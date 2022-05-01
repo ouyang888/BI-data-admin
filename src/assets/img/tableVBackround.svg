@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="906px" height="325px" viewBox="0 0 906 325" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>bg2</title>
+    <defs>
+        <path d="M905.89891,316.19658 C905.89891,320.614858 902.317188,324.19658 897.89891,324.19658 L8,324.19658 C3.581722,324.19658 -3.47095419e-16,320.614858 0,316.19658 L0,25.2902808 L14.2943855,0.0586494513 L893.057271,0.0586494513 L905.89891,25.2902808 L905.89891,316.19658 Z" id="path-1"></path>
+        <filter x="-1.9%" y="-5.2%" width="103.8%" height="110.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="17" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.0682783918   0 0 0 0 0.156315079   0 0 0 0 1  0 0 0 0.659929182 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="PSI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bg/模块">
+            <g id="形状结合">
+                <use fill-opacity="0.4" fill="#02004D" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <path stroke="#0D53B7" stroke-width="2" d="M892.444156,1.05864945 L904.89891,25.5301179 L904.89891,316.19658 C904.89891,318.129577 904.115408,319.879577 902.848657,321.146328 C901.581907,322.413079 899.831907,323.19658 897.89891,323.19658 L897.89891,323.19658 L8,323.19658 C6.06700338,323.19658 4.31700338,322.413079 3.05025253,321.146328 C1.78350169,319.879577 1,318.129577 1,316.19658 L1,316.19658 L1,25.553864 L14.8771859,1.05864945 L892.444156,1.05864945 Z" stroke-linejoin="square"></path>
+            </g>
+            <polygon id="矩形" fill="#0E5FFF" points="0 0 8.09998549 0 0 18.4729719"></polygon>
+            <polygon id="矩形" fill="#0E5FFF" transform="translate(901.950007, 9.236486) scale(-1, 1) translate(-901.950007, -9.236486) " points="897.900015 0 906 0 897.900015 18.4729719"></polygon>
+        </g>
+    </g>
+</svg>

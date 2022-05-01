@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="348px" height="129px" viewBox="0 0 348 129" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>小的</title>
+    <defs>
+        <path d="M340,114 C340,117.313708 337.313708,120 334,120 L6,120 C2.6862915,120 4.05812251e-16,117.313708 0,114 L0,25.4231189 L8.40065182,0.19148756 L89.1727273,0.19148756 L99.5898801,25.2533201 L241.024652,25.2533201 L251.677273,0.19148756 L332.14459,0.19148756 L340,25.4231189 L340,114 Z" id="path-1"></path>
+        <filter x="-2.1%" y="-4.2%" width="104.1%" height="111.7%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <filter x="-6.2%" y="-15.9%" width="112.4%" height="135.1%" filterUnits="objectBoundingBox" id="filter-3">
+            <feGaussianBlur stdDeviation="17" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.0682783918   0 0 0 0 0.156315079   0 0 0 0 1  0 0 0 0.659929182 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#0E5FFF" offset="0%"></stop>
+            <stop stop-color="#1C00FF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="1.48430696%" y1="50.0036773%" x2="98.2773479%" y2="49.9963227%" id="linearGradient-5">
+            <stop stop-color="#00FFF4" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#00FFF4" offset="53.2250998%"></stop>
+            <stop stop-color="#00FFF4" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="I" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="车备份-2" transform="translate(4.000000, 2.803512)">
+            <g id="bg/模块">
+                <g id="形状结合">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill-opacity="0.4" fill="#02004D" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                    <path stroke="#0D53B7" stroke-width="2" d="M88.5054395,1.19148756 L98.9225924,26.2533201 L241.686185,26.2533201 L252.338806,1.19148756 L331.408579,1.19148756 L339,25.5751852 L339,114 C339,115.380712 338.440356,116.630712 337.535534,117.535534 C336.630712,118.440356 335.380712,119 334,119 L334,119 L6,119 C4.61928813,119 3.36928813,118.440356 2.46446609,117.535534 C1.55964406,116.630712 1,115.380712 1,114 L1,114 L1,25.5852155 L9.12167917,1.19148756 L88.5054395,1.19148756 Z" stroke-linejoin="square"></path>
+                </g>
+                <polygon id="路径-11" fill="url(#linearGradient-4)" opacity="0.600000024" points="92.089506 0 101.136847 25 237.51704 25 247.089506 0"></polygon>
+                <line x1="111.734933" y1="26.6189163" x2="228.340909" y2="26.6189163" id="路径-3" stroke="url(#linearGradient-5)" stroke-width="3"></line>
+                <polygon id="矩形" fill="#0E5FFF" points="0 0.196487727 7.09998549 0.196487727 0 18.6694597"></polygon>
+                <polygon id="矩形" fill="#0E5FFF" transform="translate(337.049993, 9.432974) scale(-1, 1) translate(-337.049993, -9.432974) " points="334 0.196487727 340.099985 0.196487727 334 18.6694597"></polygon>
+            </g>
+            <g id="编组" transform="translate(7.000000, 31.790496)" opacity="0.5" stroke="#3D7FFF">
+                <g id="编组-3">
+                    <rect id="矩形" stroke-width="1.70621099" fill="#2F428F" opacity="0.300000012" transform="translate(162.399582, 40.459858) scale(1, -1) translate(-162.399582, -40.459858) " x="0.853105496" y="0.853105496" width="323.092954" height="79.2135055"></rect>
+                    <g id="编组-2" stroke-width="1.27965824">
+                        <polyline id="路径-7" points="0 3.41242199 0 0 4.26552748 0"></polyline>
+                        <polyline id="路径-7" transform="translate(322.666401, 1.706211) scale(-1, 1) translate(-322.666401, -1.706211) " points="320.533637 3.41242199 320.533637 0 324.799165 0"></polyline>
+                    </g>
+                    <g id="编组" transform="translate(0.000000, 77.507294)" stroke-width="1.27965824">
+                        <polyline id="路径-7" transform="translate(2.132764, 1.706211) scale(1, -1) translate(-2.132764, -1.706211) " points="0 3.41242199 0 0 4.26552748 0"></polyline>
+                        <polyline id="路径-7" transform="translate(322.666401, 1.706211) scale(-1, -1) translate(-322.666401, -1.706211) " points="320.533637 3.41242199 320.533637 0 324.799165 0"></polyline>
+                    </g>
+                </g>
+            </g>
+            <g id="编组" transform="translate(7.000000, 31.790496)" opacity="0.5" stroke="#3D7FFF">
+                <g id="编组-3">
+                    <rect id="矩形" stroke-width="1.70621099" fill="#2F428F" opacity="0.300000012" transform="translate(162.399582, 40.459858) scale(1, -1) translate(-162.399582, -40.459858) " x="0.853105496" y="0.853105496" width="323.092954" height="79.2135055"></rect>
+                    <g id="编组-2" stroke-width="1.27965824">
+                        <polyline id="路径-7" points="0 3.41242199 0 0 4.26552748 0"></polyline>
+                        <polyline id="路径-7" transform="translate(322.666401, 1.706211) scale(-1, 1) translate(-322.666401, -1.706211) " points="320.533637 3.41242199 320.533637 0 324.799165 0"></polyline>
+                    </g>
+                    <g id="编组" transform="translate(0.000000, 77.507294)" stroke-width="1.27965824">
+                        <polyline id="路径-7" transform="translate(2.132764, 1.706211) scale(1, -1) translate(-2.132764, -1.706211) " points="0 3.41242199 0 0 4.26552748 0"></polyline>
+                        <polyline id="路径-7" transform="translate(322.666401, 1.706211) scale(-1, -1) translate(-322.666401, -1.706211) " points="320.533637 3.41242199 320.533637 0 324.799165 0"></polyline>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

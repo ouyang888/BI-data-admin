@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="899px" height="52px" viewBox="0 0 899 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 52</title>
+    <defs>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="49.9985872%" id="linearGradient-1">
+            <stop stop-color="#C8C8C8" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#00FFF4" offset="51.2723483%"></stop>
+            <stop stop-color="#979797" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="26.6206781%" y1="63.6229798%" x2="100%" y2="57.3167319%" id="linearGradient-2">
+            <stop stop-color="#0E5FFF" offset="0%"></stop>
+            <stop stop-color="#00FFFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="0%" id="linearGradient-3">
+            <stop stop-color="#0E5FFF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#0E5FFF" offset="6.53284483%"></stop>
+            <stop stop-color="#00FFFF" offset="25.2177665%"></stop>
+            <stop stop-color="#1777B7" offset="33.4949601%"></stop>
+            <stop stop-color="#1871B4" offset="41.9532742%"></stop>
+            <stop stop-color="#1D89CE" offset="48.0996027%"></stop>
+            <stop stop-color="#0E5FFF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="I" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-52" transform="translate(0.500000, 1.695936)">
+            <line x1="221" y1="47.740343" x2="640.5" y2="47.7459244" id="路径-14备份" stroke="url(#linearGradient-1)" stroke-width="4"></line>
+            <g id="编组-49" transform="translate(664.746740, 23.847968) scale(-1, 1) translate(-664.746740, -23.847968) translate(431.493481, 0.000000)">
+                <polyline id="路径-47" stroke="#1978BB" stroke-width="4" points="29.5071271 0 68.6300132 47.6959361 161.21356 47.6959361"></polyline>
+                <g id="编组-45" transform="translate(62.000000, 10.350576)" fill="url(#linearGradient-2)">
+                    <path d="M49,0 L73.2158809,28.0077912 L61.2158809,28.0077912 L37,0 L49,0 Z M31,0 L55.2158809,28.0077912 L43.2158809,28.0077912 L19,0 L31,0 Z M12,0 L36.2158809,28.0077912 L24.2158809,28.0077912 L0,0 L12,0 Z" id="形状结合"></path>
+                </g>
+                <polyline id="路径-48" stroke="url(#linearGradient-3)" stroke-width="4" points="0 0.304063948 117.518887 0.304063948 161.21356 47.6959361 466.506519 47.6959361"></polyline>
+            </g>
+            <g id="编组-49">
+                <polyline id="路径-47" stroke="#1978BB" stroke-width="4" points="29.5071271 0 68.6300132 47.6959361 161.21356 47.6959361"></polyline>
+                <g id="编组-45" transform="translate(62.000000, 10.350576)" fill="url(#linearGradient-2)">
+                    <path d="M49,0 L73.2158809,28.0077912 L61.2158809,28.0077912 L37,0 L49,0 Z M31,0 L55.2158809,28.0077912 L43.2158809,28.0077912 L19,0 L31,0 Z M12,0 L36.2158809,28.0077912 L24.2158809,28.0077912 L0,0 L12,0 Z" id="形状结合"></path>
+                </g>
+                <polyline id="路径-48" stroke="url(#linearGradient-3)" stroke-width="4" points="0 0.304063948 117.518887 0.304063948 161.21356 47.6959361 466.506519 47.6959361"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

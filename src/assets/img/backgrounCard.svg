@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="620px" height="950px" viewBox="0 0 620 950" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 22</title>
+    <defs>
+        <path d="M612,936.196488 C612,939.510196 609.313708,942.196488 606,942.196488 L6,942.196488 C2.6862915,942.196488 4.05812251e-16,939.510196 0,936.196488 L0,25.428119 L10.9149877,0.196487727 L215.058403,0.196487727 L226.5,22.2583202 L385.5,22.2583202 L397.365439,0.196487727 L602.066448,0.196487727 L612,25.428119 L612,936.196488 Z" id="path-1"></path>
+        <filter x="-1.1%" y="-0.5%" width="102.3%" height="101.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <filter x="-3.4%" y="-2.0%" width="106.9%" height="104.5%" filterUnits="objectBoundingBox" id="filter-3">
+            <feGaussianBlur stdDeviation="17" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.0682783918   0 0 0 0 0.156315079   0 0 0 0 1  0 0 0 0.659929182 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#0E5FFF" offset="0%"></stop>
+            <stop stop-color="#1C00FF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="1.48430696%" y1="50.0081139%" x2="98.2773479%" y2="49.9918861%" id="linearGradient-5">
+            <stop stop-color="#00FFF4" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#00FFF4" offset="53.2250998%"></stop>
+            <stop stop-color="#00FFF4" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="PSI" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bg/模块" transform="translate(4.000000, 1.803512)">
+            <g id="形状结合">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill-opacity="0.4" fill="#02004D" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                <path stroke="#0D53B7" stroke-width="2" d="M214.450536,1.19648773 L225.892133,23.2583202 L386.097628,23.2583202 L397.963068,1.19648773 L601.385435,1.19648773 L611,25.6178781 L611,936.196488 C611,937.5772 610.440356,938.8272 609.535534,939.732022 C608.630712,940.636844 607.380712,941.196488 606,941.196488 L606,941.196488 L6,941.196488 C4.61928813,941.196488 3.36928813,940.636844 2.46446609,939.732022 C1.55964406,938.8272 1,937.5772 1,936.196488 L1,936.196488 L1,25.6351444 L11.5719537,1.19648773 L214.450536,1.19648773 Z" stroke-linejoin="square"></path>
+            </g>
+            <polygon id="路径-11" fill="url(#linearGradient-4)" opacity="0.600000024" points="219 0 231.047341 24 380.427534 24 393 0"></polygon>
+            <line x1="221" y1="23.1964877" x2="377" y2="23.1964877" id="路径-3" stroke="url(#linearGradient-5)" stroke-width="2"></line>
+            <polygon id="矩形" fill="#0E5FFF" points="0 0.196487727 7.09998549 0.196487727 0 18.6694597"></polygon>
+            <polygon id="矩形" fill="#0E5FFF" transform="translate(609.049993, 9.432974) scale(-1, 1) translate(-609.049993, -9.432974) " points="606 0.196487727 612.099985 0.196487727 606 18.6694597"></polygon>
+        </g>
+    </g>
+</svg>
