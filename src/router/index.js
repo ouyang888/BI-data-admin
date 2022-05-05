@@ -43,6 +43,11 @@ const routes = [
                 component: () => import('@/views/center/export/export.vue')
             },
             {
+                path: 'onlineSummary',
+                name: 'onlineSummary',
+                component: () => import('@/views/center/onlineSummary/index.vue')
+            },
+            {
                 path: 'psi',
                 name: 'psi',
                 component: () => import('@/views/center/psi/psi.vue')
