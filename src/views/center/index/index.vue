@@ -1,12 +1,9 @@
 <template>
-  <div style="background: #02004D">
-
+  <div style="background: #02004d">
     <!-- 头部仪表盘和卡片 -->
     <div class="top-flex">
       <!-- 仪表盘 -->
-      <div class="dashboard-box">
-        
-      </div>
+      <div class="dashboard-box"></div>
       <!-- 右侧卡片 -->
       <div class="flex-card">
         <div class="card-box">
@@ -193,7 +190,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -373,7 +373,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -381,8 +384,8 @@
             <div class="line"></div>
           </div>
         </div>
-         <div class="card-box">
-          <div class="card-font">外销</div>
+        <div class="card-box">
+          <div class="card-font" @click="gotoExport">外销</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -565,7 +568,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线下毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -745,7 +751,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -807,7 +816,7 @@
   </div>
 </template>
 <script>
-// import echarts from "echarts";
+import API from "../../../service/api";
 export default {
   name: "s",
   data() {
@@ -864,9 +873,25 @@ export default {
     };
   },
   methods: {
-    gotoDomestic(){
-      this.$router.push('/center/domestic');
+    gotoDomestic() {
+      this.$router.push("/center/domestic");
     },
+    gotoExport(){
+      this.$router.push("/center/export");
+    },
+
+    //中间折线图
+    async getList() {
+      try {
+        const result = await API.getData(
+          "directTotalInnerChart",
+          "2022-01-01,2022-10-01,2022-01-01,2022-10-01"
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -877,12 +902,13 @@ export default {
             },
           },
         },
-        labelData: [
-          { class: "plan", text: "实际达成" },
-          // { class: 'actual', text: '规划达成' },
-          { class: "average", text: "日均线" },
-        ],
-        // echartsData: {
+        // labelData: [
+        //   { class: "plan", text: "实际达成" },
+        //   { class: "average", text: "日均线" },
+        // ],
+        // legend: {
+        //   data: ["实际达成", "日均线"],
+        // },
         textStyle: {
           color: "#3FB0FF",
         },
@@ -960,6 +986,7 @@ export default {
             },
             data: [1948, 7308, 8949, 3839, 13857],
             markLine: {
+              name: "日均线",
               data: [
                 {
                   yAxis: 8576,
@@ -1223,6 +1250,7 @@ export default {
     },
   },
   mounted() {
+    // this.getList();
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
@@ -1310,8 +1338,13 @@ export default {
 ::v-deep .ant-spin-nested-loading {
   margin: 14px;
 }
-::v-deep .ant-table-thead > tr:first-child > th:first-child{
-  background: linear-gradient(to right, rgb(80, 192, 255), rgb(90, 255, 163), rgb(102, 255, 255));
+::v-deep .ant-table-thead > tr:first-child > th:first-child {
+  background: linear-gradient(
+    to right,
+    rgb(80, 192, 255),
+    rgb(90, 255, 163),
+    rgb(102, 255, 255)
+  );
 }
 .top-flex {
   display: flex;
@@ -1444,11 +1477,30 @@ export default {
   color: #a0a3c0;
   font-size: 12px;
 }
-.light-blue{
-  color: #66FFFF;
+.light-blue {
+  color: #66ffff;
   opacity: 1;
 }
-::v-deep .ant-table-bordered .ant-table-body > table{
+::v-deep .ant-table-bordered .ant-table-body > table {
   border: none;
+}
+/* 计划 */
+.plan {
+  border-bottom: 2px solid #66ffff;
+}
+
+/* 实际 */
+.actual {
+  border-bottom: 2px solid #6c02cf;
+}
+
+/* 日均线 */
+.average {
+  border-bottom: 2px dashed #ff8b2f;
+}
+
+.text {
+  color: #fff;
+  font-size: 12px;
 }
 </style> 

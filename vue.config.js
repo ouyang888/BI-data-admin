@@ -6,14 +6,11 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     proxy: {
-      '/apa': {
-        target: 'https://devnewdota.smartmidea.net/quality-service/',
-        // target: 'https://lease.msmartlife.com/quality-service/',
-        // target: 'http://10.73.44.48:8085/',
-        // target: 'http://10.73.41.36:8085/',//才哥
-        changeOrigin: true,
+      '/api': {
+        target: 'http://10.33.119.107:80/',
+        changeOrigin:true, // 允许跨域
         pathRewrite: {
-          '^/apa': ''
+          '^/api': ''
         }
       },
     }

@@ -37,6 +37,16 @@ const routes = [
                 name: 'domestic',
                 component: () => import('@/views/center/domestic/domestic.vue')
             },
+            {
+                path: 'export',
+                name: 'export',
+                component: () => import('@/views/center/export/export.vue')
+            },
+            {
+                path: 'psi',
+                name: 'psi',
+                component: () => import('@/views/center/psi/psi.vue')
+            },
         ],
     }
 

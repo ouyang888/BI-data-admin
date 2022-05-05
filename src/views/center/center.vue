@@ -1,11 +1,13 @@
 <template>
-  <div style="background: linear-gradient(180deg, #162770 0%, #1C2B72 41%, #0D182E 100%);background-repeat:no-repeat">
+  <div
+    style="background: linear-gradient(180deg,#162770 0%,#1c2b72 41%,#0d182e 100%);background-repeat: no-repeat;"
+  >
     <div class="flex-title">
       <div class="flex-back">
-        <div class="back">
+        <div class="back" @click="goBack">
           <a-icon type="left" style="color: #19ecff" />后退
         </div>
-        <div class="left-font">当前页面：销向汇总页</div>
+        <div class="left-font">当前页面：{{title}}</div>
       </div>
       <div class="flex-right">
         <div class="right-font">
@@ -23,10 +25,21 @@
       </div>
     </div>
     <div class="flex-header">
-        
       <div class="flex-font-left">
-        <div class="head-box"><span>PSI</span></div>
-        <router-link class="head-box active" to="/center/index"><span>S</span></router-link>
+        <div
+          @click="clickChange(1)"
+          :class="index == 1 ? 'head-box active' : 'head-box'"
+          to="/center/psi"
+        >
+          <span>PSI</span>
+        </div>
+        <div
+          @click="clickChange(2)"
+          :class="index == 2 ? 'head-box active' : 'head-box'"
+          to="/center/index"
+        >
+          <span>S</span>
+        </div>
         <div class="head-box"><span>I</span></div>
         <div class="head-box"><span>P</span></div>
         <div class="change-flex" style="margin-left: 14px">
@@ -53,12 +66,10 @@
         </div>
       </div>
     </div>
-   
 
-   
-  <a-layout-content class="layout-content">
+    <a-layout-content class="layout-content">
       <keep-alive include="qualityList,outside,order">
-        <router-view  />  
+        <router-view />
       </keep-alive>
     </a-layout-content>
   </div>
@@ -66,12 +77,14 @@
 
 <script>
 import Vue from "vue";
-export default Vue.extend({
-    data() {
-      return {
-        searchKeys: [this.$route.path, this.$route.meta.preMenuUrl || ""],
-      }
-    },
+export default {
+  data() {
+    return {
+      searchKeys: [this.$route.path, this.$route.meta.preMenuUrl || ""],
+      index: 2,
+      title:"销向汇总页"
+    };
+  },
   computed: {
     titleNav() {
       return this.$route.meta.title;
@@ -84,7 +97,22 @@ export default Vue.extend({
       }
     },
   },
-});
+  methods: {
+    goBack() {
+      this.$router.go(-1);
+    },
+    clickChange(i) {
+      this.index = i;
+      if (this.index == 1) {
+        this.$router.push("/center/psi");
+        this.title = "总裁PSI页"
+      } else if (this.index == 2) {
+        this.$router.push("/center/index");
+         this.title = "销向汇总页"
+      }
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 .title {
@@ -110,6 +138,7 @@ export default Vue.extend({
 .back {
   color: #19ecff;
   font-size: 18px;
+  cursor: pointer;
 }
 .flex-back {
   display: flex;
