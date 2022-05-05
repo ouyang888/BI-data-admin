@@ -771,6 +771,7 @@
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
+        <a-spin class="flex-loading" size="large" v-if="showLoading" />
         <div>
           <div class="middle-font">事业部日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
@@ -870,6 +871,8 @@ export default {
           tags: ["cool", "teacher"],
         },
       ],
+      showLoading:false,
+
       divisionList:[],
       divisionDate:[],
       divisionLine:"",
@@ -893,6 +896,7 @@ export default {
 
     //中间折线图
     async getList() {
+      this.showLoading = true
       try {
         const res = await API.getData("directTotalInnerChart","2022-01-01,2022-10-01,2022-01-01,2022-10-01");
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
@@ -917,6 +921,7 @@ export default {
             this.outerDirectLine = item.saleAvgTaskQty
             this.myEcharts3();
           }
+          this.showLoading = false
         })
          
       } catch (error) {
@@ -1531,5 +1536,10 @@ export default {
 .text {
   color: #fff;
   font-size: 12px;
+}
+.flex-loading{
+ position: relative;
+ left: 50%;
+ right: 50%;
 }
 </style> 
