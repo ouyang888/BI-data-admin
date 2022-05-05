@@ -145,3 +145,28 @@ color: #1890FF;
     border: 1px solid #e8e8e8;
     border-radius: 2px;
 }
+// 2022-05-05
+.ant-select {
+  width:100%;
+  .ant-select-selection{
+  border:1px solid rgba(0,249,255,1);
+  background: transparent;
+  color:#19ECFF;
+    }
+  .ant-select-arrow-icon{
+    color: #05BCDC;
+  }
+}
+.select-list{
+  background: rgba(12,13,40,0.87);
+  border:1px solid rgba(0,249,255,1);
+  .ant-select-dropdown-menu-item{
+    color: rgba(25,236,255,.8);
+    &.ant-select-dropdown-menu-item-selected{
+      background: rgba(12,13,40,0.87);
+    }
+    &:hover{
+      background: rgba(0,0,0,.5);
+    }
+  }
+}

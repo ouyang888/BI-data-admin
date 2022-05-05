@@ -29,14 +29,12 @@
         <div
           @click="clickChange(1)"
           :class="index == 1 ? 'head-box active' : 'head-box'"
-          to="/center/psi"
         >
           <span>PSI</span>
         </div>
         <div
           @click="clickChange(2)"
           :class="index == 2 ? 'head-box active' : 'head-box'"
-          to="/center/index"
         >
           <span>S</span>
         </div>

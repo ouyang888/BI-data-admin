@@ -13,6 +13,6 @@ export default class ApiService {
 
   //总的接口
   static getData(code,date) {
-    return request.get(api.adminUrl + `api/query?code=${code}&parameter=${date}`);
+    return request.get(api.adminUrl + `query?code=${code}&parameter=${date}`);
   }
 }
