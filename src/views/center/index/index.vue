@@ -668,91 +668,179 @@ export default {
           address: "Sidney No. ",
           tags: ["cool", "teacher"],
         },
-      ],    
+      ],   
+      echartsLabel: [
+          { class: "plan", text: "实际达成" },
+          { class: "average", text: "日均线" },
+        ],
+     
+        progressData: {
+          bar1: 0,
+          bar2: 0,
+          ballTitle: '产司',
+          bigBallTitle: '毛利率',
+          textLeft: '内销',
+          textRight: '外销',
+          titleTop: '内销',
+          titleBottom: '外销',
+          topGPM: 0,
+          bottomGPM: 0,
+          ballNum: 0
+        },
+        speedData: {
+          bar: 0,
+          speedBar: 0,
+          ballTitle: '事业部达成',
+          ballNum: 0,
+          ballLeftTitle: '自营',
+          ballRightTitle: '代运营',
+          ballLeftNum: 0,
+          ballRightNum: 0,
+          bottomNum: 0,
+          bottomTitle1: '内销',
+          bottomClose: 0,
+          bottomTime: 0,
+          bottomTitle2: '外销',
+          bottomClose1: 0,
+          bottomTime1: 0
+        },
+        sabData: {
+          bar1: 70,
+          bar2: 50,
+          bar3: 30,
+          bar4: 12,
+          bar5: 7,
+          ballTitle: '内销',
+          bottom: '线上',
+          top: '线下',
+          sabArr: { 's': 32, 'a': 18, 'b': 21 },
+          topArr: { 's': 32, 'a': 18, 'b': 21 },
+          bottomArr: { 's': 32, 'a': 18, 'b': 21 }
+          // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+          // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+          // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
+        } 
     };
   },
 methods: {
       gotoDomestic() {
         this.$router.push('/center/domestic');
       },
-      myEcharts() {
-        var myChart = this.$echarts.init(document.getElementById("main"));
-        var option = {
-          xAxis: {
-            axisLabel: {
-              formatter: function (val) {
-                return "";
-              },
+      gotoExport(){
+      this.$router.push("/center/export");
+    },
+        //中间折线图
+    async getList() {
+      try {
+        const res = await API.getData("directTotalInnerChart","2022-01-01,2022-10-01,2022-01-01,2022-10-01");
+        let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
+        let newArr = res.rows.filter((item)=>{
+        var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
+        var yue = timeArr[1];
+        var ri = timeArr[2];
+          if(item.directName == "事业部"){
+            obj.divisionArr.push(item)
+          }else if(item.directName == "内销"){
+            obj.innerDirect.push(item)
+          }else if(item.directName == "外销"){
+            obj.outerDirect.push(item)
+          }
+        })
+        console.log("obj",obj)
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    myEcharts() {
+      var myChart = this.$echarts.init(document.getElementById("main"));
+      var option = {
+        xAxis: {
+          axisLabel: {
+            formatter: function (val) {
+              return "";
             },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              name: "日均线",
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
+          },
+        },
+        // labelData: [
+        //   { class: "plan", text: "实际达成" },
+        //   { class: "average", text: "日均线" },
+        // ],
+        // legend: {
+        //   data: ["实际达成", "日均线"],
+        // },
+        textStyle: {
+          color: "#3FB0FF",
+        },
+        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+        title: {
+          text: "",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        grid: {
+          top: "5%",
+          left: "2%",
+          right: "5%",
+          bottom: "3%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          axisTick: {
+            show: false,
+          },
+          axisLine: {
+            show: false,
+          },
+        },
+        yAxis: {
+          name: "单位：万",
+          type: "value",
+          splitLine: {
+            lineStyle: {
+              type: "dashed",
+              color: "rgba(45,153,255,.3)",
+            },
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLine: {
+            show: false,
+          },
+        },
+        series: [
+          {
+            name: "实际达成",
+            type: "line",
+            stack: "Total",
+            // smooth: true,
+            lineStyle: {
+              width: 1,
+            },
+            showSymbol: false,
+            areaStyle: {
+              normal: {
+                color: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                    },
+                    {
+                      offset: 0.7,
+                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                    },
+                  ],
+                  globalCoord: false, // 缺省为 false
                 },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-          yAxis: {
-            name: "单位：万",
-            type: "value",
-            splitLine: {
-              lineStyle: {
-                type: "dashed",
-                color: "rgba(45,153,255,.3)",
-              },
-            },
-            axisTick: {
-              show: false,
-            },
-            axisLine: {
-              show: false,
-            },
-          },
-          series: [
-            {
-              name: "实际达成",
-              type: "line",
-              stack: "Total",
-              // smooth: true,
-              lineStyle: {
-                width: 1,
-              },
-              showSymbol: false,
-              areaStyle: {
-                normal: {
-                  color: {
-                    x: 0,
-                    y: 0,
-                    x2: 0,
-                    y2: 1,
-                    colorStops: [
-                      {
-                        offset: 0,
-                        color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                      },
-                      {
-                        offset: 0.7,
-                        color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                      },
-                    ],
-                    globalCoord: false, // 缺省为 false
-                  },
                 },
               },
               data: [1948, 7308, 8949, 3839, 13857],
@@ -1293,56 +1381,6 @@ methods: {
     border: none;
   }
 
-  .select-box {
-    position: absolute;
-    right: 20px;
-    top: 30px;
-    z-index: 11;
-    width: 186px;
-  }
-
-  #legend {
-    display: flex;
-    justify-content: flex-end;
-
-  }
-
-  .item {
-    display: flex;
-    align-items: center;
-    margin-left: 15px;
-    width: 95px;
-  }
-
-  .lump {
-    width: 19px;
-    height: 3px;
-    margin-right: 10px;
-  }
-
-  /* 计划 */
-  .plan {
-    border-bottom: 2px solid #66FFFF;
-  }
-
-  /* 实际 */
-  .actual {
-    border-bottom: 2px solid #6C02CF;
-  }
-
-  /* 日均线 */
-  .average {
-    border-bottom: 2px dashed #FF8B2F;
-  }
-
-  .text {
-    color: #fff;
-    font-size: 12px;
-  }
-/* 仪表盘样式 */
-  .main{
-  height: 230px;
-}
 ::v-deep .ant-table-thead > tr:first-child > th:first-child {
   background: linear-gradient(
     to right,
@@ -1479,23 +1517,160 @@ methods: {
 ::v-deep .ant-table-bordered .ant-table-body > table {
   border: none;
 }
-/* 计划 */
-.plan {
-  border-bottom: 2px solid #66ffff;
-}
 
-/* 实际 */
-.actual {
-  border-bottom: 2px solid #6c02cf;
-}
+.select-box {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    z-index: 11;
+    width: 186px;
+  }
 
-/* 日均线 */
-.average {
-  border-bottom: 2px dashed #ff8b2f;
-}
+  #legend {
+    display: flex;
+    justify-content: flex-end;
 
-.text {
-  color: #fff;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    width: 95px;
+  }
+
+  .lump {
+    width: 19px;
+    height: 3px;
+    margin-right: 10px;
+  }
+
+  /* 计划 */
+  .plan {
+    border-bottom: 2px solid #66FFFF;
+  }
+
+  /* 实际 */
+  .actual {
+    border-bottom: 2px solid #6C02CF;
+  }
+
+  /* 日均线 */
+  .average {
+    border-bottom: 2px dashed #FF8B2F;
+  }
+
+  .text {
+    color: #fff;
+    font-size: 12px;
+  }
+/* 仪表盘样式 */
+  .main{
+  height: 230px;
+}
+.backgroundPic{
+  height: 200px;
+  width: 192px;
+  background-image: url('../../../assets/img/backgroundPanel.svg');
+  background-repeat:no-repeat;
+  background-position: 50% 62%;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+.content {
+  width: 192px;
+  height: 192px;
+  top:7%;
+  position: absolute;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+.big-round {
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+.round {
+  width: 85px;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
+  border-radius: 50%;
+  background: #0C098B;
+  box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
+  border: 1px solid rgba(50, 197, 255, 0.22);
+}
+.round-title{
   font-size: 12px;
+  color: #32C5FF;
+  letter-spacing: -0.01px;
+  text-align: center;
+  font-weight: 500;
 }
+.sort {
+  font-size: 24px;
+  color: #FFFFFF;
+  letter-spacing: -0.01px;
+  text-align: center;
+  font-weight: 600;
+}
+.title {
+  position: absolute;
+  bottom: 20px;
+  opacity: 0.8;
+  font-size: 14px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 17px;
+  font-weight: 400;
+}
+.bottom{
+  text-align: center;
+  margin-top:18px;
+}
+.bottom-color {
+  width: 8px;
+  height: 8px;
+  margin-left: 5px;
+  display:inline-block;
+}
+.bottom-title {
+  opacity: 0.8;
+  padding-left: 5px;
+  font-size: 12px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 17px;
+  font-weight: 400;
+}
+.bottom-text {
+  margin-top: 3px;
+  opacity: 0.7;
+  font-size: 10px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 10px;
+  font-weight: 400;
+}
+.bottom-text span{
+  margin-left: 5px;
+}
+.panelList {
+    height: 258px;
+     width: 760px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
 </style> 
