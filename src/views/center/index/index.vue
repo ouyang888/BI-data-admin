@@ -869,7 +869,18 @@ export default {
           address: "Sidney No. ",
           tags: ["cool", "teacher"],
         },
-      ],    
+      ],
+      divisionList:[],
+      divisionDate:[],
+      divisionLine:"",
+
+      innerDirectList:[],
+      innerDirectDate:[],
+      innerDirectLine:"",
+
+      outerDirectList:[],
+      outerDirectDate:[],
+      outerDirectLine:""
     };
   },
   methods: {
@@ -884,20 +895,30 @@ export default {
     async getList() {
       try {
         const res = await API.getData("directTotalInnerChart","2022-01-01,2022-10-01,2022-01-01,2022-10-01");
-        let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
+        // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
         let newArr = res.rows.filter((item)=>{
         var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
         var yue = timeArr[1];
         var ri = timeArr[2];
           if(item.directName == "事业部"){
-            obj.divisionArr.push(item)
+            // obj.divisionArr.push(item)
+            this.divisionDate.push(yue+'-'+ri)
+            this.divisionList.push(item.totalCnyAmt)
+            this.divisionLine = item.saleAvgTaskQty
+            this.myEcharts();
           }else if(item.directName == "内销"){
-            obj.innerDirect.push(item)
+            this.innerDirectDate.push(yue+'-'+ri)
+            this.innerDirectList.push(item.totalCnyAmt)
+            this.innerDirectLine = item.saleAvgTaskQty
+            this.myEcharts2();
           }else if(item.directName == "外销"){
-            obj.outerDirect.push(item)
+            this.outerDirectDate.push(yue+'-'+ri)
+            this.outerDirectList.push(item.totalCnyAmt)
+            this.outerDirectLine = item.saleAvgTaskQty
+            this.myEcharts3();
           }
         })
-        console.log("obj",obj)
+         
       } catch (error) {
         console.log(error);
       }
@@ -940,7 +961,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.divisionDate,
           axisTick: {
             show: false,
           },
@@ -995,12 +1016,12 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.divisionList,
             markLine: {
               name: "日均线",
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.divisionLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1059,7 +1080,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.innerDirectDate,
           axisTick: {
             show: false,
           },
@@ -1114,11 +1135,11 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.innerDirectList,
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.innerDirectLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1177,7 +1198,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.outerDirectDate,
           axisTick: {
             show: false,
           },
@@ -1232,11 +1253,11 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.outerDirectList,
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.outerDirectLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1262,9 +1283,6 @@ export default {
   },
   mounted() {
     this.getList();
-    this.myEcharts();
-    this.myEcharts2();
-    this.myEcharts3();
   },
 };
 </script>
