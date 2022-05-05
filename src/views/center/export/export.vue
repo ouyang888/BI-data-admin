@@ -1958,7 +1958,7 @@ export default {
 }
 .echartsBox {
   width: 607px;
-  height: 240px;
+  height: 280px;
 }
 .flex-fang {
   display: flex;

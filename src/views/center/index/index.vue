@@ -1381,6 +1381,43 @@ methods: {
     border: none;
   }
 
+  .select-box {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    z-index: 11;
+    width: 186px;
+  }
+
+  #legend {
+    display: flex;
+    justify-content: flex-end;
+
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    width: 95px;
+  }
+
+  .lump {
+    width: 19px;
+    height: 3px;
+    margin-right: 10px;
+  }
+
+
+
+  .text {
+    color: #fff;
+    font-size: 12px;
+  }
+/* 仪表盘样式 */
+  .main{
+  height: 230px;
+}
 ::v-deep .ant-table-thead > tr:first-child > th:first-child {
   background: linear-gradient(
     to right,
@@ -1517,7 +1554,25 @@ methods: {
 ::v-deep .ant-table-bordered .ant-table-body > table {
   border: none;
 }
+/* 计划 */
+.plan {
+  border-bottom: 2px solid #66ffff;
+}
 
+/* 实际 */
+.actual {
+  border-bottom: 2px solid #6c02cf;
+}
+
+/* 日均线 */
+.average {
+  border-bottom: 2px dashed #ff8b2f;
+}
+
+.text {
+  color: #fff;
+  font-size: 12px;
+}
 .select-box {
     position: absolute;
     right: 20px;
@@ -1614,57 +1669,6 @@ methods: {
   letter-spacing: -0.01px;
   text-align: center;
   font-weight: 500;
-}
-.sort {
-  font-size: 24px;
-  color: #FFFFFF;
-  letter-spacing: -0.01px;
-  text-align: center;
-  font-weight: 600;
-}
-.title {
-  position: absolute;
-  bottom: 20px;
-  opacity: 0.8;
-  font-size: 14px;
-  color: #FFFFFF;
-  letter-spacing: 0;
-  text-align: center;
-  line-height: 17px;
-  font-weight: 400;
-}
-.bottom{
-  text-align: center;
-  margin-top:18px;
-}
-.bottom-color {
-  width: 8px;
-  height: 8px;
-  margin-left: 5px;
-  display:inline-block;
-}
-.bottom-title {
-  opacity: 0.8;
-  padding-left: 5px;
-  font-size: 12px;
-  color: #FFFFFF;
-  letter-spacing: 0;
-  text-align: center;
-  line-height: 17px;
-  font-weight: 400;
-}
-.bottom-text {
-  margin-top: 3px;
-  opacity: 0.7;
-  font-size: 10px;
-  color: #FFFFFF;
-  letter-spacing: 0;
-  text-align: center;
-  line-height: 10px;
-  font-weight: 400;
-}
-.bottom-text span{
-  margin-left: 5px;
 }
 .panelList {
     height: 258px;
