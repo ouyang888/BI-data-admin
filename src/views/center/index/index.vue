@@ -869,7 +869,7 @@ export default {
           address: "Sidney No. ",
           tags: ["cool", "teacher"],
         },
-      ],
+      ],    
     };
   },
   methods: {
@@ -883,10 +883,21 @@ export default {
     //中间折线图
     async getList() {
       try {
-        const result = await API.getData(
-          "directTotalInnerChart",
-          "2022-01-01,2022-10-01,2022-01-01,2022-10-01"
-        );
+        const res = await API.getData("directTotalInnerChart","2022-01-01,2022-10-01,2022-01-01,2022-10-01");
+        let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
+        let newArr = res.rows.filter((item)=>{
+        var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
+        var yue = timeArr[1];
+        var ri = timeArr[2];
+          if(item.directName == "事业部"){
+            obj.divisionArr.push(item)
+          }else if(item.directName == "内销"){
+            obj.innerDirect.push(item)
+          }else if(item.directName == "外销"){
+            obj.outerDirect.push(item)
+          }
+        })
+        console.log("obj",obj)
       } catch (error) {
         console.log(error);
       }
@@ -1250,7 +1261,7 @@ export default {
     },
   },
   mounted() {
-    // this.getList();
+    this.getList();
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
