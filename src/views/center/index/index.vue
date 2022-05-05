@@ -1,6 +1,5 @@
 <template>
-  <div style="background: #02004D">
-
+  <div style="background: #02004d">
     <!-- 头部仪表盘和卡片 -->
     <div class="top-flex">
       <!-- 仪表盘 -->
@@ -137,7 +136,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -257,7 +259,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -266,7 +271,7 @@
           </div>
         </div>
         <div class="card-box">
-          <div class="card-font">外销</div>
+          <div class="card-font" @click="gotoExport">外销</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -389,7 +394,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线下毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -509,7 +517,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -596,123 +607,71 @@
   </div>
 </template>
 <script>
-  // import echarts from "echarts";
-  import ProgressPanel from '@/views/center/panel/ProgressPanel.vue'
-  import SpeedPanel from '@/views/center/panel/SpeedPanel.vue'
-  import SadPanel from '@/views/center/panel/SadPanel.vue'
-  // import CircleProgress from '@/components/CircleProgress.vue'
-  export default {
-    name: "s",  
-    components: {
+ import ProgressPanel from '@/views/center/panel/ProgressPanel.vue'
+ import SpeedPanel from '@/views/center/panel/SpeedPanel.vue'
+ import SadPanel from '@/views/center/panel/SadPanel.vue'
+ import API from "../../../service/api";
+export default {
+  name: "s",
+  components: {
       ProgressPanel,
       SpeedPanel,
       SadPanel,
     },
-    data() {
-      return {
-        columns: [
-          {
-            title: "内销",
-            dataIndex: "name",
-            key: "name",
-            align: "center",
-          },
-          {
-            title: "渠道",
-            dataIndex: "age",
-            key: "age",
-            align: "center",
-          },
-          {
-            title: "责任人",
-            dataIndex: "address",
-            key: "address 1",
-            align: "center",
-          },
-          {
-            title: "总计",
-            dataIndex: "address",
-            key: "address 2",
-            align: "center",
-          },
-        ],
-        data: [
-          {
-            key: "1",
-            name: "John Brown",
-            age: 32,
-            address: "New York No. ",
-            tags: ["nice", "developer"],
-          },
-          {
-            key: "2",
-            name: "Jim Green",
-            age: 42,
-            address: "London No. ",
-            tags: ["loser"],
-          },
-          {
-            key: "3",
-            name: "Joe Black",
-            age: 32,
-            address: "Sidney No. ",
-            tags: ["cool", "teacher"],
-          },
-        ],
-        echartsLabel: [
-          { class: "plan", text: "实际达成" },
-          { class: "average", text: "日均线" },
-        ],
-     
-        progressData: {
-          bar1: 0,
-          bar2: 0,
-          ballTitle: '产司',
-          bigBallTitle: '毛利率',
-          textLeft: '内销',
-          textRight: '外销',
-          titleTop: '内销',
-          titleBottom: '外销',
-          topGPM: 0,
-          bottomGPM: 0,
-          ballNum: 0
+  data() {
+    return {
+      columns: [
+        {
+          title: "内销",
+          dataIndex: "name",
+          key: "name",
+          align: "center",
         },
-        speedData: {
-          bar: 0,
-          speedBar: 0,
-          ballTitle: '事业部达成',
-          ballNum: 0,
-          ballLeftTitle: '自营',
-          ballRightTitle: '代运营',
-          ballLeftNum: 0,
-          ballRightNum: 0,
-          bottomNum: 0,
-          bottomTitle1: '内销',
-          bottomClose: 0,
-          bottomTime: 0,
-          bottomTitle2: '外销',
-          bottomClose1: 0,
-          bottomTime1: 0
+        {
+          title: "渠道",
+          dataIndex: "age",
+          key: "age",
+          align: "center",
         },
-        sabData: {
-          bar1: 70,
-          bar2: 50,
-          bar3: 30,
-          bar4: 12,
-          bar5: 7,
-          ballTitle: '内销',
-          bottom: '线上',
-          top: '线下',
-          sabArr: { 's': 32, 'a': 18, 'b': 21 },
-          topArr: { 's': 32, 'a': 18, 'b': 21 },
-          bottomArr: { 's': 32, 'a': 18, 'b': 21 }
-          // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
-          // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
-          // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
-        }
-      };
-    },
-    methods: {
+        {
+          title: "责任人",
+          dataIndex: "address",
+          key: "address 1",
+          align: "center",
+        },
+        {
+          title: "总计",
+          dataIndex: "address",
+          key: "address 2",
+          align: "center",
+        },
+      ],
+      data: [
+        {
+          key: "1",
+          name: "John Brown",
+          age: 32,
+          address: "New York No. ",
+          tags: ["nice", "developer"],
+        },
+        {
+          key: "2",
+          name: "Jim Green",
+          age: 42,
+          address: "London No. ",
+          tags: ["loser"],
+        },
+        {
+          key: "3",
+          name: "Joe Black",
+          age: 32,
+          address: "Sidney No. ",
+          tags: ["cool", "teacher"],
+        },
+      ],    
+    };
+  },
+methods: {
       gotoDomestic() {
         this.$router.push('/center/domestic');
       },
@@ -725,39 +684,28 @@
                 return "";
               },
             },
-          },
-          labelData: [
-            { class: "plan", text: "实际达成" },
-            // { class: 'actual', text: '规划达成' },
-            { class: "average", text: "日均线" },
-          ],
-          // echartsData: {
-          textStyle: {
-            color: "#3FB0FF",
-          },
-          color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-          title: {
-            text: "",
-          },
-          tooltip: {
-            trigger: "axis",
-          },
-          grid: {
-            top: "5%",
-            left: "2%",
-            right: "5%",
-            bottom: "3%",
-            containLabel: true,
-          },
-          xAxis: {
-            type: "category",
-            boundaryGap: false,
-            data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-            axisTick: {
-              show: false,
-            },
-            axisLine: {
-              show: false,
+            data: [1948, 7308, 8949, 3839, 13857],
+            markLine: {
+              name: "日均线",
+              data: [
+                {
+                  yAxis: 8576,
+                  silent: false, //鼠标悬停事件 true没有，false有
+                  lineStyle: {
+                    //警戒线的样式 ，虚实 颜色
+                    type: "dashed", //样式  ‘solid’和'dotted'
+                    color: "#FF8B2F",
+                    width: 2, //宽度
+                  },
+                  label: {
+                    formatter: "",
+                    color: "#FF8B2F",
+                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                  },
+                },
+              ],
+
+              symbol: ["none", "none"],
             },
           },
           yAxis: {
@@ -1074,12 +1022,13 @@
         console.log("更新时间")
       }
     },
-    mounted() {
-      this.myEcharts();
-      this.myEcharts2();
-      this.myEcharts3();
-    },
-  };
+  mounted() {
+    this.getList();
+    this.myEcharts();
+    this.myEcharts2();
+    this.myEcharts3();
+  },
+};
 </script>
 <style scoped>
   .flex-char {
@@ -1394,15 +1343,13 @@
   .main{
   height: 230px;
 }
-.backgroundPic{
-  height: 200px;
-  width: 192px;
-  background-image: url('../../../assets/img/backgroundPanel.svg');
-  background-repeat:no-repeat;
-  background-position: 50% 62%;
-  display: flex;
-  align-items:center;
-  justify-content:center;
+::v-deep .ant-table-thead > tr:first-child > th:first-child {
+  background: linear-gradient(
+    to right,
+    rgb(80, 192, 255),
+    rgb(90, 255, 163),
+    rgb(102, 255, 255)
+  );
 }
 .content {
   width: 192px;
@@ -1492,11 +1439,63 @@
 .bottom-text span{
   margin-left: 5px;
 }
-.panelList {
-    height: 258px;
-     width: 760px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-</style>
+.card-big-num {
+  color: #66ffff;
+  font-size: 28px;
+}
+.progress {
+  width: 120px;
+  height: 10px;
+}
+.progress:last-child {
+  margin-bottom: 12px;
+}
+.progress-middle {
+  width: 34px;
+  height: 10px;
+}
+.progress-middle:last-child {
+  margin-bottom: 12px;
+}
+::v-deep .ant-progress-bg {
+  height: 4px !important;
+  border-radius: 200px !important;
+}
+.card-middle-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-bottoms {
+  display: flex;
+  align-items: center;
+  color: #a0a3c0;
+  font-size: 12px;
+}
+.light-blue {
+  color: #66ffff;
+  opacity: 1;
+}
+::v-deep .ant-table-bordered .ant-table-body > table {
+  border: none;
+}
+/* 计划 */
+.plan {
+  border-bottom: 2px solid #66ffff;
+}
+
+/* 实际 */
+.actual {
+  border-bottom: 2px solid #6c02cf;
+}
+
+/* 日均线 */
+.average {
+  border-bottom: 2px dashed #ff8b2f;
+}
+
+.text {
+  color: #fff;
+  font-size: 12px;
+}
+</style> 
