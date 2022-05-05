@@ -762,6 +762,7 @@
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
+        <a-spin class="flex-loading" size="large" v-if="showLoading" />
         <div>
           <div class="middle-font">内销日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
@@ -807,11 +808,22 @@
   </div>
 </template>
 <script>
-// import echarts from "echarts";
+import API from "../../../service/api";
 export default {
   name: "s",
   data() {
     return {
+      showLoading:false,
+      
+      innerDirectList:[],
+      innerDirectDate:[],
+      innerDirectLine:"",
+
+      outerDirectList:[],
+      outerDirectDate:[],
+      outerDirectLine:"",
+      allList:[],
+      allLiine:"",
       columns: [
         {
           title: "线上",
@@ -894,6 +906,41 @@ export default {
     };
   },
   methods: {
+
+
+ //中间折线图
+    async getList() {
+      this.showLoading = true
+      try { 
+        const res = await API.getData("innerDirectChart","2022-01-01,2022-10-01");
+        let obj = { innerDirect:"",outerDirect: "" };
+        let newArr = res.rows.filter((item)=>{
+        var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
+        var yue = timeArr[1];
+        var ri = timeArr[2];
+          if(item.cooprLevel1 == "线上"){
+            this.innerDirectDate.push(yue+'-'+ri)
+            this.innerDirectList.push(item.totalCnyAmt)
+            this.innerDirectLine = item.saleAvgTaskQty
+            this.myEcharts2();
+          }else if(item.cooprLevel1 == "线下"){
+            this.outerDirectDate.push(yue+'-'+ri)
+            this.outerDirectList.push(item.totalCnyAmt)
+            this.outerDirectLine = item.saleAvgTaskQty
+            this.myEcharts3();
+          }
+          
+          this.allList.push(item.saleAvgTaskQty+item.saleAvgTaskQty)
+          this.allLiine = item.saleAvgTaskQty + item.saleAvgTaskQty
+          this.myEcharts();
+          this.showLoading = false
+        })
+         
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -930,7 +977,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.innerDirectDate,
           axisTick: {
             show: false,
           },
@@ -985,11 +1032,11 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.allList,
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.allLiine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1048,7 +1095,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.innerDirectDate,
           axisTick: {
             show: false,
           },
@@ -1103,11 +1150,11 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.innerDirectList,
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: 23040199,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1166,7 +1213,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.outerDirectDate,
           axisTick: {
             show: false,
           },
@@ -1221,11 +1268,11 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.outerDirectList,
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.outerDirectLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1250,9 +1297,7 @@ export default {
     },
   },
   mounted() {
-    this.myEcharts();
-    this.myEcharts2();
-    this.myEcharts3();
+    this.getList()
   },
 };
 </script>
@@ -1477,5 +1522,10 @@ export default {
 }
 ::v-deep .ant-table-bordered .ant-table-body > table{
   border: none;
+}
+.flex-loading{
+ position: relative;
+ left: 50%;
+ right: 50%;
 }
 </style> 
