@@ -17,7 +17,7 @@
             <div class="left-right-box">
               <div style="margin-left: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线上达成</div>
+                  <div class="top-left-font">实时达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -72,7 +72,7 @@
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线下达成</div>
+                  <div class="top-left-font">库存达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -81,23 +81,8 @@
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
                   <div style="display: flex; align-items: center">
-                    <div class="finish-font">进度</div>
-                    <div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
-                      </div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
-                      </div>
-                    </div>
+                    <div class="finish-font">毛利率<span>75%</span></div>
+          
                   </div>
                 </div>
                 <div
@@ -135,7 +120,7 @@
             <div class="left-right-box">
               <div style="margin-left: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线上达成</div>
+                  <div class="top-left-font">实时达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -178,7 +163,7 @@
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线下达成</div>
+                  <div class="top-left-font">库存达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -186,24 +171,9 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-                  <div style="display: flex; align-items: center">
-                    <div class="finish-font">进度</div>
-                    <div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
-                      </div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
-                      </div>
-                    </div>
+                 <div style="display: flex; align-items: center">
+                    <div class="finish-font">毛利率<span>75%</span></div>
+          
                   </div>
                 </div>
                 <!-- <div
@@ -303,7 +273,7 @@
             <div class="left-right-box">
               <div style="margin-left: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线上达成</div>
+                  <div class="top-left-font">实时达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -346,7 +316,152 @@
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线下达成</div>
+                  <div class="top-left-font">库存达成</div>
+                  <div class="flex-finish">
+                    <div class="finish-font">责任制 <span>100亿</span></div>
+                    <div class="finish-font">完成率 <span>75%</span></div>
+                  </div>
+                </div>
+                <div class="flex-top-card">
+                  <div class="card-big-num">75亿</div>
+                  <div style="display: flex; align-items: center">
+                    <div style="display: flex; align-items: center">
+                    <div class="finish-font">毛利率<span>75%</span></div>
+          
+                  </div>
+                  </div>
+                </div>
+               
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                  "
+                >
+                
+                </div>
+              
+              </div>
+            </div>
+            <div class="line"></div>
+          </div>
+        </div>
+           <div class="card-box">
+          <div class="card-font">美的平台</div>
+          <div class="card-border-box">
+            <div class="line"></div>
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+            <div class="line4"></div>
+            <div class="left-right-box">
+              <div style="margin-left: 14px">
+                <div class="flex-top-card">
+                  <div class="top-left-font">实时达成</div>
+                  <div class="flex-finish">
+                    <div class="finish-font">责任制 <span>100亿</span></div>
+                    <div class="finish-font">完成率 <span>75%</span></div>
+                  </div>
+                </div>
+                <div class="flex-top-card">
+                  <div class="card-big-num">75亿</div>
+                   <div class="flex-finish">
+                    <!-- <div class="finish-font">进度 <span>s</span></div>
+                    <div class="finish-font">完成率 <span>75%</span></div> -->
+                  </div>
+                  <div style="display: flex; align-items: center">
+                    <div class="finish-font">进度</div>
+                    <div>
+                      <div class="progress">
+                        <a-progress
+                          :percent="50"
+                          :show-info="false"
+                          strokeColor="#FF8B2F"
+                        />
+                      </div>
+                      <div class="progress">
+                        <a-progress
+                          :percent="50"
+                          :show-info="false"
+                          strokeColor="rgb(102, 255, 255)"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                  "
+                >
+                
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                  "
+                >
+                 
+                </div>
+               
+              </div>
+              <div class="mt-border"></div>
+              <div style="margin-right: 14px">
+                <div class="flex-top-card">
+                  <div class="top-left-font">库存达成</div>
+                  <div class="flex-finish">
+                    <div class="finish-font">责任制 <span>100亿</span></div>
+                    <div class="finish-font">完成率 <span>75%</span></div>
+                  </div>
+                </div>
+                <div class="flex-top-card">
+                  <div class="card-big-num">75亿</div>
+                 <div style="display: flex; align-items: center">
+                    <div class="finish-font">毛利率<span>75%</span></div>
+          
+                  </div>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                  "
+                >
+                 
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                  "
+                >
+                
+                </div>
+               
+              </div>
+            </div>
+            <div class="line"></div>
+          </div>
+        </div>
+        <div class="card-box" >
+          <div class="card-font">兴趣电商</div>
+          <div class="card-border-box">
+            <div class="line"></div>
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+            <div class="line4"></div>
+            <div class="left-right-box">
+              <div style="margin-left: 14px">
+                <div class="flex-top-card">
+                  <div class="top-left-font">实时达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -374,77 +489,117 @@
                     </div>
                   </div>
                 </div>
-                <!-- <div
+             
+                <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
+                  
+                </div>
+               
+              </div>
+              <div class="mt-border"></div>
+              <div style="margin-right: 14px">
+                <div class="flex-top-card">
+                  <div class="top-left-font">库存达成</div>
+                  <div class="flex-finish">
+                    <div class="finish-font">责任制 <span>100亿</span></div>
+                    <div class="finish-font">完成率 <span>75%</span></div>
+                  </div>
+                </div>
+                <div class="flex-top-card">
+                  <div class="card-big-num">75亿</div>
+                  <div style="display: flex; align-items: center">
+                    <div class="finish-font">毛利率<span>75%</span></div>
+          
+                  </div>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                  "
+                >
+                
+                </div>
+              
+              </div>
+            </div>
+            <div class="line"></div>
+          </div>
+        </div>
+        <div class="card-box" >
+          <div class="card-font">天猫自运营</div>
+          <div class="card-border-box">
+            <div class="line"></div>
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+            <div class="line4"></div>
+            <div class="left-right-box">
+              <div style="margin-left: 14px">
+                <div class="flex-top-card">
+                  <div class="top-left-font">实时达成</div>
+                  <div class="flex-finish">
+                    <div class="finish-font">责任制 <span>100亿</span></div>
+                    <div class="finish-font">完成率 <span>75%</span></div>
+                  </div>
+                </div>
+                <div class="flex-top-card">
+                  <div class="card-big-num">75亿</div>
+                  <div style="display: flex; align-items: center">
+                    <div class="finish-font">进度</div>
+                    <div>
+                      <div class="progress">
+                        <a-progress
+                          :percent="50"
+                          :show-info="false"
+                          strokeColor="#FF8B2F"
+                        />
+                      </div>
+                      <div class="progress">
+                        <a-progress
+                          :percent="50"
+                          :show-info="false"
+                          strokeColor="rgb(102, 255, 255)"
+                        />
                       </div>
                     </div>
                   </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
+                </div>
+             
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                  "
+                >
+                  
+                </div>
+               
+              </div>
+              <div class="mt-border"></div>
+              <div style="margin-right: 14px">
+                <div class="flex-top-card">
+                  <div class="top-left-font">库存达成</div>
+                  <div class="flex-finish">
+                    <div class="finish-font">责任制 <span>100亿</span></div>
+                    <div class="finish-font">完成率 <span>75%</span></div>
                   </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
+                </div>
+                <div class="flex-top-card">
+                  <div class="card-big-num">75亿</div>
+              <div style="display: flex; align-items: center">
+                    <div class="finish-font">毛利率<span>75%</span></div>
+          
                   </div>
-                </div> -->
+                </div>
+              
                 <div
                   style="
                     display: flex;
@@ -1762,28 +1917,36 @@ export default {
     font-size: 18px;
     color: white;
     text-align: center;
+    width: 31%;
 }
 
 .card-box {
   background-image: url("../../../assets/img/bigCardBackground.svg");
   background-repeat: no-repeat;
   margin-right: 20px;
-  background-size: cover;
-  height: 154px;
-  width: 400px;
+  background-size: 100% 95%;
+  /* height: 154px;
+  width: 400px; */
   margin: 4px 8px 4px 8px;
 }
 .card-font {
-  font-size: 16px;
+  font-size: 14px;
   color: #fff;
   text-align: center;
-  font-weight: 600;
+  /* font-weight: 600; */
   cursor: pointer;
   color: #19ecff;
 }
 .flex-card {
-  display: flex;
-  margin-top: 20px;
+  /* display: flex;
+  margin-top: 20px; */
+      display: flex;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+    /* width: 100%; */
+    flex-wrap: wrap;
+    width: 67%;
 }
 .flex-top-card {
   display: flex;
@@ -1796,13 +1959,12 @@ export default {
   margin-right: 20px;
 }
 .card-border-box {
-  /* margin: 14px;
-  border: 1px solid rgba(13, 83, 183, 0.7); */
-  position: relative;
-  margin: 15px 15px 15px 15px;
+    margin: 20px 30px 50px 20px;
     position: relative;
     /* border: 1px solid red; */
     border: 1px solid hsla(210, 86%, 39%, 0.66);
+    min-width: 89%;
+    height: 60%;
 }
 .line {
   height: 10px;
