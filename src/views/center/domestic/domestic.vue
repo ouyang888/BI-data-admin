@@ -4,11 +4,11 @@
     <div class="top-flex">
       <!-- 仪表盘 -->
       <div class="dashboard-box">
-        <!-- <div class="panelList">
+        <div class="panelList">
           <ProgressPanel :data="progressData" />
           <SpeedPanel :data="speedData" />
           <SadPanel :data="sabData" />
-        </div> -->
+        </div>
       </div>
       <!-- 右侧卡片 -->
       <div class="flex-card">
@@ -780,14 +780,38 @@
         <a-spin class="flex-loading" size="large" v-if="showLoading" />
         <div>
           <div class="middle-font">内销日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{item.text}}</div>
+              </div>
+            </template>
+          </div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
           <div class="middle-font">线上日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{item.text}}</div>
+              </div>
+            </template>
+          </div>
           <div id="main2" class="echartsBox"></div>
         </div>
         <div>
           <div class="middle-font">线下日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{item.text}}</div>
+              </div>
+            </template>
+          </div>
           <div id="main3" class="echartsBox"></div>
         </div>
       </div>
@@ -828,11 +852,12 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 export default {
-  // components: {
-  //   ProgressPanel,
-  //   SpeedPanel,
-  //   SadPanel,
-  // },
+  name: "s",
+  components: {
+    ProgressPanel,
+    SpeedPanel,
+    SadPanel,
+  },
   data() {
     return {
       showLoading: false,
@@ -970,6 +995,10 @@ export default {
           address: "Sidney No. ",
           tags: ["cool", "teacher"],
         },
+      ],
+      echartsLabel: [
+        { class: "plan", text: "实际达成" },
+        { class: "average", text: "日均线" },
       ],
     };
   },
@@ -1473,6 +1502,7 @@ export default {
 }
 .dashboard-box {
   width: 50%;
+  position: relative;
 }
 .card-box {
   height: 248px;
@@ -1606,6 +1636,13 @@ export default {
   position: relative;
   left: 50%;
   right: 50%;
+}
+.panelList {
+  height: 258px;
+  width: 760px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .panelList {
   height: 258px;
