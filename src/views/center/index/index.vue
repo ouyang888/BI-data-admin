@@ -60,8 +60,8 @@
                 >
                 <!-- <template v-for="(item,index) in innerLeft" :key="index">
                   {{item}} -->
-                  <div class="card-middle-progress" v-for="(item,index) in innerLeft" :key="index" >
-                    <template  v-if="index<3">  
+                  <template  v-for="(item,index) in innerLeft" >  
+                  <div class="card-middle-progress" :key="index" v-if="index<3">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -81,9 +81,8 @@
                         </div>
                       </div>
                     </div>
-                    </template>
                   </div>
-                  <!-- </template> -->
+                </template>
                 </div>
 
                 <div class="cardList"
@@ -94,8 +93,8 @@
                 "
               >
             
-                <div class="card-middle-progress" v-for="(item,index) in innerLeft" :key="index" >
-                  <template v-if="index>2" >
+              <template v-for="(item,index) in innerLeft">
+                <div class="card-middle-progress" :key="index"  v-if="index>2">
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">{{item.businessEntityName}}</div>
                     <div>
@@ -115,8 +114,8 @@
                       </div>
                     </div>
                   </div>
-                  </template>
                 </div>
+              </template>
       
               </div>
                 
@@ -168,8 +167,8 @@
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress" v-for="(item,index) in innerRight" :key="index">
-                    <template  v-if="index<3">
+                <template v-for="(item,index) in innerRight" >
+                  <div class="card-middle-progress" :key="index" v-if="index<3">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -189,8 +188,8 @@
                         </div>
                       </div>
                     </div>
-                    </template>
                   </div>
+                </template>
                 </div>
                 <div class="cardList"
                 style="
@@ -199,8 +198,8 @@
                   justify-content: space-between;
                 "
               >
-                  <div class="card-middle-progress" v-for="(item,index) in innerRight" :key="index" >
-                    <template v-if="index>=3"> 
+              <template  v-for="(item,index) in innerRight" > 
+                  <div class="card-middle-progress":key="index" v-if="index>=3">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -220,8 +219,8 @@
                         </div>
                       </div>
                     </div>
-                    </template>
                   </div>
+                </template>
                
                 </div>
                 <div class="flex-bottoms">
@@ -284,8 +283,8 @@
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress" v-for="(item,index) in outterLeft" :key="index">
-                    <template v-if="index<3">
+                <template  v-for="(item,index) in outterLeft" >
+                  <div class="card-middle-progress":key="index" v-if="index<3">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -305,8 +304,8 @@
                         </div>
                       </div>
                     </div>
-                    </template>
                   </div>
+                </template>
                   </div>
                   <div class="cardList"
                   style="
@@ -315,8 +314,8 @@
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress" v-for="(item,index) in outterLeft" :key="index">
-                    <template v-if="index>2">
+                <template v-for="(item,index) in outterLeft" >
+                  <div class="card-middle-progress":key="index" v-if="index>2">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -336,8 +335,8 @@
                         </div>
                       </div>
                     </div>
-                    </template>
                   </div>
+                </template>
                
                 </div>
                 <div class="flex-bottoms">
@@ -388,8 +387,8 @@
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress" v-for="(item,index) in outterRight" :key="index">
-                    <template v-if="index<3">
+                <template  v-for="(item,index) in outterRight" >
+                  <div class="card-middle-progress":key="index" v-if="index<3">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -409,8 +408,8 @@
                         </div>
                       </div>
                     </div>
-                    </template>
                   </div>
+                </template>
                 </div>
                 <div class="cardList"
                 style="
@@ -419,8 +418,8 @@
                   justify-content: space-between;
                 "
               >
-                <div class="card-middle-progress" v-for="(item,index) in outterRight" :key="index" >
-                  <template v-if="index>=3">
+              <template v-for="(item,index) in outterRight" >
+                <div class="card-middle-progress":key="index"  v-if="index>=3">
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">{{item.businessEntityName}}</div>
                     <div>
@@ -440,8 +439,8 @@
                       </div>
                     </div>
                   </div>
-                  </template>
                 </div>
+              </template>
                 </div>
                 <div class="flex-bottoms">
                   <div>线上结构   <span v-for="(item,index) in outterSabLeft" :key="index"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
@@ -741,13 +740,13 @@ export default {
 
         inner.rows.forEach(v=>{
           v.dateRadio = v.dateRadio*100
-          v.onLineRadio = v.onLineRadio*100
+          v.onLineRadio = v.onLineRadio*100>100?100:v.onLineRadio*100;
         })
         outter.rows.forEach(v=>{
           v.dateRadio = v.dateRadio*100
-          v.onLineRadio = v.onLineRadio*100
+          v.onLineRadio = v.onLineRadio*100>100?100:v.onLineRadio*100;
         })
-
+       
 
         this.outterLeft = outter.rows.filter(v=>{
           return v.obmOem == 'OBM';
