@@ -60,7 +60,8 @@
                 >
                 <!-- <template v-for="(item,index) in innerLeft" :key="index">
                   {{item}} -->
-                  <div class="card-middle-progress" v-for="(item,index) in innerLeft" :key="index" v-if="index<3">
+                  <div class="card-middle-progress" v-for="(item,index) in innerLeft" :key="index" >
+                    <template  v-if="index<3">  
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -80,6 +81,7 @@
                         </div>
                       </div>
                     </div>
+                    </template>
                   </div>
                   <!-- </template> -->
                 </div>
@@ -92,7 +94,8 @@
                 "
               >
             
-                <div class="card-middle-progress" v-for="(item,index) in innerLeft" :key="index" v-if="index>2" >
+                <div class="card-middle-progress" v-for="(item,index) in innerLeft" :key="index" >
+                  <template v-if="index>2" >
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">{{item.businessEntityName}}</div>
                     <div>
@@ -112,13 +115,13 @@
                       </div>
                     </div>
                   </div>
-                
+                  </template>
                 </div>
       
               </div>
                 
                 <div class="flex-bottoms">
-                  <div>线上结构   <span v-for="(item,index) in innerSabLeft"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
+                  <div>线上结构   <span v-for="(item,index) in innerSabLeft" :key="index"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
                 </div>
                 <div
                   class="flex-bottoms"
@@ -165,7 +168,8 @@
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress" v-for="(item,index) in innerRight" :key="index" v-if="index<3">
+                  <div class="card-middle-progress" v-for="(item,index) in innerRight" :key="index">
+                    <template  v-if="index<3">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -185,6 +189,7 @@
                         </div>
                       </div>
                     </div>
+                    </template>
                   </div>
                 </div>
                 <div class="cardList"
@@ -194,7 +199,8 @@
                   justify-content: space-between;
                 "
               >
-                  <div class="card-middle-progress" v-for="(item,index) in innerRight" :key="index" v-if="index>=3">
+                  <div class="card-middle-progress" v-for="(item,index) in innerRight" :key="index" >
+                    <template v-if="index>=3"> 
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -214,11 +220,12 @@
                         </div>
                       </div>
                     </div>
+                    </template>
                   </div>
                
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构   <span v-for="(item,index) in innerSabRight"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
+                  <div>线上结构   <span v-for="(item,index) in innerSabRight" :key="index"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
                 </div>
                 <div
                   class="flex-bottoms"
@@ -277,7 +284,8 @@
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress" v-for="(item,index) in outterLeft" :key="index" v-if="index<3">
+                  <div class="card-middle-progress" v-for="(item,index) in outterLeft" :key="index">
+                    <template v-if="index<3">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -297,6 +305,7 @@
                         </div>
                       </div>
                     </div>
+                    </template>
                   </div>
                   </div>
                   <div class="cardList"
@@ -306,7 +315,8 @@
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress" v-for="(item,index) in outterLeft" :key="index" v-if="index>2">
+                  <div class="card-middle-progress" v-for="(item,index) in outterLeft" :key="index">
+                    <template v-if="index>2">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -326,11 +336,12 @@
                         </div>
                       </div>
                     </div>
+                    </template>
                   </div>
                
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构   <span v-for="(item,index) in outterSabLeft"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
+                  <div>线上结构   <span v-for="(item,index) in outterSabLeft" :key="index"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
                 </div>
                 <div
                   class="flex-bottoms"
@@ -377,7 +388,8 @@
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress" v-for="(item,index) in outterRight" :key="index" v-if="index<3">
+                  <div class="card-middle-progress" v-for="(item,index) in outterRight" :key="index">
+                    <template v-if="index<3">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -397,6 +409,7 @@
                         </div>
                       </div>
                     </div>
+                    </template>
                   </div>
                 </div>
                 <div class="cardList"
@@ -406,7 +419,8 @@
                   justify-content: space-between;
                 "
               >
-                <div class="card-middle-progress" v-for="(item,index) in outterRight" :key="index" v-if="index>=3">
+                <div class="card-middle-progress" v-for="(item,index) in outterRight" :key="index" >
+                  <template v-if="index>=3">
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">{{item.businessEntityName}}</div>
                     <div>
@@ -426,10 +440,11 @@
                       </div>
                     </div>
                   </div>
+                  </template>
                 </div>
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构   <span v-for="(item,index) in outterSabLeft"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
+                  <div>线上结构   <span v-for="(item,index) in outterSabLeft" :key="index"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
                 </div>
                 <div
                   class="flex-bottoms"
@@ -506,7 +521,7 @@
 
         >
          <template slot="manager" slot-scope="manager">
-          1111
+          {{manager}}
            </template>
           <a slot="name" slot-scope="text">{{ text }}</a>
         </a-table>
