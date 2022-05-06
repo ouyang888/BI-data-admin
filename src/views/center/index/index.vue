@@ -25,25 +25,25 @@
                 <div class="flex-top-card">
                   <div class="top-left-font">线上达成</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div>
+                    <div class="finish-font">责任制 <span>{{innerLeftInfo.saleTaskAmt}}亿</span></div>
+                    <div class="finish-font">完成率 <span>{{innerLeftInfo.onLineRadio>100?100:innerLeftInfo.onLineRadio}}%</span></div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
+                  <div class="card-big-num">{{innerLeftInfo.cnyAmt}}亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="50"
+                          :percent="innerLeftInfo.dateRadio"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="50"
+                          :percent="innerLeftInfo.onLineRadio"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -51,27 +51,29 @@
                     </div>
                   </div>
                 </div>
-                <div
+                <div class="cardList"
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress">
+                <!-- <template v-for="(item,index) in innerLeft" :key="index">
+                  {{item}} -->
+                  <div class="card-middle-progress" v-for="(item,index) in innerLeft" :key="index" v-if="index<3">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
+                      <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
+                            :percent="item.dateRadio"
                             :show-info="false"
                             strokeColor="#FF8B2F"
                           />
                         </div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
+                            :percent="item.cnyAmtRadio*100"
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
@@ -79,128 +81,50 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <!-- </template> -->
                 </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
+
+                <div class="cardList"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                "
+              >
+            
+                <div class="card-middle-progress" v-for="(item,index) in innerLeft" :key="index" v-if="index>2" >
+                  <div style="display: flex; align-items: center">
+                    <div class="finish-font">{{item.businessEntityName}}</div>
+                    <div>
+                      <div class="progress-middle">
+                        <a-progress
+                          :percent="item.dateRadio"
+                          :show-info="false"
+                          strokeColor="#FF8B2F"
+                        />
+                      </div>
+                      <div class="progress-middle">
+                        <a-progress
+                          :percent="item.cnyAmtRadio*100"
+                          :show-info="false"
+                          strokeColor="rgb(102, 255, 255)"
+                        />
                       </div>
                     </div>
                   </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                
                 </div>
+      
+              </div>
+                
                 <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
+                  <div>线上结构   <span v-for="(item,index) in innerSabLeft"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">75%</span></div>
+                  <div>线上毛利率 <span class="light-blue">{{innerLeftInfo.onLineProfitRadio}}%</span></div>
                 </div>
               </div>
               <div class="mt-border"></div>
@@ -208,25 +132,25 @@
                 <div class="flex-top-card">
                   <div class="top-left-font">线下达成</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div>
+                    <div class="finish-font">责任制 <span>{{innerRightInfo.saleTaskAmt}}亿</span></div>
+                    <div class="finish-font">完成率 <span>{{innerRightInfo.onLineRadio}}%</span></div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
+                  <div class="card-big-num">{{innerRightInfo.cnyAmt}}亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="50"
+                          :percent="innerRightInfo.dateRadio"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="50"
+                          :percent="innerRightInfo.onLineRadio"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -234,69 +158,27 @@
                     </div>
                   </div>
                 </div>
-                <div
+                <div class="cardList"
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress">
+                  <div class="card-middle-progress" v-for="(item,index) in innerRight" :key="index" v-if="index<3">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
+                      <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
+                            :percent="item.dateRadio"
                             :show-info="false"
                             strokeColor="#FF8B2F"
                           />
                         </div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
+                            :percent="item.cnyAmtRadio*100"
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
@@ -305,27 +187,27 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
+                <div class="cardList"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                "
+              >
+                  <div class="card-middle-progress" v-for="(item,index) in innerRight" :key="index" v-if="index>=3">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
+                      <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
+                            :percent="item.dateRadio"
                             :show-info="false"
                             strokeColor="#FF8B2F"
                           />
                         </div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
+                            :percent="item.cnyAmtRadio*100"
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
@@ -333,57 +215,16 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+               
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
+                  <div>线上结构   <span v-for="(item,index) in innerSabRight"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">75%</span></div>
+                  <div>线上毛利率 <span class="light-blue">{{innerRightInfo.onLineProfitRadio}}%</span></div>
                 </div>
               </div>
             </div>
@@ -401,27 +242,27 @@
             <div class="left-right-box">
               <div style="margin-left: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线上达成</div>
+                  <div class="top-left-font">OBM达成</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div>
+                    <div class="finish-font">责任制 <span>{{outterLeftInfo.saleTaskAmt}}亿</span></div>
+                    <div class="finish-font">完成率 <span>{{outterLeftInfo.onLineRadio>100?100:outterLeftInfo.onLineRadio}}%</span></div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
+                  <div class="card-big-num">{{outterLeftInfo.cnyAmt}}亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="50"
+                          :percent="outterLeftInfo.dateRadio"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="50"
+                          :percent="outterLeftInfo.onLineRadio"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -429,27 +270,27 @@
                     </div>
                   </div>
                 </div>
-                <div
+                <div class="cardList"
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress">
+                  <div class="card-middle-progress" v-for="(item,index) in outterLeft" :key="index" v-if="index<3">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
+                      <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
+                            :percent="item.dateRadio"
                             :show-info="false"
                             strokeColor="#FF8B2F"
                           />
                         </div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
+                            :percent="item.cnyAmtRadio*100"
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
@@ -457,70 +298,28 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
                   </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
+                  <div class="cardList"
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress">
+                  <div class="card-middle-progress" v-for="(item,index) in outterLeft" :key="index" v-if="index>2">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
+                      <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
+                            :percent="item.dateRadio"
                             :show-info="false"
                             strokeColor="#FF8B2F"
                           />
                         </div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
+                            :percent="item.cnyAmtRadio*100"
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
@@ -528,83 +327,42 @@
                       </div>
                     </div>
                   </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+               
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
+                  <div>线上结构   <span v-for="(item,index) in outterSabLeft"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线下毛利率 <span class="light-blue">75%</span></div>
+                  <div>线上毛利率 <span class="light-blue">{{outterLeftInfo.onLineProfitRadio}}%</span></div>
                 </div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线下达成</div>
+                  <div class="top-left-font">OEM达成</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div>
+                    <div class="finish-font">责任制 <span>{{outterRightInfo.saleTaskAmt}}亿</span></div>
+                    <div class="finish-font">完成率 <span>{{outterRightInfo.onLineRadio>100?100:outterRightInfo.onLineRadio}}%</span></div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
+                  <div class="card-big-num">{{outterRightInfo.cnyAmt}}亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="50"
+                          :percent="outterRightInfo.dateRadio"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="50"
+                          :percent="outterRightInfo.onLineRadio"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -612,69 +370,27 @@
                     </div>
                   </div>
                 </div>
-                <div
+                <div class="cardList"
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
                 >
-                  <div class="card-middle-progress">
+                  <div class="card-middle-progress" v-for="(item,index) in outterRight" :key="index" v-if="index<3">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
+                      <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
+                            :percent="item.dateRadio"
                             :show-info="false"
                             strokeColor="#FF8B2F"
                           />
                         </div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
+                            :percent="item.cnyAmtRadio*100"
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
@@ -683,85 +399,43 @@
                     </div>
                   </div>
                 </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
+                <div class="cardList"
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                "
+              >
+                <div class="card-middle-progress" v-for="(item,index) in outterRight" :key="index" v-if="index>=3">
+                  <div style="display: flex; align-items: center">
+                    <div class="finish-font">{{item.businessEntityName}}</div>
+                    <div>
+                      <div class="progress-middle">
+                        <a-progress
+                          :percent="item.dateRadio"
+                          :show-info="false"
+                          strokeColor="#FF8B2F"
+                        />
+                      </div>
+                      <div class="progress-middle">
+                        <a-progress
+                          :percent="item.cnyAmtRadio*100"
+                          :show-info="false"
+                          strokeColor="rgb(102, 255, 255)"
+                        />
                       </div>
                     </div>
                   </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                </div>
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
+                  <div>线上结构   <span v-for="(item,index) in outterSabLeft"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">75%</span></div>
+                  <div>线上毛利率 <span class="light-blue">{{outterRightInfo.onLineProfitRadio}}%</span></div>
                 </div>
               </div>
             </div>
@@ -829,7 +503,11 @@
           :columns="columns"
           :data-source="data"
           :pagination="false"
+
         >
+         <template slot="manager" slot-scope="manager">
+          1111
+           </template>
           <a slot="name" slot-scope="text">{{ text }}</a>
         </a-table>
       </div>
@@ -875,26 +553,70 @@ export default {
       columns: [
         {
           title: "内销",
-          dataIndex: "name",
-          key: "name",
+          dataIndex: "marketChannel",
+          key: "marketChannel",
           align: "center",
+          width:100,
+          scroll:{
+            x:100,
+          }
         },
         {
           title: "渠道",
-          dataIndex: "age",
-          key: "age",
+          dataIndex: "marketCenter ",
+          key: "marketCenter ",
           align: "center",
+          width:100,
         },
         {
           title: "责任人",
-          dataIndex: "address",
-          key: "address 1",
+          dataIndex: "manager ",
+          key: "manager ",
+          align: "center",
+          scopedSlots: { customRender: "manager" },
+          width:100,
+        },
+        {
+          title: "环境",
+          dataIndex: "businessEntityName1",
+          key: "businessEntityName1",
+          align: "center",
+          width:120,
+        },
+        {
+          title: "烹饪",
+          dataIndex: "businessEntityName6",
+          key: "businessEntityName6",
+          align: "center",
+        },
+        {
+          title: "电磁",
+          dataIndex: "businessEntityName2",
+          key: "businessEntityName2",
+          align: "center",
+        },
+        {
+          title: "调理",
+          dataIndex: "businessEntityName7",
+          key: "businessEntityName7",
+          align: "center",
+        },
+        {
+          title: "电动",
+          dataIndex: "businessEntityName4",
+          key: "businessEntityName4",
+          align: "center",
+        },
+        {
+          title: "饮品",
+          dataIndex: "businessEntityName3",
+          key: "businessEntityName3",
           align: "center",
         },
         {
           title: "总计",
-          dataIndex: "address",
-          key: "address 2",
+          dataIndex: "cnyAmt",
+          key: "cnyAmt",
           align: "center",
         },
       ],
@@ -972,6 +694,18 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
+       innerLeft:[],
+       innerLeftInfo:{},
+       innerRight:[],
+       innerRightInfo:{},
+       innerSabLeft:[],
+       innerSabRight:[],
+       outterLeft:[],
+       outterLeftInfo:{},
+       outterRight:[],
+       outterRightInfo:{},
+       outterSabLeft:[],
+       outterSabRight:[],
     };
   },
   methods: {
@@ -980,6 +714,154 @@ export default {
     },
     gotoExport() {
       this.$router.push("/center/export");
+    },
+    // 右边卡片/
+    async getCard() {
+      try {
+        const inner = await API.getData("directITotalInnerTotal","2022-03");
+        const outter = await API.getData("directTotalOutterTotal","2022-03");
+        const innersab = await API.getData("directTotalInnerSAB","2022-03");
+        const outtersab = await API.getData("directTotalOutterSAB","2022-03");
+        console.log('inner,',outter)
+
+        inner.rows.forEach(v=>{
+          v.dateRadio = v.dateRadio*100
+          v.onLineRadio = v.onLineRadio*100
+        })
+        outter.rows.forEach(v=>{
+          v.dateRadio = v.dateRadio*100
+          v.onLineRadio = v.onLineRadio*100
+        })
+
+
+        this.outterLeft = outter.rows.filter(v=>{
+          return v.obmOem == 'OBM';
+        })
+        this.outterLeftInfo = this.outterLeft[0]
+        if(this.outterLeftInfo.onLineRadio){
+        this.outterLeftInfo.onLineRadio = this.outterLeftInfo.onLineRadio.toFixed(0)
+        }
+        if(this.outterLeftInfo.onLineProfitRadio){
+        this.outterLeftInfo.onLineProfitRadio = (this.outterLeftInfo.onLineProfitRadio*100).toFixed(2)
+        }
+        if(this.outterLeftInfo.cnyAmt){
+        this.outterLeftInfo.cnyAmt = this.outterLeftInfo.cnyAmt.toFixed(0)
+        }
+        if(this.outterLeftInfo.saleTaskAmt){
+        this.outterLeftInfo.saleTaskAmt = this.outterLeftInfo.saleTaskAmt.toFixed(0)
+        }
+
+        this.outterRight = outter.rows.filter(v=>{
+          return v.obmOem == 'OEM';
+        })
+        this.outterRightInfo = this.outterRight[0]
+        if(this.outterRightInfo.onLineRadio){
+        this.outterRightInfo.onLineRadio = this.outterRightInfo.onLineRadio.toFixed(0)
+        }
+        if(this.outterRightInfo.onLineProfitRadio){
+        this.outterRightInfo.onLineProfitRadio = (this.outterRightInfo.onLineProfitRadio*100).toFixed(2)
+        }
+        if(this.outterRightInfo.cnyAmt){
+        this.outterRightInfo.cnyAmt = this.outterRightInfo.cnyAmt.toFixed(0)
+        }
+        if(this.outterRightInfo.saleTaskAmt){
+        this.outterRightInfo.saleTaskAmt = this.outterRightInfo.saleTaskAmt.toFixed(0)
+        }
+
+
+
+        this.innerLeft = inner.rows.filter(v=>{
+          return v.cooprLevel1 == '线上';
+        })
+        this.innerLeftInfo = this.innerLeft[0]
+        if(this.innerLeftInfo.onLineRadio){
+        this.innerLeftInfo.onLineRadio = this.innerLeftInfo.onLineRadio.toFixed(0)
+        }
+        if(this.innerLeftInfo.onLineProfitRadio){
+        this.innerLeftInfo.onLineProfitRadio = (this.innerLeftInfo.onLineProfitRadio*100).toFixed(2)
+        }
+        if(this.innerLeftInfo.cnyAmt){
+        this.innerLeftInfo.cnyAmt = this.innerLeftInfo.cnyAmt.toFixed(0)
+        }
+        if(this.innerLeftInfo.saleTaskAmt){
+        this.innerLeftInfo.saleTaskAmt = this.innerLeftInfo.saleTaskAmt.toFixed(0)
+        }
+
+
+       this.innerRight = inner.rows.filter(v=>{
+          return v.cooprLevel1 == '线下';
+        })
+       this.innerRightInfo = this.innerRight[0]
+       if(this.innerRightInfo.onLineRadio){
+        this.innerRightInfo.onLineRadio = this.innerRightInfo.onLineRadio.toFixed(0)
+       }
+       if(this.innerRightInfo.onLineProfitRadio){
+        this.innerRightInfo.onLineProfitRadio = (this.innerRightInfo.onLineProfitRadio*100).toFixed(0)
+       }
+   
+        if(this.innerRightInfo.cnyAmt){
+        this.innerRightInfo.cnyAmt = this.innerRightInfo.cnyAmt.toFixed(0)
+        }
+        if(this.innerRightInfo.saleTaskAmt){
+        this.innerRightInfo.saleTaskAmt = this.innerRightInfo.saleTaskAmt.toFixed(0)
+      }
+      console.log('this.innerRightInfo',this.innerRightInfo,this.innerRight)
+
+       this.innerSabLeft = innersab.rows.filter(v=>{
+          return v.cooprLevel1 == '线上';
+        })
+       console.log('this.innerSabLeft', this.innerSabLeft)
+       this.innerSabRight = innersab.rows.filter(v=>{
+          return v.cooprLevel1 == '线下';
+        })
+
+      }catch(err){
+        console.log(err)
+      }
+
+    },
+
+       // 底部table/
+  async getTable() {
+      try {
+        const tableInner = await API.getData("directTotalinnerBottom","2022-03");
+        const tableOutter = await API.getData("directTotalOutterBottom","2022-03");
+
+        let obj = {
+            businessEntityName1:'环境',
+            businessEntityName2:'电磁',
+            businessEntityName3:'饮品',
+            businessEntityName4:'电动',
+            businessEntityName5:'奇厨',
+            businessEntityName6:'烹饪',
+            businessEntityName7:'调理',
+            businessEntityName8:'其他',
+            completeRadio1:'环境',
+            completeRadio2:'电磁',
+            completeRadio3:'饮品',
+            completeRadio4:'电动',
+            completeRadio5:'奇厨',
+            completeRadio6:'烹饪',
+            completeRadio7:'调理',
+            completeRadio8:'其他',
+        }
+
+
+        
+
+        let innerTop = tableInner.rows.filter(v=>{
+          return v.marketChannel == '线上'
+        })
+        let innerBottom = tableInner.rows.filter(v=>{
+          return v.marketChannel == '线下'
+        })
+        this.data = innerTop.concat(innerBottom);
+        console.log('this.data',this.data)
+
+
+      }catch(err){
+        console.log(err)
+      }
     },
     //中间折线图
     async getList() {
@@ -1376,6 +1258,8 @@ export default {
   },
   mounted() {
     this.getList();
+    this.getCard();
+    this.getTable()
   },
 };
 </script>
@@ -1526,6 +1410,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* width:90%; */
 }
 
 .top-left-font {
@@ -1893,4 +1778,11 @@ export default {
  left: 50%;
  right: 50%;
 }
+/* .cardList{
+  flex-wrap: wrap;
+} */
+
+/* .card-middle-progress{
+  width:33.33%;
+} */
 </style> 
