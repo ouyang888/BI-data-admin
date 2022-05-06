@@ -1907,7 +1907,7 @@ export default {
   margin: 0 auto;
 }
 .dashboard-box {
-    height: 140px;
+     height: 140px;
     border: 1px solid hsla(210, 86%, 39%, 0.66);
     /* flex: 0.82; */
     margin-top: 23px;
@@ -1917,11 +1917,11 @@ export default {
     font-size: 18px;
     color: white;
     text-align: center;
-    width: 31%;
+    width: 32%;
 }
 
 .card-box {
-  background-image: url("../../../assets/img/bigCardBackground.svg");
+  background-image: url("../../../assets/img/smallCardBackground.svg");
   background-repeat: no-repeat;
   margin-right: 20px;
   background-size: 100% 95%;
@@ -1930,7 +1930,7 @@ export default {
   margin: 4px 8px 4px 8px;
 }
 .card-font {
-  font-size: 14px;
+  font-size: 18px;
   color: #fff;
   text-align: center;
   /* font-weight: 600; */
@@ -1946,7 +1946,8 @@ export default {
     justify-content: space-between;
     /* width: 100%; */
     flex-wrap: wrap;
-    width: 67%;
+    width: 70%;
+    padding: 10px;
 }
 .flex-top-card {
   display: flex;
@@ -1959,41 +1960,41 @@ export default {
   margin-right: 20px;
 }
 .card-border-box {
-    margin: 20px 30px 50px 20px;
+    margin: 10px 10px 30px 10px;
     position: relative;
     /* border: 1px solid red; */
-    border: 1px solid hsla(210, 86%, 39%, 0.66);
+    /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
     min-width: 89%;
-    height: 60%;
+    /* height: 70%;
 }
 .line {
   height: 10px;
-  border-left: 2px solid rgb(102, 255, 255);
-  border-right: 2px solid rgb(102, 255, 255);
+  /* border-left: 2px solid rgb(102, 255, 255);
+  border-right: 2px solid rgb(102, 255, 255); */
 }
 .line1 {
-  border-top: 2px solid rgb(102, 255, 255);
+  /* border-top: 2px solid rgb(102, 255, 255); */
   width: 10px;
   position: absolute;
   top: 0;
   left: 0;
 }
 .line2 {
-  border-top: 2px solid rgb(102, 255, 255);
+  /* border-top: 2px solid rgb(102, 255, 255); */
   width: 10px;
   position: absolute;
   top: 0;
   right: 0;
 }
 .line3 {
-  border-top: 2px solid rgb(102, 255, 255);
+  /* border-top: 2px solid rgb(102, 255, 255); */
   width: 10px;
   position: absolute;
   bottom: 0;
   left: 0;
 }
 .line4 {
-  border-top: 2px solid rgb(102, 255, 255);
+  /* border-top: 2px solid rgb(102, 255, 255); */
   width: 10px;
   position: absolute;
   bottom: 0;
