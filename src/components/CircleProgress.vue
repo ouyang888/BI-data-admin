@@ -65,9 +65,9 @@
     },
     mounted() {
       this.cav = this.$refs.cav;
-      console.log('this.cav',this.cav,this.$props)
+      // console.log('this.cav',this.cav,this.$props) 
       if (this.cav) {
-        console.log('props',this.$props)
+        // console.log('props',this.$props)
         const goProgress = new circleProgress({
           el: this.cav,
           progress: this.$props.rate / 100,

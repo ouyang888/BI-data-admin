@@ -782,9 +782,13 @@
           <div class="middle-font">内销日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
-              <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+              <div
+                class="item"
+                v-for="(item, index) in echartsLabel"
+                :key="index"
+              >
                 <div class="lump" :class="item.class"></div>
-                <div class="text">{{item.text}}</div>
+                <div class="text">{{ item.text }}</div>
               </div>
             </template>
           </div>
@@ -794,9 +798,13 @@
           <div class="middle-font">线上日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
-              <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+              <div
+                class="item"
+                v-for="(item, index) in echartsLabel"
+                :key="index"
+              >
                 <div class="lump" :class="item.class"></div>
-                <div class="text">{{item.text}}</div>
+                <div class="text">{{ item.text }}</div>
               </div>
             </template>
           </div>
@@ -806,9 +814,13 @@
           <div class="middle-font">线下日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
-              <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+              <div
+                class="item"
+                v-for="(item, index) in echartsLabel"
+                :key="index"
+              >
                 <div class="lump" :class="item.class"></div>
-                <div class="text">{{item.text}}</div>
+                <div class="text">{{ item.text }}</div>
               </div>
             </template>
           </div>
@@ -874,30 +886,30 @@ export default {
       progressData: {
         bar1: 0,
         bar2: 0,
-        ballTitle: "产司",
+        ballTitle: "内销",
         bigBallTitle: "毛利率",
-        textLeft: "内销",
-        textRight: "外销",
-        titleTop: "内销",
-        titleBottom: "外销",
+        textLeft: "线上",
+        textRight: "线下",
+        titleTop: "线上",
+        titleBottom: "线下",
         topGPM: 0,
         bottomGPM: 0,
-        ballNum: 0,
+        ballNum: 55,
       },
       speedData: {
         bar: 0,
         speedBar: 0,
-        ballTitle: "事业部达成",
+        ballTitle: "内销达成",
         ballNum: 0,
-        ballLeftTitle: "自营",
-        ballRightTitle: "代运营",
+        ballLeftTitle: "线上",
+        ballRightTitle: "线下",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "内销",
+        bottomTitle1: "线上",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "外销",
+        bottomTitle2: "线下",
         bottomClose1: 0,
         bottomTime1: 0,
       },
@@ -1003,6 +1015,46 @@ export default {
     };
   },
   methods: {
+    //三个仪表盘
+    async getdashboard() {
+     
+      try { 
+        const res = await API.getData("innerDirectTopTotal", "2022-03");
+        //内销汇总仪表盘左边&&中间
+        let panelDataList = res.rows;
+        for (var i = 0; i < panelDataList.length; i++) {
+          if (panelDataList[i].cooprLevel1 == "线上") {
+            this.progressData.topGPM = (
+              panelDataList[i].onLineProfitRadio * 100
+            ).toFixed(1);
+            this.progressData.bar1 = (
+              panelDataList[i].onLineProfitRadio * 100
+            ).toFixed(1);
+          } else if (panelDataList[i].cooprLevel1 == "线下") {
+            this.progressData.bar1 = 10;
+            this.progressData.bottomGPM = (
+              panelDataList[i].onLineProfitRadio * 100
+            ).toFixed(1);
+            this.progressData.bar2 = (
+              panelDataList[i].onLineProfitRadio * 100
+            ).toFixed(1);
+          }
+        }
+
+        //外销汇总仪表盘左边&&中间
+        // let smallData = JSON.parse(localStorage.getItem("setPanel"));
+        // for (var i = 0; i < smallData.length; i++) {
+        //   if (smallData[i].directName == "内销") {
+        //     dataList.smallInnerDataObj = smallData[i];
+        //   } else {
+        //     dataList.smallDownDataObj = smallData[i];
+        //   }
+        // }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     //中间折线图
     async getList() {
       this.showLoading = true;
@@ -1399,9 +1451,11 @@ export default {
       this.$router.push("/center/onlineSummary");
     },
   },
-  mounted() {
+  created() {
     this.getList();
+    this.getdashboard();
   },
+  mounted() {},
 };
 </script>
 <style scoped>
@@ -1511,8 +1565,8 @@ export default {
   background-repeat: no-repeat;
   /* margin-left: 20px; */
 }
-.card-box:first-child{
-   margin-right: 20px;
+.card-box:first-child {
+  margin-right: 20px;
 }
 
 .card-font {

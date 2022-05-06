@@ -93,7 +93,7 @@ export default {
 }
 .bottom {
   position: absolute;
-  bottom: -10px
+  bottom: 2px
 }
 .bottom p{
   margin-bottom: -1px;
@@ -109,7 +109,7 @@ export default {
 }
 .round {
   width: 110px;
-  height: 160px;
+  height: 132px;
   margin-top: 32px;
   display: flex;
   align-items: center;
