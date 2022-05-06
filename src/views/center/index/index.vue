@@ -503,10 +503,26 @@
           :columns="columns"
           :data-source="data"
           :pagination="false"
-
+          :scroll="{ x: 'calc(700px + 50%)', y: 240 }"
         >
-         <template slot="manager" slot-scope="manager">
-          1111
+         <template slot="manager" slot-scope="record, index, indent, expanded">
+
+          {{manager}} 
+
+          <!-- <div class="progress">
+            <a-progress
+              :percent="innerLeftInfo.dateRadio"
+              :show-info="false"
+              strokeColor="#FF8B2F"
+            />
+          </div>
+          <div class="progress">
+            <a-progress
+              :percent="innerLeftInfo.onLineRadio"
+              :show-info="false"
+              strokeColor="rgb(102, 255, 255)"
+            />
+          </div> -->
            </template>
           <a slot="name" slot-scope="text">{{ text }}</a>
         </a-table>
@@ -517,6 +533,7 @@
           :columns="columns"
           :data-source="data"
           :pagination="false"
+          :scroll="{ x: 'calc(700px + 50%)', y: 240 }"
         >
           <a slot="name" slot-scope="text">{{ text }}</a>
         </a-table>
@@ -557,9 +574,6 @@ export default {
           key: "marketChannel",
           align: "center",
           width:100,
-          scroll:{
-            x:100,
-          }
         },
         {
           title: "渠道",
@@ -573,7 +587,9 @@ export default {
           dataIndex: "manager ",
           key: "manager ",
           align: "center",
-          scopedSlots: { customRender: "manager" },
+          scopedSlots: { 
+            customRender: "manager" 
+          },
           width:100,
         },
         {
@@ -1785,4 +1801,7 @@ export default {
 /* .card-middle-progress{
   width:33.33%;
 } */
+::v-deep .ant-table-fixed{
+  background: rgb(7 6 64);
+}
 </style> 
