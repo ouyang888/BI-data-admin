@@ -539,6 +539,7 @@
     </div>
   </div>
 </template>
+</template>
 <script>
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
@@ -572,9 +573,6 @@ export default {
           key: "marketChannel",
           align: "center",
           width:100,
-          scroll:{
-            x:100,
-          }
         },
         {
           title: "渠道",
@@ -588,7 +586,9 @@ export default {
           dataIndex: "manager ",
           key: "manager ",
           align: "center",
-          scopedSlots: { customRender: "manager" },
+          scopedSlots: { 
+            customRender: "manager" 
+          },
           width:100,
         },
         {
@@ -664,7 +664,7 @@ export default {
       ],
 
       progressData: {
-        bar1: 0,
+        bar1: 10,
         bar2: 0,
         ballTitle: "产司",
         bigBallTitle: "毛利率",
@@ -1272,6 +1272,7 @@ export default {
     },
   },
   mounted() {
+    this.progressData.bar1 = 20;
     this.getList();
     this.getCard();
     this.getTable()
@@ -1800,4 +1801,7 @@ export default {
 /* .card-middle-progress{
   width:33.33%;
 } */
+::v-deep .ant-table-fixed{
+  background: rgb(7 6 64);
+}
 </style> 
