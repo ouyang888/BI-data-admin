@@ -1,11 +1,14 @@
 <template>
-  <div style="background: #02004D">
-
+  <div style="background: #02004d">
     <!-- 头部仪表盘和卡片 -->
     <div class="top-flex">
       <!-- 仪表盘 -->
       <div class="dashboard-box">
-        
+        <!-- <div class="panelList">
+          <ProgressPanel :data="progressData" />
+          <SpeedPanel :data="speedData" />
+          <SadPanel :data="sabData" />
+        </div> -->
       </div>
       <!-- 右侧卡片 -->
       <div class="flex-card">
@@ -193,7 +196,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -373,7 +379,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -381,7 +390,7 @@
             <div class="line"></div>
           </div>
         </div>
-         <div class="card-box">
+        <div class="card-box">
           <div class="card-font">线下</div>
           <div class="card-border-box">
             <div class="line"></div>
@@ -565,7 +574,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线下毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -745,7 +757,10 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div class="flex-bottoms" style="padding-bottom:10px;padding-top:4px;">
+                <div
+                  class="flex-bottoms"
+                  style="padding-bottom: 10px; padding-top: 4px"
+                >
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -809,21 +824,74 @@
 </template>
 <script>
 import API from "../../../service/api";
+import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
+import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
+import SadPanel from "@/views/center/panel/SadPanel.vue";
 export default {
-  name: "s",
+  // components: {
+  //   ProgressPanel,
+  //   SpeedPanel,
+  //   SadPanel,
+  // },
   data() {
     return {
-      showLoading:false,
-      
-      innerDirectList:[],
-      innerDirectDate:[],
-      innerDirectLine:"",
+      showLoading: false,
 
-      outerDirectList:[],
-      outerDirectDate:[],
-      outerDirectLine:"",
-      allList:[],
-      allLiine:"",
+      innerDirectList: [],
+      innerDirectDate: [],
+      innerDirectLine: "",
+
+      outerDirectList: [],
+      outerDirectDate: [],
+      outerDirectLine: "",
+      allList: [],
+      allLiine: "",
+      progressData: {
+        bar1: 0,
+        bar2: 0,
+        ballTitle: "产司",
+        bigBallTitle: "毛利率",
+        textLeft: "内销",
+        textRight: "外销",
+        titleTop: "内销",
+        titleBottom: "外销",
+        topGPM: 0,
+        bottomGPM: 0,
+        ballNum: 0,
+      },
+      speedData: {
+        bar: 0,
+        speedBar: 0,
+        ballTitle: "事业部达成",
+        ballNum: 0,
+        ballLeftTitle: "自营",
+        ballRightTitle: "代运营",
+        ballLeftNum: 0,
+        ballRightNum: 0,
+        bottomNum: 0,
+        bottomTitle1: "内销",
+        bottomClose: 0,
+        bottomTime: 0,
+        bottomTitle2: "外销",
+        bottomClose1: 0,
+        bottomTime1: 0,
+      },
+      sabData: {
+        bar1: 70,
+        bar2: 50,
+        bar3: 30,
+        bar4: 12,
+        bar5: 7,
+        ballTitle: "内销",
+        bottom: "线上",
+        top: "线下",
+        sabArr: { s: 32, a: 18, b: 21 },
+        topArr: { s: 32, a: 18, b: 21 },
+        bottomArr: { s: 32, a: 18, b: 21 },
+        // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+        // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+        // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
+      },
       columns: [
         {
           title: "线上",
@@ -849,7 +917,7 @@ export default {
           key: "address 2",
           align: "center",
         },
-         {
+        {
           title: "任务完成率",
           dataIndex: "address",
           key: "address 2",
@@ -906,36 +974,39 @@ export default {
     };
   },
   methods: {
-
-
- //中间折线图
+    //中间折线图
     async getList() {
-      this.showLoading = true
-      try { 
-        const res = await API.getData("innerDirectChart","2022-01-01,2022-10-01");
-        let obj = { innerDirect:"",outerDirect: "" };
-        let newArr = res.rows.filter((item)=>{
-        var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
-        var yue = timeArr[1];
-        var ri = timeArr[2];
-          if(item.cooprLevel1 == "线上"){
-            this.innerDirectDate.push(yue+'-'+ri)
-            this.innerDirectList.push(item.totalCnyAmt)
-            this.innerDirectLine = item.saleAvgTaskQty
+      this.showLoading = true;
+      try {
+        const res = await API.getData(
+          "innerDirectChart",
+          "2022-01-01,2022-10-01"
+        );
+        let obj = { innerDirect: "", outerDirect: "" };
+        let newArr = res.rows.filter((item) => {
+          var timeArr = item.orderDate
+            .replace(" ", ":")
+            .replace(/\:/g, "-")
+            .split("-");
+          var yue = timeArr[1];
+          var ri = timeArr[2];
+          if (item.cooprLevel1 == "线上") {
+            this.innerDirectDate.push(yue + "-" + ri);
+            this.innerDirectList.push(item.totalCnyAmt);
+            this.innerDirectLine = item.saleAvgTaskQty;
             this.myEcharts2();
-          }else if(item.cooprLevel1 == "线下"){
-            this.outerDirectDate.push(yue+'-'+ri)
-            this.outerDirectList.push(item.totalCnyAmt)
-            this.outerDirectLine = item.saleAvgTaskQty
+          } else if (item.cooprLevel1 == "线下") {
+            this.outerDirectDate.push(yue + "-" + ri);
+            this.outerDirectList.push(item.totalCnyAmt);
+            this.outerDirectLine = item.saleAvgTaskQty;
             this.myEcharts3();
           }
-          
-          this.allList.push(item.saleAvgTaskQty+item.saleAvgTaskQty)
-          this.allLiine = item.saleAvgTaskQty + item.saleAvgTaskQty
+
+          this.allList.push(item.saleAvgTaskQty + item.saleAvgTaskQty);
+          this.allLiine = item.saleAvgTaskQty + item.saleAvgTaskQty;
           this.myEcharts();
-          this.showLoading = false
-        })
-         
+          this.showLoading = false;
+        });
       } catch (error) {
         console.log(error);
       }
@@ -1295,13 +1366,12 @@ export default {
       };
       myChart3.setOption(option);
     },
-    online(){
-        this.$router.push("/center/onlineSummary");
-
-    }
+    online() {
+      this.$router.push("/center/onlineSummary");
+    },
   },
   mounted() {
-    this.getList()
+    this.getList();
   },
 };
 </script>
@@ -1386,8 +1456,13 @@ export default {
 ::v-deep .ant-spin-nested-loading {
   margin: 14px;
 }
-::v-deep .ant-table-thead > tr:first-child > th:first-child{
-  background: linear-gradient(to right, rgb(80, 192, 255), rgb(90, 255, 163), rgb(102, 255, 255));
+::v-deep .ant-table-thead > tr:first-child > th:first-child {
+  background: linear-gradient(
+    to right,
+    rgb(80, 192, 255),
+    rgb(90, 255, 163),
+    rgb(102, 255, 255)
+  );
 }
 .top-flex {
   display: flex;
@@ -1520,16 +1595,23 @@ export default {
   color: #a0a3c0;
   font-size: 12px;
 }
-.light-blue{
-  color: #66FFFF;
+.light-blue {
+  color: #66ffff;
   opacity: 1;
 }
-::v-deep .ant-table-bordered .ant-table-body > table{
+::v-deep .ant-table-bordered .ant-table-body > table {
   border: none;
 }
-.flex-loading{
- position: relative;
- left: 50%;
- right: 50%;
+.flex-loading {
+  position: relative;
+  left: 50%;
+  right: 50%;
+}
+.panelList {
+  height: 258px;
+  width: 760px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 </style> 

@@ -8,9 +8,6 @@ module.exports = {
     proxy: {
       '/apa': {
         target: 'http://10.33.119.107:80/',
-        // target: 'https://lease.msmartlife.com/quality-service/',
-        // target: 'http://10.73.44.48:8085/',
-        // target: 'http://10.73.41.36:8085/',//才哥
         changeOrigin: true,
         pathRewrite: {
           '^/apa': ''

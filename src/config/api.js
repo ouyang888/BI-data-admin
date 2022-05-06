@@ -4,7 +4,7 @@ const admin_test ='https://devnewdota.smartmidea.net/quality-service/'
 
 const admin_uat = 'https://devnewdota.smartmidea.net/uat/quality-service/'
 
-const admin_pro = 'https://lease.msmartlife.com/quality-service/'
+const admin_pro = 'http://10.33.119.107:80/'
 
 let local = 'test'
 

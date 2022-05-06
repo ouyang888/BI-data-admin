@@ -107,7 +107,7 @@ export default {
 .round {
   width: 110px;
   height: 160px;
-  margin-top: 5px;
+  margin-top: 32px;
   display: flex;
   align-items: center;
   justify-content:center;
@@ -119,18 +119,19 @@ export default {
   letter-spacing: -0.01px;
   text-align: center;
   font-weight: 500;
+  margin-bottom: 0;
 }
 .sort {
   font-size: 24px;
-  margin-top: 5px;
   color: #FFFFFF;
   letter-spacing: -0.01px;
   text-align: center;
   font-weight: 600;
+  margin-bottom: 0;
 }
 .round-data{
   width: 75px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   display: flex;
   align-items: center;
   justify-content: space-between;
