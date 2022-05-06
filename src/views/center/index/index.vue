@@ -58,8 +58,6 @@
                     justify-content: space-between;
                   "
                 >
-                <!-- <template v-for="(item,index) in innerLeft" :key="index">
-                  {{item}} -->
                   <template  v-for="(item,index) in innerLeft" >  
                   <div class="card-middle-progress" :key="index" v-if="index<3">
                     <div style="display: flex; align-items: center">
