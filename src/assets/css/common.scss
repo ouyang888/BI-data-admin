@@ -170,3 +170,41 @@ color: #1890FF;
     }
   }
 }
+/* echarts 菜单 */
+.legend {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  width: 95px;
+}
+
+.lump {
+  width: 19px;
+  height: 3px;
+  margin-right: 10px;
+}
+
+.text {
+  color: #fff;
+  font-size: 12px;
+}
+
+/* 计划 */
+.plan {
+  border-bottom: 2px solid #66ffff;
+}
+
+/* 实际 */
+.actual {
+  border-bottom: 2px solid #6c02cf;
+}
+
+/* 日均线 */
+.average {
+  border-bottom: 2px dashed #ff8b2f;
+}

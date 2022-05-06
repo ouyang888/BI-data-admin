@@ -769,14 +769,38 @@
         <a-spin class="flex-loading" size="large" v-if="showLoading" />
         <div>
           <div class="middle-font">内销日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="item in echartsLabel">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{item.text}}</div>
+              </div>
+            </template>
+          </div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
           <div class="middle-font">线上日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="item in echartsLabel">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{item.text}}</div>
+              </div>
+            </template>
+          </div>
           <div id="main2" class="echartsBox"></div>
         </div>
         <div>
           <div class="middle-font">线下日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="item in echartsLabel">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{item.text}}</div>
+              </div>
+            </template>
+          </div>
           <div id="main3" class="echartsBox"></div>
         </div>
       </div>
@@ -961,6 +985,10 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
+      echartsLabel: [
+        { class: "plan", text: "实际达成" },
+        { class: "average", text: "日均线" },
+      ],
     };
   },
   methods: {

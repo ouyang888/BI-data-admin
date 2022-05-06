@@ -780,14 +780,38 @@
         <a-spin class="flex-loading" size="large" v-if="showLoading" />
         <div>
           <div class="middle-font">事业部日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="item in echartsLabel">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{item.text}}</div>
+              </div>
+            </template>
+          </div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
           <div class="middle-font">内销日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="item in echartsLabel">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{item.text}}</div>
+              </div>
+            </template>
+          </div>
           <div id="main2" class="echartsBox"></div>
         </div>
         <div>
           <div class="middle-font">外销日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="item in echartsLabel">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{item.text}}</div>
+              </div>
+            </template>
+          </div>
           <div id="main3" class="echartsBox"></div>
         </div>
       </div>
@@ -1634,28 +1658,7 @@ export default {
   width: 186px;
 }
 
-#legend {
-  display: flex;
-  justify-content: flex-end;
-}
 
-.item {
-  display: flex;
-  align-items: center;
-  margin-left: 15px;
-  width: 95px;
-}
-
-.lump {
-  width: 19px;
-  height: 3px;
-  margin-right: 10px;
-}
-
-.text {
-  color: #fff;
-  font-size: 12px;
-}
 /* 仪表盘样式 */
 .main {
   height: 230px;
@@ -1823,43 +1826,6 @@ export default {
   width: 186px;
 }
 
-#legend {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.item {
-  display: flex;
-  align-items: center;
-  margin-left: 15px;
-  width: 95px;
-}
-
-.lump {
-  width: 19px;
-  height: 3px;
-  margin-right: 10px;
-}
-
-/* 计划 */
-.plan {
-  border-bottom: 2px solid #66ffff;
-}
-
-/* 实际 */
-.actual {
-  border-bottom: 2px solid #6c02cf;
-}
-
-/* 日均线 */
-.average {
-  border-bottom: 2px dashed #ff8b2f;
-}
-
-.text {
-  color: #fff;
-  font-size: 12px;
-}
 /* 仪表盘样式 */
 .main {
   height: 230px;
