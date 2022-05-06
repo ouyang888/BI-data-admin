@@ -124,7 +124,7 @@
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">{{innerLeftInfo.onLineProfitRadio}}%</span></div>
+                  <div>线上毛利率 <span class="light-blue">{{innerLeftInfo.onLineProfitRadio || 0}}%</span></div>
                 </div>
               </div>
               <div class="mt-border"></div>
@@ -202,7 +202,7 @@
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">{{innerRightInfo.onLineProfitRadio}}%</span></div>
+                  <div>线上毛利率 <span class="light-blue">{{innerRightInfo.onLineProfitRadio || 0}}%</span></div>
                 </div>
               </div>
             </div>
