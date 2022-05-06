@@ -7,7 +7,7 @@
       <!-- 右侧卡片 -->
       <div class="flex-card" >
         <div class="card-box">
-          <div class="card-font">淘系</div>
+          <div class="card-font" @click="toModuleResponsible">淘系</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -110,7 +110,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font">京东</div>
+          <div class="card-font"  @click="toModuleResponsible">京东</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -263,7 +263,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font">淘系</div>
+          <div class="card-font"  @click="toModuleResponsible">淘系</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -348,7 +348,7 @@
           </div>
         </div>
            <div class="card-box">
-          <div class="card-font">美的平台</div>
+          <div class="card-font"  @click="toModuleResponsible">美的平台</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -451,7 +451,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font">兴趣电商</div>
+          <div class="card-font"  @click="toModuleResponsible">兴趣电商</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -504,7 +504,7 @@
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">库存达成</div>
+                  <div class="top-left-font" >库存达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -533,7 +533,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font">天猫自运营</div>
+          <div class="card-font"  @click="toModuleResponsible">天猫自运营</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -847,6 +847,9 @@ export default {
     };
   },
   methods: {
+    toModuleResponsible(){
+      this.$router.push({name:'moduleResponsible'});
+    },
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {

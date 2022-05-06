@@ -47,10 +47,22 @@ const routes = [
                 name: 'onlineSummary',
                 component: () => import('@/views/center/onlineSummary/index.vue')
             },
+            // 线下
+            {
+                path: 'offlineSummary',
+                name: 'offlineSummary',
+                component: () => import('@/views/center/offlineSummary/index.vue')
+            },
             {
                 path: 'psi',
                 name: 'psi',
                 component: () => import('@/views/center/psi/psi.vue')
+            },
+            // 模块2负责人
+            {
+                path: 'moduleResponsible',
+                name: 'moduleResponsible',
+                component: () => import('@/views/center/moduleResponsible/index.vue')
             },
         ],
     }
