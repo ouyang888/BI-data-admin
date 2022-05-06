@@ -674,8 +674,7 @@ export default {
   methods: {
     //三个仪表盘
     async getdashboard() {
-     
-      try { 
+      try {
         const res = await API.getData("innerDirectTopTotal", "2022-03");
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
@@ -684,9 +683,7 @@ export default {
             this.progressData.topGPM = (
               panelDataList[i].onLineProfitRadio * 100
             ).toFixed(1);
-            this.progressData.bar1 = (
-              panelDataList[i].onLineProfitRadio * 100
-            ).toFixed(1);
+            this.progressData.bar1 = (panelDataList[i].onLineProfitRadio * 100).toFixed(1);
           } else if (panelDataList[i].cooprLevel1 == "线下") {
             this.progressData.bar1 = 10;
             this.progressData.bottomGPM = (
