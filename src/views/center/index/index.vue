@@ -518,7 +518,7 @@
           :columns="columns"
           :data-source="data"
           :pagination="false"
-
+          :scroll="{ x: 'calc(700px + 50%)', y: 240 }"
         >
          <template slot="manager" slot-scope="manager">
           {{manager}}
@@ -532,13 +532,13 @@
           :columns="columns"
           :data-source="data"
           :pagination="false"
+          :scroll="{ x: 'calc(700px + 50%)', y: 240 }"
         >
           <a slot="name" slot-scope="text">{{ text }}</a>
         </a-table>
       </div>
     </div>
   </div>
-</template>
 </template>
 <script>
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
