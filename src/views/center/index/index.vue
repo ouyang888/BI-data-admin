@@ -503,7 +503,11 @@
           :columns="columns"
           :data-source="data"
           :pagination="false"
+
         >
+         <template slot="manager" slot-scope="manager">
+          1111
+           </template>
           <a slot="name" slot-scope="text">{{ text }}</a>
         </a-table>
       </div>
@@ -549,26 +553,70 @@ export default {
       columns: [
         {
           title: "内销",
-          dataIndex: "name",
-          key: "name",
+          dataIndex: "marketChannel",
+          key: "marketChannel",
           align: "center",
+          width:100,
+          scroll:{
+            x:100,
+          }
         },
         {
           title: "渠道",
-          dataIndex: "age",
-          key: "age",
+          dataIndex: "marketCenter ",
+          key: "marketCenter ",
           align: "center",
+          width:100,
         },
         {
           title: "责任人",
-          dataIndex: "address",
-          key: "address 1",
+          dataIndex: "manager ",
+          key: "manager ",
+          align: "center",
+          scopedSlots: { customRender: "manager" },
+          width:100,
+        },
+        {
+          title: "环境",
+          dataIndex: "businessEntityName1",
+          key: "businessEntityName1",
+          align: "center",
+          width:120,
+        },
+        {
+          title: "烹饪",
+          dataIndex: "businessEntityName6",
+          key: "businessEntityName6",
+          align: "center",
+        },
+        {
+          title: "电磁",
+          dataIndex: "businessEntityName2",
+          key: "businessEntityName2",
+          align: "center",
+        },
+        {
+          title: "调理",
+          dataIndex: "businessEntityName7",
+          key: "businessEntityName7",
+          align: "center",
+        },
+        {
+          title: "电动",
+          dataIndex: "businessEntityName4",
+          key: "businessEntityName4",
+          align: "center",
+        },
+        {
+          title: "饮品",
+          dataIndex: "businessEntityName3",
+          key: "businessEntityName3",
           align: "center",
         },
         {
           title: "总计",
-          dataIndex: "address",
-          key: "address 2",
+          dataIndex: "cnyAmt",
+          key: "cnyAmt",
           align: "center",
         },
       ],
@@ -776,30 +824,43 @@ export default {
        // 底部table/
   async getTable() {
       try {
-        const inner = await API.getData("directTotalinnerBottom","2022-03");
-        const outer = await API.getData("directTotalOutterBottom","2022-03");
+        const tableInner = await API.getData("directTotalinnerBottom","2022-03");
+        const tableOutter = await API.getData("directTotalOutterBottom","2022-03");
 
         let obj = {
-          
+            businessEntityName1:'环境',
+            businessEntityName2:'电磁',
+            businessEntityName3:'饮品',
+            businessEntityName4:'电动',
+            businessEntityName5:'奇厨',
+            businessEntityName6:'烹饪',
+            businessEntityName7:'调理',
+            businessEntityName8:'其他',
+            completeRadio1:'环境',
+            completeRadio2:'电磁',
+            completeRadio3:'饮品',
+            completeRadio4:'电动',
+            completeRadio5:'奇厨',
+            completeRadio6:'烹饪',
+            completeRadio7:'调理',
+            completeRadio8:'其他',
         }
 
 
-        inner.rows.forEach(v=>{
-
-        })
         
 
-        let innerTop = inner.rows.filter(v=>{
+        let innerTop = tableInner.rows.filter(v=>{
           return v.marketChannel == '线上'
         })
-        let innerBottom = inner.rows.filter(v=>{
+        let innerBottom = tableInner.rows.filter(v=>{
           return v.marketChannel == '线下'
         })
-
+        this.data = innerTop.concat(innerBottom);
+        console.log('this.data',this.data)
 
 
       }catch(err){
-        // console.log(err)
+        console.log(err)
       }
     },
     //中间折线图
