@@ -14,7 +14,7 @@
       <!-- 右侧卡片 -->
       <div class="flex-card">
         <div class="card-box">
-          <div class="card-font">线上</div>
+          <div class="card-font" @click="online()">线上</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -1353,6 +1353,10 @@ export default {
       };
       myChart3.setOption(option);
     },
+    online(){
+        this.$router.push("/center/onlineSummary");
+
+    }
   },
   mounted() {
     this.getList()
