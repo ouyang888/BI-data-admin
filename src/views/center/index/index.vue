@@ -1492,7 +1492,7 @@ export default {
 }
 
 .dashboard-box {
-  width: 50%;
+  /* width: 50%; */
   position: relative;
 }
 
@@ -1501,7 +1501,11 @@ export default {
   width: 545px;
   background-image: url("../../../assets/img/bigCardBackground.svg");
   background-repeat: no-repeat;
-  margin-left: 20px;
+  /* margin-left: 20px; */
+}
+
+.card-box:first-child{
+   margin-right: 20px;
 }
 
 .card-font {
