@@ -779,6 +779,25 @@ export default {
         const inner = await API.getData("directTotalinnerBottom","2022-03");
         const outer = await API.getData("directTotalOutterBottom","2022-03");
 
+        let obj = {
+          
+        }
+
+
+        inner.rows.forEach(v=>{
+
+        })
+        
+
+        let innerTop = inner.rows.filter(v=>{
+          return v.marketChannel == '线上'
+        })
+        let innerBottom = inner.rows.filter(v=>{
+          return v.marketChannel == '线下'
+        })
+
+
+
       }catch(err){
         // console.log(err)
       }
