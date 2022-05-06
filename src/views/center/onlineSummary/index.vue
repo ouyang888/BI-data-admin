@@ -1834,7 +1834,7 @@ export default {
 }
 .middle-box {
   width: 98%;
-  margin: 30px auto;
+  margin: 10px 20px 10px 10px;
   border: 1px solid hsla(210, 86%, 39%, 0.66);
 }
 .flex-font-middle {
@@ -1933,7 +1933,7 @@ export default {
   font-size: 18px;
   color: #fff;
   text-align: center;
-  /* font-weight: 600; */
+  font-weight: 600; 
   cursor: pointer;
   color: #19ecff;
 }
