@@ -93,7 +93,10 @@ export default {
 }
 .bottom {
   position: absolute;
-  bottom: 10px
+  bottom: -10px
+}
+.bottom p{
+  margin-bottom: -1px;
 }
 .bottom span {
   opacity: 0.7;

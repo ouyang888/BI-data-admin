@@ -1509,8 +1509,12 @@ export default {
   width: 545px;
   background-image: url("../../../assets/img/bigCardBackground.svg");
   background-repeat: no-repeat;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
+.card-box:first-child{
+   margin-right: 20px;
+}
+
 .card-font {
   font-size: 16px;
   color: #fff;

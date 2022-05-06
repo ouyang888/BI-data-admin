@@ -162,7 +162,7 @@ export default {
 }
 
 .bottom-text {
-  margin-top: 3px;
+  margin-top: 8px;
   opacity: 0.7;
   font-size: 10px;
   color: #ffffff;

@@ -124,7 +124,7 @@ export default {
 }
 .title {
   position: absolute;
-  bottom: 15px;
+  bottom: 8px;
   opacity: 0.8;
   font-size: 14px;
   color: #FFFFFF;
