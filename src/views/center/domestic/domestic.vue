@@ -184,7 +184,7 @@
                 "
               >
               <template  v-for="(item,index) in innerRight" > 
-                  <div class="card-middle-progress":key="index" v-if="index>=3">
+                  <div class="card-middle-progress" :key="index" v-if="index>=3">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div class="light-blue">
@@ -256,7 +256,7 @@
                   "
                 >
                 <template  v-for="(item,index) in outterLeft" >
-                  <div class="card-middle-progress":key="index" v-if="index<3">
+                  <div class="card-middle-progress" :key="index" v-if="index<3">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -287,7 +287,7 @@
                   "
                 >
                 <template v-for="(item,index) in outterLeft" >
-                  <div class="card-middle-progress":key="index" v-if="index>2">
+                  <div class="card-middle-progress" :key="index" v-if="index>2">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div>
@@ -360,7 +360,7 @@
                   "
                 >
                 <template  v-for="(item,index) in outterRight" >
-                  <div class="card-middle-progress":key="index" v-if="index<3">
+                  <div class="card-middle-progress" :key="index" v-if="index<3">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">{{item.businessEntityName}}</div>
                       <div class="light-blue">
@@ -378,7 +378,7 @@
                 "
               >
               <template v-for="(item,index) in outterRight" >
-                <div class="card-middle-progress":key="index"  v-if="index>=3">
+                <div class="card-middle-progress" :key="index"  v-if="index>=3">
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">{{item.businessEntityName}}</div>
                     <div class="light-blue">
