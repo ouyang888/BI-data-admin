@@ -47,10 +47,42 @@ const routes = [
                 name: 'onlineSummary',
                 component: () => import('@/views/center/onlineSummary/index.vue')
             },
+            // 线下
+            {
+                path: 'offlineSummary',
+                name: 'offlineSummary',
+                component: () => import('@/views/center/offlineSummary/index.vue')
+            },
             {
                 path: 'psi',
                 name: 'psi',
                 component: () => import('@/views/center/psi/psi.vue')
+            },
+            // 模块2负责人
+            {
+                path: 'moduleResponsible',
+                name: 'moduleResponsible',
+                component: () => import('@/views/center/moduleResponsible/index.vue')
+            },
+            // 猫系
+            {
+                path: 'catSeries',
+                name: 'catSeries',
+                component: () => import('@/views/center/catSeries/index.vue')
+            },
+            // 区域负责人
+            
+            {
+                path: 'regionalHead',
+                name: 'regionalHead',
+                component: () => import('@/views/center/regionalHead/index.vue')
+            },
+            // 店铺负责人
+ 
+            {
+                path: 'storeManager',
+                name: 'storeManager',
+                component: () => import('@/views/center/storeManager/index.vue')
             },
         ],
     }
