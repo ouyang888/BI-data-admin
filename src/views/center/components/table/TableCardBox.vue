@@ -64,14 +64,20 @@ export default {
     rightData:{
       type:Array,
       default:function(){ return []}
-    }
+    },
+    rowSpanNumber1:{
+      type:Number,
+      default:0,
+    },
+    rowSpanNumber2:{
+      type:Number,
+      default:0,
+    },
   },
   data() {
     return {
       color: "linear-gradient(to right , #50C0FF,#5AFFA3,#66FFFF) ",
       color2: "linear-gradient(to right , #1B6FFF, #7A5AFF, #7066FF) ",
-      rowSpanNumber1: 3,
-      rowSpanNumber2: 6,
       // directName: computed(() => Store.state.tableOneHeading),
       // directName2: computed(() => Store.state.tableTwoHeading),
       cooprMode: "渠道",
@@ -419,12 +425,24 @@ export default {
           },
         ],
       titleHead: {
-          businessEntityName1: "环境",
-          businessEntityName2: "烹饪",
-          businessEntityName3: "电磁",
-          businessEntityName4: "调理",
-          businessEntityName5: "电动",
-          businessEntityName6: "饮品",
+         businessEntityName1:'环境',
+         businessEntityName2:'电磁',
+         businessEntityName3:'饮品',
+         businessEntityName4:'电动',
+         businessEntityName5:'奇厨',
+         businessEntityName6:'烹饪',
+         businessEntityName7:'调理',
+         businessEntityName8:'其他'
+        },
+      titleHead: {
+         businessEntityName1:'环境',
+         businessEntityName2:'电磁',
+         businessEntityName3:'饮品',
+         businessEntityName4:'电动',
+         businessEntityName5:'奇厨',
+         businessEntityName6:'烹饪',
+         businessEntityName7:'调理',
+         businessEntityName8:'其他'
         },
       tableList: {
         innerDirect: [

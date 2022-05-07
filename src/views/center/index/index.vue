@@ -657,7 +657,7 @@
 
     <!-- 底部表格 -->
     <div class="flex-bottom">
-      <TableCardBox :leftData="tableInner" :rightData="tableOutter"/>
+      <TableCardBox :leftData="tableInner" :rightData="tableOutter" :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1"/>
     </div>
   </div>
 </template>
@@ -845,7 +845,9 @@ export default {
       outterSabLeft: [],
       outterSabRight: [],
       tableInner:[],
-      tableOutter:[]
+      tableOutter:[],
+      rowSpanNumber1:6,
+      rowSpanNumber2:6,
     };
 
   },
@@ -979,26 +981,34 @@ export default {
     // 底部table/
     async getTable() {
       try {
-        const tableInner = await API.getData(
+        let tableInner = await API.getData(
           "directTotalinnerBottom",
           "2022-03"
         );
-        const tableOutter = await API.getData(
+        let tableOutter = await API.getData(
           "directTotalOutterBottom",
           "2022-03"
         );
 
-        this.tableInner = tableInner.rows;
+        // this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
+        this.rowSpanNumber2 = this.tableOutter.length;
+
+        let innerTop = tableInner.rows.filter((v) => {
+          return v.marketChannel == "线上";
+        });
+        this.rowSpanNumber1 = innerTop.length;
+
+        let innerBottom = tableInner.rows.filter((v) => {
+          return v.marketChannel == "线下";
+        });
+        let innerTotal = tableInner.rows.filter((v) => {
+          return v.marketChannel == "底部合计";
+        });
+        this.tableInner = innerTop.concat(innerBottom,innerTotal);
+        console.log('this.tableInner',this.rowSpanNumber1,this.tableInner)
 
 
-        // let innerTop = tableInner.rows.filter((v) => {
-        //   return v.marketChannel == "线上";
-        // });
-        // let innerBottom = tableInner.rows.filter((v) => {
-        //   return v.marketChannel == "线下";
-        // });
-        // this.data = innerTop.concat(innerBottom);
         // console.log("this.data", this.data);
       } catch (err) {
         console.log(err);
