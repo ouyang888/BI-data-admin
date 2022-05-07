@@ -1957,9 +1957,17 @@ export default {
 
   // 接口数据  
   // sellOutTopOnline  大区卡片
+  async getList() {
+        this.showLoading = true;
+        try {
+          const res = await API.getData(
+            "sellOutTopOnline",
+            "2022-01-01,2022-10-01"
+          );
 
+        }
 
-
+  },
 
   mounted() {
     this.myEcharts(); 

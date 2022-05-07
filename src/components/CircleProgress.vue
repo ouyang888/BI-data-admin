@@ -14,24 +14,24 @@
   export default {
 
     name: 'Progress',
-   props: {
+    props: {
       rate: {
         type: Number,
-        default:function(){
+        default: function () {
           return 0
         }
       },
       size: {
         type: Number,
-        default:function(){
+        default: function () {
           return 300
-        } 
+        }
       },
       circleSize: {
         type: Number,
-        default: function(){
+        default: function () {
           return 300
-        } 
+        }
       },
       color: {
         type: String,
@@ -39,12 +39,12 @@
       },
       deg: {
         type: Object,
-        default: function (){
+        default: function () {
           return {
-          start: 120,
-          end: 60
+            start: 120,
+            end: 60
+          }
         }
-      }
       },
       barSize: {
         type: Number,
@@ -57,48 +57,48 @@
     },
     data() {
       return {
-        title:'123',
-        cav:'',
-        cavId:''
+        title: '123',
+        cav: '',
+        cavId: ''
 
       }
     },
     mounted() {
       this.cav = this.$refs.cav;
-      console.log('this.cav',this.cav,this.$props)
+      // console.log('this.cav',this.cav,this.$props) 
       if (this.cav) {
-        console.log('props',this.$props)
+        // console.log('props',this.$props)
         const goProgress = new circleProgress({
           el: this.cav,
-          progress: this.$props.rate / 100,
+          progress: this.$props.rate / 200,
           number: this.$props.rate,
           color: this.$props.color,
           deg: this.$props.deg,
           barSize: this.$props.barSize,
-          circleSize:this.$props.circleSize,
+          circleSize: this.$props.circleSize,
           isBackground: this.$props.isBackground
         })
       }
+
+
+
     },
     watch: {
-      // this.$props: {
-      //   handle(newVal, old) {
-      //     if (this.cav) {
-      //       console.log('this.$props', this.$props)
-      //       const goProgress = new circleProgress({
-      //         el: this.cav,
-      //         progress: this.$props.rate / 100,
-      //         number: this.$props.rate,
-      //         color: this.$props.color,
-      //         deg: this.$props.deg,
-      //         barSize: this.$props.barSize,
-      //         isBackground: this.$props.isBackground
-      //       })
-      //     }
-      //   }
-
-      // }
-
+      rate: {
+        handler: function (newValue, oldValue) {
+          console.log('newValue', newValue)
+          const goProgress = new circleProgress({
+            el: this.cav,
+            progress: newValue / 200,
+            number: newValue,
+            color: this.$props.color,
+            deg: this.$props.deg,
+            barSize: this.$props.barSize,
+            circleSize: this.$props.circleSize,
+            isBackground: this.$props.isBackground
+          })
+        }
+      },
     },
 
     methods: {

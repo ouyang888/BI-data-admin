@@ -3,7 +3,7 @@
     <!-- 头部仪表盘和卡片 -->
     <div class="top-flex"  >
       <!-- 仪表盘 -->
-      <div class="dashboard-box">仪表</div>
+      <div class="dashboard-box"></div>
       <!-- 右侧卡片 -->
       <div class="flex-card" >
         <div class="card-box">
@@ -1852,8 +1852,9 @@ this.$router.push("/center/index")
 }
 .middle-box {
   width: 98%;
-  margin: 10px 20px 10px 10px;
+  /* margin: 10px 20px 10px 10px; */
   border: 1px solid hsla(210, 86%, 39%, 0.66);
+  margin: 20px auto;
 }
 .flex-font-middle {
   display: flex;
@@ -1920,32 +1921,21 @@ this.$router.push("/center/index")
 .top-flex {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: space-between;
   width: 98%;
   margin: 0 auto;
 }
 .dashboard-box {
-     height: 140px;
-    border: 1px solid hsla(210, 86%, 39%, 0.66);
-    /* flex: 0.82; */
     margin-top: 23px;
-    /* padding-top: 40px; */
-    margin-right: 30px;
-    width: 600px;
     font-size: 18px;
-    color: white;
-    text-align: center;
-    width: 32%;
+    width: 50%;
 }
 
 .card-box {
   background-image: url("../../../assets/img/smallCardBackground.svg");
   background-repeat: no-repeat;
   margin-right: 20px;
-  background-size: 100% 95%;
-  /* height: 154px;
-  width: 400px; */
-  margin: 4px 8px 4px 8px;
+  background-size: 100%;
 }
 .card-font {
   font-size: 18px;
@@ -1961,10 +1951,10 @@ this.$router.push("/center/index")
       display: flex;
     margin-top: 20px;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     /* width: 100%; */
     flex-wrap: wrap;
-    width: 70%;
+    /* width: 70%; */
     padding: 10px;
 }
 .flex-top-card {
