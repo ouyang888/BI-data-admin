@@ -1,13 +1,11 @@
 <template>
-  <div
-    style="background: linear-gradient(180deg,#162770 0%,#1c2b72 41%,#0d182e 100%);background-repeat: no-repeat;"
-  >
+  <div class="bg">
     <div class="flex-title">
       <div class="flex-back">
         <div class="back" @click="goBack">
           <a-icon type="left" style="color: #19ecff" />后退
         </div>
-        <div class="left-font">当前页面：{{title}}</div>
+        <div class="left-font">当前页面：{{ title }}</div>
       </div>
       <div class="flex-right">
         <div class="right-font">
@@ -41,8 +39,18 @@
         <div class="head-box"><span>I</span></div>
         <div class="head-box"><span>P</span></div>
         <div class="change-flex" style="margin-left: 14px">
-          <div class="change-box"><span>金额版</span></div>
-          <div class="change-box"><span>数量版</span></div>
+          <div
+            :class="cus == 1 ? 'change-box active' : 'change-box'"
+            @click="changeNum(1)"
+          >
+            <span>金额版</span>
+          </div>
+          <div
+            :class="cus == 2 ? 'change-box active' : 'change-box'"
+            @click="changeNum(2)"
+          >
+            <span>数量版</span>
+          </div>
         </div>
       </div>
       <div class="title-bg">
@@ -50,9 +58,8 @@
       </div>
       <div class="flex-font-left">
         <div class="head-box-right" style="margin-right: 14px">
-          <span
-            >产地<a-icon type="down" style="padding-left: 3px; font-size: 14px"
-          /></span>
+          <span>产地<a-icon type="down" style="padding-left: 3px; font-size: 14px"/></span>
+          <!-- <div>1111222</div> -->
         </div>
         <div class="change-flex">
           <div class="head-box-right active"><span>销向</span></div>
@@ -80,7 +87,8 @@ export default {
     return {
       searchKeys: [this.$route.path, this.$route.meta.preMenuUrl || ""],
       index: 2,
-      title:"销向汇总页"
+      title: "销向汇总页",
+      cus: 1,
     };
   },
   computed: {
@@ -99,20 +107,28 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
-    clickChange(i) {
-      this.index = i;
-      if (this.index == 1) {
-        this.$router.push("/center/psi");
-        this.title = "总裁PSI页"
-      } else if (this.index == 2) {
-        this.$router.push("/center/index");
-         this.title = "销向汇总页"
+    changeNum(index) {
+      this.cus = index;
+      if(index == 2){
+        localStorage.setItem("showMoney","money")
+      }else{
+        localStorage.removeItem("showMoney")
       }
     },
+    clickChange(i) {
+      this.index = i;
+    },
   },
+  mounted(){
+    localStorage.removeItem("showMoney")
+  }
 };
 </script>
 <style lang="scss" scoped>
+.bg {
+  background: linear-gradient(180deg, #162770 0%, #1c2b72 41%, #0d182e 100%);
+  background-repeat: no-repeat;
+}
 .title {
   font-size: 36px;
   font-weight: 600;

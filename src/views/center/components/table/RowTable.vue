@@ -4,23 +4,23 @@
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" height="287">
       <el-table-column prop="marketChannel" align="center" :label="directName"></el-table-column>
-      <el-table-column prop="cooprMode" align="center" :label="cooprMode" v-if="setTrueOrFalse"></el-table-column>
-      <el-table-column prop="manager3" align="center" label="责任人">
-        <div class="nameColor" @click="handleClick">张茉欧</div>
-        <!-- <template v-slot="scope">
+      <el-table-column prop="marketCenter" align="center" :label="cooprMode" v-if="setTrueOrFalse"></el-table-column>
+      <el-table-column prop="manager" align="center" label="责任人">
+        <!-- <div class="nameColor" @click="handleClick">{{张茉欧}}</div> -->
+        <template v-slot="scope">
             <div class="nameColor" @click="handleClick">
               {{ scope.row.manager }}
             </div>
-          </template> -->
+          </template>
       </el-table-column>
       <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center">
         <template v-slot="scope">
           <div class="precent">
-            <div style="width: 30px">{{ scope.row[i] }}</div>
-            <div style="margin-top: 5px">
-              <Progress style="margin-bottom: 3px" :rate="scope.row.saleTaskAmt" :color="'#FF8B2F'"
+            <div style="width: 30px">{{ scope.row[i].toFixed(0)}}</div>
+            <div style="margin-top: 5px"> 
+              <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
-              <Progress :rate="scope.row.saleVolume1" :color="'#66FFFF'" class="precentCompentes" />
+              <Progress :rate="scope.row[i.replace('businessEntityName','completeRadio')]*100" :color="'#66FFFF'" class="precentCompentes" />
             </div>
           </div>
         </template>
@@ -28,11 +28,11 @@
       <el-table-column prop="cnyAmt" label="总计" align="center">
         <template v-slot="scope">
           <div class="precent">
-            <div style="width: 30px">{{ scope.row.cnyAmt }}</div>
+            <div style="width: 30px">{{ scope.row.cnyAmt.toFixed(0) }}</div>
             <div style="margin-top: 5px">
-              <Progress style="margin-bottom: 3px" :rate="scope.row.saleTaskAmt" :color="'#FF8B2F'"
+              <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
-              <Progress :rate="scope.row.saleVolumeAll" :color="'#66FFFF'" class="precentCompentes" />
+              <Progress :rate="scope.row.saleVolumeAll*100" :color="'#66FFFF'" class="precentCompentes" />
             </div>
           </div>
         </template>
@@ -88,7 +88,7 @@
             return [0, 0];
           }
           if (columnIndex === 0) {
-            return [1, 3];
+            return [1, 2];
           }
         }
         //       if (rowIndex === 6) {
@@ -131,7 +131,7 @@
           let color = {
             color: "#fff",
             backgroundColor: "#041370",
-            padding: "9px 0",
+            padding: "0px 0",
             borderColor: "#1E1D51",
           };
           return color;
@@ -190,7 +190,7 @@
     height: 0;
   }
 
- .el-table__body-wrapper{
+ ::v-deep .el-table__body-wrapper{
     &::-webkit-scrollbar {
       height: 6px;
       width: 6px;
@@ -208,6 +208,7 @@
       background-color: #8383a5;
     }
   }
+  
 
   .el-table__fixed-right {
     height: 100% !important;
@@ -217,6 +218,9 @@
     .el-table__fixed-body-wrapper {
       height: calc(100% - 43px) !important;
     }
+  }
+  ::v-deep .el-table .el-table__cell{
+    padding:8px 0;
   }
 
   /* 头部加粗 */

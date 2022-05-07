@@ -7,7 +7,7 @@
       <RowTable
         :color="color"
         :title="directName"
-        :mesInfo="innerTableList"
+        :mesInfo="leftData"
         :titleHead="titleHead"
         :directName="directName"
         :rowSpanNumber="rowSpanNumber1"
@@ -18,7 +18,7 @@
       <RowTable
         :color="color2"
         :title="directName2"
-        :mesInfo="outerTableList"
+        :mesInfo="rightData"
         :titleHead="titleHead"
         :directName="directName2"
         :rowSpanNumber="rowSpanNumber2"
@@ -56,12 +56,32 @@ export default {
     // SaleSummaryTable,
     RowTable,
   },
+  props:{
+    leftData:{
+      type:Array,
+      default:function(){ return []}
+    },
+    titleHead:{
+      type:Array,
+      default:function(){ return []}
+    },
+    rightData:{
+      type:Array,
+      default:function(){ return []}
+    },
+    rowSpanNumber1:{
+      type:Number,
+      default:0,
+    },
+    rowSpanNumber2:{
+      type:Number,
+      default:0,
+    },
+  },
   data() {
     return {
       color: "linear-gradient(to right , #50C0FF,#5AFFA3,#66FFFF) ",
       color2: "linear-gradient(to right , #1B6FFF, #7A5AFF, #7066FF) ",
-      rowSpanNumber1: 3,
-      rowSpanNumber2: 6,
       // directName: computed(() => Store.state.tableOneHeading),
       // directName2: computed(() => Store.state.tableTwoHeading),
       cooprMode: "渠道",
@@ -408,14 +428,8 @@ export default {
             dateRadio: 1,
           },
         ],
-      titleHead: {
-          businessEntityName1: "环境",
-          businessEntityName2: "烹饪",
-          businessEntityName3: "电磁",
-          businessEntityName4: "调理",
-          businessEntityName5: "电动",
-          businessEntityName6: "饮品",
-        },
+
+
       tableList: {
         innerDirect: [
           {

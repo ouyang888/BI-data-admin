@@ -775,6 +775,9 @@ export default {
   },
   data() {
     return {
+      dateTime:"2022-03",
+      dataTimeMany:"2022-01-01,2022-10-01,2022-01-01,2022-10-01",
+      showLoading: false,
       columns: [
         {
           title: "线上",
@@ -855,15 +858,15 @@ export default {
           tags: ["cool", "teacher"],
         },
       ],
-  progressData: {
+      progressData: {
         bar1: 0,
         bar2: 0,
-        ballTitle: "内销",
+        ballTitle: "线上",
         bigBallTitle: "毛利率",
-        textLeft: "线上",
-        textRight: "线下",
-        titleTop: "线上",
-        titleBottom: "线下",
+        textLeft: "自营",
+        textRight: "代运营",
+        titleTop: "自营",
+        titleBottom: "代运营",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -871,26 +874,26 @@ export default {
       speedData: {
         bar: 0,
         speedBar: 0,
-        ballTitle: "内销达成",
+        ballTitle: "线上达成",
         ballNum: 0,
-        ballLeftTitle: "线上",
-        ballRightTitle: "线下",
+        ballLeftTitle: "自营",
+        ballRightTitle: "代运营",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "线上",
+        bottomTitle1: "自营",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "线下",
+        bottomTitle2: "代运营",
         bottomClose1: 0,
         bottomTime1: 0,
       },
       sabData: {
         bar1: 70,
         bar2: 50,
-        ballTitle: "内销",
-        bottom: "线上",
-        top: "线下",
+        ballTitle: "线上",
+        top: "自营",
+        bottom: "代运营",
         sabArr: { s: 0, a: 0, b: 0 },
         topArr: { s: 0, a: 0, b: 0 },
         bottomArr: { s: 0, a: 0, b: 0 },
@@ -912,6 +915,89 @@ this.$router.push("/center/index")
     toModuleResponsible(){
       this.$router.push({name:'moduleResponsible'});
     },
+
+
+  //仪表盘(左中)
+    async getdashboard() {
+      localStorage.getItem("")
+      try {
+        const res = await API.getData("onlineTopTotal", this.dateTime);
+        let panelDataList = res.rows;
+        this.progressData.ballNum = (
+          panelDataList[0].onLineGrossProfitRadio * 100
+        ).toFixed(1);
+        this.speedData.speedBar = (panelDataList[0].businessModelCompleteRadio*100).toFixed(1)
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1)
+        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1)
+        // this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+        for (var i = 0; i < panelDataList.length; i++) {
+          if (panelDataList[i].businessModel == "直营") {
+            this.progressData.bar2 = (panelDataList[i].grossProfitRadio*100).toFixed(1)
+            this.progressData.topGPM = (panelDataList[i].grossProfitRadio*100).toFixed(1)
+            // this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(1)
+            // this.speedData.bottomClose =  panelDataList[i].orgQtyRadio.toFixed(1)
+            // this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
+
+          } else if (panelDataList[i].businessModel == "代运营") {
+            this.progressData.bar1 = (panelDataList[i].grossProfitRadio*100).toFixed(1)
+            this.progressData.bottomGPM = (panelDataList[i].grossProfitRadio*100).toFixed(1)
+            //  this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(1)
+            //  this.speedData.bottomClose1 =  panelDataList[i].orgQtyRadio.toFixed(1)
+            // this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    //仪表盘(右)
+    async queryCardSAB() {
+      try {
+        const res = await API.getData("directTotalDashboardSAB", this.dateTime);
+        let RightSAB = res.rows;
+        for (var i = 0; i < RightSAB.length; i++) {
+          if(RightSAB[i].directName == "事业部"){
+            // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
+            if(RightSAB[i].position == "S"){
+              this.sabData.sabArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "A"){
+              this.sabData.sabArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "B"){
+              this.sabData.sabArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
+            }
+          }else if(RightSAB[i].directName == "内销"){
+            this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
+             if(RightSAB[i].position == "S"){
+              this.sabData.topArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "A"){
+              this.sabData.topArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "B"){
+              this.sabData.topArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
+            }
+          }else if(RightSAB[i].directName == "外销"){
+              this.sabData.bar2 = (RightSAB[i].positionRatio*100).toFixed(1)
+             if(RightSAB[i].position == "S"){
+              this.sabData.bottomArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "A"){
+              this.sabData.bottomArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "B"){
+              this.sabData.bottomArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
+            }
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+
+
+
+
+
+
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -1864,6 +1950,7 @@ this.$router.push("/center/index")
     },
   },
   mounted() {
+    this.getdashboard();
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
@@ -2075,6 +2162,8 @@ this.$router.push("/center/index")
 .mt-border {
   border: 1px solid rgba(255, 255, 255, 0.24);
   width: 1px;
+  margin-left: 6px;
+  margin-right: 6px;
 }
 .card-big-num {
   color: #66ffff;
