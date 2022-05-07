@@ -637,6 +637,8 @@ export default {
   },
   data() {
     return {
+      dateTime:"2022-03",
+      dataTimeMany:"2022-01-01,2022-10-01,2022-01-01,2022-10-01",
       showLoading: false,
 
       innerDirectList: [],
@@ -806,7 +808,7 @@ export default {
     //三个仪表盘(左中)
     async getdashboard() {
       try {
-        const res = await API.getData("innerDirectTopTotal", "2022-03");
+        const res = await API.getData("innerDirectTopTotal", this.dateTime);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         this.progressData.ballNum = (
@@ -852,7 +854,7 @@ export default {
     //三个仪表盘(右)
     async queryCardSAB() {
       try {
-        const res = await API.getData("innerDirectRightSAB", "2022-03");
+        const res = await API.getData("innerDirectRightSAB", this,dateTime);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].cooprLevel1 == "线上") {
@@ -902,7 +904,7 @@ export default {
       try {
         const res = await API.getData(
           "innerDirectChart",
-          "2022-03-01,2022-03-31,2022-03-01,2022-03-31"
+          this.dataTimeMany
         );
 
         let obj = { innerDirect: "", outerDirect: "" };
