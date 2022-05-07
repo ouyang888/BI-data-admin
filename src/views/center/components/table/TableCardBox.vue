@@ -61,6 +61,10 @@ export default {
       type:Array,
       default:function(){ return []}
     },
+    titleHead:{
+      type:Array,
+      default:function(){ return []}
+    },
     rightData:{
       type:Array,
       default:function(){ return []}
@@ -424,26 +428,8 @@ export default {
             dateRadio: 1,
           },
         ],
-      titleHead: {
-         businessEntityName1:'环境',
-         businessEntityName2:'电磁',
-         businessEntityName3:'饮品',
-         businessEntityName4:'电动',
-         businessEntityName5:'奇厨',
-         businessEntityName6:'烹饪',
-         businessEntityName7:'调理',
-         businessEntityName8:'其他'
-        },
-      titleHead: {
-         businessEntityName1:'环境',
-         businessEntityName2:'电磁',
-         businessEntityName3:'饮品',
-         businessEntityName4:'电动',
-         businessEntityName5:'奇厨',
-         businessEntityName6:'烹饪',
-         businessEntityName7:'调理',
-         businessEntityName8:'其他'
-        },
+
+
       tableList: {
         innerDirect: [
           {

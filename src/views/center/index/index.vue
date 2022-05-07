@@ -657,7 +657,7 @@
 
     <!-- 底部表格 -->
     <div class="flex-bottom">
-      <TableCardBox :leftData="tableInner" :rightData="tableOutter" :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1"/>
+      <TableCardBox :leftData="tableInner" :rightData="tableOutter" :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" :titleHead="titleHead"/>
     </div>
   </div>
 </template>
@@ -832,6 +832,7 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
+      // 右边卡片
       innerLeft: [],
       innerLeftInfo: {},
       innerRight: [],
@@ -844,10 +845,21 @@ export default {
       outterRightInfo: {},
       outterSabLeft: [],
       outterSabRight: [],
+      // 底部表格
       tableInner:[],
       tableOutter:[],
       rowSpanNumber1:6,
       rowSpanNumber2:6,
+      titleHead: {
+         businessEntityName1:'环境',
+         businessEntityName2:'电磁',
+         businessEntityName3:'饮品',
+         businessEntityName4:'电动',
+         businessEntityName5:'奇厨',
+         businessEntityName6:'烹饪',
+         businessEntityName7:'调理',
+         businessEntityName8:'其他'
+        },
     };
 
   },
