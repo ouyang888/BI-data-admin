@@ -142,13 +142,15 @@
 </script>
 <style scoped lang="scss">
   .execl {
-    width: 905px;
+    width: 925px;
     height: 324px;
     background-color: rgba(2, 0, 77, 0.4);
     box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
     border: 2px solid #0d53b7;
     background-image: url("../../../../assets/img/tableVBackround.svg");
     border-radius: 0 0 10px 10px;
+    background-repeat: no-repeat;
+    background-size: 100%;
   }
 
   .execl-box {
