@@ -35,46 +35,28 @@
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
+                        <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
+                        <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  style="
+                <div style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -84,18 +66,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -105,47 +79,29 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  style="
+                <div style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -155,18 +111,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -176,18 +124,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -196,10 +136,7 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
+                <div class="flex-bottoms" style="padding-bottom: 10px; padding-top: 4px">
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -218,46 +155,28 @@
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
+                        <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
+                        <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  style="
+                <div style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -267,18 +186,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -288,47 +199,29 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  style="
+                <div style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -338,18 +231,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -359,18 +244,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -379,10 +256,7 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
+                <div class="flex-bottoms" style="padding-bottom: 10px; padding-top: 4px">
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -413,46 +287,28 @@
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
+                        <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
+                        <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  style="
+                <div style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -462,18 +318,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -483,47 +331,29 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  style="
+                <div style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -533,18 +363,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -554,18 +376,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -574,10 +388,7 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
+                <div class="flex-bottoms" style="padding-bottom: 10px; padding-top: 4px">
                   <div>线下毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -596,46 +407,28 @@
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
+                        <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
+                        <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  style="
+                <div style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -645,18 +438,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -666,47 +451,29 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  style="
+                <div style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -716,18 +483,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -737,18 +496,10 @@
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="#FF8B2F" />
                         </div>
                         <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                          <a-progress :percent="50" :show-info="false" strokeColor="rgb(102, 255, 255)" />
                         </div>
                       </div>
                     </div>
@@ -757,10 +508,7 @@
                 <div class="flex-bottoms">
                   <div>线上结构 S-10%; A-20%; B-70%</div>
                 </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
+                <div class="flex-bottoms" style="padding-bottom: 10px; padding-top: 4px">
                   <div>线上毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
@@ -824,1073 +572,1101 @@
     <!-- 底部表格 -->
     <div class="flex-bottom">
       <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-        >
+        <a-table :bordered="true" :columns="columns" :data-source="data" :pagination="false">
           <a slot="name" slot-scope="text">{{ text }}</a>
+          <template slot="address" slot-scope="address">
+            <a @click="gotocatSeries"> {{ address }}</a>
+          </template>
         </a-table>
       </div>
       <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-        >
+        <a-table :bordered="true" :columns="columns" :data-source="data" :pagination="false">
           <a slot="name" slot-scope="text">{{ text }}</a>
+          <template slot="address" slot-scope="address">
+            <a @click="gotoregionalHead"> {{ address }}</a>
+            </template>
         </a-table>
       </div>
     </div>
   </div>
 </template>
 <script>
-import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
-import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
-import SadPanel from "@/views/center/panel/SadPanel.vue";
-import API from "../../../service/api";
-export default {
-  name: "s",
-  components: {
-    ProgressPanel,
-    SpeedPanel,
-    SadPanel,
-  },
-  data() {
-    return {
-        showLoading:false,
-         divisionList:[],
-      divisionDate:[],
-      divisionLine:"",
-
-      innerDirectList:[],
-      innerDirectDate:[],
-      innerDirectLine:"",
-
-      outerDirectList:[],
-      outerDirectDate:[],
-      outerDirectLine:"",
-      columns: [
-        {
-          title: "内销",
-          dataIndex: "name",
-          key: "name",
-          align: "center",
-        },
-        {
-          title: "渠道",
-          dataIndex: "age",
-          key: "age",
-          align: "center",
-        },
-        {
-          title: "责任人",
-          dataIndex: "address",
-          key: "address 1",
-          align: "center",
-        },
-        {
-          title: "总计",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-      ],
-      data: [
-        {
-          key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. ",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. ",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. ",
-          tags: ["cool", "teacher"],
-        },
-      ],
-      echartsLabel: [
-        { class: "plan", text: "实际达成" },
-        { class: "average", text: "日均线" },
-      ],
-
-      progressData: {
-        bar1: 0,
-        bar2: 0,
-        ballTitle: "产司",
-        bigBallTitle: "毛利率",
-        textLeft: "内销",
-        textRight: "外销",
-        titleTop: "内销",
-        titleBottom: "外销",
-        topGPM: 0,
-        bottomGPM: 0,
-        ballNum: 0,
-      },
-      speedData: {
-        bar: 0,
-        speedBar: 0,
-        ballTitle: "事业部达成",
-        ballNum: 0,
-        ballLeftTitle: "自营",
-        ballRightTitle: "代运营",
-        ballLeftNum: 0,
-        ballRightNum: 0,
-        bottomNum: 0,
-        bottomTitle1: "内销",
-        bottomClose: 0,
-        bottomTime: 0,
-        bottomTitle2: "外销",
-        bottomClose1: 0,
-        bottomTime1: 0,
-      },
-      sabData: {
-        bar1: 70,
-        bar2: 50,
-        bar3: 30,
-        bar4: 12,
-        bar5: 7,
-        ballTitle: "内销",
-        bottom: "线上",
-        top: "线下",
-        sabArr: { s: 32, a: 18, b: 21 },
-        topArr: { s: 32, a: 18, b: 21 },
-        bottomArr: { s: 32, a: 18, b: 21 },
-        // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
-        // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
-        // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
-      },
-    };
-  },
-  methods: {
-    gotoDomestic() {
-      this.$router.push("/center/domestic");
+  import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
+  import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
+  import SadPanel from "@/views/center/panel/SadPanel.vue";
+  import API from "../../../service/api";
+  export default {
+    name: "s",
+    components: {
+      ProgressPanel,
+      SpeedPanel,
+      SadPanel,
     },
-    gotoExport() {
-      this.$router.push("/center/export");
-    },
-    //中间折线图
-    async getList() {
-      this.showLoading = true
-      try {
-        const res = await API.getData("directTotalInnerChart","2022-01-01,2022-10-01,2022-01-01,2022-10-01");
-        // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
-        let newArr = res.rows.filter((item)=>{
-        var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
-        var yue = timeArr[1];
-        var ri = timeArr[2];
-          if(item.directName == "事业部"){
-            // obj.divisionArr.push(item)
-            this.divisionDate.push(yue+'-'+ri)
-            this.divisionList.push(item.totalCnyAmt)
-            this.divisionLine = item.saleAvgTaskQty
-            this.myEcharts();
-          }else if(item.directName == "内销"){
-            this.innerDirectDate.push(yue+'-'+ri)
-            this.innerDirectList.push(item.totalCnyAmt)
-            this.innerDirectLine = item.saleAvgTaskQty
-            this.myEcharts2();
-          }else if(item.directName == "外销"){
-            this.outerDirectDate.push(yue+'-'+ri)
-            this.outerDirectList.push(item.totalCnyAmt)
-            this.outerDirectLine = item.saleAvgTaskQty
-            this.myEcharts3();
-          }
-          this.showLoading = false
-        })
-         
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    myEcharts() {
-      var myChart = this.$echarts.init(document.getElementById("main"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // labelData: [
-        //   { class: "plan", text: "实际达成" },
-        //   { class: "average", text: "日均线" },
-        // ],
-        // legend: {
-        //   data: ["实际达成", "日均线"],
-        // },
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-           data: this.divisionDate,
-          axisTick: {
-            show: false,
-          },
-          axisLine: {
-            show: false,
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLine: {
-            show: false,
-          },
-        },
-        series: [
+    data() {
+      return {
+        showLoading: false,
+        divisionList: [],
+        divisionDate: [],
+        divisionLine: "",
+
+        innerDirectList: [],
+        innerDirectDate: [],
+        innerDirectLine: "",
+
+        outerDirectList: [],
+        outerDirectDate: [],
+        outerDirectLine: "",
+        columns: [
           {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-             data: this.divisionList,
-            markLine: {
-              data: [
-                {
-                 yAxis: this.divisionLine,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
+            title: "内销",
+            dataIndex: "name",
+            key: "name",
+            align: "center",
+          },
+          {
+            title: "渠道",
+            dataIndex: "age",
+            key: "age",
+            align: "center",
+          },
+          {
+            title: "责任人",
+            dataIndex: "address",
+            key: "address 1",
+            align: "center",
+            scopedSlots: { customRender: "address" },
+          },
+          {
+            title: "总计",
+            dataIndex: "address",
+            key: "address",
+            align: "center",
           },
         ],
-      };
-      myChart.setOption(option);
-    },
-    myEcharts2() {
-      var myChart2 = this.$echarts.init(document.getElementById("main2"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
+        data: [
+          {
+            key: "1",
+            name: "John Brown",
+            age: 32,
+            address: "New York No. ",
+            tags: ["nice", "developer"],
           },
-        },
-        labelData: [
+          {
+            key: "2",
+            name: "Jim Green",
+            age: 42,
+            address: "London No. ",
+            tags: ["loser"],
+          },
+          {
+            key: "3",
+            name: "Joe Black",
+            age: 32,
+            address: "Sidney No. ",
+            tags: ["cool", "teacher"],
+          },
+        ],
+        echartsLabel: [
           { class: "plan", text: "实际达成" },
-          // { class: 'actual', text: '规划达成' },
           { class: "average", text: "日均线" },
         ],
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
+
+        progressData: {
+          bar1: 0,
+          bar2: 0,
+          ballTitle: "产司",
+          bigBallTitle: "毛利率",
+          textLeft: "内销",
+          textRight: "外销",
+          titleTop: "内销",
+          titleBottom: "外销",
+          topGPM: 0,
+          bottomGPM: 0,
+          ballNum: 0,
         },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
+        speedData: {
+          bar: 0,
+          speedBar: 0,
+          ballTitle: "事业部达成",
+          ballNum: 0,
+          ballLeftTitle: "自营",
+          ballRightTitle: "代运营",
+          ballLeftNum: 0,
+          ballRightNum: 0,
+          bottomNum: 0,
+          bottomTitle1: "内销",
+          bottomClose: 0,
+          bottomTime: 0,
+          bottomTitle2: "外销",
+          bottomClose1: 0,
+          bottomTime1: 0,
         },
-        tooltip: {
-          trigger: "axis",
+        sabData: {
+          bar1: 70,
+          bar2: 50,
+          bar3: 30,
+          bar4: 12,
+          bar5: 7,
+          ballTitle: "内销",
+          bottom: "线上",
+          top: "线下",
+          sabArr: { s: 32, a: 18, b: 21 },
+          topArr: { s: 32, a: 18, b: 21 },
+          bottomArr: { s: 32, a: 18, b: 21 },
+          // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+          // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+          // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
         },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-         data: this.innerDirectDate,
-          axisTick: {
-            show: false,
-          },
-          axisLine: {
-            show: false,
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLine: {
-            show: false,
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
+      };
+    },
+    methods: {
+      gotoDomestic() {
+        this.$router.push("/center/domestic");
+      },
+      gotocatSeries() {
+        this.$router.push("/center/catSeries");
+      },
+      // 区域负责人
+      gotoregionalHead() {
+        this.$router.push("/center/regionalHead");
+      },
+      gotoExport() {
+        this.$router.push("/center/export");
+      },
+      //中间折线图
+      async getList() {
+        this.showLoading = true
+        try {
+          const res = await API.getData("directTotalInnerChart", "2022-01-01,2022-10-01,2022-01-01,2022-10-01");
+          // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
+          let newArr = res.rows.filter((item) => {
+            var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+            if (item.directName == "事业部") {
+              // obj.divisionArr.push(item)
+              this.divisionDate.push(yue + '-' + ri)
+              this.divisionList.push(item.totalCnyAmt)
+              this.divisionLine = item.saleAvgTaskQty
+              this.myEcharts();
+            } else if (item.directName == "内销") {
+              this.innerDirectDate.push(yue + '-' + ri)
+              this.innerDirectList.push(item.totalCnyAmt)
+              this.innerDirectLine = item.saleAvgTaskQty
+              this.myEcharts2();
+            } else if (item.directName == "外销") {
+              this.outerDirectDate.push(yue + '-' + ri)
+              this.outerDirectList.push(item.totalCnyAmt)
+              this.outerDirectLine = item.saleAvgTaskQty
+              this.myEcharts3();
+            }
+            this.showLoading = false
+          })
+
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      myEcharts() {
+        var myChart = this.$echarts.init(document.getElementById("main"));
+        var option = {
+          xAxis: {
+            axisLabel: {
+              formatter: function (val) {
+                return "";
               },
             },
-            data: this.innerDirectList,
-            markLine: {
-              data: [
-                {
-                   yAxis: this.innerDirectLine,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
+          },
+          // labelData: [
+          //   { class: "plan", text: "实际达成" },
+          //   { class: "average", text: "日均线" },
+          // ],
+          // legend: {
+          //   data: ["实际达成", "日均线"],
+          // },
+          textStyle: {
+            color: "#3FB0FF",
+          },
+          color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+          title: {
+            text: "",
+          },
+          tooltip: {
+            trigger: "axis",
+          },
+          grid: {
+            top: "5%",
+            left: "2%",
+            right: "5%",
+            bottom: "3%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "category",
+            boundaryGap: false,
+            data: this.divisionDate,
+            axisTick: {
+              show: false,
+            },
+            axisLine: {
+              show: false,
             },
           },
-        ],
-      };
-      myChart2.setOption(option);
-    },
-    myEcharts3() {
-      var myChart3 = this.$echarts.init(document.getElementById("main3"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        labelData: [
-          { class: "plan", text: "实际达成" },
-          // { class: 'actual', text: '规划达成' },
-          { class: "average", text: "日均线" },
-        ],
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-           data: this.outerDirectDate,
-          axisTick: {
-            show: false,
-          },
-          axisLine: {
-            show: false,
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false,
-          },
-          axisLine: {
-            show: false,
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
+          yAxis: {
+            name: "单位：万",
+            type: "value",
+            splitLine: {
+              lineStyle: {
+                type: "dashed",
+                color: "rgba(45,153,255,.3)",
               },
             },
-             data: this.outerDirectList,
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
+            axisTick: {
+              show: false,
+            },
+            axisLine: {
+              show: false,
             },
           },
-        ],
-      };
-      myChart3.setOption(option);
+          series: [
+            {
+              name: "实际达成",
+              type: "line",
+              stack: "Total",
+              // smooth: true,
+              lineStyle: {
+                width: 1,
+              },
+              showSymbol: false,
+              areaStyle: {
+                normal: {
+                  color: {
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [
+                      {
+                        offset: 0,
+                        color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                      },
+                      {
+                        offset: 0.7,
+                        color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                      },
+                    ],
+                    globalCoord: false, // 缺省为 false
+                  },
+                },
+              },
+              data: this.divisionList,
+              markLine: {
+                data: [
+                  {
+                    yAxis: this.divisionLine,
+                    silent: false, //鼠标悬停事件 true没有，false有
+                    lineStyle: {
+                      //警戒线的样式 ，虚实 颜色
+                      type: "dashed", //样式  ‘solid’和'dotted'
+                      color: "#FF8B2F",
+                      width: 2, //宽度
+                    },
+                    label: {
+                      formatter: "",
+                      color: "#FF8B2F",
+                      position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                    },
+                  },
+                ],
+
+                symbol: ["none", "none"],
+              },
+            },
+          ],
+        };
+        myChart.setOption(option);
+      },
+      myEcharts2() {
+        var myChart2 = this.$echarts.init(document.getElementById("main2"));
+        var option = {
+          xAxis: {
+            axisLabel: {
+              formatter: function (val) {
+                return "";
+              },
+            },
+          },
+          labelData: [
+            { class: "plan", text: "实际达成" },
+            // { class: 'actual', text: '规划达成' },
+            { class: "average", text: "日均线" },
+          ],
+          // echartsData: {
+          textStyle: {
+            color: "#3FB0FF",
+          },
+          color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+          title: {
+            text: "",
+          },
+          tooltip: {
+            trigger: "axis",
+          },
+          grid: {
+            top: "5%",
+            left: "2%",
+            right: "5%",
+            bottom: "3%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "category",
+            boundaryGap: false,
+            data: this.innerDirectDate,
+            axisTick: {
+              show: false,
+            },
+            axisLine: {
+              show: false,
+            },
+          },
+          yAxis: {
+            name: "单位：万",
+            type: "value",
+            splitLine: {
+              lineStyle: {
+                type: "dashed",
+                color: "rgba(45,153,255,.3)",
+              },
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLine: {
+              show: false,
+            },
+          },
+          series: [
+            {
+              name: "实际达成",
+              type: "line",
+              stack: "Total",
+              // smooth: true,
+              lineStyle: {
+                width: 1,
+              },
+              showSymbol: false,
+              areaStyle: {
+                normal: {
+                  color: {
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [
+                      {
+                        offset: 0,
+                        color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                      },
+                      {
+                        offset: 0.7,
+                        color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                      },
+                    ],
+                    globalCoord: false, // 缺省为 false
+                  },
+                },
+              },
+              data: this.innerDirectList,
+              markLine: {
+                data: [
+                  {
+                    yAxis: this.innerDirectLine,
+                    silent: false, //鼠标悬停事件 true没有，false有
+                    lineStyle: {
+                      //警戒线的样式 ，虚实 颜色
+                      type: "dashed", //样式  ‘solid’和'dotted'
+                      color: "#FF8B2F",
+                      width: 2, //宽度
+                    },
+                    label: {
+                      formatter: "",
+                      color: "#FF8B2F",
+                      position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                    },
+                  },
+                ],
+
+                symbol: ["none", "none"],
+              },
+            },
+          ],
+        };
+        myChart2.setOption(option);
+      },
+      myEcharts3() {
+        var myChart3 = this.$echarts.init(document.getElementById("main3"));
+        var option = {
+          xAxis: {
+            axisLabel: {
+              formatter: function (val) {
+                return "";
+              },
+            },
+          },
+          labelData: [
+            { class: "plan", text: "实际达成" },
+            // { class: 'actual', text: '规划达成' },
+            { class: "average", text: "日均线" },
+          ],
+          // echartsData: {
+          textStyle: {
+            color: "#3FB0FF",
+          },
+          color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+          title: {
+            text: "",
+          },
+          tooltip: {
+            trigger: "axis",
+          },
+          grid: {
+            top: "5%",
+            left: "2%",
+            right: "5%",
+            bottom: "3%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "category",
+            boundaryGap: false,
+            data: this.outerDirectDate,
+            axisTick: {
+              show: false,
+            },
+            axisLine: {
+              show: false,
+            },
+          },
+          yAxis: {
+            name: "单位：万",
+            type: "value",
+            splitLine: {
+              lineStyle: {
+                type: "dashed",
+                color: "rgba(45,153,255,.3)",
+              },
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLine: {
+              show: false,
+            },
+          },
+          series: [
+            {
+              name: "实际达成",
+              type: "line",
+              stack: "Total",
+              // smooth: true,
+              lineStyle: {
+                width: 1,
+              },
+              showSymbol: false,
+              areaStyle: {
+                normal: {
+                  color: {
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [
+                      {
+                        offset: 0,
+                        color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                      },
+                      {
+                        offset: 0.7,
+                        color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                      },
+                    ],
+                    globalCoord: false, // 缺省为 false
+                  },
+                },
+              },
+              data: this.outerDirectList,
+              markLine: {
+                data: [
+                  {
+                    yAxis: 8576,
+                    silent: false, //鼠标悬停事件 true没有，false有
+                    lineStyle: {
+                      //警戒线的样式 ，虚实 颜色
+                      type: "dashed", //样式  ‘solid’和'dotted'
+                      color: "#FF8B2F",
+                      width: 2, //宽度
+                    },
+                    label: {
+                      formatter: "",
+                      color: "#FF8B2F",
+                      position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                    },
+                  },
+                ],
+
+                symbol: ["none", "none"],
+              },
+            },
+          ],
+        };
+        myChart3.setOption(option);
+      },
+      changeDate(val) {
+        console.log("更新时间");
+      },
     },
-    changeDate(val) {
-      console.log("更新时间");
+    mounted() {
+      this.getList();
     },
-  },
-  mounted() {
-    this.getList();
-  },
-};
+  };
 </script>
 <style scoped>
-.flex-char {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 98%;
-  margin: 20px auto;
-  margin-bottom: 20px;
-}
+  .flex-char {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+    margin: 20px auto;
+    margin-bottom: 20px;
+  }
 
-.echartsBox {
-  width: 607px;
-  height: 240px;
-}
+  .echartsBox {
+    width: 607px;
+    height: 240px;
+  }
 
-.flex-fang {
-  display: flex;
-  justify-content: space-between;
-}
+  .flex-fang {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.fang-color {
-  width: 10px;
-  height: 10px;
-  background-color: hsla(188, 100%, 50%, 1);
-}
+  .fang-color {
+    width: 10px;
+    height: 10px;
+    background-color: hsla(188, 100%, 50%, 1);
+  }
 
-.middle-box {
-  width: 98%;
-  margin: 30px auto;
-  border: 1px solid hsla(210, 86%, 39%, 0.66);
-  position: relative;
-}
+  .middle-box {
+    width: 98%;
+    margin: 30px auto;
+    border: 1px solid hsla(210, 86%, 39%, 0.66);
+    position: relative;
+  }
 
-.flex-font-middle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 60%;
-  color: #fff;
-}
+  .flex-font-middle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 60%;
+    color: #fff;
+  }
 
-.middle-font {
-  font-size: 18px;
-  color: #fff;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 30px;
-}
+  .middle-font {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+  }
 
-.flex-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 98%;
-  margin: 0 auto;
-  padding-bottom: 20px;
-}
+  .flex-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 98%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  }
 
-.execl {
-  background: url("../../../assets/img/tableVBackround.svg");
-  width: 905px;
-  height: 324px;
-  background-color: rgba(2, 0, 77, 0.4);
-  box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
-  border: 2px solid #0d53b7;
-  border-radius: 0 0 10px 10px;
-}
+  .execl {
+    background: url("../../../assets/img/tableVBackround.svg");
+    width: 905px;
+    height: 324px;
+    background-color: rgba(2, 0, 77, 0.4);
+    box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
+    border: 2px solid #0d53b7;
+    border-radius: 0 0 10px 10px;
+  }
 
-::v-deep .ant-table-thead > tr > th {
-  background: rgb(4, 19, 112);
-  border-bottom: 1px solid rgb(55, 56, 112);
-  border-right: 1px solid rgb(55, 56, 112);
-}
+  ::v-deep .ant-table-thead>tr>th {
+    background: rgb(4, 19, 112);
+    border-bottom: 1px solid rgb(55, 56, 112);
+    border-right: 1px solid rgb(55, 56, 112);
+  }
 
-::v-deep .ant-table-thead > tr > th .ant-table-header-column {
-  color: #fff;
-  font-size: 14px;
-}
+  ::v-deep .ant-table-thead>tr>th .ant-table-header-column {
+    color: #fff;
+    font-size: 14px;
+  }
 
-::v-deep .ant-table-bordered .ant-table-tbody > tr > td {
-  border: 1px solid rgb(55, 56, 112);
-  color: #fff;
-}
+  ::v-deep .ant-table-bordered .ant-table-tbody>tr>td {
+    border: 1px solid rgb(55, 56, 112);
+    color: #fff;
+  }
 
-::v-deep
-  .ant-table-tbody
-  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
-  > td {
-  background: transparent;
-}
+  ::v-deep .ant-table-tbody>tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)>td {
+    background: transparent;
+  }
 
-::v-deep .ant-spin-nested-loading {
-  margin: 14px;
-}
+  ::v-deep .ant-spin-nested-loading {
+    margin: 14px;
+  }
 
-::v-deep .ant-table-thead > tr:first-child > th:first-child {
-  background: linear-gradient(
-    to right,
-    rgb(80, 192, 255),
-    rgb(90, 255, 163),
-    rgb(102, 255, 255)
-  );
-}
+  ::v-deep .ant-table-thead>tr:first-child>th:first-child {
+    background: linear-gradient(to right,
+        rgb(80, 192, 255),
+        rgb(90, 255, 163),
+        rgb(102, 255, 255));
+  }
 
-.top-flex {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 98%;
-  margin: 0 auto;
-}
+  .top-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 98%;
+    margin: 0 auto;
+  }
 
-.dashboard-box {
-  /* width: 50%; */
-  position: relative;
-}
+  .dashboard-box {
+    /* width: 50%; */
+    position: relative;
+  }
 
-.card-box {
-  height: 248px;
-  width: 545px;
-  background-image: url("../../../assets/img/bigCardBackground.svg");
-  background-repeat: no-repeat;
-  /* margin-left: 20px; */
-}
+  .card-box {
+    height: 248px;
+    width: 545px;
+    background-image: url("../../../assets/img/bigCardBackground.svg");
+    background-repeat: no-repeat;
+    /* margin-left: 20px; */
+  }
 
-.card-box:first-child{
-   margin-right: 20px;
-}
+  .card-box:first-child {
+    margin-right: 20px;
+  }
 
-.card-font {
-  font-size: 16px;
-  color: #fff;
-  text-align: center;
-  font-weight: 600;
-  cursor: pointer;
-  color: #19ecff;
-}
+  .card-font {
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+    color: #19ecff;
+  }
 
-.flex-card {
-  display: flex;
-  margin-top: 20px;
-}
+  .flex-card {
+    display: flex;
+    margin-top: 20px;
+  }
 
-.flex-top-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .flex-top-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-.top-left-font {
-  font-size: 14px;
-  color: #fff;
-  margin-right: 20px;
-}
+  .top-left-font {
+    font-size: 14px;
+    color: #fff;
+    margin-right: 20px;
+  }
 
-.card-border-box {
-  margin: 14px;
-  border: 1px solid rgba(13, 83, 183, 0.7);
-  position: relative;
-}
+  .card-border-box {
+    margin: 14px;
+    border: 1px solid rgba(13, 83, 183, 0.7);
+    position: relative;
+  }
 
-.line {
-  height: 10px;
-  border-left: 2px solid rgb(102, 255, 255);
-  border-right: 2px solid rgb(102, 255, 255);
-}
+  .line {
+    height: 10px;
+    border-left: 2px solid rgb(102, 255, 255);
+    border-right: 2px solid rgb(102, 255, 255);
+  }
 
-.line1 {
-  border-top: 2px solid rgb(102, 255, 255);
-  width: 10px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+  .line1 {
+    border-top: 2px solid rgb(102, 255, 255);
+    width: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 
-.line2 {
-  border-top: 2px solid rgb(102, 255, 255);
-  width: 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
+  .line2 {
+    border-top: 2px solid rgb(102, 255, 255);
+    width: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
-.line3 {
-  border-top: 2px solid rgb(102, 255, 255);
-  width: 10px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
+  .line3 {
+    border-top: 2px solid rgb(102, 255, 255);
+    width: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
 
-.line4 {
-  border-top: 2px solid rgb(102, 255, 255);
-  width: 10px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
+  .line4 {
+    border-top: 2px solid rgb(102, 255, 255);
+    width: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 
-.left-right-box {
-  display: flex;
-  justify-content: space-between;
-}
+  .left-right-box {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.flex-finish {
-  display: flex;
-}
+  .flex-finish {
+    display: flex;
+  }
 
-.finish-font {
-  color: #fff;
-  opacity: 0.6;
-  font-size: 12px;
-  margin-right: 4px;
-}
+  .finish-font {
+    color: #fff;
+    opacity: 0.6;
+    font-size: 12px;
+    margin-right: 4px;
+  }
 
-.finish-font span {
-  color: #66ffff;
-  margin-left: 2px;
-}
+  .finish-font span {
+    color: #66ffff;
+    margin-left: 2px;
+  }
 
-.mt-border {
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  width: 1px;
-}
+  .mt-border {
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    width: 1px;
+  }
 
-.card-big-num {
-  color: #66ffff;
-  font-size: 28px;
-}
+  .card-big-num {
+    color: #66ffff;
+    font-size: 28px;
+  }
 
-.progress {
-  width: 120px;
-  height: 10px;
-}
+  .progress {
+    width: 120px;
+    height: 10px;
+  }
 
-.progress:last-child {
-  margin-bottom: 12px;
-}
+  .progress:last-child {
+    margin-bottom: 12px;
+  }
 
-.progress-middle {
-  width: 34px;
-  height: 10px;
-}
+  .progress-middle {
+    width: 34px;
+    height: 10px;
+  }
 
-.progress-middle:last-child {
-  margin-bottom: 12px;
-}
+  .progress-middle:last-child {
+    margin-bottom: 12px;
+  }
 
-::v-deep .ant-progress-bg {
-  height: 4px !important;
-  border-radius: 200px !important;
-}
+  ::v-deep .ant-progress-bg {
+    height: 4px !important;
+    border-radius: 200px !important;
+  }
 
-.card-middle-progress {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+  .card-middle-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-.flex-bottoms {
-  display: flex;
-  align-items: center;
-  color: #a0a3c0;
-  font-size: 12px;
-}
+  .flex-bottoms {
+    display: flex;
+    align-items: center;
+    color: #a0a3c0;
+    font-size: 12px;
+  }
 
-.light-blue {
-  color: #66ffff;
-  opacity: 1;
-}
+  .light-blue {
+    color: #66ffff;
+    opacity: 1;
+  }
 
-::v-deep .ant-table-bordered .ant-table-body > table {
-  border: none;
-}
+  ::v-deep .ant-table-bordered .ant-table-body>table {
+    border: none;
+  }
 
-.select-box {
-  position: absolute;
-  right: 20px;
-  top: 30px;
-  z-index: 11;
-  width: 186px;
-}
+  .select-box {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    z-index: 11;
+    width: 186px;
+  }
 
 
-/* 仪表盘样式 */
-.main {
-  height: 230px;
-}
-::v-deep .ant-table-thead > tr:first-child > th:first-child {
-  background: linear-gradient(
-    to right,
-    rgb(80, 192, 255),
-    rgb(90, 255, 163),
-    rgb(102, 255, 255)
-  );
-}
-.content {
-  width: 192px;
-  height: 192px;
-  top: 7%;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.big-round {
-  width: 105px;
-  height: 105px;
-  border-radius: 50%;
-  box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.round {
-  width: 85px;
-  height: 85px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border-radius: 50%;
-  background: #0c098b;
-  box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
-  border: 1px solid rgba(50, 197, 255, 0.22);
-}
-.round-title {
-  font-size: 12px;
-  color: #32c5ff;
-  letter-spacing: -0.01px;
-  text-align: center;
-  font-weight: 500;
-}
-.sort {
-  font-size: 24px;
-  color: #ffffff;
-  letter-spacing: -0.01px;
-  text-align: center;
-  font-weight: 600;
-}
-.title {
-  position: absolute;
-  bottom: 20px;
-  opacity: 0.8;
-  font-size: 14px;
-  color: #ffffff;
-  letter-spacing: 0;
-  text-align: center;
-  line-height: 17px;
-  font-weight: 400;
-}
-.bottom {
-  text-align: center;
-  margin-top: 18px;
-}
-.bottom-color {
-  width: 8px;
-  height: 8px;
-  margin-left: 5px;
-  display: inline-block;
-}
-.bottom-title {
-  opacity: 0.8;
-  padding-left: 5px;
-  font-size: 12px;
-  color: #ffffff;
-  letter-spacing: 0;
-  text-align: center;
-  line-height: 17px;
-  font-weight: 400;
-}
-.bottom-text {
-  margin-top: 3px;
-  opacity: 0.7;
-  font-size: 10px;
-  color: #ffffff;
-  letter-spacing: 0;
-  text-align: center;
-  line-height: 10px;
-  font-weight: 400;
-}
-.bottom-text span {
-  margin-left: 5px;
-}
-.card-big-num {
-  color: #66ffff;
-  font-size: 28px;
-}
-.progress {
-  width: 120px;
-  height: 10px;
-}
-.progress:last-child {
-  margin-bottom: 12px;
-}
-.progress-middle {
-  width: 34px;
-  height: 10px;
-}
-.progress-middle:last-child {
-  margin-bottom: 12px;
-}
-::v-deep .ant-progress-bg {
-  height: 4px !important;
-  border-radius: 200px !important;
-}
-.card-middle-progress {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.flex-bottoms {
-  display: flex;
-  align-items: center;
-  color: #a0a3c0;
-  font-size: 12px;
-}
-.light-blue {
-  color: #66ffff;
-  opacity: 1;
-}
-::v-deep .ant-table-bordered .ant-table-body > table {
-  border: none;
-}
-/* 计划 */
-.plan {
-  border-bottom: 2px solid #66ffff;
-}
+  /* 仪表盘样式 */
+  .main {
+    height: 230px;
+  }
 
-/* 实际 */
-.actual {
-  border-bottom: 2px solid #6c02cf;
-}
+  ::v-deep .ant-table-thead>tr:first-child>th:first-child {
+    background: linear-gradient(to right,
+        rgb(80, 192, 255),
+        rgb(90, 255, 163),
+        rgb(102, 255, 255));
+  }
 
-/* 日均线 */
-.average {
-  border-bottom: 2px dashed #ff8b2f;
-}
+  .content {
+    width: 192px;
+    height: 192px;
+    top: 7%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.text {
-  color: #fff;
-  font-size: 12px;
-}
-.select-box {
-  position: absolute;
-  right: 20px;
-  top: 30px;
-  z-index: 11;
-  width: 186px;
-}
+  .big-round {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-/* 仪表盘样式 */
-.main {
-  height: 230px;
-}
-.backgroundPic {
-  height: 200px;
-  width: 192px;
-  background-image: url("../../../assets/img/backgroundPanel.svg");
-  background-repeat: no-repeat;
-  background-position: 50% 62%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.content {
-  width: 192px;
-  height: 192px;
-  top: 7%;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.big-round {
-  width: 105px;
-  height: 105px;
-  border-radius: 50%;
-  box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.round {
-  width: 85px;
-  height: 85px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  border-radius: 50%;
-  background: #0c098b;
-  box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
-  border: 1px solid rgba(50, 197, 255, 0.22);
-}
-.round-title {
-  font-size: 12px;
-  color: #32c5ff;
-  letter-spacing: -0.01px;
-  text-align: center;
-  font-weight: 500;
-}
-.panelList {
-  height: 258px;
-  width: 760px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-.flex-loading{
- position: relative;
- left: 50%;
- right: 50%;
-}
-</style> 
+  .round {
+    width: 85px;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 50%;
+    background: #0c098b;
+    box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
+    border: 1px solid rgba(50, 197, 255, 0.22);
+  }
+
+  .round-title {
+    font-size: 12px;
+    color: #32c5ff;
+    letter-spacing: -0.01px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .sort {
+    font-size: 24px;
+    color: #ffffff;
+    letter-spacing: -0.01px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .title {
+    position: absolute;
+    bottom: 20px;
+    opacity: 0.8;
+    font-size: 14px;
+    color: #ffffff;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 17px;
+    font-weight: 400;
+  }
+
+  .bottom {
+    text-align: center;
+    margin-top: 18px;
+  }
+
+  .bottom-color {
+    width: 8px;
+    height: 8px;
+    margin-left: 5px;
+    display: inline-block;
+  }
+
+  .bottom-title {
+    opacity: 0.8;
+    padding-left: 5px;
+    font-size: 12px;
+    color: #ffffff;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 17px;
+    font-weight: 400;
+  }
+
+  .bottom-text {
+    margin-top: 3px;
+    opacity: 0.7;
+    font-size: 10px;
+    color: #ffffff;
+    letter-spacing: 0;
+    text-align: center;
+    line-height: 10px;
+    font-weight: 400;
+  }
+
+  .bottom-text span {
+    margin-left: 5px;
+  }
+
+  .card-big-num {
+    color: #66ffff;
+    font-size: 28px;
+  }
+
+  .progress {
+    width: 120px;
+    height: 10px;
+  }
+
+  .progress:last-child {
+    margin-bottom: 12px;
+  }
+
+  .progress-middle {
+    width: 34px;
+    height: 10px;
+  }
+
+  .progress-middle:last-child {
+    margin-bottom: 12px;
+  }
+
+  ::v-deep .ant-progress-bg {
+    height: 4px !important;
+    border-radius: 200px !important;
+  }
+
+  .card-middle-progress {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .flex-bottoms {
+    display: flex;
+    align-items: center;
+    color: #a0a3c0;
+    font-size: 12px;
+  }
+
+  .light-blue {
+    color: #66ffff;
+    opacity: 1;
+  }
+
+  ::v-deep .ant-table-bordered .ant-table-body>table {
+    border: none;
+  }
+
+  /* 计划 */
+  .plan {
+    border-bottom: 2px solid #66ffff;
+  }
+
+  /* 实际 */
+  .actual {
+    border-bottom: 2px solid #6c02cf;
+  }
+
+  /* 日均线 */
+  .average {
+    border-bottom: 2px dashed #ff8b2f;
+  }
+
+  .text {
+    color: #fff;
+    font-size: 12px;
+  }
+
+  .select-box {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    z-index: 11;
+    width: 186px;
+  }
+
+  /* 仪表盘样式 */
+  .main {
+    height: 230px;
+  }
+
+  .backgroundPic {
+    height: 200px;
+    width: 192px;
+    background-image: url("../../../assets/img/backgroundPanel.svg");
+    background-repeat: no-repeat;
+    background-position: 50% 62%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content {
+    width: 192px;
+    height: 192px;
+    top: 7%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .big-round {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .round {
+    width: 85px;
+    height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 50%;
+    background: #0c098b;
+    box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
+    border: 1px solid rgba(50, 197, 255, 0.22);
+  }
+
+  .round-title {
+    font-size: 12px;
+    color: #32c5ff;
+    letter-spacing: -0.01px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .panelList {
+    height: 258px;
+    width: 760px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .flex-loading {
+    position: relative;
+    left: 50%;
+    right: 50%;
+  }
+</style>
