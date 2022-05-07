@@ -160,9 +160,6 @@
     border-color: #1e1d51;
   }
 
-  ::v-deep .el-table--enable-row-hover .el-table__body tr:hover > td {
-    background-color: #070640 !important;
-  }
 
   .nameColor {
     color: #00ddff;
@@ -189,26 +186,6 @@
     width: 0;
     height: 0;
   }
-
- ::v-deep .el-table__body-wrapper{
-    &::-webkit-scrollbar {
-      height: 6px;
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: #070640;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: #8383a5;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: #8383a5;
-    }
-  }
-  
 
   .el-table__fixed-right {
     height: 100% !important;

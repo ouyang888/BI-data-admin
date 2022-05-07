@@ -656,9 +656,9 @@
     </div>
 
     <!-- 底部表格 -->
-    <div class="flex-bottom">
+    
       <TableCardBox :leftData="tableInner" :rightData="tableOutter" :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" :titleHead="titleHead"/>
-    </div>
+
   </div>
 </template>
 <script>
@@ -781,12 +781,12 @@ export default {
       this.$router.push("/center/export");
     },
     // 右边卡片/
-    async getCard() {
+    async getCard(params) {
       try {
-        const inner = await API.getData("directITotalInnerTotal", "2022-03");
-        const outter = await API.getData("directTotalOutterTotal", "2022-03");
-        const innersab = await API.getData("directTotalInnerSAB", "2022-03");
-        const outtersab = await API.getData("directTotalOutterSAB", "2022-03");
+        const inner = await API.getData("directITotalInnerTotal",params);
+        const outter = await API.getData("directTotalOutterTotal",params);
+        const innersab = await API.getData("directTotalInnerSAB",params);
+        const outtersab = await API.getData("directTotalOutterSAB",params);
         console.log("inner,", outter);
 
         inner.rows.forEach((v) => {
@@ -901,15 +901,15 @@ export default {
     },
 
     // 底部table/
-    async getTable() {
+    async getTable(params) {
       try {
         let tableInner = await API.getData(
           "directTotalinnerBottom",
-          "2022-03"
+          params
         );
         let tableOutter = await API.getData(
           "directTotalOutterBottom",
-          "2022-03"
+          params
         );
 
         // this.tableInner = tableInner.rows;
@@ -1415,8 +1415,9 @@ export default {
   },
   mounted() {
     this.getList();
-    this.getCard();
-    this.getTable();
+    let month = '2022-03';
+    this.getCard(month);
+    this.getTable(month);
     this.getdashboard();
     this.queryCardSAB();
   },

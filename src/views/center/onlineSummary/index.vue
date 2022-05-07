@@ -732,34 +732,7 @@
     </div>
 
     <!-- 底部表格 -->
-    <div class="flex-bottom">
-      <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-        >
-          <a slot="name" slot-scope="text">{{ text }}</a>
-          <template slot="name" slot-scope="name">
-            <a @click="gotoDomestic"> {{ name }}</a>
-             </template>
-        </a-table>
-      </div>
-      <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-        >
-          <a slot="name" slot-scope="text">{{ text }}</a>
-          <template slot="name" slot-scope="name">
-            <a @click="gotoDomestic"> {{ name }}</a>
-            </template>
-        </a-table>
-      </div>
-    </div>
+      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" title1="合作模式三" title2="线上客户" />
   </div>
 </template>
 <script>
@@ -767,11 +740,13 @@ import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
+import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
 export default {
    components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
+    innerTableCardBox
   },
   data() {
     return {
@@ -901,6 +876,11 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
+      // 底部表格
+      tableInner:[],
+      tableOutter:[],
+      rowSpanNumber1:6,
+      rowSpanNumber2:6,
     };
   },
   methods: {
@@ -1948,6 +1928,25 @@ this.$router.push("/center/index")
       };
       myChart8.setOption(option);
     },
+    async getTable() {
+      try {
+        let tableInner = await API.getData(
+          "onlineBottomLevel3",
+          "202203,202203"
+        );
+        let tableOutter = await API.getData(
+          "onlineBottomStore",
+          "2022-03,2022-03"
+        );
+
+        this.tableInner = tableInner.rows;
+        this.tableOutter = tableOutter.rows;
+        
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
   },
   mounted() {
     this.getdashboard();
@@ -1959,6 +1958,7 @@ this.$router.push("/center/index")
     this.myEcharts6();
     this.myEcharts7();
     this.myEcharts8();
+    this.getTable();
   },
 };
 </script>

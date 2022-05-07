@@ -599,9 +599,7 @@
     </div>
 
     <!-- 底部表格 -->
-    <div class="flex-bottom">
-      <TableCardBox :leftData="tableInner" :rightData="tableOutter" :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" :titleHead="titleHead"/>
-    </div>
+      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" title1="线上" title2="线下"/>
   </div>
 </template>
 <script>
@@ -609,14 +607,14 @@ import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
-import TableCardBox from '@/views/center/components/table/TableCardBox.vue';
+import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
 export default {
   name: "s",
   components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
-    TableCardBox
+    innerTableCardBox
   },
   data() {
     return {
@@ -1401,34 +1399,36 @@ export default {
     async getTable() {
       try {
         let tableInner = await API.getData(
+          "innerDirectOnOutline",
+          "202203,202203"
+        );
+        let tableOutter = await API.getData(
           "innerDirectline",
           "2022-03,2022-03"
         );
-        // let tableOutter = await API.getData(
-        //   "innerDirectOnOutline",
-        //   "2022-03,2022-03"
-        // );
 
         this.tableInner = tableInner.rows;
-        // this.tableOutter = tableOutter.rows;
-        // this.rowSpanNumber2 = this.tableOutter.length;
+        this.tableOutter = tableOutter.rows;
 
-        // let innerTop = tableInner.rows.filter((v) => {
-        //   return v.cooprLevel1 == "线上";
-        // });
-        // this.rowSpanNumber1 = innerTop.length;
+        this.tableInner = tableInner.rows.filter(v=>{
+          return v.cooprLevel2Manager != '底部合计'
+        })
+        let innerbottom = tableInner.rows.filter(v=>{
+          return v.cooprLevel2Manager == '底部合计'
+        })
+        this.tableInner = this.tableInner.concat(innerbottom);
 
-        // let innerBottom = tableInner.rows.filter((v) => {
-        //   return v.marketChannel == "线下";
-        // });
-        // let innerTotal = tableInner.rows.filter((v) => {
-        //   return v.marketChannel == "底部合计";
-        // });
-        // this.tableInner = innerTop.concat(innerBottom,innerTotal);
-        // console.log('this.tableInner',this.rowSpanNumber1,this.tableInner)
+        this.tableOutter = tableOutter.rows.filter(v=>{
+          return v.cooprLevel2Manager != '底部合计'
+        })
+        let outterbottom = tableOutter.rows.filter(v=>{
+          if(v.cooprLevel2Manager =='底部合计' ){
+            v.cooprLevel2 = '底部合计'
+          }
+          return v.cooprLevel2Manager == '底部合计'
+        })
+        this.tableOutter = this.tableOutter.concat(outterbottom);
 
-
-        // console.log("this.data", this.data);
       } catch (err) {
         console.log(err);
       }
