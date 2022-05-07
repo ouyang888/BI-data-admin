@@ -657,7 +657,7 @@
 
     <!-- 底部表格 -->
     <div class="flex-bottom">
-      <TableCardBox />
+      <TableCardBox :leftData="tableInner" :rightData="tableOutter"/>
     </div>
   </div>
 </template>
@@ -844,7 +844,10 @@ export default {
       outterRightInfo: {},
       outterSabLeft: [],
       outterSabRight: [],
+      tableInner:[],
+      tableOutter:[]
     };
+
   },
   methods: {
     gotoDomestic() {
@@ -985,33 +988,18 @@ export default {
           "2022-03"
         );
 
-        let obj = {
-          businessEntityName1: "环境",
-          businessEntityName2: "电磁",
-          businessEntityName3: "饮品",
-          businessEntityName4: "电动",
-          businessEntityName5: "奇厨",
-          businessEntityName6: "烹饪",
-          businessEntityName7: "调理",
-          businessEntityName8: "其他",
-          completeRadio1: "环境",
-          completeRadio2: "电磁",
-          completeRadio3: "饮品",
-          completeRadio4: "电动",
-          completeRadio5: "奇厨",
-          completeRadio6: "烹饪",
-          completeRadio7: "调理",
-          completeRadio8: "其他",
-        };
+        this.tableInner = tableInner.rows;
+        this.tableOutter = tableOutter.rows;
 
-        let innerTop = tableInner.rows.filter((v) => {
-          return v.marketChannel == "线上";
-        });
-        let innerBottom = tableInner.rows.filter((v) => {
-          return v.marketChannel == "线下";
-        });
-        this.data = innerTop.concat(innerBottom);
-        console.log("this.data", this.data);
+
+        // let innerTop = tableInner.rows.filter((v) => {
+        //   return v.marketChannel == "线上";
+        // });
+        // let innerBottom = tableInner.rows.filter((v) => {
+        //   return v.marketChannel == "线下";
+        // });
+        // this.data = innerTop.concat(innerBottom);
+        // console.log("this.data", this.data);
       } catch (err) {
         console.log(err);
       }

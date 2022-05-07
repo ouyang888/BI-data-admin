@@ -7,7 +7,7 @@
       <RowTable
         :color="color"
         :title="directName"
-        :mesInfo="innerTableList"
+        :mesInfo="leftData"
         :titleHead="titleHead"
         :directName="directName"
         :rowSpanNumber="rowSpanNumber1"
@@ -18,7 +18,7 @@
       <RowTable
         :color="color2"
         :title="directName2"
-        :mesInfo="outerTableList"
+        :mesInfo="rightData"
         :titleHead="titleHead"
         :directName="directName2"
         :rowSpanNumber="rowSpanNumber2"
@@ -55,6 +55,16 @@ export default {
     // SellSportTable
     // SaleSummaryTable,
     RowTable,
+  },
+  props:{
+    leftData:{
+      type:Array,
+      default:function(){ return []}
+    },
+    rightData:{
+      type:Array,
+      default:function(){ return []}
+    }
   },
   data() {
     return {
