@@ -469,26 +469,7 @@
 
     <!-- 底部表格 -->
     <div class="flex-bottom">
-      <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-        >
-          <a slot="name" slot-scope="text">{{ text }}</a>
-        </a-table>
-      </div>
-      <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-        >
-          <a slot="name" slot-scope="text">{{ text }}</a>
-        </a-table>
-      </div>
+      <TableCardBox :leftData="tableInner" :rightData="tableOutter" :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" :titleHead="titleHead"/>
     </div>
   </div>
 </template>
@@ -497,12 +478,14 @@ import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
+import TableCardBox from '@/views/center/components/table/TableCardBox.vue';
 export default {
   name: "s",
   components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
+    TableCardBox
   },
   data() {
     return {
@@ -665,6 +648,20 @@ export default {
        outterRightInfo:{},
        outterSabLeft:[],
        outterSabRight:[],
+      // 底部表格
+      tableInner:[],
+      tableOutter:[],
+      rowSpanNumber1:6,
+      rowSpanNumber2:6,
+      titleHead :{
+      tAvgAmt:'责任制',
+      cnyAmt:'累计达成',
+      amtRadio: '任务完成率',
+      profitRadio :'毛利率',
+      days:' 周转天数',
+      amtFinish:'说到做到',
+      ranking :'排名',
+      },
     };
     
   },
@@ -1248,12 +1245,48 @@ export default {
       // }
 
     },
+    async getTable() {
+      try {
+        let tableInner = await API.getData(
+          "innerDirectline",
+          "2022-03,2022-03"
+        );
+        // let tableOutter = await API.getData(
+        //   "innerDirectOnOutline",
+        //   "2022-03,2022-03"
+        // );
+
+        this.tableInner = tableInner.rows;
+        // this.tableOutter = tableOutter.rows;
+        // this.rowSpanNumber2 = this.tableOutter.length;
+
+        // let innerTop = tableInner.rows.filter((v) => {
+        //   return v.cooprLevel1 == "线上";
+        // });
+        // this.rowSpanNumber1 = innerTop.length;
+
+        // let innerBottom = tableInner.rows.filter((v) => {
+        //   return v.marketChannel == "线下";
+        // });
+        // let innerTotal = tableInner.rows.filter((v) => {
+        //   return v.marketChannel == "底部合计";
+        // });
+        // this.tableInner = innerTop.concat(innerBottom,innerTotal);
+        // console.log('this.tableInner',this.rowSpanNumber1,this.tableInner)
+
+
+        // console.log("this.data", this.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   created() {
     this.getList();
     this.getdashboard();
     this.queryCardSAB();
     this.getCard();
+    this.getTable();
   },
   mounted() {},
 };
