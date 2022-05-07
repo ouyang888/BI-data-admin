@@ -70,7 +70,7 @@
         // console.log('props',this.$props)
         const goProgress = new circleProgress({
           el: this.cav,
-          progress: this.$props.rate / 100,
+          progress: this.$props.rate / 200,
           number: this.$props.rate,
           color: this.$props.color,
           deg: this.$props.deg,
@@ -89,7 +89,7 @@
           console.log('newValue', newValue)
           const goProgress = new circleProgress({
             el: this.cav,
-            progress: newValue / 100,
+            progress: newValue / 200,
             number: newValue,
             color: this.$props.color,
             deg: this.$props.deg,

@@ -528,7 +528,7 @@ export default {
         titleBottom: "线下",
         topGPM: 0,
         bottomGPM: 0,
-        ballNum: 55,
+        ballNum: 0,
       },
       speedData: {
         bar: 0,
@@ -550,15 +550,12 @@ export default {
       sabData: {
         bar1: 70,
         bar2: 50,
-        bar3: 30,
-        bar4: 12,
-        bar5: 7,
         ballTitle: "内销",
         bottom: "线上",
         top: "线下",
-        sabArr: { s: 32, a: 18, b: 21 },
-        topArr: { s: 32, a: 18, b: 21 },
-        bottomArr: { s: 32, a: 18, b: 21 },
+        sabArr: { s: 0, a: 0, b: 0 },
+        topArr: { s: 0, a: 0, b: 0 },
+        bottomArr: { s: 0, a: 0, b: 0 },
         // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
@@ -672,18 +669,34 @@ export default {
     
   },
   methods: {
-    //三个仪表盘
+    //三个仪表盘(左中)
     async getdashboard() {
       try {
         const res = await API.getData("innerDirectTopTotal", "2022-03");
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
+        this.progressData.ballNum = (
+          panelDataList[0].directProfitRadio * 100
+        ).toFixed(1);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
+        this.speedData.speedBar = (
+          panelDataList[0].directAmtRadio * 100
+        ).toFixed(1);
+        this.speedData.ballNum = panelDataList[0].directCnyAmt.toFixed(1);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1);
+
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].cooprLevel1 == "线上") {
             this.progressData.topGPM = (
               panelDataList[i].onLineProfitRadio * 100
             ).toFixed(1);
-            this.progressData.bar1 = (panelDataList[i].onLineProfitRadio * 100).toFixed(1);
+            this.progressData.bar1 = (
+              panelDataList[i].onLineProfitRadio * 100
+            ).toFixed(1);
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.bottomClose =
+              panelDataList[i].cnyAmtRadio.toFixed(1);
+            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
           } else if (panelDataList[i].cooprLevel1 == "线下") {
             this.progressData.bar1 = 10;
             this.progressData.bottomGPM = (
@@ -692,18 +705,42 @@ export default {
             this.progressData.bar2 = (
               panelDataList[i].onLineProfitRadio * 100
             ).toFixed(1);
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.bottomClose1 =
+              panelDataList[i].cnyAmtRadio.toFixed(1);
+            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1);
           }
         }
-
-        //外销汇总仪表盘左边&&中间
-        // let smallData = JSON.parse(localStorage.getItem("setPanel"));
-        // for (var i = 0; i < smallData.length; i++) {
-        //   if (smallData[i].directName == "内销") {
-        //     dataList.smallInnerDataObj = smallData[i];
-        //   } else {
-        //     dataList.smallDownDataObj = smallData[i];
-        //   }
-        // }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    //三个仪表盘(右)
+    async queryCardSAB() {
+      try {
+        const res = await API.getData("innerDirectRightSAB", "2022-03");
+        let RightSAB = res.rows;
+        for (var i = 0; i < RightSAB.length; i++) {
+          if(RightSAB[i].cooprLevel1 == "线上"){
+            this.sabData.bar1 = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            if(RightSAB[i].position == "S"){
+              this.sabData.topArr.s = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "A"){
+              this.sabData.topArr.a = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "B"){
+              this.sabData.topArr.b = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }
+          }else if(RightSAB[i].cooprLevel1 == "线下"){
+            this.sabData.bar2 = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+             if(RightSAB[i].position == "S"){
+              this.sabData.bottomArr.s = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "A"){
+              this.sabData.bottomArr.a = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "B"){
+              this.sabData.bottomArr.b = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }
+          }
+        }
       } catch (error) {
         console.log(error);
       }
@@ -1215,6 +1252,7 @@ export default {
   created() {
     this.getList();
     this.getdashboard();
+    this.queryCardSAB();
     this.getCard();
   },
   mounted() {},

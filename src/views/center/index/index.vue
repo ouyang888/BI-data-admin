@@ -25,12 +25,23 @@
                 <div class="flex-top-card">
                   <div class="top-left-font">线上达成</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>{{innerLeftInfo.saleTaskAmt}}亿</span></div>
-                    <div class="finish-font">完成率 <span>{{innerLeftInfo.onLineRadio>100?100:innerLeftInfo.onLineRadio}}%</span></div>
+                    <div class="finish-font">
+                      责任制 <span>{{ innerLeftInfo.saleTaskAmt }}亿</span>
+                    </div>
+                    <div class="finish-font">
+                      完成率
+                      <span
+                        >{{
+                          innerLeftInfo.onLineRadio > 100
+                            ? 100
+                            : innerLeftInfo.onLineRadio
+                        }}%</span
+                      >
+                    </div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{innerLeftInfo.cnyAmt}}亿</div>
+                  <div class="card-big-num">{{ innerLeftInfo.cnyAmt }}亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -51,80 +62,106 @@
                     </div>
                   </div>
                 </div>
-                <div class="cardList"
+                <div
+                  class="cardList"
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
                 >
-                  <template  v-for="(item,index) in innerLeft" >  
-                  <div class="card-middle-progress" :key="index" v-if="index<3">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">{{item.businessEntityName}}</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.dateRadio"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                  <!-- <template v-for="(item,index) in innerLeft" :key="index">
+                  {{item}} -->
+                  <div
+                    class="card-middle-progress"
+                    v-for="(item, index) in innerLeft"
+                    :key="index"
+                  >
+                    <template v-if="index < 3">
+                      <div style="display: flex; align-items: center">
+                        <div class="finish-font">
+                          {{ item.businessEntityName }}
                         </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.cnyAmtRadio*100"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                        <div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.dateRadio"
+                              :show-info="false"
+                              strokeColor="#FF8B2F"
+                            />
+                          </div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.cnyAmtRadio * 100"
+                              :show-info="false"
+                              strokeColor="rgb(102, 255, 255)"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </template>
                   </div>
-                </template>
+                  <!-- </template> -->
                 </div>
 
-                <div class="cardList"
-                style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                "
-              >
-            
-              <template v-for="(item,index) in innerLeft">
-                <div class="card-middle-progress" :key="index"  v-if="index>2">
-                  <div style="display: flex; align-items: center">
-                    <div class="finish-font">{{item.businessEntityName}}</div>
-                    <div>
-                      <div class="progress-middle">
-                        <a-progress
-                          :percent="item.dateRadio"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
+                <div
+                  class="cardList"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                  "
+                >
+                  <div
+                    class="card-middle-progress"
+                    v-for="(item, index) in innerLeft"
+                    :key="index"
+                  >
+                    <template v-if="index > 2">
+                      <div style="display: flex; align-items: center">
+                        <div class="finish-font">
+                          {{ item.businessEntityName }}
+                        </div>
+                        <div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.dateRadio"
+                              :show-info="false"
+                              strokeColor="#FF8B2F"
+                            />
+                          </div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.cnyAmtRadio * 100"
+                              :show-info="false"
+                              strokeColor="rgb(102, 255, 255)"
+                            />
+                          </div>
+                        </div>
                       </div>
-                      <div class="progress-middle">
-                        <a-progress
-                          :percent="item.cnyAmtRadio*100"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
-                      </div>
-                    </div>
+                    </template>
                   </div>
                 </div>
-              </template>
-      
-              </div>
-                
+
                 <div class="flex-bottoms">
-                  <div>线上结构   <span v-for="(item,index) in innerSabLeft" :key="index"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
+                  <div>
+                    线上结构
+                    <span v-for="(item, index) in innerSabLeft" :key="index">
+                      <span>{{ item.position }}</span> -
+                      <span>{{ item.positionRatio * 100 }}%;</span>
+                    </span>
+                  </div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">{{innerLeftInfo.onLineProfitRadio}}%</span></div>
+                  <div>
+                    线上毛利率
+                    <span class="light-blue"
+                      >{{ innerLeftInfo.onLineProfitRadio }}%</span
+                    >
+                  </div>
                 </div>
               </div>
               <div class="mt-border"></div>
@@ -132,12 +169,16 @@
                 <div class="flex-top-card">
                   <div class="top-left-font">线下达成</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>{{innerRightInfo.saleTaskAmt}}亿</span></div>
-                    <div class="finish-font">完成率 <span>{{innerRightInfo.onLineRadio}}%</span></div>
+                    <div class="finish-font">
+                      责任制 <span>{{ innerRightInfo.saleTaskAmt }}亿</span>
+                    </div>
+                    <div class="finish-font">
+                      完成率 <span>{{ innerRightInfo.onLineRadio }}%</span>
+                    </div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{innerRightInfo.cnyAmt}}亿</div>
+                  <div class="card-big-num">{{ innerRightInfo.cnyAmt }}亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -158,77 +199,101 @@
                     </div>
                   </div>
                 </div>
-                <div class="cardList"
+                <div
+                  class="cardList"
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
                 >
-                <template v-for="(item,index) in innerRight" >
-                  <div class="card-middle-progress" :key="index" v-if="index<3">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">{{item.businessEntityName}}</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.dateRadio"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                  <div
+                    class="card-middle-progress"
+                    v-for="(item, index) in innerRight"
+                    :key="index"
+                  >
+                    <template v-if="index < 3">
+                      <div style="display: flex; align-items: center">
+                        <div class="finish-font">
+                          {{ item.businessEntityName }}
                         </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.cnyAmtRadio*100"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                        <div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.dateRadio"
+                              :show-info="false"
+                              strokeColor="#FF8B2F"
+                            />
+                          </div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.cnyAmtRadio * 100"
+                              :show-info="false"
+                              strokeColor="rgb(102, 255, 255)"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </template>
                   </div>
-                </template>
                 </div>
-                <div class="cardList"
-                style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                "
-              >
-              <template  v-for="(item,index) in innerRight" > 
-                  <div class="card-middle-progress":key="index" v-if="index>=3">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">{{item.businessEntityName}}</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.dateRadio"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                <div
+                  class="cardList"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                  "
+                >
+                  <div
+                    class="card-middle-progress"
+                    v-for="(item, index) in innerRight"
+                    :key="index"
+                  >
+                    <template v-if="index >= 3">
+                      <div style="display: flex; align-items: center">
+                        <div class="finish-font">
+                          {{ item.businessEntityName }}
                         </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.cnyAmtRadio*100"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                        <div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.dateRadio"
+                              :show-info="false"
+                              strokeColor="#FF8B2F"
+                            />
+                          </div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.cnyAmtRadio * 100"
+                              :show-info="false"
+                              strokeColor="rgb(102, 255, 255)"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </template>
                   </div>
-                </template>
-               
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构   <span v-for="(item,index) in innerSabRight" :key="index"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
+                  <div>
+                    线上结构
+                    <span v-for="(item, index) in innerSabRight" :key="index">
+                      <span>{{ item.position }}</span> -
+                      <span>{{ item.positionRatio * 100 }}%;</span>
+                    </span>
+                  </div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">{{innerRightInfo.onLineProfitRadio}}%</span></div>
+                  <div>
+                    线上毛利率
+                    <span class="light-blue"
+                      >{{ innerRightInfo.onLineProfitRadio }}%</span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -248,12 +313,23 @@
                 <div class="flex-top-card">
                   <div class="top-left-font">OBM达成</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>{{outterLeftInfo.saleTaskAmt}}亿</span></div>
-                    <div class="finish-font">完成率 <span>{{outterLeftInfo.onLineRadio>100?100:outterLeftInfo.onLineRadio}}%</span></div>
+                    <div class="finish-font">
+                      责任制 <span>{{ outterLeftInfo.saleTaskAmt }}亿</span>
+                    </div>
+                    <div class="finish-font">
+                      完成率
+                      <span
+                        >{{
+                          outterLeftInfo.onLineRadio > 100
+                            ? 100
+                            : outterLeftInfo.onLineRadio
+                        }}%</span
+                      >
+                    </div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{outterLeftInfo.cnyAmt}}亿</div>
+                  <div class="card-big-num">{{ outterLeftInfo.cnyAmt }}亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -274,77 +350,101 @@
                     </div>
                   </div>
                 </div>
-                <div class="cardList"
+                <div
+                  class="cardList"
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
                 >
-                <template  v-for="(item,index) in outterLeft" >
-                  <div class="card-middle-progress":key="index" v-if="index<3">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">{{item.businessEntityName}}</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.dateRadio"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                  <div
+                    class="card-middle-progress"
+                    v-for="(item, index) in outterLeft"
+                    :key="index"
+                  >
+                    <template v-if="index < 3">
+                      <div style="display: flex; align-items: center">
+                        <div class="finish-font">
+                          {{ item.businessEntityName }}
                         </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.cnyAmtRadio*100"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                        <div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.dateRadio"
+                              :show-info="false"
+                              strokeColor="#FF8B2F"
+                            />
+                          </div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.cnyAmtRadio * 100"
+                              :show-info="false"
+                              strokeColor="rgb(102, 255, 255)"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </template>
                   </div>
-                </template>
-                  </div>
-                  <div class="cardList"
+                </div>
+                <div
+                  class="cardList"
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
                 >
-                <template v-for="(item,index) in outterLeft" >
-                  <div class="card-middle-progress":key="index" v-if="index>2">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">{{item.businessEntityName}}</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.dateRadio"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                  <div
+                    class="card-middle-progress"
+                    v-for="(item, index) in outterLeft"
+                    :key="index"
+                  >
+                    <template v-if="index > 2">
+                      <div style="display: flex; align-items: center">
+                        <div class="finish-font">
+                          {{ item.businessEntityName }}
                         </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.cnyAmtRadio*100"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                        <div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.dateRadio"
+                              :show-info="false"
+                              strokeColor="#FF8B2F"
+                            />
+                          </div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.cnyAmtRadio * 100"
+                              :show-info="false"
+                              strokeColor="rgb(102, 255, 255)"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </template>
                   </div>
-                </template>
-               
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构   <span v-for="(item,index) in outterSabLeft" :key="index"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
+                  <div>
+                    线上结构
+                    <span v-for="(item, index) in outterSabLeft" :key="index">
+                      <span>{{ item.position }}</span> -
+                      <span>{{ item.positionRatio * 100 }}%;</span>
+                    </span>
+                  </div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">{{outterLeftInfo.onLineProfitRadio}}%</span></div>
+                  <div>
+                    线上毛利率
+                    <span class="light-blue"
+                      >{{ outterLeftInfo.onLineProfitRadio }}%</span
+                    >
+                  </div>
                 </div>
               </div>
               <div class="mt-border"></div>
@@ -352,12 +452,23 @@
                 <div class="flex-top-card">
                   <div class="top-left-font">OEM达成</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>{{outterRightInfo.saleTaskAmt}}亿</span></div>
-                    <div class="finish-font">完成率 <span>{{outterRightInfo.onLineRadio>100?100:outterRightInfo.onLineRadio}}%</span></div>
+                    <div class="finish-font">
+                      责任制 <span>{{ outterRightInfo.saleTaskAmt }}亿</span>
+                    </div>
+                    <div class="finish-font">
+                      完成率
+                      <span
+                        >{{
+                          outterRightInfo.onLineRadio > 100
+                            ? 100
+                            : outterRightInfo.onLineRadio
+                        }}%</span
+                      >
+                    </div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{outterRightInfo.cnyAmt}}亿</div>
+                  <div class="card-big-num">{{ outterRightInfo.cnyAmt }}亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -378,76 +489,101 @@
                     </div>
                   </div>
                 </div>
-                <div class="cardList"
+                <div
+                  class="cardList"
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
                 >
-                <template  v-for="(item,index) in outterRight" >
-                  <div class="card-middle-progress":key="index" v-if="index<3">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">{{item.businessEntityName}}</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.dateRadio"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
+                  <div
+                    class="card-middle-progress"
+                    v-for="(item, index) in outterRight"
+                    :key="index"
+                  >
+                    <template v-if="index < 3">
+                      <div style="display: flex; align-items: center">
+                        <div class="finish-font">
+                          {{ item.businessEntityName }}
                         </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="item.cnyAmtRadio*100"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
+                        <div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.dateRadio"
+                              :show-info="false"
+                              strokeColor="#FF8B2F"
+                            />
+                          </div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.cnyAmtRadio * 100"
+                              :show-info="false"
+                              strokeColor="rgb(102, 255, 255)"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </template>
-                </div>
-                <div class="cardList"
-                style="
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                "
-              >
-              <template v-for="(item,index) in outterRight" >
-                <div class="card-middle-progress":key="index"  v-if="index>=3">
-                  <div style="display: flex; align-items: center">
-                    <div class="finish-font">{{item.businessEntityName}}</div>
-                    <div>
-                      <div class="progress-middle">
-                        <a-progress
-                          :percent="item.dateRadio"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
-                      </div>
-                      <div class="progress-middle">
-                        <a-progress
-                          :percent="item.cnyAmtRadio*100"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
-                      </div>
-                    </div>
+                    </template>
                   </div>
                 </div>
-              </template>
+                <div
+                  class="cardList"
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                  "
+                >
+                  <div
+                    class="card-middle-progress"
+                    v-for="(item, index) in outterRight"
+                    :key="index"
+                  >
+                    <template v-if="index >= 3">
+                      <div style="display: flex; align-items: center">
+                        <div class="finish-font">
+                          {{ item.businessEntityName }}
+                        </div>
+                        <div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.dateRadio"
+                              :show-info="false"
+                              strokeColor="#FF8B2F"
+                            />
+                          </div>
+                          <div class="progress-middle">
+                            <a-progress
+                              :percent="item.cnyAmtRadio * 100"
+                              :show-info="false"
+                              strokeColor="rgb(102, 255, 255)"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+                  </div>
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构   <span v-for="(item,index) in outterSabLeft" :key="index"> <span>{{item.position}}</span> - <span>{{item.positionRatio*100}}%;</span>  </span></div>
+                  <div>
+                    线上结构
+                    <span v-for="(item, index) in outterSabLeft" :key="index">
+                      <span>{{ item.position }}</span> -
+                      <span>{{ item.positionRatio * 100 }}%;</span>
+                    </span>
+                  </div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">{{outterRightInfo.onLineProfitRadio}}%</span></div>
+                  <div>
+                    线上毛利率
+                    <span class="light-blue"
+                      >{{ outterRightInfo.onLineProfitRadio }}%</span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -468,9 +604,13 @@
           <div class="middle-font">事业部日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
-              <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+              <div
+                class="item"
+                v-for="(item, index) in echartsLabel"
+                :key="index"
+              >
                 <div class="lump" :class="item.class"></div>
-                <div class="text">{{item.text}}</div>
+                <div class="text">{{ item.text }}</div>
               </div>
             </template>
           </div>
@@ -480,9 +620,13 @@
           <div class="middle-font">内销日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
-              <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+              <div
+                class="item"
+                v-for="(item, index) in echartsLabel"
+                :key="index"
+              >
                 <div class="lump" :class="item.class"></div>
-                <div class="text">{{item.text}}</div>
+                <div class="text">{{ item.text }}</div>
               </div>
             </template>
           </div>
@@ -492,9 +636,13 @@
           <div class="middle-font">外销日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
-              <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+              <div
+                class="item"
+                v-for="(item, index) in echartsLabel"
+                :key="index"
+              >
                 <div class="lump" :class="item.class"></div>
-                <div class="text">{{item.text}}</div>
+                <div class="text">{{ item.text }}</div>
               </div>
             </template>
           </div>
@@ -517,9 +665,9 @@
           :pagination="false"
           :scroll="{ x: 'calc(700px + 50%)', y: 240 }"
         >
-         <template slot="manager" slot-scope="manager">
-          {{manager}}
-           </template>
+           <template slot="manager" slot-scope="manager">
+            {{ manager }}
+          </template>
           <a slot="name" slot-scope="text">{{ text }}</a>
         </a-table>
       </div>
@@ -551,49 +699,49 @@ export default {
   },
   data() {
     return {
-        showLoading:false,
-         divisionList:[],
-      divisionDate:[],
-      divisionLine:"",
+      showLoading: false,
+      divisionList: [],
+      divisionDate: [],
+      divisionLine: "",
 
-      innerDirectList:[],
-      innerDirectDate:[],
-      innerDirectLine:"",
+      innerDirectList: [],
+      innerDirectDate: [],
+      innerDirectLine: "",
 
-      outerDirectList:[],
-      outerDirectDate:[],
-      outerDirectLine:"",
+      outerDirectList: [],
+      outerDirectDate: [],
+      outerDirectLine: "",
       columns: [
         {
           title: "内销",
           dataIndex: "marketChannel",
           key: "marketChannel",
           align: "center",
-          width:100,
+          width: 100,
         },
         {
           title: "渠道",
           dataIndex: "marketCenter ",
           key: "marketCenter ",
           align: "center",
-          width:100,
+          width: 100,
         },
         {
           title: "责任人",
           dataIndex: "manager ",
           key: "manager ",
           align: "center",
-          scopedSlots: { 
-            customRender: "manager" 
+          scopedSlots: {
+            customRender: "manager",
           },
-          width:100,
+          width: 100,
         },
         {
           title: "环境",
           dataIndex: "businessEntityName1",
           key: "businessEntityName1",
           align: "center",
-          width:120,
+          width: 120,
         },
         {
           title: "烹饪",
@@ -661,9 +809,9 @@ export default {
       ],
 
       progressData: {
-        bar1: 10,
+        bar1: 0,
         bar2: 0,
-        ballTitle: "产司",
+        ballTitle: "事业部",
         bigBallTitle: "毛利率",
         textLeft: "内销",
         textRight: "外销",
@@ -678,8 +826,8 @@ export default {
         speedBar: 0,
         ballTitle: "事业部达成",
         ballNum: 0,
-        ballLeftTitle: "自营",
-        ballRightTitle: "代运营",
+        ballLeftTitle: "内销",
+        ballRightTitle: "外销",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
@@ -696,7 +844,7 @@ export default {
         bar3: 30,
         bar4: 12,
         bar5: 7,
-        ballTitle: "内销",
+        ballTitle: "事业部",
         bottom: "线上",
         top: "线下",
         sabArr: { s: 32, a: 18, b: 21 },
@@ -706,18 +854,18 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
-       innerLeft:[],
-       innerLeftInfo:{},
-       innerRight:[],
-       innerRightInfo:{},
-       innerSabLeft:[],
-       innerSabRight:[],
-       outterLeft:[],
-       outterLeftInfo:{},
-       outterRight:[],
-       outterRightInfo:{},
-       outterSabLeft:[],
-       outterSabRight:[],
+      innerLeft: [],
+      innerLeftInfo: {},
+      innerRight: [],
+      innerRightInfo: {},
+      innerSabLeft: [],
+      innerSabRight: [],
+      outterLeft: [],
+      outterLeftInfo: {},
+      outterRight: [],
+      outterRightInfo: {},
+      outterSabLeft: [],
+      outterSabRight: [],
     };
   },
   methods: {
@@ -730,185 +878,277 @@ export default {
     // 右边卡片/
     async getCard() {
       try {
-        const inner = await API.getData("directITotalInnerTotal","2022-03");
-        const outter = await API.getData("directTotalOutterTotal","2022-03");
-        const innersab = await API.getData("directTotalInnerSAB","2022-03");
-        const outtersab = await API.getData("directTotalOutterSAB","2022-03");
-        console.log('inner,',outter)
+        const inner = await API.getData("directITotalInnerTotal", "2022-03");
+        const outter = await API.getData("directTotalOutterTotal", "2022-03");
+        const innersab = await API.getData("directTotalInnerSAB", "2022-03");
+        const outtersab = await API.getData("directTotalOutterSAB", "2022-03");
+        console.log("inner,", outter);
 
-        inner.rows.forEach(v=>{
-          v.dateRadio = v.dateRadio*100
-          v.onLineRadio = v.onLineRadio*100>100?100:v.onLineRadio*100;
-        })
-        outter.rows.forEach(v=>{
-          v.dateRadio = v.dateRadio*100
-          v.onLineRadio = v.onLineRadio*100>100?100:v.onLineRadio*100;
-        })
-       
+        inner.rows.forEach((v) => {
+          v.dateRadio = v.dateRadio * 100;
+          v.onLineRadio = v.onLineRadio * 100;
+        });
+        outter.rows.forEach((v) => {
+          v.dateRadio = v.dateRadio * 100;
+          v.onLineRadio = v.onLineRadio * 100;
+        });
 
-        this.outterLeft = outter.rows.filter(v=>{
-          return v.obmOem == 'OBM';
-        })
-        this.outterLeftInfo = this.outterLeft[0]
-        if(this.outterLeftInfo.onLineRadio){
-        this.outterLeftInfo.onLineRadio = this.outterLeftInfo.onLineRadio.toFixed(0)
+        this.outterLeft = outter.rows.filter((v) => {
+          return v.obmOem == "OBM";
+        });
+        this.outterLeftInfo = this.outterLeft[0];
+        if (this.outterLeftInfo.onLineRadio) {
+          this.outterLeftInfo.onLineRadio =
+            this.outterLeftInfo.onLineRadio.toFixed(0);
         }
-        if(this.outterLeftInfo.onLineProfitRadio){
-        this.outterLeftInfo.onLineProfitRadio = (this.outterLeftInfo.onLineProfitRadio*100).toFixed(2)
+        if (this.outterLeftInfo.onLineProfitRadio) {
+          this.outterLeftInfo.onLineProfitRadio = (
+            this.outterLeftInfo.onLineProfitRadio * 100
+          ).toFixed(2);
         }
-        if(this.outterLeftInfo.cnyAmt){
-        this.outterLeftInfo.cnyAmt = this.outterLeftInfo.cnyAmt.toFixed(0)
+        if (this.outterLeftInfo.cnyAmt) {
+          this.outterLeftInfo.cnyAmt = this.outterLeftInfo.cnyAmt.toFixed(0);
         }
-        if(this.outterLeftInfo.saleTaskAmt){
-        this.outterLeftInfo.saleTaskAmt = this.outterLeftInfo.saleTaskAmt.toFixed(0)
-        }
-
-        this.outterRight = outter.rows.filter(v=>{
-          return v.obmOem == 'OEM';
-        })
-        this.outterRightInfo = this.outterRight[0]
-        if(this.outterRightInfo.onLineRadio){
-        this.outterRightInfo.onLineRadio = this.outterRightInfo.onLineRadio.toFixed(0)
-        }
-        if(this.outterRightInfo.onLineProfitRadio){
-        this.outterRightInfo.onLineProfitRadio = (this.outterRightInfo.onLineProfitRadio*100).toFixed(2)
-        }
-        if(this.outterRightInfo.cnyAmt){
-        this.outterRightInfo.cnyAmt = this.outterRightInfo.cnyAmt.toFixed(0)
-        }
-        if(this.outterRightInfo.saleTaskAmt){
-        this.outterRightInfo.saleTaskAmt = this.outterRightInfo.saleTaskAmt.toFixed(0)
+        if (this.outterLeftInfo.saleTaskAmt) {
+          this.outterLeftInfo.saleTaskAmt =
+            this.outterLeftInfo.saleTaskAmt.toFixed(0);
         }
 
+        this.outterRight = outter.rows.filter((v) => {
+          return v.obmOem == "OEM";
+        });
+        this.outterRightInfo = this.outterRight[0];
+        if (this.outterRightInfo.onLineRadio) {
+          this.outterRightInfo.onLineRadio =
+            this.outterRightInfo.onLineRadio.toFixed(0);
+        }
+        if (this.outterRightInfo.onLineProfitRadio) {
+          this.outterRightInfo.onLineProfitRadio = (
+            this.outterRightInfo.onLineProfitRadio * 100
+          ).toFixed(2);
+        }
+        if (this.outterRightInfo.cnyAmt) {
+          this.outterRightInfo.cnyAmt = this.outterRightInfo.cnyAmt.toFixed(0);
+        }
+        if (this.outterRightInfo.saleTaskAmt) {
+          this.outterRightInfo.saleTaskAmt =
+            this.outterRightInfo.saleTaskAmt.toFixed(0);
+        }
 
+        this.innerLeft = inner.rows.filter((v) => {
+          return v.cooprLevel1 == "线上";
+        });
+        this.innerLeftInfo = this.innerLeft[0];
+        if (this.innerLeftInfo.onLineRadio) {
+          this.innerLeftInfo.onLineRadio =
+            this.innerLeftInfo.onLineRadio.toFixed(0);
+        }
+        if (this.innerLeftInfo.onLineProfitRadio) {
+          this.innerLeftInfo.onLineProfitRadio = (
+            this.innerLeftInfo.onLineProfitRadio * 100
+          ).toFixed(2);
+        }
+        if (this.innerLeftInfo.cnyAmt) {
+          this.innerLeftInfo.cnyAmt = this.innerLeftInfo.cnyAmt.toFixed(0);
+        }
+        if (this.innerLeftInfo.saleTaskAmt) {
+          this.innerLeftInfo.saleTaskAmt =
+            this.innerLeftInfo.saleTaskAmt.toFixed(0);
+        }
 
-        this.innerLeft = inner.rows.filter(v=>{
-          return v.cooprLevel1 == '线上';
-        })
-        this.innerLeftInfo = this.innerLeft[0]
-        if(this.innerLeftInfo.onLineRadio){
-        this.innerLeftInfo.onLineRadio = this.innerLeftInfo.onLineRadio.toFixed(0)
+        this.innerRight = inner.rows.filter((v) => {
+          return v.cooprLevel1 == "线下";
+        });
+        this.innerRightInfo = this.innerRight[0];
+        if (this.innerRightInfo.onLineRadio) {
+          this.innerRightInfo.onLineRadio =
+            this.innerRightInfo.onLineRadio.toFixed(0);
         }
-        if(this.innerLeftInfo.onLineProfitRadio){
-        this.innerLeftInfo.onLineProfitRadio = (this.innerLeftInfo.onLineProfitRadio*100).toFixed(2)
-        }
-        if(this.innerLeftInfo.cnyAmt){
-        this.innerLeftInfo.cnyAmt = this.innerLeftInfo.cnyAmt.toFixed(0)
-        }
-        if(this.innerLeftInfo.saleTaskAmt){
-        this.innerLeftInfo.saleTaskAmt = this.innerLeftInfo.saleTaskAmt.toFixed(0)
+        if (this.innerRightInfo.onLineProfitRadio) {
+          this.innerRightInfo.onLineProfitRadio = (
+            this.innerRightInfo.onLineProfitRadio * 100
+          ).toFixed(0);
         }
 
-
-       this.innerRight = inner.rows.filter(v=>{
-          return v.cooprLevel1 == '线下';
-        })
-       this.innerRightInfo = this.innerRight[0]
-       if(this.innerRightInfo.onLineRadio){
-        this.innerRightInfo.onLineRadio = this.innerRightInfo.onLineRadio.toFixed(0)
-       }
-       if(this.innerRightInfo.onLineProfitRadio){
-        this.innerRightInfo.onLineProfitRadio = (this.innerRightInfo.onLineProfitRadio*100).toFixed(0)
-       }
-   
-        if(this.innerRightInfo.cnyAmt){
-        this.innerRightInfo.cnyAmt = this.innerRightInfo.cnyAmt.toFixed(0)
+        if (this.innerRightInfo.cnyAmt) {
+          this.innerRightInfo.cnyAmt = this.innerRightInfo.cnyAmt.toFixed(0);
         }
-        if(this.innerRightInfo.saleTaskAmt){
-        this.innerRightInfo.saleTaskAmt = this.innerRightInfo.saleTaskAmt.toFixed(0)
+        if (this.innerRightInfo.saleTaskAmt) {
+          this.innerRightInfo.saleTaskAmt =
+            this.innerRightInfo.saleTaskAmt.toFixed(0);
+        }
+        console.log(
+          "this.innerRightInfo",
+          this.innerRightInfo,
+          this.innerRight
+        );
+
+        this.innerSabLeft = innersab.rows.filter((v) => {
+          return v.cooprLevel1 == "线上";
+        });
+        console.log("this.innerSabLeft", this.innerSabLeft);
+        this.innerSabRight = innersab.rows.filter((v) => {
+          return v.cooprLevel1 == "线下";
+        });
+      } catch (err) {
+        console.log(err);
       }
-      console.log('this.innerRightInfo',this.innerRightInfo,this.innerRight)
-
-       this.innerSabLeft = innersab.rows.filter(v=>{
-          return v.cooprLevel1 == '线上';
-        })
-       console.log('this.innerSabLeft', this.innerSabLeft)
-       this.innerSabRight = innersab.rows.filter(v=>{
-          return v.cooprLevel1 == '线下';
-        })
-
-      }catch(err){
-        console.log(err)
-      }
-
     },
 
-       // 底部table/
-  async getTable() {
+    // 底部table/
+    async getTable() {
       try {
-        const tableInner = await API.getData("directTotalinnerBottom","2022-03");
-        const tableOutter = await API.getData("directTotalOutterBottom","2022-03");
+        const tableInner = await API.getData(
+          "directTotalinnerBottom",
+          "2022-03"
+        );
+        const tableOutter = await API.getData(
+          "directTotalOutterBottom",
+          "2022-03"
+        );
 
         let obj = {
-            businessEntityName1:'环境',
-            businessEntityName2:'电磁',
-            businessEntityName3:'饮品',
-            businessEntityName4:'电动',
-            businessEntityName5:'奇厨',
-            businessEntityName6:'烹饪',
-            businessEntityName7:'调理',
-            businessEntityName8:'其他',
-            completeRadio1:'环境',
-            completeRadio2:'电磁',
-            completeRadio3:'饮品',
-            completeRadio4:'电动',
-            completeRadio5:'奇厨',
-            completeRadio6:'烹饪',
-            completeRadio7:'调理',
-            completeRadio8:'其他',
-        }
+          businessEntityName1: "环境",
+          businessEntityName2: "电磁",
+          businessEntityName3: "饮品",
+          businessEntityName4: "电动",
+          businessEntityName5: "奇厨",
+          businessEntityName6: "烹饪",
+          businessEntityName7: "调理",
+          businessEntityName8: "其他",
+          completeRadio1: "环境",
+          completeRadio2: "电磁",
+          completeRadio3: "饮品",
+          completeRadio4: "电动",
+          completeRadio5: "奇厨",
+          completeRadio6: "烹饪",
+          completeRadio7: "调理",
+          completeRadio8: "其他",
+        };
 
-
-        
-
-        let innerTop = tableInner.rows.filter(v=>{
-          return v.marketChannel == '线上'
-        })
-        let innerBottom = tableInner.rows.filter(v=>{
-          return v.marketChannel == '线下'
-        })
+        let innerTop = tableInner.rows.filter((v) => {
+          return v.marketChannel == "线上";
+        });
+        let innerBottom = tableInner.rows.filter((v) => {
+          return v.marketChannel == "线下";
+        });
         this.data = innerTop.concat(innerBottom);
-        console.log('this.data',this.data)
-
-
-      }catch(err){
-        console.log(err)
+        console.log("this.data", this.data);
+      } catch (err) {
+        console.log(err);
       }
     },
     //中间折线图
     async getList() {
-      this.showLoading = true
+      this.showLoading = true;
       try {
-        const res = await API.getData("directTotalInnerChart","2022-01-01,2022-10-01,2022-01-01,2022-10-01");
+        const res = await API.getData(
+          "directTotalInnerChart",
+          "2022-01-01,2022-10-01,2022-01-01,2022-10-01"
+        );
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
-        let newArr = res.rows.filter((item)=>{
-        var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
-        var yue = timeArr[1];
-        var ri = timeArr[2];
-          if(item.directName == "事业部"){
+        let newArr = res.rows.filter((item) => {
+          var timeArr = item.orderDate
+            .replace(" ", ":")
+            .replace(/\:/g, "-")
+            .split("-");
+          var yue = timeArr[1];
+          var ri = timeArr[2];
+          if (item.directName == "事业部") {
             // obj.divisionArr.push(item)
-            this.divisionDate.push(yue+'-'+ri)
-            this.divisionList.push(item.totalCnyAmt)
-            this.divisionLine = item.saleAvgTaskQty
+            this.divisionDate.push(yue + "-" + ri);
+            this.divisionList.push(item.totalCnyAmt);
+            this.divisionLine = item.saleAvgTaskQty;
             this.myEcharts();
-          }else if(item.directName == "内销"){
-            this.innerDirectDate.push(yue+'-'+ri)
-            this.innerDirectList.push(item.totalCnyAmt)
-            this.innerDirectLine = item.saleAvgTaskQty
+          } else if (item.directName == "内销") {
+            this.innerDirectDate.push(yue + "-" + ri);
+            this.innerDirectList.push(item.totalCnyAmt);
+            this.innerDirectLine = item.saleAvgTaskQty;
             this.myEcharts2();
-          }else if(item.directName == "外销"){
-            this.outerDirectDate.push(yue+'-'+ri)
-            this.outerDirectList.push(item.totalCnyAmt)
-            this.outerDirectLine = item.saleAvgTaskQty
+          } else if (item.directName == "外销") {
+            this.outerDirectDate.push(yue + "-" + ri);
+            this.outerDirectList.push(item.totalCnyAmt);
+            this.outerDirectLine = item.saleAvgTaskQty;
             this.myEcharts3();
           }
-          this.showLoading = false
-        })
-         
+          this.showLoading = false;
+        });
       } catch (error) {
         console.log(error);
       }
     },
+
+
+
+  //三个仪表盘(左中)
+    async getdashboard() {
+      try {
+        const res = await API.getData("directTotalDashboard", "2022-03");
+        //内销汇总仪表盘左边&&中间
+        let panelDataList = res.rows;
+        this.progressData.ballNum = (
+          panelDataList[0].grossProfitRadio * 100
+        ).toFixed(1);
+        this.speedData.speedBar = (panelDataList[0].cnyAmt*100).toFixed(1)
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1)
+        this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(1)
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+        for (var i = 0; i < panelDataList.length; i++) {
+          if (panelDataList[i].directName == "内销") {
+            this.progressData.bar1 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
+            this.progressData.topGPM = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
+            this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(1)
+
+            this.speedData.bottomClose =  panelDataList[i].orgQtyRadio.toFixed(1)
+            this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
+
+          } else if (panelDataList[i].directName == "外销") {
+            this.progressData.bar2 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
+            this.progressData.bottomGPM = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
+             this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(1)
+             this.speedData.bottomClose1 =  panelDataList[i].orgQtyRadio.toFixed(1)
+            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    //三个仪表盘(右)
+    async queryCardSAB() {
+      try {
+        const res = await API.getData("directTotalDashboardSAB", "2022-03");
+        let RightSAB = res.rows;
+        for (var i = 0; i < RightSAB.length; i++) {
+          if(RightSAB[i].cooprLevel1 == "线上"){
+            this.sabData.bar1 = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            if(RightSAB[i].position == "S"){
+              this.sabData.topArr.s = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "A"){
+              this.sabData.topArr.a = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "B"){
+              this.sabData.topArr.b = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }
+          }else if(RightSAB[i].cooprLevel1 == "线下"){
+            this.sabData.bar2 = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+             if(RightSAB[i].position == "S"){
+              this.sabData.bottomArr.s = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "A"){
+              this.sabData.bottomArr.a = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "B"){
+              this.sabData.bottomArr.b = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+            }
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+
+
+
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -946,7 +1186,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-           data: this.divisionDate,
+          data: this.divisionDate,
           axisTick: {
             show: false,
           },
@@ -1001,11 +1241,11 @@ export default {
                 },
               },
             },
-             data: this.divisionList,
+            data: this.divisionList,
             markLine: {
               data: [
                 {
-                 yAxis: this.divisionLine,
+                  yAxis: this.divisionLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1064,7 +1304,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-         data: this.innerDirectDate,
+          data: this.innerDirectDate,
           axisTick: {
             show: false,
           },
@@ -1123,7 +1363,7 @@ export default {
             markLine: {
               data: [
                 {
-                   yAxis: this.innerDirectLine,
+                  yAxis: this.innerDirectLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1182,7 +1422,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-           data: this.outerDirectDate,
+          data: this.outerDirectDate,
           axisTick: {
             show: false,
           },
@@ -1237,7 +1477,7 @@ export default {
                 },
               },
             },
-             data: this.outerDirectList,
+            data: this.outerDirectList,
             markLine: {
               data: [
                 {
@@ -1269,10 +1509,11 @@ export default {
     },
   },
   mounted() {
-    this.progressData.bar1 = 20;
     this.getList();
     this.getCard();
-    this.getTable()
+    this.getTable();
+    this.getdashboard();
+    this.queryCardSAB();
   },
 };
 </script>
@@ -1304,9 +1545,11 @@ export default {
 
 .middle-box {
   width: 98%;
-  margin: 30px auto;
+  margin: 0 auto;
   border: 1px solid hsla(210, 86%, 39%, 0.66);
   position: relative;
+  margin-top: 30px;
+  margin-bottom: 14px;
 }
 
 .flex-font-middle {
@@ -1401,8 +1644,8 @@ export default {
   /* margin-left: 20px; */
 }
 
-.card-box:first-child{
-   margin-right: 20px;
+.card-box:first-child {
+  margin-right: 20px;
 }
 
 .card-font {
@@ -1559,7 +1802,6 @@ export default {
   z-index: 11;
   width: 186px;
 }
-
 
 /* 仪表盘样式 */
 .main {
@@ -1786,10 +2028,10 @@ export default {
   flex-direction: row;
   justify-content: space-around;
 }
-.flex-loading{
- position: relative;
- left: 50%;
- right: 50%;
+.flex-loading {
+  position: relative;
+  left: 50%;
+  right: 50%;
 }
 /* .cardList{
   flex-wrap: wrap;
@@ -1798,7 +2040,7 @@ export default {
 /* .card-middle-progress{
   width:33.33%;
 } */
-::v-deep .ant-table-fixed{
+::v-deep .ant-table-fixed {
   background: rgb(7 6 64);
 }
 </style> 
