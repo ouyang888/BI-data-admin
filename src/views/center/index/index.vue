@@ -839,17 +839,17 @@ export default {
         bottomTime1: 0,
       },
       sabData: {
-        bar1: 70,
-        bar2: 50,
-        bar3: 30,
-        bar4: 12,
-        bar5: 7,
+        bar1: 0,
+        bar2: 0,
+        bar3: 0,
+        bar4: 0,
+        bar5: 0,
         ballTitle: "事业部",
-        bottom: "线上",
-        top: "线下",
-        sabArr: { s: 32, a: 18, b: 21 },
-        topArr: { s: 32, a: 18, b: 21 },
-        bottomArr: { s: 32, a: 18, b: 21 },
+        bottom: "外销",
+        top: "内销",
+        sabArr: { s: 0, a: 0, b: 0 },
+        topArr: { s: 0, a: 0, b: 0 },
+        bottomArr: { s: 0, a: 0, b: 0 },
         // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
@@ -1121,23 +1121,32 @@ export default {
         const res = await API.getData("directTotalDashboardSAB", "2022-03");
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
-          if(RightSAB[i].cooprLevel1 == "线上"){
-            this.sabData.bar1 = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+          if(RightSAB[i].directName == "事业部"){
+            // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if(RightSAB[i].position == "S"){
-              this.sabData.topArr.s = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.sabArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "A"){
-              this.sabData.topArr.a = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.sabArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "B"){
-              this.sabData.topArr.b = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.sabArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
             }
-          }else if(RightSAB[i].cooprLevel1 == "线下"){
-            this.sabData.bar2 = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+          }else if(RightSAB[i].directName == "内销"){
+            this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
              if(RightSAB[i].position == "S"){
-              this.sabData.bottomArr.s = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.topArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "A"){
-              this.sabData.bottomArr.a = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.topArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "B"){
-              this.sabData.bottomArr.b = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.topArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
+            }
+          }else if(RightSAB[i].directName == "外销"){
+              this.sabData.bar2 = (RightSAB[i].positionRatio*100).toFixed(1)
+             if(RightSAB[i].position == "S"){
+              this.sabData.bottomArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "A"){
+              this.sabData.bottomArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "B"){
+              this.sabData.bottomArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
             }
           }
         }

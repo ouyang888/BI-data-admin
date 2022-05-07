@@ -3,7 +3,13 @@
     <!-- 头部仪表盘和卡片 -->
     <div class="top-flex"  >
       <!-- 仪表盘 -->
-      <div class="dashboard-box"></div>
+       <div class="dashboard-box">
+        <div class="panelList">
+          <ProgressPanel :data="progressData" />
+          <SpeedPanel :data="speedData" />
+          <SadPanel :data="sabData" />
+        </div>
+      </div>
       <!-- 右侧卡片 -->
       <div class="flex-card" >
         <div class="card-box">
@@ -736,8 +742,8 @@
         >
           <a slot="name" slot-scope="text">{{ text }}</a>
           <template slot="name" slot-scope="name">
-                       <a @click="gotoDomestic"> {{ name }}</a>
-                      </template>
+            <a @click="gotoDomestic"> {{ name }}</a>
+             </template>
         </a-table>
       </div>
       <div class="execl">
@@ -749,17 +755,24 @@
         >
           <a slot="name" slot-scope="text">{{ text }}</a>
           <template slot="name" slot-scope="name">
-                       <a @click="gotoDomestic"> {{ name }}</a>
-                      </template>
+            <a @click="gotoDomestic"> {{ name }}</a>
+            </template>
         </a-table>
       </div>
     </div>
   </div>
 </template>
 <script>
-// import echarts from "echarts";
+import API from "../../../service/api";
+import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
+import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
+import SadPanel from "@/views/center/panel/SadPanel.vue";
 export default {
-  name: "s",
+   components: {
+    ProgressPanel,
+    SpeedPanel,
+    SadPanel,
+  },
   data() {
     return {
       columns: [
@@ -842,15 +855,49 @@ export default {
           tags: ["cool", "teacher"],
         },
       ],
-      //  headInfo:[{
-      //    title:"套系",
-      //    responsibility:"100",
-
-         
-         
-
-
-      // }],
+  progressData: {
+        bar1: 0,
+        bar2: 0,
+        ballTitle: "内销",
+        bigBallTitle: "毛利率",
+        textLeft: "线上",
+        textRight: "线下",
+        titleTop: "线上",
+        titleBottom: "线下",
+        topGPM: 0,
+        bottomGPM: 0,
+        ballNum: 0,
+      },
+      speedData: {
+        bar: 0,
+        speedBar: 0,
+        ballTitle: "内销达成",
+        ballNum: 0,
+        ballLeftTitle: "线上",
+        ballRightTitle: "线下",
+        ballLeftNum: 0,
+        ballRightNum: 0,
+        bottomNum: 0,
+        bottomTitle1: "线上",
+        bottomClose: 0,
+        bottomTime: 0,
+        bottomTitle2: "线下",
+        bottomClose1: 0,
+        bottomTime1: 0,
+      },
+      sabData: {
+        bar1: 70,
+        bar2: 50,
+        ballTitle: "内销",
+        bottom: "线上",
+        top: "线下",
+        sabArr: { s: 0, a: 0, b: 0 },
+        topArr: { s: 0, a: 0, b: 0 },
+        bottomArr: { s: 0, a: 0, b: 0 },
+        // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+        // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+        // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
+      },
     };
   },
   methods: {
@@ -1926,36 +1973,38 @@ this.$router.push("/center/index")
   margin: 0 auto;
 }
 .dashboard-box {
-    margin-top: 23px;
-    font-size: 18px;
-    width: 50%;
+  width: 50%;
+  position: relative;
 }
 
 .card-box {
   background-image: url("../../../assets/img/smallCardBackground.svg");
   background-repeat: no-repeat;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   background-size: 100%;
 }
 .card-font {
-  font-size: 18px;
+  font-size: 16px;
   color: #fff;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 600; 
   cursor: pointer;
   color: #19ecff;
+  padding-top: 3px;
 }
 .flex-card {
   /* display: flex;
   margin-top: 20px; */
       display: flex;
-    margin-top: 20px;
+    margin-top: 10px;
     align-items: center;
-    /* justify-content: space-between; */
+    justify-content: inherit;
     /* width: 100%; */
     flex-wrap: wrap;
     /* width: 70%; */
-    padding: 10px;
+    /* padding: 10px; */
 }
 .flex-top-card {
   display: flex;
@@ -2012,9 +2061,7 @@ this.$router.push("/center/index")
   display: flex;
   justify-content: space-between;
 }
-.flex-finish {
-  /* display: flex; */
-}
+
 .finish-font {
   color: #fff;
   opacity: 0.6;
@@ -2136,5 +2183,12 @@ this.$router.push("/center/index")
   justify-content: space-between;
   width: 100%;
   flex-wrap: wrap;
+}
+.panelList {
+  height: 258px;
+  width: 760px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 </style> 
