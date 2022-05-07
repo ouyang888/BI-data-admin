@@ -677,6 +677,8 @@ export default {
   },
   data() {
     return {
+      dateTime:"2022-03",
+      dataTimeMany:"2022-01-01,2022-10-01,2022-01-01,2022-10-01",
       showLoading: false,
       divisionList: [],
       divisionDate: [],
@@ -689,103 +691,11 @@ export default {
       outerDirectList: [],
       outerDirectDate: [],
       outerDirectLine: "",
-      columns: [
-        {
-          title: "内销",
-          dataIndex: "marketChannel",
-          key: "marketChannel",
-          align: "center",
-          width: 100,
-        },
-        {
-          title: "渠道",
-          dataIndex: "marketCenter ",
-          key: "marketCenter ",
-          align: "center",
-          width: 100,
-        },
-        {
-          title: "责任人",
-          dataIndex: "manager ",
-          key: "manager ",
-          align: "center",
-          scopedSlots: {
-            customRender: "manager",
-          },
-          width: 100,
-        },
-        {
-          title: "环境",
-          dataIndex: "businessEntityName1",
-          key: "businessEntityName1",
-          align: "center",
-          width: 120,
-        },
-        {
-          title: "烹饪",
-          dataIndex: "businessEntityName6",
-          key: "businessEntityName6",
-          align: "center",
-        },
-        {
-          title: "电磁",
-          dataIndex: "businessEntityName2",
-          key: "businessEntityName2",
-          align: "center",
-        },
-        {
-          title: "调理",
-          dataIndex: "businessEntityName7",
-          key: "businessEntityName7",
-          align: "center",
-        },
-        {
-          title: "电动",
-          dataIndex: "businessEntityName4",
-          key: "businessEntityName4",
-          align: "center",
-        },
-        {
-          title: "饮品",
-          dataIndex: "businessEntityName3",
-          key: "businessEntityName3",
-          align: "center",
-        },
-        {
-          title: "总计",
-          dataIndex: "cnyAmt",
-          key: "cnyAmt",
-          align: "center",
-        },
-      ],
-      data: [
-        {
-          key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. ",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. ",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. ",
-          tags: ["cool", "teacher"],
-        },
-      ],
+     
       echartsLabel: [
         { class: "plan", text: "实际达成" },
         { class: "average", text: "日均线" },
       ],
-
       progressData: {
         bar1: 0,
         bar2: 0,
@@ -817,17 +727,17 @@ export default {
         bottomTime1: 0,
       },
       sabData: {
-        bar1: 70,
-        bar2: 50,
-        bar3: 30,
-        bar4: 12,
-        bar5: 7,
+        bar1: 0,
+        bar2: 0,
+        bar3: 0,
+        bar4: 0,
+        bar5: 0,
         ballTitle: "事业部",
-        bottom: "线上",
-        top: "线下",
-        sabArr: { s: 32, a: 18, b: 21 },
-        topArr: { s: 32, a: 18, b: 21 },
-        bottomArr: { s: 32, a: 18, b: 21 },
+        bottom: "外销",
+        top: "内销",
+        sabArr: { s: 0, a: 0, b: 0 },
+        topArr: { s: 0, a: 0, b: 0 },
+        bottomArr: { s: 0, a: 0, b: 0 },
         // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
@@ -1032,7 +942,7 @@ export default {
       try {
         const res = await API.getData(
           "directTotalInnerChart",
-          "2022-01-01,2022-10-01,2022-01-01,2022-10-01"
+          this.dataTimeMany
         );
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
         let newArr = res.rows.filter((item) => {
@@ -1071,7 +981,7 @@ export default {
   //三个仪表盘(左中)
     async getdashboard() {
       try {
-        const res = await API.getData("directTotalDashboard", "2022-03");
+        const res = await API.getData("directTotalDashboard", this.dateTime);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         this.progressData.ballNum = (
@@ -1086,10 +996,8 @@ export default {
             this.progressData.bar1 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
             this.progressData.topGPM = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
             this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(1)
-
             this.speedData.bottomClose =  panelDataList[i].orgQtyRadio.toFixed(1)
             this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
-
           } else if (panelDataList[i].directName == "外销") {
             this.progressData.bar2 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
             this.progressData.bottomGPM = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
@@ -1106,26 +1014,35 @@ export default {
     //三个仪表盘(右)
     async queryCardSAB() {
       try {
-        const res = await API.getData("directTotalDashboardSAB", "2022-03");
+        const res = await API.getData("directTotalDashboardSAB", this.dateTime);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
-          if(RightSAB[i].cooprLevel1 == "线上"){
-            this.sabData.bar1 = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+          if(RightSAB[i].directName == "事业部"){
+            // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if(RightSAB[i].position == "S"){
-              this.sabData.topArr.s = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.sabArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "A"){
-              this.sabData.topArr.a = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.sabArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "B"){
-              this.sabData.topArr.b = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.sabArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
             }
-          }else if(RightSAB[i].cooprLevel1 == "线下"){
-            this.sabData.bar2 = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+          }else if(RightSAB[i].directName == "内销"){
+            this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
              if(RightSAB[i].position == "S"){
-              this.sabData.bottomArr.s = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.topArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "A"){
-              this.sabData.bottomArr.a = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.topArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "B"){
-              this.sabData.bottomArr.b = (RightSAB[i].level1PositionRatio*100).toFixed(1)
+              this.sabData.topArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
+            }
+          }else if(RightSAB[i].directName == "外销"){
+              this.sabData.bar2 = (RightSAB[i].positionRatio*100).toFixed(1)
+             if(RightSAB[i].position == "S"){
+              this.sabData.bottomArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "A"){
+              this.sabData.bottomArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
+            }else if(RightSAB[i].position == "B"){
+              this.sabData.bottomArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
             }
           }
         }
@@ -1536,8 +1453,8 @@ export default {
   margin: 0 auto;
   border: 1px solid hsla(210, 86%, 39%, 0.66);
   position: relative;
-  margin-top: 30px;
-  margin-bottom: 14px;
+  margin-top: 25px;
+  /* margin-bottom: 14px; */
 }
 
 .flex-font-middle {
@@ -1553,7 +1470,7 @@ export default {
   color: #fff;
   font-weight: 600;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .flex-bottom {

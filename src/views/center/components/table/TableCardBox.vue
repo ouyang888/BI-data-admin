@@ -3015,7 +3015,7 @@ export default {
 </script>
 <style scoped>
 .table {
-  width: 1840px;
+  width: 98%;
   height: 330px;
   display: flex;
   justify-content: space-between;
