@@ -657,31 +657,7 @@
 
     <!-- 底部表格 -->
     <div class="flex-bottom">
-      <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-          :scroll="{ x: 'calc(700px + 50%)', y: 240 }"
-        >
-           <template slot="manager" slot-scope="manager">
-            {{ manager }}
-          </template>
-          <a slot="name" slot-scope="text">{{ text }}</a>
-        </a-table>
-      </div>
-      <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-          :scroll="{ x: 'calc(700px + 50%)', y: 240 }"
-        >
-          <a slot="name" slot-scope="text">{{ text }}</a>
-        </a-table>
-      </div>
+      <TableCardBox />
     </div>
   </div>
 </template>
@@ -690,12 +666,14 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
+import TableCardBox from '@/views/center/components/table/TableCardBox.vue';
 export default {
   name: "s",
   components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
+    TableCardBox
   },
   data() {
     return {

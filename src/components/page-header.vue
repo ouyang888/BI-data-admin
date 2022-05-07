@@ -6,7 +6,7 @@
         <div class="back">
           <a-icon type="left" style="color: #19ecff" />后退
         </div>
-        <div class="left-font">当前页面：销向汇总页</div>
+        <div class="left-font">当前页面：销向汇总页111</div>
       </div>
       <div class="flex-right">
         <div class="right-font">
@@ -58,12 +58,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
+<script>
+export default {
   name: "page-header",
 
-});
+};
 </script>
 <style lang="scss" scoped>
 .title {
