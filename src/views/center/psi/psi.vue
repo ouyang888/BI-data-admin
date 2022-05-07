@@ -6,7 +6,6 @@
         <!-- 上 -->
         <div class="card-box">
           <div class="card-font">事业部s</div>
-
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -68,6 +67,7 @@
                     justify-content: space-between;
                     width: 80%;
                     flex-wrap: wrap;
+                    min-width: 200px;
                   "
                 >
                   <div
@@ -179,6 +179,7 @@
                     justify-content: space-between;
                     width: 80%;
                     flex-wrap: wrap;
+                    min-width: 200px;
                   "
                 >
                   <div
@@ -428,8 +429,9 @@
             <div class="fang-color"></div>
           </div>
           <div class="flex-char">
+            
             <div>
-              <div class="middle-font">内销日达成趋势图</div>
+              <div class="middle-font">事业部年度销售规划及达成趋势图</div>
                <div class="legend">
             <template v-if="echartsLabel">
               <div class="item" v-for="(item,index) in echartsLabel" :key="index">
@@ -444,7 +446,10 @@
         </div>
         <!-- 底部表格 -->
         <div class="flex-bottom">
-          <div class="execl">
+             <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
+      :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" 
+      :titleHead="titleHead" style="transform: scale(0.98);"/>   
+          <!-- <div class="execl">
             <a-table
               :bordered="true"
               :columns="columns"
@@ -453,7 +458,7 @@
             >
               <a slot="name" slot-scope="text">{{ text }}</a>
             </a-table>
-          </div>
+          </div> -->
         </div>
         <!-- 底部表格 -->
         <!-- <div class="flex-bottom">
@@ -463,6 +468,10 @@
                       </a-table>
                   </div>
               </div> -->
+                  <!-- 底部表格 -->
+    <!-- <div class="flex-bottom">
+      <TableCardBox :leftData="tableInner" :rightData="tableOutter" :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" :titleHead="titleHead"/>
+    </div> -->
       </div>
 
       <!-- 整列中间 -->
@@ -855,13 +864,16 @@
           </div>
           <div class="flex-char">
             <div>
-              <div class="middle-font">线上日达成趋势图</div>
+              <div class="middle-font"> 事业部年度生产规划及达成趋势图</div>
               <div id="main2" class="echartsBox"></div>
             </div>
           </div>
         </div>
         <!-- 底部表格 -->
-        <div class="flex-bottom">
+           <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
+      :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" 
+      :titleHead="titleHead" style="transform: scale(0.98);"/>   
+        <!-- <div class="flex-bottom">
           <div class="execl">
             <a-table
               :bordered="true"
@@ -872,7 +884,7 @@
               <a slot="name" slot-scope="text">{{ text }}</a>
             </a-table>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- 整列右边 -->
       <div class="right-box">
@@ -1263,13 +1275,21 @@
           </div>
           <div class="flex-char">
             <div>
-              <div class="middle-font">线下日达成趋势图</div>
+              <div class="middle-font">事业部年库存生产规划及达成趋势图</div>
               <div id="main3" class="echartsBox"></div>
             </div>
           </div>
         </div>
+
         <!-- 底部表格 -->
-        <div class="flex-bottom">
+     
+      <div class="flex-bottom">
+      <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
+      :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" 
+      :titleHead="titleHead" style="transform: scale(0.98);"/>   
+       </div>
+        <!-- 底部表格3 -->
+        <!-- <div class="flex-bottom">
           <div class="execl">
             <a-table
               :bordered="true"
@@ -1280,16 +1300,20 @@
               <a slot="name" slot-scope="text">{{ text }}</a>
             </a-table>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 <script>
 import API from "../../../service/api";
+import TableCardBox from '@/views/center/components/table/TableBoxInfo.vue';
 // import echarts from "echarts";
 export default {
   name: "s",
+   components: {
+    TableCardBox
+  },
   data() {
     return {
       departmentInfo: [],
@@ -1312,6 +1336,11 @@ export default {
       outerDirectList:[],
       outerDirectDate:[],
       outerDirectLine:"",
+       // 底部表格
+      tableInner:[],
+      tableOutter:[],
+      rowSpanNumber1:6,
+      rowSpanNumber2:6,
       columns: [
         {
           title: "线上",
@@ -1453,6 +1482,42 @@ export default {
     
 
     },
+   // 底部table/
+    async getTable() {
+      try {
+        let tableInner = await API.getData(
+          "homeByDirectTotal",
+          "2022-03"
+        );
+        // let tableOutter = await API.getData(
+        //   "homeByDirectTotal",
+        //   "2022-03"
+        // );
+
+        // this.tableInner = tableInner.rows;
+        this.tableOutter = tableOutter.rows;
+        this.rowSpanNumber2 = this.tableOutter.length;
+
+        let innerTop = tableInner.rows.filter((v) => {
+          return v.marketChannel == "线上";
+        });
+        this.rowSpanNumber1 = innerTop.length;
+
+        let innerBottom = tableInner.rows.filter((v) => {
+          return v.marketChannel == "线下";
+        });
+        let innerTotal = tableInner.rows.filter((v) => {
+          return v.marketChannel == "底部合计";
+        });
+        this.tableInner = innerTop.concat(innerBottom,innerTotal);
+        console.log('this.tableInner',this.rowSpanNumber1,this.tableInner)
+
+
+        // console.log("this.data", this.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
      async getLine() {
       this.showLoading = true
       try {
@@ -1462,26 +1527,12 @@ export default {
         var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
         var yue = timeArr[1];
         var ri = timeArr[2];
-        console.log(yue);
-
-
-          if(item.directName == "事业部"){
+          // if(item.事业部S == "事业部S"){
             // obj.divisionArr.push(item)
             this.divisionDate.push(yue+'-'+ri)
             this.divisionList.push(item.totalCnyAmt)
-            this.divisionLine = item.saleAvgTaskQty
+            this.divisionLine = item.saleAvgTaskQty;
             this.myEcharts();
-          }else if(item.directName == "内销"){
-            this.innerDirectDate.push(yue+'-'+ri)
-            this.innerDirectList.push(item.totalCnyAmt)
-            this.innerDirectLine = item.saleAvgTaskQty
-            this.myEcharts2();
-          }else if(item.directName == "外销"){
-            this.outerDirectDate.push(yue+'-'+ri)
-            this.outerDirectList.push(item.totalCnyAmt)
-            this.outerDirectLine = item.saleAvgTaskQty
-            this.myEcharts3();
-          }
           this.showLoading = false
         })
          
@@ -1877,10 +1928,47 @@ export default {
       };
       myChart3.setOption(option);
     },
+        // 底部table/
+    // async getTable() {
+    //   try {
+    //     let tableInner = await API.getData(
+    //       "homeByDirectTotal",
+    //       "2022-03"
+    //     );
+    //     let tableOutter = await API.getData(
+    //       "homeByDirectTotal",
+    //       "2022-03"
+    //     );
+
+    //     // this.tableInner = tableInner.rows;
+    //     this.tableOutter = tableOutter.rows;
+    //     this.rowSpanNumber2 = this.tableOutter.length;
+
+    //     let innerTop = tableInner.rows.filter((v) => {
+    //       return v.marketChannel == "线上";
+    //     });
+    //     this.rowSpanNumber1 = innerTop.length;
+
+    //     let innerBottom = tableInner.rows.filter((v) => {
+    //       return v.marketChannel == "线下";
+    //     });
+    //     let innerTotal = tableInner.rows.filter((v) => {
+    //       return v.marketChannel == "底部合计";
+    //     });
+    //     this.tableInner = innerTop.concat(innerBottom,innerTotal);
+    //     console.log('this.tableInner',this.rowSpanNumber1,this.tableInner)
+
+
+    //     // console.log("this.data", this.data);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
   },
   mounted() {
     this.getList();
     this.getLine();
+    this.getTable();
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
@@ -2153,10 +2241,10 @@ margin-top: 20px;
     }
 
     .execl {
-        background: url("../../../assets/img/tableVBackround.svg");
-        width: 98.5%;
+        /* background: url("../../../assets/img/tableVBackround.svg"); */
+        /* width: 99%; */
         /* height: 368px; */
-        height: 27vh;
+        /* height: 27vh; */
         align-items: center;
         background-size: cover;
         background-color: rgba(2, 0, 77, 0.4);
@@ -2164,6 +2252,7 @@ margin-top: 20px;
         border: 2px solid #0d53b7;
         border-radius: 0 0 10px 10px;
         margin-left: 4px;
+        
 
     }
 
