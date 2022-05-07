@@ -385,7 +385,7 @@
           </div>
         </div>
         <div class="card-box">
-          <div class="card-font">线下</div>
+          <div class="card-font"  @click='offline()'>线下</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -881,6 +881,9 @@
           :pagination="false"
         >
           <a slot="name" slot-scope="text">{{ text }}</a>
+          <template slot="name" slot-scope="name">
+            <a @click="gotoDomestic"> {{ name }}</a>
+             </template>
         </a-table>
       </div>
       <div class="execl">
@@ -891,6 +894,9 @@
           :pagination="false"
         >
           <a slot="name" slot-scope="text">{{ text }}</a>
+          <template slot="name" slot-scope="name">
+            <a @click="gotoDomestic"> {{ name }}</a>
+          </template>
         </a-table>
       </div>
     </div>
@@ -908,12 +914,14 @@ export default {
           dataIndex: "name",
           key: "name",
           align: "center",
+           scopedSlots: { customRender: "name" },
         },
         {
           title: "责任人",
           dataIndex: "age",
           key: "age",
           align: "center",
+          
         },
         {
           title: "责任制",
@@ -984,6 +992,9 @@ export default {
     };
   },
   methods: {
+    gotoDomestic() {
+        this.$router.push("/center/index");
+      },
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -1937,10 +1948,29 @@ export default {
     online(){
         this.$router.push("/center/onlineSummary");
 
+    },
+    offline(){
+        this.$router.push("/center/offlineSummary");
+
     }
   },
+
+  // 接口数据  
+  // sellOutTopOnline  大区卡片
+  // async getList() {
+  //       this.showLoading = true;
+  //       try {
+  //         const res = await API.getData(
+  //           "sellOutTopOnline",
+  //           "2022-01-01,2022-10-01"
+  //         );
+
+  //       }
+
+  // },
+
   mounted() {
-    this.myEcharts();
+    this.myEcharts(); 
     this.myEcharts2();
     this.myEcharts3();
     this.myEcharts4();

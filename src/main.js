@@ -12,6 +12,10 @@ import * as echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 Vue.use(antd)
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
 Vue.component('page-header', pageHeader);
 // Vue.component('upload-picture', uploadPicture);
 // 注册

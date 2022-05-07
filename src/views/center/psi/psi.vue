@@ -41,7 +41,7 @@
                   <div class="card-big-num">
                     {{ Number(departmentInfo.cnyAmt).toFixed(0) }}亿
                   </div>
-                  <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center;">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
@@ -1886,288 +1886,323 @@ export default {
     this.myEcharts3();
   },
 };
-</script>
-<style scoped>
-.main-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 33;
-  /* padding: 10px 10px; */
-}
+</script><style scoped>
+    .main-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 33;
+        /* padding: 10px 10px; */
+    }
 
-/* 整列左边 */
-.left-box {
-  height: 89vh;
-  overflow: hidden;
-  /* width: 605px; */
-  flex: 1;
-  margin-top: 20px;
-  margin-left: 20px;
-  margin-right: 10px;
-  box-sizing: border-box;
-  background-image: url("../../../assets/img/backgrounCard.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+    /* 整列左边 */
+    .left-box {
+        height: 89vh;
+        overflow: hidden;
+        /* width: 605px; */
+        flex: 1;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 10px;
+        box-sizing: border-box;
+        background-image: url("../../../assets/img/backgrounCard.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
-/* flex-card */
+    /* flex-card */
 
-/* 整列中间 */
-.center-box {
-  height: 89vh;
-  overflow: hidden;
-  /* width: 605px; */
-  margin-top: 20px;
-  margin-left: 8px;
-  margin-right: 8px;
-  box-sizing: border-box;
-  flex: 1;
-  background-image: url("../../../assets/img/backgrounCard.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
-/* 右边 */
-.right-box {
-  height: 89vh;
-  overflow: hidden;
-  /* width: 605px; */
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-right: 20px;
-  box-sizing: border-box;
-  flex: 1;
-  background-image: url("../../../assets/img/backgrounCard.svg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
-/*上 card-box */
-.card-box {
-  height: 248px;
-  /* width: 605px; */
-  width: 100%;
-  background-image: url("../../../assets/img/bigCardBackground.svg");
-  background-repeat: no-repeat;
-  /* margin-left: 20px; */
-  background-size: cover;
-}
-.card-font {
-  font-size: 16px;
-  color: #fff;
-  text-align: center;
-  font-weight: 600;
-  cursor: pointer;
-  color: #19ecff;
-}
-/* .flex-card {
+
+    /* 整列中间 */
+    .center-box {
+        height: 89vh;
+        overflow: hidden;
+        /* width: 605px; */
+        margin-top: 20px;
+        margin-left: 8px;
+        margin-right: 8px;
+        box-sizing: border-box;
+        flex: 1;
+        background-image: url("../../../assets/img/backgrounCard.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    /* 右边 */
+    .right-box {
+        height: 89vh;
+        overflow: hidden;
+        /* width: 605px; */
+        margin-top: 20px;
+        margin-left: 10px;
+        margin-right: 20px;
+        box-sizing: border-box;
+        flex: 1;
+        background-image: url("../../../assets/img/backgrounCard.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    /*上 card-box */
+    .card-box {
+        height: 248px;
+        /* width: 605px; */
+        width: 100%;
+        background-image: url("../../../assets/img/bigCardBackground.svg");
+        background-repeat: no-repeat;
+        /* margin-left: 20px; */
+        background-size: cover;
+    }
+
+    .card-font {
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+        font-weight: 600;
+        cursor: pointer;
+        color: #19ecff;
+    }
+
+    /* .flex-card {
 display: flex;
 margin-top: 20px;
 } */
-.flex-top-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.top-left-font {
-  font-size: 14px;
-  color: #fff;
-  margin-right: 20px;
-}
-.card-border-box {
-  margin: 14px;
-  border: 1px solid rgba(13, 83, 183, 0.7);
-  position: relative;
-}
-.line {
-  height: 10px;
-  border-left: 2px solid rgb(102, 255, 255);
-  border-right: 2px solid rgb(102, 255, 255);
-}
-.line1 {
-  border-top: 2px solid rgb(102, 255, 255);
-  width: 10px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.line2 {
-  border-top: 2px solid rgb(102, 255, 255);
-  width: 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.line3 {
-  border-top: 2px solid rgb(102, 255, 255);
-  width: 10px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-.line4 {
-  border-top: 2px solid rgb(102, 255, 255);
-  width: 10px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.left-right-box {
-  display: flex;
-  justify-content: space-between;
-}
-.flex-finish {
-  display: flex;
-}
-.finish-font {
-  color: #fff;
-  opacity: 0.6;
-  font-size: 12px;
-  margin-right: 4px;
-}
-.finish-font span {
-  color: #66ffff;
-  margin-left: 2px;
-}
-.mt-border {
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  width: 1px;
-}
-.card-big-num {
-  color: #66ffff;
-  font-size: 28px;
-}
-.progress {
-  width: 120px;
-  height: 10px;
-}
-.progress:last-child {
-  margin-bottom: 12px;
-}
-.progress-middle {
-  width: 34px;
-  height: 10px;
-}
-.progress-middle:last-child {
-  margin-bottom: 12px;
-}
-::v-deep .ant-progress-bg {
-  height: 4px !important;
-  border-radius: 200px !important;
-}
-.card-middle-progress {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.flex-bottoms {
-  display: flex;
-  align-items: center;
-  color: #a0a3c0;
-  font-size: 12px;
-}
-.light-blue {
-  color: #66ffff;
-  opacity: 1;
-}
-::v-deep .ant-table-bordered .ant-table-body > table {
-  border: none;
-}
+    .flex-top-card {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
 
-/* 中 */
-.flex-char {
-  width: 100%;
-  margin: 20px auto;
-  /* margin-bottom: 20px; */
-}
-.echartsBox {
-  width: 100%;
-  height: 24vh;
-}
+    .top-left-font {
+        font-size: 14px;
+        color: #fff;
+        margin-right: 20px;
+    }
 
-.fang-color {
-  width: 10px;
-  height: 10px;
-  /* background-color: hsla(188, 100%, 50%, 1); */
-}
-.middle-box {
-  width: 100%;
-  /* margin: 30px auto; */
-  /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
-}
-.flex-font-middle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  color: #fff;
-}
-.middle-font {
-  font-size: 18px;
-  color: #fff;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 30px;
-}
+    .card-border-box {
+        margin: 14px;
+        border: 1px solid rgba(13, 83, 183, 0.7);
+        position: relative;
+    }
 
-.flex-bottom {
-  width: 100%;
-  margin: 0 auto;
-  /* padding-bottom: 20px; */
-}
-.execl {
-  background: url("../../../assets/img/tableVBackround.svg");
-  width: 98.5%;
-  /* height: 368px; */
-  height: 27vh;
-  align-items: center;
-  background-size: cover;
-  background-color: rgba(2, 0, 77, 0.4);
-  box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
-  border: 2px solid #0d53b7;
-  border-radius: 0 0 10px 10px;
-  margin-left: 4px;
-}
+    .line {
+        height: 10px;
+        border-left: 2px solid rgb(102, 255, 255);
+        border-right: 2px solid rgb(102, 255, 255);
+    }
 
-::v-deep .ant-table-thead > tr > th {
-  background: rgb(4, 19, 112);
-  border-bottom: 1px solid rgb(55, 56, 112);
-  border-right: 1px solid rgb(55, 56, 112);
-  padding: 0;
-  font-family: "Microsoft YaHei";
-  font-size: 12px;
-}
-::v-deep .ant-table-thead > tr > th .ant-table-header-column {
-  color: #fff;
-  font-size: 12px;
-  padding: 0;
-}
-::v-deep .ant-table-bordered .ant-table-tbody > tr > td {
-  border: 1px solid rgb(55, 56, 112);
-  color: #fff;
-  padding: 0;
-  line-height: 26px;
-  font-family: "Microsoft YaHei";
-  font-size: 12px;
-  line-height: 40px;
-}
-::v-deep
-  .ant-table-tbody
-  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
-  > td {
-  background: transparent;
-}
+    .line1 {
+        border-top: 2px solid rgb(102, 255, 255);
+        width: 10px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 
-::v-deep .ant-spin-nested-loading {
-  margin: 14px;
-}
-::v-deep .ant-table-thead > tr:first-child > th:first-child {
-  background: linear-gradient(
-    to right,
-    rgb(80, 192, 255),
-    rgb(90, 255, 163),
-    rgb(102, 255, 255)
-  );
-}
+    .line2 {
+        border-top: 2px solid rgb(102, 255, 255);
+        width: 10px;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .line3 {
+        border-top: 2px solid rgb(102, 255, 255);
+        width: 10px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .line4 {
+        border-top: 2px solid rgb(102, 255, 255);
+        width: 10px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+    .left-right-box {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .flex-finish {
+        display: flex;
+    }
+
+    .finish-font {
+        color: #fff;
+        opacity: 0.6;
+        font-size: 12px;
+        margin-right: 4px;
+    }
+
+    .finish-font span {
+        color: #66ffff;
+        margin-left: 2px;
+    }
+
+    .mt-border {
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        width: 1px;
+    }
+
+    .card-big-num {
+        color: #66ffff;
+        font-size: 28px;
+        margin-right: 15px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .progress {
+        width: 120px;
+        height: 10px;
+    }
+
+    .progress:last-child {
+        margin-bottom: 12px;
+    }
+
+    .progress-middle {
+        width: 34px;
+        height: 10px;
+    }
+
+    .progress-middle:last-child {
+        margin-bottom: 12px;
+    }
+
+    ::v-deep .ant-progress-bg {
+        height: 4px !important;
+        border-radius: 200px !important;
+    }
+
+    .card-middle-progress {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .flex-bottoms {
+        display: flex;
+        align-items: center;
+        color: #a0a3c0;
+        font-size: 12px;
+    }
+
+    .light-blue {
+        color: #66ffff;
+        opacity: 1;
+    }
+
+    ::v-deep .ant-table-bordered .ant-table-body>table {
+        border: none;
+    }
+
+    /* 中 */
+    .flex-char {
+        width: 100%;
+        margin: 20px auto;
+        /* margin-bottom: 20px; */
+    }
+
+    .echartsBox {
+        width: 100%;
+        height: 24vh;
+    }
+
+    .fang-color {
+        width: 10px;
+        height: 10px;
+        /* background-color: hsla(188, 100%, 50%, 1); */
+    }
+
+    .middle-box {
+        width: 100%;
+        /* margin: 30px auto; */
+        /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
+    }
+
+    .flex-font-middle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        color: #fff;
+    }
+
+    .middle-font {
+        font-size: 18px;
+        color: #fff;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+
+    .flex-bottom {
+        width: 100%;
+        margin: 0 auto;
+        /* padding-bottom: 20px; */
+    }
+
+    .execl {
+        background: url("../../../assets/img/tableVBackround.svg");
+        width: 98.5%;
+        /* height: 368px; */
+        height: 27vh;
+        align-items: center;
+        background-size: cover;
+        background-color: rgba(2, 0, 77, 0.4);
+        box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
+        border: 2px solid #0d53b7;
+        border-radius: 0 0 10px 10px;
+        margin-left: 4px;
+
+    }
+
+    ::v-deep .ant-table-thead>tr>th {
+        background: rgb(4, 19, 112);
+        border-bottom: 1px solid rgb(55, 56, 112);
+        border-right: 1px solid rgb(55, 56, 112);
+        padding: 0;
+        font-family: 'Microsoft YaHei';
+        font-size: 12px;
+    }
+
+    ::v-deep .ant-table-thead>tr>th .ant-table-header-column {
+        color: #fff;
+        font-size: 12px;
+        padding: 0;
+
+    }
+
+    ::v-deep .ant-table-bordered .ant-table-tbody>tr>td {
+        border: 1px solid rgb(55, 56, 112);
+        color: #fff;
+        padding: 0;
+        line-height: 26px;
+        font-family: 'Microsoft YaHei';
+        font-size: 12px;
+        line-height: 40px;
+    }
+
+    ::v-deep .ant-table-tbody>tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)>td {
+        background: transparent;
+    }
+
+    ::v-deep .ant-spin-nested-loading {
+        margin: 14px;
+    }
+
+    ::v-deep .ant-table-thead>tr:first-child>th:first-child {
+        background: linear-gradient(to right, rgb(80, 192, 255), rgb(90, 255, 163), rgb(102, 255, 255));
+
+    }
 </style>
