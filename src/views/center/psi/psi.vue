@@ -13,7 +13,7 @@
             <div class="line3"></div>
             <div class="line4"></div>
             <div class="left-right-box">
-              <div style="flex: 1; padding: 10px" v-if="sale === '内销'">
+              <div class="centerInfo" v-if="sale === '内销'">
                 <div class="flex-top-card">
                   <div class="top-left-font">{{ sale }}达成</div>
                   <div class="flex-finish">
@@ -40,7 +40,9 @@
                   <div class="card-big-num">
                     {{ Number(departmentInfo.cnyAmt).toFixed(0) }}亿
                   </div>
-                  <div style="display: flex; align-items: center;">
+                  <div style=" display: flex;
+            align-items: center;
+         ">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
@@ -61,14 +63,13 @@
                   </div>
                 </div>
                 <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    width: 80%;
-                    flex-wrap: wrap;
-                    min-width: 200px;
-                  "
+                clasee="wrapInfo" style=" display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            flex-wrap: wrap;
+            min-width: 200px;"
+                 
                 >
                   <div
                     class="card-middle-progress"
@@ -125,7 +126,7 @@
                 </div>
               </div>
               <div class="mt-border"></div>
-              <div style="flex: 1; padding: 10px" >
+              <div class="centerInfo"  >
                 <div class="flex-top-card">
                   <div class="top-left-font">{{ sales }}达成</div>
                   <div class="flex-finish">
@@ -173,21 +174,21 @@
                   </div>
                 </div>
                 <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    width: 80%;
-                    flex-wrap: wrap;
-                    min-width: 200px;
-                  "
+                class="warpInfo"
+              style=" display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            flex-wrap: wrap;
+            min-width: 200px;"
+                
                 >
                   <div
                     class="card-middle-progress"
                     v-for="(item, index) in processInfo"
                     :key="index"
                   >
-                    <div style="display: flex; align-items: center">
+                    <div style="display: flex; align-items: center;">
                       <div class="finish-font">
                         {{ item.businessEntityName }}
                       </div>
@@ -446,9 +447,10 @@
         </div>
         <!-- 底部表格 -->
         <div class="flex-bottom">
-             <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
+           <TableCardBox />   
+             <!-- <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
       :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" 
-      :titleHead="titleHead" style="transform: scale(0.98);"/>   
+      :titleHead="titleHead" style="transform: scale(0.98);"/>    -->
           <!-- <div class="execl">
             <a-table
               :bordered="true"
@@ -486,7 +488,7 @@
             <div class="line3"></div>
             <div class="line4"></div>
             <div class="left-right-box">
-              <div style="margin-left: 14px">
+              <div class="centerInfo" >
                 <div class="flex-top-card">
                   <div class="top-left-font">线上达成</div>
                   <div class="flex-finish">
@@ -521,10 +523,13 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    width: 90%;
+                    flex-wrap: wrap;
+                    min-width: 200px;
                   "
                 >
                   <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
+                    <div style="display: flex; align-items: center ;">
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
@@ -545,7 +550,8 @@
                     </div>
                   </div>
                   <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
+                    <div style="display: flex; align-items: center;  
+                  ">
                       <div class="finish-font">进度</div>
                       <div>
                         <div class="progress-middle">
@@ -592,6 +598,10 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    justify-content: space-between;
+                    width: 90%;
+                    flex-wrap: wrap;
+                    min-width: 200px;
                   "
                 >
                   <div class="card-middle-progress">
@@ -669,7 +679,7 @@
                 </div>
               </div>
               <div class="mt-border"></div>
-              <div style="margin-right: 14px">
+              <div class="centerInfo" >
                 <div class="flex-top-card">
                   <div class="top-left-font">线下达成</div>
                   <div class="flex-finish">
@@ -679,7 +689,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-                  <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center;">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
@@ -704,6 +714,10 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                       width: 90%;
+                    flex-wrap: wrap;
+                    min-width: 200px;
+
                   "
                 >
                   <div class="card-middle-progress">
@@ -775,6 +789,10 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+               
+                    width: 90%;
+                    flex-wrap: wrap;
+                    min-width: 200px;
                   "
                 >
                   <div class="card-middle-progress">
@@ -870,9 +888,10 @@
           </div>
         </div>
         <!-- 底部表格 -->
-           <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
+           <!-- <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
       :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" 
-      :titleHead="titleHead" style="transform: scale(0.98);"/>   
+      :titleHead="titleHead" style="transform: scale(0.98);"/>    -->
+           <TableCardBox  />   
         <!-- <div class="flex-bottom">
           <div class="execl">
             <a-table
@@ -898,7 +917,7 @@
             <div class="line3"></div>
             <div class="line4"></div>
             <div class="left-right-box">
-              <div style="margin-left: 14px">
+              <div class="centerInfo" >
                 <div class="flex-top-card">
                   <div class="top-left-font">线上达成</div>
                   <div class="flex-finish">
@@ -933,6 +952,10 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                    width: 90%;
+                    flex-wrap: wrap;
+                    min-width: 200px;
+                    
                   "
                 >
                   <div class="card-middle-progress">
@@ -1004,6 +1027,9 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                      width: 90%;
+                    flex-wrap: wrap;
+                    min-width: 200px;
                   "
                 >
                   <div class="card-middle-progress">
@@ -1081,7 +1107,7 @@
                 </div>
               </div>
               <div class="mt-border"></div>
-              <div style="margin-right: 14px">
+              <div class="centerInfo">
                 <div class="flex-top-card">
                   <div class="top-left-font">线下达成</div>
                   <div class="flex-finish">
@@ -1116,6 +1142,9 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                      width: 90%;
+                    flex-wrap: wrap;
+                    min-width: 200px;
                   "
                 >
                   <div class="card-middle-progress">
@@ -1187,6 +1216,9 @@
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
+                      width: 90%;
+                    flex-wrap: wrap;
+                    min-width: 200px;
                   "
                 >
                   <div class="card-middle-progress">
@@ -1284,9 +1316,10 @@
         <!-- 底部表格 -->
      
       <div class="flex-bottom">
-      <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
+      <!-- <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
       :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" 
-      :titleHead="titleHead" style="transform: scale(0.98);"/>   
+      :titleHead="titleHead" style="transform: scale(0.98);"/>    -->
+         <TableCardBox />   
        </div>
         <!-- 底部表格3 -->
         <!-- <div class="flex-bottom">
@@ -1307,7 +1340,7 @@
 </template>
 <script>
 import API from "../../../service/api";
-import TableCardBox from '@/views/center/components/table/TableBoxInfo.vue';
+import TableCardBox from '@/views/center/components/table/ColumnTable.vue';
 // import echarts from "echarts";
 export default {
   name: "s",
@@ -1975,6 +2008,7 @@ export default {
   },
 };
 </script><style scoped>
+       
     .main-box {
         display: flex;
         justify-content: space-between;
@@ -2111,6 +2145,19 @@ margin-top: 20px;
         position: absolute;
         bottom: 0;
         right: 0;
+    }
+    .centerInfo{
+      flex: 1;padding-top: 10px;padding-left: 40px;
+       
+       
+    }
+    .wrapInfo{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 80%;
+            flex-wrap: wrap;
+            min-width: 200px;
     }
 
     .left-right-box {
