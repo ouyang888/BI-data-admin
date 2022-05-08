@@ -976,7 +976,7 @@ export default {
     //三个仪表盘(左中)
     async getdashboard() {
       try {
-        const res = await API.getData("directTotalDashboard", y + "-" + m);
+        const res = await API.getData("directTotalDashboard", this.dateTime);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         this.progressData.ballNum = (
