@@ -75,6 +75,7 @@ export default {
       // directName: computed(() => Store.state.tableOneHeading),
       // directName2: computed(() => Store.state.tableTwoHeading),
       cooprMode: "内销",
+        cooprMode1: "外销",
       directName: "产司",
       directName2: "合计",
       setTrueOrFalse: true,

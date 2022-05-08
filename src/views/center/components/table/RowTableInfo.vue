@@ -1,8 +1,10 @@
 <template>
   <div >
-    <el-table border :data="mesInfo" :span-method="objectSpanMethod"
+    <!-- {{mesInfo}} -->
+    <el-table  :data="mesInfo" :span-method="objectSpanMethod"
       :cell-style="{ padding: '0px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" >
+
       <el-table-column prop="marketChannel" align="center" :label="directName">
         <template v-slot="scope">
             <div class="nameColor" @click="handleClick">
@@ -13,20 +15,39 @@
       <el-table-column prop="marketCenter" align="center" :label="cooprMode" v-if="setTrueOrFalse">
         <template v-slot="scope">
             <div class="nameColor" @click="handleClick">
-              {{ scope.row.cooprMode }}
+              {{ scope.row.businessEntityName1 }}
             </div>
           </template>
       
       </el-table-column>
-      <el-table-column prop="manager" align="center" label="外销">
+      <el-table-column prop="saleVolume1" align="center" label="外销">
         <!-- <div class="nameColor" @click="handleClick">{{张茉欧}}</div> -->
         <template v-slot="scope">
             <div class="nameColor" @click="handleClick">
-              {{ scope.row.manager }}
+            {{scope.row.saleVolume1}}
+              <!-- <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
+                class="precentCompentes" />
+              <Progress :rate="scope.row.saleVolume1*100" :color="'#66FFFF'" class="precentCompentes" />
+           -->
             </div>
           </template>
       </el-table-column>
-      <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center">
+          <!-- <el-table-column prop="saleVolume1" align="center" label="总计">
+
+        <template v-slot="scope">
+            <div class="nameColor" @click="handleClick">
+    
+            <div style="margin-top: -15px"> 
+             {{scope.row.saleTaskAmt}}<div style="width: 30px"></div>
+              <Progress :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
+                class="precentCompentes" />
+              <Progress :rate="scope.row.saleVolume1*100" :color="'#66FFFF'" class="precentCompentes" />
+            </div>
+            </div>
+          </template>
+      </el-table-column> -->
+   
+      <!-- <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center">
         <template v-slot="scope">
           <div class="precent">
             <div style="width: 30px">{{ scope.row[i].toFixed(0)}}</div>
@@ -37,27 +58,24 @@
             </div>
           </div>
         </template>
-      </el-table-column>
-      <el-table-column prop="cnyAmt" label="总计" align="center">
+      </el-table-column>  -->
+
+
+      <el-table-column prop="businessEntityName2" label="总计44" align="center">
         <template v-slot="scope">
          <div class="precent">
-            <div style="width: 30px">2342</div>
+            <div style="width: 30px">{{scope.row.saleTaskAmt}}</div>
             <div style="margin-top: 5px">
-              <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
+              <Progress style="margin-bottom: 3px" :rate="scope.row.businessEntityName2*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
-              <Progress :rate="scope.row.saleVolumeAll*100" :color="'#66FFFF'" class="precentCompentes" />
+              <Progress :rate="scope.row.businessEntityName2*100" :color="'#66FFFF'" class="precentCompentes" />
             </div>
           </div>
-          <!-- <div class="precent">
-            <div style="width: 30px">{{ scope.row.cnyAmt.toFixed(0) }}</div>
-            <div style="margin-top: 5px">
-              <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
-                class="precentCompentes" />
-              <Progress :rate="scope.row.saleVolumeAll*100" :color="'#66FFFF'" class="precentCompentes" />
-            </div>
-          </div> -->
         </template>
       </el-table-column>
+
+
+
     </el-table>
     
   </div>
@@ -121,19 +139,19 @@
         //     return [1, 3];
         //   }
         // }
-        if (columnIndex === 0) {
-          if (rowIndex % this.rowSpanNumber === 0) {
-            return {
-              rowspan: this.rowSpanNumber,
-              colspan: 1,
-            };
-          } else {
-            return {
-              rowspan: 0,
-              colspan: 0,
-            };
-          }
-        }
+        // if (columnIndex === 0) {
+        //   if (rowIndex % this.rowSpanNumber === 0) {
+        //     return {
+        //       rowspan: 0,
+        //       colspan: 0,
+        //     };
+        //   } else {
+        //     return {
+        //       rowspan: 0,
+        //       colspan: 0,
+        //     };
+        //   }
+        // }
       },
       rowStyle({ row, rowIndex }) {
         return {
