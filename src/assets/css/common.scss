@@ -261,3 +261,9 @@ color: #1890FF;
   position: relative;
   z-index: 11;
 }
+.noData{
+  position: absolute;
+  left:calc(50% - 20px);
+  top:calc(50%);
+  color:#fff;
+}

@@ -213,7 +213,7 @@ export default{
 </script>
 <style scoped>
 .execl {
-  width: 905px;
+  width:calc(50% - 15px);
   height: 324px;
   background-color: rgba(2, 0, 77, 0.4);
   box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
@@ -223,7 +223,7 @@ export default{
 }
 
 .execl-box {
-  width: 864px;
+  /* width: 864px; */
   height: 287px;
   margin: 5px auto 0;
   border-color: #1e1d51;
@@ -286,5 +286,8 @@ body .el-table::before {
   .el-table__fixed-body-wrapper {
     height: calc(100% - 43px) !important;
   }
+}
+::v-deep .el-table .el-table__cell.gutter{
+  background:#041370;
 }
 </style>

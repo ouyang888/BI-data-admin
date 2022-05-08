@@ -120,15 +120,88 @@ export default {
     titleNav() {
       return this.$route.meta.title;
     },
+    path(){
+      return this.$route.name;
+    }
   },
   watch: {
     $route: function (val) {
       if (val.meta.preMenuUrl || this.$route.path) {
         this.searchKeys = [this.$route.path, val.meta.preMenuUrl || ""];
+        console.log('路由',val.name)
+        this.getPageName(val.name)
       }
+  
     },
   },
   methods: {
+    getPageName(path){
+      switch (path) {
+        case 'psi':
+          this.title = '总裁PSI页'
+          break;
+        case 'index':
+          this.title = '销向汇总页'
+
+          break;
+        case 'department':
+          this.title = '产司汇总页'
+
+          break;
+    
+        case 'productCo':
+          this.title = '品类汇总'
+
+          break;
+        case 'domestic':
+        this.title = '内销汇总'
+
+          break;
+        case 'export':
+          this.title = '外销汇总'
+          break;
+            case 'onlineSummary':
+              this.title = '内销线上汇总'
+              break;
+
+              case 'catSeries':
+                this.title = '合作模式二负责人'
+               break;
+
+         case 'modeCo':
+          this.title = '合作模式三负责人'
+         break;
+        case 'onlineModeCo':
+          this.title = '合作模式四负责人'
+         break;
+
+         
+          
+          
+         case 'offlineSummary':
+            this.title = '内销线下汇总'
+            break;
+
+         case 'offlineCatSeries':
+            this.title = '合作模式二负责人'
+            break;
+         case 'offlineCode':
+            this.title = '合作模式三负责人'
+            break;
+          /*外销*/  
+            case 'exprotAreaAll':
+          this.title = '外销大区汇总页'
+          break;
+
+            case 'exprotProductCo':
+          this.title = '外销大区产司汇总页'
+          break;
+
+
+         default:
+          this.title = '销向汇总页'
+      }
+    },
     goBack() {
       this.$router.go(-1);
     },

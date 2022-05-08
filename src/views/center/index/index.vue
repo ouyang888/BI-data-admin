@@ -14,7 +14,9 @@
       <div class="flex-card">
         <div class="card-box">
           <div class="card-font" @click="gotoDomestic">内销</div>
+        
           <a-spin class="cardLoad" size="large" v-if="showLoadingLeft" />
+          <div class="noData" v-else-if="innerLeft && innerLeft.length<1">暂无数据</div>
           <div class="card-border-box" v-else>
             <div class="line"></div>
             <div class="line1"></div>
@@ -303,6 +305,7 @@
         <div class="card-box">
           <div class="card-font" @click="gotoExport">外销</div>
           <a-spin class="cardLoad" size="large" v-if="showLoadingRight" />
+          <div class="noData" v-else-if="outterLeft && outterLeft.length<1">暂无数据</div>
           <div class="card-border-box" v-else>
             <div class="line"></div>
             <div class="line1"></div>
@@ -825,65 +828,19 @@ export default {
         const innersab = await API.getData("directTotalInnerSAB", params);
         const outtersab = await API.getData("directTotalOutterSAB", params);
         console.log("inner,", outter);
-        if(inner.rows.length>0){
           this.showLoadingLeft = false;
-        }
-        
-        if(outter.rows.length>0){
           this.showLoadingRight = false;
-        }
 
-        inner.rows.forEach((v) => {
+        if(inner.rows.length<1){
+          this.innerLeft = [];
+        } else{
+
+          inner.rows.forEach((v) => {
           v.dateRadio = v.dateRadio * 100;
           v.onLineRadio = v.onLineRadio * 100;
         });
-        outter.rows.forEach((v) => {
-          v.dateRadio = v.dateRadio * 100;
-          v.onLineRadio = v.onLineRadio * 100;
-        });
 
-        this.outterLeft = outter.rows.filter((v) => {
-          return v.obmOem == "OBM";
-        });
-        this.outterLeftInfo = this.outterLeft[0];
-        if (this.outterLeftInfo.onLineRadio) {
-          this.outterLeftInfo.onLineRadio =
-            this.outterLeftInfo.onLineRadio.toFixed(0);
-        }
-        if (this.outterLeftInfo.onLineProfitRadio) {
-          this.outterLeftInfo.onLineProfitRadio = (
-            this.outterLeftInfo.onLineProfitRadio * 100
-          ).toFixed(2);
-        }
-        if (this.outterLeftInfo.cnyAmt) {
-          this.outterLeftInfo.cnyAmt = this.outterLeftInfo.cnyAmt.toFixed(0);
-        }
-        if (this.outterLeftInfo.saleTaskAmt) {
-          this.outterLeftInfo.saleTaskAmt =
-            this.outterLeftInfo.saleTaskAmt.toFixed(0);
-        }
-
-        this.outterRight = outter.rows.filter((v) => {
-          return v.obmOem == "OEM";
-        });
-        this.outterRightInfo = this.outterRight[0];
-        if (this.outterRightInfo.onLineRadio) {
-          this.outterRightInfo.onLineRadio =
-            this.outterRightInfo.onLineRadio.toFixed(0);
-        }
-        if (this.outterRightInfo.onLineProfitRadio) {
-          this.outterRightInfo.onLineProfitRadio = (
-            this.outterRightInfo.onLineProfitRadio * 100
-          ).toFixed(2);
-        }
-        if (this.outterRightInfo.cnyAmt) {
-          this.outterRightInfo.cnyAmt = this.outterRightInfo.cnyAmt.toFixed(0);
-        }
-        if (this.outterRightInfo.saleTaskAmt) {
-          this.outterRightInfo.saleTaskAmt =
-            this.outterRightInfo.saleTaskAmt.toFixed(0);
-        }
-
+        
         this.innerLeft = inner.rows.filter((v) => {
           return v.cooprLevel1 == "线上";
         });
@@ -926,16 +883,67 @@ export default {
           this.innerRightInfo.saleTaskAmt =
             this.innerRightInfo.saleTaskAmt.toFixed(0);
         }
-        console.log(
-          "this.innerRightInfo",
-          this.innerRightInfo,
-          this.innerRight
-        );
+
+        }
+        if(outter.rows.length<1){
+          this.outterLeft = [];
+   
+        }else{
+
+          outter.rows.forEach((v) => {
+            v.dateRadio = v.dateRadio * 100;
+            v.onLineRadio = v.onLineRadio * 100;
+          });
+  
+          this.outterLeft = outter.rows.filter((v) => {
+            return v.obmOem == "OBM";
+          });
+          this.outterLeftInfo = this.outterLeft[0];
+          if (this.outterLeftInfo.onLineRadio) {
+            this.outterLeftInfo.onLineRadio =
+              this.outterLeftInfo.onLineRadio.toFixed(0);
+          }
+          if (this.outterLeftInfo.onLineProfitRadio) {
+            this.outterLeftInfo.onLineProfitRadio = (
+              this.outterLeftInfo.onLineProfitRadio * 100
+            ).toFixed(2);
+          }
+          if (this.outterLeftInfo.cnyAmt) {
+            this.outterLeftInfo.cnyAmt = this.outterLeftInfo.cnyAmt.toFixed(0);
+          }
+          if (this.outterLeftInfo.saleTaskAmt) {
+            this.outterLeftInfo.saleTaskAmt =
+              this.outterLeftInfo.saleTaskAmt.toFixed(0);
+          }
+  
+          this.outterRight = outter.rows.filter((v) => {
+            return v.obmOem == "OEM";
+          });
+          this.outterRightInfo = this.outterRight[0];
+          if (this.outterRightInfo.onLineRadio) {
+            this.outterRightInfo.onLineRadio =
+              this.outterRightInfo.onLineRadio.toFixed(0);
+          }
+          if (this.outterRightInfo.onLineProfitRadio) {
+            this.outterRightInfo.onLineProfitRadio = (
+              this.outterRightInfo.onLineProfitRadio * 100
+            ).toFixed(2);
+          }
+          if (this.outterRightInfo.cnyAmt) {
+            this.outterRightInfo.cnyAmt = this.outterRightInfo.cnyAmt.toFixed(0);
+          }
+          if (this.outterRightInfo.saleTaskAmt) {
+            this.outterRightInfo.saleTaskAmt =
+              this.outterRightInfo.saleTaskAmt.toFixed(0);
+          }
+
+        }   
+
 
         this.innerSabLeft = innersab.rows.filter((v) => {
           return v.cooprLevel1 == "线上";
         });
-        console.log("this.innerSabLeft", this.innerSabLeft);
+
         this.innerSabRight = innersab.rows.filter((v) => {
           return v.cooprLevel1 == "线下";
         });

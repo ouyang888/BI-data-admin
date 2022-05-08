@@ -150,7 +150,8 @@
 </script>
 <style scoped lang="scss">
   .execl {
-    width: 925px;
+    /* width: 900px; */
+    width:calc(50% - 15px);
     height: 324px;
     background-color: rgba(2, 0, 77, 0.4);
     box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
@@ -162,7 +163,7 @@
   }
 
   .execl-box {
-    width: 864px;
+    /* width: 864px; */
     height: 287px;
     margin: 20px auto 0;
     border-color: #1e1d51;
