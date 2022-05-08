@@ -632,7 +632,7 @@
       </div>
       <div class="flex-char">
         <div>
-          <div class="middle-font">内销日达成趋势图</div>
+          <div class="middle-font left-file">内销日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
@@ -1881,8 +1881,8 @@ this.$router.push("/center/index")
   justify-content: space-around;
   align-items: center;
   width: 98%;
-  margin: 20px auto;
-  margin-bottom: 20px;
+  margin: 10px auto;
+  margin-bottom: 10px;
 }
 .echartsBox {
   width: 607px;
@@ -1902,6 +1902,7 @@ this.$router.push("/center/index")
   /* margin: 10px 20px 10px 10px; */
   border: 1px solid hsla(210, 86%, 39%, 0.66);
   margin: 20px auto;
+  margin-bottom: 10px;
 }
 .flex-font-middle {
   display: flex;
@@ -1915,7 +1916,7 @@ this.$router.push("/center/index")
   color: #fff;
   font-weight: 600;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 6px;
 }
 .flex-bottom {
   display: flex;
@@ -1989,17 +1990,17 @@ this.$router.push("/center/index")
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600; 
+  font-weight: 600;
   cursor: pointer;
   color: #19ecff;
   padding-top: 3px;
 }
 .flex-card {
-    display: flex;
-    margin-top: 10px;
-    align-items: center;
-    justify-content: inherit;
-    flex-wrap: wrap;
+  display: flex;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: inherit;
+  flex-wrap: wrap;
 }
 .flex-top-card {
   display: flex;
@@ -2012,12 +2013,12 @@ this.$router.push("/center/index")
   margin-right: 20px;
 }
 .card-border-box {
-    margin: 10px 10px 30px 10px;
-    position: relative;
-    /* border: 1px solid red; */
-    /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
-    min-width: 89%;
-    /* height: 70%;
+  margin: 10px 10px 30px 10px;
+  position: relative;
+  /* border: 1px solid red; */
+  /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
+  min-width: 89%;
+  /* height: 70%;
 }
 .line {
   height: 10px;
@@ -2185,5 +2186,9 @@ this.$router.push("/center/index")
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+.left-file {
+  position: relative;
+  bottom: 20px;
 }
 </style> 

@@ -1456,24 +1456,32 @@ export default {
   margin: 20px auto;
   margin-bottom: 20px;
 }
+
 .echartsBox {
   width: 607px;
   height: 240px;
 }
+
 .flex-fang {
   display: flex;
   justify-content: space-between;
 }
+
 .fang-color {
   width: 10px;
   height: 10px;
   background-color: hsla(188, 100%, 50%, 1);
 }
+
 .middle-box {
   width: 98%;
-  margin: 30px auto;
+  margin: 0 auto;
   border: 1px solid hsla(210, 86%, 39%, 0.66);
+  position: relative;
+  margin-top: 25px;
+  /* margin-bottom: 14px; */
 }
+
 .flex-font-middle {
   display: flex;
   align-items: center;
@@ -1481,13 +1489,15 @@ export default {
   width: 60%;
   color: #fff;
 }
+
 .middle-font {
   font-size: 18px;
   color: #fff;
   font-weight: 600;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
+
 .flex-bottom {
   display: flex;
   align-items: center;
@@ -1496,6 +1506,7 @@ export default {
   margin: 0 auto;
   padding-bottom: 20px;
 }
+
 .execl {
   background: url("../../../assets/img/tableVBackround.svg");
   width: 905px;
@@ -1505,19 +1516,23 @@ export default {
   border: 2px solid #0d53b7;
   border-radius: 0 0 10px 10px;
 }
+
 ::v-deep .ant-table-thead > tr > th {
   background: rgb(4, 19, 112);
   border-bottom: 1px solid rgb(55, 56, 112);
   border-right: 1px solid rgb(55, 56, 112);
 }
+
 ::v-deep .ant-table-thead > tr > th .ant-table-header-column {
   color: #fff;
   font-size: 14px;
 }
+
 ::v-deep .ant-table-bordered .ant-table-tbody > tr > td {
   border: 1px solid rgb(55, 56, 112);
   color: #fff;
 }
+
 ::v-deep
   .ant-table-tbody
   > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
@@ -1528,6 +1543,7 @@ export default {
 ::v-deep .ant-spin-nested-loading {
   margin: 14px;
 }
+
 ::v-deep .ant-table-thead > tr:first-child > th:first-child {
   background: linear-gradient(
     to right,
@@ -1536,6 +1552,7 @@ export default {
     rgb(102, 255, 255)
   );
 }
+
 .top-flex {
   display: flex;
   align-items: center;
@@ -1543,10 +1560,12 @@ export default {
   width: 98%;
   margin: 0 auto;
 }
+
 .dashboard-box {
-  width: 50%;
+  /* width: 50%; */
   position: relative;
 }
+
 .card-box {
   height: 248px;
   width: 545px;
@@ -1554,6 +1573,7 @@ export default {
   background-repeat: no-repeat;
   /* margin-left: 20px; */
 }
+
 .card-box:first-child {
   margin-right: 20px;
 }
@@ -1566,30 +1586,37 @@ export default {
   cursor: pointer;
   color: #19ecff;
 }
+
 .flex-card {
   display: flex;
   margin-top: 20px;
 }
+
 .flex-top-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* width:90%; */
 }
+
 .top-left-font {
   font-size: 14px;
   color: #fff;
   margin-right: 20px;
 }
+
 .card-border-box {
   margin: 14px;
   border: 1px solid rgba(13, 83, 183, 0.7);
   position: relative;
 }
+
 .line {
   height: 10px;
   border-left: 2px solid rgb(102, 255, 255);
   border-right: 2px solid rgb(102, 255, 255);
 }
+
 .line1 {
   border-top: 2px solid rgb(102, 255, 255);
   width: 10px;
@@ -1597,6 +1624,7 @@ export default {
   top: 0;
   left: 0;
 }
+
 .line2 {
   border-top: 2px solid rgb(102, 255, 255);
   width: 10px;
@@ -1604,6 +1632,7 @@ export default {
   top: 0;
   right: 0;
 }
+
 .line3 {
   border-top: 2px solid rgb(102, 255, 255);
   width: 10px;
@@ -1611,6 +1640,7 @@ export default {
   bottom: 0;
   left: 0;
 }
+
 .line4 {
   border-top: 2px solid rgb(102, 255, 255);
   width: 10px;
@@ -1618,26 +1648,190 @@ export default {
   bottom: 0;
   right: 0;
 }
+
 .left-right-box {
   display: flex;
   justify-content: space-between;
 }
+
 .flex-finish {
   display: flex;
 }
+
 .finish-font {
   color: #fff;
   opacity: 0.6;
   font-size: 12px;
   margin-right: 4px;
 }
+
 .finish-font span {
   color: #66ffff;
   margin-left: 2px;
 }
+
 .mt-border {
   border: 1px solid rgba(255, 255, 255, 0.24);
   width: 1px;
+}
+
+.card-big-num {
+  color: #66ffff;
+  font-size: 28px;
+}
+
+.progress {
+  width: 120px;
+  height: 10px;
+}
+
+.progress:last-child {
+  margin-bottom: 12px;
+}
+
+.progress-middle {
+  width: 34px;
+  height: 10px;
+}
+
+.progress-middle:last-child {
+  margin-bottom: 12px;
+}
+
+::v-deep .ant-progress-bg {
+  height: 4px !important;
+  border-radius: 200px !important;
+}
+
+.card-middle-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-bottoms {
+  display: flex;
+  align-items: center;
+  color: #a0a3c0;
+  font-size: 12px;
+}
+
+.light-blue {
+  color: #66ffff;
+  opacity: 1;
+}
+
+::v-deep .ant-table-bordered .ant-table-body > table {
+  border: none;
+}
+
+.select-box {
+  position: absolute;
+  right: 20px;
+  top: 30px;
+  z-index: 11;
+  width: 186px;
+}
+
+/* 仪表盘样式 */
+.main {
+  height: 230px;
+}
+::v-deep .ant-table-thead > tr:first-child > th:first-child {
+  background: linear-gradient(
+    to right,
+    rgb(80, 192, 255),
+    rgb(90, 255, 163),
+    rgb(102, 255, 255)
+  );
+}
+.content {
+  width: 192px;
+  height: 192px;
+  top: 7%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.big-round {
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.round {
+  width: 85px;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 50%;
+  background: #0c098b;
+  box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
+  border: 1px solid rgba(50, 197, 255, 0.22);
+}
+.round-title {
+  font-size: 12px;
+  color: #32c5ff;
+  letter-spacing: -0.01px;
+  text-align: center;
+  font-weight: 500;
+}
+.sort {
+  font-size: 24px;
+  color: #ffffff;
+  letter-spacing: -0.01px;
+  text-align: center;
+  font-weight: 600;
+}
+.title {
+  position: absolute;
+  bottom: 20px;
+  opacity: 0.8;
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 17px;
+  font-weight: 400;
+}
+.bottom {
+  text-align: center;
+  margin-top: 18px;
+}
+.bottom-color {
+  width: 8px;
+  height: 8px;
+  margin-left: 5px;
+  display: inline-block;
+}
+.bottom-title {
+  opacity: 0.8;
+  padding-left: 5px;
+  font-size: 12px;
+  color: #ffffff;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 17px;
+  font-weight: 400;
+}
+.bottom-text {
+  margin-top: 3px;
+  opacity: 0.7;
+  font-size: 10px;
+  color: #ffffff;
+  letter-spacing: 0;
+  text-align: center;
+  line-height: 10px;
+  font-weight: 400;
+}
+.bottom-text span {
+  margin-left: 5px;
 }
 .card-big-num {
   color: #66ffff;
@@ -1665,7 +1859,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 32px;
 }
 .flex-bottoms {
   display: flex;
@@ -1680,10 +1873,83 @@ export default {
 ::v-deep .ant-table-bordered .ant-table-body > table {
   border: none;
 }
-.flex-loading {
-  position: relative;
-  left: 50%;
-  right: 50%;
+/* 计划 */
+.plan {
+  border-bottom: 2px solid #66ffff;
+}
+
+/* 实际 */
+.actual {
+  border-bottom: 2px solid #6c02cf;
+}
+
+/* 日均线 */
+.average {
+  border-bottom: 2px dashed #ff8b2f;
+}
+
+.text {
+  color: #fff;
+  font-size: 12px;
+}
+.select-box {
+  position: absolute;
+  right: 20px;
+  top: 30px;
+  z-index: 11;
+  width: 186px;
+}
+
+/* 仪表盘样式 */
+.main {
+  height: 230px;
+}
+.backgroundPic {
+  height: 200px;
+  width: 192px;
+  background-image: url("../../../assets/img/backgroundPanel.svg");
+  background-repeat: no-repeat;
+  background-position: 50% 62%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.content {
+  width: 192px;
+  height: 192px;
+  top: 7%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.big-round {
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.round {
+  width: 85px;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 50%;
+  background: #0c098b;
+  box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
+  border: 1px solid rgba(50, 197, 255, 0.22);
+}
+.round-title {
+  font-size: 12px;
+  color: #32c5ff;
+  letter-spacing: -0.01px;
+  text-align: center;
+  font-weight: 500;
 }
 .panelList {
   height: 258px;
@@ -1691,5 +1957,20 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+.flex-loading {
+  position: relative;
+  left: 50%;
+  right: 50%;
+}
+/* .cardList{
+  flex-wrap: wrap;
+} */
+
+/* .card-middle-progress{
+  width:33.33%;
+} */
+::v-deep .ant-table-fixed {
+  background: rgb(7 6 64);
 }
 </style> 
