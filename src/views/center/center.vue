@@ -58,16 +58,36 @@
       </div>
       <div class="flex-font-left">
         <div class="head-box-right" style="margin-right: 14px">
-          <span>产地<a-icon type="down" style="padding-left: 3px; font-size: 14px"/></span>
-          <!-- <div>1111222</div> -->
+          <span
+            >{{land}}<a-icon type="down" style="padding-left: 3px; font-size: 14px"
+          /></span>
+          <div class="drop-down">
+            <div class="down-font" @click="changeland('本地')">本地</div>
+            <div class="down-font" @click="changeland('OEM')">OEM</div>
+          </div>
+        </div>
+
+        <div class="change-flex">
+          <div :class="direction == '1' ? 'head-box-right active' : 'head-box-right'" @click="changedirection(1)"><span>销向</span></div>
+          <div :class="direction == '2' ? 'head-box-right active' : 'head-box-right'" @click="changedirection(2)"><span>产司</span></div>
         </div>
         <div class="change-flex">
-          <div class="head-box-right active"><span>销向</span></div>
-          <div class="head-box-right"><span>产司</span></div>
-        </div>
-        <div class="change-flex">
-          <div class="head-box-right right-width"><span>年度</span></div>
-          <div class="head-box-right right-width"><span>月度</span></div>
+          <div class="head-box-right right-width">
+            <span>{{year}}</span>
+             <div class="drop-down drop-down-year">
+              <div class="down-font-year" @click="changeyear('2022')">2022</div>
+              <div class="down-font-year" @click="changeyear('2021')">2021</div>
+            </div>
+          </div>
+          <div class="head-box-right right-width drop-month">
+            <span>{{month}}</span>
+            <div class="drop-down drop-down-year">
+              <!-- <div class="down-font-year" @click="changemonth('5')">5</div> -->
+              <div class="down-font-year" @click="changemonth('3')">3</div>
+              <div class="down-font-year" @click="changemonth('4')">4</div>
+              
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -89,6 +109,11 @@ export default {
       index: 2,
       title: "销向汇总页",
       cus: 1,
+      land:"产地",
+      direction:1,
+      year:"2022",
+      month:"03",
+      date:new Date()
     };
   },
   computed: {
@@ -107,21 +132,33 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
+    changeland(item){
+      this.land = item;
+    },
+    changedirection(index){
+      this.direction = index
+    },
+    changeyear(item){
+      this.year = item
+    },
+    changemonth(item){
+      this.month = item
+    },
     changeNum(index) {
       this.cus = index;
-      if(index == 2){
-        localStorage.setItem("showMoney","money")
-      }else{
-        localStorage.removeItem("showMoney")
+      if (index == 2) {
+        localStorage.setItem("showMoney", "money");
+      } else {
+        localStorage.removeItem("showMoney");
       }
     },
     clickChange(i) {
       this.index = i;
     },
   },
-  mounted(){
-    localStorage.removeItem("showMoney")
-  }
+  mounted() {
+    localStorage.removeItem("showMoney");
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -260,5 +297,51 @@ export default {
 }
 .change-box {
   cursor: pointer;
+}
+.drop-down {
+  display: none;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  background-image: linear-gradient(0deg, #0e5fff 0%, rgba(28, 0, 255, 0) 100%);
+  width: 110px;
+  text-align: center;
+  // padding-bottom: 6px;
+}
+.head-box-right:hover .drop-down {
+  display: block;
+  font-size: 18px;
+  color: #fff;
+  position: absolute;
+  top: 40px;
+  left: 7px;
+  transform: skewX(18deg);
+}
+.down-font {
+  // padding-top: 6px;
+}
+.down-font:hover {
+  background-color: #0e5fff;
+  color: #f1f1f1;
+   display: block;
+}
+.drop-down-year{
+  width: 90px;
+}
+.down-font-year:first-child{
+  // padding-top: 10px;
+}
+.down-font-year{
+  // padding-bottom: 10px;
+}
+.down-font-year:hover {
+  background-color: #0e5fff;
+  color: #f1f1f1;
+  display: block;
+}
+
+.drop-down-month{
+  // padding-top: 10px;
+}
+.drop-month{
+  left: 80px !important;
 }
 </style>
