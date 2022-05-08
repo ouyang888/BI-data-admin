@@ -14,7 +14,8 @@
       <div class="flex-card">
         <div class="card-box">
           <div class="card-font" @click="gotoDomestic">内销</div>
-          <div class="card-border-box">
+          <a-spin class="cardLoad" size="large" v-if="showLoadingLeft" />
+          <div class="card-border-box" v-else>
             <div class="line"></div>
             <div class="line1"></div>
             <div class="line2"></div>
@@ -26,7 +27,7 @@
                   <div class="top-left-font">线上达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ innerLeftInfo.saleTaskAmt }}亿</span>
+                      责任制 <span>{{ innerLeftInfo.saleTaskAmt }} {{modelLabel}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -41,7 +42,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerLeftInfo.cnyAmt }}亿</div>
+                  <div class="card-big-num">{{ innerLeftInfo.cnyAmt }}{{modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -72,12 +73,12 @@
                 >
                   <!-- <template v-for="(item,index) in innerLeft" :key="index">
                   {{item}} -->
+                  <template v-for="(item, index) in innerLeft" >
                   <div
                     class="card-middle-progress"
-                    v-for="(item, index) in innerLeft"
-                    :key="index"
+                    v-if="index < 3"
+                    :key="index" 
                   >
-                    <template v-if="index < 3">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
@@ -99,9 +100,8 @@
                           </div>
                         </div>
                       </div>
-                    </template>
-                  </div>
-                  <!-- </template> -->
+                    </div>
+                  </template>
                 </div>
 
                 <div
@@ -112,12 +112,12 @@
                     justify-content: space-between;
                   "
                 >
-                  <div
-                    class="card-middle-progress"
-                    v-for="(item, index) in innerLeft"
-                    :key="index"
-                  >
-                    <template v-if="index > 2">
+                <template v-for="(item, index) in innerLeft">
+                      <div
+                        class="card-middle-progress"
+                        v-if="index > 2"
+                        :key="index"
+                        >
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
@@ -139,8 +139,8 @@
                           </div>
                         </div>
                       </div>
-                    </template>
-                  </div>
+                    </div>
+                  </template>
                 </div>
 
                 <div class="flex-bottoms">
@@ -170,7 +170,7 @@
                   <div class="top-left-font">线下达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ innerRightInfo.saleTaskAmt }}亿</span>
+                      责任制 <span>{{ innerRightInfo.saleTaskAmt }}{{modelLabel}}</span>
                     </div>
                     <div class="finish-font">
                       完成率 <span>{{ innerRightInfo.onLineRadio }}%</span>
@@ -178,7 +178,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerRightInfo.cnyAmt }}亿</div>
+                  <div class="card-big-num">{{ innerRightInfo.cnyAmt }}{{modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -207,12 +207,12 @@
                     justify-content: space-between;
                   "
                 >
+                <template v-for="(item, index) in innerRight">
                   <div
                     class="card-middle-progress"
-                    v-for="(item, index) in innerRight"
+                    v-if="index < 3"
                     :key="index"
                   >
-                    <template v-if="index < 3">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
@@ -234,8 +234,8 @@
                           </div>
                         </div>
                       </div>
-                    </template>
-                  </div>
+                    </div>
+                  </template>
                 </div>
                 <div
                   class="cardList"
@@ -245,12 +245,12 @@
                     justify-content: space-between;
                   "
                 >
-                  <div
-                    class="card-middle-progress"
-                    v-for="(item, index) in innerRight"
-                    :key="index"
-                  >
-                    <template v-if="index >= 3">
+                <template v-for="(item, index) in innerRight">
+                      <div
+                        class="card-middle-progress"
+                        v-if="index >= 3"
+                        :key="index"
+                      >
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
@@ -272,8 +272,8 @@
                           </div>
                         </div>
                       </div>
-                    </template>
-                  </div>
+                    </div>
+                  </template>
                 </div>
                 <div class="flex-bottoms">
                   <div>
@@ -302,7 +302,8 @@
         </div>
         <div class="card-box">
           <div class="card-font" @click="gotoExport">外销</div>
-          <div class="card-border-box">
+          <a-spin class="cardLoad" size="large" v-if="showLoadingRight" />
+          <div class="card-border-box" v-else>
             <div class="line"></div>
             <div class="line1"></div>
             <div class="line2"></div>
@@ -314,7 +315,7 @@
                   <div class="top-left-font">OBM达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ outterLeftInfo.saleTaskAmt }}亿</span>
+                      责任制 <span>{{ outterLeftInfo.saleTaskAmt }}{{modelLabel}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -329,7 +330,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterLeftInfo.cnyAmt }}亿</div>
+                  <div class="card-big-num">{{ outterLeftInfo.cnyAmt }}{{modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -358,12 +359,12 @@
                     justify-content: space-between;
                   "
                 >
+                <template  v-for="(item, index) in outterLeft" >
                   <div
                     class="card-middle-progress"
-                    v-for="(item, index) in outterLeft"
+                    v-if="index < 3"
                     :key="index"
                   >
-                    <template v-if="index < 3">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
@@ -385,8 +386,8 @@
                           </div>
                         </div>
                       </div>
-                    </template>
-                  </div>
+                    </div>
+                  </template>
                 </div>
                 <div
                   class="cardList"
@@ -396,12 +397,12 @@
                     justify-content: space-between;
                   "
                 >
-                  <div
-                    class="card-middle-progress"
-                    v-for="(item, index) in outterLeft"
-                    :key="index"
-                  >
-                    <template v-if="index > 2">
+                <template v-for="(item, index) in outterLeft">
+                      <div
+                        class="card-middle-progress"
+                        v-if="index > 2"
+                        :key="index"
+                      >
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
@@ -423,8 +424,8 @@
                           </div>
                         </div>
                       </div>
-                    </template>
-                  </div>
+                    </div>
+                  </template>
                 </div>
                 <div class="flex-bottoms">
                   <div>
@@ -453,7 +454,7 @@
                   <div class="top-left-font">OEM达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ outterRightInfo.saleTaskAmt }}亿</span>
+                      责任制 <span>{{ outterRightInfo.saleTaskAmt }}{{modelLabel}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -468,7 +469,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterRightInfo.cnyAmt }}亿</div>
+                  <div class="card-big-num">{{ outterRightInfo.cnyAmt }}{{modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -497,12 +498,12 @@
                     justify-content: space-between;
                   "
                 >
+                <template v-for="(item, index) in outterRight">
                   <div
                     class="card-middle-progress"
-                    v-for="(item, index) in outterRight"
+                    v-if="index < 3"
                     :key="index"
                   >
-                    <template v-if="index < 3">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
@@ -524,8 +525,8 @@
                           </div>
                         </div>
                       </div>
-                    </template>
-                  </div>
+                    </div>
+                  </template>
                 </div>
                 <div
                   class="cardList"
@@ -535,12 +536,12 @@
                     justify-content: space-between;
                   "
                 >
-                  <div
-                    class="card-middle-progress"
-                    v-for="(item, index) in outterRight"
-                    :key="index"
-                  >
-                    <template v-if="index >= 3">
+                <template v-for="(item, index) in outterRight">
+                      <div
+                        class="card-middle-progress"
+                        v-if="index >= 3"
+                        :key="index"
+                      >
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
@@ -562,8 +563,8 @@
                           </div>
                         </div>
                       </div>
-                    </template>
-                  </div>
+                    </div>
+                  </template>
                 </div>
                 <div class="flex-bottoms">
                   <div>
@@ -614,7 +615,8 @@
               </div>
             </template>
           </div>
-          <div id="main" class="echartsBox"></div>
+          <div id="main" class="echartsBox" v-show="!showLoading"></div>
+          <div class="echartsBox" v-show="showLoading"></div>
         </div>
         <div>
           <div class="middle-font">内销日达成趋势图</div>
@@ -630,7 +632,9 @@
               </div>
             </template>
           </div>
-          <div id="main2" class="echartsBox"></div>
+          <div id="main2" class="echartsBox" v-show="!showLoading"></div>
+          <div class="echartsBox" v-show="showLoading"></div>
+
         </div>
         <div>
           <div class="middle-font">外销日达成趋势图</div>
@@ -646,7 +650,8 @@
               </div>
             </template>
           </div>
-          <div id="main3" class="echartsBox"></div>
+          <div id="main3" class="echartsBox" v-show="!showLoading"></div>
+          <div class="echartsBox" v-show="showLoading"></div>
         </div>
       </div>
       <div class="flex-fang">
@@ -682,7 +687,6 @@ export default {
   },
   data() {
     return {
-      dateTime: "2022-03",
       dataTimeMany: "2022-01-01,2022-10-01,2022-01-01,2022-10-01",
       showLoading: false,
       divisionList: [],
@@ -763,8 +767,8 @@ export default {
       // 底部表格
       tableInner: [],
       tableOutter: [],
-      rowSpanNumber1: 6,
-      rowSpanNumber2: 6,
+      rowSpanNumber1: [0,0],
+      rowSpanNumber2: [6],
       titleHead: {
         businessEntityName1: "环境",
         businessEntityName2: "电磁",
@@ -775,7 +779,34 @@ export default {
         businessEntityName7: "调理",
         businessEntityName8: "其他",
       },
+      showLoadingLeft:true,
+      showLoadingRight:true,
     };
+  },
+  computed:{
+    ontime(){
+      return this.$store.state.year +'-'+ this.$store.state.month;
+    },
+    showMoney(){
+      return this.$store.state.showMoney;
+    },
+    modelLabel(){
+      return this.$store.state.showMoney==true?'亿':'台'
+    }
+    
+  },
+  watch:{
+    ontime:{
+     handler: function (newValue, oldValue) {
+        this.init();
+      }
+    },
+    showMoney:{
+      handler:(newValue,oldValue)=>{
+ 
+      }
+    }
+
   },
   methods: {
     gotoDomestic() {
@@ -786,12 +817,21 @@ export default {
     },
     // 右边卡片/
     async getCard(params) {
+      this.showLoadingLeft = true;
+      this.showLoadingRight = true;
       try {
         const inner = await API.getData("directITotalInnerTotal", params);
         const outter = await API.getData("directTotalOutterTotal", params);
         const innersab = await API.getData("directTotalInnerSAB", params);
         const outtersab = await API.getData("directTotalOutterSAB", params);
         console.log("inner,", outter);
+        if(inner.rows.length>0){
+          this.showLoadingLeft = false;
+        }
+        
+        if(outter.rows.length>0){
+          this.showLoadingRight = false;
+        }
 
         inner.rows.forEach((v) => {
           v.dateRadio = v.dateRadio * 100;
@@ -912,16 +952,17 @@ export default {
 
         // this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
-        this.rowSpanNumber2 = this.tableOutter.length;
+        this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
         let innerTop = tableInner.rows.filter((v) => {
           return v.marketChannel == "线上";
         });
-        this.rowSpanNumber1 = innerTop.length;
 
         let innerBottom = tableInner.rows.filter((v) => {
           return v.marketChannel == "线下";
         });
+        this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
+        console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
         let innerTotal = tableInner.rows.filter((v) => {
           return v.marketChannel == "底部合计";
         });
@@ -935,7 +976,16 @@ export default {
     },
     //中间折线图
     async getList() {
-      this.showLoading = true;
+    this.showLoading = true;
+    this.divisionDate = [];
+    this.divisionList = [];
+    this.divisionLine = '';
+    this.innerDirectList =  [];
+    this.innerDirectDate = [];
+    this.innerDirectLine = "";
+    this.outerDirectDate = [];
+    this.outerDirectList = [];
+    this.outerDirectLine = '';
       try {
         const res = await API.getData(
           "directTotalInnerChart",
@@ -974,9 +1024,9 @@ export default {
     },
 
     //三个仪表盘(左中)
-    async getdashboard() {
+    async getdashboard(params) {
       try {
-        const res = await API.getData("directTotalDashboard", this.dateTime);
+        const res = await API.getData("directTotalDashboard",params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         this.progressData.ballNum = (
@@ -1016,9 +1066,9 @@ export default {
       }
     },
     //三个仪表盘(右)
-    async queryCardSAB() {
+    async queryCardSAB(params) {
       try {
-        const res = await API.getData("directTotalDashboardSAB", this.dateTime);
+        const res = await API.getData("directTotalDashboardSAB", params);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].directName == "事业部") {
@@ -1431,14 +1481,18 @@ export default {
     changeDate(val) {
       console.log("更新时间");
     },
+    init(){
+    this.getList();
+    this.getCard(this.ontime);
+    this.getTable(this.ontime);
+    this.getdashboard(this.ontime);
+    this.queryCardSAB(this.ontime);
+    }
   },
   mounted() {
-    this.getList();
-    let month = "2022-03";
-    this.getCard(month);
-    this.getTable(month);
-    this.getdashboard();
-    this.queryCardSAB();
+
+    this.init();
+
   },
 };
 </script>
@@ -1968,4 +2022,5 @@ export default {
 ::v-deep .ant-table-fixed {
   background: rgb(7 6 64);
 }
+
 </style> 

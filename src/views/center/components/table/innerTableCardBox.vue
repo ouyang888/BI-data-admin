@@ -32,8 +32,8 @@ export default {
       default:function(){ return []}
     },
     titleHead:{
-      type:Array,
-      default:function(){ return []}
+      type:Object,
+      default:function(){ return {}}
     },
     rightData:{
       type:Array,

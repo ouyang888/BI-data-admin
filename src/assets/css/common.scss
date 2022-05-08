@@ -247,3 +247,17 @@ color: #1890FF;
   background:rgb(4, 19, 112)
 }
 }
+/*卡片加载*/
+.card-box{
+  position: relative;
+}
+.cardLoad{
+  position: absolute;
+    left:calc(50% - 20px);
+    top:calc(50% - 20px);
+}
+
+.flex-header{
+  position: relative;
+  z-index: 11;
+}

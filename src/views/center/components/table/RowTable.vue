@@ -53,7 +53,7 @@
         type: String,
       },
       rowSpanNumber: {
-        type: Number,
+        type: Array,
       },
       color: {
         type: String,
@@ -88,7 +88,7 @@
             return [0, 0];
           }
           if (columnIndex === 0) {
-            return [1, 2];
+            return [1, 3];
           }
         }
         //       if (rowIndex === 6) {
@@ -100,12 +100,20 @@
         //   }
         // }
         if (columnIndex === 0) {
-          if (rowIndex % this.rowSpanNumber === 0) {
+          if (rowIndex == 0) {
             return {
-              rowspan: this.rowSpanNumber,
+              rowspan: this.rowSpanNumber[0],
               colspan: 1,
             };
-          } else {
+          } else if(rowIndex == this.rowSpanNumber[0]){
+            return {
+              rowspan: this.rowSpanNumber[1],
+              colspan: 1,
+            };
+            
+          }
+          
+          else {
             return {
               rowspan: 0,
               colspan: 0,

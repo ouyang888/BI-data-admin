@@ -62,20 +62,20 @@ export default {
       default:function(){ return []}
     },
     titleHead:{
-      type:Array,
-      default:function(){ return []}
+      type:Object,
+      default:function(){ return {}}
     },
     rightData:{
       type:Array,
       default:function(){ return []}
     },
     rowSpanNumber1:{
-      type:Number,
-      default:0,
+      type:Array,
+      default:function(){ return []},
     },
     rowSpanNumber2:{
-      type:Number,
-      default:0,
+      type:Array,
+      default:function(){ return []},
     },
   },
   data() {
@@ -3000,7 +3000,7 @@ export default {
 
   methods:{
     namesClick(){
-
+      this.$router.push("onlineSummary");
     },
     managerClick(){
       // switch (Store.state.currentPath) {
@@ -3009,6 +3009,8 @@ export default {
       //     this.$router.push("exprotAreaAll");
       //     break;
       // }
+      console.log("123")
+      this.$router.push("catSeries");
     }
   }
 };

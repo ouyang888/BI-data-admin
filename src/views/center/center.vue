@@ -112,7 +112,7 @@ export default {
       land:"产地",
       direction:1,
       year:"2022",
-      month:"03",
+      month:"3",
       date:new Date()
     };
   },
@@ -140,16 +140,22 @@ export default {
     },
     changeyear(item){
       this.year = item
+      this.$store.commit("setYear",item);
     },
     changemonth(item){
       this.month = item
+      let val = item.length<2?'0'+item:item;
+    
+      this.$store.commit("setMonth",val);
     },
     changeNum(index) {
       this.cus = index;
       if (index == 2) {
         localStorage.setItem("showMoney", "money");
+        this.$store.commit('setShowMoney',false);
       } else {
         localStorage.removeItem("showMoney");
+        this.$store.commit('setShowMoney',true);
       }
     },
     clickChange(i) {

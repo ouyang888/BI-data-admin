@@ -14,7 +14,8 @@
       <div class="flex-card">
         <div class="card-box">
           <div class="card-font" @click="online()">线上</div>
-          <div class="card-border-box">
+          <a-spin class="cardLoad" size="large" v-if="showLoadingLeft" />
+          <div class="card-border-box" v-else>
             <div class="line"></div>
             <div class="line1"></div>
             <div class="line2"></div>
@@ -26,7 +27,7 @@
                   <div class="top-left-font">线上达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ innerLeftInfo.saleTaskAmt || 0 }}亿</span>
+                      责任制 <span>{{ innerLeftInfo.saleTaskAmt || 0 }}{{modelLabel}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -41,7 +42,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerLeftInfo.cnyAmt }}亿</div>
+                  <div class="card-big-num">{{ innerLeftInfo.cnyAmt }}{{modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -168,7 +169,7 @@
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
-                      <span>{{ innerRightInfo.saleTaskAmt || 0 }}亿</span>
+                      <span>{{ innerRightInfo.saleTaskAmt || 0 }}{{modelLabel}}</span>
                     </div>
                     <div class="finish-font">
                       完成率 <span>{{ innerRightInfo.onLineRadio || 0 }}%</span>
@@ -177,7 +178,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ innerRightInfo.cnyAmt || 0 }}亿
+                    {{ innerRightInfo.cnyAmt || 0 }}{{modelLabel}}
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -217,7 +218,7 @@
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
-                        <div class="light-blue">15亿</div>
+                        <div class="light-blue">15{{modelLabel}}</div>
                       </div>
                     </div>
                   </template>
@@ -240,7 +241,7 @@
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
-                        <div class="light-blue">15亿</div>
+                        <div class="light-blue">15{{modelLabel}}</div>
                       </div>
                     </div>
                   </template>
@@ -272,7 +273,8 @@
         </div>
         <div class="card-box">
           <div class="card-font">线下</div>
-          <div class="card-border-box">
+          <a-spin class="cardLoad" size="large" v-if="showLoadingRight" />
+          <div class="card-border-box" v-else>
             <div class="line"></div>
             <div class="line1"></div>
             <div class="line2"></div>
@@ -284,7 +286,7 @@
                   <div class="top-left-font">线下达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ outterLeftInfo.saleTaskAmt }}亿</span>
+                      责任制 <span>{{ outterLeftInfo.saleTaskAmt }}{{modelLabel}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -299,7 +301,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterLeftInfo.cnyAmt }}亿</div>
+                  <div class="card-big-num">{{ outterLeftInfo.cnyAmt }}{{modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -424,7 +426,7 @@
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
-                      <span>{{ outterRightInfo.saleTaskAmt || 0 }}亿</span>
+                      <span>{{ outterRightInfo.saleTaskAmt || 0 }}{{modelLabel}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -440,7 +442,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ outterRightInfo.cnyAmt || 0 }}亿
+                    {{ outterRightInfo.cnyAmt || 0 }}{{modelLabel}}
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -480,7 +482,7 @@
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
-                        <div class="light-blue">15亿</div>
+                        <div class="light-blue">15{{modelLabel}}</div>
                       </div>
                     </div>
                   </template>
@@ -503,7 +505,7 @@
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
-                        <div class="light-blue">15亿</div>
+                        <div class="light-blue">15{{modelLabel}}</div>
                       </div>
                     </div>
                   </template>
@@ -557,7 +559,8 @@
               </div>
             </template>
           </div>
-          <div id="main" class="echartsBox"></div>
+          <div id="main" class="echartsBox" v-show="!showLoading"></div>
+          <div class="echartsBox" v-show="showLoading"></div>
         </div>
         <div>
           <div class="middle-font">线上日达成趋势图</div>
@@ -573,7 +576,8 @@
               </div>
             </template>
           </div>
-          <div id="main2" class="echartsBox"></div>
+          <div id="main2" class="echartsBox" v-show="!showLoading"></div>
+          <div class="echartsBox" v-show="showLoading"></div>
         </div>
         <div>
           <div class="middle-font">线下日达成趋势图</div>
@@ -589,7 +593,8 @@
               </div>
             </template>
           </div>
-          <div id="main3" class="echartsBox"></div>
+          <div id="main3" class="echartsBox" v-show="!showLoading"></div>
+          <div class="echartsBox" v-show="showLoading"></div>
         </div>
       </div>
       <div class="flex-fang">
@@ -793,13 +798,40 @@ export default {
       amtFinish:'说到做到',
       ranking :'排名',
       },
+      showLoadingLeft:true,
+      showLoadingRight:true,
     };
+  },
+  computed:{
+    ontime(){
+      return this.$store.state.year +'-'+ this.$store.state.month;
+    },
+    showMoney(){
+      return this.$store.state.showMoney;
+    },
+    modelLabel(){
+      return this.$store.state.showMoney==true?'亿':'台'
+    }
+    
+  },
+  watch:{
+    ontime:{
+     handler: function (newValue, oldValue) {
+        this.init();
+      }
+    },
+    showMoney:{
+      handler:(newValue,oldValue)=>{
+ 
+      }
+    }
+
   },
   methods: {
     //三个仪表盘(左中)
-    async getdashboard() {
+    async getdashboard(params) {
       try {
-        const res = await API.getData("innerDirectTopTotal", this.dateTime);
+        const res = await API.getData("innerDirectTopTotal", params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         this.progressData.ballNum = (
@@ -843,9 +875,9 @@ export default {
       }
     },
     //三个仪表盘(右)
-    async queryCardSAB() {
+    async queryCardSAB(params) {
       try {
-        const res = await API.getData("innerDirectRightSAB", this,dateTime);
+        const res = await API.getData("innerDirectRightSAB", params);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].cooprLevel1 == "线上") {
@@ -892,6 +924,15 @@ export default {
     //中间折线图
     async getList() {
       this.showLoading = true;
+      this.innerDirectList=[];
+      this.innerDirectDate=[];
+      this.innerDirectLine="";
+
+      this.outerDirectList=[];
+      this.outerDirectDate=[];
+      this.outerDirectLine="";
+      this.allList=[];
+      this.allLiine="";
       try {
         const res = await API.getData(
           "innerDirectChart",
@@ -1288,9 +1329,16 @@ export default {
     // 右边卡片/
     async getCard() {
       // try {
+      this.showLoadingLeft = true;
+      this.showLoadingRight = true;
       const inner = await API.getData("innerDirectInOutKard", "2022-03");
       const innersab = await API.getData("innerDirectRightSAB", "2022-03");
       console.log("inner,", inner);
+      if(inner.rows.length>0){
+          this.showLoadingLeft = false;
+          this.showLoadingRight = false;
+        }
+   
       inner.rows.forEach((v) => {
         v.dateRadio = v.dateRadio * 100;
         v.onLineRadio = v.onLineRadio * 100 > 100 ? 100 : v.onLineRadio * 100;
@@ -1396,15 +1444,16 @@ export default {
       //   console.log(err)
       // }
     },
-    async getTable() {
+    async getTable(params) {
+      // let time= params && params.splice('-','');
       try {
         let tableInner = await API.getData(
           "innerDirectOnOutline",
-          "202203,202203"
+          `${params},${params}`
         );
         let tableOutter = await API.getData(
           "innerDirectline",
-          "2022-03,2022-03"
+          `${params},${params}`
         );
 
         this.tableInner = tableInner.rows;
@@ -1433,13 +1482,16 @@ export default {
         console.log(err);
       }
     },
+    init(){
+    this.getList();
+    this.getdashboard(this.ontime);
+    this.queryCardSAB(this.ontime);
+    this.getCard(this.ontime);
+    this.getTable(this.ontime);
+    }
   },
   created() {
-    this.getList();
-    this.getdashboard();
-    this.queryCardSAB();
-    this.getCard();
-    this.getTable();
+     this.init()
   },
   mounted() {},
 };
