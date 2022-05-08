@@ -13,7 +13,7 @@
       <!-- 右侧卡片 -->
       <div class="flex-card" >
         <div class="card-box">
-          <div class="card-font"   @click="gotoCatSeries">淘系</div>
+          <div class="card-font"   @click="gotoCatSeries">苏宁</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -116,7 +116,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font"     @click="gotoCatSeries">京东</div>
+          <div class="card-font"     @click="gotoCatSeries">国美</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -269,7 +269,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font"     @click="gotoCatSeries">拼多多系</div>
+          <div class="card-font"     @click="gotoCatSeries">特渠</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -354,7 +354,7 @@
           </div>
         </div>
            <div class="card-box">
-          <div class="card-font"     @click="gotoCatSeries">美的平台</div>
+          <div class="card-font"     @click="gotoCatSeries">待定通道</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -457,7 +457,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font"     @click="gotoCatSeries">兴趣电商</div>
+          <div class="card-font"     @click="gotoCatSeries">美云销</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -539,7 +539,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font"     @click="gotoCatSeries">天猫自运营</div>
+          <div class="card-font"     @click="gotoCatSeries">待定通道</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -904,9 +904,9 @@ export default {
     gotoDomestic(){
 this.$router.push("/center/index")
     },
-    // 猫系
+    // 合作模式3
     gotoCatSeries(){
-      this.$router.push("/center/catSeries")
+      this.$router.push("/center/offlineCatSeries")
     },
  
     toModuleResponsible(){
@@ -1995,16 +1995,11 @@ this.$router.push("/center/index")
   padding-top: 3px;
 }
 .flex-card {
-  /* display: flex;
-  margin-top: 20px; */
-      display: flex;
+    display: flex;
     margin-top: 10px;
     align-items: center;
     justify-content: inherit;
-    /* width: 100%; */
     flex-wrap: wrap;
-    /* width: 70%; */
-    /* padding: 10px; */
 }
 .flex-top-card {
   display: flex;

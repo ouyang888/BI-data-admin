@@ -2047,22 +2047,17 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
+  font-weight: 600; 
   cursor: pointer;
   color: #19ecff;
   padding-top: 3px;
 }
 .flex-card {
-  /* display: flex;
-  margin-top: 20px; */
-  display: flex;
-  margin-top: 10px;
-  align-items: center;
-  justify-content: inherit;
-  /* width: 100%; */
-  flex-wrap: wrap;
-  /* width: 70%; */
-  /* padding: 10px; */
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: inherit;
+    flex-wrap: wrap;
 }
 .flex-top-card {
   display: flex;
@@ -2075,12 +2070,12 @@ export default {
   margin-right: 20px;
 }
 .card-border-box {
-  margin: 10px 10px 30px 10px;
-  position: relative;
-  /* border: 1px solid red; */
-  /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
-  min-width: 89%;
-  /* height: 70%;
+    margin: 10px 10px 30px 10px;
+    position: relative;
+    /* border: 1px solid red; */
+    /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
+    min-width: 89%;
+    /* height: 70%;
 }
 .line {
   height: 10px;
@@ -2133,8 +2128,6 @@ export default {
 .mt-border {
   border: 1px solid rgba(255, 255, 255, 0.24);
   width: 1px;
-  margin-left: 6px;
-  margin-right: 6px;
 }
 .card-big-num {
   color: #66ffff;

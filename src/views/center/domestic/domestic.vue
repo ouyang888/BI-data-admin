@@ -271,7 +271,7 @@
           </div>
         </div>
         <div class="card-box">
-          <div class="card-font">线下</div>
+          <div class="card-font" @click="gotoSummary">线下</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -1284,6 +1284,9 @@ export default {
     },
     online() {
       this.$router.push("/center/onlineSummary");
+    },
+    gotoSummary(){
+      this.$router.push("/center/offlineSummary");
     },
     // 右边卡片/
     async getCard() {

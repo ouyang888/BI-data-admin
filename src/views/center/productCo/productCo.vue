@@ -2082,16 +2082,11 @@ this.$router.push("/center/index")
   padding-top: 3px;
 }
 .flex-card {
-  /* display: flex;
-  margin-top: 20px; */
-      display: flex;
+    display: flex;
     margin-top: 10px;
     align-items: center;
     justify-content: inherit;
-    /* width: 100%; */
     flex-wrap: wrap;
-    /* width: 70%; */
-    /* padding: 10px; */
 }
 .flex-top-card {
   display: flex;
@@ -2162,8 +2157,6 @@ this.$router.push("/center/index")
 .mt-border {
   border: 1px solid rgba(255, 255, 255, 0.24);
   width: 1px;
-  margin-left: 6px;
-  margin-right: 6px;
 }
 .card-big-num {
   color: #66ffff;

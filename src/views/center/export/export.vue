@@ -7,7 +7,7 @@
       <!-- 右侧卡片 -->
       <div class="flex-card">
         <div class="card-box">
-          <div class="card-font" @click="online()">线上</div>
+          <div class="card-font" @click="leftGo()">南美区-张莱欧</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -385,7 +385,7 @@
           </div>
         </div>
         <div class="card-box">
-          <div class="card-font"  @click='offline()'>线下</div>
+          <div class="card-font" @click="rightGo()">北美区-李林</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -883,7 +883,7 @@
           <a slot="name" slot-scope="text">{{ text }}</a>
           <template slot="name" slot-scope="name">
             <a @click="gotoDomestic"> {{ name }}</a>
-             </template>
+          </template>
         </a-table>
       </div>
       <div class="execl">
@@ -914,14 +914,13 @@ export default {
           dataIndex: "name",
           key: "name",
           align: "center",
-           scopedSlots: { customRender: "name" },
+          scopedSlots: { customRender: "name" },
         },
         {
           title: "责任人",
           dataIndex: "age",
           key: "age",
           align: "center",
-          
         },
         {
           title: "责任制",
@@ -993,8 +992,14 @@ export default {
   },
   methods: {
     gotoDomestic() {
-        this.$router.push("/center/index");
-      },
+      this.$router.push("/center/index");
+    },
+    leftGo() {
+       this.$router.push("/center/exprotAreaAll");
+    },
+    rightGo() {
+      this.$router.push("/center/exprotAreaAll");
+    },
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -1945,17 +1950,15 @@ export default {
       };
       myChart8.setOption(option);
     },
-    online(){
-        this.$router.push("/center/onlineSummary");
-
+    online() {
+      this.$router.push("/center/onlineSummary");
     },
-    offline(){
-        this.$router.push("/center/offlineSummary");
-
-    }
+    offline() {
+      this.$router.push("/center/offlineSummary");
+    },
   },
 
-  // 接口数据  
+  // 接口数据
   // sellOutTopOnline  大区卡片
   // async getList() {
   //       this.showLoading = true;
@@ -1970,7 +1973,7 @@ export default {
   // },
 
   mounted() {
-    this.myEcharts(); 
+    this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
     this.myEcharts4();

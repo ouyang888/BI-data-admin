@@ -1,4 +1,4 @@
-    import Vue from 'vue'
+import Vue from 'vue'
 import store from "../store";
 import VueRouter, {
     RouteConfig
@@ -71,54 +71,85 @@ const routes = [
                 component: () => import('@/views/center/catSeries/index.vue')
             },
             // 区域负责人
-            
+
             {
                 path: 'regionalHead',
                 name: 'regionalHead',
                 component: () => import('@/views/center/regionalHead/index.vue')
             },
             // 店铺负责人
- 
+
             {
                 path: 'storeManager',
                 name: 'storeManager',
                 component: () => import('@/views/center/storeManager/index.vue')
             },
 
-              // 产司
- 
-              {
+            // 产司
+
+            {
                 path: 'department',
                 name: 'department',
                 component: () => import('@/views/center/department/department.vue')
             },
 
-                //品类汇总
- 
-                {
-                    path: 'productCo',
-                    name: 'productCo',
-                    component: () => import('@/views/center/productCo/productCo.vue')
-                },
+            //品类汇总
 
-                  //线上负责人模式
- 
-                  {
-                    path: 'modeCo',
-                    name: 'modeCo',
-                    component: () => import('@/views/center/modeCo/modeCo.vue')
-                },
+            {
+                path: 'productCo',
+                name: 'productCo',
+                component: () => import('@/views/center/productCo/productCo.vue')
+            },
 
-                    //店铺负责人---合作模式4
- 
-                    {
-                        path: 'onlineModeCo',
-                        name: 'onlineModeCo',
-                        component: () => import('@/views/center/onlineModeCo/onlineModeCo.vue')
-                    },
+            //线上负责人模式
+
+            {
+                path: 'modeCo',
+                name: 'modeCo',
+                component: () => import('@/views/center/modeCo/modeCo.vue')
+            },
+
+            //店铺负责人---合作模式4
+
+            {
+                path: 'onlineModeCo',
+                name: 'onlineModeCo',
+                component: () => import('@/views/center/onlineModeCo/onlineModeCo.vue')
+            },
+
+               //线下--合作模式3 --
+
+               {
+                path: 'offlineCatSeries',
+                name: 'offlineCatSeries',
+                component: () => import('@/views/center/offlineCatSeries/offlineCatSeries.vue')
+            },
+
+             //线下--合作模式3 --负责人
+
+             {
+                path: 'offlineCode',
+                name: 'offlineCode',
+                component: () => import('@/views/center/offlineCode/offlineCode.vue')
+            },
+
+              //外销--大区区域
+
+              {
+                path: 'exprotAreaAll',
+                name: 'exprotAreaAll',
+                component: () => import('@/views/center/exprotAreaAll/exprotAreaAll.vue')
+            },
+              //外销--产司区域主管
+
+              {
+                path: 'exprotProductCo',
+                name: 'exprotProductCo',
+                component: () => import('@/views/center/exprotProductCo/exprotProductCo.vue')
+            },
         ],
     }
-
+    
 
 ]
 const router = new VueRouter({
@@ -128,36 +159,36 @@ const router = new VueRouter({
  * 路由守卫
  */
 // router.beforeEach(async (to, from, next) => {
-    // if (to.name !== 'login') {
-    //     const authoritys = await store.dispatch('setUserAuthoritys')
-    //     if (to.fullPath==="/center"&&from.fullPath!=="/center") {
-    //         if (authoritys.includes('admin:quality')) {
-    //             next('/center/qualityList');
-    //             return
-    //         }
-    //     }
-    // if (to.meta.permission) {
-    //     let sign = false
-    //     if (to.meta.permission instanceof Array) {
-    //         to.meta.permission.forEach(item => {
-    //             if (authoritys.indexOf(item) >= 0) {
-    //                 sign = true
-    //             }
-    //         })
-    //     } else if (authoritys.indexOf(to.meta.permission) > -1) sign = true
+// if (to.name !== 'login') {
+//     const authoritys = await store.dispatch('setUserAuthoritys')
+//     if (to.fullPath==="/center"&&from.fullPath!=="/center") {
+//         if (authoritys.includes('admin:quality')) {
+//             next('/center/qualityList');
+//             return
+//         }
+//     }
+// if (to.meta.permission) {
+//     let sign = false
+//     if (to.meta.permission instanceof Array) {
+//         to.meta.permission.forEach(item => {
+//             if (authoritys.indexOf(item) >= 0) {
+//                 sign = true
+//             }
+//         })
+//     } else if (authoritys.indexOf(to.meta.permission) > -1) sign = true
 
-    //     if (!sign) {
-    //         // if (to.name == 'login') {
-    //         //     console.log("进入coupon权限不足");
-    //         //     // next('/login');
-    //         // } else {
-    //         console.log('权限不足')
-    //         // }
-    //         return;
-    //     }
-    // }
-    // }
-    // next();
+//     if (!sign) {
+//         // if (to.name == 'login') {
+//         //     console.log("进入coupon权限不足");
+//         //     // next('/login');
+//         // } else {
+//         console.log('权限不足')
+//         // }
+//         return;
+//     }
+// }
+// }
+// next();
 // })
 
 export default router
