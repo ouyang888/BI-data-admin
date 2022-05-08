@@ -77,7 +77,7 @@
       },
       objectSpanMethod({ row, column, rowIndex, columnIndex }) {
         let number = 0;
-        console.log('this.mesInfo',this.mesInfo)
+        // console.log('this.mesInfo',this.mesInfo)
         this.mesInfo.forEach((item, idnex) => {
           number++;
         });

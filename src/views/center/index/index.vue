@@ -656,9 +656,14 @@
     </div>
 
     <!-- 底部表格 -->
-    
-      <TableCardBox :leftData="tableInner" :rightData="tableOutter" :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" :titleHead="titleHead"/>
 
+    <TableCardBox
+      :leftData="tableInner"
+      :rightData="tableOutter"
+      :rowSpanNumber2="rowSpanNumber2"
+      :rowSpanNumber1="rowSpanNumber1"
+      :titleHead="titleHead"
+    />
   </div>
 </template>
 <script>
@@ -666,19 +671,19 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
-import TableCardBox from '@/views/center/components/table/TableCardBox.vue';
+import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
 export default {
   name: "s",
   components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
-    TableCardBox
+    TableCardBox,
   },
   data() {
     return {
-      dateTime:"2022-03",
-      dataTimeMany:"2022-01-01,2022-10-01,2022-01-01,2022-10-01",
+      dateTime: "2022-03",
+      dataTimeMany: "2022-01-01,2022-10-01,2022-01-01,2022-10-01",
       showLoading: false,
       divisionList: [],
       divisionDate: [],
@@ -691,7 +696,7 @@ export default {
       outerDirectList: [],
       outerDirectDate: [],
       outerDirectLine: "",
-     
+
       echartsLabel: [
         { class: "plan", text: "实际达成" },
         { class: "average", text: "日均线" },
@@ -756,22 +761,21 @@ export default {
       outterSabLeft: [],
       outterSabRight: [],
       // 底部表格
-      tableInner:[],
-      tableOutter:[],
-      rowSpanNumber1:6,
-      rowSpanNumber2:6,
+      tableInner: [],
+      tableOutter: [],
+      rowSpanNumber1: 6,
+      rowSpanNumber2: 6,
       titleHead: {
-         businessEntityName1:'环境',
-         businessEntityName2:'电磁',
-         businessEntityName3:'饮品',
-         businessEntityName4:'电动',
-         businessEntityName5:'奇厨',
-         businessEntityName6:'烹饪',
-         businessEntityName7:'调理',
-         businessEntityName8:'其他'
-        },
+        businessEntityName1: "环境",
+        businessEntityName2: "电磁",
+        businessEntityName3: "饮品",
+        businessEntityName4: "电动",
+        businessEntityName5: "奇厨",
+        businessEntityName6: "烹饪",
+        businessEntityName7: "调理",
+        businessEntityName8: "其他",
+      },
     };
-
   },
   methods: {
     gotoDomestic() {
@@ -783,10 +787,10 @@ export default {
     // 右边卡片/
     async getCard(params) {
       try {
-        const inner = await API.getData("directITotalInnerTotal",params);
-        const outter = await API.getData("directTotalOutterTotal",params);
-        const innersab = await API.getData("directTotalInnerSAB",params);
-        const outtersab = await API.getData("directTotalOutterSAB",params);
+        const inner = await API.getData("directITotalInnerTotal", params);
+        const outter = await API.getData("directTotalOutterTotal", params);
+        const innersab = await API.getData("directTotalInnerSAB", params);
+        const outtersab = await API.getData("directTotalOutterSAB", params);
         console.log("inner,", outter);
 
         inner.rows.forEach((v) => {
@@ -903,14 +907,8 @@ export default {
     // 底部table/
     async getTable(params) {
       try {
-        let tableInner = await API.getData(
-          "directTotalinnerBottom",
-          params
-        );
-        let tableOutter = await API.getData(
-          "directTotalOutterBottom",
-          params
-        );
+        let tableInner = await API.getData("directTotalinnerBottom", params);
+        let tableOutter = await API.getData("directTotalOutterBottom", params);
 
         // this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
@@ -927,9 +925,8 @@ export default {
         let innerTotal = tableInner.rows.filter((v) => {
           return v.marketChannel == "底部合计";
         });
-        this.tableInner = innerTop.concat(innerBottom,innerTotal);
-        console.log('this.tableInner',this.rowSpanNumber1,this.tableInner)
-
+        this.tableInner = innerTop.concat(innerBottom, innerTotal);
+        console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
 
         // console.log("this.data", this.data);
       } catch (err) {
@@ -976,9 +973,7 @@ export default {
       }
     },
 
-
-
-  //三个仪表盘(左中)
+    //三个仪表盘(左中)
     async getdashboard() {
       try {
         const res = await API.getData("directTotalDashboard", this.dateTime);
@@ -987,24 +982,33 @@ export default {
         this.progressData.ballNum = (
           panelDataList[0].grossProfitRadio * 100
         ).toFixed(1);
-        this.speedData.speedBar = (panelDataList[0].cnyAmt*100).toFixed(1)
-        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1)
-        this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(1)
-        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+        this.speedData.speedBar = (panelDataList[0].cnyAmt * 100).toFixed(1);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
+        this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(1);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1);
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].directName == "内销") {
-            this.progressData.bar1 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
-            this.progressData.topGPM = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
-            this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(1)
-            this.speedData.bottomClose =  panelDataList[i].orgQtyRadio.toFixed(1)
-            this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
+            this.progressData.bar1 = (
+              panelDataList[i].directNameGrossProfitRadio * 100
+            ).toFixed(1);
+            this.progressData.topGPM = (
+              panelDataList[i].directNameGrossProfitRadio * 100
+            ).toFixed(1);
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.bottomClose =
+              panelDataList[i].orgQtyRadio.toFixed(1);
+            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
           } else if (panelDataList[i].directName == "外销") {
-            this.progressData.bar2 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
-            this.progressData.bottomGPM = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
-             this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(1)
-             this.speedData.bottomClose1 =  panelDataList[i].orgQtyRadio.toFixed(1)
-            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
-
+            this.progressData.bar2 = (
+              panelDataList[i].directNameGrossProfitRadio * 100
+            ).toFixed(1);
+            this.progressData.bottomGPM = (
+              panelDataList[i].directNameGrossProfitRadio * 100
+            ).toFixed(1);
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.bottomClose1 =
+              panelDataList[i].orgQtyRadio.toFixed(1);
+            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1);
           }
         }
       } catch (error) {
@@ -1017,32 +1021,50 @@ export default {
         const res = await API.getData("directTotalDashboardSAB", this.dateTime);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
-          if(RightSAB[i].directName == "事业部"){
+          if (RightSAB[i].directName == "事业部") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
-            if(RightSAB[i].position == "S"){
-              this.sabData.sabArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
-            }else if(RightSAB[i].position == "A"){
-              this.sabData.sabArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
-            }else if(RightSAB[i].position == "B"){
-              this.sabData.sabArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
+            if (RightSAB[i].position == "S") {
+              this.sabData.sabArr.s = (RightSAB[i].positionRatio * 100).toFixed(
+                1
+              );
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.sabArr.a = (RightSAB[i].positionRatio * 100).toFixed(
+                1
+              );
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.sabArr.b = (RightSAB[i].positionRatio * 100).toFixed(
+                1
+              );
             }
-          }else if(RightSAB[i].directName == "内销"){
-            this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
-             if(RightSAB[i].position == "S"){
-              this.sabData.topArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
-            }else if(RightSAB[i].position == "A"){
-              this.sabData.topArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
-            }else if(RightSAB[i].position == "B"){
-              this.sabData.topArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
+          } else if (RightSAB[i].directName == "内销") {
+            this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
+            if (RightSAB[i].position == "S") {
+              this.sabData.topArr.s = (RightSAB[i].positionRatio * 100).toFixed(
+                1
+              );
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.topArr.a = (RightSAB[i].positionRatio * 100).toFixed(
+                1
+              );
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.topArr.b = (RightSAB[i].positionRatio * 100).toFixed(
+                1
+              );
             }
-          }else if(RightSAB[i].directName == "外销"){
-              this.sabData.bar2 = (RightSAB[i].positionRatio*100).toFixed(1)
-             if(RightSAB[i].position == "S"){
-              this.sabData.bottomArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
-            }else if(RightSAB[i].position == "A"){
-              this.sabData.bottomArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
-            }else if(RightSAB[i].position == "B"){
-              this.sabData.bottomArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
+          } else if (RightSAB[i].directName == "外销") {
+            this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(1);
+            if (RightSAB[i].position == "S") {
+              this.sabData.bottomArr.s = (
+                RightSAB[i].positionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.bottomArr.a = (
+                RightSAB[i].positionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.bottomArr.b = (
+                RightSAB[i].positionRatio * 100
+              ).toFixed(1);
             }
           }
         }
@@ -1050,9 +1072,6 @@ export default {
         console.log(error);
       }
     },
-
-
-
 
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
@@ -1415,7 +1434,7 @@ export default {
   },
   mounted() {
     this.getList();
-    let month = '2022-03';
+    let month = "2022-03";
     this.getCard(month);
     this.getTable(month);
     this.getdashboard();
