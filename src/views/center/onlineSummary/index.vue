@@ -13,7 +13,7 @@
       <!-- 右侧卡片 -->
       <div class="flex-card">
         <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries">淘系</div>
+          <div class="card-font" @click="gotoCatSeries('淘系')">淘系</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -105,7 +105,7 @@
           </div>
         </div>
         <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries">京东</div>
+          <div class="card-font" @click="gotoCatSeries('京东')">京东</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -251,7 +251,7 @@
           </div>
         </div>
         <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries">拼多多系</div>
+          <div class="card-font" @click="gotoCatSeries('拼多多')">拼多多</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -329,7 +329,7 @@
           </div>
         </div>
         <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries">美的平台</div>
+          <div class="card-font" @click="gotoCatSeries('美的平台')">美的平台</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -421,7 +421,7 @@
           </div>
         </div>
         <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries">兴趣电商</div>
+          <div class="card-font" @click="gotoCatSeries('兴趣电商')">兴趣电商</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -496,7 +496,7 @@
           </div>
         </div>
         <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries">天猫自运营</div>
+          <div class="card-font" @click="gotoCatSeries('天猫自运营')">天猫自运营</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -787,6 +787,7 @@ export default {
           tags: ["cool", "teacher"],
         },
       ],
+
       progressData: {
         bar1: 0,
         bar2: 0,
@@ -842,8 +843,8 @@ export default {
       this.$router.push("/center/index");
     },
     // 猫系
-    gotoCatSeries() {
-      this.$router.push("/center/catSeries");
+    gotoCatSeries(item) {
+      this.$router.push({path:"/center/catSeries",query:{key:item}});
     },
 
     toModuleResponsible() {
