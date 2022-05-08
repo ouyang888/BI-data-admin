@@ -84,6 +84,38 @@ const routes = [
                 name: 'storeManager',
                 component: () => import('@/views/center/storeManager/index.vue')
             },
+
+              // 产司
+ 
+              {
+                path: 'department',
+                name: 'department',
+                component: () => import('@/views/center/department/department.vue')
+            },
+
+                //品类汇总
+ 
+                {
+                    path: 'productCo',
+                    name: 'productCo',
+                    component: () => import('@/views/center/productCo/productCo.vue')
+                },
+
+                  //线上负责人模式
+ 
+                  {
+                    path: 'modeCo',
+                    name: 'modeCo',
+                    component: () => import('@/views/center/modeCo/modeCo.vue')
+                },
+
+                    //店铺负责人---合作模式4
+ 
+                    {
+                        path: 'onlineModeCo',
+                        name: 'onlineModeCo',
+                        component: () => import('@/views/center/onlineModeCo/onlineModeCo.vue')
+                    },
         ],
     }
 

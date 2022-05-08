@@ -13,7 +13,7 @@
       <!-- 右侧卡片 -->
       <div class="flex-card" >
         <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries">京东自营</div>
+          <div class="card-font" @click="gotoCatSeries">京东旗舰店</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -116,7 +116,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font" @click="gotoCatSeries">京东企业购</div>
+          <div class="card-font" @click="gotoCatSeries">拍怕优品</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -269,7 +269,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font" @click="gotoCatSeries">京东POP</div>
+          <div class="card-font" @click="gotoCatSeries">环境旗舰店</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -354,7 +354,7 @@
           </div>
         </div>
            <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries">京东新通路</div>
+          <div class="card-font" @click="gotoCatSeries">生活专卖店</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -457,7 +457,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font" @click="gotoCatSeries">京东代理</div>
+          <div class="card-font" @click="gotoCatSeries">拼购旗舰店</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -904,9 +904,9 @@ export default {
     gotoDomestic(){
 this.$router.push("/center/index")
     },
-    // 负责人模式
+    // 店铺负责人---合作模式4
     gotoCatSeries(){
-      this.$router.push("/center/modeCo")
+      this.$router.push("/center/onlineModeCo")
     },
  
     toModuleResponsible(){
