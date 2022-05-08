@@ -13,7 +13,7 @@
       <!-- 右侧卡片 -->
       <div class="flex-card" >
         <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries">京东自营</div>
+          <div class="card-font" @click="gotoCatSeries">{{titleName}}自营</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -116,7 +116,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font" @click="gotoCatSeries">京东企业购</div>
+          <div class="card-font" @click="gotoCatSeries">{{titleName}}企业购</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -269,7 +269,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font" @click="gotoCatSeries">京东POP</div>
+          <div class="card-font" @click="gotoCatSeries">{{titleName}}POP</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -354,7 +354,7 @@
           </div>
         </div>
            <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries">京东新通路</div>
+          <div class="card-font" @click="gotoCatSeries">{{titleName}}新通路</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -457,7 +457,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font" @click="gotoCatSeries">京东代理</div>
+          <div class="card-font" @click="gotoCatSeries">{{titleName}}代理</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -632,11 +632,11 @@
       </div>
       <div class="flex-char">
         <div>
-          <div class="middle-font left-file">内销日达成趋势图</div>
+          <div class="middle-font left-file">内销线下{{titleName}}日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
-          <div class="middle-font">大区日达成趋势图</div>
+          <div class="middle-font">{{titleName}}店铺日达成趋势图</div>
           <div class="right-box-qushi">
             <div class="flex-right-bottom">
               <div>
@@ -775,6 +775,7 @@ export default {
   },
   data() {
     return {
+      titleName:"",
       columns: [
         {
           title: "线上",
@@ -1864,6 +1865,7 @@ this.$router.push("/center/index")
     },
   },
   mounted() {
+    this.titleName = this.$route.query.key
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();

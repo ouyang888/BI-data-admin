@@ -581,7 +581,7 @@
       </div>
       <div class="flex-char">
         <div>
-          <div class="middle-font">内销日达成趋势图</div>
+          <div class="middle-font left-file">内销日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
@@ -1939,8 +1939,8 @@ export default {
   justify-content: space-around;
   align-items: center;
   width: 98%;
-  margin: 20px auto;
-  margin-bottom: 20px;
+  margin: 10px auto;
+  margin-bottom: 10px;
 }
 .echartsBox {
   width: 607px;
@@ -1960,6 +1960,7 @@ export default {
   /* margin: 10px 20px 10px 10px; */
   border: 1px solid hsla(210, 86%, 39%, 0.66);
   margin: 20px auto;
+  margin-bottom: 10px;
 }
 .flex-font-middle {
   display: flex;
@@ -1973,7 +1974,7 @@ export default {
   color: #fff;
   font-weight: 600;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 6px;
 }
 .flex-bottom {
   display: flex;
@@ -2053,16 +2054,11 @@ export default {
   padding-top: 3px;
 }
 .flex-card {
-  /* display: flex;
-  margin-top: 20px; */
   display: flex;
   margin-top: 10px;
   align-items: center;
   justify-content: inherit;
-  /* width: 100%; */
   flex-wrap: wrap;
-  /* width: 70%; */
-  /* padding: 10px; */
 }
 .flex-top-card {
   display: flex;
@@ -2133,8 +2129,6 @@ export default {
 .mt-border {
   border: 1px solid rgba(255, 255, 255, 0.24);
   width: 1px;
-  margin-left: 6px;
-  margin-right: 6px;
 }
 .card-big-num {
   color: #66ffff;
@@ -2250,5 +2244,9 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+.left-file {
+  position: relative;
+  bottom: 20px;
 }
 </style> 

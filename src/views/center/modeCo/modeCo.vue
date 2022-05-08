@@ -7,7 +7,7 @@
         <div class="panelList">
           <ProgressPanel :data="progressData" />
           <SpeedPanel :data="speedData" />
-          <SadPanel :data="sabData" />
+          <SadPanel :data="sabData" /> 
         </div>
       </div>
       <!-- 右侧卡片 -->
@@ -632,11 +632,11 @@
       </div>
       <div class="flex-char">
         <div>
-          <div class="middle-font left-file">内销日达成趋势图</div>
+          <div class="middle-font left-file">内销线上{{codeName}}日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
-          <div class="middle-font">大区日达成趋势图</div>
+          <div class="middle-font">{{codeName}}店铺日达成趋势图</div>
           <div class="right-box-qushi">
             <div class="flex-right-bottom">
               <div>
@@ -775,6 +775,7 @@ export default {
   },
   data() {
     return {
+      codeName:"",
       columns: [
         {
           title: "线上",
@@ -1864,6 +1865,7 @@ this.$router.push("/center/index")
     },
   },
   mounted() {
+    this.codeName = this.$route.query.key
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
