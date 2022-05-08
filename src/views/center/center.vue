@@ -137,6 +137,13 @@ export default {
     },
     changedirection(index){
       this.direction = index
+      if(index == "2"){
+        this.$router.push("/center/department")
+        this.title = "产司汇总页"
+      }else{
+        this.$router.push("/center/index")
+        this.title = "销向汇总页"
+      }
     },
     changeyear(item){
       this.year = item
@@ -167,8 +174,8 @@ export default {
         this.$router.push("/center/index");
         this.title = "销向汇总页"
       }
-      
     },
+   
   },
   mounted() {
     localStorage.removeItem("showMoney");

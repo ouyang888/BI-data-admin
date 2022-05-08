@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- <el-scrollbar> -->
         <el-table border :data="mesInfo" :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }"
             :row-style="rowStyle" :header-cell-style="headerCellStyle" class="exportTable" height="270">
             <el-table-column prop="mode" label="产司" width="48" height="43px"></el-table-column>
@@ -67,18 +66,18 @@
     </div>
 </template>
 <script>
-    import { reactive, ref, defineComponent } from "vue";
-    import Progress from "@/views/componets/Progress.vue";
-    export default defineComponent({
+    import { reactive, ref, defineComponent } from "vue";  
+    import Progress from "./Progress.vue";
+    export default {
         name: "ColumnTable",
         components: {
             Progress,
         },
-        props: {
-            tableList: {
-                type: Object
-            }
-        },
+        // props: {
+        //     tableList: {
+        //         type: Object
+        //     }
+        // },
         data() {
             return {
                 tableList: [
@@ -280,9 +279,9 @@
                 }
             }
         },
-    });
+    };
 </script>
-<style scoped lang="stylus">
+<style scoped >
     .exportTable {
         font-size: 13px;
         width: 550px;

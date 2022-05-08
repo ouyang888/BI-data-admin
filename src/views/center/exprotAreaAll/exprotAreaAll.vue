@@ -13,7 +13,7 @@
       <!-- 右侧卡片 -->
       <div class="flex-card" >
         <div class="card-box">
-          <div class="card-font"   @click="gotoCatSeries">苏宁</div>
+          <div class="card-font" @click="gotoCatSeries">巴西</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -116,7 +116,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font"     @click="gotoCatSeries">国美</div>
+          <div class="card-font" @click="gotoCatSeries">阿根廷</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -269,7 +269,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font"     @click="gotoCatSeries">特渠</div>
+          <div class="card-font" @click="gotoCatSeries">哥伦比亚</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -354,7 +354,7 @@
           </div>
         </div>
            <div class="card-box">
-          <div class="card-font"     @click="gotoCatSeries">待定通道</div>
+          <div class="card-font" @click="gotoCatSeries">智利</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -457,7 +457,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font"     @click="gotoCatSeries">美云销</div>
+          <div class="card-font" @click="gotoCatSeries">美国</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -539,7 +539,7 @@
           </div>
         </div>
         <div class="card-box" >
-          <div class="card-font"     @click="gotoCatSeries">待定通道</div>
+          <div class="card-font" @click="gotoCatSeries">墨西哥</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -902,11 +902,11 @@ export default {
   },
   methods: {
     gotoDomestic(){
-this.$router.push("/center/index")
+    this.$router.push("/center/index")
     },
-    // 合作模式3
+    // 外销--产司区域主管
     gotoCatSeries(){
-      this.$router.push("/center/offlineCatSeries")
+      this.$router.push("/center/exprotProductCo")
     },
  
     toModuleResponsible(){
