@@ -1,5 +1,5 @@
 <template>
-  <div style="background: #02004d">
+  <div style="background: #02004d" >
     <div class="main-box">
       <!-- 整列左边 -->
       <div class="left-box">
@@ -447,7 +447,8 @@
         </div>
         <!-- 底部表格 -->
         <div class="flex-bottom">
-           <TableCardBox />   
+           <TableCardBox   :mesInfo="nesInfo" :headTitle="headTitle" />   
+            <!-- <TableCardBox   />    -->
              <!-- <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
       :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" 
       :titleHead="titleHead" style="transform: scale(0.98);"/>    -->
@@ -887,11 +888,12 @@
             </div>
           </div>
         </div>
+          <TableCardBox   :mesInfo="mesInfo" :headTitle="headTitle" />   
         <!-- 底部表格 -->
            <!-- <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
       :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" 
       :titleHead="titleHead" style="transform: scale(0.98);"/>    -->
-           <TableCardBox  />   
+           <!-- <TableCardBox  />    -->
         <!-- <div class="flex-bottom">
           <div class="execl">
             <a-table
@@ -1319,7 +1321,8 @@
       <!-- <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
       :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" 
       :titleHead="titleHead" style="transform: scale(0.98);"/>    -->
-         <TableCardBox />   
+         <!-- <TableCardBox />    -->
+           <TableCardBox   :mesInfo="mesInfo" :headTitle="headTitle" />   
        </div>
         <!-- 底部表格3 -->
         <!-- <div class="flex-bottom">
@@ -1349,6 +1352,248 @@ export default {
   },
   data() {
     return {
+      // * tQtyAll 合计责任制销量
+
+      //* orgQtyAll 合计累计达成销量
+
+         headTitle: {
+                    inSale: {
+                        title: "责任制",
+                        text: "累计达成",
+                        innerSaleTaskAmt: "innerSaleTaskAmt",
+                        innerCnyAmt: "innerCnyAmt",
+                    },
+                    outSale: {
+                        title: "责任制",
+                        text: "累计达成",
+                        outerSaleTaskAmt: "outerSaleTaskAmt",
+                        outerCnyAmt: "outerCnyAmt",
+                    },
+                    total: {
+                        title: "责任制",
+                        text: "累计达成",
+                        tQtyAll: "tQtyAll",
+                        orgQtyAll: "orgQtyAll",
+                    },
+                },
+                 nesInfo: [
+                    {
+                        businessEntityName: "环境",
+                        innerSaleTaskAmt: 23,
+                        innerCnyAmt: 41,
+                        outerSaleTaskAmt: 44,
+                        outerCnyAmt: 65,
+                        totalRespon: 79,
+                        totalDone: 80,
+                    },
+                    {
+                        businessEntityName: "烹饪",
+                        innerSaleTaskAmt: 24,
+                        innerCnyAmt: 21,
+                        outerSaleTaskAmt: 44,
+                        outerCnyAmt: 35,
+                        totalRespon: 79,
+                        totalDone: 80,
+                    },
+                    {
+                        businessEntityName: "电磁",
+                        innerSaleTaskAmt: 25,
+                        innerCnyAmt: 21,
+                        outerSaleTaskAmt: 44,
+                        outerCnyAmt: 65,
+                        totalRespon: 79,
+                        totalDone: 80,
+                    },
+                    {
+                        businessEntityName: "调理",
+                        innerSaleTaskAmt: 27,
+                        innerCnyAmt: 21,
+                        outerSaleTaskAmt: 44,
+                        outerCnyAmt: 65,
+                        totalRespon: 79,
+                        totalDone: 80,
+                    },
+                    {
+                        businessEntityName: "电动",
+                        innerSaleTaskAmt: 43,
+                        innerCnyAmt: 21,
+                        outerSaleTaskAmt: 44,
+                        outerCnyAmt: 65,
+                        totalRespon: 79,
+                        totalDone: 80,
+                    },
+                    {
+                        businessEntityName: "饮品",
+                        innerSaleTaskAmt: 23,
+                        innerCnyAmt: 21,
+                        outerSaleTaskAmt: 49,
+                        outerCnyAmt: 65,
+                        totalRespon: 79,
+                        totalDone: 80,
+                    },
+                    {
+                        businessEntityName: "合计",
+                        innerSaleTaskAmt: 83,
+                        innerCnyAmt: 21,
+                        outerSaleTaskAmt: 49,
+                        outerCnyAmt: 65,
+                        totalRespon: 79,
+                        totalDone: 80,
+                    },
+                ],
+                mesInfo: [
+                    {
+                        businessEntityName: "环境",
+                        innerSaleTaskAmt: 23,
+                        innerCnyAmt: 41,
+                        outerSaleTaskAmt: 44,
+                        outerCnyAmt: 65,
+                        tQtyAll: 93,
+                        orgQtyAll: 230,
+                    },
+                    {
+                        businessEntityName: "烹饪",
+                         innerSaleTaskAmt: 22,
+                        innerCnyAmt: 1,
+                        outerSaleTaskAmt: 34,
+                        outerCnyAmt: 65,
+                        tQtyAll: 93,
+                        orgQtyAll: 130,
+                    },
+                    {
+                        businessEntityName: "电磁",
+                        innerSaleTaskAmt: 223,
+                        innerCnyAmt: 14,
+                        outerSaleTaskAmt: 234,
+                        outerCnyAmt: 65,
+                        tQtyAll: 94,
+                        orgQtyAll: 101,
+                    },
+                    {
+                        businessEntityName: "调理",
+                        innerSaleTaskAmt: 9,
+                        innerCnyAmt: 13,
+                        outerSaleTaskAmt: 34,
+                        outerCnyAmt: 65,
+                        tQtyAll: 95,
+                        orgQtyAll: 103,
+                    },
+                    {
+                        businessEntityName: "电动",
+                        innerSaleTaskAmt: 49,
+                        innerCnyAmt: 33,
+                        outerSaleTaskAmt: 44,
+                        outerCnyAmt: 65,
+                        tQtyAll: 55,
+                        orgQtyAll: 93,
+                    },
+                    {
+                        businessEntityName: "饮品",
+                        innerSaleTaskAmt: 49,
+                        innerCnyAmt: 363,
+                        outerSaleTaskAmt: 434,
+                        outerCnyAmt: 65,
+                        tQtyAll: 25,
+                        orgQtyAll: 108,
+                    },
+                     {
+                        businessEntityName: "饮品",
+                        innerSaleTaskAmt: 49,
+                        innerCnyAmt: 363,
+                        outerSaleTaskAmt: 434,
+                        outerCnyAmt: 65,
+                        tQtyAll: 25,
+                        orgQtyAll: 108,
+                    }
+                   
+                ],
+       tableList: [
+                    {
+                        headTitle: {
+                            inSale: {
+                                inSaleRespon: "责任制",
+                                inSaleDone: "累计达成",
+                            },
+                            outSale: {
+                                title: "责任制",
+                                text: "累计达成",
+                                outSaleRespon: "outSaleRespon",
+                                outSaleDone: "outSaleDone",
+                            },
+                            total: {
+                                title: "责任制",
+                                text: "累计达成",
+                                totalRespon: "totalRespon",
+                                totalDone: "totalDone",
+                            },
+                        },
+                        mesInfo: [
+                            {
+                                mode: "环境",
+                                inSaleRespon: 23,
+                                inSaleDone: 21,
+                                outSaleRespon: 44,
+                                outSaleDone: 65,
+                                totalRespon: 79,
+                                totalDone: 80,
+                            },
+                            {
+                                mode: "烹饪",
+                                inSaleRespon: 23,
+                                inSaleDone: 21,
+                                outSaleRespon: 44,
+                                outSaleDone: 65,
+                                totalRespon: 79,
+                                totalDone: 80,
+                            },
+                            {
+                                mode: "电磁",
+                                inSaleRespon: 23,
+                                inSaleDone: 21,
+                                outSaleRespon: 44,
+                                outSaleDone: 65,
+                                totalRespon: 79,
+                                totalDone: 80,
+                            },
+                            {
+                                mode: "调理",
+                                inSaleRespon: 23,
+                                inSaleDone: 21,
+                                outSaleRespon: 44,
+                                outSaleDone: 65,
+                                totalRespon: 79,
+                                totalDone: 80,
+                            },
+                            {
+                                mode: "电动",
+                                inSaleRespon: 23,
+                                inSaleDone: 21,
+                                outSaleRespon: 44,
+                                outSaleDone: 65,
+                                totalRespon: 79,
+                                totalDone: 80,
+                            },
+                            {
+                                mode: "饮品",
+                                inSaleRespon: 23,
+                                inSaleDone: 21,
+                                outSaleRespon: 44,
+                                outSaleDone: 65,
+                                totalRespon: 79,
+                                totalDone: 80,
+                            },
+                            {
+                                mode: "合计",
+                                inSaleRespon: 23,
+                                inSaleDone: 21,
+                                outSaleRespon: 44,
+                                outSaleDone: 65,
+                                totalRespon: 79,
+                                totalDone: 80,
+                            },
+                        ],
+                    },
+                ], 
       departmentInfo: [],
       processInfo: [],
       homeSabInfo: [],
@@ -1478,9 +1723,35 @@ export default {
       ],
     };
   },
+    computed:{
+    ontime(){
+      return this.$store.state.year +'-'+ this.$store.state.month;
+    },
+    showMoney(){
+      return this.$store.state.showMoney;
+    },
+    modelLabel(){
+      return this.$store.state.showMoney==true?'亿':'台'
+    }
+    
+  },
+  watch:{
+    ontime:{
+     handler: function (newValue, oldValue) {
+        this.init();
+      }
+    },
+    showMoney:{
+      handler:(newValue,oldValue)=>{
+ 
+      }
+    }
+
+  },
   methods: {
-    async getList() {
-      const res = await API.getData("homeDashBoard", "2022-03");
+
+    async getList(ontime) {
+      const res = await API.getData("homeDashBoard", ontime);
       const homeSab = await API.getData("homeSab", "2022-03,2022-03");
       const homeGrossProfitRadio = await API.getData(
         "homeGrossProfitRadio",
@@ -1516,33 +1787,35 @@ export default {
 
     },
    // 底部table/
-    async getTable() {
+    async getTable(ontime) {
       try {
         let tableInner = await API.getData(
           "homeByDirectTotal",
-          "2022-03"
+          ontime
         );
+
+        this.nesInfo=tableInner.rows;
         // let tableOutter = await API.getData(
         //   "homeByDirectTotal",
         //   "2022-03"
         // );
 
         // this.tableInner = tableInner.rows;
-        this.tableOutter = tableOutter.rows;
-        this.rowSpanNumber2 = this.tableOutter.length;
+        // this.tableOutter = tableOutter.rows;
+        // this.rowSpanNumber2 = this.tableOutter.length;
 
-        let innerTop = tableInner.rows.filter((v) => {
-          return v.marketChannel == "线上";
-        });
-        this.rowSpanNumber1 = innerTop.length;
+        // let innerTop = tableInner.rows.filter((v) => {
+        //   return v.marketChannel == "线上";
+        // });
+        // this.rowSpanNumber1 = innerTop.length;
 
-        let innerBottom = tableInner.rows.filter((v) => {
-          return v.marketChannel == "线下";
-        });
-        let innerTotal = tableInner.rows.filter((v) => {
-          return v.marketChannel == "底部合计";
-        });
-        this.tableInner = innerTop.concat(innerBottom,innerTotal);
+        // let innerBottom = tableInner.rows.filter((v) => {
+        //   return v.marketChannel == "线下";
+        // });
+        // let innerTotal = tableInner.rows.filter((v) => {
+        //   return v.marketChannel == "底部合计";
+        // });
+        // this.tableInner = innerTop.concat(innerBottom,innerTotal);
         console.log('this.tableInner',this.rowSpanNumber1,this.tableInner)
 
 
@@ -1997,17 +2270,32 @@ export default {
     //     console.log(err);
     //   }
     // },
-  },
-  mounted() {
-    this.getList();
+    init(){
+    // this.getList();
+    // this.getCard(this.ontime);
+    // this.getTable(this.ontime);
+    // this.getdashboard(this.ontime);
+    // this.queryCardSAB(this.ontime);
+    this.getList(this.ontime);
     this.getLine();
-    this.getTable();
+    this.getTable(this.ontime);
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
+    }
+  },
+  mounted() {
+    this.init();
+    // this.getList();
+    // this.getLine();
+    // this.getTable();
+    // this.myEcharts();
+    // this.myEcharts2();
+    // this.myEcharts3();
   },
 };
 </script><style scoped>
+
        
     .main-box {
         display: flex;
@@ -2243,7 +2531,7 @@ margin-top: 20px;
     /* 中 */
     .flex-char {
         width: 100%;
-        margin: 20px auto;
+        margin: 10px auto;
         /* margin-bottom: 20px; */
     }
 
@@ -2277,7 +2565,7 @@ margin-top: 20px;
         color: #fff;
         font-weight: 600;
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
     }
 
 
