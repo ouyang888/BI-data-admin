@@ -154,6 +154,14 @@ export default {
     },
     clickChange(i) {
       this.index = i;
+      if(i == 1){
+        this.$router.push("/center/psi");
+        this.title = "总裁PSI页"
+      }else{
+        this.$router.push("/center/index");
+        this.title = "销向汇总页"
+      }
+      
     },
   },
   mounted() {
