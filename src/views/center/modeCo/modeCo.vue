@@ -7,7 +7,7 @@
         <div class="panelList">
           <ProgressPanel :data="progressData" />
           <SpeedPanel :data="speedData" />
-          <SadPanel :data="sabData" />
+          <SadPanel :data="sabData" /> 
         </div>
       </div>
       <!-- 右侧卡片 -->
