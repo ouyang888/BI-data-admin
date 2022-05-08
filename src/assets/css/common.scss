@@ -233,4 +233,17 @@ color: #1890FF;
   &::-webkit-scrollbar-thumb:hover {
     background-color: #8383a5;
   }
+  .el-table__empty-block{
+    background:rgb(7 6 64);
+  }
+  .el-table__empty-text{
+    color:#fff;
+  }
+
+}
+::v-deep .el-table{
+  color:red;
+  &::-webkit-scrollbar {
+  background:rgb(4, 19, 112)
+}
 }

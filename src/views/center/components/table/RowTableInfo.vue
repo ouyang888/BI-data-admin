@@ -38,7 +38,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="cnyAmt" label="总计" align="center">
+      <el-table-column prop="cnyAmt" label="总计" align="center" fixed="right">
         <template v-slot="scope">
          <div class="precent">
             <div style="width: 30px">2342</div>
