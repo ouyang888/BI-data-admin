@@ -42,6 +42,11 @@ const routes = [
                 name: 'export',
                 component: () => import('@/views/center/export/export.vue')
             },
+            // {
+            //     path: 'onlineSummary',
+            //     name: 'onlineSummary',
+            //     component: () => import('@/views/center/offlineSummaryInfo/index.vue')
+            // },
             {
                 path: 'onlineSummary',
                 name: 'onlineSummary',
