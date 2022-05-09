@@ -840,14 +840,6 @@
             var yue = timeArr[1];
             var ri = timeArr[2];
 
-            // for (let i = 0; i < sellOutDataList.length; i++) {
-
-            //   setTimeout(() => {
-            //     console.log(i);
-
-            //   }, 1000)
-
-            // }
             // 外销日内
             if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
               this.AvgTaskAmtDate.push(yue + "-" + ri);
@@ -902,27 +894,41 @@
             k++;
           }
           console.log('arr', arr);
-          var sellOutDataLists = arr;
-          console.log("sellOutDataLists",sellOutDataLists);
-         var arrnum = Array.from(sellOutDataLists, item => item.slice(0, 1))
 
-        //  console.log("arr2",arr2);
+          // var arrnum=[]
+          // arr.forEach(
+          //   function(v){ arrnum.push(v.cooprLevel1);}
+          //   );
+          // console.log(arrnum);
 
-         let newArr = arrnum.filter((item) => {
-            var timeArr = item.orderDate
-              .replace(" ", ":")
-              .replace(/\:/g, "-")
-              .split("-");
-            var yue = timeArr[1];
-            var ri = timeArr[2];
+          // var sellOutDataLists = arr;
+          // console.log("sellOutDataLists",sellOutDataLists);
+        //  var arrnum = Array.from(sellOutDataLists, item => item.slice(0, 1))  
+        //  console.log("arr32",arrnum);
+        //  for (var i in arrnum) {
+        //   console.log('11111111111', arrnum[i])
+        //  }
 
-            this.AmericaDate.push(yue + "-" + ri);
-              this.AmericaList.push(item.totalAmt);
-              this.AmericaLine = item.totalAvgTaskAmt;
-              this.myEcharts();
-         })
-         console.log("AmericaDate",AmericaDate);
-        //  this.myEcharts2(arrnum.,time,lines);
+        //  let newArr = arrnum.filter((item) => {
+        //     var timeArr = item.orderDate
+        //       .replace(" ", ":")
+        //       .replace(/\:/g, "-")
+        //       .split("-");
+        //     var yue = timeArr[1];
+        //     var ri = timeArr[2];
+        //     this.AmericaDate.push(yue + "-" + ri);
+        //       this.AmericaList.push(item.totalAmt);
+        //       this.AmericaLine = item.totalAvgTaskAmt;
+        //       this.myEcharts();
+        //  })
+
+    //     for (let h = 0; h < arrnum.length; h++) {
+    //       var element = arrnum[h]
+    //     }
+    //     let newArr = element.map(items=>{
+    //   var asd= items.cooprLevel1
+    // })
+        //  this.myEcharts2(arrnum.totalAmt,arrnum.orderDate,arrnum.totalAvgTaskAmt);
         } catch (error) {
           console.log(error);
 
