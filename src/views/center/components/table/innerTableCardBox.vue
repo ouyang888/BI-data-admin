@@ -9,11 +9,13 @@
         :title="title1"
         :color="color"
         @handleClick="namesClick"
+        :headerObj="leftObj"
       />
       <SellSportTable
         :mesInfo="rightData"
         :title="title2"
         :color="color2"
+        :headerObj="rightObj"
         @handleClick="managerClick"
       />
     </div>
@@ -46,6 +48,14 @@ export default {
     title2:{
       type:String,
       default:'',
+    },
+    leftObj:{
+      type:Object,
+      default:function(){ return {}}
+    },
+    rightObj:{
+      type:Object,
+      default:function(){ return {}}
     },
   },
   data() {

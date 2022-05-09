@@ -859,7 +859,7 @@ export default {
               panelDataList[i].cnyAmtRadio.toFixed(1);
             this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
           } else if (panelDataList[i].cooprLevel1 == "线下") {
-            this.progressData.bar1 = 10;
+            // this.progressData.bar1 = 10;
             this.progressData.bottomGPM = (
               panelDataList[i].onLineProfitRadio * 100
             ).toFixed(1);

@@ -13,7 +13,7 @@
     >
            
       <el-table-column
-        prop="cooprLevel2"
+        :prop="headerObj.name"
         align="center"
         :label="title"
         height="30px"
@@ -22,14 +22,14 @@
       <!-- label="通用-自营" -->
            
       <el-table-column
-        prop="cooprLevel2Manager"
+        :prop="headerObj.level"
         align="center"
         label="责任人"
         height="30px"
       >
         <template v-slot="scope">
           <div class="nameColor" @click="handleClick">
-            {{ scope.row.cooprLevel2Manager }}
+            {{ scope.row[headerObj.level] }}
           </div>
         </template>
       </el-table-column>
@@ -152,6 +152,16 @@ export default{
     title: {
       type: String,
     },
+    headerObj:{
+      type:Object,
+      default:function(){
+        return {
+          name:'cooprLevel2',
+         level:'coopr_level3_manager'
+
+      } 
+     }
+    }
   },
   components: {
     Progress,
