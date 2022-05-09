@@ -123,34 +123,8 @@
     </div>
 
     <!-- 底部表格 -->
-    <div class="flex-bottom">
-      <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-        >
-          <a slot="name" slot-scope="text">{{ text }}</a>
-          <template slot="name" slot-scope="name">
-            <a @click="gotoDomestic"> {{ name }}</a>
-             </template>
-        </a-table>
-      </div>
-      <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-        >
-          <a slot="name" slot-scope="text">{{ text }}</a>
-          <template slot="name" slot-scope="name">
-            <a @click="gotoDomestic"> {{ name }}</a>
-            </template>
-        </a-table>
-      </div>
-    </div>
+    <!-- 底部表格 -->
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" title1="线上" title2="线下"/>
   </div>
 </template>
 <script>
@@ -159,140 +133,21 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import Card from './component/card.vue'
+import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
 export default {
    components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
-    Card
+    Card,
+    innerTableCardBox
   },
   data() {
     return {
-      columns: [
-        {
-          title: "线上",
-          dataIndex: "name",
-          key: "name",
-          align: "center",
-          scopedSlots: { customRender: "name" },
-        },
-        {
-          title: "责任人",
-          dataIndex: "age",
-          key: "age",
-          align: "center",
-        },
-        {
-          title: "责任制",
-          dataIndex: "address",
-          key: "address 1",
-          align: "center",
-        },
-        {
-          title: "累计达成",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "任务完成率",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "毛利率",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "周转天数",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "说到做到",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "排名",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-      ],
-      data: [
-        {
-          key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. ",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. ",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. ",
-          tags: ["cool", "teacher"],
-        },
-      ],
-  progressData: {
-        bar1: 0,
-        bar2: 0,
-        ballTitle: "内销",
-        bigBallTitle: "毛利率",
-        textLeft: "线上",
-        textRight: "线下",
-        titleTop: "线上",
-        titleBottom: "线下",
-        topGPM: 0,
-        bottomGPM: 0,
-        ballNum: 0,
-      },
-      speedData: {
-        bar: 0,
-        speedBar: 0,
-        ballTitle: "内销达成",
-        ballNum: 0,
-        ballLeftTitle: "线上",
-        ballRightTitle: "线下",
-        ballLeftNum: 0,
-        ballRightNum: 0,
-        bottomNum: 0,
-        bottomTitle1: "线上",
-        bottomClose: 0,
-        bottomTime: 0,
-        bottomTitle2: "线下",
-        bottomClose1: 0,
-        bottomTime1: 0,
-      },
-      sabData: {
-        bar1: 70,
-        bar2: 50,
-        ballTitle: "内销",
-        bottom: "线上",
-        top: "线下",
-        sabArr: { s: 0, a: 0, b: 0 },
-        topArr: { s: 0, a: 0, b: 0 },
-        bottomArr: { s: 0, a: 0, b: 0 },
-        // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
-        // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
-        // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
-      },
       cardData:[{}],
-      showLoadingCard:true
+      showLoadingCard:true,
+      tableInner:[],
+      tableOutter:[]
     };
   },
   computed:{
@@ -1317,14 +1172,12 @@ this.$router.push("/center/index")
 
 
             if (!!v.saleAmtRadio) {
-              v.saleAmtRadio = (v.saleAmtRadio * 100).toFixed(0)
+              v.saleAmtRadio = (v.saleAmtRadio * 100>100?100:v.saleAmtRadio * 100).toFixed(0)
             }
             if (!!v.saleQtyRadio) {
-              v.saleQtyRadio = (v.saleQtyRadio * 100).toFixed(0)
+              v.saleQtyRadio = (v.saleQtyRadio * 100>100?100:v.saleQtyRadio * 100).toFixed(0)
             }
-            if (!!v.completeRadio) {
-              v.completeRadio = (v.completeRadio * 100).toFixed(0)
-            }
+        
             });
 
             if(res.rows.length>0){
@@ -1342,7 +1195,7 @@ this.$router.push("/center/index")
     // 底部table/
     async getTable(params) {
       try {
-        let tableInner = await API.getData("directTotalinnerBottom", params);
+        let tableInner = await API.getData("offLineBotton3Table", params);
         let tableOutter = await API.getData("directTotalOutterBottom", params);
 
         // this.tableInner = tableInner.rows;

@@ -1,7 +1,7 @@
 <template>
   <div class="flex-card" >
     <div class="card-box" v-for="(v,i) in list" :key="i">
-      <div class="card-font" @click="gotoCatSeries(v.cooprLevel2)">{{v.cooprLevel2}}</div>
+      <div class="card-font" @click="gotoCatSeries(v.cooprLevel2)">{{v.cooprLevel2 || 标题}} </div>
       <div class="card-border-box">
         <div class="line"></div>
         <div class="line1"></div>
@@ -118,7 +118,7 @@
     },
     methods: {
       gotoCatSeries(val) {
-        // $emit('gotoCatSeries',val)
+        this.$emit('gotoCatSeries',val)
       }
     }
 
