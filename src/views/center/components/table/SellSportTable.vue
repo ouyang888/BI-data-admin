@@ -1,6 +1,5 @@
 <template>
   <div class="execl">
-       
     <el-table
       border
       :data="mesInfo"
