@@ -1,19 +1,18 @@
 <template>
   <div style="background: #02004d">
     <!-- 头部仪表盘和卡片 -->
-    <div class="top-flex"  >
+    <div class="top-flex">
       <!-- 仪表盘 -->
-       <div class="dashboard-box">
+      <div class="dashboard-box">
         <div class="panelList">
           <ProgressPanel :data="progressData" />
           <SpeedPanel :data="speedData" />
           <SadPanel :data="sabData" />
         </div>
       </div>
-  
+
       <!-- 右侧卡片 -->
       <Card :list="cardData" @gotoCatSeries="gotoCatSeries" />
-      
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -131,27 +130,27 @@ import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
-import Card from './component/card.vue'
-import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
+import Card from "./component/card.vue";
+import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
 export default {
-   components: {
+  components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
     Card,
-    innerTableCardBox
+    innerTableCardBox,
   },
   data() {
     return {
       progressData: {
         bar1: 0,
         bar2: 0,
-        ballTitle: "内销",
+        ballTitle: "线下",
         bigBallTitle: "毛利率",
-        textLeft: "线上",
-        textRight: "线下",
-        titleTop: "线上",
-        titleBottom: "线下",
+        textLeft: "直营",
+        textRight: "代运营",
+        titleTop: "直营",
+        titleBottom: "代运营",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -159,32 +158,29 @@ export default {
       speedData: {
         bar: 0,
         speedBar: 0,
-        ballTitle: "内销达成",
+        ballTitle: "线下达成",
         ballNum: 0,
-        ballLeftTitle: "线上",
-        ballRightTitle: "线下",
+        ballLeftTitle: "直营",
+        ballRightTitle: "代运营",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "线上",
+        bottomTitle1: "直营",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "线下",
+        bottomTitle2: "代运营",
         bottomClose1: 0,
         bottomTime1: 0,
       },
       sabData: {
         bar1: 70,
         bar2: 50,
-        ballTitle: "内销",
-        bottom: "线上",
-        top: "线下",
+        ballTitle: "线下",
+        top: "直营",
+        bottom: "代运营",
         sabArr: { s: 0, a: 0, b: 0 },
         topArr: { s: 0, a: 0, b: 0 },
         bottomArr: { s: 0, a: 0, b: 0 },
-        // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
-        // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
-        // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
       cardData:[{}],
       showLoadingCard:true,
@@ -200,38 +196,36 @@ export default {
       },
     };
   },
-  computed:{
-    ontime(){
-      return this.$store.state.year +'-'+ this.$store.state.month;
+  computed: {
+    ontime() {
+      return this.$store.state.year + "-" + this.$store.state.month;
     },
-    showMoney(){
+    showMoney() {
       return this.$store.state.showMoney;
     },
-    modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'亿'
-    }
-    
-  },
-  watch:{
-    ontime:{
-     handler: function (newValue, oldValue) {
-        this.init();
-      }
+    modelLabel() {
+      return this.$store.state.showMoney == true ? "亿" : "亿";
     },
-    showMoney:{
-      handler:(newValue,oldValue)=>{
- 
-      }
-    }
-
+  },
+  watch: {
+    ontime: {
+      handler: function (newValue, oldValue) {
+        this.init();
+      },
+    },
+    showMoney: {
+      handler: (newValue, oldValue) => {},
+    },
   },
   mounted() {
-     this.init();
-   },
+    this.init();
+  },
   methods: {
     init(){
     this.getCard(this.ontime);
     this.getTable(this.ontime);
+    this.getdashboard(this.ontime);
+    this.queryCardSAB(this.ontime);
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
@@ -241,16 +235,121 @@ export default {
     this.myEcharts7();
     this.myEcharts8();
     },
-    gotoDomestic(){
-this.$router.push("/center/index")
+
+    //三个仪表盘(左中)
+    async getdashboard(params) {
+      try {
+        const res = await API.getData("offLineTopDashBoard", params);
+        //内销汇总仪表盘左边&&中间
+        let panelDataList = res.rows;
+        this.progressData.ballNum = (
+          panelDataList[0].onLineGrossProfitRadio * 100
+        ).toFixed(1);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
+        this.speedData.speedBar = (
+          panelDataList[0].businessModelAmtRadio * 100
+        ).toFixed(1);
+        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1);
+        for (var i = 0; i < panelDataList.length; i++) {
+          if (panelDataList[i].businessModel == "直营") {
+            this.progressData.topGPM = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(1);
+            this.progressData.bar1 = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(1);
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.bottomClose =
+              panelDataList[i].businessModelAmtRadio.toFixed(1);
+            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
+          } else if (panelDataList[i].businessModel == "代运营") {
+            this.progressData.bottomGPM = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(1);
+            this.progressData.bar2 = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(1);
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.bottomClose1 =
+              panelDataList[i].businessModelAmtRadio.toFixed(1);
+            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    //三个仪表盘(右)
+    async queryCardSAB(params) {
+      try {
+        const res = await API.getData("offLineTopSAB", params);
+        let RightSAB = res.rows;
+        for (var i = 0; i < RightSAB.length; i++) {
+          if (RightSAB[i].businessModel == "直营") {
+            this.sabData.bar1 = (
+              RightSAB[i].operationPositionRatio * 100
+            ).toFixed(1);
+            if (RightSAB[i].position == "S") {
+              this.sabData.topArr.s = (
+                RightSAB[i].operationPositionRatio * 100
+              ).toFixed(1);
+              this.sabData.sabArr.s = (
+                RightSAB[i].level1PositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.topArr.a = (
+                RightSAB[i].operationPositionRatio * 100
+              ).toFixed(1);
+              this.sabData.sabArr.a = (
+                RightSAB[i].level1PositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.topArr.b = (
+                RightSAB[i].operationPositionRatio * 100
+              ).toFixed(1);
+              this.sabData.sabArr.b = (
+                RightSAB[i].level1PositionRatio * 100
+              ).toFixed(1);
+            }
+          } else if (RightSAB[i].businessModel == "代运营") {
+            this.sabData.bar2 = (
+              RightSAB[i].level1QtyPositionRatio * 100
+            ).toFixed(1);
+            if (RightSAB[i].position == "S") {
+              this.sabData.bottomArr.s = (
+                RightSAB[i].operationPositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.bottomArr.a = (
+                RightSAB[i].operationPositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.bottomArr.b = (
+                RightSAB[i].operationPositionRatio * 100
+              ).toFixed(1);
+            }
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    gotoDomestic() {
+      this.$router.push("/center/index");
     },
     // 合作模式3
-    gotoCatSeries(item){
-      this.$router.push({path:"/center/offlineCatSeries",query:{key:item}})
+    gotoCatSeries(item) {
+      this.$router.push({
+        path: "/center/offlineCatSeries",
+        query: { key: item },
+      });
     },
- 
-    toModuleResponsible(){
-      this.$router.push({name:'moduleResponsible'});
+
+    toModuleResponsible() {
+      this.$router.push({ name: "moduleResponsible" });
     },
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
@@ -1202,41 +1301,41 @@ this.$router.push("/center/index")
       };
       myChart8.setOption(option);
     },
-        // 右边卡片/
-      async getCard(params) {
+    // 右边卡片/
+    async getCard(params) {
       this.showLoadingCard = true;
       try {
         const res = await API.getData("offLineRightCooper2", params);
-        res.rows.length>0 && res.rows.forEach(v => {
 
-
+        res.rows.length > 0 &&
+          res.rows.forEach((v) => {
             if (!!v.cnyAmt) {
-              v.cnyAmt = v.cnyAmt.toFixed(0)
+              v.cnyAmt = v.cnyAmt.toFixed(0);
             }
             if (!!v.saleTaskAmt) {
-              v.saleTaskAmt =v.saleTaskAmt.toFixed(0)
+              v.saleTaskAmt = v.saleTaskAmt.toFixed(0);
             }
-
-
 
             if (!!v.saleAmtRadio) {
-              v.saleAmtRadio = (v.saleAmtRadio * 100>100?100:v.saleAmtRadio * 100).toFixed(0)
+              v.saleAmtRadio = (
+                v.saleAmtRadio * 100 > 100 ? 100 : v.saleAmtRadio * 100
+              ).toFixed(0);
             }
             if (!!v.saleQtyRadio) {
-              v.saleQtyRadio = (v.saleQtyRadio * 100>100?100:v.saleQtyRadio * 100).toFixed(0)
+              v.saleQtyRadio = (
+                v.saleQtyRadio * 100 > 100 ? 100 : v.saleQtyRadio * 100
+              ).toFixed(0);
             }
-        
-            });
+          });
 
-            if(res.rows.length>0){ 
-            this.cardData = res.rows.filter(v=>{
-              return !!v.cooprLevel2
-            });
-            this.cardData.splice(6);
-          }else{
-            this.cardData = [{}];
-          }
-       
+        if (res.rows.length > 0) {
+          this.cardData = res.rows.filter((v) => {
+            return !!v.cooprLevel2;
+          });
+          this.cardData.splice(6);
+        } else {
+          this.cardData = [{}];
+        }
       } catch (err) {
         console.log(err);
       }
@@ -1275,7 +1374,6 @@ this.$router.push("/center/index")
       }
     },
     //中间折线图
-    
   },
 };
 </script>
