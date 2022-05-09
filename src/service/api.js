@@ -15,4 +15,7 @@ export default class ApiService {
   static getData(code,date) {
     return request.get(api.adminUrl + `query?code=${code}&parameter=${date}`);
   }
+  static getChartQuery(code,date,fields) {
+    return request.get(api.adminUrl + `chartQuery?code=${code}&parameter=${date}&fields=${fields}`);
+  }
 }
