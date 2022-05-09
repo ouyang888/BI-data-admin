@@ -546,7 +546,7 @@
                 <div class="border-left-line3"></div>
               </div>
             </div>
-            <div class="flex-right-bottom">
+            <!-- <div class="flex-right-bottom">
               <div class="content-cart">
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
@@ -559,7 +559,7 @@
                 <div class="border-left-line2"></div>
                 <div class="border-left-line3"></div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -840,6 +840,8 @@
             var yue = timeArr[1];
             var ri = timeArr[2];
 
+            // console.log("sellOutDataList",sellOutDataList);
+
             // 外销日内
             if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
               this.AvgTaskAmtDate.push(yue + "-" + ri);
@@ -895,43 +897,26 @@
           }
           console.log('arr', arr);
 
-          // var arrnum=[]
-          // arr.forEach(
-          //   function(v){ arrnum.push(v.cooprLevel1);}
-          //   );
-          // console.log(arrnum);
+          for (let j = 0; j < arr.length; j++) {
+            var datanum = arr[j];
+            
+          }
+          let Arrnum = datanum.filter((item) => {
+            var timeArr = item.orderDate 
+            .replace(" ", ":")
+              .replace(/\:/g, "-")
+              .split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+          console.log( "sdvsd", timeArr);
 
-          // var sellOutDataLists = arr;
-          // console.log("sellOutDataLists",sellOutDataLists);
-        //  var arrnum = Array.from(sellOutDataLists, item => item.slice(0, 1))  
-        //  console.log("arr32",arrnum);
-        //  for (var i in arrnum) {
-        //   console.log('11111111111', arrnum[i])
-        //  }
-
-        //  let newArr = arrnum.filter((item) => {
-        //     var timeArr = item.orderDate
-        //       .replace(" ", ":")
-        //       .replace(/\:/g, "-")
-        //       .split("-");
-        //     var yue = timeArr[1];
-        //     var ri = timeArr[2];
-        //     this.AmericaDate.push(yue + "-" + ri);
-        //       this.AmericaList.push(item.totalAmt);
-        //       this.AmericaLine = item.totalAvgTaskAmt;
-        //       this.myEcharts();
-        //  })
-
-    //     for (let h = 0; h < arrnum.length; h++) {
-    //       var element = arrnum[h]
-    //     }
-    //     let newArr = element.map(items=>{
-    //   var asd= items.cooprLevel1
-    // })
-        //  this.myEcharts2(arrnum.totalAmt,arrnum.orderDate,arrnum.totalAvgTaskAmt);
+          this.AmericaDate.push(yue + "-" + ri);
+              this.AmericaList.push(item.totalAmt);
+              this.AmericaLine = item.totalAvgTaskAmt;     
+          })
+          this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine);
         } catch (error) {
           console.log(error);
-
 
         }
       },
@@ -1323,11 +1308,11 @@
     },
 
     mounted() {
-           let data = [100,200,300,300];
-           let time = ['01-02','03-03','04-04','01-04'];
-    let lines = 400;
+//            let data = [100,200,300,300];
+//            let time = ['01-02','03-03','04-04','01-04'];
+//     let lines = 400;
       this.myEcharts();
-      this.myEcharts2(data,time,lines);
+      // this.myEcharts2(data,time,lines);
       this.myEcharts3();
       // this.myEcharts8();
     },
