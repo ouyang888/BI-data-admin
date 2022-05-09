@@ -224,7 +224,7 @@ export default {
   methods: {
     init(){
     this.getCard(this.ontime);
-    this.getTable(this.ontime);
+    // this.getTable(this.ontime);
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
@@ -1238,8 +1238,8 @@ this.$router.push("/center/index")
     // 底部table/
     async getTable(params) {
       try {
-        // let tableInner = await API.getData("innerDirectOnOutline", params);
-        let tableInner = await API.getData("offLineBotton3Table", params);
+        let tableInner = await API.getData("innerDirectOnOutline", params);
+        // let tableInner = await API.getData("offLineBotton3Table", params);
         let tableOutter = await API.getData("directTotalOutterBottom", params);
 
         // this.tableInner = tableInner.rows;

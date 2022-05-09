@@ -896,7 +896,7 @@
         try {
           const res = await API.getData(
             "sellOuttotalchart",
-            "202203,202203,20220301,20220314"
+            "2022-01-01,2022-10-01"
           );
 
           console.log("sell", res);
