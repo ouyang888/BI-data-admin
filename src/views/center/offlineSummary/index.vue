@@ -10,11 +10,9 @@
           <SadPanel :data="sabData" />
         </div>
       </div>
-      {{cardData}}
+  
       <!-- 右侧卡片 -->
-      <!-- <span v-for="(item,index) in cardData" :key="index">{{item}}</span> -->
- 
-      <!-- <Card :list="cardData" @gotoCatSeries="gotoCatSeries" /> -->
+      <Card :list="cardData" @gotoCatSeries="gotoCatSeries" />
       
     </div>
     <!-- 中间echart -->
@@ -160,13 +158,13 @@ import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
-// import Card from './component/card.vue'
+import Card from './component/card.vue'
 export default {
    components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
-    // Card
+    Card
   },
   data() {
     return {
@@ -1309,12 +1307,12 @@ this.$router.push("/center/index")
         res.rows.length>0 && res.rows.forEach(v => {
 
 
-            // if (!!v.cnyAmt) {
-            //   v.cnyAmt = (v.cnyAmt / 100000000).toFixed(0)
-            // }
-            // if (!!v.saleTaskAmt) {
-            //   v.saleTaskAmt = (v.saleTaskAmt / 100000000).toFixed(0)
-            // }
+            if (!!v.cnyAmt) {
+              v.cnyAmt = v.cnyAmt.toFixed(0)
+            }
+            if (!!v.saleTaskAmt) {
+              v.saleTaskAmt =v.saleTaskAmt.toFixed(0)
+            }
 
 
 
