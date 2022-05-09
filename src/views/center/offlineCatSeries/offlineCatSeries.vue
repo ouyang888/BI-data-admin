@@ -303,16 +303,16 @@ export default {
   methods: {
     init(){
     this.titleName = this.$route.query.key
-    // this.myEcharts();
-    // this.myEcharts2();
-    // this.myEcharts3();
-    // this.myEcharts4();
-    // this.myEcharts5();
-    // this.myEcharts6();
-    // this.myEcharts7();
-    // this.myEcharts8();
+    this.myEcharts();
+    this.myEcharts2();
+    this.myEcharts3();
+    this.myEcharts4();
+    this.myEcharts5();
+    this.myEcharts6();
+    this.myEcharts7();
+    this.myEcharts8();
     this.getCard(this.ontime);
-    this.getTable(this.ontime);
+    // this.getTable(this.ontime);
     },
     gotoDomestic(){
 this.$router.push("/center/index")
@@ -1319,8 +1319,8 @@ this.$router.push("/center/index")
     // 底部table/
     async getTable(params) {
       try {
-        let tableInner = await API.getData("level3OfflineCategory", params);
-        let tableOutter = await API.getData("level3OfflineFucosModel", params);
+        let tableInner = await API.getData("level3OfflineCategory",'淘系');
+        let tableOutter = await API.getData("level3OfflineFucosModel", `${params},${params}`);
 
         return;
 
