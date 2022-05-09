@@ -812,7 +812,7 @@ export default {
       return this.$store.state.showMoney;
     },
     modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'台'
+      return this.$store.state.showMoney==true?'亿':'亿'
     }
     
   },
