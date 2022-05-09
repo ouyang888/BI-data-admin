@@ -122,13 +122,7 @@
     </div>
 
     <!-- 底部表格 -->
-    <!-- 底部表格 -->
-    <innerTableCardBox
-      :leftData="tableInner"
-      :rightData="tableOutter"
-      title1="线上"
-      title2="线下"
-    />
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" title1="通路" title2="重点客户"/>
   </div>
 </template>
 <script>
@@ -219,19 +213,19 @@ export default {
     this.init();
   },
   methods: {
-    init() {
-      this.getCard(this.ontime);
-      this.getdashboard(this.ontime);
-      this.queryCardSAB(this.ontime);
-      // this.getTable(this.ontime);
-      this.myEcharts();
-      this.myEcharts2();
-      this.myEcharts3();
-      this.myEcharts4();
-      this.myEcharts5();
-      this.myEcharts6();
-      this.myEcharts7();
-      this.myEcharts8();
+    init(){
+    this.getCard(this.ontime);
+    this.getTable(this.ontime);
+    this.getdashboard(this.ontime);
+    this.queryCardSAB(this.ontime);
+    this.myEcharts();
+    this.myEcharts2();
+    this.myEcharts3();
+    this.myEcharts4();
+    this.myEcharts5();
+    this.myEcharts6();
+    this.myEcharts7();
+    this.myEcharts8();
     },
 
     //三个仪表盘(左中)
@@ -1342,32 +1336,29 @@ export default {
     // 底部table/
     async getTable(params) {
       try {
-        let tableInner = await API.getData("innerDirectOnOutline", params);
-        // let tableInner = await API.getData("offLineBotton3Table", params);
-        let tableOutter = await API.getData("directTotalOutterBottom", params);
+        let tableInner = await API.getData("offLineBotton3Table", `${params},${params}`);
+        let tableOutter = await API.getData("offLineBottomAk", `${params},${params}`);
 
-        // this.tableInner = tableInner.rows;
+        this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
-        this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
-        let innerTop = tableInner.rows.filter((v) => {
-          return v.marketChannel == "线上";
-        });
+        this.tableInner.forEach(v=>{
+          v.cooprLevel2Manager = v.coopr_level3_manager;
+        })
 
-        let innerBottom = tableInner.rows.filter((v) => {
-          return v.marketChannel == "线下";
-        });
-        this.rowSpanNumber1 = [innerTop.length, innerBottom.length];
-        console.log(
-          "innerBottom.length",
-          innerBottom.length,
-          this.rowSpanNumber1
-        );
-        let innerTotal = tableInner.rows.filter((v) => {
-          return v.marketChannel == "底部合计";
-        });
-        this.tableInner = innerTop.concat(innerBottom, innerTotal);
-        console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
+
+        this.tableInner.forEach(v=>{
+          v.cooprLevel2 = v.customerName;
+        })
+        // this.rowSpanNumber2 = [this.tableOutter.length - 1];
+
+        // this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
+        // console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
+        // let innerTotal = tableInner.rows.filter((v) => {
+        //   return v.marketChannel == "底部合计";
+        // });
+        // this.tableInner = innerTop.concat(innerBottom, innerTotal);
+        // console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
 
         // console.log("this.data", this.data);
       } catch (err) {
