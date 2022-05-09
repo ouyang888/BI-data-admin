@@ -13,7 +13,7 @@
       <!-- 右侧卡片 -->
       <div class="flex-card">
         <div class="card-box">
-          <div class="card-font" @click="online()">线上</div>
+          <div class="card-font" @click="leftGo()">南美区-张莱欧</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -265,7 +265,7 @@
           </div>
         </div>
         <div class="card-box">
-          <div class="card-font" @click='offline()'>线下</div>
+          <div class="card-font" @click="rightGo()">北美区-李林</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -817,7 +817,12 @@
     },
     methods: {
       // 三个仪表盘
-
+      leftGo() {
+       this.$router.push("/center/exprotAreaAll");
+    },
+    rightGo() {
+      this.$router.push("/center/exprotAreaAll");
+    },
       //三个仪表盘(左中)
       async getdashboard() {
         try {
