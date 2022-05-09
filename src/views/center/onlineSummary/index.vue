@@ -1089,8 +1089,8 @@ export default {
       };
       myChart.setOption(option);
     },
-    myEcharts2(data,time,lines,id) {
-      var myChart2 = this.$echarts.init(document.getElementById(id));
+    myEcharts2() {
+      var myChart2 = this.$echarts.init(document.getElementById("main2"));
       var option = {
         xAxis: {
           axisLabel: {
@@ -1119,7 +1119,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: time,
+          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
           axisTick: {
             show: false, //刻度线
           },
@@ -1180,11 +1180,11 @@ export default {
                 },
               },
             },
-            data:data,
+            data: [1948, 7308, 8949, 3839, 13857],
             markLine: {
               data: [
                 {
-                  yAxis:lines,
+                  yAxis: 8576,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1943,16 +1943,13 @@ export default {
     this.getdashboard();
     this.queryCardSAB();
     this.myEcharts();
-    let data = [200,300];
-    let time = ['01-02','01-03'];
-    let lines = 200;
-    this.myEcharts2(data,time,100,'main2');
-    // this.myEcharts3();
-    // this.myEcharts4();
-    // this.myEcharts5();
-    // this.myEcharts6();
-    // this.myEcharts7();
-    // this.myEcharts8();
+    this.myEcharts2();
+    this.myEcharts3();
+    this.myEcharts4();
+    this.myEcharts5();
+    this.myEcharts6();
+    this.myEcharts7();
+    this.myEcharts8();
     this.getTable();
   },
 };
