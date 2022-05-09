@@ -605,17 +605,16 @@
     },
     data() {
       return {
-        time: "2022-03",
         showLoading: false,
-        AmericaDate: [],
-        AmericaList: [],
+        // AmericaDate: [],
+        // AmericaList: [],
         AvgTaskAmtDate: [],
         AvgTaskAmtList: [],
         AvgTaskAmtLine: [],
-        AmericaLine: [],
-        koreaData: [],
-        koreaList: [],
-        koreaLine: [],
+        // AmericaLine: [],
+        // koreaData: [],
+        // koreaList: [],
+        // koreaLine: [],
         progressData: {
           bar1: 3,
           bar2: 5,
@@ -838,7 +837,6 @@
               .replace(" ", ":")
               .replace(/\:/g, "-")
               .split("-");
-
             var yue = timeArr[1];
             var ri = timeArr[2];
 
@@ -858,21 +856,18 @@
               this.myEcharts();
             }
 
-            this.myEcharts2();
-
-            if (item.cooprLevel1 == "北美零售营销中心") {
-              // obj.divisionArr.push(item)
-              this.AmericaDate.push(yue + "-" + ri);
-              this.AmericaList.push(item.CnyAmt);
-              this.AmericaLine = item.tAvgAmt;
-              this.myEcharts2();
-            } else if (item.cooprLevel1 == "韩国业务区") {
-              this.koreaData.push(yue + "-" + ri);
-              this.koreaList.push(item.CnyAmt);
-              this.koreaLine = item.tAvgAmt;
-              this.myEcharts3();
-            } 
-
+          //   if (item.cooprLevel1 == "北美零售营销中心") {
+          //     // obj.divisionArr.push(item)
+          //     this.AmericaDate.push(yue + "-" + ri);
+          //     this.AmericaList.push(item.CnyAmt);
+          //     this.AmericaLine = item.tAvgAmt;
+          //     this.myEcharts2();
+          //   } else if (item.cooprLevel1 == "韩国业务区") {
+          //     this.koreaData.push(yue + "-" + ri);
+          //     this.koreaList.push(item.CnyAmt);
+          //     this.koreaLine = item.tAvgAmt;
+          //     this.myEcharts3();
+          //   } 
             this.showLoading = false;
           });
 
@@ -880,6 +875,7 @@
           console.log(error);
         }
       },
+
 
       gotoDomestic() {
         this.$router.push("/center/index");
@@ -1002,7 +998,7 @@
         };
         myChart.setOption(option);
       },
-      myEcharts2() {
+      myEcharts2(data,time,lines) {
         var myChart2 = this.$echarts.init(document.getElementById("main2"));
         var option = {
           xAxis: {
@@ -1032,7 +1028,10 @@
           xAxis: {
             type: "category",
             boundaryGap: false,
-            data: this.AmericaDate,
+            // data: this.AmericaDate,
+            // data: ['01-02','03-03','04-04','01-04'],
+           
+            data:time,
             axisTick: {
               show: false, //刻度线
             },
@@ -1093,12 +1092,17 @@
                   },
                 },
               },
-              data: this.AmericaList,
+              // data: this.AmericaList,
+              // data:[10,20,100,250],
+              data:data,
+              // data:data,
               markLine: {
                 // data:this.AmericaLine,
                 data: [
                   {
-                    yAxis: this.AmericaLine,
+                    // yAxis: this.AmericaLine,
+                    // yAxis:400,
+                    yAxis:lines,
                     silent: false, //鼠标悬停事件 true没有，false有
                     lineStyle: {
                       //警戒线的样式 ，虚实 颜色
@@ -1255,9 +1259,13 @@
       this.queryCardSAB();
       this.getList();
     },
+
     mounted() {
+           let data = [100,200,300,300];
+           let time = ['01-02','03-03','04-04','01-04'];
+    let lines = 400;
       this.myEcharts();
-      this.myEcharts2();
+      this.myEcharts2(data,time,lines);
       this.myEcharts3();
       // this.myEcharts8();
     },
