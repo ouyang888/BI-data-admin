@@ -2629,4 +2629,10 @@ margin-top: 20px;
         background: linear-gradient(to right, rgb(80, 192, 255), rgb(90, 255, 163), rgb(102, 255, 255));
 
     }
+    ::v-deep .el-table .el-table__header-wrapper .el-table__cell{
+      padding:2px 0;
+    }
+    ::v-deep .el-table .el-table__body-wrapper .el-table__cell{
+      padding:15px 0;
+    }
 </style>

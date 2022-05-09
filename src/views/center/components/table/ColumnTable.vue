@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-table border :data="mesInfo" :cell-style="{ padding: '1px 0', borderColor: '#1E1D51' }"
+        <el-table border :data="mesInfo" :cell-style="{borderColor: '#1E1D51' }"
             :row-style="rowStyle" :header-cell-style="headerCellStyle" class="exportTable" height="258" >
             <el-table-column prop="businessEntityName" label="产司" width="48"  >
                
