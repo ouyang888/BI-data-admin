@@ -15,6 +15,7 @@
         <div class="card-box">
           <div class="card-font" @click="online()">线上</div>
           <a-spin class="cardLoad" size="large" v-if="showLoadingLeft" />
+          <div class="noData" v-else-if="innerLeft && innerLeft.length<1">暂无数据</div>
           <div class="card-border-box" v-else>
             <div class="line"></div>
             <div class="line1"></div>
@@ -274,6 +275,7 @@
         <div class="card-box">
           <div class="card-font" @click="gotoSummary">线下</div>
           <a-spin class="cardLoad" size="large" v-if="showLoadingRight" />
+          <div class="noData" v-else-if="outterLeft && outterLeft.length<1">暂无数据</div>
           <div class="card-border-box" v-else>
             <div class="line"></div>
             <div class="line1"></div>
@@ -810,7 +812,7 @@ export default {
       return this.$store.state.showMoney;
     },
     modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'台'
+      return this.$store.state.showMoney==true?'亿':'亿'
     }
     
   },
@@ -1330,16 +1332,19 @@ export default {
       this.$router.push("/center/offlineSummary");
     },
     // 右边卡片/
-    async getCard() {
+    async getCard(params) {
       // try {
       this.showLoadingLeft = true;
       this.showLoadingRight = true;
-      const inner = await API.getData("innerDirectInOutKard", "2022-03");
-      const innersab = await API.getData("innerDirectRightSAB", "2022-03");
+      const inner = await API.getData("innerDirectInOutKard", params);
+      const innersab = await API.getData("innerDirectRightSAB", params);
       console.log("inner,", inner);
-      if(inner.rows.length>0){
-          this.showLoadingLeft = false;
-          this.showLoadingRight = false;
+      this.showLoadingLeft = false;
+      this.showLoadingRight = false;
+      if(inner.rows.length == 0){
+        this.innerLeft = [];
+        this.outterLeft = [];
+        return;
         }
    
       inner.rows.forEach((v) => {
@@ -1463,24 +1468,31 @@ export default {
         this.tableOutter = tableOutter.rows;
 
         this.tableInner = tableInner.rows.filter(v=>{
-          return v.cooprLevel2Manager != '底部合计'
+          return v.cooprLevel2Manager != '底部合计' && !!v.cooprLevel2
         })
         let innerbottom = tableInner.rows.filter(v=>{
-          return v.cooprLevel2Manager == '底部合计'
-        })
-        this.tableInner = this.tableInner.concat(innerbottom);
-
-        this.tableOutter = tableOutter.rows.filter(v=>{
-          return v.cooprLevel2Manager != '底部合计'
-        })
-        let outterbottom = tableOutter.rows.filter(v=>{
           if(v.cooprLevel2Manager =='底部合计' ){
             v.cooprLevel2 = '底部合计'
           }
           return v.cooprLevel2Manager == '底部合计'
         })
-        this.tableOutter = this.tableOutter.concat(outterbottom);
+        this.tableInner = this.tableInner.concat(innerbottom);
 
+
+
+        this.tableOutter = tableOutter.rows.filter(v=>{
+          return v.cooprLevel2Manager != '合计' && !!v.cooprLevel2
+        })
+     
+        let outterbottom = tableOutter.rows.filter(v=>{
+          if(v.cooprLevel2Manager =='合计' ){
+            v.cooprLevel2 = '合计'
+            v.ranking = ''
+          }
+          return v.cooprLevel2Manager == '合计'
+        })
+        this.tableOutter = this.tableOutter.concat(outterbottom);
+        console.log('outterbottom',outterbottom)
       } catch (err) {
         console.log(err);
       }
