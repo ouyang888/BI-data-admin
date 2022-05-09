@@ -811,7 +811,17 @@ export default {
     }
 
   },
+  created() {
+     this.init();
+   },
   methods: {
+    init(){
+    this.getList();
+    this.getCard(this.ontime);
+    this.getTable(this.ontime);
+    this.getdashboard(this.ontime);
+    this.queryCardSAB(this.ontime);
+    },
     gotoDomestic() {
       this.$router.push("/center/domestic");
     },
@@ -1489,19 +1499,8 @@ export default {
     changeDate(val) {
       console.log("更新时间");
     },
-    init(){
-    this.getList();
-    this.getCard(this.ontime);
-    this.getTable(this.ontime);
-    this.getdashboard(this.ontime);
-    this.queryCardSAB(this.ontime);
-    }
   },
-  mounted() {
 
-    this.init();
-
-  },
 };
 </script>
 <style scoped>
