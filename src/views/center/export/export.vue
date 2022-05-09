@@ -616,18 +616,6 @@
         koreaData: [],
         koreaList: [],
         koreaLine: [],
-        JapanDate: [],
-        JapanList: [],
-        JapanLine: [],
-        AmericaKaDate: [],
-        AmericaKaList: [],
-        AmericaKaLine: [],
-        NorthwestDate: [],
-        NorthwestList: [],
-        NorthwestLine: [],
-        AsiaDate: [],
-        AsiaList: [],
-        AsiaLine: [],
         progressData: {
           bar1: 3,
           bar2: 5,
@@ -870,6 +858,7 @@
               this.myEcharts();
             }
 
+            this.myEcharts2();
 
             if (item.cooprLevel1 == "北美零售营销中心") {
               // obj.divisionArr.push(item)
