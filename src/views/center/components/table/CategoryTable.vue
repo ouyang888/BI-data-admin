@@ -95,7 +95,7 @@
   });
   </script>
   <style scoped>
-.execl {
+/* .execl {
   width: 905px;
   height: 324px;
   background-color: rgba(2, 0, 77, 0.4);
@@ -167,6 +167,6 @@ body .el-table::before {
     .el-table__fixed-body-wrapper{
       height: calc(100% - 43px) !important;
     }
-  }
+  } */
   </style>
   

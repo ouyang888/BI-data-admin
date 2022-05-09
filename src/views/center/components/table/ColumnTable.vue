@@ -398,7 +398,7 @@
         },
     };
 </script>
-<style scoped >
+<style scoped lang="scss">
     .exportTable {
         font-size: 13px;
         width: 550px;

@@ -220,7 +220,7 @@ export default{
   },
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .execl {
   width:calc(50% - 15px);
   height: 324px;
