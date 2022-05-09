@@ -144,6 +144,49 @@ export default {
   },
   data() {
     return {
+      progressData: {
+        bar1: 0,
+        bar2: 0,
+        ballTitle: "内销",
+        bigBallTitle: "毛利率",
+        textLeft: "线上",
+        textRight: "线下",
+        titleTop: "线上",
+        titleBottom: "线下",
+        topGPM: 0,
+        bottomGPM: 0,
+        ballNum: 0,
+      },
+      speedData: {
+        bar: 0,
+        speedBar: 0,
+        ballTitle: "内销达成",
+        ballNum: 0,
+        ballLeftTitle: "线上",
+        ballRightTitle: "线下",
+        ballLeftNum: 0,
+        ballRightNum: 0,
+        bottomNum: 0,
+        bottomTitle1: "线上",
+        bottomClose: 0,
+        bottomTime: 0,
+        bottomTitle2: "线下",
+        bottomClose1: 0,
+        bottomTime1: 0,
+      },
+      sabData: {
+        bar1: 70,
+        bar2: 50,
+        ballTitle: "内销",
+        bottom: "线上",
+        top: "线下",
+        sabArr: { s: 0, a: 0, b: 0 },
+        topArr: { s: 0, a: 0, b: 0 },
+        bottomArr: { s: 0, a: 0, b: 0 },
+        // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+        // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+        // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
+      },
       cardData:[{}],
       showLoadingCard:true,
       tableInner:[],
@@ -1157,8 +1200,6 @@ this.$router.push("/center/index")
       this.showLoadingCard = true;
       try {
         const res = await API.getData("offLineRightCooper2", params);
-
-
         res.rows.length>0 && res.rows.forEach(v => {
 
 
@@ -1180,9 +1221,11 @@ this.$router.push("/center/index")
         
             });
 
-            if(res.rows.length>0){
-
-            this.cardData = res.rows;
+            if(res.rows.length>0){ 
+            this.cardData = res.rows.filter(v=>{
+              return !!v.cooprLevel2
+            });
+            this.cardData.splice(6);
           }else{
             this.cardData = [{}];
           }
@@ -1195,6 +1238,7 @@ this.$router.push("/center/index")
     // 底部table/
     async getTable(params) {
       try {
+        // let tableInner = await API.getData("innerDirectOnOutline", params);
         let tableInner = await API.getData("offLineBotton3Table", params);
         let tableOutter = await API.getData("directTotalOutterBottom", params);
 
