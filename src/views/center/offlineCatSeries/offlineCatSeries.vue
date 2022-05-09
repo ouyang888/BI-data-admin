@@ -1379,8 +1379,81 @@ export default {
     this.myEcharts5();
     this.myEcharts6();
     this.myEcharts7();
-    this.myEcharts8();
     this.getCard(this.ontime);
+    },
+        // 右边卡片/
+  async getCard(params) {
+ 
+      this.showLoadingCard = true;
+      console.log('params');
+      try {
+        const res = await API.getData("level3OfflineTopTotal",params+','+this.titleName);
+        res.rows.length>0 && res.rows.forEach(v => {
+
+
+            if (!!v.cnyAmt) {
+              v.cnyAmt = v.cnyAmt.toFixed(0)
+            }
+            if (!!v.saleTaskAmt) {
+              v.saleTaskAmt =v.saleTaskAmt.toFixed(0)
+            }
+
+
+
+            if (!!v.saleAmtRadio) {
+              v.saleAmtRadio = (v.saleAmtRadio * 100>100?100:v.saleAmtRadio * 100).toFixed(0)
+            }
+            if (!!v.saleQtyRadio) {
+              v.saleQtyRadio = (v.saleQtyRadio * 100>100?100:v.saleQtyRadio * 100).toFixed(0)
+            }
+        
+            });
+
+            if(res.rows.length>0){ 
+            this.cardData = res.rows.filter(v=>{
+              return !!v.cooprLevel2
+            });
+            this.cardData.splice(6);
+          }else{
+            this.cardData = [{}];
+          }
+       
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    // 底部table/
+    async getTable(params) {
+      try {
+        let tableInner = await API.getData("level3OfflineCategory",'淘系');
+        let tableOutter = await API.getData("level3OfflineFucosModel", `${params},${params}`);
+
+        return;
+
+        // this.tableInner = tableInner.rows;
+        this.tableOutter = tableOutter.rows;
+        this.rowSpanNumber2 = [this.tableOutter.length - 1];
+
+        let innerTop = tableInner.rows.filter((v) => {
+          return v.marketChannel == "线上";
+        });
+
+        let innerBottom = tableInner.rows.filter((v) => {
+          return v.marketChannel == "线下";
+        });
+        this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
+        console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
+        let innerTotal = tableInner.rows.filter((v) => {
+          return v.marketChannel == "底部合计";
+        });
+        this.tableInner = innerTop.concat(innerBottom, innerTotal);
+        console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
+
+        // console.log("this.data", this.data);
+      } catch (err) {
+        console.log(err);
+      }
     },
 
   },
