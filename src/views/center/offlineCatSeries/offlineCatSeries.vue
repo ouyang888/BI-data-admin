@@ -122,7 +122,7 @@
     </div>
 
     <!-- 底部表格 -->
-      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" title1="通路自营" title2="KA"/>
+      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter"  :leftObj="leftObj" :rightObj="rightObj" title1="通路自营" title2="KA"/>
   </div>
 </template>
 <script>
@@ -269,7 +269,16 @@ export default {
       cardData:[{}],
       showLoadingCard:true,
       tableInner:[],
-      tableOutter:[]
+      tableOutter:[],
+      leftObj:{
+      name:'coopr_level3',
+      level:'coopr_level3_manager'
+      },
+      rightObj:{
+      name:'customerName',
+      level:'coopr_level3_manager'
+      },
+     
     };
   },
   computed:{
@@ -1305,29 +1314,19 @@ export default {
     // 底部table/
     async getTable(params) {
       try {
-        let tableInner = await API.getData("level3OfflineCategory",`${params},淘系`);
-        let tableOutter = await API.getData("level3OfflineFucosModel", `${params},${params}`);
+        let tableInner = await API.getData("level3OfflineCategory",`${params},${this.titleName},${params},${this.titleName}`);
+        let tableOutter = await API.getData("level3OfflineFucosModel",`${params},${this.titleName},${params},${this.titleName}`);
 
-        return;
 
-        // this.tableInner = tableInner.rows;
+        this.tableInner = tableInner.rows;
+        this.tableInner.forEach(v=>{
+          // v. = v.coopr_level3_manager;
+        })
+
         this.tableOutter = tableOutter.rows;
-        this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
-        let innerTop = tableInner.rows.filter((v) => {
-          return v.marketChannel == "线上";
-        });
 
-        let innerBottom = tableInner.rows.filter((v) => {
-          return v.marketChannel == "线下";
-        });
-        this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
-        console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
-        let innerTotal = tableInner.rows.filter((v) => {
-          return v.marketChannel == "底部合计";
-        });
-        this.tableInner = innerTop.concat(innerBottom, innerTotal);
-        console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
+     
 
         // console.log("this.data", this.data);
       } catch (err) {
