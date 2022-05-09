@@ -144,6 +144,7 @@ export default {
   },
   data() {
     return {
+<<<<<<< HEAD
       progressData: {
         bar1: 0,
         bar2: 0,
@@ -187,6 +188,8 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
+=======
+>>>>>>> fb85ab7a2b125a00cb86e2273c7d034e71c2af84
       cardData:[{}],
       showLoadingCard:true,
       tableInner:[],
@@ -1238,8 +1241,12 @@ this.$router.push("/center/index")
     // 底部table/
     async getTable(params) {
       try {
+<<<<<<< HEAD
         let tableInner = await API.getData("innerDirectOnOutline", params);
         // let tableInner = await API.getData("offLineBotton3Table", params);
+=======
+        let tableInner = await API.getData("offLineBotton3Table", params);
+>>>>>>> fb85ab7a2b125a00cb86e2273c7d034e71c2af84
         let tableOutter = await API.getData("directTotalOutterBottom", params);
 
         // this.tableInner = tableInner.rows;
