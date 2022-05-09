@@ -1643,6 +1643,8 @@ export default {
       tableOutter:[],
       rowSpanNumber1:6,
       rowSpanNumber2:6,
+      mode:"本部,OEM,待定",
+      mode2:"本部,OEM,待定,本部,OEM,待定",
       columns: [
         {
           title: "线上",
@@ -1749,7 +1751,13 @@ export default {
   },
     computed:{
     ontime(){
-      return this.$store.state.year +'-'+ this.$store.state.month;
+      return this.$store.state.year +'-'+ this.$store.state.month//this.$store.state.model;
+    },
+    ontime2(){
+      return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month;
+    },
+    ontime3(){
+      return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month +','+ this.$store.state.year +'-'+ this.$store.state.month+',' +this.$store.state.year +'-'+ this.$store.state.month;
     },
     showMoney(){
       return this.$store.state.showMoney;
@@ -1774,19 +1782,25 @@ export default {
   },
   methods: {
 
-    async getList(ontime) {
+    async getList(ontime,ontime2) {
       const res = await API.getData("homeDashBoard", ontime);
-      const homeSab = await API.getData("homeSab", "2022-03,2022-03");
+      const homeSab = await API.getData("homeSab", ontime2);
       const homeGrossProfitRadio = await API.getData(
         "homeGrossProfitRadio",
-        "2022-03,2022-03"
+        ontime2
       );
    
         this.departmentInfo = res.rows.filter((v) => {
-          return v.directName == this.sale;
+          return v.directName == "内销";
         })[0];
-        this.processInfo = res.rows;
-        this.homeSabInfo = homeSab.rows;
+        this.processInfo = res.rows.filter((v) => {
+          return v.directName == "内销";
+        });
+        //this.homeSabInfo = homeSab.rows;
+        //  this.homeSabInfo = homeSab.rowsfilter((v) => {
+        //   return v.directName == "内销";
+        // })
+        console.log("this.homeSabInfo this.homeSabInfo this.homeSabInfo ",this.homeSabInfo );
         this.homeGrossProfitRadio = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName ==this.sale;
         })[0];
@@ -1796,8 +1810,14 @@ export default {
         })[0];
         console.log("外销",this.departmentInfo1);
 
-        this.processInfo1 = res.rows;
-        this.homeSabInfo1 = homeSab.rows;
+        this.processInfo1 = res.rows.filter((v) => {
+          return v.directName == "外销";
+        });
+        //this.homeSabInfo1 = homeSab.rows;
+        // .filter((v) => {
+        //   return v.directName == "外销";
+        // });;
+        //   console.log("homeSabInfo1",this.homeSabInfo );
         this.homeGrossProfitRadio1 = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName == this.sales;
         })[0];
@@ -1848,10 +1868,10 @@ export default {
         console.log(err);
       }
     },
-     async getLine() {
+     async getLine(ontime3) {
       this.showLoading = true
       try {
-        const res = await API.getData("homeAnnualAmtChart","2022-01-01,2022-10-01,2022-01-01,2022-10-01");
+        const res = await API.getData("homeAnnualAmtChart",'2022-03-01,2022-03-31,2022-03-01,2022-03-31');
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
         let newArr = res.rows.filter((item)=>{
         var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
@@ -2302,8 +2322,8 @@ export default {
     // this.getTable(this.ontime);
     // this.getdashboard(this.ontime);
     // this.queryCardSAB(this.ontime);
-    this.getList(this.ontime);
-    this.getLine();
+    this.getList(this.ontime,this.ontime2);
+    this.getLine(this.ontime3);
     this.getTable(this.ontime);
     this.myEcharts();
     this.myEcharts2();
