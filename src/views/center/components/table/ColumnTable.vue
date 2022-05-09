@@ -11,7 +11,7 @@
                 </template>
                 </el-table-column>
                 <el-table-column :prop="headTitle.inSale.innerCnyAmt" :label="headTitle.inSale.text" align="center"
-                    style="font-weight: 600">
+                    style="font-weight: 400">
                     <template v-slot="scope">
                         <div class="precent">
                             <div style="width: 30px">
@@ -364,7 +364,8 @@
                     backgroundColor: "#070640",
                     color: "rgba(255,255,255,0.8)",
                     fontFamily: 'PingFangSC-Regular',
-                    height:20
+                    height:20,
+                    fontWeight: 400
                 };
             },
             headerCellStyle({ row, column, rowIndex, columnIndex }) {
@@ -376,7 +377,9 @@
                         color: "#fff",
                         borderColor: "#1E1D51",
                         lineHight:"10px",
-                        padding:"1px"
+                        padding:"3px",
+                        fontWeight: 400
+                    
 
                     };
                 } else {
@@ -385,7 +388,8 @@
                         color: "#fff",
                         borderColor: "#1E1D51",
                         lineHight:"10px",
-                        padding:"1px"
+                        padding:"3px",
+                        fontWeight: 400
                     };
                 }
             }
@@ -400,6 +404,7 @@
         border-color: #1E1D51;
         margin: 0 auto;
         background-color: rgb(4, 19, 112);
+        font-weight: 200px;
     }
 
     body .el-table::before {
@@ -488,7 +493,10 @@
      :deep(.el-table tr) {
         padding: 0;
     }
-   
+   :deep(.el-table .cell) {
+        padding: 0;
+        font-weight: 400;
+    }
 
     :deep(.el-table .el-table__header tr:nth-child(2)) {
         height: 25px;
