@@ -5,7 +5,7 @@
       <div class="left-box">
         <!-- 上 -->
         <div class="card-box">
-          <div class="card-font">事业部s</div>
+          <div class="card-font">S</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -433,14 +433,14 @@
             
             <div>
               <div class="middle-font">事业部年度销售规划及达成趋势图</div>
-               <div class="legend">
-            <template v-if="echartsLabel">
-              <div class="item" v-for="(item,index) in echartsLabel" :key="index">
-                <div class="lump" :class="item.class"></div>
-                <div class="text">{{item.text}}</div>
+               <div class="legend"> 
+                <template v-if="echartsLabel">
+                  <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+                    <div class="lump" :class="item.class"></div>
+                    <div class="text">{{item.text}}</div>
+                  </div>
+                </template>
               </div>
-            </template>
-          </div>
               <div id="main" class="echartsBox"></div>
             </div>
           </div>
@@ -481,7 +481,7 @@
       <div class="center-box">
         <!-- 上 -->
         <div class="card-box">
-          <div class="card-font">事业部p</div>
+          <div class="card-font">P</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -491,7 +491,7 @@
             <div class="left-right-box">
               <div class="centerInfo" >
                 <div class="flex-top-card">
-                  <div class="top-left-font">线上达成</div>
+                  <div class="top-left-font">内销达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -682,7 +682,7 @@
               <div class="mt-border"></div>
               <div class="centerInfo" >
                 <div class="flex-top-card">
-                  <div class="top-left-font">线下达成</div>
+                  <div class="top-left-font">外销达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -884,7 +884,17 @@
           <div class="flex-char">
             <div>
               <div class="middle-font"> 事业部年度生产规划及达成趋势图</div>
-              <div id="main2" class="echartsBox"></div>
+                <div class="legend"> 
+                <template v-if="echartsLabel">
+                  <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+                    <div class="lump" :class="item.class"></div>
+                    <div class="text">{{item.text}}</div>
+                  </div>
+                </template>
+              </div>
+              <div id="main2" class="echartsBox">
+        
+              </div>
             </div>
           </div>
         </div>
@@ -911,7 +921,7 @@
       <div class="right-box">
         <!-- 上 -->
         <div class="card-box">
-          <div class="card-font">事业部I</div>
+          <div class="card-font">I</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -921,7 +931,7 @@
             <div class="left-right-box">
               <div class="centerInfo" >
                 <div class="flex-top-card">
-                  <div class="top-left-font">线上达成</div>
+                  <div class="top-left-font">内销库存</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -1111,10 +1121,10 @@
               <div class="mt-border"></div>
               <div class="centerInfo">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线下达成</div>
+                  <div class="top-left-font">内销达成</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div>
+                    <div class="finish-font">库存目标 <span>100亿</span></div>
+                    <div class="finish-font">库存比 <span>75%</span></div>
                   </div>
                 </div>
                 <div class="flex-top-card">
@@ -1310,7 +1320,16 @@
           <div class="flex-char">
             <div>
               <div class="middle-font">事业部年库存生产规划及达成趋势图</div>
-              <div id="main3" class="echartsBox"></div>
+                  <div class="legend"> 
+                <template v-if="echartsLabel">
+                  <div class="item" v-for="(item,index) in echartsLabel" :key="index">
+                    <div class="lump" :class="item.class"></div>
+                    <div class="text">{{item.text}}</div>
+                  </div>
+                </template>
+              </div>
+              <div id="main3" class="echartsBox">
+              </div>
             </div>
           </div>
         </div>
@@ -1355,6 +1374,11 @@ export default {
       // * tQtyAll 合计责任制销量
 
       //* orgQtyAll 合计累计达成销量
+        echartsLabel: [
+          { class: "plan", text: "实际达成" },
+          { class: "plan", text: "规划达成" },
+          { class: "average", text: "日均线" },
+        ],
 
          headTitle: {
                     inSale: {
@@ -1890,11 +1914,11 @@ export default {
             },
           },
         },
-        // labelData: [
-        //   { class: "plan", text: "实际达成" },
-        //   // { class: 'actual', text: '规划达成' },
-        //   { class: "average", text: "日均线" },
-        // ],
+        labelData: [
+          { class: "plan", text: "实际达成" },
+          // { class: 'actual', text: '规划达成' },
+          { class: "average", text: "日均线" },
+        ],
         // echartsData: {
         textStyle: {
           color: "#3FB0FF",
@@ -2066,6 +2090,7 @@ export default {
             // smooth: true,
             lineStyle: {
               width: 1,
+              label:true,
             },
             showSymbol: false,
             areaStyle: {
@@ -2138,6 +2163,7 @@ export default {
         color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
         title: {
           text: "",
+          
         },
         tooltip: {
           trigger: "axis",
@@ -2360,7 +2386,7 @@ export default {
         height: 248px;
         /* width: 605px; */
         width: 100%;
-        background-image: url("../../../assets/img/bigCardBackground.svg");
+        /* background-image: url("../../../assets/img/bigCardBackground.svg"); */
         background-repeat: no-repeat;
         /* margin-left: 20px; */
         background-size: cover;

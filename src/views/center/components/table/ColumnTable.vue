@@ -13,7 +13,7 @@
                 </template>
                 </el-table-column>
                 <el-table-column :prop="headTitle.inSale.innerCnyAmt" :label="headTitle.inSale.text" align="center"
-                    style="font-weight: 600">
+                    style="font-weight: 400">
                     <template v-slot="scope">
                         <div class="precent">
                             <div style="width: 30px">
@@ -29,14 +29,14 @@
                 </el-table-column>
                 <!-- <el-table-column v-for="(k,i) in tableList.headTitle.inSale" :label="k"></el-table-column> -->
             </el-table-column>
-            <el-table-column label="外销" align="center" height="30px">
-                <el-table-column :prop="headTitle.outSale.outerSaleTaskAmt" :label="headTitle.outSale.title"
+            <el-table-column label="外销" align="center" height="20px">
+                <el-table-column :prop="headTitle.outSale.outerSaleTaskAmt" :label="headTitle.outSale.title" height="20px"
                     align="center">
                      <template v-slot="scope">
                                 {{ Number(scope.row.outerSaleTaskAmt).toFixed(1) }}
                 </template>
                 </el-table-column>
-                <el-table-column :prop="headTitle.outSale.outerCnyAmt" :label="headTitle.outSale.text" align="center">
+                <el-table-column :prop="headTitle.outSale.outerCnyAmt" :label="headTitle.outSale.text" align="center" height="20px" >
                     <template v-slot="scope">
                         <div class="precent">
                             <div style="width: 30px">
@@ -52,9 +52,9 @@
                 </el-table-column>
                 <!-- <el-table-column v-for="(k,i) in tableList.headTitle.outSale" :label="k"></el-table-column> -->
             </el-table-column>
-            <el-table-column label="合计" align="center" height="30px">
+            <el-table-column label="合计" align="center" height="20px" width="50">
                 <!-- <el-table-column v-for="(k,i) in tableList.headTitle.totalDone" :label="k"></el-table-column> -->
-                <el-table-column :prop="headTitle.total.tQtyAll" :label="headTitle.total.title" align="center">
+                <el-table-column :prop="headTitle.total.tQtyAll" :label="headTitle.total.title" align="center" height="20px">
                      <template v-slot="scope">
                                 {{ Number(scope.row.tQtyAll).toFixed(1) }}
                      </template>
@@ -365,24 +365,33 @@
                 return {
                     backgroundColor: "#070640",
                     color: "rgba(255,255,255,0.8)",
-                    fontFamily: 'PingFangSC-Regular'
+                    fontFamily: 'PingFangSC-Regular',
+                    height:20,
+                    fontWeight: 400
                 };
             },
             headerCellStyle({ row, column, rowIndex, columnIndex }) {
                 if (rowIndex === 0 && columnIndex === 0) {
                     return {
                         backgroundImage:
-                            "linear-gradient(to bottom , #50C0FF,#5AFFA3,#66FFFF)",
+                        "linear-gradient(to bottom , #50C0FF,#5AFFA3,#66FFFF)",
+                        height:"30px",
                         color: "#fff",
                         borderColor: "#1E1D51",
-                        lineHight:"10px"
+                        lineHight:"10px",
+                        padding:"3px",
+                        fontWeight: 400
+                    
+
                     };
                 } else {
                     return {
                         backgroundColor: "#041370",
                         color: "#fff",
                         borderColor: "#1E1D51",
-                         lineHight:"10px"
+                        lineHight:"10px",
+                        padding:"3px",
+                        fontWeight: 400
                     };
                 }
             }
@@ -393,10 +402,11 @@
     .exportTable {
         font-size: 13px;
         width: 550px;
-        height: 258px;
+        /* height: 258px; */
         border-color: #1E1D51;
         margin: 0 auto;
         background-color: rgb(4, 19, 112);
+        font-weight: 200px;
     }
 
     body .el-table::before {
@@ -422,6 +432,13 @@
 
     :deep(.el-table--enable-row-hover .el-table__body tr:hover > td) {
         background-color: #070640 !important;
+    }
+     :deep(.el-table .el-table__cell){
+     padding: 0;
+    }
+
+    :deep(.el-table thead.is-group th.el-table__cell){
+     padding: 0;
     }
 
     /* 边框线 */
@@ -467,18 +484,25 @@
 
     /* 头部加粗 */
     :deep(.el-table .el-table__header tr:first-child) {
-        height: 45px;
-        line-height: 45px;
-        font-weight: 600;
+        height: 25px;
+        line-height: 25px;
+        /* font-weight: 600; */
     }
 
     :deep(.el-table th) {
         padding: 0;
     }
+     :deep(.el-table tr) {
+        padding: 0;
+    }
+   :deep(.el-table .cell) {
+        padding: 0;
+        font-weight: 400;
+    }
 
     :deep(.el-table .el-table__header tr:nth-child(2)) {
-        height: 35px;
-        line-height: 35px;
+        height: 25px;
+        line-height: 25px;
         color: rgba(255, 255, 255, 0.8);
         font-family: PingFangSC-Regular
     }
