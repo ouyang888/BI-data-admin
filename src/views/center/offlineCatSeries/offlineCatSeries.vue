@@ -856,15 +856,15 @@ export default {
           tags: ["cool", "teacher"],
         },
       ],
-  progressData: {
+      progressData: {
         bar1: 0,
         bar2: 0,
-        ballTitle: "内销",
+        ballTitle: "线下",
         bigBallTitle: "毛利率",
-        textLeft: "线上",
-        textRight: "线下",
-        titleTop: "线上",
-        titleBottom: "线下",
+        textLeft: "自营",
+        textRight: "代运营",
+        titleTop: "自营",
+        titleBottom: "代运营",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -872,26 +872,26 @@ export default {
       speedData: {
         bar: 0,
         speedBar: 0,
-        ballTitle: "内销达成",
+        ballTitle: "线下达成",
         ballNum: 0,
-        ballLeftTitle: "线上",
-        ballRightTitle: "线下",
+        ballLeftTitle: "自营",
+        ballRightTitle: "代运营",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "线上",
+        bottomTitle1: "自营",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "线下",
+        bottomTitle2: "代运营",
         bottomClose1: 0,
         bottomTime1: 0,
       },
       sabData: {
-        bar1: 70,
-        bar2: 50,
-        ballTitle: "内销",
-        bottom: "线上",
-        top: "线下",
+        bar1: 0,
+        bar2: 0,
+        ballTitle: "线下",
+        top: "自营",
+        bottom: "代运营",
         sabArr: { s: 0, a: 0, b: 0 },
         topArr: { s: 0, a: 0, b: 0 },
         bottomArr: { s: 0, a: 0, b: 0 },
@@ -901,9 +901,30 @@ export default {
       },
     };
   },
+    computed: {
+    ontime() {
+      return this.$store.state.year + "-" + this.$store.state.month;
+    },
+    showMoney() {
+      return this.$store.state.showMoney;
+    },
+    modelLabel() {
+      return this.$store.state.showMoney == true ? "亿" : "亿";
+    },
+  },
+  watch: {
+    ontime: {
+      handler: function (newValue, oldValue) {
+        this.init();
+      },
+    },
+    showMoney: {
+      handler: (newValue, oldValue) => {},
+    },
+  },
   methods: {
     gotoDomestic(){
-this.$router.push("/center/index")
+      this.$router.push("/center/index")
     },
     // 负责人模式
     gotoCatSeries(){
@@ -1863,9 +1884,116 @@ this.$router.push("/center/index")
       };
       myChart8.setOption(option);
     },
-  },
-  mounted() {
+
+
+
+    //三个仪表盘(左中)
+    async getdashboard(params) {
+      try {
+        const res = await API.getData("offlinePlatformTop", params+','+this.titleName);
+        //内销汇总仪表盘左边&&中间
+        let panelDataList = res.rows;
+        this.progressData.ballNum = (
+          panelDataList[0].onLineGrossProfitRadio * 100
+        ).toFixed(1);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
+        this.speedData.speedBar = (
+          panelDataList[0].onLineCompleteRadioRadio  * 100
+        ).toFixed(1);
+        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1);
+        for (var i = 0; i < panelDataList.length; i++) {
+          if (panelDataList[i].businessModel == "直营") {
+            this.progressData.topGPM = (
+              panelDataList[i].grossProfitRadio  * 100
+            ).toFixed(1);
+            this.progressData.bar1 = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(1);
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.bottomClose =
+              panelDataList[i].businessModelCompleteRadio.toFixed(1);
+            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
+          } else if (panelDataList[i].businessModel == "代运营") {
+            this.progressData.bottomGPM = (
+              panelDataList[i].grossProfitRadio  * 100
+            ).toFixed(1);
+            this.progressData.bar2 = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(1);
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.bottomClose1 =
+              panelDataList[i].businessModelCompleteRadio.toFixed(1);
+            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+
+      //三个仪表盘(右)
+    async queryCardSAB(params) {
+      try {
+        const res = await API.getData("offlinePlatformSAB", params+','+this.titleName);
+        let RightSAB = res.rows;
+        for (var i = 0; i < RightSAB.length; i++) {
+          if (RightSAB[i].businessModel == "直营") {
+            this.sabData.bar1 = (
+              RightSAB[i].positionRatio  * 100
+            ).toFixed(1);
+            if (RightSAB[i].position == "S") {
+              this.sabData.topArr.s = (
+                RightSAB[i].positionRatio  * 100
+              ).toFixed(1);
+              this.sabData.sabArr.s = (
+                RightSAB[i].saleVolumePositionRatio  * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.topArr.a = (
+                RightSAB[i].positionRatio  * 100
+              ).toFixed(1);
+              this.sabData.sabArr.a = (
+                RightSAB[i].saleVolumePositionRatio  * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.topArr.b = (
+                RightSAB[i].positionRatio  * 100
+              ).toFixed(1);
+              this.sabData.sabArr.b = (
+                RightSAB[i].saleVolumePositionRatio  * 100
+              ).toFixed(1);
+            }
+          } else if (RightSAB[i].businessModel == "代运营") {
+            this.sabData.bar2 = (
+              RightSAB[i].level1QtyPositionRatio * 100
+            ).toFixed(1);
+            if (RightSAB[i].position == "S") {
+              this.sabData.bottomArr.s = (
+                RightSAB[i].positionRatio  * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.bottomArr.a = (
+                RightSAB[i].positionRatio  * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.bottomArr.b = (
+                RightSAB[i].positionRatio  * 100
+              ).toFixed(1);
+            }
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+
+  init() {
     this.titleName = this.$route.query.key
+    this.getdashboard(this.ontime)
+    this.queryCardSAB(this.ontime)
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
@@ -1874,6 +2002,13 @@ this.$router.push("/center/index")
     this.myEcharts6();
     this.myEcharts7();
     this.myEcharts8();
+    },
+
+  },
+  
+  mounted() {
+    this.init();
+  
   },
 };
 </script>
