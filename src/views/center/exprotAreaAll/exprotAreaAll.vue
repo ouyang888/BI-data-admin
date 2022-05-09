@@ -856,17 +856,17 @@ export default {
         },
       ],
   progressData: {
-        bar1: 0,
-        bar2: 0,
+        bar1: 1,
+        bar2: 2, 
         ballTitle: "内销",
         bigBallTitle: "毛利率",
         textLeft: "线上",
         textRight: "线下",
         titleTop: "线上",
         titleBottom: "线下",
-        topGPM: 0,
-        bottomGPM: 0,
-        ballNum: 0,
+        topGPM: 3,
+        bottomGPM: 4,
+        ballNum: 5,
       },
       speedData: {
         bar: 0,
@@ -1863,7 +1863,17 @@ export default {
       myChart8.setOption(option);
     },
   },
+
+
+// 仪表盘右spa
+
+// 折线图
+// init(){
+//   // this.getCard(this.ontime);
+//   this.getdashboard('2022-03')
+// },
   mounted() {
+    // this.init()
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
