@@ -606,12 +606,12 @@
     data() {
       return {
         showLoading: false,
-        // AmericaDate: [],
-        // AmericaList: [],
+        AmericaDate: [],
+        AmericaList: [],
         AvgTaskAmtDate: [],
         AvgTaskAmtList: [],
         AvgTaskAmtLine: [],
-        // AmericaLine: [],
+        AmericaLine: [],
         // koreaData: [],
         // koreaList: [],
         // koreaLine: [],
@@ -830,7 +830,7 @@
             "2022-01-01,2022-10-01"
           );
 
-          console.log("sell", res);
+          // console.log("sell", res);
           let sellOutDataList = res.rows;
           let newArr = sellOutDataList.filter((item) => {
             var timeArr = item.orderDate
@@ -875,6 +875,61 @@
           console.log(error);
         }
       },
+
+      // 右边接口
+
+      async getList1() {
+        this.showLoading = true;
+        try {
+      const res = await API.getChartQuery(
+            "sellOuttotalchart",
+            "2022-01-01,2022-10-01",
+            "cooprLevel1"
+          );
+
+          console.log("sell程序", res);
+          let sellOutDataList = res.rows;
+          this.showLoading = false;
+
+          let obj = res.rows[0]
+          var k = 0;
+          var arr = [];
+          for (var i in obj) {
+            console.log('11111111111', obj[i])
+            if (k < 6) {
+              arr.push(obj[i]);
+            }
+            k++;
+          }
+          console.log('arr', arr);
+          var sellOutDataLists = arr;
+          console.log("sellOutDataLists",sellOutDataLists);
+         var arrnum = Array.from(sellOutDataLists, item => item.slice(0, 1))
+
+        //  console.log("arr2",arr2);
+
+         let newArr = arrnum.filter((item) => {
+            var timeArr = item.orderDate
+              .replace(" ", ":")
+              .replace(/\:/g, "-")
+              .split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+
+            this.AmericaDate.push(yue + "-" + ri);
+              this.AmericaList.push(item.totalAmt);
+              this.AmericaLine = item.totalAvgTaskAmt;
+              this.myEcharts();
+         })
+         console.log("AmericaDate",AmericaDate);
+        //  this.myEcharts2(arrnum.,time,lines);
+        } catch (error) {
+          console.log(error);
+
+
+        }
+      },
+      
 
 
       gotoDomestic() {
@@ -1258,6 +1313,7 @@
       this.getdashboard();
       this.queryCardSAB();
       this.getList();
+      this.getList1();
     },
 
     mounted() {
