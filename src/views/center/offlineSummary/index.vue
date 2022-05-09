@@ -1,9 +1,9 @@
 <template>
   <div style="background: #02004d">
     <!-- 头部仪表盘和卡片 -->
-    <div class="top-flex"  >
+    <div class="top-flex">
       <!-- 仪表盘 -->
-       <div class="dashboard-box">
+      <div class="dashboard-box">
         <div class="panelList">
           <ProgressPanel :data="progressData" />
           <SpeedPanel :data="speedData" />
@@ -11,9 +11,9 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-      <div class="flex-card" >
+      <div class="flex-card">
         <div class="card-box">
-          <div class="card-font"   @click="gotoCatSeries('苏宁')">苏宁</div>
+          <div class="card-font" @click="gotoCatSeries('苏宁')">苏宁</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-                   <div class="flex-finish">
+                  <div class="flex-finish">
                     <!-- <div class="finish-font">进度 <span>s</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div> -->
                   </div>
@@ -61,19 +61,14 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
+                ></div>
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                 
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
@@ -88,7 +83,6 @@
                   <div class="card-big-num">75亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">毛利率<span>75%</span></div>
-          
                   </div>
                 </div>
                 <div
@@ -97,26 +91,21 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                 
-                </div>
+                ></div>
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-               
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box" >
-          <div class="card-font"     @click="gotoCatSeries('国美')">国美</div>
+        <div class="card-box">
+          <div class="card-font" @click="gotoCatSeries('国美')">国美</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -154,17 +143,14 @@
                     </div>
                   </div>
                 </div>
-             
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                  
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
@@ -177,9 +163,8 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-                 <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center">
                     <div class="finish-font">毛利率<span>75%</span></div>
-          
                   </div>
                 </div>
                 <!-- <div
@@ -259,17 +244,14 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-              
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box" >
-          <div class="card-font"  @click="gotoCatSeries('特渠')">特渠</div>
+        <div class="card-box">
+          <div class="card-font" @click="gotoCatSeries('特渠')">特渠</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -307,17 +289,14 @@
                     </div>
                   </div>
                 </div>
-             
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                  
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
@@ -332,29 +311,27 @@
                   <div class="card-big-num">75亿</div>
                   <div style="display: flex; align-items: center">
                     <div style="display: flex; align-items: center">
-                    <div class="finish-font">毛利率<span>75%</span></div>
-          
-                  </div>
+                      <div class="finish-font">毛利率<span>75%</span></div>
+                    </div>
                   </div>
                 </div>
-               
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-              
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
-           <div class="card-box">
-          <div class="card-font"  @click="gotoCatSeries('待定通道')">待定通道</div>
+        <div class="card-box">
+          <div class="card-font" @click="gotoCatSeries('待定通道')">
+            待定通道
+          </div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -372,7 +349,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-                   <div class="flex-finish">
+                  <div class="flex-finish">
                     <!-- <div class="finish-font">进度 <span>s</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div> -->
                   </div>
@@ -402,19 +379,14 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
+                ></div>
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                 
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
@@ -427,9 +399,8 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-                 <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center">
                     <div class="finish-font">毛利率<span>75%</span></div>
-          
                   </div>
                 </div>
                 <div
@@ -438,25 +409,20 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                 
-                </div>
+                ></div>
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-               
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box" >
+        <div class="card-box">
           <div class="card-font" @click="gotoCatSeries('美云销')">美云销</div>
           <div class="card-border-box">
             <div class="line"></div>
@@ -495,22 +461,19 @@
                     </div>
                   </div>
                 </div>
-             
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                  
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font" >库存达成</div>
+                  <div class="top-left-font">库存达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -520,7 +483,6 @@
                   <div class="card-big-num">75亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">毛利率<span>75%</span></div>
-          
                   </div>
                 </div>
                 <div
@@ -529,17 +491,16 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-              
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box" >
-          <div class="card-font" @click="gotoCatSeries('待定通道')">待定通道</div>
+        <div class="card-box">
+          <div class="card-font" @click="gotoCatSeries('待定通道')">
+            待定通道
+          </div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -577,17 +538,14 @@
                     </div>
                   </div>
                 </div>
-             
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                  
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
@@ -600,29 +558,24 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-              <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center">
                     <div class="finish-font">毛利率<span>75%</span></div>
-          
                   </div>
                 </div>
-              
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-              
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
       </div>
-      
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -732,7 +685,7 @@
     </div>
 
     <!-- 底部表格 -->
-    <div class="flex-bottom">
+    <!-- <div class="flex-bottom">
       <div class="execl">
         <a-table
           :bordered="true"
@@ -743,7 +696,7 @@
           <a slot="name" slot-scope="text">{{ text }}</a>
           <template slot="name" slot-scope="name">
             <a @click="gotoDomestic"> {{ name }}</a>
-             </template>
+          </template>
         </a-table>
       </div>
       <div class="execl">
@@ -756,10 +709,10 @@
           <a slot="name" slot-scope="text">{{ text }}</a>
           <template slot="name" slot-scope="name">
             <a @click="gotoDomestic"> {{ name }}</a>
-            </template>
+          </template>
         </a-table>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -768,7 +721,7 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 export default {
-   components: {
+  components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
@@ -855,15 +808,15 @@ export default {
           tags: ["cool", "teacher"],
         },
       ],
-  progressData: {
+      progressData: {
         bar1: 0,
         bar2: 0,
-        ballTitle: "内销",
+        ballTitle: "线下",
         bigBallTitle: "毛利率",
-        textLeft: "线上",
-        textRight: "线下",
-        titleTop: "线上",
-        titleBottom: "线下",
+        textLeft: "旗舰店",
+        textRight: "其他",
+        titleTop: "旗舰店",
+        titleBottom: "其他",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -871,26 +824,26 @@ export default {
       speedData: {
         bar: 0,
         speedBar: 0,
-        ballTitle: "内销达成",
+        ballTitle: "线下达成",
         ballNum: 0,
-        ballLeftTitle: "线上",
-        ballRightTitle: "线下",
+        ballLeftTitle: "旗舰店",
+        ballRightTitle: "其他",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "线上",
+        bottomTitle1: "旗舰店",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "线下",
+        bottomTitle2: "其他",
         bottomClose1: 0,
         bottomTime1: 0,
       },
       sabData: {
         bar1: 70,
         bar2: 50,
-        ballTitle: "内销",
-        bottom: "线上",
-        top: "线下",
+        ballTitle: "线下",
+        top: "旗舰店",
+        bottom: "其他",
         sabArr: { s: 0, a: 0, b: 0 },
         topArr: { s: 0, a: 0, b: 0 },
         bottomArr: { s: 0, a: 0, b: 0 },
@@ -900,18 +853,92 @@ export default {
       },
     };
   },
+  computed: {
+      ontime() {
+        return this.$store.state.year + "-" + this.$store.state.month;
+      },
+      showMoney() {
+        return this.$store.state.showMoney;
+      },
+      modelLabel() {
+        return this.$store.state.showMoney == true ? "亿" : "台";
+      },
+    },
+    watch: {
+      ontime: {
+        handler: function (newValue, oldValue) {
+          this.init();
+        },
+      },
+      showMoney: {
+        handler: (newValue, oldValue) => {},
+      },
+    },
   methods: {
-    gotoDomestic(){
-this.$router.push("/center/index")
+    gotoDomestic() {
+      this.$router.push("/center/index");
     },
     // 合作模式3
-    gotoCatSeries(item){
-      this.$router.push({path:"/center/offlineCatSeries",query:{key:item}})
+    gotoCatSeries(item) {
+      this.$router.push({
+        path: "/center/offlineCatSeries",
+        query: { key: item },
+      });
     },
- 
-    toModuleResponsible(){
-      this.$router.push({name:'moduleResponsible'});
+
+    toModuleResponsible() {
+      this.$router.push({ name: "moduleResponsible" });
     },
+
+    //三个仪表盘(左中)
+    async getdashboard(params) {
+      try {
+        const res = await API.getData("offLineTopDashBoard", params);
+        //内销汇总仪表盘左边&&中间
+        let panelDataList = res.rows;
+        this.progressData.ballNum = (
+          panelDataList[0].directProfitRadio * 100
+        ).toFixed(1);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
+        this.speedData.speedBar = (
+          panelDataList[0].directAmtRadio * 100
+        ).toFixed(1);
+        this.speedData.ballNum = panelDataList[0].directCnyAmt.toFixed(1);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1);
+
+        for (var i = 0; i < panelDataList.length; i++) {
+          if (panelDataList[i].cooprLevel1 == "线上") {
+            this.progressData.topGPM = (
+              panelDataList[i].onLineProfitRadio * 100
+            ).toFixed(1);
+            this.progressData.bar1 = (
+              panelDataList[i].onLineProfitRadio * 100
+            ).toFixed(1);
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.bottomClose =
+              panelDataList[i].cnyAmtRadio.toFixed(1);
+            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
+          } else if (panelDataList[i].cooprLevel1 == "线下") {
+            this.progressData.bar1 = 10;
+            this.progressData.bottomGPM = (
+              panelDataList[i].onLineProfitRadio * 100
+            ).toFixed(1);
+            this.progressData.bar2 = (
+              panelDataList[i].onLineProfitRadio * 100
+            ).toFixed(1);
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.bottomClose1 =
+              panelDataList[i].cnyAmtRadio.toFixed(1);
+            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    
+
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -1864,6 +1891,7 @@ this.$router.push("/center/index")
     },
   },
   mounted() {
+    this.getdashboard(this.ontime);
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
@@ -1872,6 +1900,7 @@ this.$router.push("/center/index")
     this.myEcharts6();
     this.myEcharts7();
     this.myEcharts8();
+    
   },
 };
 </script>
