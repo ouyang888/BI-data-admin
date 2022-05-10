@@ -11,8 +11,14 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-      <div class="flex-card">
-        <div class="card-box">
+      <div style="    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: right;
+    flex-wrap: wrap;">
+        <Card :list="cardData" @gotoCatSeries="gotoCatSeries" />
+</div>
+        <!-- <div class="card-box">
           <div class="card-font" @click="gotoCatSeries('淘系')">淘系</div>
           <div class="card-border-box">
             <div class="line"></div>
@@ -32,8 +38,7 @@
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
                   <div class="flex-finish">
-                    <!-- <div class="finish-font">进度 <span>s</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div> -->
+                  
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -167,77 +172,7 @@
                     <div class="finish-font">毛利率<span>75%</span></div>
                   </div>
                 </div>
-                <!-- <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
+      
                 <div
                   style="
                     display: flex;
@@ -348,8 +283,7 @@
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
                   <div class="flex-finish">
-                    <!-- <div class="finish-font">进度 <span>s</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div> -->
+                 
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -570,10 +504,10 @@
             </div>
             <div class="line"></div>
           </div>
-        </div>
+        </div> -->
       </div>
-    </div>
-    <!-- 中间echart -->
+
+
     <div class="middle-box">
       <div class="flex-fang">
         <div class="fang-color"></div>
@@ -690,6 +624,7 @@
   </div>
 </template>
 <script>
+import Card from "./component/card.vue";
 import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
@@ -702,9 +637,11 @@ export default {
     SpeedPanel,
     SadPanel,
     innerTableCardBox,
+    Card
   },
   data() {
     return {
+      cardData:[],
       dateTime: "2022-03",
       dataTimeMany: "2022-01-01,2022-10-01,2022-01-01,2022-10-01",
       showLoading: false,
@@ -840,6 +777,54 @@ export default {
     };
   },
   methods: {
+    //    // 合作模式3
+    // gotoCatSeries(item) {
+    //   this.$router.push({
+    //     path: "/center/offlineCatSeries",
+    //     query: { key: item },
+    //   });
+    // },
+      // 右边卡片/
+    async getCard(params) {
+      this.showLoadingCard = true;
+      try {
+        //onlineTopCooprLevel2
+        const res = await API.getData("onlineTopCooprLevel2", params);
+
+        res.rows.length > 0 &&
+          res.rows.forEach((v) => {
+            if (!!v.cnyAmt) {
+              v.cnyAmt = v.cnyAmt.toFixed(0);
+            }
+            if (!!v.saleTaskAmt) {
+              v.saleTaskAmt = v.saleTaskAmt.toFixed(0);
+            }
+
+            if (!!v.saleAmtRadio) {
+              v.saleAmtRadio = (
+                v.saleAmtRadio * 100 > 100 ? 100 : v.saleAmtRadio * 100
+              ).toFixed(0);
+            }
+            if (!!v.saleQtyRadio) {
+              v.saleQtyRadio = (
+                v.saleQtyRadio * 100 > 100 ? 100 : v.saleQtyRadio * 100
+              ).toFixed(0);
+            }
+          });
+
+        if (res.rows.length > 0) {
+          this.cardData = res.rows.filter((v) => {
+            return !!v.cooprLevel2;
+          });
+          this.cardData.splice(6);
+        } else {
+          this.cardData = [{}];
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
     gotoDomestic() {
       this.$router.push("/center/index");
     },
@@ -877,12 +862,6 @@ export default {
             ).toFixed(1);
             this.speedData.bottomClose1 =  panelDataList[i].bmsCompleteRadio.toFixed(1)
             this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
-            
-            //  Console.log("代运营",panelDataList[i].dateRadio)
-            //this.speedData.ballLeftNum =  panelDataList[i].saleTaskAmt.toFixed(1);
-            
-            // this.speedData.bottomClose =  panelDataList[i].orgQtyRadio.toFixed(1)
-            // this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
             
           } 
            if (panelDataList[i].businessModel == "代运营") {
@@ -1939,7 +1918,29 @@ export default {
       }
     },
   },
+   computed: {
+    ontime() {
+      return this.$store.state.year + "-" + this.$store.state.month;
+    },
+    showMoney() {
+      return this.$store.state.showMoney;
+    },
+    modelLabel() {
+      return this.$store.state.showMoney == true ? "亿" : "亿";
+    },
+  },
+  watch: {
+    ontime: {
+      handler: function (newValue, oldValue) {
+        this.init();
+      },
+    },
+    showMoney: {
+      handler: (newValue, oldValue) => {},
+    },
+  },
   mounted() {
+    this.getCard(this.ontime);
     this.getdashboard();
     this.queryCardSAB();
     this.myEcharts();
@@ -2053,7 +2054,7 @@ export default {
   margin: 0 auto;
 }
 .dashboard-box {
-  width: 50%;
+  width: 34%;
   position: relative;
 }
 
@@ -2078,7 +2079,7 @@ export default {
   display: flex;
   margin-top: 10px;
   align-items: center;
-  justify-content: inherit;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 .flex-top-card {
@@ -2261,7 +2262,7 @@ export default {
 }
 .panelList {
   height: 258px;
-  width: 760px;
+  width:98%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;

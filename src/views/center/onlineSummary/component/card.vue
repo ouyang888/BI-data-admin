@@ -1,4 +1,21 @@
 <template>
+ <!-- * monthDate 月份
+
+ * cooprLevel2 合作模式二级
+
+ * cnyAmt 金额
+
+ * saleVolume 销量
+
+ * saleTaskAmt 责任制金额
+
+ * saleTaskQty 责任制销量
+
+ * completeRadio 金额完成率
+
+ * saleTaskQtyRadio 销量完成率
+
+ * dateRadio 时间进度 -->
   <div class="flex-card" >
     <div class="card-box" v-for="(v,i) in list" :key="i">
       <div class="card-font" @click="gotoCatSeries(v.cooprLevel2)">{{v.cooprLevel2 || '标题'}} </div>
@@ -14,7 +31,7 @@
               <div class="top-left-font">实时达成</div>
               <div class="flex-finish">
                 <div class="finish-font">责任制 <span>{{v.saleTaskAmt}}亿</span></div>
-                <div class="finish-font">完成率 <span>{{v.saleAmtRadio}}%</span></div>
+                <div class="finish-font">完成率 <span>{{v.completeRadio.toFixed(0)}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
@@ -28,14 +45,14 @@
                 <div>
                   <div class="progress">
                     <a-progress
-                      :percent="v.dateRadio"
+                      :percent="v.dateRadio*100"
                       :show-info="false"
                       strokeColor="#FF8B2F"
                     />
                   </div>
                   <div class="progress">
                     <a-progress
-                      :percent="v.saleAmtRadio"
+                      :percent="v.completeRadio"
                       :show-info="false"
                       strokeColor="rgb(102, 255, 255)"
                     />
@@ -326,6 +343,7 @@
   .left-right-box {
     display: flex;
     justify-content: space-between;
+    padding: 27px;
   }
 
   .finish-font {
