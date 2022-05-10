@@ -1498,8 +1498,10 @@ export default {
     },
     init(model){ /*初始化数据方法*/
     let params = `${this.ontime},${model}`;
+
     
-    let listParams = `${this.ontime}-01,${this.ontime}-31,${model},${this.ontime}-01,${this.ontime}-31,${model}`
+    let listParams = `${this.ontime}-01,${this.ontime}-31,本部,${this.ontime}-01,${this.ontime}-31,本部`
+    console.log('listParams',listParams)
     this.getList(listParams);
     this.getdashboard(params);
     this.queryCardSAB(params);
