@@ -537,7 +537,7 @@
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
                 <div class="flex-echrats-right">
-                  <div class="right-font-title">{{item}}</div>
+                  <div class="right-font-title">日达成趋势图</div>
                   <div :id="i" class="echartsBox-min"></div>
                 </div>
                 <div class="border-top-line"></div>
@@ -605,7 +605,7 @@
     },
     data() {
       return {
-        dhcarr:[0,1,2,3,4,5],
+        dhcarr:[0,1,2,3,4,],
         Arrnum:[],
         showLoading: false,
         AmericaDate: [],
@@ -898,11 +898,10 @@
             k++;
           }
           console.log('arr', arr);
-          this.dhcarr = [];
-          let arrs = JSON.parse(JSON.stringify(arr));
-          arrs.forEach(v=>{
-            this.dhcarr.push(v[0].cooprLevel1)
-          })
+          // let arrs = JSON.parse(JSON.stringify(arr));
+          // arrs.forEach(v=>{
+          //   this.dhcarr.push(v[0].cooprLevel1)
+          // })
           // this.dhcarr = [1,2,3,4,5];
 
           for (let j = 0; j < arr.length; j++) {
