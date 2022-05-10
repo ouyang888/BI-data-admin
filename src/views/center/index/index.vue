@@ -795,14 +795,23 @@ export default {
     },
     modelLabel(){
       return this.$store.state.showMoney==true?'亿':'亿'
+    },
+    model(){
+      return this.$store.state.model
     }
     
   },
   watch:{
     ontime:{
      handler: function (newValue, oldValue) {
-        this.init();
+        this.init(this.model);
       }
+    },
+    model:{ 
+      handler: function(newValue,oldValue){
+        this.init(newValue);
+      }
+
     },
     showMoney:{
       handler:(newValue,oldValue)=>{
@@ -812,15 +821,20 @@ export default {
 
   },
   created() {
-     this.init();
+     this.init(this.model);
    },
   methods: {
-    init(){
-    this.getList(this.ontime);
-    this.getCard(this.ontime);
-    this.getTable(this.ontime);
-    this.getdashboard(this.ontime);
-    this.queryCardSAB(this.ontime);
+
+    init(model){
+    let params = `${this.ontime},${model}`;
+    let listParams = `${this.ontime}-01,${this.ontime}-31,,${model},${this.ontime}-01,${this.ontime}-31,${model}`
+    console.log('params',listParams)
+
+    this.getList(listParams);
+    this.getCard(params);
+    this.getTable(params);
+    this.getdashboard(params);
+    this.queryCardSAB(params);
     },
     gotoDomestic() {
       this.$router.push("/center/domestic");
@@ -948,7 +962,13 @@ export default {
           }
 
         }   
-        innersab.forEach(v=>{
+        if(innersab.rows.length<1){
+
+          this.innerSabLeft = [];
+          this.innerSabRight = [];
+        }else{
+
+        innersab.rows.forEach(v=>{
           v.positionRatio = (v.positionRatio*100).toFixed(1);
         })
 
@@ -960,6 +980,7 @@ export default {
         this.innerSabRight = innersab.rows.filter((v) => {
           return v.cooprLevel1 == "线下";
         });
+      }
       } catch (err) {
         console.log(err);
       }
@@ -1010,9 +1031,26 @@ export default {
       try {
         const res = await API.getData(
           "directTotalInnerChart",
-          `${params}-01,${params}-31,${params}-01,${params}-31,`
+          params
         );
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
+        if(res.rows.length<1){
+          this.divisionDate = [];
+            this.divisionList = [0];
+            this.divisionLine = 0;
+          this.innerDirectDate = [];
+            this.innerDirectList = [0];
+            this.innerDirectLine = 0;
+          this.outerDirectDate = [];
+            this.outerDirectList = [0];
+            this.outerDirectLine = 0;
+            this.showLoading = false;
+            this.myEcharts();
+            this.myEcharts2();
+            this.myEcharts3();
+            return;
+        }
+        
         let newArr = res.rows.filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")

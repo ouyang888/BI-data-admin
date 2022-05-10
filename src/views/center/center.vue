@@ -207,15 +207,16 @@ export default {
       this.$router.go(-1);
     },
     changeland(item){
+      this.land = item;
       switch (item) {
         case '本部':
-          this.$store.commit('setModel',',本部,本部,本部');
+          this.$store.commit('setModel','本部,本部,本部');
           break;
         case 'OEM':
-        this.$store.commit('setModel',',OEM,OEM,OEM');
+        this.$store.commit('setModel','OEM,OEM,OEM');
           break;
           case '待定':
-          this.$store.commit('setModel',',本部,OEM,待定');
+          this.$store.commit('setModel','本部,OEM,待定');
           break;
       }
     },
