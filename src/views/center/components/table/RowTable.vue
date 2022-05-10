@@ -164,9 +164,10 @@
 
   .execl-box {
     /* width: 864px; */
-    height: 287px;
+    /* height: 287px; */
     margin: 20px auto 0;
     border-color: #1e1d51;
+    background: #070640;
   }
 
 
@@ -212,5 +213,9 @@
   /* 头部加粗 */
   ::v-deep.el-table .el-table__header tr {
     font-weight: 600;
+  }
+  /*去掉空白*/
+  ::v-deep .el-table__cell.gutter{
+    background:#041370;
   }
 </style>
