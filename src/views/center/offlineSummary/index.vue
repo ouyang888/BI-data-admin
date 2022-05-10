@@ -122,7 +122,7 @@
     </div>
 
     <!-- 底部表格 -->
-    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" title1="通路" title2="重点客户"/>
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" title1="通路" :leftObj="leftObj" :rightObj="rightObj" title2="重点客户"/>
   </div>
 </template>
 <script>
@@ -182,10 +182,18 @@ export default {
         topArr: { s: 0, a: 0, b: 0 },
         bottomArr: { s: 0, a: 0, b: 0 },
       },
-      cardData: [{}],
-      showLoadingCard: true,
-      tableInner: [],
-      tableOutter: [],
+      cardData:[{}],
+      showLoadingCard:true,
+      tableInner:[],
+      tableOutter:[],
+      leftObj:{
+      name:'coopr_level3',
+      level:'coopr_level3_manager'
+      },
+      rightObj:{
+      name:'customerName',
+      level:'coopr_level3_manager'
+      },
     };
   },
   computed: {
@@ -1342,14 +1350,14 @@ export default {
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
 
-        this.tableInner.forEach(v=>{
-          v.cooprLevel2Manager = v.coopr_level3_manager;
-        })
+        // this.tableInner.forEach(v=>{
+        //   v.cooprLevel2Manager = v.coopr_level3_manager;
+        // })
 
 
-        this.tableInner.forEach(v=>{
-          v.cooprLevel2 = v.customerName;
-        })
+        // this.tableInner.forEach(v=>{
+        //   v.cooprLevel2 = v.customerName;
+        // })
         // this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
         // this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
