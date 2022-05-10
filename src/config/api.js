@@ -2,9 +2,9 @@ const admin_dev = '/apa/'
 
 const admin_test ='http://10.33.119.107:80/'
 
-const admin_uat = 'http://10.33.119.107:80/'
+const admin_uat = 'http://10.18.4.132/'
 
-const admin_pro = 'http://10.33.119.107:80/'
+const admin_pro = 'http://10.18.4.132/'
 
 let local = 'test'
 
