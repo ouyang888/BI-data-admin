@@ -1,10 +1,8 @@
 <template>
     <div>
         <el-table border :data="mesInfo" :cell-style="{borderColor: '#1E1D51' }"
-            :row-style="rowStyle" :header-cell-style="headerCellStyle" class="exportTable" height="258" >
-            <el-table-column prop="businessEntityName" label="产司" width="48"  >
-               
-
+            :row-style="rowStyle" :header-cell-style="headerCellStyle" class="exportTable"  >
+            <el-table-column prop="businessEntityName" label="产司" width="60"   height="270" >
             </el-table-column>
             <el-table-column label="内销" align="center" style="padding:0">
                 <el-table-column :prop="headTitle.inSale.innerSaleTaskAmt" :label="headTitle.inSale.title" align="center">
@@ -27,6 +25,21 @@
                         </div>
                     </template>
                 </el-table-column>
+                   <el-table-column v-if="headTitle.total.day!==null&&headTitle.total.day !==undefined" :prop="headTitle.total.day" :label="headTitle.total.day" align="center">
+                    <template v-slot="scope" v-if="headTitle.total.day!==null">
+                        <div class="precent" v-if="headTitle.total.day!==null">
+                            <div style="width: 30px">
+                                {{ scope.row.day }}
+                            </div>
+                            <div style="margin-top: 5px" v-if="headTitle.total.day!==null">
+                                <Progress style="margin-bottom: 3px" :rate="40" :color="'#FF8B2F'"
+                                    class="precentCompentes" />
+                                <Progress :rate="60" :color="'#66FFFF'" class="precentCompentes" />
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+
                 <!-- <el-table-column v-for="(k,i) in tableList.headTitle.inSale" :label="k"></el-table-column> -->
             </el-table-column>
             <el-table-column label="外销" align="center" height="20px">
@@ -50,6 +63,20 @@
                         </div>
                     </template>
                 </el-table-column>
+                   <el-table-column v-if="headTitle.total.day!==null&&headTitle.total.day !==undefined" :prop="headTitle.total.day" :label="headTitle.total.day" align="center">
+                    <template v-slot="scope" v-if="headTitle.total.day!==null">
+                        <div class="precent" v-if="headTitle.total.day!==null">
+                            <div style="width: 30px">
+                                {{ scope.row.day }}
+                            </div>
+                            <div style="margin-top: 5px" v-if="headTitle.total.day!==null">
+                                <Progress style="margin-bottom: 3px" :rate="40" :color="'#FF8B2F'"
+                                    class="precentCompentes" />
+                                <Progress :rate="60" :color="'#66FFFF'" class="precentCompentes" />
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
                 <!-- <el-table-column v-for="(k,i) in tableList.headTitle.outSale" :label="k"></el-table-column> -->
             </el-table-column>
             <el-table-column label="合计" align="center" height="20px" width="50">
@@ -66,6 +93,21 @@
                                 {{ scope.row.orgQtyAll }}
                             </div>
                             <div style="margin-top: 5px">
+                                <Progress style="margin-bottom: 3px" :rate="40" :color="'#FF8B2F'"
+                                    class="precentCompentes" />
+                                <Progress :rate="60" :color="'#66FFFF'" class="precentCompentes" />
+                            </div>
+                        </div>
+                    </template>
+                </el-table-column>
+             
+                <el-table-column v-if="headTitle.total.day!==null&&headTitle.total.day !==undefined" :prop="headTitle.total.day" :label="headTitle.total.day" align="center">
+                    <template v-slot="scope" v-if="headTitle.total.day!==null">
+                        <div class="precent" v-if="headTitle.total.day!==null">
+                            <div style="width: 30px">
+                                {{ scope.row.day }}
+                            </div>
+                            <div style="margin-top: 5px" v-if="headTitle.total.day!==null">
                                 <Progress style="margin-bottom: 3px" :rate="40" :color="'#FF8B2F'"
                                     class="precentCompentes" />
                                 <Progress :rate="60" :color="'#66FFFF'" class="precentCompentes" />
@@ -402,7 +444,7 @@
     .exportTable {
         font-size: 13px;
         width: 550px;
-        /* height: 258px; */
+        height: 270px;
         border-color: #1E1D51;
         margin: 0 auto;
         background-color: rgb(4, 19, 112);
