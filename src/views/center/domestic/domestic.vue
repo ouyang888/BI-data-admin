@@ -821,21 +821,29 @@ export default {
     },
     modelLabel(){
       return this.$store.state.showMoney==true?'亿':'亿'
+    },
+    model(){ /* 获取本部，OEM */
+      return this.$store.state.model
     }
     
   },
   watch:{
     ontime:{
      handler: function (newValue, oldValue) {
-        this.init();
+      this.init(this.model);
       }
+    },
+    model:{ /*监听数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(newValue);
+      }
+
     },
     showMoney:{
       handler:(newValue,oldValue)=>{
  
       }
-    }
-
+    },
   },
   methods: {
     //三个仪表盘(左中)
@@ -981,7 +989,7 @@ export default {
     },
 
     //中间折线图
-    async getList() {
+    async getList(listParams) {
       this.showLoading = true;
       this.innerDirectList=[];
       this.innerDirectDate=[];
@@ -995,7 +1003,7 @@ export default {
       try {
         const res = await API.getData(
           "innerDirectChart",
-          this.dataTimeMany
+          listParams
         );
 
         let obj = { innerDirect: "", outerDirect: "" };
@@ -1488,16 +1496,19 @@ export default {
         console.log(err);
       }
     },
-    init(){
-    this.getList();
-    this.getdashboard(this.ontime);
-    this.queryCardSAB(this.ontime);
-    this.getCard(this.ontime);
-    this.getTable(this.ontime);
+    init(model){ /*初始化数据方法*/
+    let params = `${this.ontime},${model}`;
+    
+    let listParams = `${this.ontime}-01,${this.ontime}-31,${model},${this.ontime}-01,${this.ontime}-31,${model}`
+    this.getList(listParams);
+    this.getdashboard(params);
+    this.queryCardSAB(params);
+    this.getCard(params);
+    this.getTable(params);
     }
   },
   created() {
-     this.init()
+    this.init(this.model);
   },
   mounted() {},
 };
