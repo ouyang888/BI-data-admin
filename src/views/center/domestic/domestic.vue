@@ -1456,11 +1456,11 @@ export default {
       try {
         let tableInner = await API.getData(
           "innerDirectOnOutline",
-          `${params},${params}`
+          `${params}`
         );
         let tableOutter = await API.getData(
           "innerDirectline",
-          `${params},${params}`
+          `${params}`
         );
 
         this.tableInner = tableInner.rows;
@@ -1498,15 +1498,14 @@ export default {
     },
     init(model){ /*初始化数据方法*/
     let params = `${this.ontime},${model}`;
-
     
-    let listParams = `${this.ontime}-01,${this.ontime}-31,本部,${this.ontime}-01,${this.ontime}-31,本部`
-    console.log('listParams',listParams)
+    let listParams = `${model},${this.ontime}-01,${this.ontime}-31`;
+    let tableParams = `${this.ontime},${this.ontime},${model},`;
     this.getList(listParams);
     this.getdashboard(params);
     this.queryCardSAB(params);
     this.getCard(params);
-    this.getTable(params);
+    this.getTable(tableParams);
     }
   },
   created() {

@@ -8,7 +8,7 @@
       <el-table-column prop="manager" align="center" label="责任人">
         <!-- <div class="nameColor" @click="handleClick">{{张茉欧}}</div> -->
         <template v-slot="scope">
-            <div class="nameColor" @click="handleClick">
+            <div class="nameColor" @click="handleClick(scope.row)">
               {{ scope.row.manager }}
             </div>
           </template>
@@ -72,8 +72,8 @@
       Progress,
     },
     methods: {
-      handleClick(row, index) {
-        this.$emit("handleClick");
+      handleClick(obj) {
+        this.$emit("handleClick",obj);
       },
       objectSpanMethod({ row, column, rowIndex, columnIndex }) {
         let number = 0;

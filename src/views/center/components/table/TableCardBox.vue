@@ -2999,18 +2999,30 @@ export default {
   },
 
   methods:{
-    namesClick(){
-      this.$router.push("onlineSummary");
+    namesClick(obj){
+      // console.log('handleClick',val);
+      switch(obj.marketChannel){
+        case '线上':
+        this.$router.push({
+        name: "catSeries",
+        query: { key: obj.manager },
+      });
+        break;
+        case '线下':
+        this.$router.push({
+          name: "offlineCatSeries",
+        query: { key: obj.manager},
+      });
+        break;
+      }
     },
-    managerClick(){
-      // switch (Store.state.currentPath) {
-      //   case "s":
-      //     // Store.commit("setTableList", ...data.demosticDirectOnOnline);
-      //     this.$router.push("exprotAreaAll");
-      //     break;
-      // }
-      console.log("123")
-      this.$router.push("catSeries");
+    managerClick(obj){
+
+      this.$router.push({
+        name: "exprotAreaAll",
+        query: { key: obj.manager },
+      });
+      exprotAreaAll
     }
   }
 };
