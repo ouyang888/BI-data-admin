@@ -263,7 +263,12 @@
     align-items: center;
     justify-content: inherit;
     flex-wrap: wrap;
+    justify-content:flex-start;
   }
+  /* .card-box::nth-child(2n){
+    margin-left:10px;
+    margin-
+  } */
 
   .flex-top-card {
     display: flex;

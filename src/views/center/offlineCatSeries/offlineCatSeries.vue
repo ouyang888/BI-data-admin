@@ -122,7 +122,7 @@
     </div>
 
     <!-- 底部表格 -->
-      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" title1="通路自营" title2="KA"/>
+      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter"  :leftObj="leftObj" :rightObj="rightObj" title1="通路自营" title2="KA"/>
   </div>
 </template>
 <script>
@@ -269,7 +269,16 @@ export default {
       cardData:[{}],
       showLoadingCard:true,
       tableInner:[],
-      tableOutter:[]
+      tableOutter:[],
+      leftObj:{
+      name:'coopr_level3',
+      level:'coopr_level3_manager'
+      },
+      rightObj:{
+      name:'customerName',
+      level:'coopr_level3_manager'
+      },
+     
     };
   },
   computed:{
@@ -1143,128 +1152,6 @@ export default {
       };
       myChart7.setOption(option);
     },
-    myEcharts8() {
-      var myChart8 = this.$echarts.init(document.getElementById("main8"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart8.setOption(option);
-    },
-
-
-
     //三个仪表盘(左中)
     async getdashboard(params) {
       try {
@@ -1379,8 +1266,72 @@ export default {
     this.myEcharts5();
     this.myEcharts6();
     this.myEcharts7();
-    this.myEcharts8();
     this.getCard(this.ontime);
+    this.getTable(this.ontime)
+    },
+        // 右边卡片/
+  async getCard(params) {
+ 
+      this.showLoadingCard = true;
+      console.log('params');
+      try {
+        const res = await API.getData("level3OfflineTopTotal",params+','+this.titleName);
+        res.rows.length>0 && res.rows.forEach(v => {
+
+
+            if (!!v.cnyAmt) {
+              v.cnyAmt = v.cnyAmt.toFixed(0)
+            }
+            if (!!v.saleTaskAmt) {
+              v.saleTaskAmt =v.saleTaskAmt.toFixed(0)
+            }
+
+
+
+            if (!!v.saleAmtRadio) {
+              v.saleAmtRadio = (v.saleAmtRadio * 100>100?100:v.saleAmtRadio * 100).toFixed(0)
+            }
+            if (!!v.saleQtyRadio) {
+              v.saleQtyRadio = (v.saleQtyRadio * 100>100?100:v.saleQtyRadio * 100).toFixed(0)
+            }
+        
+            });
+
+            if(res.rows.length>0){ 
+            this.cardData = res.rows.filter(v=>{
+              return !!v.cooprLevel2
+            });
+            this.cardData.splice(6);
+          }else{
+            this.cardData = [{}];
+          }
+       
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    // 底部table/
+    async getTable(params) {
+      try {
+        let tableInner = await API.getData("level3OfflineCategory",`${params},${this.titleName},${params},${this.titleName}`);
+        let tableOutter = await API.getData("level3OfflineFucosModel",`${params},${this.titleName},${params},${this.titleName}`);
+
+
+        this.tableInner = tableInner.rows;
+        this.tableInner.forEach(v=>{
+          // v. = v.coopr_level3_manager;
+        })
+
+        this.tableOutter = tableOutter.rows;
+
+
+     
+
+        // console.log("this.data", this.data);
+      } catch (err) {
+        console.log(err);
+      }
     },
 
   },
@@ -1703,4 +1654,17 @@ export default {
   position: relative;
   bottom: 20px;
 }
+
+.top-flex{
+  align-items: flex-start;
+  /* width:50%; */
+}
+
+.dashboard-box{
+width:41%;
+}
+.flex-card{
+  flex:auto;
+}
+
 </style> 

@@ -267,3 +267,9 @@ color: #1890FF;
   top:calc(50%);
   color:#fff;
 }
+.card-font{
+  cursor: pointer;
+}
+::v-deep .el-table{
+  background:rgb(7 6 64)
+}

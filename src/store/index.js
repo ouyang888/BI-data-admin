@@ -23,6 +23,7 @@ export default new Vuex.Store({
         showMoney:true,
         year:'2022',
         month:'03',
+        model:'本部,OEM,待定'
         /* 图片框end */
     },
     mutations: {
@@ -61,6 +62,9 @@ export default new Vuex.Store({
         },
         setShowMoney(state,val){
             state.showMoney = val
+        },
+        setModel(state,val){
+            state.model = val
         },
     },
     actions: {
