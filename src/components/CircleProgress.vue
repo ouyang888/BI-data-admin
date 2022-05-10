@@ -86,7 +86,7 @@
     watch: {
       rate: {
         handler: function (newValue, oldValue) {
-          console.log('newValue', newValue)
+          console.log('newValue000000', newValue)
           const goProgress = new circleProgress({
             el: this.cav,
             progress: newValue / 200,
