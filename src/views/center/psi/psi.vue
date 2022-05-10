@@ -5,7 +5,7 @@
       <div class="left-box">
         <!-- 上 -->
         <div class="card-box">
-          <div class="card-font">S</div>
+          <div class="card-font" @click="toggle">S</div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -1781,7 +1781,10 @@ export default {
 
   },
   methods: {
+    toggle(){
+      this.$router.push("/center/index");
 
+    },
     async getList(ontime,ontime2) {
       const res = await API.getData("homeDashBoard", ontime);
       const homeSab = await API.getData("homeSab", ontime2);

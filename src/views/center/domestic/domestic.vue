@@ -606,7 +606,7 @@
     </div>
 
     <!-- 底部表格 -->
-      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" title1="线上" title2="线下"/>
+      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj" title1="线上" title2="线下"/>
   </div>
 </template>
 <script>
@@ -802,6 +802,14 @@ export default {
       },
       showLoadingLeft:true,
       showLoadingRight:true,
+      leftObj:{
+      name:'cooprLevel2',
+      level:'cooprLevel2Manager'
+      },
+      rightObj:{
+      name:'cooprLevel2',
+      level:'cooprLevel2Manager'
+      },
     };
   },
   computed:{

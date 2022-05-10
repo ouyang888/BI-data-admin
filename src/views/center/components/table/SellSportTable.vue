@@ -97,13 +97,13 @@
         </template>
       </el-table-column>
            
-      <el-table-column
+      <!-- <el-table-column
         prop="turnoverDays"
         align="center"
         label="周转天数"
         height="30px"
       >
-      </el-table-column>
+      </el-table-column> -->
            
       <el-table-column
         prop="amtFinish"
