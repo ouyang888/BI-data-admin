@@ -2,7 +2,7 @@
     <div>
         <el-table border :data="mesInfo" :cell-style="{borderColor: '#1E1D51' }"
             :row-style="rowStyle" :header-cell-style="headerCellStyle" class="exportTable"  >
-            <el-table-column prop="businessEntityName" label="产司" width="60"   height="270" >
+            <el-table-column prop="businessEntityName" label="产司" width="60"   height="275" >
             </el-table-column>
             <el-table-column label="内销" align="center" style="padding:0">
                 <el-table-column :prop="headTitle.inSale.innerSaleTaskAmt" :label="headTitle.inSale.title" align="center">
