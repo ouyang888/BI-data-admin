@@ -64,7 +64,7 @@
           <div class="drop-down">
             <div class="down-font" @click="changeland('本部')">本部</div>
             <div class="down-font" @click="changeland('OEM')">OEM</div>
-            <div class="down-font" @click="changeland('待定')">待定</div>
+            <div class="down-font" @click="changeland('所有')">所有</div>
           </div>
         </div>
 
@@ -207,7 +207,12 @@ export default {
       this.$router.go(-1);
     },
     changeland(item){
-      this.land = item;
+
+      if(item == '所有'){
+        this.land = '本地';
+      }else{
+        this.land = item;
+      }
       switch (item) {
         case '本部':
           this.$store.commit('setModel','本部,本部,本部');
@@ -215,7 +220,7 @@ export default {
         case 'OEM':
         this.$store.commit('setModel','OEM,OEM,OEM');
           break;
-          case '待定':
+          case '所有':
           this.$store.commit('setModel','本部,OEM,待定');
           break;
       }
