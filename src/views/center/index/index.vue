@@ -150,7 +150,7 @@
                     线上结构
                     <span v-for="(item, index) in innerSabLeft" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio * 100 }}%;</span>
+                      <span>{{ item.positionRatio}}%;</span>
                     </span>
                   </div>
                 </div>
@@ -690,7 +690,7 @@ export default {
   },
   data() {
     return {
-      dataTimeMany: "2022-01-01,2022-10-01,2022-01-01,2022-10-01",
+      dataTimeMany: "2022-03-01,2022-03-31,2022-03-01,2022-03-31",
       showLoading: false,
       divisionList: [],
       divisionDate: [],
@@ -948,6 +948,9 @@ export default {
           }
 
         }   
+        innersab.forEach(v=>{
+          v.positionRatio = (v.positionRatio*100).toFixed(1);
+        })
 
 
         this.innerSabLeft = innersab.rows.filter((v) => {

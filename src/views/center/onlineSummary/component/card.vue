@@ -1,7 +1,7 @@
 <template>
   <div class="flex-card" >
     <div class="card-box" v-for="(v,i) in list" :key="i">
-      <div class="card-font" @click="gotoCatSeries(v.cooprLevel3)">{{v.cooprLevel3 || '标题'}} </div>
+      <div class="card-font" @click="gotoCatSeries(v.cooprLevel2)">{{v.cooprLevel2 || '标题'}} </div>
       <div class="card-border-box">
         <div class="line"></div>
         <div class="line1"></div>
@@ -263,12 +263,7 @@
     align-items: center;
     justify-content: inherit;
     flex-wrap: wrap;
-    justify-content:flex-start;
   }
-  /* .card-box::nth-child(2n){
-    margin-left:10px;
-    margin-
-  } */
 
   .flex-top-card {
     display: flex;

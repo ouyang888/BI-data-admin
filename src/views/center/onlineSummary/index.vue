@@ -695,6 +695,7 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
+// import { Console } from "console";
 export default {
   components: {
     ProgressPanel,
@@ -853,7 +854,7 @@ export default {
 
     //仪表盘(左中)
     async getdashboard() {
-      localStorage.getItem("");
+      // localStorage.getItem("");
       try {
         const res = await API.getData("onlineTopTotal", this.dateTime);
         let panelDataList = res.rows;
@@ -874,20 +875,32 @@ export default {
             this.progressData.topGPM = (
               panelDataList[i].grossProfitRadio * 100
             ).toFixed(1);
-            // this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(1)
+            this.speedData.bottomClose1 =  panelDataList[i].bmsCompleteRadio.toFixed(1)
+            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+            
+            //  Console.log("代运营",panelDataList[i].dateRadio)
+            //this.speedData.ballLeftNum =  panelDataList[i].saleTaskAmt.toFixed(1);
+            
             // this.speedData.bottomClose =  panelDataList[i].orgQtyRadio.toFixed(1)
             // this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
-          } else if (panelDataList[i].businessModel == "代运营") {
+            
+          } 
+           if (panelDataList[i].businessModel == "代运营") {
+            //  Console.log("代运营",panelDataList[i].dateRadio)
             this.progressData.bar1 = (
               panelDataList[i].grossProfitRadio * 100
             ).toFixed(1);
             this.progressData.bottomGPM = (
               panelDataList[i].grossProfitRadio * 100
             ).toFixed(1);
-            //  this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(1)
-            //  this.speedData.bottomClose1 =  panelDataList[i].orgQtyRadio.toFixed(1)
-            // this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+             this.speedData.ballRightNum =  panelDataList[i].saleTaskAmt.toFixed(1)
+
+            //  <span>{{data.bottomTitle1}}:</span><span>完成率:{{data.bottomClose}}%</span><span>时间进度:{{data.bottomTime}}%</span>
+            this.speedData.bottomClose1 =  panelDataList[i].bmsCompleteRadio.toFixed(1)
+            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
           }
+
+          
         }
       } catch (error) {
         console.log(error);
@@ -897,12 +910,14 @@ export default {
     //仪表盘(右)
     async queryCardSAB() {
       try {
-        const res = await API.getData("directTotalDashboardSAB", this.dateTime);
+        const res = await API.getData("onlineTopSAB", this.dateTime);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
-          if (RightSAB[i].directName == "事业部") {
+          if (RightSAB[i].cooprLevel1 == "线上") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
-            if (RightSAB[i].position == "S") {
+            //  console.log()
+            if (RightSAB[i].position === "S") {
+             
               this.sabData.sabArr.s = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
@@ -915,22 +930,26 @@ export default {
                 1
               );
             }
-          } else if (RightSAB[i].directName == "内销") {
+          } 
+        if (RightSAB[i].businessModel == "直营") {
+          
             this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
-            if (RightSAB[i].position == "S") {
+            if (RightSAB[i].position === "S") {
               this.sabData.topArr.s = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
-            } else if (RightSAB[i].position == "A") {
+            } else if (RightSAB[i].position === "A") {
               this.sabData.topArr.a = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
-            } else if (RightSAB[i].position == "B") {
+            } else if (RightSAB[i].position === "B") {
               this.sabData.topArr.b = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
             }
-          } else if (RightSAB[i].directName == "外销") {
+          } 
+        if (RightSAB[i].businessModel === "代运营") {
+             
             this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.s = (
@@ -1070,8 +1089,8 @@ export default {
       };
       myChart.setOption(option);
     },
-    myEcharts2(data,time,lines,id) {
-      var myChart2 = this.$echarts.init(document.getElementById(id));
+    myEcharts2() {
+      var myChart2 = this.$echarts.init(document.getElementById("main2"));
       var option = {
         xAxis: {
           axisLabel: {
@@ -1100,7 +1119,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: time,
+          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
           axisTick: {
             show: false, //刻度线
           },
@@ -1161,11 +1180,11 @@ export default {
                 },
               },
             },
-            data:data,
+            data: [1948, 7308, 8949, 3839, 13857],
             markLine: {
               data: [
                 {
-                  yAxis:lines,
+                  yAxis: 8576,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1922,17 +1941,15 @@ export default {
   },
   mounted() {
     this.getdashboard();
+    this.queryCardSAB();
     this.myEcharts();
-    let data = [200,300];
-    let time = ['01-02','01-03'];
-    let lines = 200;
-    this.myEcharts2(data,time,100,'main2');
-    // this.myEcharts3();
-    // this.myEcharts4();
-    // this.myEcharts5();
-    // this.myEcharts6();
-    // this.myEcharts7();
-    // this.myEcharts8();
+    this.myEcharts2();
+    this.myEcharts3();
+    this.myEcharts4();
+    this.myEcharts5();
+    this.myEcharts6();
+    this.myEcharts7();
+    this.myEcharts8();
     this.getTable();
   },
 };

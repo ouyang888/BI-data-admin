@@ -398,7 +398,7 @@
         },
     };
 </script>
-<style scoped >
+<style scoped lang="scss">
     .exportTable {
         font-size: 13px;
         width: 550px;
@@ -430,14 +430,14 @@
         height: 4px;
     }
 
-    :deep(.el-table--enable-row-hover .el-table__body tr:hover > td) {
+    ::v-deep.el-table--enable-row-hover .el-table__body tr:hover > td {
         background-color: #070640 !important;
     }
-     :deep(.el-table .el-table__cell){
+     ::v-deep.el-table .el-table__cell{
      padding: 0;
     }
 
-    :deep(.el-table thead.is-group th.el-table__cell){
+    ::v-deep.el-table thead.is-group th.el-table__cell{
      padding: 0;
     }
 
@@ -453,7 +453,7 @@
     }
 
     /* 滚动条 */
-    :deep(.el-table__body-wrapper) {
+    ::v-deep.el-table__body-wrapper {
         &::-webkit-scrollbar {
             height: 1px;
             width: 6px;
@@ -472,7 +472,7 @@
         }
     }
 
-    :deep(.el-table__fixed-right) {
+    ::v-deep.el-table__fixed-right {
         height: 100% !important;
         bottom: 7px !important;
         right: 7px !important;
@@ -483,24 +483,24 @@
     }
 
     /* 头部加粗 */
-    :deep(.el-table .el-table__header tr:first-child) {
+    ::v-deep.el-table .el-table__header tr:first-child {
         height: 25px;
         line-height: 25px;
         /* font-weight: 600; */
     }
 
-    :deep(.el-table th) {
+    ::v-deep.el-table th {
         padding: 0;
     }
-     :deep(.el-table tr) {
+     ::v-deep.el-table tr {
         padding: 0;
     }
-   :deep(.el-table .cell) {
+   ::v-deep.el-table .cell {
         padding: 0;
         font-weight: 400;
     }
 
-    :deep(.el-table .el-table__header tr:nth-child(2)) {
+    ::v-deep.el-table .el-table__header tr:nth-child(2) {
         height: 25px;
         line-height: 25px;
         color: rgba(255, 255, 255, 0.8);

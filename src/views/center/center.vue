@@ -62,8 +62,9 @@
             >{{land}}<a-icon type="down" style="padding-left: 3px; font-size: 14px"
           /></span>
           <div class="drop-down">
-            <div class="down-font" @click="changeland('本地')">本地</div>
+            <div class="down-font" @click="changeland('本部')">本部</div>
             <div class="down-font" @click="changeland('OEM')">OEM</div>
+            <div class="down-font" @click="changeland('待定')">待定</div>
           </div>
         </div>
 
@@ -206,7 +207,17 @@ export default {
       this.$router.go(-1);
     },
     changeland(item){
-      this.land = item;
+      switch (item) {
+        case '本部':
+          this.$store.commit('setModel',',本部,本部,本部');
+          break;
+        case 'OEM':
+        this.$store.commit('setModel',',OEM,OEM,OEM');
+          break;
+          case '待定':
+          this.$store.commit('setModel',',本部,OEM,待定');
+          break;
+      }
     },
     changedirection(index){
       this.direction = index

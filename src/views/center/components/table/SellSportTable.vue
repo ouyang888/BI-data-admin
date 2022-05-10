@@ -97,13 +97,13 @@
         </template>
       </el-table-column>
            
-      <el-table-column
+      <!-- <el-table-column
         prop="turnoverDays"
         align="center"
         label="周转天数"
         height="30px"
       >
-      </el-table-column>
+      </el-table-column> -->
            
       <el-table-column
         prop="amtFinish"
@@ -220,7 +220,7 @@ export default{
   },
 };
 </script>
-<style scoped>
+<style scoped lang="scss">
 .execl {
   width:calc(50% - 15px);
   height: 324px;
@@ -238,7 +238,7 @@ export default{
   border-color: #1e1d51;
 }
 
-:deep(.el-table--enable-row-hover .el-table__body tr:hover > td) {
+::v-deep.el-table--enable-row-hover .el-table__body tr:hover > td {
   background-color: #070640 !important;
 }
 
@@ -273,7 +273,7 @@ body .el-table::before {
   height: 0;
 }
 
-:deep(.el-table__body-wrapper) {
+::v-deep.el-table__body-wrapper {
   &::-webkit-scrollbar {
     height: 6px;
     width: 6px;
@@ -288,7 +288,7 @@ body .el-table::before {
     background-color: #8383a5;
   }
 }
-:deel(.el-table__fixed-right) {
+::v-deep.el-table__fixed-right {
   height: 100% !important;
   bottom: 7px !important;
   right: 7px !important;

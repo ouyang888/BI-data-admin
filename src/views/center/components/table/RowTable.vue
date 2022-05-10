@@ -210,7 +210,7 @@
   }
 
   /* 头部加粗 */
-  ::v-deep(.el-table .el-table__header tr) {
+  ::v-deep.el-table .el-table__header tr {
     font-weight: 600;
   }
 </style>
