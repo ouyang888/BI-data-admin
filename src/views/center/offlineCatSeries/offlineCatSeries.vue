@@ -1320,7 +1320,9 @@ export default {
 
         this.tableInner = tableInner.rows;
         this.tableInner.forEach(v=>{
-          // v. = v.coopr_level3_manager;
+          if(v.coopr_level3_manager == '合计'){
+           v.coopr_level3 = v.coopr_level3_manager;
+          }
         })
 
         this.tableOutter = tableOutter.rows;

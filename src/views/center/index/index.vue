@@ -690,7 +690,7 @@ export default {
   },
   data() {
     return {
-      dataTimeMany: "2022-03-01,2022-03-31,2022-03-01,2022-03-31",
+      dataTimeMany: "2022-04-01,2022-04-31,2022-04-01,2022-04-31",
       showLoading: false,
       divisionList: [],
       divisionDate: [],
@@ -795,14 +795,23 @@ export default {
     },
     modelLabel(){
       return this.$store.state.showMoney==true?'亿':'亿'
+    },
+    model(){ /* 获取本部，OEM */
+      return this.$store.state.model
     }
     
   },
   watch:{
-    ontime:{
+    ontime:{ /*监听数据更改 调用接口 */
      handler: function (newValue, oldValue) {
-        this.init();
+        this.init(this.model);
       }
+    },
+    model:{ /*监听数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(newValue);
+      }
+
     },
     showMoney:{
       handler:(newValue,oldValue)=>{
@@ -812,15 +821,20 @@ export default {
 
   },
   created() {
-     this.init();
+     this.init(this.model);
    },
   methods: {
-    init(){
-    this.getList();
-    this.getCard(this.ontime);
-    this.getTable(this.ontime);
-    this.getdashboard(this.ontime);
-    this.queryCardSAB(this.ontime);
+
+    init(model){ /*初始化数据方法*/
+    let params = `${this.ontime},${model}`;
+    let listParams = `${this.ontime}-01,${this.ontime}-31,${model},${this.ontime}-01,${this.ontime}-31,${model}`
+    console.log('params',listParams)
+
+    this.getList(listParams);
+    this.getCard(params);
+    this.getTable(params);
+    this.getdashboard(params);
+    this.queryCardSAB(params);
     },
     gotoDomestic() {
       this.$router.push("/center/domestic");
@@ -948,7 +962,13 @@ export default {
           }
 
         }   
-        innersab.forEach(v=>{
+        if(innersab.rows.length<1){
+
+          this.innerSabLeft = [];
+          this.innerSabRight = [];
+        }else{
+
+        innersab.rows.forEach(v=>{
           v.positionRatio = (v.positionRatio*100).toFixed(1);
         })
 
@@ -960,6 +980,7 @@ export default {
         this.innerSabRight = innersab.rows.filter((v) => {
           return v.cooprLevel1 == "线下";
         });
+      }
       } catch (err) {
         console.log(err);
       }
@@ -996,7 +1017,7 @@ export default {
       }
     },
     //中间折线图
-    async getList() {
+    async getList(params) {
     this.showLoading = true;
     this.divisionDate = [];
     this.divisionList = [];
@@ -1010,9 +1031,26 @@ export default {
       try {
         const res = await API.getData(
           "directTotalInnerChart",
-          this.dataTimeMany
+          params
         );
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
+        if(res.rows.length<1){
+          this.divisionDate = [];
+            this.divisionList = [0];
+            this.divisionLine = 0;
+          this.innerDirectDate = [];
+            this.innerDirectList = [0];
+            this.innerDirectLine = 0;
+          this.outerDirectDate = [];
+            this.outerDirectList = [0];
+            this.outerDirectLine = 0;
+            this.showLoading = false;
+            this.myEcharts();
+            this.myEcharts2();
+            this.myEcharts3();
+            return;
+        }
+        
         let newArr = res.rows.filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
@@ -1024,17 +1062,17 @@ export default {
             // obj.divisionArr.push(item)
             this.divisionDate.push(yue + "-" + ri);
             this.divisionList.push(item.totalCnyAmt);
-            this.divisionLine = item.saleAvgTaskQty;
+            this.divisionLine = item.saleAvgAmt;
             this.myEcharts();
           } else if (item.directName == "内销") {
             this.innerDirectDate.push(yue + "-" + ri);
             this.innerDirectList.push(item.totalCnyAmt);
-            this.innerDirectLine = item.saleAvgTaskQty;
+            this.innerDirectLine = item.saleAvgAmt;
             this.myEcharts2();
           } else if (item.directName == "外销") {
             this.outerDirectDate.push(yue + "-" + ri);
             this.outerDirectList.push(item.totalCnyAmt);
-            this.outerDirectLine = item.saleAvgTaskQty;
+            this.outerDirectLine = item.saleAvgAmt;
             this.myEcharts3();
           }
           this.showLoading = false;
@@ -1050,6 +1088,39 @@ export default {
         const res = await API.getData("directTotalDashboard",params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
+        if(res.rows.length<1){
+          this.speedData = {
+            bar: 0,
+            speedBar: 0,
+            ballTitle: "事业部达成",
+            ballNum: 0,
+            ballLeftTitle: "内销",
+            ballRightTitle: "外销",
+            ballLeftNum: 0,
+            ballRightNum: 0,
+            bottomNum: 0,
+            bottomTitle1: "内销",
+            bottomClose: 0,
+            bottomTime: 0,
+            bottomTitle2: "外销",
+            bottomClose1: 0,
+            bottomTime1: 0,
+               };
+            this.progressData = {
+                bar1: 0,
+                bar2: 0,
+                ballTitle: "事业部",
+                bigBallTitle: "毛利率",
+                textLeft: "内销",
+                textRight: "外销",
+                titleTop: "内销",
+                titleBottom: "外销",
+                topGPM: 0,
+                bottomGPM: 0,
+                ballNum: 0,
+         };
+          return;
+        }
         this.progressData.ballNum = (
           panelDataList[0].grossProfitRadio * 100
         ).toFixed(1);
@@ -1091,6 +1162,26 @@ export default {
       try {
         const res = await API.getData("directTotalDashboardSAB", params);
         let RightSAB = res.rows;
+        if(RightSAB.length<1 ){
+            this.sabData = {
+              bar1: 0,
+              bar2: 0,
+              bar3: 0,
+              bar4: 0,
+              bar5: 0,
+              ballTitle: "事业部",
+              bottom: "外销",
+              top: "内销",
+              sabArr: { s: 0, a: 0, b: 0 },
+              topArr: { s: 0, a: 0, b: 0 },
+              bottomArr: { s: 0, a: 0, b: 0 },
+              // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+              // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+              // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
+            };
+           return;
+        }
+
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].directName == "事业部") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
@@ -1476,7 +1567,7 @@ export default {
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.outerDirectLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
