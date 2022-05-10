@@ -796,18 +796,18 @@ export default {
     modelLabel(){
       return this.$store.state.showMoney==true?'亿':'亿'
     },
-    model(){
+    model(){ /* 获取本部，OEM */
       return this.$store.state.model
     }
     
   },
   watch:{
-    ontime:{
+    ontime:{ /*监听数据更改 调用接口 */
      handler: function (newValue, oldValue) {
         this.init(this.model);
       }
     },
-    model:{ 
+    model:{ /*监听数据更改 调用接口 */
       handler: function(newValue,oldValue){
         this.init(newValue);
       }
@@ -825,7 +825,7 @@ export default {
    },
   methods: {
 
-    init(model){
+    init(model){ /*初始化数据方法*/
     let params = `${this.ontime},${model}`;
     let listParams = `${this.ontime}-01,${this.ontime}-31,,${model},${this.ontime}-01,${this.ontime}-31,${model}`
     console.log('params',listParams)
