@@ -532,13 +532,13 @@
         <div>
           <div class="middle-font">大区日达成趋势图</div>
           <div class="right-box-qushi">
-            <div class="flex-right-bottom">
+            <div class="flex-right-bottom" v-for="(item,i) in dhcarr" :key="i">
               <div class="content-cart">
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
                 <div class="flex-echrats-right">
-                  <div class="right-font-title">北美零售营销中心</div>
-                  <div id="main2" class="echartsBox-min"></div>
+                  <div class="right-font-title">{{item}}</div>
+                  <div :id="i" class="echartsBox-min"></div>
                 </div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line1"></div>
@@ -605,6 +605,8 @@
     },
     data() {
       return {
+        dhcarr:[0,1,2,3,4,5],
+        Arrnum:[],
         showLoading: false,
         AmericaDate: [],
         AmericaList: [],
@@ -896,12 +898,19 @@
             k++;
           }
           console.log('arr', arr);
+          this.dhcarr = [];
+          let arrs = JSON.parse(JSON.stringify(arr));
+          arrs.forEach(v=>{
+            this.dhcarr.push(v[0].cooprLevel1)
+          })
+          // this.dhcarr = [1,2,3,4,5];
 
           for (let j = 0; j < arr.length; j++) {
             var datanum = arr[j];
-            
-          }
-          let Arrnum = datanum.filter((item) => {
+            let AmericaDate = [];
+           let AmericaList = [];
+           let AmericaLine = 1;
+            let Arrnum = datanum.filter((item) => {
             var timeArr = item.orderDate 
             .replace(" ", ":")
               .replace(/\:/g, "-")
@@ -909,12 +918,37 @@
             var yue = timeArr[1];
             var ri = timeArr[2];
           console.log( "sdvsd", timeArr);
+        
 
-          this.AmericaDate.push(yue + "-" + ri);
-              this.AmericaList.push(item.totalAmt);
-              this.AmericaLine = item.totalAvgTaskAmt;     
+         AmericaDate.push(yue + "-" + ri);
+             AmericaList.push(item.totalAmt);
+             AmericaLine = item.totalAvgTaskAmt;     
           })
-          this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine);
+          console.log("Arrnum",this.sellOutDataList);
+
+          this.myEcharts2(AmericaList,AmericaDate,AmericaLine,j);
+          }
+          // let Arrnum = datanum.filter((item) => {
+          //   var timeArr = item.orderDate 
+          //   .replace(" ", ":")
+          //     .replace(/\:/g, "-")
+          //     .split("-");
+          //   var yue = timeArr[1];
+          //   var ri = timeArr[2];
+          // console.log( "sdvsd", timeArr);
+
+          // this.AmericaDate.push(yue + "-" + ri);
+          //     this.AmericaList.push(item.totalAmt);
+          //     this.AmericaLine = item.totalAvgTaskAmt;     
+          // })
+          // console.log("Arrnum",this.datanum);
+          // this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine);
+          // let dhcarr = [1,2,3,4,5,6];
+          // dhcarr.forEach(v=>{
+
+          //   this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine,v);
+
+          // })
         } catch (error) {
           console.log(error);
 
@@ -1044,8 +1078,8 @@
         };
         myChart.setOption(option);
       },
-      myEcharts2(data,time,lines) {
-        var myChart2 = this.$echarts.init(document.getElementById("main2"));
+      myEcharts2(data,time,lines,id) {
+        var myChart2 = this.$echarts.init(document.getElementById(id));
         var option = {
           xAxis: {
             axisLabel: {
