@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <el-table border :data="mesInfo" :cell-style="{borderColor: '#1E1D51' }"
+    <div class="execl">
+        <el-table border :data="mesInfo" :cell-style="{padding: '5px 0',borderColor: '#1E1D51' }"
             :row-style="rowStyle" :header-cell-style="headerCellStyle" class="exportTable"  >
-            <el-table-column prop="businessEntityName" label="产司" width="60"   height="270" >
+            <el-table-column prop="businessEntityName" label="产司" width="60"   height="287" >
             </el-table-column>
             <el-table-column label="内销" align="center" style="padding:0">
                 <el-table-column :prop="headTitle.inSale.innerSaleTaskAmt" :label="headTitle.inSale.title" align="center">
@@ -441,12 +441,24 @@
     };
 </script>
 <style scoped lang="scss">
+    .execl {
+    width: 99%;
+    height:280px;
+    background-color: rgba(2, 0, 77, 0.4);
+    box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
+    border: 2px solid #0d53b7;
+    // background-image: url("@/assets/tableVBackround.svg");
+    border-radius: 0 0 10px 10px;
+    }
+    .el-table--scrollable-y .el-table__body-wrapper {
+            overflow-y: auto;
+    }
     .exportTable {
         font-size: 13px;
         width: 550px;
-        height: 270px;
+        height: 267px;
         border-color: #1E1D51;
-        margin: 0 auto;
+        margin: 5px auto 0;
         background-color: rgb(4, 19, 112);
         font-weight: 200px;
     }
@@ -497,7 +509,7 @@
     /* 滚动条 */
     ::v-deep.el-table__body-wrapper {
         &::-webkit-scrollbar {
-            height: 1px;
+            height: 6px;
             width: 6px;
         }
 
@@ -554,4 +566,14 @@
     ::-webkit-scrollbar-track{
         background:#070640;
     }
+    
+::v-deep.el-table--scrollable-x .el-table__body-wrapper{
+        overflow-y: scroll;
+
+}
+::v-deep .el-table .el-table__body-wrapper {
+    height: 200px;
+    overflow-y: scroll;
+    
+}
 </style>
