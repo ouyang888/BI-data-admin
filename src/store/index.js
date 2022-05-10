@@ -64,6 +64,7 @@ export default new Vuex.Store({
             state.showMoney = val
         },
         setModel(state,val){
+            console.log('model改制',val)
             state.model = val
         },
     },
