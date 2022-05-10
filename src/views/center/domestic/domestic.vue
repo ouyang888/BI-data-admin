@@ -959,18 +959,18 @@ export default {
           var ri = timeArr[2];
           if (item.cooprLevel1 == "线上") {
             this.innerDirectDate.push(yue + "-" + ri);
-            this.innerDirectList.push(item.totalCnyAmt);
-            this.innerDirectLine = item.saleAvgTaskQty;
+            this.innerDirectList.push(item.CnyAmt);
+            this.innerDirectLine = item.saleAvgAmt;
             this.myEcharts2();
           } else if (item.cooprLevel1 == "线下") {
             this.outerDirectDate.push(yue + "-" + ri);
-            this.outerDirectList.push(item.totalCnyAmt);
-            this.outerDirectLine = item.saleAvgTaskQty;
+            this.outerDirectList.push(item.CnyAmt);
+            this.outerDirectLine = item.saleAvgAmt;
             this.myEcharts3();
           }
 
-          this.allList.push(item.saleAvgTaskQty + item.saleAvgTaskQty);
-          this.allLiine = item.saleAvgTaskQty + item.saleAvgTaskQty;
+          this.allList.push(item.totalCnyAmt);
+          this.allLiine = item.saleAvgAmt;
           this.myEcharts();
           this.showLoading = false;
         });
@@ -1192,7 +1192,7 @@ export default {
             markLine: {
               data: [
                 {
-                  yAxis: 23040199,
+                  yAxis: this.innerDirectLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色

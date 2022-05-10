@@ -28,7 +28,7 @@
       <el-table-column prop="cnyAmt" label="总计" align="center">
         <template v-slot="scope">
           <div class="precent">
-            <div style="width: 30px">{{ scope.row.cnyAmt.toFixed(0) }}</div>
+            <div>{{ scope.row.cnyAmt.toFixed(0) }}</div>
             <div style="margin-top: 5px">
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />

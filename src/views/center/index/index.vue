@@ -690,7 +690,7 @@ export default {
   },
   data() {
     return {
-      dataTimeMany: "2022-03-01,2022-03-31,2022-03-01,2022-03-31",
+      dataTimeMany: "2022-04-01,2022-04-31,2022-04-01,2022-04-31",
       showLoading: false,
       divisionList: [],
       divisionDate: [],
@@ -816,7 +816,7 @@ export default {
    },
   methods: {
     init(){
-    this.getList();
+    this.getList(this.ontime);
     this.getCard(this.ontime);
     this.getTable(this.ontime);
     this.getdashboard(this.ontime);
@@ -996,7 +996,7 @@ export default {
       }
     },
     //中间折线图
-    async getList() {
+    async getList(params) {
     this.showLoading = true;
     this.divisionDate = [];
     this.divisionList = [];
@@ -1010,7 +1010,7 @@ export default {
       try {
         const res = await API.getData(
           "directTotalInnerChart",
-          this.dataTimeMany
+          `${params}-01,${params}-31,${params}-01,${params}-31,`
         );
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
         let newArr = res.rows.filter((item) => {
@@ -1024,17 +1024,17 @@ export default {
             // obj.divisionArr.push(item)
             this.divisionDate.push(yue + "-" + ri);
             this.divisionList.push(item.totalCnyAmt);
-            this.divisionLine = item.saleAvgTaskQty;
+            this.divisionLine = item.saleAvgAmt;
             this.myEcharts();
           } else if (item.directName == "内销") {
             this.innerDirectDate.push(yue + "-" + ri);
             this.innerDirectList.push(item.totalCnyAmt);
-            this.innerDirectLine = item.saleAvgTaskQty;
+            this.innerDirectLine = item.saleAvgAmt;
             this.myEcharts2();
           } else if (item.directName == "外销") {
             this.outerDirectDate.push(yue + "-" + ri);
             this.outerDirectList.push(item.totalCnyAmt);
-            this.outerDirectLine = item.saleAvgTaskQty;
+            this.outerDirectLine = item.saleAvgAmt;
             this.myEcharts3();
           }
           this.showLoading = false;
@@ -1050,6 +1050,39 @@ export default {
         const res = await API.getData("directTotalDashboard",params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
+        if(res.rows.length<1){
+          this.speedData = {
+            bar: 0,
+            speedBar: 0,
+            ballTitle: "事业部达成",
+            ballNum: 0,
+            ballLeftTitle: "内销",
+            ballRightTitle: "外销",
+            ballLeftNum: 0,
+            ballRightNum: 0,
+            bottomNum: 0,
+            bottomTitle1: "内销",
+            bottomClose: 0,
+            bottomTime: 0,
+            bottomTitle2: "外销",
+            bottomClose1: 0,
+            bottomTime1: 0,
+               };
+            this.progressData = {
+                bar1: 0,
+                bar2: 0,
+                ballTitle: "事业部",
+                bigBallTitle: "毛利率",
+                textLeft: "内销",
+                textRight: "外销",
+                titleTop: "内销",
+                titleBottom: "外销",
+                topGPM: 0,
+                bottomGPM: 0,
+                ballNum: 0,
+         };
+          return;
+        }
         this.progressData.ballNum = (
           panelDataList[0].grossProfitRadio * 100
         ).toFixed(1);
@@ -1091,6 +1124,26 @@ export default {
       try {
         const res = await API.getData("directTotalDashboardSAB", params);
         let RightSAB = res.rows;
+        if(RightSAB.length<1 ){
+            this.sabData = {
+              bar1: 0,
+              bar2: 0,
+              bar3: 0,
+              bar4: 0,
+              bar5: 0,
+              ballTitle: "事业部",
+              bottom: "外销",
+              top: "内销",
+              sabArr: { s: 0, a: 0, b: 0 },
+              topArr: { s: 0, a: 0, b: 0 },
+              bottomArr: { s: 0, a: 0, b: 0 },
+              // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+              // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
+              // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
+            };
+           return;
+        }
+
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].directName == "事业部") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
@@ -1476,7 +1529,7 @@ export default {
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.outerDirectLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
