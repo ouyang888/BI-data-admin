@@ -1155,7 +1155,7 @@ export default {
     //三个仪表盘(左中)
     async getdashboard(params) {
       try {
-        const res = await API.getData("offlinePlatformTop", params+','+this.titleName);
+        const res = await API.getData("offlinePlatformTop",`${params},线上,${this.titleName},${params},线上,${this.titleName}`);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         this.progressData.ballNum = (
@@ -1201,7 +1201,7 @@ export default {
       //三个仪表盘(右)
     async queryCardSAB(params) {
       try {
-        const res = await API.getData("offlinePlatformSAB", params+','+this.titleName);
+        const res = await API.getData("offlinePlatformSAB", `${params},线上,${this.titleName},${params},线上,${this.titleName}`);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].businessModel == "直营") {
