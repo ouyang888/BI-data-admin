@@ -128,11 +128,13 @@ export default {
       tableOutter:[],
       leftObj:{
       name:'coopr_level3',
-      level:'coopr_level3_manager'
+      level:'coopr_level3_manager',
+      tAvgAmt:'tAvgAmt',/*责任制*/
       },
       rightObj:{
       name:'customerName',
-      level:'coopr_level3_manager'
+      level:'coopr_level3_manager',
+      tAvgAmt:'tAvgAmt',/*责任制*/
       },
     };
   },
@@ -146,36 +148,50 @@ export default {
     modelLabel() {
       return this.$store.state.showMoney == true ? "亿" : "亿";
     },
+    model(){ /* 获取本部，OEM */
+      return this.$store.state.model
+    }
   },
   watch: {
     ontime: {
       handler: function (newValue, oldValue) {
-        this.init();
+       this.init(this.model);
       },
     },
     showMoney: {
       handler: (newValue, oldValue) => {},
     },
+        model:{ /*监听数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(newValue);
+      }
+   },
   },
   mounted() {
-    this.init();
+   
+    this.init(this.model);
+
   },
 
 
 
   methods: {
-    init(){
-      
-    this.getCard(this.ontime);
-    this.getTable(this.ontime);
-    this.getdashboard(this.ontime);
-    this.queryCardSAB(this.ontime);
-    this.getList() 
-    this.getList1()
+    init(model){
+     let params = `${this.ontime},${model}`;
+     let tableParmas = `线下,${this.ontime},${model},线下,${this.ontime},${model}`;
+    this.getCard(params);
+
+    this.getTable(tableParmas);
+    this.getdashboard(params);
+    this.queryCardSAB(params);
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
-  
+    this.myEcharts4();
+    this.myEcharts5();
+    this.myEcharts6();
+    this.myEcharts7();
+    // this.myEcharts8();
     },
 
     //中间折线图
@@ -794,7 +810,483 @@ export default {
       };
       myChart3.setOption(option);
     },
-   
+    myEcharts4() {
+      var myChart4 = this.$echarts.init(document.getElementById("main4"));
+      var option = {
+        xAxis: {
+          axisLabel: {
+            formatter: function (val) {
+              return "";
+            },
+          },
+        },
+        // echartsData: {
+        textStyle: {
+          color: "#3FB0FF",
+        },
+        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+        title: {
+          text: "",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        grid: {
+          top: "5%",
+          left: "2%",
+          right: "5%",
+          bottom: "3%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          axisTick: {
+            show: false, //刻度线
+          },
+          axisLine: {
+            show: false, //隐藏y轴
+          },
+          axisLabel: {
+            show: false, //隐藏刻度值
+          },
+        },
+        yAxis: {
+          name: "单位：万",
+          type: "value",
+          splitLine: {
+            lineStyle: {
+              type: "dashed",
+              color: "rgba(45,153,255,.3)",
+            },
+          },
+          axisTick: {
+            show: false, //刻度线
+          },
+          axisLine: {
+            show: false, //隐藏y轴
+          },
+          axisLabel: {
+            show: false, //隐藏刻度值
+          },
+        },
+        series: [
+          {
+            name: "实际达成",
+            type: "line",
+            stack: "Total",
+            // smooth: true,
+            lineStyle: {
+              width: 1,
+            },
+            showSymbol: false,
+            areaStyle: {
+              normal: {
+                color: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                    },
+                    {
+                      offset: 0.7,
+                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                    },
+                  ],
+                  globalCoord: false, // 缺省为 false
+                },
+              },
+            },
+            data: [1948, 7308, 8949, 3839, 13857],
+            markLine: {
+              data: [
+                {
+                  yAxis: 8576,
+                  silent: false, //鼠标悬停事件 true没有，false有
+                  lineStyle: {
+                    //警戒线的样式 ，虚实 颜色
+                    type: "dashed", //样式  ‘solid’和'dotted'
+                    color: "#FF8B2F",
+                    width: 2, //宽度
+                  },
+                  label: {
+                    formatter: "",
+                    color: "#FF8B2F",
+                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                  },
+                },
+              ],
+
+              symbol: ["none", "none"],
+            },
+          },
+        ],
+      };
+      myChart4.setOption(option);
+    },
+    myEcharts5() {
+      var myChart5 = this.$echarts.init(document.getElementById("main5"));
+      var option = {
+        xAxis: {
+          axisLabel: {
+            formatter: function (val) {
+              return "";
+            },
+          },
+        },
+        // echartsData: {
+        textStyle: {
+          color: "#3FB0FF",
+        },
+        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+        title: {
+          text: "",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        grid: {
+          top: "5%",
+          left: "2%",
+          right: "5%",
+          bottom: "3%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          axisTick: {
+            show: false, //刻度线
+          },
+          axisLine: {
+            show: false, //隐藏y轴
+          },
+          axisLabel: {
+            show: false, //隐藏刻度值
+          },
+        },
+        yAxis: {
+          name: "单位：万",
+          type: "value",
+          splitLine: {
+            lineStyle: {
+              type: "dashed",
+              color: "rgba(45,153,255,.3)",
+            },
+          },
+          axisTick: {
+            show: false, //刻度线
+          },
+          axisLine: {
+            show: false, //隐藏y轴
+          },
+          axisLabel: {
+            show: false, //隐藏刻度值
+          },
+        },
+        series: [
+          {
+            name: "实际达成",
+            type: "line",
+            stack: "Total",
+            // smooth: true,
+            lineStyle: {
+              width: 1,
+            },
+            showSymbol: false,
+            areaStyle: {
+              normal: {
+                color: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                    },
+                    {
+                      offset: 0.7,
+                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                    },
+                  ],
+                  globalCoord: false, // 缺省为 false
+                },
+              },
+            },
+            data: [1948, 7308, 8949, 3839, 13857],
+            markLine: {
+              data: [
+                {
+                  yAxis: 8576,
+                  silent: false, //鼠标悬停事件 true没有，false有
+                  lineStyle: {
+                    //警戒线的样式 ，虚实 颜色
+                    type: "dashed", //样式  ‘solid’和'dotted'
+                    color: "#FF8B2F",
+                    width: 2, //宽度
+                  },
+                  label: {
+                    formatter: "",
+                    color: "#FF8B2F",
+                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                  },
+                },
+              ],
+
+              symbol: ["none", "none"],
+            },
+          },
+        ],
+      };
+      myChart5.setOption(option);
+    },
+    myEcharts6() {
+      var myChart6 = this.$echarts.init(document.getElementById("main6"));
+      var option = {
+        xAxis: {
+          axisLabel: {
+            formatter: function (val) {
+              return "";
+            },
+          },
+        },
+        // echartsData: {
+        textStyle: {
+          color: "#3FB0FF",
+        },
+        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+        title: {
+          text: "",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        grid: {
+          top: "5%",
+          left: "2%",
+          right: "5%",
+          bottom: "3%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          axisTick: {
+            show: false, //刻度线
+          },
+          axisLine: {
+            show: false, //隐藏y轴
+          },
+          axisLabel: {
+            show: false, //隐藏刻度值
+          },
+        },
+        yAxis: {
+          name: "单位：万",
+          type: "value",
+          splitLine: {
+            lineStyle: {
+              type: "dashed",
+              color: "rgba(45,153,255,.3)",
+            },
+          },
+          axisTick: {
+            show: false, //刻度线
+          },
+          axisLine: {
+            show: false, //隐藏y轴
+          },
+          axisLabel: {
+            show: false, //隐藏刻度值
+          },
+        },
+        series: [
+          {
+            name: "实际达成",
+            type: "line",
+            stack: "Total",
+            // smooth: true,
+            lineStyle: {
+              width: 1,
+            },
+            showSymbol: false,
+            areaStyle: {
+              normal: {
+                color: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                    },
+                    {
+                      offset: 0.7,
+                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                    },
+                  ],
+                  globalCoord: false, // 缺省为 false
+                },
+              },
+            },
+            data: [1948, 7308, 8949, 3839, 13857],
+            markLine: {
+              data: [
+                {
+                  yAxis: 8576,
+                  silent: false, //鼠标悬停事件 true没有，false有
+                  lineStyle: {
+                    //警戒线的样式 ，虚实 颜色
+                    type: "dashed", //样式  ‘solid’和'dotted'
+                    color: "#FF8B2F",
+                    width: 2, //宽度
+                  },
+                  label: {
+                    formatter: "",
+                    color: "#FF8B2F",
+                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                  },
+                },
+              ],
+
+              symbol: ["none", "none"],
+            },
+          },
+        ],
+      };
+      myChart6.setOption(option);
+    },
+    myEcharts7() {
+      var myChart7 = this.$echarts.init(document.getElementById("main7"));
+      var option = {
+        xAxis: {
+          axisLabel: {
+            formatter: function (val) {
+              return "";
+            },
+          },
+        },
+        // echartsData: {
+        textStyle: {
+          color: "#3FB0FF",
+        },
+        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+        title: {
+          text: "",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        grid: {
+          top: "5%",
+          left: "2%",
+          right: "5%",
+          bottom: "3%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          axisTick: {
+            show: false, //刻度线
+          },
+          axisLine: {
+            show: false, //隐藏y轴
+          },
+          axisLabel: {
+            show: false, //隐藏刻度值
+          },
+        },
+        yAxis: {
+          name: "单位：万",
+          type: "value",
+          splitLine: {
+            lineStyle: {
+              type: "dashed",
+              color: "rgba(45,153,255,.3)",
+            },
+          },
+          axisTick: {
+            show: false, //刻度线
+          },
+          axisLine: {
+            show: false, //隐藏y轴
+          },
+          axisLabel: {
+            show: false, //隐藏刻度值
+          },
+        },
+        series: [
+          {
+            name: "实际达成",
+            type: "line",
+            stack: "Total",
+            // smooth: true,
+            lineStyle: {
+              width: 1,
+            },
+            showSymbol: false,
+            areaStyle: {
+              normal: {
+                color: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                    },
+                    {
+                      offset: 0.7,
+                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                    },
+                  ],
+                  globalCoord: false, // 缺省为 false
+                },
+              },
+            },
+            data: [1948, 7308, 8949, 3839, 13857],
+            markLine: {
+              data: [
+                {
+                  yAxis: 8576,
+                  silent: false, //鼠标悬停事件 true没有，false有
+                  lineStyle: {
+                    //警戒线的样式 ，虚实 颜色
+                    type: "dashed", //样式  ‘solid’和'dotted'
+                    color: "#FF8B2F",
+                    width: 2, //宽度
+                  },
+                  label: {
+                    formatter: "",
+                    color: "#FF8B2F",
+                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                  },
+                },
+              ],
+
+              symbol: ["none", "none"],
+            },
+          },
+        ],
+      };
+      myChart7.setOption(option);
+    },
+ 
     // 右边卡片/
     async getCard(params) {
       this.showLoadingCard = true;
@@ -838,8 +1330,8 @@ export default {
     // 底部table/
     async getTable(params) {
       try {
-        let tableInner = await API.getData("offLineBotton3Table", `${params},${params}`);
-        let tableOutter = await API.getData("offLineBottomAk", `${params},${params}`);
+        let tableInner = await API.getData("offLineBotton3Table", `${params}`);
+        let tableOutter = await API.getData("offLineBottomAk", `${params}`);
 
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;

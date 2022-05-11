@@ -1100,7 +1100,7 @@ export default {
     // 中部
     //中间折线图
     async getList() {
-      this.showLoading = true;
+      // this.showLoading = true;
       try {
         const res = await API.getData(
           "sellOuttotalchart",
@@ -1126,20 +1126,7 @@ export default {
             this.AvgTaskAmtLine = item.totalAvgTaskAmt;
             this.myEcharts();
           }
-
-          //   if (item.cooprLevel1 == "北美零售营销中心") {
-          //     // obj.divisionArr.push(item)
-          //     this.AmericaDate.push(yue + "-" + ri);
-          //     this.AmericaList.push(item.CnyAmt);
-          //     this.AmericaLine = item.tAvgAmt;
-          //     this.myEcharts2();
-          //   } else if (item.cooprLevel1 == "韩国业务区") {
-          //     this.koreaData.push(yue + "-" + ri);
-          //     this.koreaList.push(item.CnyAmt);
-          //     this.koreaLine = item.tAvgAmt;
-          //     this.myEcharts3();
-          //   }
-          this.showLoading = false;
+          // this.showLoading = false;
         });
       } catch (error) {
         console.log(error);
@@ -1147,7 +1134,6 @@ export default {
     },
 
     // 右边接口
-
     async getList1() {
       this.showLoading = true;
       try {
@@ -1201,27 +1187,6 @@ export default {
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
-        // let Arrnum = datanum.filter((item) => {
-        //   var timeArr = item.orderDate
-        //   .replace(" ", ":")
-        //     .replace(/\:/g, "-")
-        //     .split("-");
-        //   var yue = timeArr[1];
-        //   var ri = timeArr[2];
-        // console.log( "sdvsd", timeArr);
-
-        // this.AmericaDate.push(yue + "-" + ri);
-        //     this.AmericaList.push(item.totalAmt);
-        //     this.AmericaLine = item.totalAvgTaskAmt;
-        // })
-        // console.log("Arrnum",this.datanum);
-        // this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine);
-        // let dhcarr = [1,2,3,4,5,6];
-        // dhcarr.forEach(v=>{
-
-        //   this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine,v);
-
-        // })
       } catch (error) {
         console.log(error);
       }
@@ -1475,126 +1440,7 @@ export default {
       };
       myChart2.setOption(option);
     },
-    myEcharts3() {
-      var myChart3 = this.$echarts.init(document.getElementById("main3"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: this.koreaData,
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: this.koreaList,
-            markLine: {
-              data: [
-                {
-                  yAxis: this.koreaLine,
-
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart3.setOption(option);
-    },
+   
     online() {
       this.$router.push("/center/onlineSummary");
     },

@@ -21,6 +21,13 @@ const routes = [
         redirect: '/center/index'
     },
 
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/login.vue'),
+    },
+
+
 
     {
         path: '/center',
@@ -122,39 +129,39 @@ const routes = [
                 component: () => import('@/views/center/onlineModeCo/onlineModeCo.vue')
             },
 
-               //线下--合作模式3 --
+            //线下--合作模式3 --
 
-               {
+            {
                 path: 'offlineCatSeries',
                 name: 'offlineCatSeries',
                 component: () => import('@/views/center/offlineCatSeries/offlineCatSeries.vue')
             },
 
-             //线下--合作模式3 --负责人
+            //线下--合作模式3 --负责人
 
-             {
+            {
                 path: 'offlineCode',
                 name: 'offlineCode',
                 component: () => import('@/views/center/offlineCode/offlineCode.vue')
             },
 
-              //外销--大区区域
+            //外销--大区区域
 
-              {
+            {
                 path: 'exprotAreaAll',
                 name: 'exprotAreaAll',
                 component: () => import('@/views/center/exprotAreaAll/exprotAreaAll.vue')
             },
-              //外销--产司区域主管
+            //外销--产司区域主管
 
-              {
+            {
                 path: 'exprotProductCo',
                 name: 'exprotProductCo',
                 component: () => import('@/views/center/exprotProductCo/exprotProductCo.vue')
             },
         ],
     }
-    
+
 
 ]
 const router = new VueRouter({
@@ -163,37 +170,28 @@ const router = new VueRouter({
 /**
  * 路由守卫
  */
-// router.beforeEach(async (to, from, next) => {
-// if (to.name !== 'login') {
-//     const authoritys = await store.dispatch('setUserAuthoritys')
-//     if (to.fullPath==="/center"&&from.fullPath!=="/center") {
-//         if (authoritys.includes('admin:quality')) {
-//             next('/center/qualityList');
-//             return
-//         }
-//     }
-// if (to.meta.permission) {
-//     let sign = false
-//     if (to.meta.permission instanceof Array) {
-//         to.meta.permission.forEach(item => {
-//             if (authoritys.indexOf(item) >= 0) {
-//                 sign = true
-//             }
-//         })
-//     } else if (authoritys.indexOf(to.meta.permission) > -1) sign = true
-
-//     if (!sign) {
-//         // if (to.name == 'login') {
-//         //     console.log("进入coupon权限不足");
-//         //     // next('/login');
-//         // } else {
-//         console.log('权限不足')
-//         // }
-//         return;
-//     }
-// }
-// }
-// next();
-// })
+router.beforeEach(async (to, from, next) => {
+    // console.log("!11222",to)
+    if (to.name !== 'login') {
+        // const authoritys = await store.dispatch('setUserAuthoritys')
+        if (to.fullPath === "/center" && from.fullPath !== "/center") {
+            // if (authoritys.includes('admin:quality')) {
+                next('/center/index');
+                return
+            // }
+        }
+        if (to.meta.permission) {
+            let sign = false
+            if (to.meta.permission instanceof Array) {
+                to.meta.permission.forEach(item => {
+                    if (authoritys.indexOf(item) >= 0) {
+                        sign = true
+                    }
+                })
+            } else if (authoritys.indexOf(to.meta.permission) > -1) sign = true
+        }
+    }
+    next();
+})
 
 export default router

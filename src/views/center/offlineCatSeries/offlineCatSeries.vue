@@ -82,86 +82,6 @@ export default {
         AvgTaskAmtLine: [],
         AmericaLine: [],
       titleName:"",
-      columns: [
-        {
-          title: "线上",
-          dataIndex: "name",
-          key: "name",
-          align: "center",
-          scopedSlots: { customRender: "name" },
-        },
-        {
-          title: "责任人",
-          dataIndex: "age",
-          key: "age",
-          align: "center",
-        },
-        {
-          title: "责任制",
-          dataIndex: "address",
-          key: "address 1",
-          align: "center",
-        },
-        {
-          title: "累计达成",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "任务完成率",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "毛利率",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "周转天数",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "说到做到",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "排名",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-      ],
-      data: [
-        {
-          key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. ",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. ",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. ",
-          tags: ["cool", "teacher"],
-        },
-      ],
       progressData: {
         bar1: 0,
         bar2: 0,
@@ -211,11 +131,13 @@ export default {
       tableOutter:[],
       leftObj:{
       name:'coopr_level3',
-      level:'coopr_level3_manager'
+      level:'coopr_level3_manager',
+      tAvgAmt:'tAvgAmt',/*责任制*/
       },
       rightObj:{
       name:'customerName',
-      level:'coopr_level3_manager'
+      level:'coopr_level3_manager',
+      tAvgAmt:'tAvgAmt',/*责任制*/
       },
      
     };
