@@ -14,6 +14,7 @@
         @handleClick="namesClick"
         :setTrueOrFalse="setTrueOrFalse"
         :cooprMode="cooprMode"
+        :headerObj="leftObj"
       />
       <RowTable
         :color="color2"
@@ -25,6 +26,7 @@
         @handleClick="managerClick"
         :setTrueOrFalse="setTrueOrFalse"
         :cooprMode="cooprMode"
+        :headerObj="rightObj"
       />
     </div>
     <!-- <div
@@ -77,6 +79,12 @@ export default {
       type:Array,
       default:function(){ return []},
     },
+    leftObj:{
+      type:Object,
+    },
+    rightObj:{
+      type:Object,
+    }
   },
   data() {
     return {

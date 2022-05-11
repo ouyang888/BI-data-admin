@@ -107,7 +107,7 @@ export default {
   data() {
     return {
       searchKeys: [this.$route.path, this.$route.meta.preMenuUrl || ""],
-      index: 2,
+      index: 1,
       title: "销向汇总页",
       cus: 1,
       land:"产地",
@@ -218,8 +218,8 @@ export default {
 
 
          default:
-          this.title = '销向汇总页';
-          this.$store.commit("setCurrPath",'销向汇总页')
+          this.title = '总裁PSI页';
+          this.$store.commit("setCurrPath",'总裁PSI页')
       }
     },
     goBack() {

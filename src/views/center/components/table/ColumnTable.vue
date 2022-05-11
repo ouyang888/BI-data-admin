@@ -81,9 +81,9 @@
             </el-table-column>
             <el-table-column label="合计" align="center" height="20px" width="50">
                 <!-- <el-table-column v-for="(k,i) in tableList.headTitle.totalDone" :label="k"></el-table-column> -->
-                <el-table-column :prop="headTitle.total.tQtyAll" :label="headTitle.total.title" align="center" height="20px">
+                <el-table-column :prop="headTitle.total.cnyAmtAll" :label="headTitle.total.title" align="center" height="20px">
                      <template v-slot="scope">
-                                {{ Number(scope.row.tQtyAll).toFixed(1) }}
+                              {{ Number(scope.row.cnyAmtAll).toFixed(1) }}
                      </template>
                 </el-table-column>
                 <el-table-column :prop="headTitle.total.orgQtyAll" :label="headTitle.total.text" align="center">
@@ -443,23 +443,23 @@
 <style scoped lang="scss">
     .execl {
     width: 99%;
-    height:280px;
-    background-color: rgba(2, 0, 77, 0.4);
+    /* height:280px; */
+    /* background-color: rgba(2, 0, 77, 0.4);
     box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
     border: 2px solid #0d53b7;
-    // background-image: url("@/assets/tableVBackround.svg");
-    border-radius: 0 0 10px 10px;
+     background-image: url("@/assets/tableVBackround.svg");
+    border-radius: 0 0 10px 10px; */
     }
     .el-table--scrollable-y .el-table__body-wrapper {
             overflow-y: auto;
     }
     .exportTable {
         font-size: 13px;
-        width: 550px;
+        /* width: 550px; */
         height: 267px;
         border-color: #1E1D51;
         margin: 5px auto 0;
-        background-color: rgb(4, 19, 112);
+        /* background-color: rgb(4, 19, 112); */
         font-weight: 200px;
     }
 
