@@ -2981,14 +2981,13 @@ export default {
   methods:{
     namesClick(){
 
+      this.$router.push("exprotAreaAll");
+
     },
     managerClick(){
-      // switch (Store.state.currentPath) {
-      //   case "s":
-      //     // Store.commit("setTableList", ...data.demosticDirectOnOnline);
-      //     this.$router.push("exprotAreaAll");
-      //     break;
-      // }
+
+      this.$router.push("exprotAreaAll");
+ 
     }
   }
 };

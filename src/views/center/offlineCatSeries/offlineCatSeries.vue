@@ -335,10 +335,10 @@ export default {
         "2022-01-24,2022-10-24,线上,京东,2022-01-24,2022-10-24,线上,京东",
         "cooprLevel3"
           );
-          console.log("sell程序", res);
+          console.log("sell程序1", res);
           let sellOutDataList = res.rows[0];
           this.showLoading = false;
-          let obj = res.rows[0]
+          let obj = res.rows
           var k = 0;
           var arr = [];
           for (var i in obj) {
@@ -347,14 +347,14 @@ export default {
             }
             k++;
           }
-
+          console.log("arrs1",obj[i]);
           this.dhcarr = [];
           let arrs = JSON.parse(JSON.stringify(arr));
           arrs.forEach(v=>{
             this.dhcarr.push(v[0].cooprLevel3)
           })
           // this.dhcarr = [1,2,3,4,5];
-console.log("arrs",this.dhcarr);
+
           for (let j = 0; j < arr.length; j++) {
             var datanum = arr[j];
             let AmericaDate = [];
@@ -777,7 +777,7 @@ console.log("arrs",this.dhcarr);
     //三个仪表盘(左中)
     async getdashboard(params) {
       try {
-        const res = await API.getData("offlinePlatformTop", params+','+this.titleName);
+        const res = await API.getData("offlinePlatformTop",`${params},线上,${this.titleName},${params},线上,${this.titleName}`);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         this.progressData.ballNum = (
@@ -823,7 +823,7 @@ console.log("arrs",this.dhcarr);
       //三个仪表盘(右)
     async queryCardSAB(params) {
       try {
-        const res = await API.getData("offlinePlatformSAB", params+','+this.titleName);
+        const res = await API.getData("offlinePlatformSAB", `${params},线上,${this.titleName},${params},线上,${this.titleName}`);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].businessModel == "直营") {
@@ -929,7 +929,9 @@ console.log("arrs",this.dhcarr);
 
         this.tableInner = tableInner.rows;
         this.tableInner.forEach(v=>{
-          // v. = v.coopr_level3_manager;
+          if(v.coopr_level3_manager == '合计'){
+           v.coopr_level3 = v.coopr_level3_manager;
+          }
         })
         this.tableOutter = tableOutter.rows;
 

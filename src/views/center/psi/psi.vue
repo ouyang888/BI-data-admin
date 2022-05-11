@@ -898,7 +898,7 @@
             </div>
           </div>
         </div>
-          <TableCardBox   :mesInfo="mesInfo" :headTitle="headTitle" />   
+          <TableCardBox   :mesInfo="mesInfo2" :headTitle="headTitle2" />   
         <!-- 底部表格 -->
            <!-- <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
       :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" 
@@ -940,23 +940,11 @@
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
                   <div style="display: flex; align-items: center">
-                    <div class="finish-font">进度</div>
-                    <div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
-                      </div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
-                      </div>
-                    </div>
+                    <!-- <div class="finish-font">环境</div>
+                    <div class="fontInfo">
+                      21亿
+                
+                    </div> -->
                   </div>
                 </div>
                 <div
@@ -972,30 +960,32 @@
                 >
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
+                      <div class="finish-font">环境</div>
+                      <div class="fontInfo">
+                        11亿
+                        <!-- <div class="progress-middle">
                           <a-progress
                             :percent="50"
                             :show-info="false"
                             strokeColor="#FF8B2F"
                           />
-                        </div>
-                        <div class="progress-middle">
+                        </div> -->
+                        <!-- <div class="progress-middle">
                           <a-progress
                             :percent="50"
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
                       <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
+                      <div class="fontInfo">
+                        32亿
+                        <!-- <div class="progress-middle">
                           <a-progress
                             :percent="50"
                             :show-info="false"
@@ -1008,15 +998,16 @@
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
+                      <div class="finish-font">烹饪</div>
+                      <div class="fontInfo">
+                        3亿
+                        <!-- <div class="progress-middle">
                           <a-progress
                             :percent="50"
                             :show-info="false"
@@ -1029,7 +1020,7 @@
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -1046,9 +1037,10 @@
                 >
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
+                      <div class="finish-font">电动</div>
+                      <div class="fontInfo">
+                        2亿
+                        <!-- <div class="progress-middle">
                           <a-progress
                             :percent="50"
                             :show-info="false"
@@ -1061,15 +1053,16 @@
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
+                      <div class="finish-font">饮品</div>
+                      <div  class="fontInfo">
+                        9亿
+                        <!-- <div class="progress-middle">
                           <a-progress
                             :percent="50"
                             :show-info="false"
@@ -1082,28 +1075,16 @@
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
+                      <div class="finish-font">条理</div>
+                      <div class="fontInfo">
+                        12亿
+                       
                       </div>
                     </div>
                   </div>
@@ -1121,7 +1102,7 @@
               <div class="mt-border"></div>
               <div class="centerInfo">
                 <div class="flex-top-card">
-                  <div class="top-left-font">内销达成</div>
+                  <div class="top-left-font">外销库存</div>
                   <div class="flex-finish">
                     <div class="finish-font">库存目标 <span>100亿</span></div>
                     <div class="finish-font">库存比 <span>75%</span></div>
@@ -1130,21 +1111,47 @@
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
                   <div style="display: flex; align-items: center">
-                    <div class="finish-font">进度</div>
-                    <div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
+                    <!-- <div class="finish-font">条理</div>
+                      <div class="fontInfo">
+                        15亿
+                       
+                      </div> -->
+                  </div>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                      width: 90%;
+                    flex-wrap: wrap;
+                    min-width: 200px;
+                  "
+                >
+                  <div class="card-middle-progress">
+                    <div style="display: flex; align-items: center">
+                       <div class="finish-font">条理</div>
+                      <div class="fontInfo">
+                        18亿
+                       
                       </div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
+                    </div>
+                  </div>
+                  <div class="card-middle-progress">
+                    <div style="display: flex; align-items: center">
+                    <div class="finish-font">电动</div>
+                      <div class="fontInfo">
+                        28亿
+                       
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-middle-progress">
+                    <div style="display: flex; align-items: center">
+                     <div class="finish-font">烹饪</div>
+                      <div class="fontInfo">
+                        78亿
+                       
                       </div>
                     </div>
                   </div>
@@ -1161,138 +1168,28 @@
                 >
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
+                     <div class="finish-font">环境</div>
+                      <div class="fontInfo">
+                        18亿
+                       
                       </div>
                     </div>
                   </div>
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
+                     <div class="finish-font">烹饪</div>
+                      <div class="fontInfo">
+                        718亿
+                       
                       </div>
                     </div>
                   </div>
                   <div class="card-middle-progress">
                     <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                      width: 90%;
-                    flex-wrap: wrap;
-                    min-width: 200px;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
+                      <div class="finish-font">电池</div>
+                      <div class="fontInfo">
+                        88亿
+                       
                       </div>
                     </div>
                   </div>
@@ -1341,7 +1238,7 @@
       :rowSpanNumber2="rowSpanNumber2" :rowSpanNumber1="rowSpanNumber1" 
       :titleHead="titleHead" style="transform: scale(0.98);"/>    -->
          <!-- <TableCardBox />    -->
-           <TableCardBox   :mesInfo="mesInfo" :headTitle="headTitle" />   
+           <TableCardBox   :mesInfo="mesInfo3" :headTitle="headTitle3" />   
        </div>
         <!-- 底部表格3 -->
         <!-- <div class="flex-bottom">
@@ -1379,8 +1276,7 @@ export default {
           { class: "plan", text: "规划达成" },
           { class: "average", text: "日均线" },
         ],
-
-         headTitle: {
+          headTitle1: {
                     inSale: {
                         title: "责任制",
                         text: "累计达成",
@@ -1400,6 +1296,75 @@ export default {
                         orgQtyAll: "orgQtyAll",
                     },
                 },
+          headTitle2: {
+                    inSale: {
+                        title: "双向契约",
+                        text: "累计达成",
+                        innerSaleTaskAmt: "innerSaleTaskAmt",
+                        innerCnyAmt: "innerCnyAmt",
+                    },
+                    outSale: {
+                        title: "双向契约",
+                        text: "累计达成",
+                        outerSaleTaskAmt: "outerSaleTaskAmt",
+                        outerCnyAmt: "outerCnyAmt",
+                    },
+                    total: {
+                        title: "双向契约",
+                        text: "累计达成",
+                        tQtyAll: "tQtyAll",
+                        orgQtyAll: "orgQtyAll",
+                    },
+          },
+           headTitle3: {
+                    inSale: {
+                        title: "目标",
+                        text: "实际达成",
+                        day:"周转天数",
+                        innerSaleTaskAmt: "innerSaleTaskAmt",
+                        innerCnyAmt: "innerCnyAmt",
+                        dayAll:"day"
+                    },
+                    outSale: {
+                        title: "周转天数",
+                        text: "累计达成",
+                        day:"周转天数",
+                        outerSaleTaskAmt: "outerSaleTaskAmt",
+                        outerCnyAmt: "outerCnyAmt",
+                        dayAll:"day"
+                    },
+                    total: {
+                        title: "责任制",
+                        text: "累计达成",
+                        day:"周转天数",
+                        tQtyAll: "tQtyAll",
+                        orgQtyAll: "orgQtyAll",
+                        dayAll:"day"
+                    },
+          },
+         headTitle: {
+                    inSale: {
+                        title: "责任制",
+                        text: "累计达成",
+                     
+                        innerSaleTaskAmt: "innerSaleTaskAmt",
+                        innerCnyAmt: "innerCnyAmt",
+                    },
+                    outSale: {
+                        title: "责任制",
+                        text: "累计达成",
+                     
+                        outerSaleTaskAmt: "outerSaleTaskAmt",
+                        outerCnyAmt: "outerCnyAmt",
+                    },
+                    total: {
+                        title: "责任制",
+                        text: "累计达成",
+                      
+                        tQtyAll: "tQtyAll",
+                        orgQtyAll: "orgQtyAll",
+                    },
+                },
                  nesInfo: [
                     {
                         businessEntityName: "环境",
@@ -1409,6 +1374,7 @@ export default {
                         outerCnyAmt: 65,
                         totalRespon: 79,
                         totalDone: 80,
+                        
                     },
                     {
                         businessEntityName: "烹饪",
@@ -1465,15 +1431,16 @@ export default {
                         totalDone: 80,
                     },
                 ],
-                mesInfo: [
+                  mesInfo3: [
                     {
                         businessEntityName: "环境",
-                        innerSaleTaskAmt: 23,
-                        innerCnyAmt: 41,
-                        outerSaleTaskAmt: 44,
-                        outerCnyAmt: 65,
-                        tQtyAll: 93,
+                        innerSaleTaskAmt: 123,
+                        innerCnyAmt: 141,
+                        outerSaleTaskAmt: 144,
+                        outerCnyAmt: 165,
+                        tQtyAll: 193,
                         orgQtyAll: 230,
+                        day:9
                     },
                     {
                         businessEntityName: "烹饪",
@@ -1483,6 +1450,80 @@ export default {
                         outerCnyAmt: 65,
                         tQtyAll: 93,
                         orgQtyAll: 130,
+                        day:10
+                    },
+                    {
+                        businessEntityName: "电磁",
+                        innerSaleTaskAmt: 223,
+                        innerCnyAmt: 114,
+                        outerSaleTaskAmt: 234,
+                        outerCnyAmt: 65,
+                        tQtyAll: 94,
+                        orgQtyAll: 101,
+                        day:11
+                    },
+                    {
+                        businessEntityName: "调理",
+                        innerSaleTaskAmt: 9,
+                        innerCnyAmt: 13,
+                        outerSaleTaskAmt: 34,
+                        outerCnyAmt: 365,
+                        tQtyAll: 95,
+                        orgQtyAll: 103,
+                        day:12
+                    },
+                    {
+                        businessEntityName: "电动",
+                        innerSaleTaskAmt: 49,
+                        innerCnyAmt: 33,
+                        outerSaleTaskAmt: 44,
+                        outerCnyAmt: 65,
+                        tQtyAll: 355,
+                        orgQtyAll: 93,
+                         day:12
+                    },
+                    {
+                        businessEntityName: "饮品",
+                        innerSaleTaskAmt: 749,
+                        innerCnyAmt: 363,
+                        outerSaleTaskAmt: 434,
+                        outerCnyAmt: 65,
+                        tQtyAll: 25,
+                        orgQtyAll: 108,
+                         day:12
+                    },
+                     {
+                        businessEntityName: "饮品",
+                        innerSaleTaskAmt: 49,
+                        innerCnyAmt: 3363,
+                        outerSaleTaskAmt: 434,
+                        outerCnyAmt: 65,
+                        tQtyAll: 25,
+                        orgQtyAll: 108,
+                         day:12
+                    }
+                   
+                ],
+                 mesInfo2: [
+                    {
+                        businessEntityName: "环境",
+                        innerSaleTaskAmt: 23,
+                        innerCnyAmt: 41,
+                        outerSaleTaskAmt: 44,
+                        outerCnyAmt: 65,
+                        tQtyAll: 93,
+                        orgQtyAll: 230,
+                        day:9
+                    },
+                    {
+                        businessEntityName: "烹饪",
+                         innerSaleTaskAmt: 22,
+                        innerCnyAmt: 1,
+                        outerSaleTaskAmt: 34,
+                        outerCnyAmt: 65,
+                        tQtyAll: 93,
+                        orgQtyAll: 130,
+                        day:10
                     },
                     {
                         businessEntityName: "电磁",
@@ -1492,15 +1533,17 @@ export default {
                         outerCnyAmt: 65,
                         tQtyAll: 94,
                         orgQtyAll: 101,
+                        day:11
                     },
                     {
                         businessEntityName: "调理",
-                        innerSaleTaskAmt: 9,
+                        innerSaleTaskAmt: 49,
                         innerCnyAmt: 13,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
                         tQtyAll: 95,
                         orgQtyAll: 103,
+                        day:12
                     },
                     {
                         businessEntityName: "电动",
@@ -1510,6 +1553,80 @@ export default {
                         outerCnyAmt: 65,
                         tQtyAll: 55,
                         orgQtyAll: 93,
+                         day:12
+                    },
+                    {
+                        businessEntityName: "饮品",
+                        innerSaleTaskAmt: 49,
+                        innerCnyAmt: 363,
+                        outerSaleTaskAmt: 434,
+                        outerCnyAmt: 65,
+                        tQtyAll: 25,
+                        orgQtyAll: 108,
+                         day:12
+                    },
+                     {
+                        businessEntityName: "饮品",
+                        innerSaleTaskAmt: 49,
+                        innerCnyAmt: 363,
+                        outerSaleTaskAmt: 434,
+                        outerCnyAmt: 65,
+                        tQtyAll: 25,
+                        orgQtyAll: 108,
+                         day:12
+                    }
+                   
+                ],
+                mesInfo: [
+                    {
+                        businessEntityName: "环境",
+                        innerSaleTaskAmt: 23,
+                        innerCnyAmt: 41,
+                        outerSaleTaskAmt: 44,
+                        outerCnyAmt: 65,
+                        tQtyAll: 93,
+                        orgQtyAll: 230,
+                        
+                    },
+                    {
+                        businessEntityName: "烹饪",
+                         innerSaleTaskAmt: 22,
+                        innerCnyAmt: 1,
+                        outerSaleTaskAmt: 34,
+                        outerCnyAmt: 65,
+                        tQtyAll: 93,
+                        orgQtyAll: 130,
+                        
+                    },
+                    {
+                        businessEntityName: "电磁",
+                        innerSaleTaskAmt: 223,
+                        innerCnyAmt: 14,
+                        outerSaleTaskAmt: 234,
+                        outerCnyAmt: 65,
+                        tQtyAll: 94,
+                        orgQtyAll: 101,
+                      
+                    },
+                    {
+                        businessEntityName: "调理",
+                        innerSaleTaskAmt: 9,
+                        innerCnyAmt: 13,
+                        outerSaleTaskAmt: 34,
+                        outerCnyAmt: 65,
+                        tQtyAll: 95,
+                        orgQtyAll: 103,
+                        
+                    },
+                    {
+                        businessEntityName: "电动",
+                        innerSaleTaskAmt: 49,
+                        innerCnyAmt: 33,
+                        outerSaleTaskAmt: 44,
+                        outerCnyAmt: 65,
+                        tQtyAll: 55,
+                        orgQtyAll: 93,
+                        
                     },
                     {
                         businessEntityName: "饮品",
@@ -2344,6 +2461,9 @@ export default {
   },
 };
 </script><style scoped>
+     .fontInfo{
+       color: #66ffff;
+     }
 
        
     .main-box {
@@ -2682,6 +2802,6 @@ margin-top: 20px;
       padding:2px 0;
     }
     ::v-deep .el-table .el-table__body-wrapper .el-table__cell{
-      padding:15px 0;
+      padding:2px 0;
     }
 </style>

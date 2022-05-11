@@ -638,13 +638,13 @@
         <div>
           <div class="middle-font">各区域日达成趋势图</div>
           <div class="right-box-qushi">
-            <div class="flex-right-bottom">
+            <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
               <div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
                 <div class="flex-echrats-right">
-                  <div class="right-font-title">淘系</div>
-                  <div id="main2" class="echartsBox-min"></div>
+                  <div class="right-font-title">{{ item }}</div>
+                  <div :id="i" class="echartsBox-min"></div>
                 </div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line1"></div>
@@ -652,76 +652,7 @@
                 <div class="border-left-line3"></div>
               </div>
             </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">京东</div>
-                  <div id="main3" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">拼多多</div>
-                  <div id="main4" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">美的</div>
-                  <div id="main5" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">兴趣</div>
-                  <div id="main6" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">天猫自营</div>
-                  <div id="main7" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -775,6 +706,8 @@ export default {
   },
   data() {
     return {
+      dhcarr: [0, 1, 2, 3, 4, 5],
+      Arrnum: [],
       columns: [
         {
           title: "线上",
@@ -869,21 +802,21 @@ export default {
         ballNum: 5,
       },
       speedData: {
-        bar: 0,
-        speedBar: 0,
+        bar: 3,
+        speedBar: 4,
         ballTitle: "内销达成",
-        ballNum: 0,
+        ballNum: 5,
         ballLeftTitle: "线上",
         ballRightTitle: "线下",
-        ballLeftNum: 0,
-        ballRightNum: 0,
-        bottomNum: 0,
+        ballLeftNum: 6,
+        ballRightNum: 7,
+        bottomNum: 8,
         bottomTitle1: "线上",
-        bottomClose: 0,
-        bottomTime: 0,
+        bottomClose: 9,
+        bottomTime: 10,
         bottomTitle2: "线下",
-        bottomClose1: 0,
-        bottomTime1: 0,
+        bottomClose1: 11,
+        bottomTime1: 12,
       },
       sabData: {
         bar1: 70,
@@ -900,7 +833,248 @@ export default {
       },
     };
   },
+
   methods: {
+
+// 三个仪表盘
+  //三个仪表盘(左中)
+  async getdashboard() {
+        try {
+          const res = await API.getData("outSellMacroRegionDashboard","2022-03,亚太业务区,本部,OEM,待定");
+          //内销汇总仪表盘左边&&中间
+          let panelDataList = res.rows;
+          console.log("res",res);
+          // directProfitRadio: 0.2713  销向毛利率
+          this.progressData.ballNum = (
+            panelDataList[0].level1ProfitRadio * 100
+          ).toFixed(1);
+          //    
+          // ⅵ. directCnyAmt: 5.8799  销向总销售金额
+          this.speedData.ballNum = panelDataList[0].level1CnyAmt.toFixed(1)
+          // 销向金额完成率
+          // 销向数量完成率
+          this.speedData.speedBar = (panelDataList[0].directAmtRadio * 100).toFixed(1)
+          this.speedData.bar = (panelDataList[0].dateRadio* 100).toFixed(1)
+          this.speedData.ballNum = (panelDataList[0].saleTaskQty / 1000000).toFixed(1)
+
+          // 责任制
+          this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+          for (var i = 0; i < panelDataList.length; i++) {
+            if (panelDataList[i].obmOem == "OBM") {
+              this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+              this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+              this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
+
+              this.speedData.bottomClose = panelDataList[i].cnyAmtRadio.toFixed(1)
+              this.speedData.bottomTime = panelDataList[i].cnyAmtRadio.toFixed(1)
+
+            } else if (panelDataList[i].obmOem == "OEM") {
+              this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+              this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+              this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
+              this.speedData.bottomClose1 = panelDataList[i].cnyQtyRadio.toFixed(1)
+              this.speedData.bottomTime1 = panelDataList[i].cnyQtyRadio.toFixed(1)
+
+            }
+          }
+        
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+   //三个仪表盘(右)
+   async queryCardSAB() {
+      try {
+        const res = await API.getData("outSellMacroRegionDashboardSAB", "2022-03,亚太业务区,本部,OEM,待定");
+        console.log("res1", res);
+        let RightSAB = res.rows;
+        for (var i = 0; i < RightSAB.length; i++) {
+          if (RightSAB[i].operationMode == "OBM") {
+            this.sabData.bottomArr.s = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1);
+            this.sabData.bottomArr.a = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1); 
+            this.sabData.bottomArr.b = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1);
+
+            this.sabData.topArr.s = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1);
+            this.sabData.topArr.a = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1);
+            this.sabData.topArr.b = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1);
+          } else if (RightSAB[i].operationMode == "OEM") {
+            if (RightSAB[i].operationMode == "OBM") {
+            this.sabData.bottomArr.s = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1);
+            this.sabData.bottomArr.a = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1); 
+            this.sabData.bottomArr.b = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1);
+            this.sabData.topArr.s = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1);
+            this.sabData.topArr.a = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1);
+            this.sabData.topArr.b = (
+              RightSAB[i].level2AmtPositionRatio * 100
+            ).toFixed(1);
+            }
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // 中部
+
+
+
+// 折线图
+ //中间折线图
+ async getList() {
+      this.showLoading = true;
+      try {
+        const res = await API.getData(
+          "sellOuttotalchart",
+          "2022-01-01,2022-10-01"
+        );
+        let sellOutDataList = res.rows;
+        let newArr = sellOutDataList.filter((item) => {
+          var timeArr = item.orderDate
+            .replace(" ", ":")
+            .replace(/\:/g, "-")
+            .split("-");
+          var yue = timeArr[1];
+          var ri = timeArr[2];
+
+          // console.log("sellOutDataList",sellOutDataList);
+
+          // 外销日内
+          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+            this.AvgTaskAmtDate.push(yue + "-" + ri);
+            this.AvgTaskAmtList.push(item.totalAmt);
+            this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+            this.myEcharts();
+          }
+
+          //   if (item.cooprLevel1 == "北美零售营销中心") {
+          //     // obj.divisionArr.push(item)
+          //     this.AmericaDate.push(yue + "-" + ri);
+          //     this.AmericaList.push(item.CnyAmt);
+          //     this.AmericaLine = item.tAvgAmt;
+          //     this.myEcharts2();
+          //   } else if (item.cooprLevel1 == "韩国业务区") {
+          //     this.koreaData.push(yue + "-" + ri);
+          //     this.koreaList.push(item.CnyAmt);
+          //     this.koreaLine = item.tAvgAmt;
+          //     this.myEcharts3();
+          //   }
+          this.showLoading = false;
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    // 右边接口
+
+    async getList1() {
+      this.showLoading = true;
+      try {
+        const res = await API.getChartQuery(
+          "sellOuttotalchart",
+          "2022-01-01,2022-10-01",
+          "cooprLevel1"
+        );
+
+        console.log("res4", res);
+        let sellOutDataList = res.rows;
+        this.showLoading = false;
+
+        let obj = res.rows[0];
+        var k = 0;
+        var arr = [];
+        for (var i in obj) {
+          console.log("11111111111", obj[i]);
+          if (k < 6) {
+            arr.push(obj[i]);
+          }
+          k++;
+        }
+        console.log("arr", arr);
+        this.dhcarr = [];
+        let arrs = JSON.parse(JSON.stringify(arr));
+        arrs.forEach((v) => {
+          this.dhcarr.push(v[0].cooprLevel1);
+        });
+        // this.dhcarr = [1,2,3,4,5];
+
+        for (let j = 0; j < arr.length; j++) {
+          var datanum = arr[j];
+          let AmericaDate = [];
+          let AmericaList = [];
+          let AmericaLine = 1;
+          let Arrnum = datanum.filter((item) => {
+            var timeArr = item.orderDate
+              .replace(" ", ":")
+              .replace(/\:/g, "-")
+              .split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+            console.log("sdvsd", timeArr);
+
+            AmericaDate.push(yue + "-" + ri);
+            AmericaList.push(item.totalAmt);
+            AmericaLine = item.totalAvgTaskAmt;
+          });
+          console.log("Arrnum", this.sellOutDataList);
+
+          this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
+        }
+        // let Arrnum = datanum.filter((item) => {
+        //   var timeArr = item.orderDate
+        //   .replace(" ", ":")
+        //     .replace(/\:/g, "-")
+        //     .split("-");
+        //   var yue = timeArr[1];
+        //   var ri = timeArr[2];
+        // console.log( "sdvsd", timeArr);
+
+        // this.AmericaDate.push(yue + "-" + ri);
+        //     this.AmericaList.push(item.totalAmt);
+        //     this.AmericaLine = item.totalAvgTaskAmt;
+        // })
+        // console.log("Arrnum",this.datanum);
+        // this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine);
+        // let dhcarr = [1,2,3,4,5,6];
+        // dhcarr.forEach(v=>{
+
+        //   this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine,v);
+
+        // })
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+ 
+
+
+
+
+
     gotoDomestic(){
     this.$router.push("/center/index")
     },
@@ -1030,8 +1204,8 @@ export default {
       };
       myChart.setOption(option);
     },
-    myEcharts2() {
-      var myChart2 = this.$echarts.init(document.getElementById("main2"));
+    myEcharts2(data, time, lines, id) {
+      var myChart2 = this.$echarts.init(document.getElementById(id));
       var option = {
         xAxis: {
           axisLabel: {
@@ -1060,7 +1234,10 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          // data: this.AmericaDate,
+          // data: ['01-02','03-03','04-04','01-04'],
+
+          data: time,
           axisTick: {
             show: false, //刻度线
           },
@@ -1121,11 +1298,17 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            // data: this.AmericaList,
+            // data:[10,20,100,250],
+            data: data,
+            // data:data,
             markLine: {
+              // data:this.AmericaLine,
               data: [
                 {
-                  yAxis: 8576,
+                  // yAxis: this.AmericaLine,
+                  // yAxis:400,
+                  yAxis: lines,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1148,6 +1331,7 @@ export default {
       };
       myChart2.setOption(option);
     },
+   
     myEcharts3() {
       var myChart3 = this.$echarts.init(document.getElementById("main3"));
       var option = {
@@ -1874,6 +2058,10 @@ export default {
 // },
   mounted() {
     // this.init()
+    this.getdashboard();
+    this.queryCardSAB();
+    this.getList()
+    this.getList1()
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
@@ -2125,22 +2313,25 @@ export default {
 .flex-echrats-right {
   display: flex;
   align-items: center;
-  padding: 4px 8px 4px 8px;
+  padding: 4px 1px 4px 8px;
 }
 .echartsBox-min {
-  width: 300px;
+  width: 305px;
   height: 100px;
 }
 .right-font-title {
+  width: 45%;
   font-size: 15px;
   color: #fff;
-  margin-right: 40px;
+  text-align: center;
+  /* margin-right: 40px; */
 }
 .flex-right-bottom {
   display: flex;
   /* align-items: center; */
-  justify-content: space-between;
+  /* justify-content: space-between; */
   flex-wrap: wrap;
+  width: 32%;
   border: 1px solid hsla(210, 86%, 39%, 0.66);
   position: relative;
   margin-left: 10px;

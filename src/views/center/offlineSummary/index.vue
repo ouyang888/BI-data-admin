@@ -253,14 +253,15 @@ export default {
             }
             k++;
           }
-          
+          console.log("arrs",arr);
           this.dhcarr = [];
           let arrs = JSON.parse(JSON.stringify(arr));
           arrs.forEach(v=>{
             this.dhcarr.push(v[0].cooprLevel2)
           })
+          console.log();
           // this.dhcarr = [1,2,3,4,5];
-console.log("arrs",this.dhcarr);
+
           for (let j = 0; j < arr.length; j++) {
             var datanum = arr[j];
             let AmericaDate = [];
@@ -273,15 +274,10 @@ console.log("arrs",this.dhcarr);
               .split("-");
             var yue = timeArr[1];
             var ri = timeArr[2];
-          console.log( "sdvsd", timeArr);
-        
-
          AmericaDate.push(yue + "-" + ri);
              AmericaList.push(item.totalAmt);
              AmericaLine = item.totalAvgTaskAmt;     
           })
-          console.log("Arrnum",AmericaList);
-
           this.myEcharts2(AmericaList,AmericaDate,AmericaLine,j);
           }
           // let Arrnum = datanum.filter((item) => {
@@ -874,6 +870,7 @@ console.log("arrs",this.dhcarr);
     //中间折线图
   },
 };
+
 
 </script>
 <style scoped>

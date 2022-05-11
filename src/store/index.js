@@ -23,7 +23,8 @@ export default new Vuex.Store({
         showMoney:true,
         year:'2022',
         month:'03',
-        model:'本部,OEM,待定'
+        model:'本部,OEM,待定',
+        currPath:'销向汇总',
         /* 图片框end */
     },
     mutations: {
@@ -64,7 +65,11 @@ export default new Vuex.Store({
             state.showMoney = val
         },
         setModel(state,val){
+            console.log('model改制',val)
             state.model = val
+        },
+        setCurrPath(state,val){
+            state.currPath = val
         },
     },
     actions: {
