@@ -19,7 +19,6 @@
         height="30px"
       >
       </el-table-column>
-      <!-- label="通用-自营" -->
            
       <el-table-column
         :prop="headerObj.level"
@@ -35,13 +34,13 @@
       </el-table-column>
            
       <el-table-column
-        prop="tAvgAmt"
+        :prop="headerObj.tAvgAmt"
         align="center"
         label="责任制"
         height="30px"
       >
         <template v-slot="scope">
-          {{ Math.abs(scope.row.tAvgAmt).toFixed(2) }}
+          {{ Math.abs(scope.row[headerObj.tAvgAmt]).toFixed(2) }}
         </template>
       </el-table-column>
            
@@ -157,11 +156,12 @@ export default{
       default:function(){
         return {
           name:'cooprLevel2',
-         level:'coopr_level3_manager'
-
+         level:'coopr_level3_manager',
+         tAvgAmt:'tAvgAmt' 
       } 
      }
-    }
+    },
+  
   },
   components: {
     Progress,

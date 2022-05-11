@@ -194,7 +194,7 @@ export default {
       rightObj:{
       name:'customerName',
       level:'coopr_level3_manager',
-       tAvgAmt:'tAvgAmt',/*责任制*/
+      tAvgAmt:'tAvgAmt',/*责任制*/
       },
     };
   },

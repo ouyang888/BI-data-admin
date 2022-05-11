@@ -681,86 +681,7 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
-      columns: [
-        {
-          title: "线上",
-          dataIndex: "name",
-          key: "name",
-          align: "center",
-        },
-        {
-          title: "责任人",
-          dataIndex: "age",
-          key: "age",
-          align: "center",
-        },
-        {
-          title: "责任制",
-          dataIndex: "address",
-          key: "address 1",
-          align: "center",
-        },
-        {
-          title: "累计达成",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "任务完成率",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "毛利率",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "周转天数",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "说到做到",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "排名",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-      ],
-      data: [
-        {
-          key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. ",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. ",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. ",
-          tags: ["cool", "teacher"],
-        },
-      ],
-      echartsLabel: [
+     echartsLabel: [
         { class: "plan", text: "实际达成" },
         { class: "average", text: "日均线" },
       ],
@@ -802,13 +723,15 @@ export default {
       },
       showLoadingLeft:true,
       showLoadingRight:true,
-      leftObj:{
-      name:'cooprLevel2',
-      level:'cooprLevel2Manager'
+      leftObj:{   
+      name:'cooprLevel2',  /*标题*/
+      level:'cooprLevel2Manager',/*责任人*/
+      tAvgAmt:'tAvgAmt',/*责任制*/
       },
       rightObj:{
       name:'cooprLevel2',
-      level:'cooprLevel2Manager'
+      level:'cooprLevel2Manager',
+      tAvgAmt:'tAvgAmt'
       },
     };
   },
