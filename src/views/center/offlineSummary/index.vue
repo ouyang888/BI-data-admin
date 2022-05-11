@@ -21,6 +21,7 @@
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
+        <a-spin class="flex-loading" size="large" v-if="showLoading" />
         <div>
           <div class="middle-font left-file">内销日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
@@ -73,7 +74,7 @@ export default {
   },
   data() {
     return {
-      dhcarr:[0,1,2,3,4,5],
+      dhcarr:[],
         Arrnum:[],
         showLoading: false,
         AmericaDate: [],

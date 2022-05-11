@@ -627,11 +627,13 @@
     <!-- 中间echart -->
     <div class="middle-box">
       <div class="flex-fang">
+        
         <div class="fang-color"></div>
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
         <div>
+          <a-spin class="flex-loading" size="large" v-if="showLoading" />
           <div class="middle-font left-file">外销中东非日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
         </div>
@@ -706,7 +708,8 @@ export default {
   },
   data() {
     return {
-      dhcarr: [0, 1, 2, 3, 4, 5],
+      dhcarr: [],
+      showLoading: false,
       Arrnum: [],
       columns: [
         {
@@ -833,9 +836,16 @@ export default {
       },
     };
   },
-
+  created() {
+    this.init(this.model);
+   },
   methods: {
-
+    // init(model){ 
+    //   // 亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31"
+    //   let LineChartparams=`亚太业务区,亚太业务区,${model},${this.ontime},${this.ontime}`;
+    //   this.getList1(LineChartparams);
+    // },
+   
 // 三个仪表盘
   //三个仪表盘(左中)
   async getdashboard() {
@@ -989,21 +999,18 @@ export default {
     },
 
     // 右边接口
-
     async getList1() {
       this.showLoading = true;
       try {
         const res = await API.getChartQuery(
           "outSellMacroRegionDashboardChart",
-         " 亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31",
-          // "2022-01-01,2022-10-01",
+         "亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31",
           "cooprLevel2"
         );
-     
+        console.log("arr", res);
         let sellOutDataList = res.rows;
         this.showLoading = false;
         let obj = res.rows;
-        console.log("arr", obj);
         var k = 0;
         var arr = [];
         for (var i in obj) {
@@ -1012,15 +1019,19 @@ export default {
           }
           k++;
         }
-        
+        var nis=arr[0]
+        // console.log("obj0,",arr);
+        // console.log("obj,",arr[0]);
+        for (var j in arr[0]) {
+          console.log("dvksi",j);
+        }
         this.dhcarr = [];
-        let arrs = JSON.parse(JSON.stringify(arr));
+        let arrs = JSON.parse(JSON.stringify(arr[0]));
         arrs.forEach((v) => {
           this.dhcarr.push(v[0].cooprLevel2);
         });
         // this.dhcarr = [1,2,3,4,5];
       
-
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
           let AmericaDate = [];
@@ -1039,7 +1050,8 @@ export default {
             AmericaList.push(item.totalAmt);
             AmericaLine = item.totalAvgTaskAmt;
           });
-          console.log("Arrnum", this.sellOutDataList);
+          console.log("AmericaLine", AmericaLine);
+          console.log("AmericaList",AmericaList);
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
         // let Arrnum = datanum.filter((item) => {
@@ -1067,12 +1079,6 @@ export default {
         console.log(error);
       }
     },
-
- 
-
-
-
-
 
     gotoDomestic(){
     this.$router.push("/center/index")
@@ -2045,9 +2051,8 @@ export default {
       };
       myChart8.setOption(option);
     },
+  
   },
-
-
 // 仪表盘右spa
 
 // 折线图
@@ -2060,6 +2065,7 @@ export default {
     this.getdashboard();
     this.queryCardSAB();
     this.getList()
+    // this.getList1(params)
     this.getList1()
     this.myEcharts();
     this.myEcharts2();

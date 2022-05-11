@@ -1421,9 +1421,11 @@ export default {
     },
     init(model){ /*初始化数据方法*/
     let params = `${this.ontime},${model}`;
+    // 亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31
     
     let listParams = `${model},${this.ontime}-01,${this.ontime}-31`;
     let tableParams = `${this.ontime},${this.ontime},${model},`;
+ 
     this.getList(listParams);
     this.getdashboard(params);
     this.queryCardSAB(params);

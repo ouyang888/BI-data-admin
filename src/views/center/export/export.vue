@@ -777,7 +777,7 @@
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
-        <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
+        <a-spin class="flex-loading" size="large" v-if="showLoading" />
         <div>
           <div class="middle-font left-file">内销日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
@@ -868,7 +868,7 @@ export default {
   },
   data() {
     return {
-      dhcarr: [0, 1, 2, 3, 4, 5],
+      dhcarr: [],
       Arrnum: [],
       showLoading: false,
       AmericaDate: [],
@@ -1100,13 +1100,12 @@ export default {
     // 中部
     //中间折线图
     async getList() {
-      // this.showLoading = true;
+      this.showLoading = true;
       try {
         const res = await API.getData(
           "sellOuttotalchart",
           "2022-01-01,2022-10-01"
         );
-
         let sellOutDataList = res.rows;
         let newArr = sellOutDataList.filter((item) => {
           var timeArr = item.orderDate
@@ -1139,8 +1138,6 @@ export default {
           "2022-01-01,2022-10-01",
           "cooprLevel1"
         );
-
-        
         let sellOutDataList = res.rows;
         this.showLoading = false;
         let obj = res.rows[0];
@@ -1153,6 +1150,7 @@ export default {
           }
           k++;
         }
+        console.log("obj", obj);
         console.log("arr", arr);
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
