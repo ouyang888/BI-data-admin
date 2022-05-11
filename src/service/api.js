@@ -9,18 +9,18 @@ export default class ApiService {
         return api.adminUrl;
     }
   }
- 
+
 
   //总的接口
-  static getData(code,date) {
+  static getData(code, date) {
     return request.get(api.adminUrl + `query?code=${code}&parameter=${date}`);
   }
-  static getChartQuery(code,date,fields) {
+  static getChartQuery(code, date, fields) {
     return request.get(api.adminUrl + `chartQuery?code=${code}&parameter=${date}&fields=${fields}`);
   }
 
   //登录接口
   static login(data) {
-    return request.post(api.adminUrl + `/login`, data);
-}
+    return request.post(api.adminUrl + `login`, data);
+  }
 }
