@@ -670,7 +670,7 @@
           :columns="columns"
           :data-source="data"
           :pagination="false"
-        >
+        >   
           <a slot="name" slot-scope="text">{{ text }}</a>
           <template slot="name" slot-scope="name">
             <a @click="gotoDomestic"> {{ name }}</a>
@@ -843,7 +843,7 @@ export default {
           const res = await API.getData("outSellMacroRegionDashboard","2022-03,亚太业务区,本部,OEM,待定");
           //内销汇总仪表盘左边&&中间
           let panelDataList = res.rows;
-          console.log("res",res);
+          console.log("res",res); 
           // directProfitRadio: 0.2713  销向毛利率
           this.progressData.ballNum = (
             panelDataList[0].level1ProfitRadio * 100
@@ -994,32 +994,33 @@ export default {
       this.showLoading = true;
       try {
         const res = await API.getChartQuery(
-          "sellOuttotalchart",
-          "2022-01-01,2022-10-01",
+          "outSellMacroRegionDashboardChart",
+         " 亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31",
+          // "2022-01-01,2022-10-01",
           "cooprLevel1"
         );
 
-        console.log("res4", res);
         let sellOutDataList = res.rows;
         this.showLoading = false;
+        let obj = res.rows;
+        console.log("arr", obj);
 
-        let obj = res.rows[0];
-        var k = 0;
-        var arr = [];
-        for (var i in obj) {
-          console.log("11111111111", obj[i]);
-          if (k < 6) {
-            arr.push(obj[i]);
-          }
-          k++;
-        }
-        console.log("arr", arr);
-        this.dhcarr = [];
-        let arrs = JSON.parse(JSON.stringify(arr));
-        arrs.forEach((v) => {
-          this.dhcarr.push(v[0].cooprLevel1);
-        });
+        // var k = 0;
+        // var arr = [];
+        // for (var i in obj) {
+        //   if (k < 6) {
+        //     arr.push(obj[i]);
+        //   }
+        //   k++;
+        // }
+        // console.log("arr", obj);
+        // this.dhcarr = [];
+        // let arrs = JSON.parse(JSON.stringify(arr));
+        // arrs.forEach((v) => {
+        //   this.dhcarr.push(v[0].cooprLevel1);
+        // });
         // this.dhcarr = [1,2,3,4,5];
+
 
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
