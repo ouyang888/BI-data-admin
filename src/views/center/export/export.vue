@@ -537,7 +537,7 @@
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
                 <div class="flex-echrats-right">
-                  <div class="right-font-title">日达成趋势图</div>
+                  <div class="right-font-title">{{item}}</div>
                   <div :id="i" class="echartsBox-min"></div>
                 </div>
                 <div class="border-top-line"></div>
@@ -759,7 +759,7 @@
       //三个仪表盘(左中)
       async getdashboard() {
         try {
-          const res = await API.getData("sellOutTopDashBoard", this.time);
+          const res = await API.getData("sellOutTopDashBoard","2022-03");
           //内销汇总仪表盘左边&&中间
           let panelDataList = res.rows;
           // directProfitRadio: 0.2713  销向毛利率
@@ -780,7 +780,7 @@
           this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
           for (var i = 0; i < panelDataList.length; i++) {
             if (panelDataList[i].obmOem == "OBM") {
-              this.progressData.bar1 = (panelDataList[i].cnyAmtRadio * 100).toFixed(1)
+              this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
               this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
               this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
 
@@ -788,7 +788,7 @@
               this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1)
 
             } else if (panelDataList[i].obmOem == "OEM") {
-              this.progressData.bar2 = (panelDataList[i].cnyAmtRadio * 100).toFixed(1)
+              this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
               this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
               this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
               this.speedData.bottomClose1 = panelDataList[i].orgQtyRadio.toFixed(1)
@@ -804,7 +804,7 @@
       //三个仪表盘(右)
       async queryCardSAB() {
         try {
-          const res = await API.getData("sellOutTopDashBoardSAB", this.time);
+          const res = await API.getData("sellOutTopDashBoardSAB","2022-03");
           // console.log("右但是,", res);
           let RightSAB = res.rows;
           for (var i = 0; i < RightSAB.length; i++) {
@@ -898,10 +898,11 @@
             k++;
           }
           console.log('arr', arr);
-          // let arrs = JSON.parse(JSON.stringify(arr));
-          // arrs.forEach(v=>{
-          //   this.dhcarr.push(v[0].cooprLevel1)
-          // })
+          this.dhcarr = [];
+          let arrs = JSON.parse(JSON.stringify(arr));
+          arrs.forEach(v=>{
+            this.dhcarr.push(v[0].cooprLevel1)
+          })
           // this.dhcarr = [1,2,3,4,5];
 
           for (let j = 0; j < arr.length; j++) {

@@ -33,7 +33,7 @@
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
                 <div class="flex-echrats-right">
-                  <div class="right-font-title">淘系</div>
+                  <div class="right-font-title">{{item}}</div>
                   <div :id="i" class="echartsBox-min"></div>
                 </div>
                 <div class="border-top-line"></div>
@@ -246,9 +246,25 @@ export default {
 
   },
   mounted() {
+  
       this.init();
+      
   },
   methods: {
+
+    init() {
+    this.titleName = this.$route.query.key
+    this.getdashboard(this.ontime)
+    this.queryCardSAB(this.ontime)
+    this.getList()
+    this.getList1()
+    this.myEcharts();
+    this.myEcharts2();
+    this.myEcharts3();
+    this.getCard(this.ontime);
+    this.getTable(this.ontime)
+    },
+
     gotoDomestic(){
       this.$router.push("/center/index")
     },
@@ -260,6 +276,137 @@ export default {
     toModuleResponsible(){
       this.$router.push({name:'moduleResponsible'});
     },
+   
+// 中部
+      //中间折线图
+      async getList() {
+        this.showLoading = true;
+        try {
+          const res = await API.getData(
+            "offlinePlatformChart",  
+            "2022-01-01,2022-10-01"
+          );
+
+          // console.log("sell", res);
+          let sellOutDataList = res.rows;
+          let newArr = sellOutDataList.filter((item) => {
+            var timeArr = item.orderDate
+              .replace(" ", ":")
+              .replace(/\:/g, "-")
+              .split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+
+            // console.log("sellOutDataList",sellOutDataList);
+
+            // 外销日内
+            if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+              this.AvgTaskAmtDate.push(yue + "-" + ri);
+              this.AvgTaskAmtList.push(item.totalAmt);
+              this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+              this.myEcharts();
+            }
+
+          //   if (item.cooprLevel1 == "北美零售营销中心") {
+          //     // obj.divisionArr.push(item)
+          //     this.AmericaDate.push(yue + "-" + ri);
+          //     this.AmericaList.push(item.CnyAmt);
+          //     this.AmericaLine = item.tAvgAmt;
+          //     this.myEcharts2();
+          //   } else if (item.cooprLevel1 == "韩国业务区") {
+          //     this.koreaData.push(yue + "-" + ri);
+          //     this.koreaList.push(item.CnyAmt);
+          //     this.koreaLine = item.tAvgAmt;
+          //     this.myEcharts3();
+          //   } 
+            this.showLoading = false;
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      },
+      // 右边接口
+     // 右边接口
+     async getList1() {
+        this.showLoading = true;
+        try {
+      const res = await API.getData(
+        "offlinePlatformChart",
+        "2022-01-24,2022-10-24,线上,京东,2022-01-24,2022-10-24,线上,京东",
+        "cooprLevel3"
+          );
+          console.log("sell程序", res);
+          let sellOutDataList = res.rows[0];
+          this.showLoading = false;
+          let obj = res.rows[0]
+          var k = 0;
+          var arr = [];
+          for (var i in obj) {
+            if (k < 6) {
+              arr.push(obj[i]);
+            }
+            k++;
+          }
+
+          this.dhcarr = [];
+          let arrs = JSON.parse(JSON.stringify(arr));
+          arrs.forEach(v=>{
+            this.dhcarr.push(v[0].cooprLevel3)
+          })
+          // this.dhcarr = [1,2,3,4,5];
+console.log("arrs",this.dhcarr);
+          for (let j = 0; j < arr.length; j++) {
+            var datanum = arr[j];
+            let AmericaDate = [];
+           let AmericaList = [];
+           let AmericaLine = 1;
+            let Arrnum = datanum.filter((item) => {
+            var timeArr = item.orderDate 
+            .replace(" ", ":")
+              .replace(/\:/g, "-")
+              .split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+          console.log( "sdvsd", timeArr);
+        
+
+         AmericaDate.push(yue + "-" + ri);
+             AmericaList.push(item.totalAmt);
+             AmericaLine = item.totalAvgTaskAmt;     
+          })
+          console.log("Arrnum",this.sellOutDataList);
+
+          this.myEcharts2(AmericaList,AmericaDate,AmericaLine,j);
+          }
+          // let Arrnum = datanum.filter((item) => {
+          //   var timeArr = item.orderDate 
+          //   .replace(" ", ":")
+          //     .replace(/\:/g, "-")
+          //     .split("-");
+          //   var yue = timeArr[1];
+          //   var ri = timeArr[2];
+          // console.log( "sdvsd", timeArr);
+
+          // this.AmericaDate.push(yue + "-" + ri);
+          //     this.AmericaList.push(item.totalAmt);
+          //     this.AmericaLine = item.totalAvgTaskAmt;     
+          // })
+          // console.log("Arrnum",this.datanum);
+          // this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine);
+          // let dhcarr = [1,2,3,4,5,6];
+          // dhcarr.forEach(v=>{
+
+          //   this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine,v);
+
+          // })
+        } catch (error) {
+          console.log(error);
+
+        }
+      },
+      
+
+
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -270,6 +417,7 @@ export default {
             },
           },
         },
+
         labelData: [
           { class: "plan", text: "实际达成" },
           // { class: 'actual', text: '规划达成' },
@@ -625,482 +773,7 @@ export default {
       };
       myChart3.setOption(option);
     },
-    myEcharts4() {
-      var myChart4 = this.$echarts.init(document.getElementById("main4"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart4.setOption(option);
-    },
-    myEcharts5() {
-      var myChart5 = this.$echarts.init(document.getElementById("main5"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart5.setOption(option);
-    },
-    myEcharts6() {
-      var myChart6 = this.$echarts.init(document.getElementById("main6"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart6.setOption(option);
-    },
-    myEcharts7() {
-      var myChart7 = this.$echarts.init(document.getElementById("main7"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart7.setOption(option);
-    },
+    
     //三个仪表盘(左中)
     async getdashboard(params) {
       try {
@@ -1203,148 +876,9 @@ export default {
       }
     },
 
- // 中部
-      //中间折线图
-      async getList() {
-        this.showLoading = true;
-        try {
-          const res = await API.getData(
-            "sellOuttotalchart",
-            "2022-01-01,2022-10-01"
-          );
-
-          // console.log("sell", res);
-          let sellOutDataList = res.rows;
-          let newArr = sellOutDataList.filter((item) => {
-            var timeArr = item.orderDate
-              .replace(" ", ":")
-              .replace(/\:/g, "-")
-              .split("-");
-            var yue = timeArr[1];
-            var ri = timeArr[2];
-
-            // console.log("sellOutDataList",sellOutDataList);
-
-            // 外销日内
-            if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
-              this.AvgTaskAmtDate.push(yue + "-" + ri);
-              this.AvgTaskAmtList.push(item.totalAmt);
-              this.AvgTaskAmtLine = item.totalAvgTaskAmt;
-              this.myEcharts();
-            }
-
-          //   if (item.cooprLevel1 == "北美零售营销中心") {
-          //     // obj.divisionArr.push(item)
-          //     this.AmericaDate.push(yue + "-" + ri);
-          //     this.AmericaList.push(item.CnyAmt);
-          //     this.AmericaLine = item.tAvgAmt;
-          //     this.myEcharts2();
-          //   } else if (item.cooprLevel1 == "韩国业务区") {
-          //     this.koreaData.push(yue + "-" + ri);
-          //     this.koreaList.push(item.CnyAmt);
-          //     this.koreaLine = item.tAvgAmt;
-          //     this.myEcharts3();
-          //   } 
-            this.showLoading = false;
-          });
-        } catch (error) {
-          console.log(error);
-        }
-      },
-      // 右边接口
-     // 右边接口
-     async getList1() {
-        this.showLoading = true;
-        try {
-      const res = await API.getChartQuery(
-            "sellOuttotalchart",
-            "2022-01-01,2022-10-01",
-            "cooprLevel1"
-          );
-console.log("res12314",this.res);
-          console.log("sell程序", res);
-          let sellOutDataList = res.rows;
-          this.showLoading = false;
-          let obj = res.rows[0]
-          var k = 0;
-          var arr = [];
-          for (var i in obj) {
-            console.log('11111111111', obj[i])
-            if (k < 6) {
-              arr.push(obj[i]);
-            }
-            k++;
-          }
-          console.log('arr', arr);
-          this.dhcarr = [];
-          let arrs = JSON.parse(JSON.stringify(arr));
-          arrs.forEach(v=>{
-            this.dhcarr.push(v[0].cooprLevel1)
-          })
-          // this.dhcarr = [1,2,3,4,5];
-
-          for (let j = 0; j < arr.length; j++) {
-            var datanum = arr[j];
-            let AmericaDate = [];
-           let AmericaList = [];
-           let AmericaLine = 1;
-            let Arrnum = datanum.filter((item) => {
-            var timeArr = item.orderDate 
-            .replace(" ", ":")
-              .replace(/\:/g, "-")
-              .split("-");
-            var yue = timeArr[1];
-            var ri = timeArr[2];
-          console.log( "sdvsd", timeArr);
-        
-
-         AmericaDate.push(yue + "-" + ri);
-             AmericaList.push(item.totalAmt);
-             AmericaLine = item.totalAvgTaskAmt;     
-          })
-          console.log("Arrnum",this.sellOutDataList);
-
-          this.myEcharts2(AmericaList,AmericaDate,AmericaLine,j);
-          }
-          // let Arrnum = datanum.filter((item) => {
-          //   var timeArr = item.orderDate 
-          //   .replace(" ", ":")
-          //     .replace(/\:/g, "-")
-          //     .split("-");
-          //   var yue = timeArr[1];
-          //   var ri = timeArr[2];
-          // console.log( "sdvsd", timeArr);
-
-          // this.AmericaDate.push(yue + "-" + ri);
-          //     this.AmericaList.push(item.totalAmt);
-          //     this.AmericaLine = item.totalAvgTaskAmt;     
-          // })
-          // console.log("Arrnum",this.datanum);
-          // this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine);
-          // let dhcarr = [1,2,3,4,5,6];
-          // dhcarr.forEach(v=>{
-
-          //   this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine,v);
-
-          // })
-        } catch (error) {
-          console.log(error);
-
-        }
-      },
-      
+ 
 
 
-  init() {
-    this.titleName = this.$route.query.key
-    this.getdashboard(this.ontime)
-    this.queryCardSAB(this.ontime)
-    this.myEcharts();
-    this.myEcharts2();
-    this.myEcharts3();
-    this.getCard(this.ontime);
-    this.getTable(this.ontime)
-    },
         // 右边卡片/
   async getCard(params) {
  

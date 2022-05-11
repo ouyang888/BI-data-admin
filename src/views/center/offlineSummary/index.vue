@@ -165,10 +165,12 @@ export default {
 
   methods: {
     init(){
+      
     this.getCard(this.ontime);
     this.getTable(this.ontime);
     this.getdashboard(this.ontime);
     this.queryCardSAB(this.ontime);
+    this.getList() 
     this.getList1()
     this.myEcharts();
     this.myEcharts2();
@@ -219,21 +221,27 @@ export default {
           //   } 
             this.showLoading = false;
           });
+
         } catch (error) {
           console.log(error);
         }
       },
+
       // 右边接口
       async getList1() {
         this.showLoading = true;
         try {
       const res = await API.getChartQuery(
             "offLineMiddleChart",
+            // "sellOuttotalchart",
             "2022-01-01,2022-10-01,2022-01-03,2022-10-08",
-            "cooprLevel1"
+            "cooprLevel2"
           );
+        
+          let sellOutDataList = res.rows[0];  
           console.log("sell程序", res);
-          let sellOutDataList = res.rows;
+
+
           this.showLoading = false;
           let obj = res.rows[0]
           var k = 0;
@@ -245,14 +253,14 @@ export default {
             }
             k++;
           }
-          console.log('arr', arr);
+          
           this.dhcarr = [];
           let arrs = JSON.parse(JSON.stringify(arr));
           arrs.forEach(v=>{
             this.dhcarr.push(v[0].cooprLevel2)
           })
           // this.dhcarr = [1,2,3,4,5];
-
+console.log("arrs",this.dhcarr);
           for (let j = 0; j < arr.length; j++) {
             var datanum = arr[j];
             let AmericaDate = [];
@@ -272,7 +280,7 @@ export default {
              AmericaList.push(item.totalAmt);
              AmericaLine = item.totalAvgTaskAmt;     
           })
-          console.log("Arrnum",this.sellOutDataList);
+          console.log("Arrnum",AmericaList);
 
           this.myEcharts2(AmericaList,AmericaDate,AmericaLine,j);
           }
@@ -1108,25 +1116,28 @@ export default {
 .flex-echrats-right {
   display: flex;
   align-items: center;
-  padding: 4px 8px 4px 8px;
+  padding: 4px 4px 4px 4px;
 }
 .echartsBox-min {
-  width: 300px;
+  width: 258px;
   height: 100px;
 }
 .right-font-title {
+  text-align: center;
   font-size: 15px;
+  width: 106px;
   color: #fff;
-  margin-right: 40px;
+  margin-right: 8px;
 }
 .flex-right-bottom {
   display: flex;
   /* align-items: center; */
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  width: 31%;
   flex-wrap: wrap;
   border: 1px solid hsla(210, 86%, 39%, 0.66);
   position: relative;
-  margin-left: 10px;
+  margin-left: 3px;
   margin-top: 10px;
 }
 .border-left-line {
