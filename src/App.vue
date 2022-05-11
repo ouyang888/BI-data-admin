@@ -26,7 +26,7 @@ export default {
 }
 html,body,#app{
 
-height: auto !important;
+// height: auto !important;
 
 }
 

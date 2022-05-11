@@ -1145,7 +1145,6 @@ export default {
     },
 
     // 右边接口
-
     async getList1() {
       this.showLoading = true;
       try {
