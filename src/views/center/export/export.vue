@@ -11,7 +11,7 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-      <Card :list="cardData" @gotoCatSeries="gotoCatSeries" />
+      <Card :list="cardData" @gotoCatSeries="gotoCatSeries" :cardObj="cardObj"/>
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -66,7 +66,7 @@
     </div>
 
     <!-- 底部表格 -->
-    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj" title1="线上" title2="线下"/>
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj" title1="区域" title2="大区"/>
   </div>
 </template>
 <script>
@@ -148,16 +148,21 @@ export default {
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
       showLoadingCard:false,
-      cardData:'',
+      cardData:[],
+      tableOutter:[],
+      tableInner:[],
       leftObj:{   
       name:'cooprLevel2',  /*标题*/
       level:'cooprLevel2Manager',/*责任人*/
       tAvgAmt:'tAvgAmt',/*责任制*/
       },
       rightObj:{
-      name:'cooprLevel2',
-      level:'cooprLevel2Manager',
+      name:'cooprLevel1',
+      level:'customerName',
       tAvgAmt:'tAvgAmt'
+      },
+      cardObj:{
+       title:'cooprLevel1'
       },
      };
   },
@@ -198,8 +203,6 @@ export default {
   methods: {
     init(model){
       let params = `${this.ontime},${model}`
-      
-
     this.getdashboard(params);
     this.queryCardSAB(params);
     this.getCard(params);
@@ -651,25 +654,16 @@ export default {
      
         this.showLoadingCard = true;
         const res = await API.getData("sellOutTopOnline",params);
+    
         res.rows.length>0 && res.rows.forEach(v => {
-             v.title = v.cooprLevel1; /*标题*/
-             v.cnyAmt = v.cooprLevel1NameAmt.toFixed(0); /*达成金额*/
+            //  v.title = v.cooprLevel1; /*标题*/
+             v.cooprLevel1NameAmt = v.cooprLevel1NameAmt.toFixed(0); /*达成金额*/
              v.saleTaskAmt = v.cooprLevel1TaskAmt.toFixed(0); /*责任制金额*/
              v.saleAmtRadio = (v.cooprLevel1AmtRadio * 100>100?100:v.cooprLevel1AmtRadio * 100).toFixed(0); /*完成率*/
           
         });
-
-
-            if(res.rows.length>0){ 
-            this.cardData = res.rows.filter(v=>{
-              return !!v.cooprLevel1
-            });
-            this.cardData.splice(6);
-          }else{
-            this.cardData = [{}];
-          }
-       
-
+        this.cardData = res.rows;
+        this.cardData.splice(6);
     },
 
     // 底部table/
@@ -678,23 +672,13 @@ export default {
         let tableInner = await API.getData("sellOutTotalOnlineBottom", params);
         let tableOutter = await API.getData("sellOutTotalOfflineBottom", params);
 
-        // this.tableInner = tableInner.rows;
+        this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
         this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
-        let innerTop = tableInner.rows.filter((v) => {
-          return v.marketChannel == "线上";
-        });
-
-        let innerBottom = tableInner.rows.filter((v) => {
-          return v.marketChannel == "线下";
-        });
         this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
-        console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
-        let innerTotal = tableInner.rows.filter((v) => {
-          return v.marketChannel == "底部合计";
-        });
-        this.tableInner = innerTop.concat(innerBottom, innerTotal);
+        // debugger;
+
         console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
 
         // console.log("this.data", this.data);
