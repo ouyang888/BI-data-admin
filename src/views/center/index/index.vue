@@ -44,7 +44,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerLeftInfo.cnyAmt }}{{modelLabel}}</div>
+                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}{{modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -147,7 +147,7 @@
 
                 <div class="flex-bottoms">
                   <div>
-                    线上结构
+                    结构
                     <span v-for="(item, index) in innerSabLeft" :key="index">
                       <span>{{ item.position }}</span> -
                       <span>{{ item.positionRatio}}%;</span>
@@ -159,7 +159,7 @@
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
                   <div>
-                    线上毛利率
+                    毛利率
                     <span class="light-blue"
                       >{{ innerLeftInfo.onLineProfitRadio }}%</span
                     >
@@ -180,7 +180,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerRightInfo.cnyAmt }}{{modelLabel}}</div>
+                  <div class="card-big-num">{{ innerRightInfo.sumCnyamt }}{{modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -279,7 +279,7 @@
                 </div>
                 <div class="flex-bottoms">
                   <div>
-                    线上结构
+                    结构
                     <span v-for="(item, index) in innerSabRight" :key="index">
                       <span>{{ item.position }}</span> -
                       <span>{{ item.positionRatio * 100 }}%;</span>
@@ -291,7 +291,7 @@
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
                   <div>
-                    线上毛利率
+                    毛利率
                     <span class="light-blue"
                       >{{ innerRightInfo.onLineProfitRadio }}%</span
                     >
@@ -333,7 +333,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterLeftInfo.cnyAmt }}{{modelLabel}}</div>
+                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}{{modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -432,7 +432,7 @@
                 </div>
                 <div class="flex-bottoms">
                   <div>
-                    线上结构
+                    结构
                     <span v-for="(item, index) in outterSabLeft" :key="index">
                       <span>{{ item.position }}</span> -
                       <span>{{ item.positionRatio * 100 }}%;</span>
@@ -444,7 +444,7 @@
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
                   <div>
-                    线上毛利率
+                    毛利率
                     <span class="light-blue"
                       >{{ outterLeftInfo.onLineProfitRadio }}%</span
                     >
@@ -472,7 +472,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterRightInfo.cnyAmt }}{{modelLabel}}</div>
+                  <div class="card-big-num">{{ outterRightInfo.sumCnyamt }}{{modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -571,7 +571,7 @@
                 </div>
                 <div class="flex-bottoms">
                   <div>
-                    线上结构
+                    结构
                     <span v-for="(item, index) in outterSabLeft" :key="index">
                       <span>{{ item.position }}</span> -
                       <span>{{ item.positionRatio * 100 }}%;</span>
@@ -583,7 +583,7 @@
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
                   <div>
-                    线上毛利率
+                    毛利率
                     <span class="light-blue"
                       >{{ outterRightInfo.onLineProfitRadio }}%</span
                     >
@@ -726,15 +726,15 @@ export default {
         speedBar: 0,
         ballTitle: "事业部达成",
         ballNum: 0,
-        ballLeftTitle: "内销",
-        ballRightTitle: "外销",
+        ballLeftTitle: "内",
+        ballRightTitle: "外",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "内销",
+        bottomTitle1: "内",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "外销",
+        bottomTitle2: "外",
         bottomClose1: 0,
         bottomTime1: 0,
       },
@@ -746,7 +746,7 @@ export default {
         bar5: 0,
         ballTitle: "事业部",
         bottom: "外销",
-        top: "内销",
+        top: "内",
         sabArr: { s: 0, a: 0, b: 0 },
         topArr: { s: 0, a: 0, b: 0 },
         bottomArr: { s: 0, a: 0, b: 0 },
@@ -825,10 +825,13 @@ export default {
    },
   methods: {
 
+
+
     init(model){ /*初始化数据方法*/
     let params = `${this.ontime},${model}`;
     let listParams = `${this.ontime}-01,${this.ontime}-31,${model},${this.ontime}-01,${this.ontime}-31,${model}`
-    console.log('params',listParams)
+    console.log('params',params);
+ 
 
     this.getList(listParams);
     this.getCard(params);
@@ -860,8 +863,17 @@ export default {
         } else{
 
           inner.rows.forEach((v) => {
+          v.dateRadio = v.dateRadio * 100>100?100: v.dateRadio * 100;
+          v.onLineRadio = v.onLineRadio * 100>100?100:v.onLineRadio * 100;
+          v.sumCnyamt = v.sumCnyamt.toFixed(0);
+          v.saleTaskAmt =  v.saleTaskAmt.toFixed(1);
+        });
+        
+        outter.rows.forEach((v) => {
           v.dateRadio = v.dateRadio * 100;
           v.onLineRadio = v.onLineRadio * 100;
+          v.sumCnyamt = v.sumCnyamt.toFixed(0);
+          v.saleTaskAmt =  v.saleTaskAmt.toFixed(1);
         });
 
         
@@ -876,15 +888,12 @@ export default {
         if (this.innerLeftInfo.onLineProfitRadio) {
           this.innerLeftInfo.onLineProfitRadio = (
             this.innerLeftInfo.onLineProfitRadio * 100
-          ).toFixed(2);
+          ).toFixed(0);
         }
         if (this.innerLeftInfo.cnyAmt) {
           this.innerLeftInfo.cnyAmt = this.innerLeftInfo.cnyAmt.toFixed(0);
         }
-        if (this.innerLeftInfo.saleTaskAmt) {
-          this.innerLeftInfo.saleTaskAmt =
-            this.innerLeftInfo.saleTaskAmt.toFixed(0);
-        }
+   
 
         this.innerRight = inner.rows.filter((v) => {
           return v.cooprLevel1 == "线下";
@@ -902,10 +911,6 @@ export default {
 
         if (this.innerRightInfo.cnyAmt) {
           this.innerRightInfo.cnyAmt = this.innerRightInfo.cnyAmt.toFixed(0);
-        }
-        if (this.innerRightInfo.saleTaskAmt) {
-          this.innerRightInfo.saleTaskAmt =
-            this.innerRightInfo.saleTaskAmt.toFixed(0);
         }
 
         }
@@ -930,15 +935,12 @@ export default {
           if (this.outterLeftInfo.onLineProfitRadio) {
             this.outterLeftInfo.onLineProfitRadio = (
               this.outterLeftInfo.onLineProfitRadio * 100
-            ).toFixed(2);
+            ).toFixed(0);
           }
           if (this.outterLeftInfo.cnyAmt) {
             this.outterLeftInfo.cnyAmt = this.outterLeftInfo.cnyAmt.toFixed(0);
           }
-          if (this.outterLeftInfo.saleTaskAmt) {
-            this.outterLeftInfo.saleTaskAmt =
-              this.outterLeftInfo.saleTaskAmt.toFixed(0);
-          }
+     
   
           this.outterRight = outter.rows.filter((v) => {
             return v.obmOem == "OEM";
@@ -951,15 +953,12 @@ export default {
           if (this.outterRightInfo.onLineProfitRadio) {
             this.outterRightInfo.onLineProfitRadio = (
               this.outterRightInfo.onLineProfitRadio * 100
-            ).toFixed(2);
+            ).toFixed(0);
           }
           if (this.outterRightInfo.cnyAmt) {
             this.outterRightInfo.cnyAmt = this.outterRightInfo.cnyAmt.toFixed(0);
           }
-          if (this.outterRightInfo.saleTaskAmt) {
-            this.outterRightInfo.saleTaskAmt =
-              this.outterRightInfo.saleTaskAmt.toFixed(0);
-          }
+     
 
         }   
         if(innersab.rows.length<1){
@@ -981,6 +980,29 @@ export default {
           return v.cooprLevel1 == "线下";
         });
       }
+
+          if(outtersab.rows.length<1){
+
+                this.outterSabLeft = [];
+                this.outterSabRight = [];
+              }else{
+              
+              outtersab.rows.forEach(v=>{
+                v.positionRatio = (v.positionRatio*100).toFixed(1);
+              })
+
+
+              this.outterSabLeft = outtersab.rows.filter((v) => {
+                return v.obmOem == "OBM";
+              });
+
+              this.outterSabRight = outtersab.rows.filter((v) => {
+                return v.obmOem == "OEM";
+              });
+            }
+
+
+
       } catch (err) {
         console.log(err);
       }
@@ -1094,15 +1116,15 @@ export default {
             speedBar: 0,
             ballTitle: "事业部达成",
             ballNum: 0,
-            ballLeftTitle: "内销",
-            ballRightTitle: "外销",
+            ballLeftTitle: "内",
+            ballRightTitle: "外",
             ballLeftNum: 0,
             ballRightNum: 0,
             bottomNum: 0,
-            bottomTitle1: "内销",
+            bottomTitle1: "内",
             bottomClose: 0,
             bottomTime: 0,
-            bottomTitle2: "外销",
+            bottomTitle2: "外",
             bottomClose1: 0,
             bottomTime1: 0,
                };
@@ -1111,10 +1133,10 @@ export default {
                 bar2: 0,
                 ballTitle: "事业部",
                 bigBallTitle: "毛利率",
-                textLeft: "内销",
-                textRight: "外销",
-                titleTop: "内销",
-                titleBottom: "外销",
+                textLeft: "内",
+                textRight: "外",
+                titleTop: "内",
+                titleBottom: "外",
                 topGPM: 0,
                 bottomGPM: 0,
                 ballNum: 0,
@@ -1153,6 +1175,7 @@ export default {
             this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1);
           }
         }
+        console.log('this.speedData',this.speedData)
       } catch (error) {
         console.log(error);
       }
@@ -1170,14 +1193,11 @@ export default {
               bar4: 0,
               bar5: 0,
               ballTitle: "事业部",
-              bottom: "外销",
-              top: "内销",
+              bottom: "外",
+              top: "内",
               sabArr: { s: 0, a: 0, b: 0 },
               topArr: { s: 0, a: 0, b: 0 },
               bottomArr: { s: 0, a: 0, b: 0 },
-              // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
-              // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
-              // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
             };
            return;
         }

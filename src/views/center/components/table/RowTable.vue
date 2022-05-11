@@ -8,7 +8,7 @@
       <el-table-column prop="manager" align="center" label="责任人">
         <!-- <div class="nameColor" @click="handleClick">{{张茉欧}}</div> -->
         <template v-slot="scope">
-            <div class="nameColor" @click="handleClick">
+            <div class="nameColor" @click="handleClick(scope.row)">
               {{ scope.row.manager }}
             </div>
           </template>
@@ -72,8 +72,8 @@
       Progress,
     },
     methods: {
-      handleClick(row, index) {
-        this.$emit("handleClick");
+      handleClick(obj) {
+        this.$emit("handleClick",obj);
       },
       objectSpanMethod({ row, column, rowIndex, columnIndex }) {
         let number = 0;
@@ -164,9 +164,10 @@
 
   .execl-box {
     /* width: 864px; */
-    height: 287px;
+    /* height: 287px; */
     margin: 20px auto 0;
     border-color: #1e1d51;
+    background: #070640;
   }
 
 
@@ -212,5 +213,9 @@
   /* 头部加粗 */
   ::v-deep.el-table .el-table__header tr {
     font-weight: 600;
+  }
+  /*去掉空白*/
+  ::v-deep .el-table__cell.gutter{
+    background:#041370;
   }
 </style>

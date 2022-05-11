@@ -1904,12 +1904,14 @@ export default {
       try {
         let tableInner = await API.getData(
           "onlineBottomLevel3",
-          "202203,202203"
+          "2022-03,2022-03"
         );
+        console.log("tableInner",tableInner);
         let tableOutter = await API.getData(
           "onlineBottomStore",
           "2022-03,2022-03"
         );
+         console.log("tableInner",tableOutter);
 
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
@@ -1940,6 +1942,7 @@ export default {
     },
   },
   mounted() {
+    this.getTable();
     this.getCard(this.ontime);
     this.getdashboard();
     this.queryCardSAB();
@@ -1951,7 +1954,6 @@ export default {
     this.myEcharts6();
     this.myEcharts7();
     this.myEcharts8();
-    this.getTable();
   },
 };
 </script>
@@ -2054,7 +2056,7 @@ export default {
   margin: 0 auto;
 }
 .dashboard-box {
-  width: 34%;
+  width: 50%;
   position: relative;
 }
 
@@ -2063,6 +2065,7 @@ export default {
   background-repeat: no-repeat;
   /* margin-right: 20px; */
   background-size: 100%;
+  padding: 8px;
 }
 .card-font {
   font-size: 16px;
@@ -2262,7 +2265,8 @@ export default {
 }
 .panelList {
   height: 258px;
-  width:98%;
+  width: 760px;
+  /* width:98%; */
   display: flex;
   flex-direction: row;
   justify-content: space-around;
