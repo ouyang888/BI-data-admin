@@ -11,764 +11,7 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-      <div class="flex-card">
-        <div class="card-box">
-          <div class="card-font" @click="leftGo()">南美区-张莱欧</div>
-          <div class="card-border-box">
-            <div class="line"></div>
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-            <div class="line4"></div>
-            <div class="left-right-box">
-              <div style="margin-left: 14px">
-                <div class="flex-top-card">
-                  <div class="top-left-font">线上达成</div>
-                  <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div>
-                  </div>
-                </div>
-                <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
-                  <div style="display: flex; align-items: center">
-                    <div class="finish-font">进度</div>
-                    <div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
-                      </div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
-                </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
-                  <div>线上毛利率 <span class="light-blue">75%</span></div>
-                </div>
-              </div>
-              <div class="mt-border"></div>
-              <div style="margin-right: 14px">
-                <div class="flex-top-card">
-                  <div class="top-left-font">线下达成</div>
-                  <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div>
-                  </div>
-                </div>
-                <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
-                  <div style="display: flex; align-items: center">
-                    <div class="finish-font">进度</div>
-                    <div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
-                      </div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
-                </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
-                  <div>线上毛利率 <span class="light-blue">75%</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="line"></div>
-          </div>
-        </div>
-        <div class="card-box">
-          <div class="card-font" @click="rightGo()">北美区-李林</div>
-          <div class="card-border-box">
-            <div class="line"></div>
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-            <div class="line4"></div>
-            <div class="left-right-box">
-              <div style="margin-left: 14px">
-                <div class="flex-top-card">
-                  <div class="top-left-font">线上达成</div>
-                  <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div>
-                  </div>
-                </div>
-                <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
-                  <div style="display: flex; align-items: center">
-                    <div class="finish-font">进度</div>
-                    <div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
-                      </div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
-                </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
-                  <div>线下毛利率 <span class="light-blue">75%</span></div>
-                </div>
-              </div>
-              <div class="mt-border"></div>
-              <div style="margin-right: 14px">
-                <div class="flex-top-card">
-                  <div class="top-left-font">线下达成</div>
-                  <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div>
-                  </div>
-                </div>
-                <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
-                  <div style="display: flex; align-items: center">
-                    <div class="finish-font">进度</div>
-                    <div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
-                      </div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
-                </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
-                  <div>线上毛利率 <span class="light-blue">75%</span></div>
-                </div>
-              </div>
-            </div>
-            <div class="line"></div>
-          </div>
-        </div>
-      </div>
+      <Card :list="cardData" @gotoCatSeries="gotoCatSeries" />
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -823,34 +66,7 @@
     </div>
 
     <!-- 底部表格 -->
-    <div class="flex-bottom">
-      <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-        >
-          <a slot="name" slot-scope="text">{{ text }}</a>
-          <template slot="name" slot-scope="name">
-            <a @click="gotoDomestic"> {{ name }}</a> 
-          </template>
-        </a-table>
-      </div>
-      <div class="execl">
-        <a-table
-          :bordered="true"
-          :columns="columns"
-          :data-source="data"
-          :pagination="false"
-        >
-          <a slot="name" slot-scope="text">{{ text }}</a>
-          <template slot="name" slot-scope="name">
-            <a @click="gotoDomestic"> {{ name }}</a> 
-          </template>
-        </a-table>
-      </div>
-    </div>
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj" title1="线上" title2="线下"/>
   </div>
 </template>
 <script>
@@ -859,12 +75,16 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
+import Card from './component/card.vue'; 
+import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
 export default {
   name: "s",
   components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
+    Card,
+    innerTableCardBox
   },
   data() {
     return {
@@ -927,90 +147,66 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
+      showLoadingCard:false,
+      cardData:'',
+      leftObj:{   
+      name:'cooprLevel2',  /*标题*/
+      level:'cooprLevel2Manager',/*责任人*/
+      tAvgAmt:'tAvgAmt',/*责任制*/
+      },
+      rightObj:{
+      name:'cooprLevel2',
+      level:'cooprLevel2Manager',
+      tAvgAmt:'tAvgAmt'
+      },
+     };
+  },
+  computed:{
+    ontime(){
+      return this.$store.state.year +'-'+ this.$store.state.month;
+    },
+    showMoney(){
+      return this.$store.state.showMoney;
+    },
+    modelLabel(){
+      return this.$store.state.showMoney==true?'亿':'亿'
+    },
+    model(){ /* 获取本部，OEM */
+      return this.$store.state.model
+    }
+    
+  },
+  watch:{
+    ontime:{ /*监听数据更改 调用接口 */
+     handler: function (newValue, oldValue) {
+        this.init(this.model);
+      }
+    },
+    model:{ /*监听数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(newValue);
+      }
 
-      columns: [
-        {
-          title: "线上",
-          dataIndex: "name",
-          key: "name",
-          align: "center",
-          scopedSlots: { customRender: "name" },
-        },
-        {
-          title: "责任人",
-          dataIndex: "age",
-          key: "age",
-          align: "center",
-        },
-        {
-          title: "责任制",
-          dataIndex: "address",
-          key: "address 1",
-          align: "center",
-        },
-        {
-          title: "累计达成",
-          dataIndex: "address",
-          key: "address2",
-          align: "center",
-        },
-        {
-          title: "任务完成率",
-          dataIndex: "address",
-          key: "address3",
-          align: "center",
-        },
-        {
-          title: "毛利率",
-          dataIndex: "address",
-          key: "address4",
-          align: "center",
-        },
-        {
-          title: "周转天数",
-          dataIndex: "address",
-          key: "address5",
-          align: "center",
-        },
-        {
-          title: "说到做到",
-          dataIndex: "address",
-          key: "address6",
-          align: "center",
-        },
-        {
-          title: "排名",
-          dataIndex: "address",
-          key: "address7",
-          align: "center",
-        },
-      ],
-      data: [
-        {
-          key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. ",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. ",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. ",
-          tags: ["cool", "teacher"],
-        },
-      ],
-    };
+    },
+    showMoney:{
+      handler:(newValue,oldValue)=>{
+ 
+      }
+    }
+
   },
   methods: {
+    init(model){
+      let params = `${this.ontime},${model}`
+      
+
+    this.getdashboard(params);
+    this.queryCardSAB(params);
+    this.getCard(params);
+    this.getList(`${model},${this.ontime}-01,${this.ontime}-31`);
+    this.getList1(`${model},${this.ontime}-01,${this.ontime}-31`);
+    this.getTable(`${this.ontime},${this.ontime},${model}`);
+    },
     // 三个仪表盘
     leftGo() {
       this.$router.push("/center/exprotAreaAll");
@@ -1019,9 +215,9 @@ export default {
       this.$router.push("/center/exprotAreaAll");
     },
       //三个仪表盘(左中)
-      async getdashboard() {
+      async getdashboard(params) {
         try {
-          const res = await API.getData("sellOutTopDashBoard","2022-03");
+          const res = await API.getData("sellOutTopDashBoard",params);
           //内销汇总仪表盘左边&&中间
           let panelDataList = res.rows;
           // directProfitRadio: 0.2713  销向毛利率
@@ -1065,9 +261,9 @@ export default {
     },
 
     //三个仪表盘(右)
-    async queryCardSAB() {
+    async queryCardSAB(params) {
       try {
-        const res = await API.getData("sellOutTopDashBoardSAB", this.time);
+        const res = await API.getData("sellOutTopDashBoardSAB", params);
         // console.log("右但是,", res);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
@@ -1099,12 +295,12 @@ export default {
     },
     // 中部
     //中间折线图
-    async getList() {
+    async getList(params) {
       // this.showLoading = true;
       try {
         const res = await API.getData(
           "sellOuttotalchart",
-          "2022-01-01,2022-10-01"
+          params
         );
 
         // console.log("sell", res);
@@ -1132,15 +328,18 @@ export default {
         console.log(error);
       }
     },
-
+    gotoCatSeries(){
+      this.$router.push("/center/offlineCode")
+    },
+ 
     // 右边接口
-    async getList1() {
+    async getList1(params) {
       this.showLoading = true;
       try {
         const res = await API.getChartQuery(
           "sellOuttotalchart",
-          "2022-01-01,2022-10-01",
-          "cooprLevel1"
+          params,
+          'cooprLevel1'
         );
 
         console.log("sell程序", res);
@@ -1447,22 +646,70 @@ export default {
     offline() {
       this.$router.push("/center/offlineSummary");
     },
+       // 右边卡片/
+       async getCard(params) {
+     
+        this.showLoadingCard = true;
+        const res = await API.getData("sellOutTopOnline",params);
+        res.rows.length>0 && res.rows.forEach(v => {
+             v.title = v.cooprLevel1; /*标题*/
+             v.cnyAmt = v.cooprLevel1NameAmt.toFixed(0); /*达成金额*/
+             v.saleTaskAmt = v.cooprLevel1TaskAmt.toFixed(0); /*责任制金额*/
+             v.saleAmtRadio = (v.cooprLevel1AmtRadio * 100>100?100:v.cooprLevel1AmtRadio * 100).toFixed(0); /*完成率*/
+          
+        });
+
+
+            if(res.rows.length>0){ 
+            this.cardData = res.rows.filter(v=>{
+              return !!v.cooprLevel1
+            });
+            this.cardData.splice(6);
+          }else{
+            this.cardData = [{}];
+          }
+       
+
+    },
+
+    // 底部table/
+    async getTable(params) {
+      try {
+        let tableInner = await API.getData("sellOutTotalOnlineBottom", params);
+        let tableOutter = await API.getData("sellOutTotalOfflineBottom", params);
+
+        // this.tableInner = tableInner.rows;
+        this.tableOutter = tableOutter.rows;
+        this.rowSpanNumber2 = [this.tableOutter.length - 1];
+
+        let innerTop = tableInner.rows.filter((v) => {
+          return v.marketChannel == "线上";
+        });
+
+        let innerBottom = tableInner.rows.filter((v) => {
+          return v.marketChannel == "线下";
+        });
+        this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
+        console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
+        let innerTotal = tableInner.rows.filter((v) => {
+          return v.marketChannel == "底部合计";
+        });
+        this.tableInner = innerTop.concat(innerBottom, innerTotal);
+        console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
+
+        // console.log("this.data", this.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+   
   },
   created() {
-    this.getdashboard();
-    this.queryCardSAB();
-    this.getList();
-    this.getList1();
+
   },
 
   mounted() {
-    //            let data = [100,200,300,300];
-    //            let time = ['01-02','03-03','04-04','01-04'];
-    //     let lines = 400;
-    this.myEcharts();
-    // this.myEcharts2(data,time,lines);
-    this.myEcharts3();
-    // this.myEcharts8();
+    this.init(this.model);
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex-card" >
     <div class="card-box" v-for="(v,i) in list" :key="i">
-      <div class="card-font" @click="gotoCatSeries(v.title)">{{v.title}} </div>
+      <div class="card-font" @click="gotoCatSeries(v.cooprLevel3)">{{v.cooprLevel3}} </div>
       <div class="card-border-box">
         <div class="line"></div>
         <div class="line1"></div>
