@@ -114,7 +114,7 @@
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
                   <div>
-                    s 线上毛利率
+                    线上毛利率
                     <span class="light-blue"
                       >{{
                         Number(
