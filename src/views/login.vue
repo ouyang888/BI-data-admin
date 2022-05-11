@@ -2,7 +2,7 @@
   <div style="height: 100%" class="flex j-c a-c bg">
     <div class="logo-wrapper flex d-c j-c a-c">
       <!-- <img class="logo" src="../assets/img/logoLogin.png" alt="" /> -->
-      <div class="logo-name">智慧BI</div>
+      <div class="logo-name">智能产销中台</div>
       <a-input class="input" v-model="userInfo.username" placeholder="请输入账号" @keydown.enter="submit"/>
       <a-input
         class="input"
@@ -43,7 +43,7 @@ export default {
       userInfo: {
         username: "",
         password: "",
-        rememberMe:false,
+        rememberMe:true,
       },
     };
   },

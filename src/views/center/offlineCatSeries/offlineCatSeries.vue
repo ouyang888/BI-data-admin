@@ -1,9 +1,9 @@
 <template>
   <div style="background: #02004d">
     <!-- 头部仪表盘和卡片 -->
-    <div class="top-flex"  >
+    <div class="top-flex">
       <!-- 仪表盘 -->
-       <div class="dashboard-box">
+      <div class="dashboard-box">
         <div class="panelList">
           <ProgressPanel :data="progressData" />
           <SpeedPanel :data="speedData" />
@@ -12,7 +12,6 @@
       </div>
       <!-- 右侧卡片 -->
       <Card :list="cardData" @gotoCatSeries="gotoCatSeries" />
-      
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -22,18 +21,20 @@
       </div>
       <div class="flex-char">
         <div>
-          <div class="middle-font left-file">内销线下{{titleName}}日达成趋势图</div>
+          <div class="middle-font left-file">
+            内销线下{{ titleName }}日达成趋势图
+          </div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
-          <div class="middle-font">{{titleName}}店铺日达成趋势图</div>
+          <div class="middle-font">{{ titleName }}店铺日达成趋势图</div>
           <div class="right-box-qushi">
-            <div class="flex-right-bottom" v-for="(item,i) in dhcarr" :key="i">
+            <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
               <div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
                 <div class="flex-echrats-right">
-                  <div class="right-font-title">{{item}}</div>
+                  <div class="right-font-title">{{ item }}</div>
                   <div :id="i" class="echartsBox-min"></div>
                 </div>
                 <div class="border-top-line"></div>
@@ -52,7 +53,14 @@
     </div>
 
     <!-- 底部表格 -->
-      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter"  :leftObj="leftObj" :rightObj="rightObj" title1="通路自营" title2="KA"/>
+    <innerTableCardBox
+      :leftData="tableInner"
+      :rightData="tableOutter"
+      :leftObj="leftObj"
+      :rightObj="rightObj"
+      title1="通路自营"
+      title2="KA"
+    />
   </div>
 </template>
 <script>
@@ -60,28 +68,28 @@ import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
-import Card from './component/card.vue'
-import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
+import Card from "./component/card.vue";
+import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
 export default {
-   components: {
+  components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
     Card,
-    innerTableCardBox
+    innerTableCardBox,
   },
   data() {
     return {
-      dhcarr:[0,1,2,3,4,5],
-        Arrnum:[],
-        showLoading: false,
-        AmericaDate: [],
-        AmericaList: [],
-        AvgTaskAmtDate: [],
-        AvgTaskAmtList: [],
-        AvgTaskAmtLine: [],
-        AmericaLine: [],
-      titleName:"",
+      dhcarr: [0, 1, 2, 3, 4, 5],
+      Arrnum: [],
+      showLoading: false,
+      AmericaDate: [],
+      AmericaList: [],
+      AvgTaskAmtDate: [],
+      AvgTaskAmtList: [],
+      AvgTaskAmtLine: [],
+      AmericaLine: [],
+      titleName: "",
       progressData: {
         bar1: 0,
         bar2: 0,
@@ -125,209 +133,196 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
-      cardData:[{}],
-      showLoadingCard:true,
-      tableInner:[],
-      tableOutter:[],
-      leftObj:{
-      name:'coopr_level3',
-      level:'coopr_level3_manager',
-      tAvgAmt:'tAvgAmt',/*责任制*/
+      cardData: [{}],
+      showLoadingCard: true,
+      tableInner: [],
+      tableOutter: [],
+      leftObj: {
+        name: "coopr_level3",
+        level: "coopr_level3_manager",
+        tAvgAmt: "tAvgAmt" /*责任制*/,
       },
-      rightObj:{
-      name:'customerName',
-      level:'coopr_level3_manager',
-      tAvgAmt:'tAvgAmt',/*责任制*/
+      rightObj: {
+        name: "customerName",
+        level: "coopr_level3_manager",
+        tAvgAmt: "tAvgAmt" /*责任制*/,
       },
-     
     };
   },
-  computed:{
-    ontime(){
-      return this.$store.state.year +'-'+ this.$store.state.month;
+  computed: {
+    ontime() {
+      return this.$store.state.year + "-" + this.$store.state.month;
     },
-    showMoney(){
+    showMoney() {
       return this.$store.state.showMoney;
     },
-    modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'亿'
-    }
-    
-  },
-  watch:{
-    ontime:{
-     handler: function (newValue, oldValue) {
-        this.init();
-      }
+    modelLabel() {
+      return this.$store.state.showMoney == true ? "亿" : "亿";
     },
-    showMoney:{
-      handler:(newValue,oldValue)=>{
- 
-      }
-    }
-
+    model() {
+      /* 获取本部，OEM */
+      return this.$store.state.model;
+    },
+  },
+  watch: {
+    ontime: {
+      handler: function (newValue, oldValue) {
+        this.init(this.model);
+      },
+    },
+    showMoney: {
+      handler: (newValue, oldValue) => {},
+    },
+    model: {
+      /*监听数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
+        this.init(newValue);
+      },
+    },
   },
   mounted() {
-  
-      this.init();
-      
+    this.init(this.model);
   },
   methods: {
-
-    init() {
-    this.titleName = this.$route.query.key
-    this.getdashboard(this.ontime)
-    this.queryCardSAB(this.ontime)
-    this.getList()
-    this.getList1()
-    this.myEcharts();
-    this.myEcharts2();
-    this.myEcharts3();
-    this.getCard(this.ontime);
-    this.getTable(this.ontime)
+    init(model) {
+      this.titleName = this.$route.query.key;
+      let params = `${this.ontime},${model}`;
+      let listParams = `${model},${this.ontime}-01,${this.ontime}-01`;
+      let offlineParmas = `${this.titleName},${this.titleName},${model},${this.ontime},${this.ontime}`;
+      this.getdashboard(this.ontime);
+      this.queryCardSAB(this.ontime);
+      // this.getList()
+      this.getList1(offlineParmas);
+      this.myEcharts();
+      this.myEcharts2();
+      this.myEcharts3();
+      this.getCard(this.ontime);
+      this.getTable(this.ontime);
     },
 
-    gotoDomestic(){
-      this.$router.push("/center/index")
+    gotoDomestic() {
+      this.$router.push("/center/index");
     },
+
     // 负责人模式
-    gotoCatSeries(){
-      this.$router.push("/center/offlineCode")
+    gotoCatSeries() {
+      this.$router.push("/center/offlineCode");
     },
- 
-    toModuleResponsible(){
-      this.$router.push({name:'moduleResponsible'});
-    },
-   
-// 中部
-      //中间折线图
-      async getList() {
-        this.showLoading = true;
-        try {
-          const res = await API.getData(
-            "offlinePlatformChart",  
-            "2022-01-01,2022-10-01"
-          );
 
-          // console.log("sell", res);
-          let sellOutDataList = res.rows;
-          let newArr = sellOutDataList.filter((item) => {
+    toModuleResponsible() {
+      this.$router.push({ name: "moduleResponsible" });
+    },
+
+    //中间折线图
+    async getList() {
+      this.showLoading = true;
+      try {
+        const res = await API.getData(
+          "offlinePlatformChart",
+          "2022-01-01,2022-10-01"
+        );
+        let sellOutDataList = res.rows;
+        let newArr = sellOutDataList.filter((item) => {
+          var timeArr = item.orderDate
+            .replace(" ", ":")
+            .replace(/\:/g, "-")
+            .split("-");
+          var yue = timeArr[1];
+          var ri = timeArr[2];
+
+          // console.log("sellOutDataList",sellOutDataList);
+
+          // 外销日内
+          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+            this.AvgTaskAmtDate.push(yue + "-" + ri);
+            this.AvgTaskAmtList.push(item.totalAmt);
+            this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+            this.myEcharts();
+          }
+          this.showLoading = false;
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    // 右边接口
+    async getList1(list) {
+      console.log("list111222",list)
+      this.showLoading = true;
+      try {
+        const res = await API.getChartQuery(
+          "level3OfflineDayChart",
+          list,
+          "cooprLevel3"
+        );
+        console.log("sell程序1", res);
+        let sellOutDataList = res.rows[0];
+        this.showLoading = false;
+        let obj = res.rows;
+        var k = 0;
+        var arr = [];
+        for (var i in obj) {
+          if (k < 6) {
+            arr.push(obj[i]);
+          }
+          k++;
+        }
+        console.log("arrs1", obj[i]);
+        this.dhcarr = [];
+        let arrs = JSON.parse(JSON.stringify(arr));
+        arrs.forEach((v) => {
+          this.dhcarr.push(v[0].cooprLevel3);
+        });
+        // this.dhcarr = [1,2,3,4,5];
+
+        for (let j = 0; j < arr.length; j++) {
+          var datanum = arr[j];
+          let AmericaDate = [];
+          let AmericaList = [];
+          let AmericaLine = 1;
+          let Arrnum = datanum.filter((item) => {
             var timeArr = item.orderDate
               .replace(" ", ":")
               .replace(/\:/g, "-")
               .split("-");
             var yue = timeArr[1];
             var ri = timeArr[2];
+            console.log("sdvsd", timeArr);
 
-            // console.log("sellOutDataList",sellOutDataList);
-
-            // 外销日内
-            if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
-              this.AvgTaskAmtDate.push(yue + "-" + ri);
-              this.AvgTaskAmtList.push(item.totalAmt);
-              this.AvgTaskAmtLine = item.totalAvgTaskAmt;
-              this.myEcharts();
-            }
-
-          //   if (item.cooprLevel1 == "北美零售营销中心") {
-          //     // obj.divisionArr.push(item)
-          //     this.AmericaDate.push(yue + "-" + ri);
-          //     this.AmericaList.push(item.CnyAmt);
-          //     this.AmericaLine = item.tAvgAmt;
-          //     this.myEcharts2();
-          //   } else if (item.cooprLevel1 == "韩国业务区") {
-          //     this.koreaData.push(yue + "-" + ri);
-          //     this.koreaList.push(item.CnyAmt);
-          //     this.koreaLine = item.tAvgAmt;
-          //     this.myEcharts3();
-          //   } 
-            this.showLoading = false;
+            AmericaDate.push(yue + "-" + ri);
+            AmericaList.push(item.totalAmt);
+            AmericaLine = item.totalAvgTaskAmt;
           });
-        } catch (error) {
-          console.log(error);
+          console.log("Arrnum", this.sellOutDataList);
+
+          this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
-      },
-      // 右边接口
-     // 右边接口
-     async getList1() {
-        this.showLoading = true;
-        try {
-      const res = await API.getData(
-        "offlinePlatformChart",
-        "2022-01-24,2022-10-24,线上,京东,2022-01-24,2022-10-24,线上,京东",
-        "cooprLevel3"
-          );
-          console.log("sell程序1", res);
-          let sellOutDataList = res.rows[0];
-          this.showLoading = false;
-          let obj = res.rows
-          var k = 0;
-          var arr = [];
-          for (var i in obj) {
-            if (k < 6) {
-              arr.push(obj[i]);
-            }
-            k++;
-          }
-          console.log("arrs1",obj[i]);
-          this.dhcarr = [];
-          let arrs = JSON.parse(JSON.stringify(arr));
-          arrs.forEach(v=>{
-            this.dhcarr.push(v[0].cooprLevel3)
-          })
-          // this.dhcarr = [1,2,3,4,5];
+        // let Arrnum = datanum.filter((item) => {
+        //   var timeArr = item.orderDate
+        //   .replace(" ", ":")
+        //     .replace(/\:/g, "-")
+        //     .split("-");
+        //   var yue = timeArr[1];
+        //   var ri = timeArr[2];
+        // console.log( "sdvsd", timeArr);
 
-          for (let j = 0; j < arr.length; j++) {
-            var datanum = arr[j];
-            let AmericaDate = [];
-           let AmericaList = [];
-           let AmericaLine = 1;
-            let Arrnum = datanum.filter((item) => {
-            var timeArr = item.orderDate 
-            .replace(" ", ":")
-              .replace(/\:/g, "-")
-              .split("-");
-            var yue = timeArr[1];
-            var ri = timeArr[2];
-          console.log( "sdvsd", timeArr);
-        
+        // this.AmericaDate.push(yue + "-" + ri);
+        //     this.AmericaList.push(item.totalAmt);
+        //     this.AmericaLine = item.totalAvgTaskAmt;
+        // })
+        // console.log("Arrnum",this.datanum);
+        // this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine);
+        // let dhcarr = [1,2,3,4,5,6];
+        // dhcarr.forEach(v=>{
 
-         AmericaDate.push(yue + "-" + ri);
-             AmericaList.push(item.totalAmt);
-             AmericaLine = item.totalAvgTaskAmt;     
-          })
-          console.log("Arrnum",this.sellOutDataList);
+        //   this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine,v);
 
-          this.myEcharts2(AmericaList,AmericaDate,AmericaLine,j);
-          }
-          // let Arrnum = datanum.filter((item) => {
-          //   var timeArr = item.orderDate 
-          //   .replace(" ", ":")
-          //     .replace(/\:/g, "-")
-          //     .split("-");
-          //   var yue = timeArr[1];
-          //   var ri = timeArr[2];
-          // console.log( "sdvsd", timeArr);
-
-          // this.AmericaDate.push(yue + "-" + ri);
-          //     this.AmericaList.push(item.totalAmt);
-          //     this.AmericaLine = item.totalAvgTaskAmt;     
-          // })
-          // console.log("Arrnum",this.datanum);
-          // this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine);
-          // let dhcarr = [1,2,3,4,5,6];
-          // dhcarr.forEach(v=>{
-
-          //   this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine,v);
-
-          // })
-        } catch (error) {
-          console.log(error);
-
-        }
-      },
-      
-
+        // })
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
@@ -448,134 +443,134 @@ export default {
       };
       myChart.setOption(option);
     },
-    myEcharts2(data,time,lines,id) {
-        var myChart2 = this.$echarts.init(document.getElementById(id));
-        var option = {
-          xAxis: {
-            axisLabel: {
-              formatter: function (val) {
-                return "";
-              },
+    myEcharts2(data, time, lines, id) {
+      var myChart2 = this.$echarts.init(document.getElementById(id));
+      var option = {
+        xAxis: {
+          axisLabel: {
+            formatter: function (val) {
+              return "";
             },
           },
-          textStyle: {
-            color: "#3FB0FF",
+        },
+        textStyle: {
+          color: "#3FB0FF",
+        },
+        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+        title: {
+          text: "",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        grid: {
+          top: "5%",
+          left: "2%",
+          right: "5%",
+          bottom: "3%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          // data: this.AmericaDate,
+          // data: ['01-02','03-03','04-04','01-04'],
+
+          data: time,
+          axisTick: {
+            show: false, //刻度线
           },
-          color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-          title: {
-            text: "",
+          axisLine: {
+            show: false, //隐藏y轴
           },
-          tooltip: {
-            trigger: "axis",
+          axisLabel: {
+            show: false, //隐藏刻度值
           },
-          grid: {
-            top: "5%",
-            left: "2%",
-            right: "5%",
-            bottom: "3%",
-            containLabel: true,
-          },
-          xAxis: {
-            type: "category",
-            boundaryGap: false,
-            // data: this.AmericaDate,
-            // data: ['01-02','03-03','04-04','01-04'],
-           
-            data:time,
-            axisTick: {
-              show: false, //刻度线
-            },
-            axisLine: {
-              show: false, //隐藏y轴
-            },
-            axisLabel: {
-              show: false, //隐藏刻度值
-            },
-          },
-          yAxis: {
-            name: "单位：万",
-            type: "value",
-            splitLine: {
-              lineStyle: {
-                type: "dashed",
-                color: "rgba(45,153,255,.3)",
-              },
-            },
-            axisTick: {
-              show: false, //刻度线
-            },
-            axisLine: {
-              show: false, //隐藏y轴
-            },
-            axisLabel: {
-              show: false, //隐藏刻度值
+        },
+        yAxis: {
+          name: "单位：万",
+          type: "value",
+          splitLine: {
+            lineStyle: {
+              type: "dashed",
+              color: "rgba(45,153,255,.3)",
             },
           },
-          series: [
-            {
-              name: "实际达成",
-              type: "line",
-              stack: "Total",
-              // smooth: true,
-              lineStyle: {
-                width: 1,
-              },
-              showSymbol: false,
-              areaStyle: {
-                normal: {
-                  color: {
-                    x: 0,
-                    y: 0,
-                    x2: 0,
-                    y2: 1,
-                    colorStops: [
-                      {
-                        offset: 0,
-                        color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                      },
-                      {
-                        offset: 0.7,
-                        color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                      },
-                    ],
-                    globalCoord: false, // 缺省为 false
-                  },
+          axisTick: {
+            show: false, //刻度线
+          },
+          axisLine: {
+            show: false, //隐藏y轴
+          },
+          axisLabel: {
+            show: false, //隐藏刻度值
+          },
+        },
+        series: [
+          {
+            name: "实际达成",
+            type: "line",
+            stack: "Total",
+            // smooth: true,
+            lineStyle: {
+              width: 1,
+            },
+            showSymbol: false,
+            areaStyle: {
+              normal: {
+                color: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                    },
+                    {
+                      offset: 0.7,
+                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                    },
+                  ],
+                  globalCoord: false, // 缺省为 false
                 },
               },
-              // data: this.AmericaList,
-              // data:[10,20,100,250],
-              data:data,
-              // data:data,
-              markLine: {
-                // data:this.AmericaLine,
-                data: [
-                  {
-                    // yAxis: this.AmericaLine,
-                    // yAxis:400,
-                    yAxis:lines,
-                    silent: false, //鼠标悬停事件 true没有，false有
-                    lineStyle: {
-                      //警戒线的样式 ，虚实 颜色
-                      type: "dashed", //样式  ‘solid’和'dotted'
-                      color: "#FF8B2F",
-                      width: 2, //宽度
-                    },
-                    label: {
-                      formatter: "",
-                      color: "#FF8B2F",
-                      position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                    },
-                  },
-                ],
-
-                symbol: ["none", "none"],
-              },
             },
-          ],
-        };
-        myChart2.setOption(option);
-      },
-     
+            // data: this.AmericaList,
+            // data:[10,20,100,250],
+            data: data,
+            // data:data,
+            markLine: {
+              // data:this.AmericaLine,
+              data: [
+                {
+                  // yAxis: this.AmericaLine,
+                  // yAxis:400,
+                  yAxis: lines,
+                  silent: false, //鼠标悬停事件 true没有，false有
+                  lineStyle: {
+                    //警戒线的样式 ，虚实 颜色
+                    type: "dashed", //样式  ‘solid’和'dotted'
+                    color: "#FF8B2F",
+                    width: 2, //宽度
+                  },
+                  label: {
+                    formatter: "",
+                    color: "#FF8B2F",
+                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                  },
+                },
+              ],
+
+              symbol: ["none", "none"],
+            },
+          },
+        ],
+      };
+      myChart2.setOption(option);
+    },
+
     myEcharts3() {
       var myChart3 = this.$echarts.init(document.getElementById("main3"));
       var option = {
@@ -695,11 +690,14 @@ export default {
       };
       myChart3.setOption(option);
     },
-    
+
     //三个仪表盘(左中)
     async getdashboard(params) {
       try {
-        const res = await API.getData("offlinePlatformTop",`${params},线上,${this.titleName},${params},线上,${this.titleName}`);
+        const res = await API.getData(
+          "offlinePlatformTop",
+          `${params},线上,${this.titleName},${params},线上,${this.titleName}`
+        );
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         this.progressData.ballNum = (
@@ -707,14 +705,14 @@ export default {
         ).toFixed(1);
         this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
         this.speedData.speedBar = (
-          panelDataList[0].onLineCompleteRadioRadio  * 100
+          panelDataList[0].onLineCompleteRadioRadio * 100
         ).toFixed(1);
         this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1);
         this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1);
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].businessModel == "直营") {
             this.progressData.topGPM = (
-              panelDataList[i].grossProfitRadio  * 100
+              panelDataList[i].grossProfitRadio * 100
             ).toFixed(1);
             this.progressData.bar1 = (
               panelDataList[i].grossProfitRadio * 100
@@ -725,7 +723,7 @@ export default {
             this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
           } else if (panelDataList[i].businessModel == "代运营") {
             this.progressData.bottomGPM = (
-              panelDataList[i].grossProfitRadio  * 100
+              panelDataList[i].grossProfitRadio * 100
             ).toFixed(1);
             this.progressData.bar2 = (
               panelDataList[i].grossProfitRadio * 100
@@ -741,37 +739,37 @@ export default {
       }
     },
 
-
-      //三个仪表盘(右)
+    //三个仪表盘(右)
     async queryCardSAB(params) {
       try {
-        const res = await API.getData("offlinePlatformSAB", `${params},线上,${this.titleName},${params},线上,${this.titleName}`);
+        const res = await API.getData(
+          "offlinePlatformSAB",
+          `${params},线上,${this.titleName},${params},线上,${this.titleName}`
+        );
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].businessModel == "直营") {
-            this.sabData.bar1 = (
-              RightSAB[i].positionRatio  * 100
-            ).toFixed(1);
+            this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.s = (
-                RightSAB[i].positionRatio  * 100
-              ).toFixed(1);
+              this.sabData.topArr.s = (RightSAB[i].positionRatio * 100).toFixed(
+                1
+              );
               this.sabData.sabArr.s = (
-                RightSAB[i].saleVolumePositionRatio  * 100
+                RightSAB[i].saleVolumePositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.a = (
-                RightSAB[i].positionRatio  * 100
-              ).toFixed(1);
+              this.sabData.topArr.a = (RightSAB[i].positionRatio * 100).toFixed(
+                1
+              );
               this.sabData.sabArr.a = (
-                RightSAB[i].saleVolumePositionRatio  * 100
+                RightSAB[i].saleVolumePositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.b = (
-                RightSAB[i].positionRatio  * 100
-              ).toFixed(1);
+              this.sabData.topArr.b = (RightSAB[i].positionRatio * 100).toFixed(
+                1
+              );
               this.sabData.sabArr.b = (
-                RightSAB[i].saleVolumePositionRatio  * 100
+                RightSAB[i].saleVolumePositionRatio * 100
               ).toFixed(1);
             }
           } else if (RightSAB[i].businessModel == "代运营") {
@@ -780,15 +778,15 @@ export default {
             ).toFixed(1);
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.s = (
-                RightSAB[i].positionRatio  * 100
+                RightSAB[i].positionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
               this.sabData.bottomArr.a = (
-                RightSAB[i].positionRatio  * 100
+                RightSAB[i].positionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
               this.sabData.bottomArr.b = (
-                RightSAB[i].positionRatio  * 100
+                RightSAB[i].positionRatio * 100
               ).toFixed(1);
             }
           }
@@ -798,46 +796,44 @@ export default {
       }
     },
 
- 
-
-
-        // 右边卡片/
-  async getCard(params) {
- 
+    // 右边卡片/
+    async getCard(params) {
       this.showLoadingCard = true;
-      console.log('params');
+      console.log("params");
       try {
-        const res = await API.getData("level3OfflineTopTotal",params+','+this.titleName);
-        res.rows.length>0 && res.rows.forEach(v => {
-
-
+        const res = await API.getData(
+          "level3OfflineTopTotal",
+          params + "," + this.titleName
+        );
+        res.rows.length > 0 &&
+          res.rows.forEach((v) => {
             if (!!v.cnyAmt) {
-              v.cnyAmt = v.cnyAmt.toFixed(0)
+              v.cnyAmt = v.cnyAmt.toFixed(0);
             }
             if (!!v.saleTaskAmt) {
-              v.saleTaskAmt =v.saleTaskAmt.toFixed(0)
+              v.saleTaskAmt = v.saleTaskAmt.toFixed(0);
             }
-
-
 
             if (!!v.saleAmtRadio) {
-              v.saleAmtRadio = (v.saleAmtRadio * 100>100?100:v.saleAmtRadio * 100).toFixed(0)
+              v.saleAmtRadio = (
+                v.saleAmtRadio * 100 > 100 ? 100 : v.saleAmtRadio * 100
+              ).toFixed(0);
             }
             if (!!v.saleQtyRadio) {
-              v.saleQtyRadio = (v.saleQtyRadio * 100>100?100:v.saleQtyRadio * 100).toFixed(0)
+              v.saleQtyRadio = (
+                v.saleQtyRadio * 100 > 100 ? 100 : v.saleQtyRadio * 100
+              ).toFixed(0);
             }
-        
-            });
+          });
 
-            if(res.rows.length>0){ 
-            this.cardData = res.rows.filter(v=>{
-              return !!v.cooprLevel2
-            });
-            this.cardData.splice(6);
-          }else{
-            this.cardData = [{}];
-          }
-       
+        if (res.rows.length > 0) {
+          this.cardData = res.rows.filter((v) => {
+            return !!v.cooprLevel2;
+          });
+          this.cardData.splice(6);
+        } else {
+          this.cardData = [{}];
+        }
       } catch (err) {
         console.log(err);
       }
@@ -846,28 +842,29 @@ export default {
     // 底部table/
     async getTable(params) {
       try {
-        let tableInner = await API.getData("level3OfflineCategory",`${params},${this.titleName},${params},${this.titleName}`);
-        let tableOutter = await API.getData("level3OfflineFucosModel",`${params},${this.titleName},${params},${this.titleName}`);
+        let tableInner = await API.getData(
+          "level3OfflineCategory",
+          `${params},${this.titleName},${params},${this.titleName}`
+        );
+        let tableOutter = await API.getData(
+          "level3OfflineFucosModel",
+          `${params},${this.titleName},${params},${this.titleName}`
+        );
 
         this.tableInner = tableInner.rows;
-        this.tableInner.forEach(v=>{
-          if(v.coopr_level3_manager == '合计'){
-           v.coopr_level3 = v.coopr_level3_manager;
+        this.tableInner.forEach((v) => {
+          if (v.coopr_level3_manager == "合计") {
+            v.coopr_level3 = v.coopr_level3_manager;
           }
-        })
+        });
         this.tableOutter = tableOutter.rows;
-
-
-     
 
         // console.log("this.data", this.data);
       } catch (err) {
         console.log(err);
       }
     },
-
   },
-  
 };
 </script>
 <style scoped>
@@ -1187,16 +1184,15 @@ export default {
   bottom: 20px;
 }
 
-.top-flex{
+.top-flex {
   align-items: flex-start;
   /* width:50%; */
 }
 
-.dashboard-box{
-width:41%;
+.dashboard-box {
+  width: 41%;
 }
-.flex-card{
-  flex:auto;
+.flex-card {
+  flex: auto;
 }
-
 </style> 
