@@ -1107,7 +1107,6 @@ export default {
           "2022-01-01,2022-10-01"
         );
 
-        console.log("sell", res);
         let sellOutDataList = res.rows;
         let newArr = sellOutDataList.filter((item) => {
           var timeArr = item.orderDate
@@ -1116,8 +1115,6 @@ export default {
             .split("-");
           var yue = timeArr[1];
           var ri = timeArr[2];
-
-          // console.log("sellOutDataList",sellOutDataList);
 
           // 外销日内
           if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
