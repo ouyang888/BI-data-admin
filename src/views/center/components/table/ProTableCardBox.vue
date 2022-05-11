@@ -1,21 +1,33 @@
 <template>
   <div class="table-box">
     <div
-     
+      class="table"
       style="margin-top: 10px"
     >
       <RowTable
         :color="color"
         :title="directName"
-        :mesInfo="innerTableList"
+        :mesInfo="leftData"
         :titleHead="titleHead"
         :directName="directName"
         :rowSpanNumber="rowSpanNumber1"
         @handleClick="namesClick"
         :setTrueOrFalse="setTrueOrFalse"
         :cooprMode="cooprMode"
+        :headerObj="leftObj"
       />
-
+      <RowTable
+        :color="color2"
+        :title="directName2"
+        :mesInfo="rightData"
+        :titleHead="titleHead"
+        :directName="directName2"
+        :rowSpanNumber="rowSpanNumber2"
+        @handleClick="managerClick"
+        :setTrueOrFalse="setTrueOrFalse"
+        :cooprMode="cooprMode"
+        :headerObj="rightObj"
+      />
     </div>
     <!-- <div
       class="table"
@@ -39,7 +51,7 @@
 <script>
 // import SaleSummaryTable from "./SaleSummaryTable.vue";
 // import SellSportTable from "./SellSportTable.vue";
-import RowTable from "./RowTableInfo.vue";
+import RowTable from "./ProRowTable.vue";
 export default {
   components: {
     // SellSportTable
@@ -52,21 +64,27 @@ export default {
       default:function(){ return []}
     },
     titleHead:{
-      type:Array,
-      default:function(){ return []}
+      type:Object,
+      default:function(){ return {}}
     },
     rightData:{
       type:Array,
       default:function(){ return []}
     },
     rowSpanNumber1:{
-      type:Number,
-      default:0,
+      type:Array,
+      default:function(){ return []},
     },
     rowSpanNumber2:{
-      type:Number,
-      default:0,
+      type:Array,
+      default:function(){ return []},
     },
+    leftObj:{
+      type:Object,
+    },
+    rightObj:{
+      type:Object,
+    }
   },
   data() {
     return {
@@ -74,10 +92,9 @@ export default {
       color2: "linear-gradient(to right , #1B6FFF, #7A5AFF, #7066FF) ",
       // directName: computed(() => Store.state.tableOneHeading),
       // directName2: computed(() => Store.state.tableTwoHeading),
-      cooprMode: "内销",
-        cooprMode1: "外销",
-      directName: "产司",
-      directName2: "合计",
+      cooprMode: "渠道",
+      directName: "内销",
+      directName2: "外销",
       setTrueOrFalse: true,
       innerTableList:[
           {
@@ -2990,26 +3007,40 @@ export default {
   },
 
   methods:{
-    namesClick(){
-
+    namesClick(obj){
+      // console.log('handleClick',val);
+      switch(obj.marketChannel){
+        case '线上':
+        this.$router.push({
+        name: "catSeries",
+        query: { key: obj.manager },
+      });
+        break;
+        case '线下':
+        this.$router.push({
+          name: "offlineCatSeries",
+        query: { key: obj.manager},
+      });
+        break;
+      }
     },
-    managerClick(){
-      // switch (Store.state.currentPath) {
-      //   case "s":
-      //     // Store.commit("setTableList", ...data.demosticDirectOnOnline);
-      //     this.$router.push("exprotAreaAll");
-      //     break;
-      // }
+    managerClick(obj){
+
+      this.$router.push({
+        name: "exprotAreaAll",
+        query: { key: obj.manager },
+      });
+      exprotAreaAll
     }
   }
 };
 </script>
 <style scoped>
 .table {
-  width: 30%;
+  width: 98%;
   height: 330px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: 0 auto;
 }
 </style>

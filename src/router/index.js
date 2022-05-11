@@ -18,7 +18,7 @@ const routes = [
     {
         path: '/',
         name: '',
-        redirect: '/center/index'
+        redirect: '/center/psi'
     },
 
     {

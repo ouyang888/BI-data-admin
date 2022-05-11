@@ -114,7 +114,7 @@
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
                   <div>
-                    s 线上毛利率
+                    线上毛利率
                     <span class="light-blue"
                       >{{
                         Number(
@@ -1312,7 +1312,7 @@ export default {
                     total: {
                         title: "双向契约",
                         text: "累计达成",
-                        tQtyAll: "tQtyAll",
+                        tQtyAll: "cnyAmtAll",
                         orgQtyAll: "orgQtyAll",
                     },
           },
@@ -1337,7 +1337,7 @@ export default {
                         title: "责任制",
                         text: "累计达成",
                         day:"周转天数",
-                        tQtyAll: "tQtyAll",
+                        tQtyAll: "cnyAmtAll",
                         orgQtyAll: "orgQtyAll",
                         dayAll:"day"
                     },
@@ -1438,7 +1438,7 @@ export default {
                         innerCnyAmt: 141,
                         outerSaleTaskAmt: 144,
                         outerCnyAmt: 165,
-                        tQtyAll: 193,
+                        cnyAmtAll: 193,
                         orgQtyAll: 230,
                         day:9
                     },
@@ -1448,7 +1448,7 @@ export default {
                         innerCnyAmt: 1,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
-                        tQtyAll: 93,
+                        cnyAmtAll: 93,
                         orgQtyAll: 130,
                         day:10
                     },
@@ -1458,7 +1458,7 @@ export default {
                         innerCnyAmt: 114,
                         outerSaleTaskAmt: 234,
                         outerCnyAmt: 65,
-                        tQtyAll: 94,
+                        cnyAmtAll: 94,
                         orgQtyAll: 101,
                         day:11
                     },
@@ -1468,7 +1468,7 @@ export default {
                         innerCnyAmt: 13,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 365,
-                        tQtyAll: 95,
+                        cnyAmtAll: 95,
                         orgQtyAll: 103,
                         day:12
                     },
@@ -1478,7 +1478,7 @@ export default {
                         innerCnyAmt: 33,
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
-                        tQtyAll: 355,
+                        cnyAmtAll: 355,
                         orgQtyAll: 93,
                          day:12
                     },
@@ -1488,7 +1488,7 @@ export default {
                         innerCnyAmt: 363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        tQtyAll: 25,
+                        cnyAmtAll: 25,
                         orgQtyAll: 108,
                          day:12
                     },
@@ -1498,7 +1498,7 @@ export default {
                         innerCnyAmt: 3363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        tQtyAll: 25,
+                        cnyAmtAll: 25,
                         orgQtyAll: 108,
                          day:12
                     }
@@ -1511,7 +1511,7 @@ export default {
                         innerCnyAmt: 41,
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
-                        tQtyAll: 93,
+                        cnyAmtAll: 93,
                         orgQtyAll: 230,
                         day:9
                     },
@@ -1521,7 +1521,7 @@ export default {
                         innerCnyAmt: 1,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
-                        tQtyAll: 93,
+                        cnyAmtAll: 93,
                         orgQtyAll: 130,
                         day:10
                     },
@@ -1531,7 +1531,7 @@ export default {
                         innerCnyAmt: 14,
                         outerSaleTaskAmt: 234,
                         outerCnyAmt: 65,
-                        tQtyAll: 94,
+                        cnyAmtAll: 94,
                         orgQtyAll: 101,
                         day:11
                     },
@@ -1541,7 +1541,7 @@ export default {
                         innerCnyAmt: 13,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
-                        tQtyAll: 95,
+                        cnyAmtAll: 95,
                         orgQtyAll: 103,
                         day:12
                     },
@@ -1551,7 +1551,7 @@ export default {
                         innerCnyAmt: 33,
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
-                        tQtyAll: 55,
+                        cnyAmtAll: 55,
                         orgQtyAll: 93,
                          day:12
                     },
@@ -1561,7 +1561,7 @@ export default {
                         innerCnyAmt: 363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        tQtyAll: 25,
+                        cnyAmtAll: 25,
                         orgQtyAll: 108,
                          day:12
                     },
@@ -1571,7 +1571,7 @@ export default {
                         innerCnyAmt: 363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        tQtyAll: 25,
+                        cnyAmtAll: 25,
                         orgQtyAll: 108,
                          day:12
                     }
@@ -1584,7 +1584,7 @@ export default {
                         innerCnyAmt: 41,
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
-                        tQtyAll: 93,
+                        cnyAmtAll: 93,
                         orgQtyAll: 230,
                         
                     },
@@ -1594,7 +1594,7 @@ export default {
                         innerCnyAmt: 1,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
-                        tQtyAll: 93,
+                        cnyAmtAll: 93,
                         orgQtyAll: 130,
                         
                     },
@@ -1604,7 +1604,7 @@ export default {
                         innerCnyAmt: 14,
                         outerSaleTaskAmt: 234,
                         outerCnyAmt: 65,
-                        tQtyAll: 94,
+                        cnyAmtAll: 94,
                         orgQtyAll: 101,
                       
                     },
@@ -1614,7 +1614,7 @@ export default {
                         innerCnyAmt: 13,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
-                        tQtyAll: 95,
+                        cnyAmtAll: 95,
                         orgQtyAll: 103,
                         
                     },
@@ -1624,7 +1624,7 @@ export default {
                         innerCnyAmt: 33,
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
-                        tQtyAll: 55,
+                        cnyAmtAll: 55,
                         orgQtyAll: 93,
                         
                     },
@@ -1634,7 +1634,7 @@ export default {
                         innerCnyAmt: 363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        tQtyAll: 25,
+                        cnyAmtAll: 25,
                         orgQtyAll: 108,
                     },
                      {
@@ -1643,7 +1643,7 @@ export default {
                         innerCnyAmt: 363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        tQtyAll: 25,
+                        cnyAmtAll: 25,
                         orgQtyAll: 108,
                     }
                    
@@ -1881,14 +1881,32 @@ export default {
     },
     modelLabel(){
       return this.$store.state.showMoney==true?'亿':'台'
+    },
+    ontime(){
+      return this.$store.state.year +'-'+ this.$store.state.month;
+    },
+    showMoney(){
+      return this.$store.state.showMoney;
+    },
+    modelLabel(){
+      return this.$store.state.showMoney==true?'亿':'亿'
+    },
+    model(){ /* 获取本部，OEM */
+      return this.$store.state.model
     }
     
   },
   watch:{
-    ontime:{
+    ontime:{ /*监听数据更改 调用接口 */
      handler: function (newValue, oldValue) {
-        this.init();
+        this.init(this.model);
       }
+    },
+    model:{ /*监听数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(newValue);
+      }
+
     },
     showMoney:{
       handler:(newValue,oldValue)=>{
@@ -1988,10 +2006,10 @@ export default {
         console.log(err);
       }
     },
-     async getLine(ontime3) {
+     async getLine(params) {
       this.showLoading = true
       try {
-        const res = await API.getData("homeAnnualAmtChart",'2022-03-01,2022-03-31,2022-03-01,2022-03-31');
+        const res = await API.getData("homeAnnualAmtChart",params);
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
         let newArr = res.rows.filter((item)=>{
         var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
@@ -2001,7 +2019,7 @@ export default {
             // obj.divisionArr.push(item)
             this.divisionDate.push(yue+'-'+ri)
             this.divisionList.push(item.totalCnyAmt)
-            this.divisionLine = item.saleAvgTaskQty;
+            this.divisionLine = item.saleAvgAmt;
             this.myEcharts();
           this.showLoading = false
         })
@@ -2436,28 +2454,27 @@ export default {
     //     console.log(err);
     //   }
     // },
-    init(){
+    init(model){
     // this.getList();
     // this.getCard(this.ontime);
     // this.getTable(this.ontime);
     // this.getdashboard(this.ontime);
     // this.queryCardSAB(this.ontime);
-    this.getList(this.ontime,this.ontime2);
-    this.getLine(this.ontime3);
-    this.getTable(this.ontime);
+    let params = `${this.ontime},${model}`;
+    let time = `${this.ontime}-01,${this.ontime}-31`; /*年月日*/
+    let lineParams =  `${time},${model},${time},${model}`;
+
+   
+    this.getList(params,`${params},${params}`);
+    this.getLine(lineParams);
+    this.getTable(params);
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
     }
   },
   mounted() {
-    this.init();
-    // this.getList();
-    // this.getLine();
-    // this.getTable();
-    // this.myEcharts();
-    // this.myEcharts2();
-    // this.myEcharts3();
+    this.init(this.model);
   },
 };
 </script><style scoped>
@@ -2561,7 +2578,7 @@ margin-top: 20px;
     }
 
     .card-border-box {
-        margin: 14px;
+        margin:20px 14px;
         border: 1px solid rgba(13, 83, 183, 0.7);
         position: relative;
     }
@@ -2679,6 +2696,7 @@ margin-top: 20px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        height: 32px;
     }
 
     .flex-bottoms {
@@ -2706,7 +2724,7 @@ margin-top: 20px;
 
     .echartsBox {
         width: 100%;
-        height: 24vh;
+        height: 25vh;
     }
 
     .fang-color {
@@ -2749,13 +2767,13 @@ margin-top: 20px;
         /* width: 99%; */
         /* height: 368px; */
         /* height: 27vh; */
-        align-items: center;
+        /* align-items: center;
         background-size: cover;
         background-color: rgba(2, 0, 77, 0.4);
         box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
         border: 2px solid #0d53b7;
         border-radius: 0 0 10px 10px;
-        margin-left: 4px;
+        margin-left: 4px; */
         
 
     }
