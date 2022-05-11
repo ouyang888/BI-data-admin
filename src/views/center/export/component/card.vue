@@ -1,7 +1,7 @@
 <template>
   <div class="flex-card" >
     <div class="card-box" v-for="(v,i) in list" :key="i">
-      <div class="card-font" @click="gotoCatSeries(v.cooprLevel1)">{{v.cooprLevel1}} </div>
+      <div class="card-font" @click="gotoCatSeries(v.cooprLevel3)">{{v.cooprLevel3}} </div>
       <div class="card-border-box">
         <div class="line"></div>
         <div class="line1"></div>
@@ -13,12 +13,12 @@
             <div class="flex-top-card">
               <div class="top-left-font">实时达成</div>
               <div class="flex-finish">
-                <div class="finish-font">责任制 <span>{{v.cooprLevel1TaskAmt}}亿</span></div>
-                <div class="finish-font">完成率 <span>{{v.cooprLevel1AmtRadio}}%</span></div>
+                <div class="finish-font">责任制 <span>{{v.saleTaskAmt}}亿</span></div>
+                <div class="finish-font">完成率 <span>{{v.saleAmtRadio}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
-              <div class="card-big-num">{{v.cooprLevel1NameAmt}}亿</div>
+              <div class="card-big-num">{{v.cnyAmt}}亿</div>
                <div class="flex-finish">
                 <!-- <div class="finish-font">进度 <span>s</span></div>
                 <div class="finish-font">完成率 <span>75%</span></div> -->
@@ -114,10 +114,6 @@
       list: {
         type: Array,
         default: function () { return [] }
-      },
-      cardObj: {
-        type:Object,
-        default: function () { return {} }
       },
     },
     methods: {

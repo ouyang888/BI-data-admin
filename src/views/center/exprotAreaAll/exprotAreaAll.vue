@@ -708,7 +708,7 @@ export default {
   },
   data() {
     return {
-      dhcarr: [],
+      dhcarr: ["越南泰国区域","澳新菲区域","新马港澳区域","新马港澳区域","越南泰国区域","澳新菲区域"],
       showLoading: false,
       Arrnum: [],
       columns: [
@@ -827,24 +827,54 @@ export default {
         ballTitle: "内销",
         bottom: "线上",
         top: "线下",
-        sabArr: { s: 0, a: 0, b: 0 },
-        topArr: { s: 0, a: 0, b: 0 },
-        bottomArr: { s: 0, a: 0, b: 0 },
+        sabArr: { s: 31, a: 18, b: 21 },
+        topArr: { s: 30, a: 18, b: 21 },
+        bottomArr: { s: 338, a: 18, b: 21 },
         // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
     };
   },
-  created() {
-    this.init(this.model);
-   },
-  methods: {
-    // init(model){ 
-    //   // 亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31"
-    //   let LineChartparams=`亚太业务区,亚太业务区,${model},${this.ontime},${this.ontime}`;
-    //   this.getList1(LineChartparams);
+  computed:{
+    ontime(){
+      return this.$store.state.year +'-'+ this.$store.state.month;
+    },
+    // showMoney(){
+    //   return this.$store.state.showMoney;
     // },
+    // modelLabel(){
+    //   return this.$store.state.showMoney==true?'亿':'亿'
+    // },
+    model(){ /* 获取本部，OEM */
+      return this.$store.state.model
+    }
+  },
+  watch:{
+    ontime:{ /*监听数据更改 调用接口 */
+     handler: function (newValue, oldValue) {
+        this.init(this.model);
+      }
+    },
+    model:{ /*监听数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(newValue);
+      }
+
+    },
+    showMoney:{
+      handler:(newValue,oldValue)=>{
+ 
+      }
+    }
+  },
+
+  methods: {
+    init(model){ 
+      // 亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31"
+      this.getList1(`亚太业务区,亚太业务区,${model},${this.ontime}-01,${this.ontime}-31`);
+      // this.getList1(`${model},${this.ontime}-01,${this.ontime}-31`);
+    },
    
 // 三个仪表盘
   //三个仪表盘(左中)
@@ -999,18 +1029,19 @@ export default {
     },
 
     // 右边接口
-    async getList1() {
+    async getList1(params) {
       this.showLoading = true;
       try {
         const res = await API.getChartQuery(
           "outSellMacroRegionDashboardChart",
-         "亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31",
+          params,
           "cooprLevel2"
         );
+        // "亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31",
         console.log("arr", res);
-        let sellOutDataList = res.rows;
+        // let sellOutDataList = res.rows;
         this.showLoading = false;
-        let obj = res.rows;
+        let obj = res.rows[0];
         var k = 0;
         var arr = [];
         for (var i in obj) {
@@ -1019,19 +1050,16 @@ export default {
           }
           k++;
         }
-        var nis=arr[0]
+
         // console.log("obj0,",arr);
-        // console.log("obj,",arr[0]);
-        for (var j in arr[0]) {
-          console.log("dvksi",j);
-        }
+
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr[0]));
-        arrs.forEach((v) => {
+        arr.forEach((v) => {
           this.dhcarr.push(v[0].cooprLevel2);
         });
+       
         // this.dhcarr = [1,2,3,4,5];
-      
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
           let AmericaDate = [];
@@ -1050,8 +1078,8 @@ export default {
             AmericaList.push(item.totalAmt);
             AmericaLine = item.totalAvgTaskAmt;
           });
-          console.log("AmericaLine", AmericaLine);
-          console.log("AmericaList",AmericaList);
+        //   console.log("AmericaLine", AmericaLine);
+        //   console.log("AmericaList",AmericaList);
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
         // let Arrnum = datanum.filter((item) => {
@@ -2060,13 +2088,16 @@ export default {
 //   // this.getCard(this.ontime);
 //   this.getdashboard('2022-03')
 // },
+created() {
+    this.init(this.model);
+   },
   mounted() {
-    // this.init()
+    this.init(this.model);
     this.getdashboard();
     this.queryCardSAB();
     this.getList()
-    // this.getList1(params)
-    this.getList1()
+    this.getList1(params)
+    // this.getList1()
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
@@ -2077,6 +2108,7 @@ export default {
     this.myEcharts8();
   },
 };
+
 </script>
 <style scoped>
 .flex-char {
