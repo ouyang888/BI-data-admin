@@ -188,11 +188,13 @@ export default {
       tableOutter:[],
       leftObj:{
       name:'coopr_level3',
-      level:'coopr_level3_manager'
+      level:'coopr_level3_manager',
+      tAvgAmt:'tAvgAmt',/*责任制*/
       },
       rightObj:{
       name:'customerName',
-      level:'coopr_level3_manager'
+      level:'coopr_level3_manager',
+      tAvgAmt:'tAvgAmt',/*责任制*/
       },
     };
   },
