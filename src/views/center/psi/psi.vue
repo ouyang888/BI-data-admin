@@ -2578,7 +2578,7 @@ margin-top: 20px;
     }
 
     .card-border-box {
-        margin: 14px;
+        margin:20px 14px;
         border: 1px solid rgba(13, 83, 183, 0.7);
         position: relative;
     }
@@ -2724,7 +2724,7 @@ margin-top: 20px;
 
     .echartsBox {
         width: 100%;
-        height: 24vh;
+        height: 25vh;
     }
 
     .fang-color {
