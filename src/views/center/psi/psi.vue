@@ -1870,21 +1870,12 @@ export default {
     ontime(){
       return this.$store.state.year +'-'+ this.$store.state.month//this.$store.state.model;
     },
-    ontime2(){
-      return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month;
-    },
-    ontime3(){
-      return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month +','+ this.$store.state.year +'-'+ this.$store.state.month+',' +this.$store.state.year +'-'+ this.$store.state.month;
-    },
-    showMoney(){
-      return this.$store.state.showMoney;
-    },
-    modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'台'
-    },
-    ontime(){
-      return this.$store.state.year +'-'+ this.$store.state.month;
-    },
+    // ontime2(){
+    //   return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month;
+    // },
+    // ontime3(){
+    //   return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month +','+ this.$store.state.year +'-'+ this.$store.state.month+',' +this.$store.state.year +'-'+ this.$store.state.month;
+    // },
     showMoney(){
       return this.$store.state.showMoney;
     },
