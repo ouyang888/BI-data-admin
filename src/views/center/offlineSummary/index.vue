@@ -28,13 +28,13 @@
         <div>
           <div class="middle-font">大区日达成趋势图</div>
           <div class="right-box-qushi">
-            <div class="flex-right-bottom">
+            <div class="flex-right-bottom" v-for="(item,i) in dhcarr" :key="i">
               <div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
                 <div class="flex-echrats-right">
-                  <div class="right-font-title">淘系</div>
-                  <div id="main2" class="echartsBox-min"></div>
+                  <div class="right-font-title">{{item}}</div>
+                  <div :id="i" class="echartsBox-min"></div>
                 </div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line1"></div>
@@ -42,76 +42,7 @@
                 <div class="border-left-line3"></div>
               </div>
             </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">京东</div>
-                  <div id="main3" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">拼多多</div>
-                  <div id="main4" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">美的</div>
-                  <div id="main5" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">兴趣</div>
-                  <div id="main6" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">天猫自营</div>
-                  <div id="main7" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
+         
           </div>
         </div>
       </div>
@@ -142,6 +73,15 @@ export default {
   },
   data() {
     return {
+      dhcarr:[0,1,2,3,4,5],
+        Arrnum:[],
+        showLoading: false,
+        AmericaDate: [],
+        AmericaList: [],
+        AvgTaskAmtDate: [],
+        AvgTaskAmtList: [],
+        AvgTaskAmtLine: [],
+        AmericaLine: [],
       progressData: {
         bar1: 0,
         bar2: 0,
@@ -232,6 +172,9 @@ export default {
     this.init(this.model);
 
   },
+
+
+
   methods: {
     init(model){
      let params = `${this.ontime},${model}`;
@@ -250,6 +193,136 @@ export default {
     this.myEcharts7();
     // this.myEcharts8();
     },
+
+    //中间折线图
+    async getList() {
+        this.showLoading = true;
+        try {
+          const res = await API.getData(
+            "sellOuttotalchart",
+            "2022-01-01,2022-10-01"
+          );
+
+          // console.log("sell", res);
+          let sellOutDataList = res.rows;
+          let newArr = sellOutDataList.filter((item) => {
+            var timeArr = item.orderDate
+              .replace(" ", ":")
+              .replace(/\:/g, "-")
+              .split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+
+            // console.log("sellOutDataList",sellOutDataList);
+
+            // 外销日内
+            if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+              this.AvgTaskAmtDate.push(yue + "-" + ri);
+              this.AvgTaskAmtList.push(item.totalAmt);
+              this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+              this.myEcharts();
+            }
+
+          //   if (item.cooprLevel1 == "北美零售营销中心") {
+          //     // obj.divisionArr.push(item)
+          //     this.AmericaDate.push(yue + "-" + ri);
+          //     this.AmericaList.push(item.CnyAmt);
+          //     this.AmericaLine = item.tAvgAmt;
+          //     this.myEcharts2();
+          //   } else if (item.cooprLevel1 == "韩国业务区") {
+          //     this.koreaData.push(yue + "-" + ri);
+          //     this.koreaList.push(item.CnyAmt);
+          //     this.koreaLine = item.tAvgAmt;
+          //     this.myEcharts3();
+          //   } 
+            this.showLoading = false;
+          });
+
+        } catch (error) {
+          console.log(error);
+        }
+      },
+
+      // 右边接口
+      async getList1() {
+        this.showLoading = true;
+        try {
+      const res = await API.getChartQuery(
+            "offLineMiddleChart",
+            // "sellOuttotalchart",
+            "2022-01-01,2022-10-01,2022-01-03,2022-10-08",
+            "cooprLevel2"
+          );
+        
+          let sellOutDataList = res.rows[0];  
+          console.log("sell程序", res);
+
+
+          this.showLoading = false;
+          let obj = res.rows[0]
+          var k = 0;
+          var arr = [];
+          for (var i in obj) {
+            console.log('11111111111', obj[i])
+            if (k < 6) {
+              arr.push(obj[i]);
+            }
+            k++;
+          }
+          console.log("arrs",arr);
+          this.dhcarr = [];
+          let arrs = JSON.parse(JSON.stringify(arr));
+          arrs.forEach(v=>{
+            this.dhcarr.push(v[0].cooprLevel2)
+          })
+          console.log();
+          // this.dhcarr = [1,2,3,4,5];
+
+          for (let j = 0; j < arr.length; j++) {
+            var datanum = arr[j];
+            let AmericaDate = [];
+           let AmericaList = [];
+           let AmericaLine = 1;
+            let Arrnum = datanum.filter((item) => {
+            var timeArr = item.orderDate 
+            .replace(" ", ":")
+              .replace(/\:/g, "-")
+              .split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+         AmericaDate.push(yue + "-" + ri);
+             AmericaList.push(item.totalAmt);
+             AmericaLine = item.totalAvgTaskAmt;     
+          })
+          this.myEcharts2(AmericaList,AmericaDate,AmericaLine,j);
+          }
+          // let Arrnum = datanum.filter((item) => {
+          //   var timeArr = item.orderDate 
+          //   .replace(" ", ":")
+          //     .replace(/\:/g, "-")
+          //     .split("-");
+          //   var yue = timeArr[1];
+          //   var ri = timeArr[2];
+          // console.log( "sdvsd", timeArr);
+
+          // this.AmericaDate.push(yue + "-" + ri);
+          //     this.AmericaList.push(item.totalAmt);
+          //     this.AmericaLine = item.totalAvgTaskAmt;     
+          // })
+          // console.log("Arrnum",this.datanum);
+          // this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine);
+          // let dhcarr = [1,2,3,4,5,6];
+          // dhcarr.forEach(v=>{
+
+          //   this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine,v);
+
+          // })
+        } catch (error) {
+          console.log(error);
+
+        }
+      },
+      
 
     //三个仪表盘(左中)
     async getdashboard(params) {
@@ -352,9 +425,15 @@ export default {
       }
     },
 
+
+
     gotoDomestic() {
       this.$router.push("/center/index");
     },
+
+
+
+    
     // 合作模式3
     gotoCatSeries(item) {
       this.$router.push({
@@ -402,7 +481,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.AvgTaskAmtDate,
           axisTick: {
             show: false,
           },
@@ -457,11 +536,11 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.AvgTaskAmtList,
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.AvgTaskAmtLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -484,124 +563,134 @@ export default {
       };
       myChart.setOption(option);
     },
-    myEcharts2() {
-      var myChart2 = this.$echarts.init(document.getElementById("main2"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
+    myEcharts2(data,time,lines,id) {
+        var myChart2 = this.$echarts.init(document.getElementById(id));
+        var option = {
+          xAxis: {
+            axisLabel: {
+              formatter: function (val) {
+                return "";
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
+          },
+          textStyle: {
+            color: "#3FB0FF",
+          },
+          color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+          title: {
+            text: "",
+          },
+          tooltip: {
+            trigger: "axis",
+          },
+          grid: {
+            top: "5%",
+            left: "2%",
+            right: "5%",
+            bottom: "3%",
+            containLabel: true,
+          },
+          xAxis: {
+            type: "category",
+            boundaryGap: false,
+            // data: this.AmericaDate,
+            // data: ['01-02','03-03','04-04','01-04'],
+           
+            data:time,
+            axisTick: {
+              show: false, //刻度线
+            },
+            axisLine: {
+              show: false, //隐藏y轴
+            },
+            axisLabel: {
+              show: false, //隐藏刻度值
             },
           },
-        ],
-      };
-      myChart2.setOption(option);
-    },
+          yAxis: {
+            name: "单位：万",
+            type: "value",
+            splitLine: {
+              lineStyle: {
+                type: "dashed",
+                color: "rgba(45,153,255,.3)",
+              },
+            },
+            axisTick: {
+              show: false, //刻度线
+            },
+            axisLine: {
+              show: false, //隐藏y轴
+            },
+            axisLabel: {
+              show: false, //隐藏刻度值
+            },
+          },
+          series: [
+            {
+              name: "实际达成",
+              type: "line",
+              stack: "Total",
+              // smooth: true,
+              lineStyle: {
+                width: 1,
+              },
+              showSymbol: false,
+              areaStyle: {
+                normal: {
+                  color: {
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [
+                      {
+                        offset: 0,
+                        color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                      },
+                      {
+                        offset: 0.7,
+                        color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                      },
+                    ],
+                    globalCoord: false, // 缺省为 false
+                  },
+                },
+              },
+              // data: this.AmericaList,
+              // data:[10,20,100,250],
+              data:data,
+              // data:data,
+              markLine: {
+                // data:this.AmericaLine,
+                data: [
+                  {
+                    // yAxis: this.AmericaLine,
+                    // yAxis:400,
+                    yAxis:lines,
+                    silent: false, //鼠标悬停事件 true没有，false有
+                    lineStyle: {
+                      //警戒线的样式 ，虚实 颜色
+                      type: "dashed", //样式  ‘solid’和'dotted'
+                      color: "#FF8B2F",
+                      width: 2, //宽度
+                    },
+                    label: {
+                      formatter: "",
+                      color: "#FF8B2F",
+                      position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                    },
+                  },
+                ],
+
+                symbol: ["none", "none"],
+              },
+            },
+          ],
+        };
+        myChart2.setOption(option);
+      },
+     
     myEcharts3() {
       var myChart3 = this.$echarts.init(document.getElementById("main3"));
       var option = {
@@ -633,7 +722,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.AvgTaskAmtDate,
           axisTick: {
             show: false, //刻度线
           },
@@ -694,11 +783,11 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.AvgTaskAmtList,
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.AvgTaskAmtLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1273,6 +1362,8 @@ export default {
     //中间折线图
   },
 };
+
+
 </script>
 <style scoped>
 .flex-char {
@@ -1514,25 +1605,28 @@ export default {
 .flex-echrats-right {
   display: flex;
   align-items: center;
-  padding: 4px 8px 4px 8px;
+  padding: 4px 4px 4px 4px;
 }
 .echartsBox-min {
-  width: 300px;
+  width: 258px;
   height: 100px;
 }
 .right-font-title {
+  text-align: center;
   font-size: 15px;
+  width: 106px;
   color: #fff;
-  margin-right: 40px;
+  margin-right: 8px;
 }
 .flex-right-bottom {
   display: flex;
   /* align-items: center; */
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  width: 31%;
   flex-wrap: wrap;
   border: 1px solid hsla(210, 86%, 39%, 0.66);
   position: relative;
-  margin-left: 10px;
+  margin-left: 3px;
   margin-top: 10px;
 }
 .border-left-line {
