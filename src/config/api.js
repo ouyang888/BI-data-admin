@@ -1,4 +1,4 @@
-const admin_dev = ''
+const admin_dev = '/apa/'
 
 const admin_test ='http://10.33.119.107:80/'
 

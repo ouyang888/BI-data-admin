@@ -1107,7 +1107,7 @@ export default {
           "2022-01-01,2022-10-01"
         );
 
-        // console.log("sell", res);
+        console.log("sell", res);
         let sellOutDataList = res.rows;
         let newArr = sellOutDataList.filter((item) => {
           var timeArr = item.orderDate
@@ -1143,15 +1143,14 @@ export default {
           "cooprLevel1"
         );
 
-        console.log("sell程序", res);
+        
         let sellOutDataList = res.rows;
         this.showLoading = false;
-
         let obj = res.rows[0];
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          console.log("11111111111", obj[i]);
+          console.log("11111111111", obj);
           if (k < 6) {
             arr.push(obj[i]);
           }

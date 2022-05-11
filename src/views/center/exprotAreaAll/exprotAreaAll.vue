@@ -997,30 +997,29 @@ export default {
           "outSellMacroRegionDashboardChart",
          " 亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31",
           // "2022-01-01,2022-10-01",
-          "cooprLevel1"
+          "cooprLevel2"
         );
-
+     
         let sellOutDataList = res.rows;
         this.showLoading = false;
         let obj = res.rows;
         console.log("arr", obj);
-
-        // var k = 0;
-        // var arr = [];
-        // for (var i in obj) {
-        //   if (k < 6) {
-        //     arr.push(obj[i]);
-        //   }
-        //   k++;
-        // }
-        // console.log("arr", obj);
-        // this.dhcarr = [];
-        // let arrs = JSON.parse(JSON.stringify(arr));
-        // arrs.forEach((v) => {
-        //   this.dhcarr.push(v[0].cooprLevel1);
-        // });
+        var k = 0;
+        var arr = [];
+        for (var i in obj) {
+          if (k < 6) {
+            arr.push(obj[i]);
+          }
+          k++;
+        }
+        
+        this.dhcarr = [];
+        let arrs = JSON.parse(JSON.stringify(arr));
+        arrs.forEach((v) => {
+          this.dhcarr.push(v[0].cooprLevel2);
+        });
         // this.dhcarr = [1,2,3,4,5];
-
+      
 
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
@@ -1041,7 +1040,6 @@ export default {
             AmericaLine = item.totalAvgTaskAmt;
           });
           console.log("Arrnum", this.sellOutDataList);
-
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
         // let Arrnum = datanum.filter((item) => {
