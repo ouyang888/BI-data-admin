@@ -1,5 +1,5 @@
 <template>
-  <div class="execl">{{headerObj}}
+  <div class="execl">
     <el-table
       border
       :data="mesInfo"
