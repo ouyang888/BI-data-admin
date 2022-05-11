@@ -2,9 +2,9 @@ const admin_dev = ''
 
 const admin_test ='http://10.33.119.107:80/'
 
-const admin_uat = 'http://127.0.0.1:8083/'
+const admin_uat = 'http://10.18.4.139:8083/'
 
-const admin_pro = 'http://127.0.0.1:8083/'
+const admin_pro = 'http://10.18.4.139:8083/'
 
 let local = 'test'
 
