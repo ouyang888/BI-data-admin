@@ -718,6 +718,7 @@ export default {
       },
       showLoadingLeft:true,
       showLoadingRight:true,
+      titleName:this.$route.query.key || '环境'
     };
   },
   computed:{
@@ -756,17 +757,22 @@ export default {
   },
   methods: {
     init(model){ /*初始化数据方法 model产地字段*/   
-    let params = `${this.ontime},${model}`;
+
+    let params = `${this.ontime},${this.titleName},${model}`;
     let listParams = `${this.ontime}-01,${this.ontime}-31,${model},${this.ontime}-01,${this.ontime}-31,${model}`
     console.log('params',params);
-    this.getdashboard();
-    this.myEcharts();
-    this.myEcharts2();
+    this.getdashboard(params);
+    this.queryCardSAB(params);
+    this.getTable(params);
 
-    this.getTable(`${this.ontime},环境`);
+    // this.getListLeft();
+    // this.getListCharts();
+    // this.myEcharts();
+    // this.myEcharts2();
     },
         // 底部table/
     async getTable(params) { 
+      debugger
        let tableInner = await API.getData("directLevelInnerBottom", params);
         let tableOutter = await API.getData("directLeveOutterBottom", params);
         this.tableOutter = tableOutter.rows;
@@ -800,10 +806,10 @@ export default {
     },
 
     //仪表盘(左中)
-    async getdashboard() {
+    async getdashboard(getdashboard) {
       localStorage.getItem("");
       try {
-        const res = await API.getData("onlineTopTotal", this.dateTime);
+        const res = await API.getData("directLevelTopDashBoard",getdashboard);
         let panelDataList = res.rows;
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
@@ -843,9 +849,9 @@ export default {
     },
 
     //仪表盘(右)
-    async queryCardSAB() {
+    async queryCardSAB(params) {
       try {
-        const res = await API.getData("directTotalDashboardSAB", this.dateTime);
+        const res = await API.getData("directLevelTopDashBoardSAB",params);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].directName == "事业部") {
@@ -1221,28 +1227,6 @@ export default {
       };
       myChart2.setOption(option);
     },
- 
-    async getTable(params) {
-      try {
-        let tableInner = await API.getData(
-          "onlineBottomLevel3",
-          params
-        );
-        let tableOutter = await API.getData(
-          "onlineBottomStore",
-          params
-        );
-
-        this.tableInner = tableInner.rows;
-        this.tableOutter = tableOutter.rows;
-      } catch (err) {
-        console.log(err);
-      }
-    },
-  },
-  created() {
-    this.getListLeft();
-    this.getListCharts();
   },
   mounted() {
     this.init(this.model);
