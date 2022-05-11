@@ -299,4 +299,7 @@ body .el-table::before {
 ::v-deep .el-table .el-table__cell.gutter{
   background:#041370;
 }
+::v-deep .el-table__body-wrapper{
+  background: #070640;
+}
 </style>
