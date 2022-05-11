@@ -711,6 +711,12 @@ export default {
       dhcarr: ["越南泰国区域","澳新菲区域","新马港澳区域","新马港澳区域","越南泰国区域","澳新菲区域"],
       showLoading: false,
       Arrnum: [],
+      AmericaDate: [],
+      AmericaList: [],
+      AvgTaskAmtDate: [],
+      AvgTaskAmtList: [],
+      AvgTaskAmtLine: [],
+      AmericaLine: [],
       columns: [
         {
           title: "线上",
@@ -871,7 +877,9 @@ export default {
 
   methods: {
     init(model){ 
+      // this.getList(`${model},${this.ontime}-01,${this.ontime}-31`);
       // 亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31"
+      this.getList(`亚太业务区,亚太业务区,${model},${this.ontime}-01,${this.ontime}-31`);
       this.getList1(`亚太业务区,亚太业务区,${model},${this.ontime}-01,${this.ontime}-31`);
       // this.getList1(`${model},${this.ontime}-01,${this.ontime}-31`);
     },
@@ -883,7 +891,7 @@ export default {
           const res = await API.getData("outSellMacroRegionDashboard","2022-03,亚太业务区,本部,OEM,待定");
           //内销汇总仪表盘左边&&中间
           let panelDataList = res.rows;
-          console.log("res",res); 
+          console.log("res仪表",res); 
           // directProfitRadio: 0.2713  销向毛利率
           this.progressData.ballNum = (
             panelDataList[0].level1ProfitRadio * 100
@@ -983,23 +991,23 @@ export default {
 
 // 折线图
  //中间折线图
- async getList() {
+ async getList(params) {
       this.showLoading = true;
       try {
-        const res = await API.getData(
-          "sellOuttotalchart",
-          "2022-01-01,2022-10-01"
+        const res = await API.getChartQuery(
+          "outSellMacroRegionDashboardChart",
+          params,
+          "cooprLevel2"
         );
-        let sellOutDataList = res.rows;
-        let newArr = sellOutDataList.filter((item) => {
+        let sellOutDataList = res.rows[0];
+        for (var i in sellOutDataList) {
+          let newArr = sellOutDataList[i].filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
             .replace(/\:/g, "-")
             .split("-");
           var yue = timeArr[1];
           var ri = timeArr[2];
-
-          // console.log("sellOutDataList",sellOutDataList);
 
           // 外销日内
           if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
@@ -1008,25 +1016,69 @@ export default {
             this.AvgTaskAmtLine = item.totalAvgTaskAmt;
             this.myEcharts();
           }
-
-          //   if (item.cooprLevel1 == "北美零售营销中心") {
-          //     // obj.divisionArr.push(item)
-          //     this.AmericaDate.push(yue + "-" + ri);
-          //     this.AmericaList.push(item.CnyAmt);
-          //     this.AmericaLine = item.tAvgAmt;
-          //     this.myEcharts2();
-          //   } else if (item.cooprLevel1 == "韩国业务区") {
-          //     this.koreaData.push(yue + "-" + ri);
-          //     this.koreaList.push(item.CnyAmt);
-          //     this.koreaLine = item.tAvgAmt;
-          //     this.myEcharts3();
-          //   }
-          this.showLoading = false;
+          // this.showLoading = false;
         });
+
+          }
+   
+        
+
+    //     let newArr = sellOutDataList.filter((item) => {
+    //       var timeArr = item.orderDate
+    //         .replace(" ", ":")
+    //         .replace(/\:/g, "-")
+    //         .split("-");
+    //       var yue = timeArr[1];
+    //       var ri = timeArr[2];
+
+    //       // 外销日内
+    //       if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+    //         this.AvgTaskAmtDate.push(yue + "-" + ri);
+    //         this.AvgTaskAmtList.push(item.totalAmt);
+    //         this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+    //         this.myEcharts();
+    //       }
+    //       // this.showLoading = false;
+    //     });
       } catch (error) {
         console.log(error);
       }
     },
+
+
+
+
+
+//  async getList(params) {
+//       this.showLoading = true;
+//       try {
+//         const res = await API.getData(
+//           "sellOuttotalchart",
+//           params
+//         );
+//         console.log("niu深V",res);
+//         let sellOutDataList = res.rows;
+//         let newArr = sellOutDataList.filter((item) => {
+//           var timeArr = item.orderDate
+//             .replace(" ", ":")
+//             .replace(/\:/g, "-")
+//             .split("-");
+//           var yue = timeArr[1];
+//           var ri = timeArr[2];
+
+//           // 外销日内
+//           if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+//             this.AvgTaskAmtDate.push(yue + "-" + ri);
+//             this.AvgTaskAmtList.push(item.totalAmt);
+//             this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+//             this.myEcharts();
+//           }
+//           // this.showLoading = false;
+//         });
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     },
 
     // 右边接口
     async getList1(params) {
@@ -1155,7 +1207,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.AvgTaskAmtDate,
           axisTick: {
             show: false,
           },
@@ -1210,11 +1262,11 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.AvgTaskAmtList,
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.AvgTaskAmtLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1237,6 +1289,8 @@ export default {
       };
       myChart.setOption(option);
     },
+   
+   
     myEcharts2(data, time, lines, id) {
       var myChart2 = this.$echarts.init(document.getElementById(id));
       var option = {

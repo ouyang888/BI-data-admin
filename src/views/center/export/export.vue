@@ -299,15 +299,17 @@ export default {
     },
     // 中部
     //中间折线图
-    async getList() {
+    async getList(params) {
       this.showLoading = true;
       try {
-        const res = await API.getData(
+        const res = await API.getChartQuery(
           "sellOuttotalchart",
-          params
+          params,
+          'cooprLevel1'
         );
-        let sellOutDataList = res.rows;
-        let newArr = sellOutDataList.filter((item) => {
+        let sellOutDataList = res.rows[0];
+        for (var i in sellOutDataList) {
+          let newArr = sellOutDataList[i].filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
             .replace(/\:/g, "-")
@@ -324,6 +326,8 @@ export default {
           }
           // this.showLoading = false;
         });
+
+          }
       } catch (error) {
         console.log(error);
       }
