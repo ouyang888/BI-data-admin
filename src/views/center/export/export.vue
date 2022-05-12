@@ -42,20 +42,6 @@
                 <div class="border-left-line3"></div>
               </div>
             </div>
-            <!-- <div class="flex-right-bottom">
-              <div class="content-cart">
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">韩国业务区</div>
-                  <div id="main3" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
@@ -177,7 +163,7 @@ export default {
       return this.$store.state.showMoney;
     },
     modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'亿'
+      return this.$store.state.showMoney==true?'亿':'台'
     },
     model(){ /* 获取本部，OEM */
       return this.$store.state.model
@@ -187,31 +173,39 @@ export default {
   watch:{
     ontime:{ /*监听数据更改 调用接口 */
      handler: function (newValue, oldValue) {
-        this.init(this.model);
+        this.init();
       }
     },
     model:{ /*监听数据更改 调用接口 */
       handler: function(newValue,oldValue){
-        this.init(newValue);
+        this.init();
       }
 
     },
     showMoney:{
-      handler:(newValue,oldValue)=>{
- 
+      handler:function(newValue,oldValue){
+        this.init()
       }
     }
 
   },
   methods: {
-    init(model){
-      let params = `${this.ontime},${model}`
-    // this.getdashboard(params);
-    // this.queryCardSAB(params);
+    init(){
+      let params = {  /*年月*/
+      month_date:this.ontime
+    };
+    let listParams = { /*年月日*/
+      start_date:`${this.ontime}-01`,
+      end_date:`${this.ontime}-31`
+    }
+
+
+    this.getdashboard(params);
+    this.queryCardSAB(params);
     this.getCard(params);
-    this.getList(`${model},${this.ontime}-01,${this.ontime}-31`);
-    this.getList1(`${model},${this.ontime}-01,${this.ontime}-31`);
-    this.getTable(`${this.ontime},${this.ontime},${model}`);
+    this.getList(listParams);
+    this.getList1(listParams);
+    this.getTable(params);
     },
     // 三个仪表盘
     leftGo() {
@@ -222,8 +216,12 @@ export default {
     },
       //三个仪表盘(左中)
       async getdashboard(params) {
+        let obj = {
+          code:'sellOutTopDashBoard'
+        }
+        Object.assign(obj,params);
         try {
-          const res = await API.getData("sellOutTopDashBoard",params);
+          const res = await API.getTotal(obj);
           //内销汇总仪表盘左边&&中间
           let panelDataList = res.rows;
           console.log("res仪表",res); 
@@ -269,8 +267,12 @@ export default {
 
     //三个仪表盘(右)
     async queryCardSAB(params) {
+      let obj = {
+        code:'  '
+      }
+      Object.assign(obj,params)
       try {
-        const res = await API.getData("sellOutTopDashBoardSAB", params);
+        const res = await API.getTotal(obj);
         // console.log("右但是,", res);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
@@ -304,15 +306,17 @@ export default {
     //中间折线图
     async getList(params) {
       this.showLoading = true;
+      let obj = {
+        code:'sellOuttotalchart'
+      }
+      Object.assign(obj,params);
       try {
-        const res = await API.getChartQuery(
-          "sellOuttotalchart",
-          params,
-          'cooprLevel1'
+        const res = await API.getTotal(
+          obj
+          // 'cooprLevel1'
         );
-        let sellOutDataList = res.rows[0];
-        for (var i in sellOutDataList) {
-          let newArr = sellOutDataList[i].filter((item) => {
+      
+          res.rows.filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
             .replace(/\:/g, "-")
@@ -329,8 +333,6 @@ export default {
           }
           // this.showLoading = false;
         });
-
-          }
       } catch (error) {
         console.log(error);
       }
@@ -344,12 +346,14 @@ export default {
     // 右边接口
     async getList1(params) {
       this.showLoading = true;
+      let chartObj = {
+        code:'sellOuttotalchart',
+        fields:'cooprLevel1'
+      }
+      Object.assign(chartObj,params)
+      console.log('chartObj',chartObj);
       try {
-        const res = await API.getChartQuery(
-          "sellOuttotalchart",
-          params,
-          'cooprLevel1'
-        );
+        const res = await API.getChartTotal(chartObj);
         console.log("res12",res);
         let sellOutDataList = res.rows;
         this.showLoading = false;
@@ -660,9 +664,12 @@ export default {
     },
        // 右边卡片/
        async getCard(params) {
-     
+        let obj = {
+          code:'sellOutTopOnline'
+        }
+        Object.assign(obj,params);
         this.showLoadingCard = true;
-        const res = await API.getData("sellOutTopOnline",params);
+        const res = await API.getTotal(obj);
     
         let onTitle = '';
         
@@ -717,9 +724,18 @@ export default {
 
     // 底部table/
     async getTable(params) {
+      let innerObj = {
+        code:"sellOutTotalOnlineBottom"
+      }
+      Object.assign(innerObj,params);
+
+      let outterObj = {
+        code:"sellOutTotalOfflineBottom"
+      }
+      Object.assign(outterObj,params);
       try {
-        let tableInner = await API.getData("sellOutTotalOnlineBottom", params);
-        let tableOutter = await API.getData("sellOutTotalOfflineBottom", params);
+        let tableInner = await API.getTotal(innerObj);
+        let tableOutter = await API.getTotal(outterObj);
 
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
