@@ -21,7 +21,7 @@
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
-        <a-spin class="flex-loading" size="large" v-if="showLoading" />
+        <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
         <div>
           <div class="middle-font left-file">内销线下日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
@@ -80,7 +80,14 @@ export default {
   },
   data() {
     return {
-      dhcarr: ["暂无数据","暂无数据","暂无数据","暂无数据","暂无数据"],
+      dhcarr: [
+        "暂无数据",
+        "暂无数据",
+        "暂无数据",
+        "暂无数据",
+        "暂无数据",
+        "暂无数据",
+      ],
       Arrnum: [],
       showLoading: false,
       AmericaDate: [],
@@ -182,13 +189,21 @@ export default {
 
   methods: {
     init(model) {
-      let params = `${this.ontime},${model}`;
-      let listParams = `${model},${this.ontime}-01,${this.ontime}-01`;
-      let tableParmas = `线下,${this.ontime},${model},线下,${this.ontime},${model}`;
+      // let tableParmas = `线下,${this.ontime},${model},线下,${this.ontime},${model}`;
+
+      let params = {
+        /*年月*/ month_date: this.ontime,
+      };
+  
+      let listParams = {
+        /*年月日*/ start_date: `${this.ontime}-01`,
+        end_date: `${this.ontime}-31`,
+      };
+
       this.getCard(params);
       this.getList(listParams);
       this.getList1(listParams);
-      this.getTable(tableParmas);
+      this.getTable(params);
       this.getdashboard(params);
       this.queryCardSAB(params);
     },
@@ -196,8 +211,12 @@ export default {
     //中间折线图
     async getList(listParams) {
       this.showLoading = true;
+      let obj = {
+        code: "offLineMiddleChart",
+      };
+      Object.assign(obj, listParams);
       try {
-        const res = await API.getData("offLineMiddleChart", listParams);
+        const res = await API.getTotal(obj);
         // console.log("sell", res);
         let sellOutDataList = res.rows;
         let newArr = sellOutDataList.filter((item) => {
@@ -227,12 +246,13 @@ export default {
     // 右边接口
     async getList1(listParams) {
       this.showLoading = true;
+      let chartObj = {
+        code: "offLineMiddleChart",
+        fields: "cooprLevel2",
+      };
+      Object.assign(chartObj, listParams);
       try {
-        const res = await API.getChartQuery(
-          "offLineMiddleChart",
-          listParams,
-          "cooprLevel2"
-        );
+        const res = await API.getChartTotal(chartObj);
 
         let sellOutDataList = res.rows[0];
         this.showLoading = false;
@@ -252,7 +272,7 @@ export default {
         arrs.forEach((v) => {
           this.dhcarr.push(v[0].cooprLevel2);
         });
-        console.log("this.dhcarr",this.dhcarr);
+        console.log("this.dhcarr", this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {
@@ -301,8 +321,12 @@ export default {
 
     //三个仪表盘(左中)
     async getdashboard(params) {
+      let obj = {
+        code: "offLineTopDashBoard",
+      };
+      Object.assign(obj, params);
       try {
-        const res = await API.getData("offLineTopDashBoard", params);
+        const res = await API.getTotal(obj);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         this.progressData.ballNum = (
@@ -346,8 +370,12 @@ export default {
 
     //三个仪表盘(右)
     async queryCardSAB(params) {
+        let obj = {
+        code: "offLineTopSAB",
+      };
+      Object.assign(obj, params);
       try {
-        const res = await API.getData("offLineTopSAB", params);
+        const res = await API.getTotal(obj);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].businessModel == "直营") {
@@ -664,8 +692,14 @@ export default {
     // 右边卡片/
     async getCard(params) {
       this.showLoadingCard = true;
+      let obj = {
+        code:'offLineRightCooper2',
+        coopr_level1:'线下'
+
+      }
+      Object.assign(obj,params)
       try {
-        const res = await API.getData("offLineRightCooper2", params);
+        const res = await API.getTotal(obj);
 
         res.rows.length > 0 &&
           res.rows.forEach((v) => {
@@ -703,9 +737,22 @@ export default {
 
     // 底部table/
     async getTable(params) {
+       
+       let innerObj = {
+         code:'offLineBotton3Table',
+           coopr_level1:'线下'
+       }
+       Object.assign(innerObj,params)
+
+       let outterObj = {
+         code:'offLineBottomAk',
+           coopr_level1:'线下'
+       }
+       Object.assign(outterObj,params)
+      
       try {
-        let tableInner = await API.getData("offLineBotton3Table", `${params}`);
-        let tableOutter = await API.getData("offLineBottomAk", `${params}`);
+        let tableInner = await API.getTotal(innerObj);
+        let tableOutter = await API.getTotal(outterObj);
 
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
@@ -1054,5 +1101,10 @@ export default {
 .left-file {
   position: relative;
   bottom: 20px;
+}
+.flex-loading {
+  position: relative;
+  left: 50%;
+  right: 50%;
 }
 </style> 
