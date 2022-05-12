@@ -13,6 +13,7 @@
             <div class="line3"></div>
             <div class="line4"></div>
             <div class="left-right-box">
+              <!-- {{departmentInfo}} -->
               <div class="centerInfo" v-if="sale === '内销'">
                 <div class="flex-top-card">
                   <div class="top-left-font">{{ sale }}达成</div>
@@ -105,7 +106,7 @@
                     线上结构
                     <span v-for="(item, index) in homeSabInfo" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio * 100 }}%;</span>
+                      <span>{{ item.positionRatio.toFixed(1) * 100 }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -185,7 +186,7 @@
                 >
                   <div
                     class="card-middle-progress"
-                    v-for="(item, index) in processInfo"
+                    v-for="(item, index) in processInfo1"
                     :key="index"
                   >
                     <div style="display: flex; align-items: center;">
@@ -215,9 +216,10 @@
                 <div class="flex-bottoms">
                   <div>
                     线上结构
-                    <span v-for="(item, index) in homeSabInfo" :key="index">
+             
+                    <span v-for="(item, index) in homeSabInfo1" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio * 100 }}%;</span>
+                      <span>{{ item.positionRatio.toFixed(1) * 100 }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -226,11 +228,11 @@
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
                   <div>
-                    s 线上毛利率
+                     线上毛利率
                     <span class="light-blue"
                       >{{
                         Number(
-                          homeGrossProfitRadio.grossProfitRadio * 100
+                          homeGrossProfitRadio1.grossProfitRadio * 100
                         ).toFixed(1)
                       }}%</span
                     >
@@ -1292,7 +1294,7 @@ export default {
                     total: {
                         title: "责任制",
                         text: "累计达成",
-                        tQtyAll: "tQtyAll",
+                        saleTaskAmtAll: "saleTaskAmtAll",
                         orgQtyAll: "orgQtyAll",
                     },
                 },
@@ -1312,7 +1314,7 @@ export default {
                     total: {
                         title: "双向契约",
                         text: "累计达成",
-                        tQtyAll: "cnyAmtAll",
+                        saleTaskAmtAll: "saleTaskAmtAll",
                         orgQtyAll: "orgQtyAll",
                     },
           },
@@ -1337,7 +1339,7 @@ export default {
                         title: "责任制",
                         text: "累计达成",
                         day:"周转天数",
-                        tQtyAll: "cnyAmtAll",
+                        saleTaskAmtAll: "saleTaskAmtAll",
                         orgQtyAll: "orgQtyAll",
                         dayAll:"day"
                     },
@@ -1361,7 +1363,7 @@ export default {
                         title: "责任制",
                         text: "累计达成",
                       
-                        tQtyAll: "tQtyAll",
+                        SaleTaskAmtAll: "SaleTaskAmtAll",
                         orgQtyAll: "orgQtyAll",
                     },
                 },
@@ -1438,7 +1440,7 @@ export default {
                         innerCnyAmt: 141,
                         outerSaleTaskAmt: 144,
                         outerCnyAmt: 165,
-                        cnyAmtAll: 193,
+                        saleTaskAmtAll: 193,
                         orgQtyAll: 230,
                         day:9
                     },
@@ -1448,7 +1450,7 @@ export default {
                         innerCnyAmt: 1,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 93,
+                        saleTaskAmtAll: 93,
                         orgQtyAll: 130,
                         day:10
                     },
@@ -1458,7 +1460,7 @@ export default {
                         innerCnyAmt: 114,
                         outerSaleTaskAmt: 234,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 94,
+                        saleTaskAmtAll: 94,
                         orgQtyAll: 101,
                         day:11
                     },
@@ -1468,7 +1470,7 @@ export default {
                         innerCnyAmt: 13,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 365,
-                        cnyAmtAll: 95,
+                        saleTaskAmtAll: 95,
                         orgQtyAll: 103,
                         day:12
                     },
@@ -1478,7 +1480,7 @@ export default {
                         innerCnyAmt: 33,
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 355,
+                        saleTaskAmtAll: 355,
                         orgQtyAll: 93,
                          day:12
                     },
@@ -1488,7 +1490,7 @@ export default {
                         innerCnyAmt: 363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 25,
+                        saleTaskAmtAll: 25,
                         orgQtyAll: 108,
                          day:12
                     },
@@ -1498,7 +1500,7 @@ export default {
                         innerCnyAmt: 3363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 25,
+                        saleTaskAmtAll: 25,
                         orgQtyAll: 108,
                          day:12
                     }
@@ -1511,7 +1513,7 @@ export default {
                         innerCnyAmt: 41,
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 93,
+                        saleTaskAmtAll: 93,
                         orgQtyAll: 230,
                         day:9
                     },
@@ -1521,7 +1523,7 @@ export default {
                         innerCnyAmt: 1,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 93,
+                        saleTaskAmtAll: 93,
                         orgQtyAll: 130,
                         day:10
                     },
@@ -1531,7 +1533,7 @@ export default {
                         innerCnyAmt: 14,
                         outerSaleTaskAmt: 234,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 94,
+                        saleTaskAmtAll: 94,
                         orgQtyAll: 101,
                         day:11
                     },
@@ -1541,7 +1543,7 @@ export default {
                         innerCnyAmt: 13,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 95,
+                        saleTaskAmtAll: 95,
                         orgQtyAll: 103,
                         day:12
                     },
@@ -1551,7 +1553,7 @@ export default {
                         innerCnyAmt: 33,
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 55,
+                        saleTaskAmtAll: 55,
                         orgQtyAll: 93,
                          day:12
                     },
@@ -1561,7 +1563,7 @@ export default {
                         innerCnyAmt: 363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 25,
+                        saleTaskAmtAll: 25,
                         orgQtyAll: 108,
                          day:12
                     },
@@ -1571,7 +1573,7 @@ export default {
                         innerCnyAmt: 363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 25,
+                        saleTaskAmtAll: 25,
                         orgQtyAll: 108,
                          day:12
                     }
@@ -1584,7 +1586,7 @@ export default {
                         innerCnyAmt: 41,
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 93,
+                        SaleTaskAmtAll: 93,
                         orgQtyAll: 230,
                         
                     },
@@ -1594,7 +1596,7 @@ export default {
                         innerCnyAmt: 1,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 93,
+                        SaleTaskAmtAll: 93,
                         orgQtyAll: 130,
                         
                     },
@@ -1604,7 +1606,7 @@ export default {
                         innerCnyAmt: 14,
                         outerSaleTaskAmt: 234,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 94,
+                        saleTaskAmtAll: 94,
                         orgQtyAll: 101,
                       
                     },
@@ -1614,7 +1616,7 @@ export default {
                         innerCnyAmt: 13,
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 95,
+                        saleTaskAmtAll: 95,
                         orgQtyAll: 103,
                         
                     },
@@ -1624,7 +1626,7 @@ export default {
                         innerCnyAmt: 33,
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 55,
+                        saleTaskAmtAll: 55,
                         orgQtyAll: 93,
                         
                     },
@@ -1634,7 +1636,7 @@ export default {
                         innerCnyAmt: 363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 25,
+                        saleTaskAmtAll: 25,
                         orgQtyAll: 108,
                     },
                      {
@@ -1643,7 +1645,7 @@ export default {
                         innerCnyAmt: 363,
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
-                        cnyAmtAll: 25,
+                        saleTaskAmtAll: 25,
                         orgQtyAll: 108,
                     }
                    
@@ -1911,24 +1913,45 @@ export default {
       this.$router.push("/center/index");
 
     },
-    async getList(ontime,ontime2) {
-      const res = await API.getData("homeDashBoard", ontime);
-      const homeSab = await API.getData("homeSab", ontime2);
-      const homeGrossProfitRadio = await API.getData(
-        "homeGrossProfitRadio",
-        ontime2
-      );
-   
+    async getList(timeInfo) {
+      // const res = await API.getData("homeDashBoard", ontime);
+      // const homeSab = await API.getData("homeSab", ontime2);
+      // const homeGrossProfitRadio = await API.getData(
+      //   "homeGrossProfitRadio",
+      //   ontime2
+      // );
+      debugger;
+       let obj = {
+        code:"homeDashBoard",
+      }
+
+       let homeSabInfo = {
+        code:"homeSab",
+      }
+        const res = await API.getTotal(
+         Object.assign(timeInfo,obj)
+        );
+        const homeSab = await API.getTotal(Object.assign(timeInfo,homeSabInfo));
+         let homeGross = {
+        code:"homeGrossProfitRadio",
+      }
+        const homeGrossProfitRadio = await API.getTotal(
+         Object.assign(timeInfo,homeGross)
+        );
+      //const homeSab = await API.getTotal(Object.assign(timeInfo,homeSabInfo));
+  
+         
         this.departmentInfo = res.rows.filter((v) => {
           return v.directName == "内销";
         })[0];
+        console.log( this.departmentInfo);
         this.processInfo = res.rows.filter((v) => {
           return v.directName == "内销";
         });
         //this.homeSabInfo = homeSab.rows;
-        //  this.homeSabInfo = homeSab.rowsfilter((v) => {
-        //   return v.directName == "内销";
-        // })
+         this.homeSabInfo = homeSab.rows.filter((v) => {
+          return v.directName == "内销";
+        })
         console.log("this.homeSabInfo this.homeSabInfo this.homeSabInfo ",this.homeSabInfo );
         this.homeGrossProfitRadio = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName ==this.sale;
@@ -1942,11 +1965,10 @@ export default {
         this.processInfo1 = res.rows.filter((v) => {
           return v.directName == "外销";
         });
-        //this.homeSabInfo1 = homeSab.rows;
-        // .filter((v) => {
-        //   return v.directName == "外销";
-        // });;
-        //   console.log("homeSabInfo1",this.homeSabInfo );
+        this.homeSabInfo1 = homeSab.rows.filter((v) => {
+          return v.directName == "外销";
+        });
+          console.log("homeSabInfo1",this.homeSabInfo );
         this.homeGrossProfitRadio1 = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName == this.sales;
         })[0];
@@ -1962,10 +1984,16 @@ export default {
    // 底部table/
     async getTable(ontime) {
       try {
-        let tableInner = await API.getData(
-          "homeByDirectTotal",
-          ontime
-        );
+          let time = {
+        code:'homeByDirectTotal'
+      };
+      Object.assign(ontime,time)
+
+        // let tableInner = await API.getData(
+        //   "homeByDirectTotal",
+        //   ontime
+        // );
+       let tableInner =await API.getTotal(ontime);
 
         this.nesInfo=tableInner.rows;
         // let tableOutter = await API.getData(
@@ -2000,7 +2028,12 @@ export default {
      async getLine(params) {
       this.showLoading = true
       try {
-        const res = await API.getData("homeAnnualAmtChart",params);
+      let chart = {
+        code:'homeAnnualAmtChart'
+      };
+      Object.assign(params,chart)
+
+        const res = await API.getTotal(params);
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
         let newArr = res.rows.filter((item)=>{
         var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
@@ -2451,13 +2484,22 @@ export default {
     // this.getTable(this.ontime);
     // this.getdashboard(this.ontime);
     // this.queryCardSAB(this.ontime);
-    let params = `${this.ontime},${model}`;
-    let time = `${this.ontime}-01,${this.ontime}-31`; /*年月日*/
-    let lineParams =  `${time},${model},${time},${model}`;
+
+    // let params = `${this.ontime},${model}`;
+    // let time = `${this.ontime}-01,${this.ontime}-31`; /*年月日*/
+    // let lineParams =  `${time},${model},${time},${model}`;
+
+    let params = {  /*年月*/
+      month_date:this.ontime
+    };
+    let listParams = { /*年月日*/
+      start_date:`${this.ontime}-01`,
+      end_date:`${this.ontime}-31`
+    }
 
    
-    this.getList(params,`${params},${params}`);
-    this.getLine(lineParams);
+    this.getList(params);
+    this.getLine(listParams);
     this.getTable(params);
     this.myEcharts();
     this.myEcharts2();

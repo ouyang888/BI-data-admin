@@ -20,17 +20,31 @@ export default class ApiService {
     return request.get(api.adminUrl + `chartQuery?code=${code}&parameter=${date}&fields=${fields}`);
   }
 
-  static getTotal(params) {
 
+//  新的总接口
+  static getTotal(params) {
     let obj = {
       sql_type:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
       prod_area_name:store.state.model /*本部*/
     };
+    console.log('params', JSON.stringify(params));
     Object.assign(params,obj);
 
     return request.get( api.adminUrl +`query?`,
     params
     );
+  }
+  // 趋势图接口
+  static getChartTotal(params) {
+    let obj = {
+      sql_type:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
+      prod_area_name:store.state.model /*本部*/
+    };
+    console.log('params', JSON.stringify(params));
+    Object.assign(obj,params);
+    console.log('getChartTotal',params)
+    return request.get(api.adminUrl + `chartQuery?`,
+    obj);
   }
 
   // axios.get('/user', {

@@ -743,7 +743,7 @@ export default {
       return this.$store.state.showMoney;
     },
     modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'亿'
+      return this.$store.state.showMoney==true?'亿':'台'
     },
     model(){ /* 获取本部，OEM */
       return this.$store.state.model

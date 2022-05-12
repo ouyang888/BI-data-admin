@@ -81,9 +81,10 @@
             </el-table-column>
             <el-table-column label="合计" align="center" height="20px" width="50">
                 <!-- <el-table-column v-for="(k,i) in tableList.headTitle.totalDone" :label="k"></el-table-column> -->
-                <el-table-column :prop="headTitle.total.cnyAmtAll" :label="headTitle.total.title" align="center" height="20px">
+                <el-table-column :prop="headTitle.total.saleTaskAmtAll" :label="headTitle.total.title" align="center" height="20px">
                      <template v-slot="scope">
-                              {{ Number(scope.row.cnyAmtAll).toFixed(1) }}
+   
+                              {{ Number(scope.row.saleTaskAmtAll).toFixed(1) }}
                      </template>
                 </el-table-column>
                 <el-table-column :prop="headTitle.total.orgQtyAll" :label="headTitle.total.text" align="center">
