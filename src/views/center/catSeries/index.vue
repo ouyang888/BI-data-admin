@@ -856,15 +856,15 @@ export default {
           tags: ["cool", "teacher"],
         },
       ],
-  progressData: {
+progressData: {
         bar1: 0,
         bar2: 0,
-        ballTitle: "内销",
+        ballTitle: "线上",
         bigBallTitle: "毛利率",
-        textLeft: "线上",
-        textRight: "线下",
-        titleTop: "线上",
-        titleBottom: "线下",
+        textLeft: "自营",
+        textRight: "代运营",
+        titleTop: "自营",
+        titleBottom: "代运营",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -872,26 +872,26 @@ export default {
       speedData: {
         bar: 0,
         speedBar: 0,
-        ballTitle: "内销达成",
+        ballTitle: "线上达成",
         ballNum: 0,
-        ballLeftTitle: "线上",
-        ballRightTitle: "线下",
+        ballLeftTitle: "自营",
+        ballRightTitle: "代运营",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "线上",
+        bottomTitle1: "自营",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "线下",
+        bottomTitle2: "代运营",
         bottomClose1: 0,
         bottomTime1: 0,
       },
       sabData: {
         bar1: 70,
         bar2: 50,
-        ballTitle: "内销",
-        bottom: "线上",
-        top: "线下",
+        ballTitle: "线上",
+        top: "自营",
+        bottom: "代运营",
         sabArr: { s: 0, a: 0, b: 0 },
         topArr: { s: 0, a: 0, b: 0 },
         bottomArr: { s: 0, a: 0, b: 0 },
@@ -903,7 +903,80 @@ export default {
   },
   methods: {
     gotoDomestic(){
-this.$router.push("/center/index")
+     this.$router.push("/center/index")
+    },
+    //* saleTaskAmt 合作模式二级责任制金额
+
+//  * cnyAmt 自营/代运营金额
+
+//  * onLineCnyAmt 合作模式二级总金额
+
+//  * businessModelCompleteRadio 自营/代运营金额完成率
+
+//  * onLineCompleteRadioRadio 合作模式二级金额完成率
+
+//  * saleTasTQty 合作模式二级责任制销量
+
+//  * 
+     //仪表盘(左中)
+    async getdashboard() {
+      // localStorage.getItem("");
+      try {
+        //2022-03,京东,线上
+        const res = await API.getData("offlinePlatformTop", '2022-03,线上,京东');
+        let panelDataList = res.rows;
+        this.progressData.ballNum = (
+          panelDataList[0].onLineGrossProfitRadio * 100
+        ).toFixed(1);
+        this.speedData.speedBar = (
+          panelDataList[0].businessModelCompleteRadio * 100
+        ).toFixed(1);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
+        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1);
+//         * saleTaskAmt 合作模式二级责任制金额
+
+//  * cnyAmt 自营/代运营金额
+
+//  * onLineCnyAmt 合作模式二级总金额
+
+//  * businessModelCompleteRadio 自营/代运营金额完成率
+
+//  * onLineCompleteRadioRadio 合作模式二级金额完成率
+
+//  * saleTasTQty 合作模式二级责任制销量
+        // this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+        for (var i = 0; i < panelDataList.length; i++) {
+          if (panelDataList[i].businessModel == "直营") {
+            this.progressData.bar2 = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(1);
+            this.progressData.topGPM = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(1);
+            this.speedData.bottomClose1 =  panelDataList[i].businessModelCompleteRadio.toFixed(1)
+            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+            
+          } 
+           if (panelDataList[i].businessModel == "代运营") {
+            //  Console.log("代运营",panelDataList[i].dateRadio)
+            this.progressData.bar1 = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(1);
+            this.progressData.bottomGPM = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(1);
+             this.speedData.ballRightNum =  panelDataList[i].saleTaskAmt.toFixed(1)
+
+            //  <span>{{data.bottomTitle1}}:</span><span>完成率:{{data.bottomClose}}%</span><span>时间进度:{{data.bottomTime}}%</span>
+            this.speedData.bottomClose1 =  panelDataList[i].businessModelCompleteRadio.toFixed(1)
+            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+          }
+
+          
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
     // 负责人模式
     gotoCatSeries(item){
@@ -913,6 +986,7 @@ this.$router.push("/center/index")
     toModuleResponsible(){
       this.$router.push({name:'moduleResponsible'});
     },
+
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -1866,6 +1940,7 @@ this.$router.push("/center/index")
   },
   mounted() {
     this.trendName = this.$route.query.key
+    this.getdashboard();
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
