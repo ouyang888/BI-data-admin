@@ -20,7 +20,7 @@
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
-        <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
+        <a-spin class="flex-loading" size="large" v-if="showLoading" />
         <div>
           <div class="middle-font left-file">内销日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
@@ -226,6 +226,7 @@ export default {
           const res = await API.getData("sellOutTopDashBoard",params);
           //内销汇总仪表盘左边&&中间
           let panelDataList = res.rows;
+          console.log("res仪表",res); 
           // directProfitRadio: 0.2713  销向毛利率
           this.progressData.ballNum = (
             panelDataList[0].directProfitRadio * 100
@@ -302,24 +303,22 @@ export default {
     // 中部
     //中间折线图
     async getList(params) {
-      // this.showLoading = true;
+      this.showLoading = true;
       try {
-        const res = await API.getData(
+        const res = await API.getChartQuery(
           "sellOuttotalchart",
-          params
+          params,
+          'cooprLevel1'
         );
-
-        // console.log("sell", res);
-        let sellOutDataList = res.rows;
-        let newArr = sellOutDataList.filter((item) => {
+        let sellOutDataList = res.rows[0];
+        for (var i in sellOutDataList) {
+          let newArr = sellOutDataList[i].filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
             .replace(/\:/g, "-")
             .split("-");
           var yue = timeArr[1];
           var ri = timeArr[2];
-
-          // console.log("sellOutDataList",sellOutDataList);
 
           // 外销日内
           if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
@@ -330,6 +329,8 @@ export default {
           }
           // this.showLoading = false;
         });
+
+          }
       } catch (error) {
         console.log(error);
       }
@@ -349,12 +350,11 @@ export default {
           params,
           'cooprLevel1'
         );
-
-        console.log("sell程序", res);
+        console.log("res12",res);
         let sellOutDataList = res.rows;
         this.showLoading = false;
-
         let obj = res.rows[0];
+        console.log("obj",obj);
         var k = 0;
         var arr = [];
         for (var i in obj) {
@@ -364,16 +364,20 @@ export default {
           }
           k++;
         }
-        console.log("arr", arr);
+        console.log("obj", obj);
+       
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
+       
         arrs.forEach((v) => {
           this.dhcarr.push(v[0].cooprLevel1);
         });
+        console.log("arr", this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
+          console.log("datanum",datanum);
           let AmericaDate = [];
           let AmericaList = [];
           let AmericaLine = 1;
@@ -734,7 +738,7 @@ export default {
    
   },
   created() {
-
+    this.init(this.model);
   },
 
   mounted() {

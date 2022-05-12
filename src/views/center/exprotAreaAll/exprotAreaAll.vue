@@ -627,11 +627,13 @@
     <!-- 中间echart -->
     <div class="middle-box">
       <div class="flex-fang">
+        
         <div class="fang-color"></div>
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
         <div>
+          <a-spin class="flex-loading" size="large" v-if="showLoading" />
           <div class="middle-font left-file">外销中东非日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
         </div>
@@ -670,7 +672,7 @@
           :columns="columns"
           :data-source="data"
           :pagination="false"
-        >
+        >   
           <a slot="name" slot-scope="text">{{ text }}</a>
           <template slot="name" slot-scope="name">
             <a @click="gotoDomestic"> {{ name }}</a>
@@ -706,8 +708,15 @@ export default {
   },
   data() {
     return {
-      dhcarr: [0, 1, 2, 3, 4, 5],
+      dhcarr: ["越南泰国区域","澳新菲区域","新马港澳区域","新马港澳区域","越南泰国区域","澳新菲区域"],
+      showLoading: false,
       Arrnum: [],
+      AmericaDate: [],
+      AmericaList: [],
+      AvgTaskAmtDate: [],
+      AvgTaskAmtList: [],
+      AvgTaskAmtLine: [],
+      AmericaLine: [],
       columns: [
         {
           title: "线上",
@@ -824,18 +833,57 @@ export default {
         ballTitle: "内销",
         bottom: "线上",
         top: "线下",
-        sabArr: { s: 0, a: 0, b: 0 },
-        topArr: { s: 0, a: 0, b: 0 },
-        bottomArr: { s: 0, a: 0, b: 0 },
+        sabArr: { s: 31, a: 18, b: 21 },
+        topArr: { s: 30, a: 18, b: 21 },
+        bottomArr: { s: 338, a: 18, b: 21 },
         // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
     };
   },
+  computed:{
+    ontime(){
+      return this.$store.state.year +'-'+ this.$store.state.month;
+    },
+    // showMoney(){
+    //   return this.$store.state.showMoney;
+    // },
+    // modelLabel(){
+    //   return this.$store.state.showMoney==true?'亿':'亿'
+    // },
+    model(){ /* 获取本部，OEM */
+      return this.$store.state.model
+    }
+  },
+  watch:{
+    ontime:{ /*监听数据更改 调用接口 */
+     handler: function (newValue, oldValue) {
+        this.init(this.model);
+      }
+    },
+    model:{ /*监听数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(newValue);
+      }
+
+    },
+    showMoney:{
+      handler:(newValue,oldValue)=>{
+ 
+      }
+    }
+  },
 
   methods: {
-
+    init(model){ 
+      // this.getList(`${model},${this.ontime}-01,${this.ontime}-31`);
+      // 亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31"
+      this.getList(`亚太业务区,亚太业务区,${model},${this.ontime}-01,${this.ontime}-31`);
+      this.getList1(`亚太业务区,亚太业务区,${model},${this.ontime}-01,${this.ontime}-31`);
+      // this.getList1(`${model},${this.ontime}-01,${this.ontime}-31`);
+    },
+   
 // 三个仪表盘
   //三个仪表盘(左中)
   async getdashboard() {
@@ -843,7 +891,7 @@ export default {
           const res = await API.getData("outSellMacroRegionDashboard","2022-03,亚太业务区,本部,OEM,待定");
           //内销汇总仪表盘左边&&中间
           let panelDataList = res.rows;
-          console.log("res",res);
+          console.log("res仪表",res); 
           // directProfitRadio: 0.2713  销向毛利率
           this.progressData.ballNum = (
             panelDataList[0].level1ProfitRadio * 100
@@ -943,23 +991,23 @@ export default {
 
 // 折线图
  //中间折线图
- async getList() {
+ async getList(params) {
       this.showLoading = true;
       try {
-        const res = await API.getData(
-          "sellOuttotalchart",
-          "2022-01-01,2022-10-01"
+        const res = await API.getChartQuery(
+          "outSellMacroRegionDashboardChart",
+          params,
+          "cooprLevel2"
         );
-        let sellOutDataList = res.rows;
-        let newArr = sellOutDataList.filter((item) => {
+        let sellOutDataList = res.rows[0];
+        for (var i in sellOutDataList) {
+          let newArr = sellOutDataList[i].filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
             .replace(/\:/g, "-")
             .split("-");
           var yue = timeArr[1];
           var ri = timeArr[2];
-
-          // console.log("sellOutDataList",sellOutDataList);
 
           // 外销日内
           if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
@@ -968,59 +1016,102 @@ export default {
             this.AvgTaskAmtLine = item.totalAvgTaskAmt;
             this.myEcharts();
           }
-
-          //   if (item.cooprLevel1 == "北美零售营销中心") {
-          //     // obj.divisionArr.push(item)
-          //     this.AmericaDate.push(yue + "-" + ri);
-          //     this.AmericaList.push(item.CnyAmt);
-          //     this.AmericaLine = item.tAvgAmt;
-          //     this.myEcharts2();
-          //   } else if (item.cooprLevel1 == "韩国业务区") {
-          //     this.koreaData.push(yue + "-" + ri);
-          //     this.koreaList.push(item.CnyAmt);
-          //     this.koreaLine = item.tAvgAmt;
-          //     this.myEcharts3();
-          //   }
-          this.showLoading = false;
+          // this.showLoading = false;
         });
+
+          }
+   
+        
+
+    //     let newArr = sellOutDataList.filter((item) => {
+    //       var timeArr = item.orderDate
+    //         .replace(" ", ":")
+    //         .replace(/\:/g, "-")
+    //         .split("-");
+    //       var yue = timeArr[1];
+    //       var ri = timeArr[2];
+
+    //       // 外销日内
+    //       if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+    //         this.AvgTaskAmtDate.push(yue + "-" + ri);
+    //         this.AvgTaskAmtList.push(item.totalAmt);
+    //         this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+    //         this.myEcharts();
+    //       }
+    //       // this.showLoading = false;
+    //     });
       } catch (error) {
         console.log(error);
       }
     },
 
-    // 右边接口
 
-    async getList1() {
+
+
+
+//  async getList(params) {
+//       this.showLoading = true;
+//       try {
+//         const res = await API.getData(
+//           "sellOuttotalchart",
+//           params
+//         );
+//         console.log("niu深V",res);
+//         let sellOutDataList = res.rows;
+//         let newArr = sellOutDataList.filter((item) => {
+//           var timeArr = item.orderDate
+//             .replace(" ", ":")
+//             .replace(/\:/g, "-")
+//             .split("-");
+//           var yue = timeArr[1];
+//           var ri = timeArr[2];
+
+//           // 外销日内
+//           if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+//             this.AvgTaskAmtDate.push(yue + "-" + ri);
+//             this.AvgTaskAmtList.push(item.totalAmt);
+//             this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+//             this.myEcharts();
+//           }
+//           // this.showLoading = false;
+//         });
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     },
+
+    // 右边接口
+    async getList1(params) {
       this.showLoading = true;
       try {
         const res = await API.getChartQuery(
-          "sellOuttotalchart",
-          "2022-01-01,2022-10-01",
-          "cooprLevel1"
+          "outSellMacroRegionDashboardChart",
+          params,
+          "cooprLevel2"
         );
-
-        console.log("res4", res);
-        let sellOutDataList = res.rows;
+        // "亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31",
+        console.log("arr", res);
+        // let sellOutDataList = res.rows;
         this.showLoading = false;
-
         let obj = res.rows[0];
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          console.log("11111111111", obj[i]);
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
-        console.log("arr", arr);
-        this.dhcarr = [];
-        let arrs = JSON.parse(JSON.stringify(arr));
-        arrs.forEach((v) => {
-          this.dhcarr.push(v[0].cooprLevel1);
-        });
-        // this.dhcarr = [1,2,3,4,5];
 
+        // console.log("obj0,",arr);
+
+        this.dhcarr = [];
+        let arrs = JSON.parse(JSON.stringify(arr[0]));
+        arr.forEach((v) => {
+          this.dhcarr.push(v[0].cooprLevel2);
+        });
+       
+        // this.dhcarr = [1,2,3,4,5];
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
           let AmericaDate = [];
@@ -1039,8 +1130,8 @@ export default {
             AmericaList.push(item.totalAmt);
             AmericaLine = item.totalAvgTaskAmt;
           });
-          console.log("Arrnum", this.sellOutDataList);
-
+        //   console.log("AmericaLine", AmericaLine);
+        //   console.log("AmericaList",AmericaList);
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
         // let Arrnum = datanum.filter((item) => {
@@ -1068,12 +1159,6 @@ export default {
         console.log(error);
       }
     },
-
- 
-
-
-
-
 
     gotoDomestic(){
     this.$router.push("/center/index")
@@ -1122,7 +1207,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.AvgTaskAmtDate,
           axisTick: {
             show: false,
           },
@@ -1177,11 +1262,11 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.AvgTaskAmtList,
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.AvgTaskAmtLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1204,6 +1289,8 @@ export default {
       };
       myChart.setOption(option);
     },
+   
+   
     myEcharts2(data, time, lines, id) {
       var myChart2 = this.$echarts.init(document.getElementById(id));
       var option = {
@@ -2046,9 +2133,8 @@ export default {
       };
       myChart8.setOption(option);
     },
+  
   },
-
-
 // 仪表盘右spa
 
 // 折线图
@@ -2056,12 +2142,16 @@ export default {
 //   // this.getCard(this.ontime);
 //   this.getdashboard('2022-03')
 // },
+created() {
+    this.init(this.model);
+   },
   mounted() {
-    // this.init()
+    this.init(this.model);
     this.getdashboard();
     this.queryCardSAB();
     this.getList()
-    this.getList1()
+    this.getList1(params)
+    // this.getList1()
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
@@ -2072,6 +2162,7 @@ export default {
     this.myEcharts8();
   },
 };
+
 </script>
 <style scoped>
 .flex-char {

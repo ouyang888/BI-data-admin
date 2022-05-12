@@ -41,6 +41,6 @@ export default class ApiService {
 
   //登录接口
   static login(data) {
-    return request.post(api.adminUrl + `login`, data);
+    return request.post(api.adminUrl + `login`, data, { headers: { "content-Type": "multipart/form-data" } });
   }
 }

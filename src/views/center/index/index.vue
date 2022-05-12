@@ -876,11 +876,9 @@ export default {
         console.log("inner,", outter);
           this.showLoadingLeft = false;
           this.showLoadingRight = false;
-
         if(inner.rows.length<1){
           this.innerLeft = [];
         } else{
-
           inner.rows.forEach((v) => {
           v.dateRadio = v.dateRadio * 100>100?100: v.dateRadio * 100;
           v.onLineRadio = v.onLineRadio * 100>100?100:v.onLineRadio * 100;
@@ -1026,7 +1024,6 @@ export default {
         console.log(err);
       }
     },
-
     // 底部table/
     async getTable(params) {
       let innerObj = {

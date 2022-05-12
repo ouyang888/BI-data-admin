@@ -21,6 +21,7 @@
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
+        <a-spin class="flex-loading" size="large" v-if="showLoading" />
         <div>
           <div class="middle-font left-file">内销线下日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
@@ -79,7 +80,7 @@ export default {
   },
   data() {
     return {
-      dhcarr: [0, 1, 2, 3, 4, 5],
+      dhcarr: ["暂无数据","暂无数据","暂无数据","暂无数据","暂无数据"],
       Arrnum: [],
       showLoading: false,
       AmericaDate: [],
@@ -234,26 +235,24 @@ export default {
         );
 
         let sellOutDataList = res.rows[0];
-        // console.log("sell程序", res);
-
         this.showLoading = false;
         let obj = res.rows[0];
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          console.log("11111111111", obj[i]);
+          // console.log("11111111111", obj[i]);
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
-        // console.log("arrs", arr);
+        console.log("arrs2222", arr);
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
         arrs.forEach((v) => {
           this.dhcarr.push(v[0].cooprLevel2);
         });
-        // console.log();
+        console.log("this.dhcarr",this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {
