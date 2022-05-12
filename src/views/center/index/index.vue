@@ -815,7 +815,6 @@ export default {
     },
     showMoney:{
       handler:function(newValue,oldValue){
-        console.log('监听数据111',newValue)
         this.init();
       }
     }
