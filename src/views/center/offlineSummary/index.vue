@@ -80,7 +80,7 @@ export default {
   },
   data() {
     return {
-      dhcarr: [],
+      dhcarr: ["暂无数据","暂无数据","暂无数据","暂无数据","暂无数据"],
       Arrnum: [],
       showLoading: false,
       AmericaDate: [],
@@ -250,9 +250,9 @@ export default {
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
         arrs.forEach((v) => {
-          this.dhcarr = this.dhcarr.push(v[0].cooprLevel2);
+          this.dhcarr.push(v[0].cooprLevel2);
         });
-        // console.log();
+        console.log("this.dhcarr",this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {

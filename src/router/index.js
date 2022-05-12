@@ -171,15 +171,15 @@ const router = new VueRouter({
  * 路由守卫
  */
 router.beforeEach(async (to, from, next) => {
-    // console.log("!11222",to)
-    if (to.name !== 'login') {
-        // const authoritys = await store.dispatch('setUserAuthoritys')
-        if (to.fullPath === "/center" && from.fullPath !== "/center") {
+    let isLogin = localStorage.getItem("token")
+    console.log("9999",isLogin)
+    if (to.name !== 'login' &&  isLogin == null) {
+        // if (to.fullPath === "/center" && from.fullPath !== "/center") {
             // if (authoritys.includes('admin:quality')) {
-                next('/center/index');
+                next('/login');
                 return
             // }
-        }
+        // }
         if (to.meta.permission) {
             let sign = false
             if (to.meta.permission instanceof Array) {

@@ -1,38 +1,42 @@
  <template>
   <div style="height: 100%" class="flex j-c a-c bg">
-    <div class="logo-wrapper flex d-c j-c a-c">
-      <!-- <img class="logo" src="../assets/img/logoLogin.png" alt="" /> -->
-      <div class="logo-name">智能产销中台</div>
-      <a-input class="input" v-model="userInfo.username" placeholder="请输入账号" @keydown.enter="submit"/>
-      <a-input
-        class="input"
-        :type="passwordType"
-        v-model="userInfo.password"
-        placeholder="密码"
-        @keydown.enter="_Login"
-      >
-        <a-icon slot="suffix" @click="showPassword" :type="eyeType" />
-      </a-input>
-      <div style="width: 100%" class="flex j-b">
-        <a-checkbox v-model="checked" style="font-size: 12px">
-          记住用户
-        </a-checkbox>
-        <!-- <div class="staff hand" @click="staff">员工登录</div> -->
+    <div class="img-size">
+      <div class="logo-wrapper flex d-c j-c a-c">
+        <!-- <img class="logo" src="../assets/img/logoLogin.png" alt="" /> -->
+        <div class="logo-name">智能产销中台</div>
+        <a-input
+          class="input"
+          v-model="userInfo.username"
+          placeholder="请输入账号"
+          @keydown.enter="submit"
+        />
+        <a-input
+          class="input"
+          :type="passwordType"
+          v-model="userInfo.password"
+          placeholder="密码"
+          @keydown.enter="_Login"
+        >
+          <a-icon slot="suffix" @click="showPassword" :type="eyeType" />
+        </a-input>
+        <a-button
+          class="login-btn"
+          style="width: 100%; height: 40px"
+          @click="_Login"
+          type="primary"
+        >
+          登录</a-button
+        >
       </div>
-      <a-button
-        class="login-btn"
-        style="width: 100%; height: 40px"
-        @click="_Login"
-        type="primary"
-      >
-        立即登录</a-button
-      >
     </div>
   </div>
 </template>
 <script>
+import Vue from "vue";
 import api from "@/service/api";
 import { getToken } from "@/utils/auth";
+import VueCookies from "vue-cookies";
+Vue.prototype.cookie = VueCookies;
 export default {
   name: "login",
   data() {
@@ -43,34 +47,30 @@ export default {
       userInfo: {
         username: "",
         password: "",
-        rememberMe:true,
+        rememberMe: true,
       },
     };
   },
   methods: {
     //登录
     async _Login() {
-        const result = await api.login(this.userInfo);
-        console.log(result);
-        // if (result.code === 0) {
-        //   if (this.checked === true) {
-        //     localStorage.setItem(
-        //       "inspection-account",
-        //       JSON.stringify({
-        //         code: this.userInfo.code,
-        //         password: this.userInfo.password,
-        //       })
-        //     );
-        //   } else localStorage.removeItem("inspection-account");
-        //   this.$router.push("/");
-        // }
-      
+      let formData = new FormData();
+      formData.append("username", this.userInfo.username);
+      formData.append("password", this.userInfo.password);
+      formData.append("rememberMe", this.userInfo.rememberMe);
+      const result = await api.login(formData);
+      // console.log(result);
+      if (result.code === 0) {
+        localStorage.setItem("token", result.data);
+        this.cookie.set("JSESSIONID", result.data);
+        this.$router.push("/");
+      }
     },
     submit() {
       const { username, password } = this.userInfo;
-    //   if (!this.$phoneRule(username) && username !== "admin")
-    //     return this.$message.error("手机号格式错误");
-    //   if (!password.trim()) return this.$message.error("请输入密码");
+      //   if (!this.$phoneRule(username) && username !== "admin")
+      //     return this.$message.error("手机号格式错误");
+      //   if (!password.trim()) return this.$message.error("请输入密码");
       this._Login();
     },
     staff() {
@@ -83,7 +83,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.commit("clearAuthoriths")
+    this.$store.commit("clearAuthoriths");
     if (getToken()) return this.$router.replace("/");
     if (localStorage.getItem("inspection-account")) {
       const userInfo = JSON.parse(localStorage.getItem("inspection-account"));
@@ -99,8 +99,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .bg {
-  background: url("../assets/img/bg.jpg");
-  background-size: 100%;
+  background: url("https://signin.midea.com/themes/midea/images/bg.png");
+  background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 .logo-wrapper {
@@ -109,14 +109,17 @@ export default {
   padding: 40px;
   border-radius: 12px;
   position: relative;
-  left: 23%;
+  left: 94%;
+  top: 20%;
   .logo-name {
     padding-bottom: 40px;
     padding-top: 16px;
     width: 90%;
     text-align: center;
     color: #222222;
+    font-size: 16px;
     border-radius: 31px;
+    font-weight: bold;
   }
   .input {
     margin-bottom: 10px;
@@ -128,8 +131,8 @@ export default {
     font-weight: bold;
   }
   .login-btn {
-    background: #ffc30d;
-    color: #222222;
+    background: #0499ff;
+    color: #fff;
     border: none;
     margin-top: 27px;
   }
@@ -148,5 +151,12 @@ export default {
     background-color: #ffc30d;
     border-color: #ffc30d;
   }
+}
+.img-size {
+  background: url("https://signin.midea.com/themes/midea/images/banner.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 970px;
+  height: 600px;
 }
 </style>
