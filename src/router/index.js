@@ -172,7 +172,6 @@ const router = new VueRouter({
  */
 router.beforeEach(async (to, from, next) => {
     let isLogin = localStorage.getItem("token")
-    console.log("9999",isLogin)
     if (to.name !== 'login' &&  isLogin == null) {
         // if (to.fullPath === "/center" && from.fullPath !== "/center") {
             // if (authoritys.includes('admin:quality')) {
