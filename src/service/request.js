@@ -18,14 +18,15 @@ const httpConfig = {
  * @param {*} msg
  */
 const handleCode = (code, msg) => {
-    code && message.error(msg || "登录失效");
-    console.log("wwww",errorTokenCode.indexOf(code))
-    if (errorTokenCode.indexOf(code) > -1) {
+
+    // code && message.error(msg || "登录失效");
+    // console.log("wwww",errorTokenCode.indexOf(code))
+    // if (errorTokenCode.indexOf(code) > -1) {
         // location.href = api.adminUrl + 'login';
         // removeToken()
-        localStorage.removeItem("token")
-        router.replace('/login')
-    }
+        // localStorage.removeItem("token")
+        // router.replace('/login')
+    // }
 };
 
 /**
