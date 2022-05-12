@@ -19,11 +19,13 @@ const httpConfig = {
  */
 const handleCode = (code, msg) => {
     code && message.error(msg || "登录失效");
-    // if (errorTokenCode.indexOf(code) > -1) {
+    console.log("wwww",errorTokenCode.indexOf(code))
+    if (errorTokenCode.indexOf(code) > -1) {
         // location.href = api.adminUrl + 'login';
-        removeToken()
+        // removeToken()
+        localStorage.removeItem("token")
         router.replace('/login')
-    // }
+    }
 };
 
 /**
