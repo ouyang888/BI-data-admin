@@ -804,34 +804,35 @@ export default {
   watch:{
     ontime:{ /*监听数据更改 调用接口 */
      handler: function (newValue, oldValue) {
-        this.init(this.model);
+        this.init();
       }
     },
     model:{ /*监听数据更改 调用接口 */
       handler: function(newValue,oldValue){
-        this.init(newValue);
+        this.init();
       }
 
     },
     showMoney:{
-      handler:(newValue,oldValue)=>{
- 
+      handler:function(newValue,oldValue){
+        console.log('监听数据111',newValue)
+        this.init();
       }
     }
 
   },
   created() {
-     this.init(this.model);
+     this.init();
    },
   methods: {
 
 
 
-    init(model){ /*初始化数据方法*/
-    let params = {
+    init(){ /*初始化数据方法*/
+    let params = {  /*年月*/
       month_date:this.ontime
     };
-    let listParams = {
+    let listParams = { /*年月日*/
       start_date:`${this.ontime}-01`,
       end_date:`${this.ontime}-31`
     }
@@ -839,8 +840,8 @@ export default {
     this.getList(listParams);
     this.getCard(params);
     this.getTable(params);
-    this.getdashboard(params);
-    this.queryCardSAB(params);
+    // this.getdashboard(params);
+    // this.queryCardSAB(params);
     },
     gotoDomestic() {
       this.$router.push("/center/domestic");
