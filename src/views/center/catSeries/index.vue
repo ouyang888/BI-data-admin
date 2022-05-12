@@ -1112,12 +1112,8 @@ progressData: {
  
   },
   mounted() {
-<<<<<<< HEAD
     this.trendName = this.$route.query.key
     this.getdashboard();
-=======
-    this.trendName = this.$route.query.key;
->>>>>>> 0c4f49cf27f1c053dcf707acfb0674931cb153d6
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
