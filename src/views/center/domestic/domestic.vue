@@ -763,8 +763,8 @@ export default {
 
     },
     showMoney:{
-      handler:(newValue,oldValue)=>{
- 
+      handler:function(newValue,oldValue){
+        this.init(this.model);
       }
     },
   },
