@@ -521,7 +521,22 @@
         <div>
           <div class="middle-font">大区日达成趋势图</div>
           <div class="right-box-qushi">
-            <div class="flex-right-bottom">
+                 <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
+              <div>
+                <div class="border-top-line"></div>
+                <div class="border-left-line"></div>
+                <div class="flex-echrats-right">
+                  <div class="right-font-title">{{ item }}</div>
+                  <div  :id="i" class="echartsBox-min"></div>
+                </div>
+                <div class="border-top-line"></div>
+                <div class="border-left-line1"></div>
+                <div class="border-left-line2"></div>
+                <div class="border-left-line3"></div>
+              </div>
+            </div>
+
+            <!-- <div class="flex-right-bottom">
               <div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
@@ -604,7 +619,7 @@
                 <div class="border-left-line2"></div>
                 <div class="border-left-line3"></div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -618,6 +633,7 @@
     <innerTableCardBox
       :leftData="tableInner"
       :rightData="tableOutter"
+      :leftObj="leftObj" :rightObj="rightObj"
       title1="合作模式三"
       title2="线上客户"
     />
@@ -640,7 +656,26 @@ export default {
     Card
   },
   data() {
+//      * CooprLevel3 合作模式三级
+
+//  * cooprLevel3Mmanager 三级负责人
+//  * customerName 线上客户
+
+//  * salesMan 责任人
+
     return {
+      name:"name",
+      dhcarr: [0, 1, 2, 3, 4, 5],
+       leftObj:{
+      name:'CooprLevel3',
+      level:'cooprLevel3Mmanager',
+       tAvgAmt:'saleTaskAmt',/*责任制*/
+      },
+      rightObj:{
+      name:'customerName',
+      level:'salesMan',
+       tAvgAmt:'saleTaskAmt',/*责任制*/
+      },
       cardData:[],
       dateTime: "2022-03",
       dataTimeMany: "2022-01-01,2022-10-01,2022-01-01,2022-10-01",
@@ -777,6 +812,124 @@ export default {
     };
   },
   methods: {
+// 右边接口
+    async getList1() {
+      this.showLoading = true;
+      try {
+        const res = await API.getChartQuery(
+                "onlineMiddleChart",
+          "2022-01-01,2022-03-01,2022-01-01,2022-03-01",
+           "cooprLevel1"
+        );
+
+        console.log("sell程序", res);
+        let sellOutDataList = res.rows;
+        this.showLoading = false;
+
+        let obj = res.rows[0];
+        var k = 0;
+        var arr = [];
+        for (var i in obj) {
+          console.log("11111111111", obj[i]);
+          if (k < 6) {
+            arr.push(obj[i]);
+          }
+          k++;
+        }
+        console.log("arr", arr);
+        this.dhcarr = [];
+        let arrs = JSON.parse(JSON.stringify(arr));
+        arrs.forEach((v) => {
+          this.dhcarr.push(v[0].cooprLevel1);
+        });
+        // this.dhcarr = [1,2,3,4,5];
+
+        for (let j = 0; j < arr.length; j++) {
+          var datanum = arr[j];
+          let AmericaDate = [];
+          let AmericaList = [];
+          let AmericaLine = 1;
+          let Arrnum = datanum.filter((item) => {
+            var timeArr = item.orderDate
+              .replace(" ", ":")
+              .replace(/\:/g, "-")
+              .split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+            console.log("sdvsd", timeArr);
+
+            AmericaDate.push(yue + "-" + ri);
+            AmericaList.push(item.totalCnyAmt);
+            AmericaLine = item.saleAvgAmt;
+          });
+          console.log("Arrnum", this.sellOutDataList);
+
+          this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+
+
+
+    // //中间折线图
+    // async getListCharts() {
+    //   this.showLoading = true;
+    //   try {
+    //     const res = await API.getChartQuery(
+    //       "onlineMiddleChart",
+    //       "2022-01-01,2022-03-01,2022-01-01,2022-03-01",
+    //        "cooprLevel2"
+    //     );
+    //     let sellOutDataList = res.rows;
+    //     // console.log("222333",res)
+    //     this.showLoading = false;
+
+    //     let obj = res.rows;
+    //     var k = 0;
+    //     var arr = [];
+    //     for (var i in obj) {
+    //       if (k < 7) {
+    //         arr.push(obj[i]);
+    //       }
+    //       k++;
+    //     }
+    //     console.log("arr",arr)
+    //     this.dhcarr = [];
+    //     let arrs = JSON.parse(JSON.stringify(arr));
+    //     arrs.forEach((v) => {
+    //       this.dhcarr.push(v[0].businessEntityName);
+    //     });
+    //     cosole.log("结果",arrs)
+    //     for (let j = 0; j < arr.length; j++) {
+    //       var datanum = arr[j];
+    //       let AmericaDate = [];
+    //       let AmericaList = [];
+    //       let AmericaLine = 1;
+    //       let Arrnum = datanum.filter((item) => {
+    //         var timeArr = item.orderDate
+    //           .replace(" ", ":")
+    //           .replace(/\:/g, "-")
+    //           .split("-");
+    //         var yue = timeArr[1];
+    //         var ri = timeArr[2];
+    //         AmericaDate.push(yue + "-" + ri);
+    //         AmericaList.push(item.cnyAmt);
+    //         AmericaLine = item.tAvgAmt;
+    //       });
+    //       console.log("AmericaList",AmericaList);
+    //       console.log("AmericaDate",AmericaDate);
+    //       console.log("AmericaLine",AmericaLine);
+    //        console.log("j",j);
+    //       this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
+    //     }
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // },
+    
     //    // 合作模式3
     // gotoCatSeries(item) {
     //   this.$router.push({
@@ -1068,8 +1221,8 @@ export default {
       };
       myChart.setOption(option);
     },
-    myEcharts2() {
-      var myChart2 = this.$echarts.init(document.getElementById("main2"));
+      myEcharts2(data, time, lines, id) {
+      var myChart2 = this.$echarts.init(document.getElementById(id));
       var option = {
         xAxis: {
           axisLabel: {
@@ -1098,7 +1251,10 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          // data: this.AmericaDate,
+          // data: ['01-02','03-03','04-04','01-04'],
+
+          data: time,
           axisTick: {
             show: false, //刻度线
           },
@@ -1159,11 +1315,17 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            // data: this.AmericaList,
+            // data:[10,20,100,250],
+            data: data,
+            // data:data,
             markLine: {
+              // data:this.AmericaLine,
               data: [
                 {
-                  yAxis: 8576,
+                  // yAxis: this.AmericaLine,
+                  // yAxis:400,
+                  yAxis: lines,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -1186,6 +1348,126 @@ export default {
       };
       myChart2.setOption(option);
     },
+   
+    // myEcharts2() {
+    //   var myChart2 = this.$echarts.init(document.getElementById("main2"));
+    //   var option = {
+    //     xAxis: {
+    //       axisLabel: {
+    //         formatter: function (val) {
+    //           return "";
+    //         },
+    //       },
+    //     },
+    //     textStyle: {
+    //       color: "#3FB0FF",
+    //     },
+    //     color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+    //     title: {
+    //       text: "",
+    //     },
+    //     tooltip: {
+    //       trigger: "axis",
+    //     },
+    //     grid: {
+    //       top: "5%",
+    //       left: "2%",
+    //       right: "5%",
+    //       bottom: "3%",
+    //       containLabel: true,
+    //     },
+    //     xAxis: {
+    //       type: "category",
+    //       boundaryGap: false,
+    //       data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+    //       axisTick: {
+    //         show: false, //刻度线
+    //       },
+    //       axisLine: {
+    //         show: false, //隐藏y轴
+    //       },
+    //       axisLabel: {
+    //         show: false, //隐藏刻度值
+    //       },
+    //     },
+    //     yAxis: {
+    //       name: "单位：万",
+    //       type: "value",
+    //       splitLine: {
+    //         lineStyle: {
+    //           type: "dashed",
+    //           color: "rgba(45,153,255,.3)",
+    //         },
+    //       },
+    //       axisTick: {
+    //         show: false, //刻度线
+    //       },
+    //       axisLine: {
+    //         show: false, //隐藏y轴
+    //       },
+    //       axisLabel: {
+    //         show: false, //隐藏刻度值
+    //       },
+    //     },
+    //     series: [
+    //       {
+    //         name: "实际达成",
+    //         type: "line",
+    //         stack: "Total",
+    //         // smooth: true,
+    //         lineStyle: {
+    //           width: 1,
+    //         },
+    //         showSymbol: false,
+    //         areaStyle: {
+    //           normal: {
+    //             color: {
+    //               x: 0,
+    //               y: 0,
+    //               x2: 0,
+    //               y2: 1,
+    //               colorStops: [
+    //                 {
+    //                   offset: 0,
+    //                   color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+    //                 },
+    //                 {
+    //                   offset: 0.7,
+    //                   color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+    //                 },
+    //               ],
+    //               globalCoord: false, // 缺省为 false
+    //             },
+    //           },
+    //         },
+    //         data: [1948, 7308, 8949, 3839, 13857],
+    //         markLine: {
+    //           data: [
+    //             {
+    //               yAxis: 8576,
+    //               silent: false, //鼠标悬停事件 true没有，false有
+    //               lineStyle: {
+    //                 //警戒线的样式 ，虚实 颜色
+    //                 type: "dashed", //样式  ‘solid’和'dotted'
+    //                 color: "#FF8B2F",
+    //                 width: 2, //宽度
+    //               },
+    //               label: {
+    //                 formatter: "",
+    //                 color: "#FF8B2F",
+    //                 position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+    //               },
+    //             },
+    //           ],
+
+    //           symbol: ["none", "none"],
+    //         },
+    //       },
+    //     ],
+    //   };
+    //   myChart2.setOption(option);
+    // },
+
     myEcharts3() {
       var myChart3 = this.$echarts.init(document.getElementById("main3"));
       var option = {
@@ -1942,12 +2224,14 @@ export default {
     },
   },
   mounted() {
+    this.getList1();
+  
     this.getTable();
     this.getCard(this.ontime);
     this.getdashboard();
     this.queryCardSAB();
     this.myEcharts();
-    this.myEcharts2();
+    // this.myEcharts2();
     this.myEcharts3();
     this.myEcharts4();
     this.myEcharts5();

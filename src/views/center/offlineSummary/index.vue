@@ -21,6 +21,7 @@
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
+        <a-spin class="flex-loading" size="large" v-if="showLoading" />
         <div>
           <div class="middle-font left-file">内销线下日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
