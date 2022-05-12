@@ -23,8 +23,8 @@ export default class ApiService {
   static getTotal(params) {
 
     let obj = {
-      sql_type:store.state.showMoney==true?'AMT':'QTY',
-      prod_area_name:store.state.model
+      sql_type:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
+      prod_area_name:store.state.model /*本部*/
     };
     Object.assign(params,obj);
 

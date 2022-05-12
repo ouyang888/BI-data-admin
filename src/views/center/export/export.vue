@@ -88,7 +88,7 @@ export default {
   },
   data() {
     return {
-      dhcarr: [0, 1, 2, 3, 4, 5],
+      dhcarr: ['暂无数据','暂无数据','暂无数据','暂无数据','暂无数据','暂无数据'],
       Arrnum: [],
       showLoading: false,
       AmericaDate: [],
@@ -101,35 +101,35 @@ export default {
       // koreaList: [],
       // koreaLine: [],
       progressData: {
-        bar1: 3,
-        bar2: 5,
+        bar1: '0',
+        bar2: '0',
         ballTitle: "外销",
         bigBallTitle: "毛利率",
         textLeft: "OBM",
         textRight: "OEM",
         titleTop: "OBM",
         titleBottom: "OEM",
-        topGPM: 7,
-        bottomGPM: 8,
-        ballNum: 67,
+        topGPM: '0',
+        bottomGPM: '0',
+        ballNum:'0',
       },
 
       speedData: {
         bar: 1,
-        speedBar: 50,
+        speedBar: '0',
         ballTitle: "外销达成",
-        ballNum: 67,
+        ballNum: '0',
         ballLeftTitle: "OBM",
         ballRightTitle: "OEM",
-        ballLeftNum: 4,
-        ballRightNum: 5,
-        bottomNum: 6,
+        ballLeftNum: '0',
+        ballRightNum: '0',
+        bottomNum: '0',
         bottomTitle1: "OBM",
-        bottomClose: 7,
-        bottomTime: 8,
+        bottomClose: '0',
+        bottomTime: '0',
         bottomTitle2: "OEM",
-        bottomClose1: 9,
-        bottomTime1: 11,
+        bottomClose1: '0',
+        bottomTime1: '0',
       },
       sabData: {
         // bar1: 70,
@@ -140,9 +140,9 @@ export default {
         ballTitle: "外销",
         bottom: "OBM",
         top: "OEM",
-        sabArr: { s: 31, a: 18, b: 21 },
-        topArr: { s: 30, a: 18, b: 21 },
-        bottomArr: { s: 338, a: 18, b: 21 },
+        sabArr: { s: '0', a: '0', b: '0' },
+        topArr: { s: '0', a: '0', b: '0' },
+        bottomArr: { s: '0', a: '0', b: '0' },
         // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
@@ -162,7 +162,10 @@ export default {
       tAvgAmt:'tAvgAmt'
       },
       cardObj:{
-       title:'cooprLevel1'
+       'title':'cooprLevel1',
+       'cnyAmt':'cooprLevel1NameAmt',
+       'saleTaskAmt':'cooprLevel1TaskAmt',
+       'saleAmtRadio':'cooprLevel1AmtRadio'
       },
      };
   },
@@ -203,8 +206,8 @@ export default {
   methods: {
     init(model){
       let params = `${this.ontime},${model}`
-    this.getdashboard(params);
-    this.queryCardSAB(params);
+    // this.getdashboard(params);
+    // this.queryCardSAB(params);
     this.getCard(params);
     this.getList(`${model},${this.ontime}-01,${this.ontime}-31`);
     this.getList1(`${model},${this.ontime}-01,${this.ontime}-31`);
@@ -331,8 +334,10 @@ export default {
         console.log(error);
       }
     },
-    gotoCatSeries(){
-      this.$router.push("/center/offlineCode")
+    gotoCatSeries(obj){
+      console.log('obj',obj);
+      this.$router.push({'path':'exprotAreaAll'})
+
     },
  
     // 右边接口
@@ -655,15 +660,55 @@ export default {
         this.showLoadingCard = true;
         const res = await API.getData("sellOutTopOnline",params);
     
-        res.rows.length>0 && res.rows.forEach(v => {
+        let onTitle = '';
+        
+        let arr = [];
+       let sabArr = [];
+
+        res.rows.forEach(v=>{
+      
+           if(onTitle!=v.cooprLevel1 && !!v.cooprLevel1){
+             console.log('title')
+             onTitle = v.cooprLevel1;
+            arr.push(v);
+           }
+        })
+
+
+        arr.splice(6);
+    
+        arr.length>0 && arr.forEach(v => {
             //  v.title = v.cooprLevel1; /*标题*/
+            if(!!v.cooprLevel1NameAmt){
              v.cooprLevel1NameAmt = v.cooprLevel1NameAmt.toFixed(0); /*达成金额*/
-             v.saleTaskAmt = v.cooprLevel1TaskAmt.toFixed(0); /*责任制金额*/
-             v.saleAmtRadio = (v.cooprLevel1AmtRadio * 100>100?100:v.cooprLevel1AmtRadio * 100).toFixed(0); /*完成率*/
-          
+            }else{
+              console.log('字段无数据','cooprLevel1NameAmt')
+            }
+            if(!!v.cooprLevel1TaskAmt){
+             v.cooprLevel1TaskAmt = v.cooprLevel1TaskAmt.toFixed(0); /*责任制金额*/
+            }else{
+              console.log('字段无数据','cooprLevel1TaskAmt')
+            }
+
+            if(!!v.grossProfitRadio){
+             v.grossProfitRadio = (v.grossProfitRadio * 100>100?100:v.grossProfitRadio * 100).toFixed(0); /*毛利率*/
+             v.grossProfitRadio = Number(v.grossProfitRadio);
+
+            }else{
+              console.log('字段无数据','cooprLevel1AmtRadio')
+            }
+
+            if(!!v.cooprLevel1AmtRadio){
+             v.cooprLevel1AmtRadio = (v.cooprLevel1AmtRadio * 100>100?100:v.cooprLevel1AmtRadio * 100).toFixed(0); /*完成率*/
+             v.cooprLevel1AmtRadio = Number(v.cooprLevel1AmtRadio);
+
+            }else{
+              console.log('字段无数据','cooprLevel1AmtRadio')
+            }
+    
         });
-        this.cardData = res.rows;
-        this.cardData.splice(6);
+        this.cardData = arr;
+        console.log('this.cardData',this.cardData)
     },
 
     // 底部table/
@@ -676,7 +721,7 @@ export default {
         this.tableOutter = tableOutter.rows;
         this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
-        this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
+        this.rowSpanNumber1 = [this.tableInner.length -1];
         // debugger;
 
         console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
