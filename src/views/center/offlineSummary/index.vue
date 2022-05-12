@@ -79,7 +79,7 @@ export default {
   },
   data() {
     return {
-      dhcarr: [0, 1, 2, 3, 4, 5],
+      dhcarr: [],
       Arrnum: [],
       showLoading: false,
       AmericaDate: [],
@@ -234,24 +234,22 @@ export default {
         );
 
         let sellOutDataList = res.rows[0];
-        // console.log("sell程序", res);
-
         this.showLoading = false;
         let obj = res.rows[0];
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          console.log("11111111111", obj[i]);
+          // console.log("11111111111", obj[i]);
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
-        // console.log("arrs", arr);
+        console.log("arrs2222", arr);
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
         arrs.forEach((v) => {
-          this.dhcarr.push(v[0].cooprLevel2);
+          this.dhcarr = this.dhcarr.push(v[0].cooprLevel2);
         });
         // console.log();
         // this.dhcarr = [1,2,3,4,5];
