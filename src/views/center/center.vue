@@ -59,7 +59,8 @@
       <div class="flex-font-left">
         <div class="head-box-right" style="margin-right: 14px">
           <span
-            >{{land}}<a-icon type="down" style="padding-left: 3px; font-size: 14px"
+            >{{ land
+            }}<a-icon type="down" style="padding-left: 3px; font-size: 14px"
           /></span>
           <div class="drop-down">
             <div class="down-font" @click="changeland('本部')">本部</div>
@@ -69,24 +70,37 @@
         </div>
 
         <div class="change-flex">
-          <div :class="direction == '1' ? 'head-box-right active' : 'head-box-right'" @click="changedirection(1)"><span>销向</span></div>
-          <div :class="direction == '2' ? 'head-box-right active' : 'head-box-right'" @click="changedirection(2)"><span>产司</span></div>
+          <div
+            :class="
+              direction == '1' ? 'head-box-right active' : 'head-box-right'
+            "
+            @click="changedirection(1)"
+          >
+            <span>销向</span>
+          </div>
+          <div
+            :class="
+              direction == '2' ? 'head-box-right active' : 'head-box-right'
+            "
+            @click="changedirection(2)"
+          >
+            <span>产司</span>
+          </div>
         </div>
         <div class="change-flex">
           <div class="head-box-right right-width">
-            <span>{{year}}</span>
-             <div class="drop-down drop-down-year">
+            <span>{{ year }}</span>
+            <div class="drop-down drop-down-year">
               <div class="down-font-year" @click="changeyear('2022')">2022</div>
               <div class="down-font-year" @click="changeyear('2021')">2021</div>
             </div>
           </div>
           <div class="head-box-right right-width drop-month">
-            <span>{{month}}</span>
+            <span>{{ month }}</span>
             <div class="drop-down drop-down-year">
               <!-- <div class="down-font-year" @click="changemonth('5')">5</div> -->
               <div class="down-font-year" @click="changemonth('3')">3</div>
               <div class="down-font-year" @click="changemonth('4')">4</div>
-              
             </div>
           </div>
         </div>
@@ -110,181 +124,174 @@ export default {
       index: 1,
       title: "销向汇总页",
       cus: 1,
-      land:"产地",
-      direction:1,
-      year:"2022",
-      month:"3",
-      date:new Date()
+      land: "产地",
+      direction: 1,
+      year: "2022",
+      month: "3",
+      date: new Date(),
     };
   },
   computed: {
     titleNav() {
       return this.$route.meta.title;
     },
-    path(){
+    path() {
       return this.$route.name;
     },
-    pathName(){
+    pathName() {
       return this.$store.state.currPath;
-    }
+    },
   },
   watch: {
     $route: function (val) {
       if (val.meta.preMenuUrl || this.$route.path) {
         this.searchKeys = [this.$route.path, val.meta.preMenuUrl || ""];
-        console.log('路由',val.name)
-        this.getPageName(val.name)
+        console.log("路由", val.name);
+        this.getPageName(val.name);
       }
-  
     },
   },
   methods: {
-    getPageName(path){
+    getPageName(path) {
       switch (path) {
-        case 'psi':
-          this.title = '总裁PSI页';
-          this.$store.commit("setCurrPath",'总裁PSI页')
+        case "psi":
+          this.title = "总裁PSI页";
+          this.$store.commit("setCurrPath", "总裁PSI页");
           break;
-        case 'index':
-          this.title = '销向汇总页';
-          this.$store.commit("setCurrPath",'销向汇总页')
-
-          break;
-        case 'department':
-          this.title = '产司汇总页';
-          this.$store.commit("setCurrPath",'产司汇总页')
+        case "index":
+          this.title = "销向汇总页";
+          this.$store.commit("setCurrPath", "销向汇总页");
 
           break;
-    
-        case 'productCo':
-          this.title = '品类汇总';
-          this.$store.commit("setCurrPath",'品类汇总')
+        case "department":
+          this.title = "产司汇总页";
+          this.$store.commit("setCurrPath", "产司汇总页");
 
           break;
-        case 'domestic':
-        this.title = '内销汇总';
-        this.$store.commit("setCurrPath",'内销汇总')
+
+        case "productCo":
+          this.title = "品类汇总";
+          this.$store.commit("setCurrPath", "品类汇总");
 
           break;
-        case 'export':
-          this.title = '外销汇总';
-          this.$store.commit("setCurrPath",'外销汇总')
+        case "domestic":
+          this.title = "内销汇总";
+          this.$store.commit("setCurrPath", "内销汇总");
+
           break;
-            case 'onlineSummary':
-              this.title = '内销线上汇总';
-              this.$store.commit("setCurrPath",'内销线上汇总')
-              break;
-
-              case 'catSeries':
-                this.title = '合作模式二负责人';
-                this.$store.commit("setCurrPath",'合作模式二负责人')
-               break;
-
-         case 'modeCo':
-          this.title = '合作模式三负责人';
-          this.$store.commit("setCurrPath",'  合作模式三负责人 ')
-         break;
-        case 'onlineModeCo':
-          this.title = '合作模式四负责人';
-          this.$store.commit("setCurrPath",'  合作模式四负责人 ')
-         break;
-
-         
-          
-          
-         case 'offlineSummary':
-            this.title = '内销线下汇总';
-            this.$store.commit("setCurrPath",'内销线下汇总')
-            break;
-
-         case 'offlineCatSeries':
-            this.title = '合作模式二负责人';
-            this.$store.commit("setCurrPath",'  合作模式二负责人 ')
-            break;
-         case 'offlineCode':
-            this.title = '合作模式三负责人';
-            this.$store.commit("setCurrPath",' 合作模式三负责人  ')
-            break;
-          /*外销*/  
-            case 'exprotAreaAll':
-          this.title = '外销大区汇总页';
-          this.$store.commit("setCurrPath",' 外销大区汇总页')
+        case "export":
+          this.title = "外销汇总";
+          this.$store.commit("setCurrPath", "外销汇总");
+          break;
+        case "onlineSummary":
+          this.title = "内销线上汇总";
+          this.$store.commit("setCurrPath", "内销线上汇总");
           break;
 
-            case 'exprotProductCo':
-          this.title = '外销大区产司汇总页';
-          this.$store.commit("setCurrPath",' 外销大区产司汇总页  ')
+        case "catSeries":
+          this.title = "合作模式二负责人";
+          this.$store.commit("setCurrPath", "合作模式二负责人");
           break;
 
+        case "modeCo":
+          this.title = "合作模式三负责人";
+          this.$store.commit("setCurrPath", "  合作模式三负责人 ");
+          break;
+        case "onlineModeCo":
+          this.title = "合作模式四负责人";
+          this.$store.commit("setCurrPath", "  合作模式四负责人 ");
+          break;
 
-         default:
-          this.title = '总裁PSI页';
-          this.$store.commit("setCurrPath",'总裁PSI页')
+        case "offlineSummary":
+          this.title = "内销线下汇总";
+          this.$store.commit("setCurrPath", "内销线下汇总");
+          break;
+
+        case "offlineCatSeries":
+          this.title = "合作模式二负责人";
+          this.$store.commit("setCurrPath", "  合作模式二负责人 ");
+          break;
+        case "offlineCode":
+          this.title = "合作模式三负责人";
+          this.$store.commit("setCurrPath", " 合作模式三负责人  ");
+          break;
+        /*外销*/
+        case "exprotAreaAll":
+          this.title = "外销大区汇总页";
+          this.$store.commit("setCurrPath", " 外销大区汇总页");
+          break;
+
+        case "exprotProductCo":
+          this.title = "外销大区产司汇总页";
+          this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
+          break;
+
+        default:
+          this.title = "总裁PSI页";
+          this.$store.commit("setCurrPath", "总裁PSI页");
       }
     },
     goBack() {
       this.$router.go(-1);
     },
-    changeland(item){
-
-      if(item == '所有'){
-        this.land = '本地';
-      }else{
+    changeland(item) {
+      if (item == "所有") {
+        this.land = "本地";
+      } else {
         this.land = item;
       }
       switch (item) {
-        case '本部':
-          this.$store.commit('setModel','本部,本部,本部');
+        case "本部":
+          this.$store.commit("setModel", "本部,本部,本部");
           break;
-        case 'OEM':
-        this.$store.commit('setModel','OEM,OEM,OEM');
+        case "OEM":
+          this.$store.commit("setModel", "OEM,OEM,OEM");
           break;
-          case '所有':
-          this.$store.commit('setModel','本部,OEM,待定');
+        case "所有":
+          this.$store.commit("setModel", "本部,OEM,待定");
           break;
       }
     },
-    changedirection(index){
-      this.direction = index
-      if(index == "2"){
-        this.$router.push("/center/department")
-        this.title = "产司汇总页"
-      }else{
-        this.$router.push("/center/index")
-        this.title = "销向汇总页"
+    changedirection(index) {
+      this.direction = index;
+      if (index == "2") {
+        this.$router.push("/center/department");
+        this.title = "产司汇总页";
+      } else {
+        this.$router.push("/center/index");
+        this.title = "销向汇总页";
       }
     },
-    changeyear(item){
-      this.year = item
-      this.$store.commit("setYear",item);
+    changeyear(item) {
+      this.year = item;
+      this.$store.commit("setYear", item);
     },
-    changemonth(item){
-      this.month = item
-      let val = item.length<2?'0'+item:item;
-    
-      this.$store.commit("setMonth",val);
+    changemonth(item) {
+      this.month = item;
+      let val = item.length < 2 ? "0" + item : item;
+
+      this.$store.commit("setMonth", val);
     },
     changeNum(index) {
       this.cus = index;
       if (index == 2) {
         localStorage.setItem("showMoney", "money");
-        this.$store.commit('setShowMoney',false);
+        this.$store.commit("setShowMoney", false);
       } else {
         localStorage.removeItem("showMoney");
-        this.$store.commit('setShowMoney',true);
+        this.$store.commit("setShowMoney", true);
       }
     },
     clickChange(i) {
       this.index = i;
-      if(i == 1){
+      if (i == 1) {
         this.$router.push("/center/psi");
-        this.title = "总裁PSI页"
-      }else{
+        this.title = "总裁PSI页";
+      } else {
         this.$router.push("/center/index");
-        this.title = "销向汇总页"
+        this.title = "销向汇总页";
       }
     },
-   
   },
   mounted() {
     localStorage.removeItem("showMoney");
@@ -451,15 +458,15 @@ export default {
 .down-font:hover {
   background-color: #0e5fff;
   color: #f1f1f1;
-   display: block;
+  display: block;
 }
-.drop-down-year{
+.drop-down-year {
   width: 90px;
 }
-.down-font-year:first-child{
+.down-font-year:first-child {
   // padding-top: 10px;
 }
-.down-font-year{
+.down-font-year {
   // padding-bottom: 10px;
 }
 .down-font-year:hover {
@@ -468,10 +475,10 @@ export default {
   display: block;
 }
 
-.drop-down-month{
+.drop-down-month {
   // padding-top: 10px;
 }
-.drop-month{
+.drop-month {
   left: 80px !important;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="flex-card" >
     <div class="card-box" v-for="(v,i) in list" :key="i">
-      <div class="card-font" @click="gotoCatSeries(v.cooprLevel3)">{{v.cooprLevel3}} </div>
+      <div class="card-font" @click="gotoCatSeries(v)">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
         <div class="line"></div>
         <div class="line1"></div>
@@ -13,12 +13,12 @@
             <div class="flex-top-card">
               <div class="top-left-font">实时达成</div>
               <div class="flex-finish">
-                <div class="finish-font">责任制 <span>{{v.saleTaskAmt}}亿</span></div>
-                <div class="finish-font">完成率 <span>{{v.saleAmtRadio}}%</span></div>
+                <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}亿</span></div>
+                <div class="finish-font">完成率 <span>{{v[cardObj.saleAmtRadio]}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
-              <div class="card-big-num">{{v.cnyAmt}}亿</div>
+              <div class="card-big-num">{{v[cardObj.cnyAmt]}}亿</div>
                <div class="flex-finish">
                 <!-- <div class="finish-font">进度 <span>s</span></div>
                 <div class="finish-font">完成率 <span>75%</span></div> -->
@@ -35,7 +35,7 @@
                   </div>
                   <div class="progress">
                     <a-progress
-                      :percent="v.saleAmtRadio"
+                      :percent="v[cardObj.saleAmtRadio]"
                       :show-info="false"
                       strokeColor="rgb(102, 255, 255)"
                     />
@@ -99,11 +99,10 @@
             </div>
            
           </div>
-        </div>
-        <div class="line"></div>
-      </div>
     </div>
 
+  </div>
+  </div>
   </div>
 </template>
 
@@ -115,6 +114,23 @@
         type: Array,
         default: function () { return [] }
       },
+      cardObj: {
+        type: Object,
+        default: function () { return {
+       'title':'cooprLevel1',
+       'cnyAmt':'cooprLevel1NameAmt',
+       'saleTaskAmt':'cooprLevel1TaskAmt',
+       'cooprLevel1AmtRadio':'saleAmtRadio'
+        } }
+      },
+    },
+    watch:{
+      cardObj:{
+        handler:function(newValue,oldValue){
+          console.log('newValue',newValue);
+        }
+      }
+
     },
     methods: {
       gotoCatSeries(val) {
@@ -126,7 +142,7 @@
 </script>
 
 <style scoped>
-  .flex-char {
+   .flex-char {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -263,12 +279,7 @@
     align-items: center;
     justify-content: inherit;
     flex-wrap: wrap;
-    justify-content:flex-start;
   }
-  /* .card-box::nth-child(2n){
-    margin-left:10px;
-    margin-
-  } */
 
   .flex-top-card {
     display: flex;
@@ -332,17 +343,24 @@
     display: flex;
     justify-content: space-between;
   }
+  .left-right-box .flex-top-card{
+    align-items: flex-start;
+    padding-top:5px;
+  }
 
   .finish-font {
     color: #fff;
     opacity: 0.6;
     font-size: 12px;
     margin-right: 4px;
+    display:flex;
   }
 
   .finish-font span {
     color: #66ffff;
     margin-left: 2px;
+    display: inline-block;
+    width:34px;
   }
 
   .mt-border {

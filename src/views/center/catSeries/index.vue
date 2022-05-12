@@ -1,9 +1,9 @@
 <template>
   <div style="background: #02004d">
     <!-- 头部仪表盘和卡片 -->
-    <div class="top-flex"  >
+    <div class="top-flex">
       <!-- 仪表盘 -->
-       <div class="dashboard-box">
+      <div class="dashboard-box">
         <div class="panelList">
           <ProgressPanel :data="progressData" />
           <SpeedPanel :data="speedData" />
@@ -11,9 +11,11 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-      <div class="flex-card" >
+      <div class="flex-card">
         <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries(trendName+'自营')">{{trendName}}自营</div>
+          <div class="card-font" @click="gotoCatSeries(trendName + '自营')">
+            {{ trendName }}自营
+          </div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -31,7 +33,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-                   <div class="flex-finish">
+                  <div class="flex-finish">
                     <!-- <div class="finish-font">进度 <span>s</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div> -->
                   </div>
@@ -61,19 +63,14 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
+                ></div>
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                 
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
@@ -88,7 +85,6 @@
                   <div class="card-big-num">75亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">毛利率<span>75%</span></div>
-          
                   </div>
                 </div>
                 <div
@@ -97,26 +93,23 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                 
-                </div>
+                ></div>
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-               
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box" >
-          <div class="card-font" @click="gotoCatSeries(trendName+'企业购')">{{trendName}}企业购</div>
+        <div class="card-box">
+          <div class="card-font" @click="gotoCatSeries(trendName + '企业购')">
+            {{ trendName }}企业购
+          </div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -154,17 +147,14 @@
                     </div>
                   </div>
                 </div>
-             
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                  
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
@@ -177,9 +167,8 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-                 <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center">
                     <div class="finish-font">毛利率<span>75%</span></div>
-          
                   </div>
                 </div>
                 <!-- <div
@@ -259,17 +248,16 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-              
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box" >
-          <div class="card-font" @click="gotoCatSeries(trendName+'POP')">{{trendName}}POP</div>
+        <div class="card-box">
+          <div class="card-font" @click="gotoCatSeries(trendName + 'POP')">
+            {{ trendName }}POP
+          </div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -307,17 +295,14 @@
                     </div>
                   </div>
                 </div>
-             
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                  
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
@@ -332,29 +317,27 @@
                   <div class="card-big-num">75亿</div>
                   <div style="display: flex; align-items: center">
                     <div style="display: flex; align-items: center">
-                    <div class="finish-font">毛利率<span>75%</span></div>
-          
-                  </div>
+                      <div class="finish-font">毛利率<span>75%</span></div>
+                    </div>
                   </div>
                 </div>
-               
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-              
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
-           <div class="card-box">
-          <div class="card-font" @click="gotoCatSeries(trendName+'新通路')">{{trendName}}新通路</div>
+        <div class="card-box">
+          <div class="card-font" @click="gotoCatSeries(trendName + '新通路')">
+            {{ trendName }}新通路
+          </div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -372,7 +355,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-                   <div class="flex-finish">
+                  <div class="flex-finish">
                     <!-- <div class="finish-font">进度 <span>s</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div> -->
                   </div>
@@ -402,19 +385,14 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
+                ></div>
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                 
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
@@ -427,9 +405,8 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-                 <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center">
                     <div class="finish-font">毛利率<span>75%</span></div>
-          
                   </div>
                 </div>
                 <div
@@ -438,26 +415,23 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                 
-                </div>
+                ></div>
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-               
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box" >
-          <div class="card-font" @click="gotoCatSeries(trendName+'代理')">{{trendName}}代理</div>
+        <div class="card-box">
+          <div class="card-font" @click="gotoCatSeries(trendName + '代理')">
+            {{ trendName }}代理
+          </div>
           <div class="card-border-box">
             <div class="line"></div>
             <div class="line1"></div>
@@ -495,22 +469,19 @@
                     </div>
                   </div>
                 </div>
-             
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                  
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font" >库存达成</div>
+                  <div class="top-left-font">库存达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100亿</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -520,7 +491,6 @@
                   <div class="card-big-num">75亿</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">毛利率<span>75%</span></div>
-          
                   </div>
                 </div>
                 <div
@@ -529,16 +499,13 @@
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-              
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box" >
+        <div class="card-box">
           <div class="card-font" @click="gotoCatSeries('其他')">其他</div>
           <div class="card-border-box">
             <div class="line"></div>
@@ -577,17 +544,14 @@
                     </div>
                   </div>
                 </div>
-             
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                  
-                </div>
-               
+                ></div>
               </div>
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
@@ -600,29 +564,24 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
-              <div style="display: flex; align-items: center">
+                  <div style="display: flex; align-items: center">
                     <div class="finish-font">毛利率<span>75%</span></div>
-          
                   </div>
                 </div>
-              
+
                 <div
                   style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                   "
-                >
-                
-                </div>
-              
+                ></div>
               </div>
             </div>
             <div class="line"></div>
           </div>
         </div>
       </div>
-      
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -632,11 +591,13 @@
       </div>
       <div class="flex-char">
         <div>
-          <div class="middle-font left-file">内销线上{{trendName}}日达成趋势图</div>
+          <div class="middle-font left-file">
+            内销线上{{ trendName }}日达成趋势图
+          </div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
-          <div class="middle-font">{{trendName}}店铺日达成趋势图</div>
+          <div class="middle-font">{{ trendName }}店铺日达成趋势图</div>
           <div class="right-box-qushi">
             <div class="flex-right-bottom">
               <div>
@@ -645,76 +606,6 @@
                 <div class="flex-echrats-right">
                   <div class="right-font-title">淘系</div>
                   <div id="main2" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">京东</div>
-                  <div id="main3" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">拼多多</div>
-                  <div id="main4" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">美的</div>
-                  <div id="main5" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">兴趣</div>
-                  <div id="main6" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">天猫自营</div>
-                  <div id="main7" class="echartsBox-min"></div>
                 </div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line1"></div>
@@ -743,7 +634,7 @@
           <a slot="name" slot-scope="text">{{ text }}</a>
           <template slot="name" slot-scope="name">
             <a @click="gotoDomestic"> {{ name }}</a>
-             </template>
+          </template>
         </a-table>
       </div>
       <div class="execl">
@@ -756,7 +647,7 @@
           <a slot="name" slot-scope="text">{{ text }}</a>
           <template slot="name" slot-scope="name">
             <a @click="gotoDomestic"> {{ name }}</a>
-            </template>
+          </template>
         </a-table>
       </div>
     </div>
@@ -768,14 +659,14 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 export default {
-   components: {
+  components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
   },
   data() {
     return {
-      trendName:"",
+      trendName: "",
       columns: [
         {
           title: "线上",
@@ -905,7 +796,6 @@ progressData: {
     gotoDomestic(){
      this.$router.push("/center/index")
     },
-    //* saleTaskAmt 合作模式二级责任制金额
 
 //  * cnyAmt 自营/代运营金额
 
@@ -978,13 +868,9 @@ progressData: {
         console.log(error);
       }
     },
-    // 负责人模式
-    gotoCatSeries(item){
-      this.$router.push({path:"/center/modeCo",query:{key:item}})
-    },
- 
-    toModuleResponsible(){
-      this.$router.push({name:'moduleResponsible'});
+
+    toModuleResponsible() {
+      this.$router.push({ name: "moduleResponsible" });
     },
 
     myEcharts() {
@@ -1223,724 +1109,15 @@ progressData: {
       };
       myChart2.setOption(option);
     },
-    myEcharts3() {
-      var myChart3 = this.$echarts.init(document.getElementById("main3"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart3.setOption(option);
-    },
-    myEcharts4() {
-      var myChart4 = this.$echarts.init(document.getElementById("main4"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart4.setOption(option);
-    },
-    myEcharts5() {
-      var myChart5 = this.$echarts.init(document.getElementById("main5"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart5.setOption(option);
-    },
-    myEcharts6() {
-      var myChart6 = this.$echarts.init(document.getElementById("main6"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart6.setOption(option);
-    },
-    myEcharts7() {
-      var myChart7 = this.$echarts.init(document.getElementById("main7"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart7.setOption(option);
-    },
-    myEcharts8() {
-      var myChart8 = this.$echarts.init(document.getElementById("main8"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart8.setOption(option);
-    },
+ 
   },
   mounted() {
+<<<<<<< HEAD
     this.trendName = this.$route.query.key
     this.getdashboard();
+=======
+    this.trendName = this.$route.query.key;
+>>>>>>> 0c4f49cf27f1c053dcf707acfb0674931cb153d6
     this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();

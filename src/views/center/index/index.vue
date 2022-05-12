@@ -828,10 +828,13 @@ export default {
 
 
     init(model){ /*初始化数据方法*/
-    let params = `${this.ontime},${model}`;
-    let listParams = `${this.ontime}-01,${this.ontime}-31,${model},${this.ontime}-01,${this.ontime}-31,${model}`
-    console.log('params',params);
- 
+    let params = {
+      month_date:this.ontime
+    };
+    let listParams = {
+      start_date:`${this.ontime}-01`,
+      end_date:`${this.ontime}-31`
+    }
 
     this.getList(listParams);
     this.getCard(params);
@@ -849,11 +852,27 @@ export default {
     async getCard(params) {
       this.showLoadingLeft = true;
       this.showLoadingRight = true;
+      let innerObj = {
+        code:"directITotalInnerTotal"
+      };
+      let outtObj = {
+        code:"directTotalOutterTotal"
+      };
+      let innerSAB = {
+        code:"directTotalInnerSAB"
+      };
+      let outterSAB = {
+        code:"directTotalOutterSAB"
+      };
+      Object.assign(innerObj,params);
+      Object.assign(outtObj,params);
+      Object.assign(innerSAB,params);
+      Object.assign(outterSAB,params);
       try {
-        const inner = await API.getData("directITotalInnerTotal", params);
-        const outter = await API.getData("directTotalOutterTotal", params);
-        const innersab = await API.getData("directTotalInnerSAB", params);
-        const outtersab = await API.getData("directTotalOutterSAB", params);
+        const inner = await API.getTotal(innerObj);
+        const outter = await API.getTotal(outtObj);
+        const innersab = await API.getTotal(innerSAB);
+        const outtersab = await API.getTotal(outterSAB);
         console.log("inner,", outter);
           this.showLoadingLeft = false;
           this.showLoadingRight = false;
@@ -1007,9 +1026,17 @@ export default {
     },
     // 底部table/
     async getTable(params) {
+      let innerObj = {
+        code:'directTotalinnerBottom'
+      }
+      Object.assign(innerObj,params);
+      let outterObj = {
+        code:'directTotalOutterBottom'
+      }
+      Object.assign(outterObj,params);
       try {
-        let tableInner = await API.getData("directTotalinnerBottom", params);
-        let tableOutter = await API.getData("directTotalOutterBottom", params);
+        let tableInner = await API.getTotal(innerObj);
+        let tableOutter = await API.getTotal(outterObj);
 
         // this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
@@ -1048,8 +1075,13 @@ export default {
     this.outerDirectList = [];
     this.outerDirectLine = '';
       try {
-        const res = await API.getData(
-          "directTotalInnerChart",
+
+      let obj = {
+        code:"directTotalInnerChart",
+      }
+       Object.assign(params,obj);
+
+        const res = await API.getTotal(
           params
         );
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
@@ -1103,8 +1135,14 @@ export default {
 
     //三个仪表盘(左中)
     async getdashboard(params) {
+      let obj = {
+        code:'directTotalDashboard'
+      };
+      Object.assign(params,obj)
+
+      
       try {
-        const res = await API.getData("directTotalDashboard",params);
+        const res = await API.getTotal(params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         if(res.rows.length<1){
@@ -1179,8 +1217,12 @@ export default {
     },
     //三个仪表盘(右)
     async queryCardSAB(params) {
+      let obj = {
+        code:'directTotalDashboardSAB'
+      };
+      Object.assign(params,obj)
       try {
-        const res = await API.getData("directTotalDashboardSAB", params);
+        const res = await API.getTotal(params);
         let RightSAB = res.rows;
         if(RightSAB.length<1 ){
             this.sabData = {

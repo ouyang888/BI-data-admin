@@ -163,6 +163,21 @@ export default{
     },
   
   },
+  watch:{
+    mesInfo:{
+      handler:function(newValue,oldValue){
+
+        console.log("更新数据",newValue);
+        newValue.forEach(v=>{
+          v.amtRadio = Number((v.amtRadio*100).toFixed(0));
+          v.profitRadio = Number((v.profitRadio*100).toFixed(0));
+        })
+        this.mesInfo = newValue;
+
+      }
+    }
+      
+  },
   components: {
     Progress,
   },
@@ -172,6 +187,7 @@ export default{
       return numVal;
     },
   },
+
   methods: {
     towNumber(val) {
       return val.toFixed(2);

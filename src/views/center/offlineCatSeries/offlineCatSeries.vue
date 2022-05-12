@@ -80,7 +80,7 @@ export default {
   },
   data() {
     return {
-      dhcarr: [0, 1, 2, 3, 4, 5],
+      dhcarr: ["暂无数据", "暂无数据", "暂无数据", "暂无数据", "暂无数据","暂无数据"],
       Arrnum: [],
       showLoading: false,
       AmericaDate: [],
@@ -180,22 +180,19 @@ export default {
       },
     },
   },
-  mounted() {
+  created() {
     this.init(this.model);
   },
   methods: {
     init(model) {
       this.titleName = this.$route.query.key;
-      let params = `${this.ontime},${model}`;
+      let params = `${this.ontime},${this.titleName},${model}`;
       let listParams = `${model},${this.ontime}-01,${this.ontime}-01`;
-      let offlineParmas = `${this.titleName},${this.titleName},${model},${this.ontime},${this.ontime}`;
-      this.getdashboard(this.ontime);
-      this.queryCardSAB(this.ontime);
-      // this.getList()
+      let offlineParmas = `${this.titleName},${this.titleName},${model},${this.ontime}-01,${this.ontime}-31`;
+      this.getdashboard(params);
+      this.queryCardSAB(params);
+      this.getList(offlineParmas);
       this.getList1(offlineParmas);
-      this.myEcharts();
-      this.myEcharts2();
-      this.myEcharts3();
       this.getCard(this.ontime);
       this.getTable(this.ontime);
     },
@@ -214,12 +211,12 @@ export default {
     },
 
     //中间折线图
-    async getList() {
+    async getList(list) {
       this.showLoading = true;
       try {
         const res = await API.getData(
-          "offlinePlatformChart",
-          "2022-01-01,2022-10-01"
+          "level3OfflineDayChart",
+          list
         );
         let sellOutDataList = res.rows;
         let newArr = sellOutDataList.filter((item) => {
@@ -229,14 +226,11 @@ export default {
             .split("-");
           var yue = timeArr[1];
           var ri = timeArr[2];
-
-          // console.log("sellOutDataList",sellOutDataList);
-
           // 外销日内
           if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
             this.AvgTaskAmtDate.push(yue + "-" + ri);
-            this.AvgTaskAmtList.push(item.totalAmt);
-            this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+            this.AvgTaskAmtList.push(item.totalCnyAmt);
+            this.AvgTaskAmtLine = item.totalSaleAvgTaskQty;
             this.myEcharts();
           }
           this.showLoading = false;
@@ -247,37 +241,42 @@ export default {
     },
 
     // 右边接口
-    async getList1(list) {
-      console.log("list111222",list)
+    async getList1(params) {
       this.showLoading = true;
       try {
         const res = await API.getChartQuery(
           "level3OfflineDayChart",
-          list,
+          params,
           "cooprLevel3"
         );
-        console.log("sell程序1", res);
-        let sellOutDataList = res.rows[0];
+        console.log("res12", res);
+        let sellOutDataList = res.rows;
         this.showLoading = false;
-        let obj = res.rows;
+        let obj = res.rows[0];
+        console.log("obj", obj);
         var k = 0;
         var arr = [];
         for (var i in obj) {
+          console.log("11111111111", obj[i]);
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
-        console.log("arrs1", obj[i]);
+        console.log("obj", obj);
+
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
+
         arrs.forEach((v) => {
           this.dhcarr.push(v[0].cooprLevel3);
         });
+        console.log("arr", this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
+          console.log("datanum", datanum);
           let AmericaDate = [];
           let AmericaList = [];
           let AmericaLine = 1;
@@ -291,34 +290,13 @@ export default {
             console.log("sdvsd", timeArr);
 
             AmericaDate.push(yue + "-" + ri);
-            AmericaList.push(item.totalAmt);
-            AmericaLine = item.totalAvgTaskAmt;
+            AmericaList.push(item.totalCnyAmt);
+            AmericaLine = item.totalSaleAvgTaskQty;
           });
           console.log("Arrnum", this.sellOutDataList);
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
-        // let Arrnum = datanum.filter((item) => {
-        //   var timeArr = item.orderDate
-        //   .replace(" ", ":")
-        //     .replace(/\:/g, "-")
-        //     .split("-");
-        //   var yue = timeArr[1];
-        //   var ri = timeArr[2];
-        // console.log( "sdvsd", timeArr);
-
-        // this.AmericaDate.push(yue + "-" + ri);
-        //     this.AmericaList.push(item.totalAmt);
-        //     this.AmericaLine = item.totalAvgTaskAmt;
-        // })
-        // console.log("Arrnum",this.datanum);
-        // this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine);
-        // let dhcarr = [1,2,3,4,5,6];
-        // dhcarr.forEach(v=>{
-
-        //   this.myEcharts2(this.AmericaList,this.AmericaDate,this.AmericaLine,v);
-
-        // })
       } catch (error) {
         console.log(error);
       }
@@ -361,7 +339,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.AvgTaskAmtDate,
           axisTick: {
             show: false,
           },
@@ -416,11 +394,11 @@ export default {
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.AvgTaskAmtList,
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.AvgTaskAmtLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -443,6 +421,7 @@ export default {
       };
       myChart.setOption(option);
     },
+
     myEcharts2(data, time, lines, id) {
       var myChart2 = this.$echarts.init(document.getElementById(id));
       var option = {
@@ -571,132 +550,12 @@ export default {
       myChart2.setOption(option);
     },
 
-    myEcharts3() {
-      var myChart3 = this.$echarts.init(document.getElementById("main3"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        // echartsData: {
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
-
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart3.setOption(option);
-    },
-
     //三个仪表盘(左中)
     async getdashboard(params) {
       try {
         const res = await API.getData(
-          "offlinePlatformTop",
-          `${params},线上,${this.titleName},${params},线上,${this.titleName}`
+          "level3OfflineTotalDashBoard",
+         params
         );
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
@@ -743,8 +602,8 @@ export default {
     async queryCardSAB(params) {
       try {
         const res = await API.getData(
-          "offlinePlatformSAB",
-          `${params},线上,${this.titleName},${params},线上,${this.titleName}`
+          "level3OfflineTotalSAB",
+          params
         );
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {

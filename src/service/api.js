@@ -1,5 +1,6 @@
 import request from "./request";
 import { api } from "@/config/index";
+import store from './../store';
 export default class ApiService {
   static getApiPre(type) {
     switch (type) {
@@ -19,8 +20,27 @@ export default class ApiService {
     return request.get(api.adminUrl + `chartQuery?code=${code}&parameter=${date}&fields=${fields}`);
   }
 
+  static getTotal(params) {
+
+    let obj = {
+      sql_type:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
+      prod_area_name:store.state.model /*本部*/
+    };
+    Object.assign(params,obj);
+
+    return request.get( api.adminUrl +`query?`,
+    params
+    );
+  }
+
+  // axios.get('/user', {
+  //   params: {
+  //     ID: 12345
+  //   }
+  // })
+
   //登录接口
   static login(data) {
-    return request.post(api.adminUrl + `login`, data);
+    return request.post(api.adminUrl + `login`, data, { headers: { "content-Type": "multipart/form-data" } });
   }
 }
