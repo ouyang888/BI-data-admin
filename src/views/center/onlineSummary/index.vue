@@ -660,6 +660,12 @@ export default {
 
     return {
       getparams:{},
+      AmericaDate: [],
+      AmericaList: [],
+      AvgTaskAmtDate: [],
+      AvgTaskAmtList: [],
+      AvgTaskAmtLine: [],
+      AmericaLine: [],
 
 //       info:[{
 // name:"name",
@@ -680,7 +686,7 @@ export default {
 
 //       }];
 
-      dhcarr: [0, 1, 2, 3, 4, 5],
+      dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
        leftObj:{
       name:'CooprLevel3',
       level:'cooprLevel3Mmanager',
@@ -831,27 +837,51 @@ export default {
     async getListInfo(listParams) {
       this.showLoading = true;
       try {
-          //  const res = await API.getTotal(
-        //  Object.assign(timeInfo,obj)
-        // );
-        const res = await API.getTotal("offLineMiddleChart", listParams);
+      let chart = {
+        code:'onlineMiddleChart',
+        //  fields:'cooprLevel1'
+      };
+      Object.assign(chart,listParams)
+      const res = await API.getTotal(chart);
+        //const homeSab = await API.getTotal(Object.assign(timeInfo,homeSabInfo));
+        //const res = await API.getTotal("offLineMiddleChart", listParams);
         // console.log("sell", res);
         let sellOutDataList = res.rows;
-        let newArr = sellOutDataList.filter((item) => {
+        debugger;
+        let newArr =res.rows.filter((item) => {
+            debugger;
           var timeArr = item.orderDate
             .replace(" ", ":")
+            
             .replace(/\:/g, "-")
             .split("-");
           var yue = timeArr[1];
           var ri = timeArr[2];
 
           // console.log("sellOutDataList",sellOutDataList);
+          /* 线上通路日达成趋势-金额版
+
+ * directName
+
+ * cooprLevel2 合作模式二级
+
+ * orderDate 日期
+
+ * cooprLevel1 线上/线下
+
+ * totalCnyAmt  日销售金额
+
+ * saleAvgAmt  任务日平均金额
+
+ */
 
           // 外销日内
-          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+           if (item.saleAvgAmt !== null && item.totalCnyAmt !== null) {
             this.AvgTaskAmtDate.push(yue + "-" + ri);
-            this.AvgTaskAmtList.push(item.totalAmt);
-            this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+            this.AvgTaskAmtList.push(item.totalCnyAmt);
+            this.AvgTaskAmtLine = item.saleAvgAmt;
+             console.log("this.AvgTaskAmtDate",this.AvgTaskAmtDate);
+            console.log("this.AvgTaskAmtLine",this.AvgTaskAmtLine);
             this.myEcharts();
           }
           this.showLoading = false;
@@ -867,11 +897,11 @@ export default {
         code:'onlineMiddleChart',
         fields:"cooprLevel2"
       };
-      Object.assign(line,chart)
+      Object.assign(chart,line)
       try {
         
-        const res = await API.getChartTotal(line);
-        
+        const res = await API.getChartTotal(chart);
+
         let sellOutDataList = res.rows;
         this.showLoading = false;
 
@@ -887,7 +917,7 @@ export default {
           }
           k++;
         }
-        debugger;
+
         console.log("arr", arr);
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
@@ -922,7 +952,7 @@ export default {
         console.log(error);
       }
     },
-        myEcharts() {
+  myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
         xAxis: {
@@ -1248,12 +1278,13 @@ export default {
     // this.getdashboard(this.ontime);
     // this.queryCardSAB(this.ontime);
     this.getList1(listParams);
+    this.getListInfo(listParams);
     this.getTable(params);
     this.getCard(params);
     this.getdashboard(params);
     this.queryCardSAB();
-    this.myEcharts();
-    this.getListInfo(listParams);
+    // this.myEcharts();
+
     },
 
  
