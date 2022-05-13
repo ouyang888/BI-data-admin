@@ -63,7 +63,7 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
-import Card from './component/card.vue'; 
+import Card from '@/views/center/components/card/card.vue'; 
 import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
 export default {
   name: "s",
@@ -89,35 +89,35 @@ export default {
       // koreaList: [],
       // koreaLine: [],
       progressData: {
-        bar1: '0',
-        bar2: '0',
+        bar1: 0,
+        bar2: 0,
         ballTitle: "外销",
         bigBallTitle: "毛利率",
         textLeft: "OBM",
         textRight: "OEM",
         titleTop: "OBM",
         titleBottom: "OEM",
-        topGPM: '0',
-        bottomGPM: '0',
-        ballNum:'0',
+        topGPM: 0,
+        bottomGPM: 0,
+        ballNum:0,
       },
 
       speedData: {
         bar: 1,
-        speedBar: '0',
+        speedBar: 0,
         ballTitle: "外销达成",
-        ballNum: '0',
+        ballNum: 0,
         ballLeftTitle: "OBM",
         ballRightTitle: "OEM",
-        ballLeftNum: '0',
-        ballRightNum: '0',
-        bottomNum: '0',
+        ballLeftNum: 0,
+        ballRightNum: 0,
+        bottomNum: 0,
         bottomTitle1: "OBM",
-        bottomClose: '0',
-        bottomTime: '0',
+        bottomClose: 0,
+        bottomTime: 0,
         bottomTitle2: "OEM",
-        bottomClose1: '0',
-        bottomTime1: '0',
+        bottomClose1: 0,
+        bottomTime1: 0,
       },
       sabData: {
         // bar1: 70,
@@ -128,9 +128,9 @@ export default {
         ballTitle: "外销",
         bottom: "OBM",
         top: "OEM",
-        sabArr: { s: '0', a: '0', b: '0' },
-        topArr: { s: '0', a: '0', b: '0' },
-        bottomArr: { s: '0', a: '0', b: '0' },
+        sabArr: { s: 0, a: 0, b: 0 },
+        topArr: { s: 0, a: 0, b: 0 },
+        bottomArr: { s: 0, a: 0, b: 0 },
         // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
@@ -357,7 +357,6 @@ export default {
         fields:'cooprLevel1'
       }
       Object.assign(chartObj,params)
-      console.log('chartObj',chartObj);
       try {
         const res = await API.getChartTotal(chartObj);
         console.log("res12",res);

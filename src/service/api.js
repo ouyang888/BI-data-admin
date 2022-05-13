@@ -22,7 +22,7 @@ export default class ApiService {
     };
     Object.assign(obj,params);
     return request.get( api.adminUrl +`query?`,
-    params
+    obj
     );
   }
   //七图
@@ -33,11 +33,12 @@ export default class ApiService {
 
 //  新的总接口
   static getTotal(params) {
+    
     let obj = {
       sql_type:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
       prod_area_name:store.state.model /*本部*/
     };
-    console.log('params', JSON.stringify(params));
+    console.log('params11', JSON.stringify(params));
     Object.assign(params,obj);
 
     return request.get( api.adminUrl +`query?`,

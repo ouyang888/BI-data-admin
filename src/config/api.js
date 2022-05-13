@@ -1,5 +1,5 @@
 // const admin_dev = '/apa/'
-const admin_dev = ''
+let admin_dev = ''
 
 const admin_test ='http://10.33.119.107:80/'
 
@@ -12,6 +12,7 @@ let local = 'test'
 switch (location.hostname) {
     case 'localhost':
         local = 'dev';
+        admin_dev =  '/apa/'
         break;
     case 'devnewdota.smartmidea.net':
         local = 'test';
@@ -23,7 +24,7 @@ switch (location.hostname) {
         local = 'prod';
 }
 
-console.log(local)
+console.log('admin_dev',admin_dev)
 const api = {
     dev: {
         adminUrl: admin_dev,
