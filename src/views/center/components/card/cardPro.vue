@@ -1,6 +1,6 @@
 <template>
   <div class="flex-card" >
-    <div class="card-box" v-for="(v,i) in list" :key="i">
+    <div class="card-box" v-for="(v,i) in cardList" :key="i">
       <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
         <div class="line"></div>
@@ -128,8 +128,9 @@
       return{
         pathObj:{
         'export':'exprotAreaAll'
+      },
+      cardList:[],
 
-      }
       }
     },
     computed:{
@@ -151,20 +152,28 @@
 
 
           let title = '';
+          this.cardList = [];
+          if(newValue.length<1) return;
 
           newValue && newValue.forEach(v => {
-            
-        
-            v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
+
+
+            if(v[this.cardObj.title] !=title){
+
+              v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
             v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt].toFixed(1);
             v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(0));
             if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
             v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/
+              this.cardList.push(v);
+                title = v[this.cardObj.title];
+            }   
+        
+     
          
             
           });
-        
-          this.list = newValue && newValue.length>6 && newValue.splice(6);
+
         }
       }
 
