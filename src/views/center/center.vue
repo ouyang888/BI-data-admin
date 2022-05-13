@@ -231,6 +231,16 @@ export default {
           this.$store.commit("setCurrPath", " 内销汇总产司页  ");
           break;
 
+            case "onlineSummaryDepartment":
+          this.title = "内销线上汇总产司页";
+          this.$store.commit("setCurrPath", " 内销线上汇总产司页  ");
+          break;
+
+            case "offlineSummaryDepartment":
+          this.title = "内销线下汇总产司页";
+          this.$store.commit("setCurrPath", " 内销线下汇总产司页  ");
+          break;
+
         default:
           this.title = "总裁PSI页";
           this.$store.commit("setCurrPath", "总裁PSI页");
