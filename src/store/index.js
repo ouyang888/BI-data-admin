@@ -28,33 +28,6 @@ export default new Vuex.Store({
         /* 图片框end */
     },
     mutations: {
-        // cutDownloadVisible(state) {
-        //     state.downloadVisible = !state.downloadVisible
-        // },
-        // mouseStart(state, envet) {
-        //     state.isMouse = true
-        //     state.preX = envet.x
-        //     state.preY = envet.y
-        // },
-        // mouseIng(state, envet) {
-        //     state.mouseX += envet.x - state.preX
-        //     state.mouseY += envet.y - state.preY
-        //     state.preX = envet.x
-        //     state.preY = envet.y
-        // },
-        // afterClose(state) {
-        //     state.isMouse = false
-        //     state.previewImage = ''
-        // },
-        // mouseup(state) {
-        //     state.isMouse = false
-        // },
-        // showImage(state, url) {
-        //     state.previewImage = url
-        //     state.previewVisible = true
-        // },
-        // setAuthoriths: (state, authoritys) => state.authoriths = authoritys,
-        // clearAuthoriths: (state) => state.authoriths = [],
         setYear(state,val){
             state.year = val
         },

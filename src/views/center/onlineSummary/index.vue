@@ -660,6 +660,12 @@ export default {
 
     return {
       getparams:{},
+      AmericaDate: [],
+      AmericaList: [],
+      AvgTaskAmtDate: [],
+      AvgTaskAmtList: [],
+      AvgTaskAmtLine: [],
+      AmericaLine: [],
 
 //       info:[{
 // name:"name",
@@ -680,7 +686,7 @@ export default {
 
 //       }];
 
-      dhcarr: [0, 1, 2, 3, 4, 5],
+      dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
        leftObj:{
       name:'CooprLevel3',
       level:'cooprLevel3Mmanager',
@@ -827,31 +833,75 @@ export default {
     };
   },
   methods: {
-// 右边接口
-    async getList1() {
-      //入参字段
-    // month_date=2022-03
-    // start_date=2022-03-01&end_date=2022-03-31
-    // coopr_level1=线上
-    // coopr_level2=京东
-    // coopr_level3=京东自营
-    // business_entity_name=环境
-    // shop_center=京东旗舰店
-    // sales_man=业务员姓名
-    // prod_area_name=本部,OEM,待定
-    // prod_area_name=本部
-    // prod_area_name=OEM
-    // sql_type=AMT
-    // sql_type=QTY
+     //中间折线图
+    async getListInfo(listParams) {
       this.showLoading = true;
-     let parseName={"code":"onlineMiddleChart","prod_area_name":"本部,OEM,待定","start_date":"2022-03-01","end_date":"2022-03-31","fields":"cooprLevel2"};
+      try {
+      let chart = {
+        code:'onlineMiddleChart',
+        //  fields:'cooprLevel1'
+      };
+      Object.assign(chart,listParams)
+      const res = await API.getTotal(chart);
+        //const homeSab = await API.getTotal(Object.assign(timeInfo,homeSabInfo));
+        //const res = await API.getTotal("offLineMiddleChart", listParams);
+        // console.log("sell", res);
+        let sellOutDataList = res.rows;
+        debugger;
+        let newArr =res.rows.filter((item) => {
+            debugger;
+          var timeArr = item.orderDate
+            .replace(" ", ":")
+            
+            .replace(/\:/g, "-")
+            .split("-");
+          var yue = timeArr[1];
+          var ri = timeArr[2];
+
+          // console.log("sellOutDataList",sellOutDataList);
+          /* 线上通路日达成趋势-金额版
+
+ * directName
+
+ * cooprLevel2 合作模式二级
+
+ * orderDate 日期
+
+ * cooprLevel1 线上/线下
+
+ * totalCnyAmt  日销售金额
+
+ * saleAvgAmt  任务日平均金额
+
+ */
+
+          // 外销日内
+           if (item.saleAvgAmt !== null && item.totalCnyAmt !== null) {
+            this.AvgTaskAmtDate.push(yue + "-" + ri);
+            this.AvgTaskAmtList.push(item.totalCnyAmt);
+            this.AvgTaskAmtLine = item.saleAvgAmt;
+             console.log("this.AvgTaskAmtDate",this.AvgTaskAmtDate);
+            console.log("this.AvgTaskAmtLine",this.AvgTaskAmtLine);
+            this.myEcharts();
+          }
+          this.showLoading = false;
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+// 右边接口
+    async getList1(line) {
+      this.showLoading = true;
+     let chart = {
+        code:'onlineMiddleChart',
+        fields:"cooprLevel2"
+      };
+      Object.assign(chart,line)
       try {
         
+        const res = await API.getChartTotal(chart);
 
-  
-
-        const res = await API.getDatainfo("onlineMiddleChart","本部,OEM,待定","2022-03-01","2022-03-31","cooprLevel2");
- 
         let sellOutDataList = res.rows;
         this.showLoading = false;
 
@@ -867,7 +917,7 @@ export default {
           }
           k++;
         }
-        debugger;
+
         console.log("arr", arr);
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
@@ -902,14 +952,135 @@ export default {
         console.log(error);
       }
     },
+  myEcharts() {
+      var myChart = this.$echarts.init(document.getElementById("main"));
+      var option = {
+        xAxis: {
+          axisLabel: {
+            formatter: function (val) {
+              return "";
+            },
+          },
+        },
+        labelData: [
+          { class: "plan", text: "实际达成" },
+          // { class: 'actual', text: '规划达成' },
+          { class: "average", text: "日均线" },
+        ],
+        // echartsData: {
+        textStyle: {
+          color: "#3FB0FF",
+        },
+        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+        title: {
+          text: "",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        grid: {
+          top: "5%",
+          left: "2%",
+          right: "5%",
+          bottom: "3%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: this.AvgTaskAmtDate,
+          axisTick: {
+            show: false,
+          },
+          axisLine: {
+            show: false,
+          },
+        },
+        yAxis: {
+          name: "单位：万",
+          type: "value",
+          splitLine: {
+            lineStyle: {
+              type: "dashed",
+              color: "rgba(45,153,255,.3)",
+            },
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLine: {
+            show: false,
+          },
+        },
+        series: [
+          {
+            name: "实际达成",
+            type: "line",
+            stack: "Total",
+            // smooth: true,
+            lineStyle: {
+              width: 1,
+            },
+            showSymbol: false,
+            areaStyle: {
+              normal: {
+                color: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                    },
+                    {
+                      offset: 0.7,
+                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                    },
+                  ],
+                  globalCoord: false, // 缺省为 false
+                },
+              },
+            },
+            data: this.AvgTaskAmtList,
+            markLine: {
+              data: [
+                {
+                  yAxis: this.AvgTaskAmtLine,
+                  silent: false, //鼠标悬停事件 true没有，false有
+                  lineStyle: {
+                    //警戒线的样式 ，虚实 颜色
+                    type: "dashed", //样式  ‘solid’和'dotted'
+                    color: "#FF8B2F",
+                    width: 2, //宽度
+                  },
+                  label: {
+                    formatter: "",
+                    color: "#FF8B2F",
+                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                  },
+                },
+              ],
+
+              symbol: ["none", "none"],
+            },
+          },
+        ],
+      };
+      myChart.setOption(option);
+    },
 
 
       // 右边卡片/
     async getCard(params) {
       this.showLoadingCard = true;
       try {
-        //onlineTopCooprLevel2
-        const res = await API.getData("onlineTopCooprLevel2", params);
+         let obj = {
+        code:"onlineTopCooprLevel2",
+      }
+        const res = await API.getTotal( Object.assign(params,obj));
+       // const res = await API.getData("onlineTopCooprLevel2", params);
 
         res.rows.length > 0 &&
           res.rows.forEach((v) => {
@@ -958,7 +1129,7 @@ export default {
     },
 
     //仪表盘(左中)
-    async getdashboard() {
+    async getdashboard(time) {
       // "page_name":"内销线上产司",
 // "page_level":"内销级",
 // "codes":"sellInnerOnlineBusinessChart,sellInnerOnlineBusinessKardSAB,sellInnerOnlineBusinessKard"
@@ -976,7 +1147,11 @@ export default {
 
 
       try {
-        const res = await API.getData("onlineTopTotal", this.dateTime);
+          let obj = {
+        code:"onlineTopTotal",
+      }
+        //const res = await API.getData("onlineTopTotal", this.dateTime);
+        const res = await API.getTotal(Object.assign(time,obj));
         let panelDataList = res.rows;
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
@@ -1085,21 +1260,31 @@ export default {
       }
     },
   init(model){
-    let params = `${this.ontime},${model}`;
-    let start=this.ontime+'-01';
-    let end=this.ontime+'-31';;
-    let time = `${this.ontime}-01,${this.ontime}-31`; /*年月日*/
+       let params = {  /*年月*/
+      month_date:this.ontime
+    };
+    let listParams = { /*年月日*/
+      start_date:`${this.ontime}-01`,
+      end_date:`${this.ontime}-31`
+    }
+
+    // let params = `${this.ontime},${model}`;
+    // let start=this.ontime+'-01';
+    // let end=this.ontime+'-31';;
+    // let time = `${this.ontime}-01,${this.ontime}-31`; /*年月日*/
     // this.getList();
     // this.getCard(this.ontime);
     // this.getTable(this.ontime);
     // this.getdashboard(this.ontime);
     // this.queryCardSAB(this.ontime);
-    this.getList1();
-    this.getTable(model,this.ontime);
-    this.getCard(this.ontime);
-    this.getdashboard();
+    this.getList1(listParams);
+    this.getListInfo(listParams);
+    this.getTable(params);
+    this.getCard(params);
+    this.getdashboard(params);
     this.queryCardSAB();
-    this.myEcharts();
+    // this.myEcharts();
+
     },
 
  
@@ -1359,14 +1544,38 @@ export default {
         //   "onlineBottomLevel3",
         //   "2022-03,2022-03"
         // );
-        let tableInner = await API.getDataLine("onlineBottomLevel3",time);
 
 
-        console.log("tableInner",tableInner);
-        let tableOutter = await API.getData(
-          "onlineBottomStore",
-          "2022-03,2022-03"
+       
+      let online = {
+        code:'onlineBottomLevel3'
+      };
+        let onlineStore = {
+        code:'onlineBottomStore'
+      };
+      // Object.assign(time,online)
+      // Object.assign(time,onlineStore)
+        // let tableInner = await API.getData(
+        //   "homeByDirectTotal",
+        //   ontime
+        // );
+       let tableInner =await API.getTotal( Object.assign(time,online));
+
+
+        // let tableInner = await API.getDataLine("onlineBottomLevel3",time);
+
+
+        // console.log("tableInner",tableInner);
+        // let tableOutter = await API.getData(
+        //   "onlineBottomStore",
+        //   "2022-03,2022-03"
+        // );
+
+         let tableOutter = await API.getTotal(
+        Object.assign(time,onlineStore)
         );
+
+
          console.log("tableInner",tableOutter);
 
         this.tableInner = tableInner.rows;

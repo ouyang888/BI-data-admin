@@ -1920,7 +1920,6 @@ export default {
       //   "homeGrossProfitRadio",
       //   ontime2
       // );
-      debugger;
        let obj = {
         code:"homeDashBoard",
       }
@@ -1934,7 +1933,7 @@ export default {
         const homeSab = await API.getTotal(Object.assign(timeInfo,homeSabInfo));
          let homeGross = {
         code:"homeGrossProfitRadio",
-      }
+        }
         const homeGrossProfitRadio = await API.getTotal(
          Object.assign(timeInfo,homeGross)
         );
@@ -1972,13 +1971,6 @@ export default {
         this.homeGrossProfitRadio1 = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName == this.sales;
         })[0];
-         //homeAnnualAmtChart中部：事业部年度达成趋势
-        // const homeAnnualAmtChart = await API.getData("homeAnnualAmtChart", "2022-01-01,2022-04-01,2022-01-01,2022-04-01");
-        //  //homeByDirectTotal	首页	首页	底部：产司汇总表格
-        // const homeAnnualAmtChart = await API.getData("homeAnnualAmtChart", "2022-03");
-
-  
-    
 
     },
    // 底部table/
@@ -2052,39 +2044,7 @@ export default {
         console.log(error);
       }
     },
-    // async getList1(name) {
-    //   alert(name);
-    //   const res = await API.getData("homeDashBoard", "2022-03");
-    //   const homeSab = await API.getData("homeSab", "2022-03");
-    //   const homeGrossProfitRadio = await API.getData(
-    //     "homeGrossProfitRadio",
-    //     "2022-03,2022-04"
-    //   );
-    //   this.departmentInfo1 = res.rows.filter((v) => {
-    //     return v.directName1 == name;
-    //   })[0];
-    //   this.processInfo1 = res.rows;
-    //   this.homeSabInfo1 = homeSab.rows;
-    //   this.homeGrossProfitRadio1 = homeGrossProfitRadio.rows.filter((v) => {
-    //     return v.directName == name;
-    //   })[0];
-    // },
-    // async getList2(name="内销") {
-    //   const res = await API.getData("homeDashBoard", "2022-03");
-    //   const homeSab = await API.getData("homeSab", "2022-03");
-    //   const homeGrossProfitRadio = await API.getData(
-    //     "homeGrossProfitRadio",
-    //     "2022-03,2022-04"
-    //   );
-    //   this.departmentInfo = res.rows.filter((v) => {
-    //     return v.directName == "内销";
-    //   })[0];
-    //   this.processInfo = res.rows;
-    //   this.homeSabInfo = homeSab.rows;
-    //   this.homeGrossProfitRadio=homeGrossProfitRadio.rows.filter((v) => {
-    //     return v.directName == "内销";
-    //   })[0]
-    // },
+    
 
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
@@ -2442,42 +2402,7 @@ export default {
       };
       myChart3.setOption(option);
     },
-        // 底部table/
-    // async getTable() {
-    //   try {
-    //     let tableInner = await API.getData(
-    //       "homeByDirectTotal",
-    //       "2022-03"
-    //     );
-    //     let tableOutter = await API.getData(
-    //       "homeByDirectTotal",
-    //       "2022-03"
-    //     );
-
-    //     // this.tableInner = tableInner.rows;
-    //     this.tableOutter = tableOutter.rows;
-    //     this.rowSpanNumber2 = this.tableOutter.length;
-
-    //     let innerTop = tableInner.rows.filter((v) => {
-    //       return v.marketChannel == "线上";
-    //     });
-    //     this.rowSpanNumber1 = innerTop.length;
-
-    //     let innerBottom = tableInner.rows.filter((v) => {
-    //       return v.marketChannel == "线下";
-    //     });
-    //     let innerTotal = tableInner.rows.filter((v) => {
-    //       return v.marketChannel == "底部合计";
-    //     });
-    //     this.tableInner = innerTop.concat(innerBottom,innerTotal);
-    //     console.log('this.tableInner',this.rowSpanNumber1,this.tableInner)
-
-
-    //     // console.log("this.data", this.data);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
+    
     init(model){
     // this.getList();
     // this.getCard(this.ontime);
