@@ -226,7 +226,7 @@ export default {
           this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
           break;
 
-           case "domesticDepartment":
+        case "domesticDepartment":
           this.title = "内销汇总产司页";
           this.$store.commit("setCurrPath", " 内销汇总产司页  ");
           break;
@@ -258,23 +258,30 @@ export default {
       }
     },
 
-
     changedirection(index) {
       this.direction = index;
-      let urlName = this.$route.name
+      let urlName = this.$route.name;
+      if (index == "1") {
+        this.$router.push("/center/index");
+        this.title = "销向汇总页";
+      }
       if (index == "2" && urlName == "psi") {
         this.$router.push("/center/department");
         this.title = "产司汇总页";
-      } else if(index == "2" && urlName == "domestic"){
+      } else if (index == "2" && urlName == "domestic") {
         this.$router.push("/center/domesticDepartment");
         this.title = "内销汇总产司页";
+      } else if (index == "2" && urlName == "onlineSummary") {
+        this.$router.push("/center/onlineSummaryDepartment");
+        this.title = "线上汇总产司页";
+      }else if (index == "2" && urlName == "offlineSummary") {
+        this.$router.push("/center/offlineSummaryDepartment");
+        this.title = "线下汇总产司页";
       }
       // else {
-      //   this.$router.push("/center/index");
-      //   this.title = "销向汇总页";
+
       // }
     },
-
 
     changeyear(item) {
       this.year = item;
@@ -298,7 +305,7 @@ export default {
     },
     clickChange(i) {
       this.index = i;
-      this.direction = 1
+      this.direction = 1;
       if (i == 1) {
         this.$router.push("/center/psi");
         this.title = "总裁PSI页";

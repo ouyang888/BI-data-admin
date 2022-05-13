@@ -167,6 +167,22 @@ const routes = [
                 name: 'domesticDepartment',
                 component: () => import('@/views/center/domesticDepartment/domesticDepartment.vue')
             },
+
+             //线上--线上汇总产司
+
+             {
+                path: 'onlineSummaryDepartment',
+                name: 'onlineSummaryDepartment',
+                component: () => import('@/views/center/onlineSummaryDepartment/onlineSummaryDepartment.vue')
+            },
+
+             //线下--线下汇总产司
+
+             {
+                path: 'offlineSummaryDepartment',
+                name: 'offlineSummaryDepartment',
+                component: () => import('@/views/center/offlineSummaryDepartment/offlineSummaryDepartment.vue')
+            },
         ],
     }
 

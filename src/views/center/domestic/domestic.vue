@@ -15,7 +15,7 @@
         <div class="card-box">
           <div class="card-font" @click="online()">线上</div>
           <a-spin class="cardLoad" size="large" v-if="showLoadingLeft" />
-          <div class="noData" v-else-if="innerLeft && innerLeft.length<1">暂无数据</div>
+          <div class="noData" v-else-if="innerLeft && innerLeft.length < 1">暂无数据</div>
           <div class="card-border-box" v-else>
             <div class="line"></div>
             <div class="line1"></div>
@@ -28,74 +28,51 @@
                   <div class="top-left-font">线上达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ innerLeftInfo.saleTaskAmt || 0 }}{{modelLabel}}</span>
+                      责任制 <span>{{ innerLeftInfo.saleTaskAmt || 0 }}{{ modelLabel }}</span>
                     </div>
                     <div class="finish-font">
                       完成率
-                      <span
-                        >{{
+                      <span>{{
                           innerLeftInfo.onLineRadio > 100
                             ? 100
                             : innerLeftInfo.onLineRadio || 0
-                        }}%</span
-                      >
+                      }}%</span>
                     </div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}{{modelLabel}}</div>
+                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}{{ modelLabel }}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
-                        <a-progress
-                          :percent="innerLeftInfo.dateRadio"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
+                        <a-progress :percent="innerLeftInfo.dateRadio" :show-info="false" strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress
-                          :percent="innerLeftInfo.onLineRadio"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
+                        <a-progress :percent="innerLeftInfo.onLineRadio" :show-info="false"
+                          strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  class="cardList"
-                  style="
+                <div class="cardList" style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <template v-for="(item, index) in innerLeft">
-                    <div
-                      class="card-middle-progress"
-                      :key="index"
-                      v-if="index < 3"
-                    >
+                    <div class="card-middle-progress" :key="index" v-if="index < 3">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
                         <div>
                           <div class="progress-middle">
-                            <a-progress
-                              :percent="item.dateRadio"
-                              :show-info="false"
-                              strokeColor="#FF8B2F"
-                            />
+                            <a-progress :percent="item.dateRadio" :show-info="false" strokeColor="#FF8B2F" />
                           </div>
                           <div class="progress-middle">
-                            <a-progress
-                              :percent="item.cnyAmtRadio * 100"
-                              :show-info="false"
-                              strokeColor="rgb(102, 255, 255)"
-                            />
+                            <a-progress :percent="item.cnyAmtRadio * 100" :show-info="false"
+                              strokeColor="rgb(102, 255, 255)" />
                           </div>
                         </div>
                       </div>
@@ -103,38 +80,24 @@
                   </template>
                 </div>
 
-                <div
-                  class="cardList"
-                  style="
+                <div class="cardList" style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <template v-for="(item, index) in innerLeft">
-                    <div
-                      class="card-middle-progress"
-                      :key="index"
-                      v-if="index > 2"
-                    >
+                    <div class="card-middle-progress" :key="index" v-if="index > 2">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
                         <div>
                           <div class="progress-middle">
-                            <a-progress
-                              :percent="item.dateRadio"
-                              :show-info="false"
-                              strokeColor="#FF8B2F"
-                            />
+                            <a-progress :percent="item.dateRadio" :show-info="false" strokeColor="#FF8B2F" />
                           </div>
                           <div class="progress-middle">
-                            <a-progress
-                              :percent="item.cnyAmtRadio * 100"
-                              :show-info="false"
-                              strokeColor="rgb(102, 255, 255)"
-                            />
+                            <a-progress :percent="item.cnyAmtRadio * 100" :show-info="false"
+                              strokeColor="rgb(102, 255, 255)" />
                           </div>
                         </div>
                       </div>
@@ -151,15 +114,10 @@
                     </span>
                   </div>
                 </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
+                <div class="flex-bottoms" style="padding-bottom: 10px; padding-top: 4px">
                   <div>
                     毛利率
-                    <span class="light-blue"
-                      >{{ innerLeftInfo.onLineProfitRadio || 0 }}%</span
-                    >
+                    <span class="light-blue">{{ innerLeftInfo.onLineProfitRadio || 0 }}%</span>
                   </div>
                 </div>
               </div>
@@ -170,7 +128,7 @@
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
-                      <span> 0.0{{modelLabel}}</span>
+                      <span> 0.0{{ modelLabel }}</span>
                     </div>
                     <div class="finish-font">
                       完成率 <span>{{ innerRightInfo.onLineRadio || 0.0 }}%</span>
@@ -179,70 +137,50 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ innerRightInfo.sumCnyamt || 0 }}{{modelLabel}}
+                    {{ innerRightInfo.sumCnyamt || 0 }}{{ modelLabel }}
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
-                        <a-progress
-                          :percent="innerRightInfo.dateRadio || 10"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
+                        <a-progress :percent="innerRightInfo.dateRadio || 10" :show-info="false"
+                          strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress
-                          :percent="innerRightInfo.onLineRadio || 20"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
+                        <a-progress :percent="innerRightInfo.onLineRadio || 20" :show-info="false"
+                          strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  class="cardList"
-                  style="
+                <div class="cardList" style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <template v-for="(item, index) in innerRight">
-                    <div
-                      class="card-middle-progress"
-                      :key="index"
-                      v-if="index < 3"
-                    >
+                    <div class="card-middle-progress" :key="index" v-if="index < 3">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
-                        <div class="light-blue">15{{modelLabel}}</div>
+                        <div class="light-blue">15{{ modelLabel }}</div>
                       </div>
                     </div>
                   </template>
                 </div>
-                <div
-                  class="cardList"
-                  style="
+                <div class="cardList" style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <template v-for="(item, index) in innerRight">
-                    <div
-                      class="card-middle-progress"
-                      :key="index"
-                      v-if="index >= 3"
-                    >
+                    <div class="card-middle-progress" :key="index" v-if="index >= 3">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
-                        <div class="light-blue">15{{modelLabel}}</div>
+                        <div class="light-blue">15{{ modelLabel }}</div>
                       </div>
                     </div>
                   </template>
@@ -256,15 +194,10 @@
                     </span>
                   </div>
                 </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
+                <div class="flex-bottoms" style="padding-bottom: 10px; padding-top: 4px">
                   <div>
                     毛利率
-                    <span class="light-blue"
-                      >{{ innerRightInfo.onLineProfitRadio || 0 }}%</span
-                    >
+                    <span class="light-blue">{{ innerRightInfo.onLineProfitRadio || 0 }}%</span>
                   </div>
                 </div>
               </div>
@@ -275,7 +208,7 @@
         <div class="card-box">
           <div class="card-font" @click="gotoSummary">线下</div>
           <a-spin class="cardLoad" size="large" v-if="showLoadingRight" />
-          <div class="noData" v-else-if="outterLeft && outterLeft.length<1">暂无数据</div>
+          <div class="noData" v-else-if="outterLeft && outterLeft.length < 1">暂无数据</div>
           <div class="card-border-box" v-else>
             <div class="line"></div>
             <div class="line1"></div>
@@ -288,112 +221,75 @@
                   <div class="top-left-font">线下达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ outterLeftInfo.saleTaskAmt }}{{modelLabel}}</span>
+                      责任制 <span>{{ outterLeftInfo.saleTaskAmt }}{{ modelLabel }}</span>
                     </div>
                     <div class="finish-font">
                       完成率
-                      <span
-                        >{{
+                      <span>{{
                           outterLeftInfo.onLineRadio > 100
                             ? 100
                             : outterLeftInfo.onLineRadio
-                        }}%</span
-                      >
+                      }}%</span>
                     </div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}{{modelLabel}}</div>
+                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}{{ modelLabel }}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
-                        <a-progress
-                          :percent="outterLeftInfo.dateRadio"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
+                        <a-progress :percent="outterLeftInfo.dateRadio" :show-info="false" strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress
-                          :percent="outterLeftInfo.onLineRadio"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
+                        <a-progress :percent="outterLeftInfo.onLineRadio" :show-info="false"
+                          strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  class="cardList"
-                  style="
+                <div class="cardList" style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <template v-for="(item, index) in outterLeft">
-                    <div
-                      class="card-middle-progress"
-                      :key="index"
-                      v-if="index < 3"
-                    >
+                    <div class="card-middle-progress" :key="index" v-if="index < 3">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
                         <div>
                           <div class="progress-middle">
-                            <a-progress
-                              :percent="item.dateRadio"
-                              :show-info="false"
-                              strokeColor="#FF8B2F"
-                            />
+                            <a-progress :percent="item.dateRadio" :show-info="false" strokeColor="#FF8B2F" />
                           </div>
                           <div class="progress-middle">
-                            <a-progress
-                              :percent="item.cnyAmtRadio * 100"
-                              :show-info="false"
-                              strokeColor="rgb(102, 255, 255)"
-                            />
+                            <a-progress :percent="item.cnyAmtRadio * 100" :show-info="false"
+                              strokeColor="rgb(102, 255, 255)" />
                           </div>
                         </div>
                       </div>
                     </div>
                   </template>
                 </div>
-                <div
-                  class="cardList"
-                  style="
+                <div class="cardList" style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <template v-for="(item, index) in outterLeft">
-                    <div
-                      class="card-middle-progress"
-                      :key="index"
-                      v-if="index > 2"
-                    >
+                    <div class="card-middle-progress" :key="index" v-if="index > 2">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
                         <div>
                           <div class="progress-middle">
-                            <a-progress
-                              :percent="item.dateRadio"
-                              :show-info="false"
-                              strokeColor="#FF8B2F"
-                            />
+                            <a-progress :percent="item.dateRadio" :show-info="false" strokeColor="#FF8B2F" />
                           </div>
                           <div class="progress-middle">
-                            <a-progress
-                              :percent="item.cnyAmtRadio * 100"
-                              :show-info="false"
-                              strokeColor="rgb(102, 255, 255)"
-                            />
+                            <a-progress :percent="item.cnyAmtRadio * 100" :show-info="false"
+                              strokeColor="rgb(102, 255, 255)" />
                           </div>
                         </div>
                       </div>
@@ -409,15 +305,10 @@
                     </span>
                   </div>
                 </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
+                <div class="flex-bottoms" style="padding-bottom: 10px; padding-top: 4px">
                   <div>
                     毛利率
-                    <span class="light-blue"
-                      >{{ outterLeftInfo.onLineProfitRadio }}%</span
-                    >
+                    <span class="light-blue">{{ outterLeftInfo.onLineProfitRadio }}%</span>
                   </div>
                 </div>
               </div>
@@ -428,86 +319,64 @@
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
-                      <span>0.0 {{modelLabel}}</span>
+                      <span>0.0 {{ modelLabel }}</span>
                     </div>
                     <div class="finish-font">
                       完成率
-                      <span
-                        >{{
+                      <span>{{
                           outterRightInfo.onLineRadio > 100
                             ? 100
                             : outterRightInfo.onLineRadio || 0
-                        }}%</span
-                      >
+                      }}%</span>
                     </div>
                   </div>
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ outterRightInfo.sumCnyamt || 0 }}{{modelLabel}}
+                    {{ outterRightInfo.sumCnyamt || 0 }}{{ modelLabel }}
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
-                        <a-progress
-                          :percent="outterRightInfo.dateRadio || 10"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
+                        <a-progress :percent="outterRightInfo.dateRadio || 10" :show-info="false"
+                          strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress
-                          :percent="outterRightInfo.onLineRadio || 20"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
+                        <a-progress :percent="outterRightInfo.onLineRadio || 20" :show-info="false"
+                          strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
                   </div>
                 </div>
-                <div
-                  class="cardList"
-                  style="
+                <div class="cardList" style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <template v-for="(item, index) in outterRight">
-                    <div
-                      class="card-middle-progress"
-                      :key="index"
-                      v-if="index < 3"
-                    >
+                    <div class="card-middle-progress" :key="index" v-if="index < 3">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
-                        <div class="light-blue">15{{modelLabel}}</div>
+                        <div class="light-blue">15{{ modelLabel }}</div>
                       </div>
                     </div>
                   </template>
                 </div>
-                <div
-                  class="cardList"
-                  style="
+                <div class="cardList" style="
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                  "
-                >
+                  ">
                   <template v-for="(item, index) in outterRight">
-                    <div
-                      class="card-middle-progress"
-                      :key="index"
-                      v-if="index >= 3"
-                    >
+                    <div class="card-middle-progress" :key="index" v-if="index >= 3">
                       <div style="display: flex; align-items: center">
                         <div class="finish-font">
                           {{ item.businessEntityName }}
                         </div>
-                        <div class="light-blue">15{{modelLabel}}</div>
+                        <div class="light-blue">15{{ modelLabel }}</div>
                       </div>
                     </div>
                   </template>
@@ -521,15 +390,10 @@
                     </span>
                   </div>
                 </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
+                <div class="flex-bottoms" style="padding-bottom: 10px; padding-top: 4px">
                   <div>
                     毛利率
-                    <span class="light-blue"
-                      >{{ outterRightInfo.onLineProfitRadio || 0 }}%</span
-                    >
+                    <span class="light-blue">{{ outterRightInfo.onLineProfitRadio || 0 }}%</span>
                   </div>
                 </div>
               </div>
@@ -551,11 +415,7 @@
           <div class="middle-font">内销日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
-              <div
-                class="item"
-                v-for="(item, index) in echartsLabel"
-                :key="index"
-              >
+              <div class="item" v-for="(item, index) in echartsLabel" :key="index">
                 <div class="lump" :class="item.class"></div>
                 <div class="text">{{ item.text }}</div>
               </div>
@@ -568,11 +428,7 @@
           <div class="middle-font">线上日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
-              <div
-                class="item"
-                v-for="(item, index) in echartsLabel"
-                :key="index"
-              >
+              <div class="item" v-for="(item, index) in echartsLabel" :key="index">
                 <div class="lump" :class="item.class"></div>
                 <div class="text">{{ item.text }}</div>
               </div>
@@ -585,11 +441,7 @@
           <div class="middle-font">线下日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
-              <div
-                class="item"
-                v-for="(item, index) in echartsLabel"
-                :key="index"
-              >
+              <div class="item" v-for="(item, index) in echartsLabel" :key="index">
                 <div class="lump" :class="item.class"></div>
                 <div class="text">{{ item.text }}</div>
               </div>
@@ -606,7 +458,8 @@
     </div>
 
     <!-- 底部表格 -->
-      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj" title1="线上" title2="线下"/>
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
+      title1="线上" title2="线下" />
   </div>
 </template>
 <script>
@@ -625,8 +478,8 @@ export default {
   },
   data() {
     return {
-      dateTime:"2022-03",
-      dataTimeMany:"2022-01-01,2022-10-01,2022-01-01,2022-10-01",
+      dateTime: "2022-03",
+      dataTimeMany: "2022-01-01,2022-10-01,2022-01-01,2022-10-01",
       showLoading: false,
 
       innerDirectList: [],
@@ -681,101 +534,106 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
-     echartsLabel: [
+      echartsLabel: [
         { class: "plan", text: "实际达成" },
         { class: "average", text: "日均线" },
       ],
-      innerLeft:[],
-       innerLeftInfo:{},
-       innerRight:[{ cnyAmtRadio: 20, businessEntityName: '环境', dateRadio: 12 },
-                { cnyAmtRadio: 20, businessEntityName: '烹饪', dateRadio: 12 },
-                { cnyAmtRadio: 20, businessEntityName: '电磁', dateRadio: 12 },
-                { cnyAmtRadio: 20, businessEntityName: '调理', dateRadio: 12 },
-                { cnyAmtRadio: 20, businessEntityName: '电动', dateRadio: 12 },
-                { cnyAmtRadio: 20, businessEntityName: '饮品', dateRadio: 12 }],
-       innerRightInfo:{},
-       innerSabLeft:[],
-       innerSabRight:[],
-       outterLeft:[],
-       outterLeftInfo:{},
-       outterRight:[{ cnyAmtRadio: 20, businessEntityName: '环境', dateRadio: 12 },
-                { cnyAmtRadio: 20, businessEntityName: '烹饪', dateRadio: 12 },
-                { cnyAmtRadio: 20, businessEntityName: '电磁', dateRadio: 12 },
-                { cnyAmtRadio: 20, businessEntityName: '调理', dateRadio: 12 },
-                { cnyAmtRadio: 20, businessEntityName: '电动', dateRadio: 12 },
-                { cnyAmtRadio: 20, businessEntityName: '饮品', dateRadio: 12 },],
-       outterRightInfo:{},
-       outterSabLeft:[],
-       outterSabRight:[],
+      innerLeft: [],
+      innerLeftInfo: {},
+      innerRight: [{ cnyAmtRadio: 20, businessEntityName: '环境', dateRadio: 12 },
+      { cnyAmtRadio: 20, businessEntityName: '烹饪', dateRadio: 12 },
+      { cnyAmtRadio: 20, businessEntityName: '电磁', dateRadio: 12 },
+      { cnyAmtRadio: 20, businessEntityName: '调理', dateRadio: 12 },
+      { cnyAmtRadio: 20, businessEntityName: '电动', dateRadio: 12 },
+      { cnyAmtRadio: 20, businessEntityName: '饮品', dateRadio: 12 }],
+      innerRightInfo: {},
+      innerSabLeft: [],
+      innerSabRight: [],
+      outterLeft: [],
+      outterLeftInfo: {},
+      outterRight: [{ cnyAmtRadio: 20, businessEntityName: '环境', dateRadio: 12 },
+      { cnyAmtRadio: 20, businessEntityName: '烹饪', dateRadio: 12 },
+      { cnyAmtRadio: 20, businessEntityName: '电磁', dateRadio: 12 },
+      { cnyAmtRadio: 20, businessEntityName: '调理', dateRadio: 12 },
+      { cnyAmtRadio: 20, businessEntityName: '电动', dateRadio: 12 },
+      { cnyAmtRadio: 20, businessEntityName: '饮品', dateRadio: 12 },],
+      outterRightInfo: {},
+      outterSabLeft: [],
+      outterSabRight: [],
       // 底部表格
-      tableInner:[],
-      tableOutter:[],
-      rowSpanNumber1:6,
-      rowSpanNumber2:6,
-      titleHead :{
-      tAvgAmt:'责任制',
-      cnyAmt:'累计达成',
-      amtRadio: '任务完成率',
-      profitRadio :'毛利率',
-      days:' 周转天数',
-      amtFinish:'说到做到',
-      ranking :'排名',
+      tableInner: [],
+      tableOutter: [],
+      rowSpanNumber1: 6,
+      rowSpanNumber2: 6,
+      titleHead: {
+        tAvgAmt: '责任制',
+        cnyAmt: '累计达成',
+        amtRadio: '任务完成率',
+        profitRadio: '毛利率',
+        days: ' 周转天数',
+        amtFinish: '说到做到',
+        ranking: '排名',
       },
-      showLoadingLeft:true,
-      showLoadingRight:true,
-      leftObj:{   
-      name:'cooprLevel2',  /*标题*/
-      level:'cooprLevel2Manager',/*责任人*/
-      tAvgAmt:'tAvgAmt',/*责任制*/
+      showLoadingLeft: true,
+      showLoadingRight: true,
+      leftObj: {
+        name: 'cooprLevel2',  /*标题*/
+        level: 'cooprLevel2Manager',/*责任人*/
+        tAvgAmt: 'tAvgAmt',/*责任制*/
       },
-      rightObj:{
-      name:'cooprLevel2',
-      level:'cooprLevel2Manager',
-      tAvgAmt:'tAvgAmt'
+      rightObj: {
+        name: 'cooprLevel2',
+        level: 'cooprLevel2Manager',
+        tAvgAmt: 'tAvgAmt'
       },
     };
   },
-  computed:{
-    ontime(){
-      return this.$store.state.year +'-'+ this.$store.state.month;
+  computed: {
+    ontime() {
+      return this.$store.state.year + '-' + this.$store.state.month;
     },
-    showMoney(){
+    showMoney() {
       return this.$store.state.showMoney;
     },
-    modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'台'
+    modelLabel() {
+      return this.$store.state.showMoney == true ? '亿' : '亿'
     },
-    model(){ /* 获取本部，OEM */
+    model() { /* 获取本部，OEM */
       return this.$store.state.model
     }
-    
+
   },
-  watch:{
-    ontime:{
-     handler: function (newValue, oldValue) {
-      this.init(this.model);
+  watch: {
+    ontime: { /*监听数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
+        this.init();
       }
     },
-    model:{ /*监听数据更改 调用接口 */
-      handler: function(newValue,oldValue){
-        this.init(newValue);
+    model: { /*监听数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
+        this.init();
       }
 
     },
-    showMoney:{
-      handler:function(newValue,oldValue){
-        this.init(this.model);
+    showMoney: {
+      handler: function (newValue, oldValue) {
+        this.init();
       }
-    },
+    }
+
   },
   methods: {
     //三个仪表盘(左中)
     async getdashboard(params) {
+      let obj = {
+        code: 'innerDirectTopTotal'
+      };
+      Object.assign(params,obj)
       try {
-        const res = await API.getData("innerDirectTopTotal", params);
+        const res = await API.getTotal(params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
-        if(res.rows.length<1){
+        if (res.rows.length < 1) {
           this.speedData = {
             bar: 0,
             speedBar: 0,
@@ -792,20 +650,20 @@ export default {
             bottomTitle2: "外销",
             bottomClose1: 0,
             bottomTime1: 0,
-               };
-            this.progressData = {
-                bar1: 0,
-                bar2: 0,
-                ballTitle: "事业部",
-                bigBallTitle: "毛利率",
-                textLeft: "内销",
-                textRight: "外销",
-                titleTop: "内销",
-                titleBottom: "外销",
-                topGPM: 0,
-                bottomGPM: 0,
-                ballNum: 0,
-         };
+          };
+          this.progressData = {
+            bar1: 0,
+            bar2: 0,
+            ballTitle: "事业部",
+            bigBallTitle: "毛利率",
+            textLeft: "内销",
+            textRight: "外销",
+            titleTop: "内销",
+            titleBottom: "外销",
+            topGPM: 0,
+            bottomGPM: 0,
+            ballNum: 0,
+          };
           return;
         }
         this.progressData.ballNum = (
@@ -850,24 +708,28 @@ export default {
     },
     //三个仪表盘(右)
     async queryCardSAB(params) {
+      let obj = {
+        code: 'innerDirectTopSAB'
+      };
+      Object.assign(params,obj)
       try {
-        const res = await API.getData("innerDirectRightSAB", params);
+        const res = await API.getTotal(params);
         let RightSAB = res.rows;
-        if(RightSAB.length<1 ){
-            this.sabData = {
-              bar1: 0,
-              bar2: 0,
-              bar3: 0,
-              bar4: 0,
-              bar5: 0,
-              ballTitle: "事业部",
-              bottom: "外销",
-              top: "内销",
-              sabArr: { s: 0, a: 0, b: 0 },
-              topArr: { s: 0, a: 0, b: 0 },
-              bottomArr: { s: 0, a: 0, b: 0 },
-            };
-           return;
+        if (RightSAB.length < 1) {
+          this.sabData = {
+            bar1: 0,
+            bar2: 0,
+            bar3: 0,
+            bar4: 0,
+            bar5: 0,
+            ballTitle: "事业部",
+            bottom: "外销",
+            top: "内销",
+            sabArr: { s: 0, a: 0, b: 0 },
+            topArr: { s: 0, a: 0, b: 0 },
+            bottomArr: { s: 0, a: 0, b: 0 },
+          };
+          return;
         }
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].cooprLevel1 == "线上") {
@@ -912,21 +774,15 @@ export default {
     },
 
     //中间折线图
-    async getList(listParams) {
+    async getList(params) {
       this.showLoading = true;
-      this.innerDirectList=[];
-      this.innerDirectDate=[];
-      this.innerDirectLine="";
-
-      this.outerDirectList=[];
-      this.outerDirectDate=[];
-      this.outerDirectLine="";
-      this.allList=[];
-      this.allLiine="";
+       let obj = {
+        code:"innerDirectChart",
+      }
+       Object.assign(params,obj);
       try {
-        const res = await API.getData(
-          "innerDirectChart",
-          listParams
+        const res = await API.getTotal(
+         params
         );
 
         let obj = { innerDirect: "", outerDirect: "" };
@@ -1316,7 +1172,7 @@ export default {
     online() {
       this.$router.push("/center/onlineSummary");
     },
-    gotoSummary(){
+    gotoSummary() {
       this.$router.push("/center/offlineSummary");
     },
     // 右边卡片/
@@ -1324,21 +1180,29 @@ export default {
       // try {
       this.showLoadingLeft = true;
       this.showLoadingRight = true;
-      const inner = await API.getData("innerDirectInOutKard", params);
-      const innersab = await API.getData("innerDirectRightSAB", params);
-      console.log("inner,", inner);
+        let innerObj = {
+        code:"innerDirectInOutKard"
+      };
+      let outtObj = {
+        code:"innerDirectRightSAB"
+      };
+      Object.assign(innerObj,params);
+      Object.assign(outtObj,params);
+      const inner = await API.getTotal(innerObj);
+      const innersab = await API.getTotal(outtObj);
+      // console.log("inner,", inner);
       this.showLoadingLeft = false;
       this.showLoadingRight = false;
-      if(inner.rows.length == 0){
+      if (inner.rows.length == 0) {
         this.innerLeft = [];
         this.outterLeft = [];
         return;
-        }
-   
+      }
+
       inner.rows.forEach((v) => {
         v.dateRadio = v.dateRadio * 100;
         v.onLineRadio = v.onLineRadio * 100 > 100 ? 100 : (v.onLineRadio * 100).toFixed(0);
-        v.onLineProfitRadio = v.onLineProfitRadio*100>100?100:(v.onLineProfitRadio*100).toFixed(0);
+        v.onLineProfitRadio = v.onLineProfitRadio * 100 > 100 ? 100 : (v.onLineProfitRadio * 100).toFixed(0);
         v.sumCnyamt = v.sumCnyamt.toFixed(0);
         v.saleTaskAmt = v.saleTaskAmt.toFixed(1);
       });
@@ -1354,21 +1218,21 @@ export default {
       });
       this.innerLeft.splice(6);
       this.innerLeftInfo = this.innerLeft[0];
-     
 
-       this.innerSabLeft = innersab.rows.filter(v=>{
-          return v.cooprLevel1 == '线上' && v.position !='其他';
-        })
-        this.innerSabLeft.forEach(v=>{
-          v.positionRatio = (v.level1PositionRatio*100).toFixed(0)
-        })
-       console.log('this.innerSabLeft', this.innerSabLeft)
-       this.outterSabLeft = innersab.rows.filter(v=>{
-          return v.cooprLevel1 == '线下' && v.position !='其他';
-        })
-        this.outterSabLeft.forEach(v=>{
-          v.positionRatio = (v.level1PositionRatio*100).toFixed(0)
-        })
+
+      this.innerSabLeft = innersab.rows.filter(v => {
+        return v.cooprLevel1 == '线上' && v.position != '其他';
+      })
+      this.innerSabLeft.forEach(v => {
+        v.positionRatio = (v.level1PositionRatio * 100).toFixed(0)
+      })
+      console.log('this.innerSabLeft', this.innerSabLeft)
+      this.outterSabLeft = innersab.rows.filter(v => {
+        return v.cooprLevel1 == '线下' && v.position != '其他';
+      })
+      this.outterSabLeft.forEach(v => {
+        v.positionRatio = (v.level1PositionRatio * 100).toFixed(0)
+      })
 
       // }catch(err){
       //   console.log(err)
@@ -1389,11 +1253,11 @@ export default {
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
 
-        this.tableInner = tableInner.rows.filter(v=>{
+        this.tableInner = tableInner.rows.filter(v => {
           return v.cooprLevel2Manager != '底部合计' && !!v.cooprLevel2
         })
-        let innerbottom = tableInner.rows.filter(v=>{
-          if(v.cooprLevel2Manager =='底部合计' ){
+        let innerbottom = tableInner.rows.filter(v => {
+          if (v.cooprLevel2Manager == '底部合计') {
             v.cooprLevel2 = '底部合计'
           }
           return v.cooprLevel2Manager == '底部合计'
@@ -1402,41 +1266,43 @@ export default {
 
 
 
-        this.tableOutter = tableOutter.rows.filter(v=>{
+        this.tableOutter = tableOutter.rows.filter(v => {
           return v.cooprLevel2Manager != '合计' && !!v.cooprLevel2
         })
-     
-        let outterbottom = tableOutter.rows.filter(v=>{
-          if(v.cooprLevel2Manager =='合计' ){
+
+        let outterbottom = tableOutter.rows.filter(v => {
+          if (v.cooprLevel2Manager == '合计') {
             v.cooprLevel2 = '合计'
             v.ranking = ''
           }
           return v.cooprLevel2Manager == '合计'
         })
         this.tableOutter = this.tableOutter.concat(outterbottom);
-        console.log('outterbottom',outterbottom)
+        console.log('outterbottom', outterbottom)
       } catch (err) {
         console.log(err);
       }
     },
-    init(model){ /*初始化数据方法*/
-    let params = `${this.ontime},${model}`;
-    // 亚太业务区,亚太业务区,本部,OEM,待定,2022-03-01,2022-03-31
-    
-    let listParams = `${model},${this.ontime}-01,${this.ontime}-31`;
-    let tableParams = `${this.ontime},${this.ontime},${model},`;
- 
-    this.getList(listParams);
-    this.getdashboard(params);
-    this.queryCardSAB(params);
-    this.getCard(params);
-    this.getTable(tableParams);
+    init() { /*初始化数据方法*/
+      // let tableParams = `${this.ontime},${this.ontime},${model},`;
+      let params = {  /*年月*/
+        month_date: this.ontime
+      };
+      let listParams = { /*年月日*/
+        start_date: `${this.ontime}-01`,
+        end_date: `${this.ontime}-31`
+      }
+      this.getList(listParams);
+      this.getdashboard(params);
+      this.queryCardSAB(params);
+      this.getCard(params);
+      // this.getTable(params);
     }
   },
   created() {
-    this.init(this.model);
+    this.init();
   },
-  mounted() {},
+  mounted() { },
 };
 </script>
 <style scoped>
@@ -1509,26 +1375,23 @@ export default {
   border-radius: 0 0 10px 10px;
 }
 
-::v-deep .ant-table-thead > tr > th {
+::v-deep .ant-table-thead>tr>th {
   background: rgb(4, 19, 112);
   border-bottom: 1px solid rgb(55, 56, 112);
   border-right: 1px solid rgb(55, 56, 112);
 }
 
-::v-deep .ant-table-thead > tr > th .ant-table-header-column {
+::v-deep .ant-table-thead>tr>th .ant-table-header-column {
   color: #fff;
   font-size: 14px;
 }
 
-::v-deep .ant-table-bordered .ant-table-tbody > tr > td {
+::v-deep .ant-table-bordered .ant-table-tbody>tr>td {
   border: 1px solid rgb(55, 56, 112);
   color: #fff;
 }
 
-::v-deep
-  .ant-table-tbody
-  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
-  > td {
+::v-deep .ant-table-tbody>tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)>td {
   background: transparent;
 }
 
@@ -1536,13 +1399,11 @@ export default {
   margin: 14px;
 }
 
-::v-deep .ant-table-thead > tr:first-child > th:first-child {
-  background: linear-gradient(
-    to right,
-    rgb(80, 192, 255),
-    rgb(90, 255, 163),
-    rgb(102, 255, 255)
-  );
+::v-deep .ant-table-thead>tr:first-child>th:first-child {
+  background: linear-gradient(to right,
+      rgb(80, 192, 255),
+      rgb(90, 255, 163),
+      rgb(102, 255, 255));
 }
 
 .top-flex {
@@ -1713,7 +1574,7 @@ export default {
   opacity: 1;
 }
 
-::v-deep .ant-table-bordered .ant-table-body > table {
+::v-deep .ant-table-bordered .ant-table-body>table {
   border: none;
 }
 
@@ -1729,14 +1590,14 @@ export default {
 .main {
   height: 230px;
 }
-::v-deep .ant-table-thead > tr:first-child > th:first-child {
-  background: linear-gradient(
-    to right,
-    rgb(80, 192, 255),
-    rgb(90, 255, 163),
-    rgb(102, 255, 255)
-  );
+
+::v-deep .ant-table-thead>tr:first-child>th:first-child {
+  background: linear-gradient(to right,
+      rgb(80, 192, 255),
+      rgb(90, 255, 163),
+      rgb(102, 255, 255));
 }
+
 .content {
   width: 192px;
   height: 192px;
@@ -1746,6 +1607,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .big-round {
   width: 105px;
   height: 105px;
@@ -1755,6 +1617,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .round {
   width: 85px;
   height: 85px;
@@ -1767,6 +1630,7 @@ export default {
   box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
   border: 1px solid rgba(50, 197, 255, 0.22);
 }
+
 .round-title {
   font-size: 12px;
   color: #32c5ff;
@@ -1774,6 +1638,7 @@ export default {
   text-align: center;
   font-weight: 500;
 }
+
 .sort {
   font-size: 24px;
   color: #ffffff;
@@ -1781,6 +1646,7 @@ export default {
   text-align: center;
   font-weight: 600;
 }
+
 .title {
   position: absolute;
   bottom: 20px;
@@ -1792,16 +1658,19 @@ export default {
   line-height: 17px;
   font-weight: 400;
 }
+
 .bottom {
   text-align: center;
   margin-top: 18px;
 }
+
 .bottom-color {
   width: 8px;
   height: 8px;
   margin-left: 5px;
   display: inline-block;
 }
+
 .bottom-title {
   opacity: 0.8;
   padding-left: 5px;
@@ -1812,6 +1681,7 @@ export default {
   line-height: 17px;
   font-weight: 400;
 }
+
 .bottom-text {
   margin-top: 3px;
   opacity: 0.7;
@@ -1822,49 +1692,61 @@ export default {
   line-height: 10px;
   font-weight: 400;
 }
+
 .bottom-text span {
   margin-left: 5px;
 }
+
 .card-big-num {
   color: #66ffff;
   font-size: 28px;
 }
+
 .progress {
   width: 120px;
   height: 10px;
 }
+
 .progress:last-child {
   margin-bottom: 12px;
 }
+
 .progress-middle {
   width: 34px;
   height: 10px;
 }
+
 .progress-middle:last-child {
   margin-bottom: 12px;
 }
+
 ::v-deep .ant-progress-bg {
   height: 4px !important;
   border-radius: 200px !important;
 }
+
 .card-middle-progress {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .flex-bottoms {
   display: flex;
   align-items: center;
   color: #a0a3c0;
   font-size: 12px;
 }
+
 .light-blue {
   color: #66ffff;
   opacity: 1;
 }
-::v-deep .ant-table-bordered .ant-table-body > table {
+
+::v-deep .ant-table-bordered .ant-table-body>table {
   border: none;
 }
+
 /* 计划 */
 .plan {
   border-bottom: 2px solid #66ffff;
@@ -1884,6 +1766,7 @@ export default {
   color: #fff;
   font-size: 12px;
 }
+
 .select-box {
   position: absolute;
   right: 20px;
@@ -1896,6 +1779,7 @@ export default {
 .main {
   height: 230px;
 }
+
 .backgroundPic {
   height: 200px;
   width: 192px;
@@ -1906,6 +1790,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .content {
   width: 192px;
   height: 192px;
@@ -1915,6 +1800,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .big-round {
   width: 105px;
   height: 105px;
@@ -1924,6 +1810,7 @@ export default {
   align-items: center;
   justify-content: center;
 }
+
 .round {
   width: 85px;
   height: 85px;
@@ -1936,6 +1823,7 @@ export default {
   box-shadow: inset 0px 0px 20px 0px rgba(102, 255, 255, 0.52);
   border: 1px solid rgba(50, 197, 255, 0.22);
 }
+
 .round-title {
   font-size: 12px;
   color: #32c5ff;
@@ -1943,6 +1831,7 @@ export default {
   text-align: center;
   font-weight: 500;
 }
+
 .panelList {
   height: 258px;
   width: 760px;
@@ -1950,11 +1839,13 @@ export default {
   flex-direction: row;
   justify-content: space-around;
 }
+
 .flex-loading {
   position: relative;
   left: 50%;
   right: 50%;
 }
+
 /* .cardList{
   flex-wrap: wrap;
 } */
@@ -1965,7 +1856,8 @@ export default {
 ::v-deep .ant-table-fixed {
   background: rgb(7 6 64);
 }
-.card-middle-progress{
-  height:28px;
+
+.card-middle-progress {
+  height: 28px;
 }
 </style> 
