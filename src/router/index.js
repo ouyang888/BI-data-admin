@@ -159,6 +159,14 @@ const routes = [
                 name: 'exprotProductCo',
                 component: () => import('@/views/center/exprotProductCo/exprotProductCo.vue')
             },
+
+              //内销--内销汇总产司
+
+              {
+                path: 'domesticDepartment',
+                name: 'domesticDepartment',
+                component: () => import('@/views/center/domesticDepartment/domesticDepartment.vue')
+            },
         ],
     }
 

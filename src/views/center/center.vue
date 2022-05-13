@@ -226,6 +226,11 @@ export default {
           this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
           break;
 
+           case "domesticDepartment":
+          this.title = "内销汇总产司页";
+          this.$store.commit("setCurrPath", " 内销汇总产司页  ");
+          break;
+
         default:
           this.title = "总裁PSI页";
           this.$store.commit("setCurrPath", "总裁PSI页");
@@ -252,16 +257,25 @@ export default {
           break;
       }
     },
+
+
     changedirection(index) {
       this.direction = index;
-      if (index == "2") {
+      let urlName = this.$route.name
+      if (index == "2" && urlName == "psi") {
         this.$router.push("/center/department");
         this.title = "产司汇总页";
-      } else {
+      } else if(index == "2" && urlName == "domestic"){
+        this.$router.push("/center/domesticDepartment");
+        this.title = "内销汇总产司页";
+      }
+      else {
         this.$router.push("/center/index");
         this.title = "销向汇总页";
       }
     },
+
+
     changeyear(item) {
       this.year = item;
       this.$store.commit("setYear", item);
@@ -284,6 +298,7 @@ export default {
     },
     clickChange(i) {
       this.index = i;
+      this.direction = 1
       if (i == 1) {
         this.$router.push("/center/psi");
         this.title = "总裁PSI页";
