@@ -11,7 +11,7 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-      <cardPro :list="cardData" :cardObj="cardObj" />
+      <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab"/>
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -193,6 +193,7 @@ export default {
       showLoadingLeft: true,
       showLoadingRight: true,
       titleName: this.$route.query.key || "环境",
+      cardSab:[]
     };
   },
   computed: {
@@ -291,16 +292,13 @@ export default {
 
     // 右边卡片/
     async getCard(params) {
-      let obj = {
-        code: "sellInnerBusinessTotalKard",
-      };
-      Object.assign(obj, params);
-      const res = await API.getTotal(obj);
-
+      const res = await API.getData('sellInnerBusinessTotalKard',params);
+      const res2 = await API.getData('sellInnerBusinessTotalKardSAB',params);
       if(res.code !=200) return;
-
       this.cardData = res.rows;
 
+      this.cardSab = res2.rows;
+      
     },
 
     //仪表盘(左中)

@@ -114,6 +114,10 @@
         type: Array,
         default: function () { return [] }
       },
+      cardSab: {
+        type: Array,
+        default: function () { return [] }
+      },
       cardObj: {
         type: Object,
         default: function () { return {
