@@ -269,10 +269,10 @@ export default {
         this.$router.push("/center/domesticDepartment");
         this.title = "内销汇总产司页";
       }
-      else {
-        this.$router.push("/center/index");
-        this.title = "销向汇总页";
-      }
+      // else {
+      //   this.$router.push("/center/index");
+      //   this.title = "销向汇总页";
+      // }
     },
 
 
