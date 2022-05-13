@@ -117,10 +117,10 @@
       cardObj: {
         type: Object,
         default: function () { return {
-       'title':'cooprLevel1',
-       'cnyAmt':'cooprLevel1NameAmt',
-       'saleTaskAmt':'cooprLevel1TaskAmt',
-       'cooprLevel1AmtRadio':'saleAmtRadio'
+        'title':'cooprLevel2', /*标题*/
+       'cnyAmt':'cnyAmt',/*金额*/
+       'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
+       'saleAmtRadio':'saleAmtRadio'  /*金额完成率*/
         } }
       },
     },
@@ -148,7 +148,17 @@
       },
       list:{
         handler:function(newValue,oldValue){
-          this.list = newValue;
+
+          newValue && newValue.forEach(v => {
+            v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
+            v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt].toFixed(1);
+            v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(0));
+            if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
+            v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/
+            
+          });
+        
+          this.list = newValue && newValue.length>6 && newValue.splice(6);
         }
       }
 
