@@ -1933,7 +1933,7 @@ export default {
         const homeSab = await API.getTotal(Object.assign(timeInfo,homeSabInfo));
          let homeGross = {
         code:"homeGrossProfitRadio",
-      }
+        }
         const homeGrossProfitRadio = await API.getTotal(
          Object.assign(timeInfo,homeGross)
         );
