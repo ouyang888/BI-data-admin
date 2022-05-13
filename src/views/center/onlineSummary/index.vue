@@ -17,8 +17,8 @@
     justify-content: right;
     flex-wrap: wrap;">
         <Card :list="cardData" @gotoCatSeries="gotoCatSeries" />
-</div>
-        <!-- <div class="card-box">
+      </div>
+      <!-- <div class="card-box">
           <div class="card-font" @click="gotoCatSeries('淘系')">淘系</div>
           <div class="card-border-box">
             <div class="line"></div>
@@ -505,7 +505,7 @@
             <div class="line"></div>
           </div>
         </div> -->
-      </div>
+    </div>
 
 
     <div class="middle-box">
@@ -521,13 +521,13 @@
         <div>
           <div class="middle-font">大区日达成趋势图</div>
           <div class="right-box-qushi">
-                 <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
+            <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
               <div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
                 <div class="flex-echrats-right">
                   <div class="right-font-title">{{ item }}</div>
-                  <div  :id="i" class="echartsBox-min"></div>
+                  <div :id="i" class="echartsBox-min"></div>
                 </div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line1"></div>
@@ -630,13 +630,8 @@
     </div>
 
     <!-- 底部表格 -->
-    <innerTableCardBox
-      :leftData="tableInner"
-      :rightData="tableOutter"
-      :leftObj="leftObj" :rightObj="rightObj"
-      title1="合作模式三"
-      title2="线上客户"
-    />
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
+      title1="合作模式三" title2="线上客户" />
   </div>
 </template>
 <script>
@@ -659,7 +654,7 @@ export default {
 
 
     return {
-      getparams:{},
+      getparams: {},
       AmericaDate: [],
       AmericaList: [],
       AvgTaskAmtDate: [],
@@ -667,37 +662,37 @@ export default {
       AvgTaskAmtLine: [],
       AmericaLine: [],
 
-//       info:[{
-// name:"name",
-// month_dat:2022-03,
-// start_date:2022-03-01,
-// end_date:2022-03-31
-// coopr_level1=线上
-// coopr_level2=京东
-// coopr_level3=京东自营
-// business_entity_name=环境
-// shop_center=京东旗舰店
-// sales_man=业务员姓名
-// prod_area_name=本部,OEM,待定
-// prod_area_name=本部
-// prod_area_name=OEM
-// sql_type=QTY
+      //       info:[{
+      // name:"name",
+      // month_dat:2022-03,
+      // start_date:2022-03-01,
+      // end_date:2022-03-31
+      // coopr_level1=线上
+      // coopr_level2=京东
+      // coopr_level3=京东自营
+      // business_entity_name=环境
+      // shop_center=京东旗舰店
+      // sales_man=业务员姓名
+      // prod_area_name=本部,OEM,待定
+      // prod_area_name=本部
+      // prod_area_name=OEM
+      // sql_type=QTY
 
 
-//       }];
+      //       }];
 
       dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
-       leftObj:{
-      name:'CooprLevel3',
-      level:'cooprLevel3Mmanager',
-       tAvgAmt:'saleTaskAmt',/*责任制*/
+      leftObj: {
+        name: 'CooprLevel3',
+        level: 'cooprLevel3Mmanager',
+        tAvgAmt: 'saleTaskAmt',/*责任制*/
       },
-      rightObj:{
-      name:'customerName',
-      level:'salesMan',
-       tAvgAmt:'saleTaskAmt',/*责任制*/
+      rightObj: {
+        name: 'customerName',
+        level: 'salesMan',
+        tAvgAmt: 'saleTaskAmt',/*责任制*/
       },
-      cardData:[],
+      cardData: [],
       dateTime: "2022-03",
       dataTimeMany: "2022-01-01,2022-10-01,2022-01-01,2022-10-01",
       showLoading: false,
@@ -833,26 +828,26 @@ export default {
     };
   },
   methods: {
-     //中间折线图
+    //中间折线图
     async getListInfo(listParams) {
       this.showLoading = true;
       try {
-      let chart = {
-        code:'onlineMiddleChart',
-        //  fields:'cooprLevel1'
-      };
-      Object.assign(chart,listParams)
-      const res = await API.getTotal(chart);
+        let chart = {
+          code: 'onlineMiddleChart',
+          //  fields:'cooprLevel1'
+        };
+        Object.assign(chart, listParams)
+        const res = await API.getTotal(chart);
         //const homeSab = await API.getTotal(Object.assign(timeInfo,homeSabInfo));
         //const res = await API.getTotal("offLineMiddleChart", listParams);
         // console.log("sell", res);
         let sellOutDataList = res.rows;
         debugger;
-        let newArr =res.rows.filter((item) => {
-            debugger;
+        let newArr = res.rows.filter((item) => {
+          debugger;
           var timeArr = item.orderDate
             .replace(" ", ":")
-            
+
             .replace(/\:/g, "-")
             .split("-");
           var yue = timeArr[1];
@@ -876,12 +871,12 @@ export default {
  */
 
           // 外销日内
-           if (item.saleAvgAmt !== null && item.totalCnyAmt !== null) {
+          if (item.saleAvgAmt !== null && item.totalCnyAmt !== null) {
             this.AvgTaskAmtDate.push(yue + "-" + ri);
             this.AvgTaskAmtList.push(item.totalCnyAmt);
             this.AvgTaskAmtLine = item.saleAvgAmt;
-             console.log("this.AvgTaskAmtDate",this.AvgTaskAmtDate);
-            console.log("this.AvgTaskAmtLine",this.AvgTaskAmtLine);
+            console.log("this.AvgTaskAmtDate", this.AvgTaskAmtDate);
+            console.log("this.AvgTaskAmtLine", this.AvgTaskAmtLine);
             this.myEcharts();
           }
           this.showLoading = false;
@@ -890,16 +885,16 @@ export default {
         console.log(error);
       }
     },
-// 右边接口
+    // 右边接口
     async getList1(line) {
       this.showLoading = true;
-     let chart = {
-        code:'onlineMiddleChart',
-        fields:"cooprLevel2"
+      let chart = {
+        code: 'onlineMiddleChart',
+        fields: "cooprLevel2"
       };
-      Object.assign(chart,line)
+      Object.assign(chart, line)
       try {
-        
+
         const res = await API.getChartTotal(chart);
 
         let sellOutDataList = res.rows;
@@ -907,7 +902,7 @@ export default {
 
         let obj = res.rows[0]
 
-       
+
         var k = 0;
         var arr = [];
         for (var i in obj) {
@@ -952,7 +947,7 @@ export default {
         console.log(error);
       }
     },
-  myEcharts() {
+    myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
         xAxis: {
@@ -1072,15 +1067,15 @@ export default {
     },
 
 
-      // 右边卡片/
+    // 右边卡片/
     async getCard(params) {
       this.showLoadingCard = true;
       try {
-         let obj = {
-        code:"onlineTopCooprLevel2",
-      }
-        const res = await API.getTotal( Object.assign(params,obj));
-       // const res = await API.getData("onlineTopCooprLevel2", params);
+        let obj = {
+          code: "onlineTopCooprLevel2",
+        }
+        const res = await API.getTotal(Object.assign(params, obj));
+        // const res = await API.getData("onlineTopCooprLevel2", params);
 
         res.rows.length > 0 &&
           res.rows.forEach((v) => {
@@ -1121,7 +1116,7 @@ export default {
     },
     // 猫系
     gotoCatSeries(item) {
-      this.$router.push({path:"/center/catSeries",query:{key:item}});
+      this.$router.push({ path: "/center/catSeries", query: { key: item } });
     },
 
     toModuleResponsible() {
@@ -1130,28 +1125,12 @@ export default {
 
     //仪表盘(左中)
     async getdashboard(time) {
-      // "page_name":"内销线上产司",
-// "page_level":"内销级",
-// "codes":"sellInnerOnlineBusinessChart,sellInnerOnlineBusinessKardSAB,sellInnerOnlineBusinessKard"
-// month_date=2022-03
-// start_date=2022-03-01&end_date=2022-03-31
-// coopr_level1=线上
-// coopr_level2=京东
-// coopr_level3=京东自营
-// business_entity_name=环境
-// shop_center=京东旗舰店
-// sales_man=业务员姓名
-// prod_area_name=本部,OEM,待定
-// prod_area_name=本部
-// prod_area_name=OEM
-
-
       try {
-          let obj = {
-        code:"onlineTopTotal",
-      }
+        let obj = {
+          code: "onlineTopTotal",
+        }
         //const res = await API.getData("onlineTopTotal", this.dateTime);
-        const res = await API.getTotal(Object.assign(time,obj));
+        const res = await API.getTotal(Object.assign(time, obj));
         let panelDataList = res.rows;
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
@@ -1170,11 +1149,11 @@ export default {
             this.progressData.topGPM = (
               panelDataList[i].grossProfitRadio * 100
             ).toFixed(1);
-            this.speedData.bottomClose1 =  panelDataList[i].bmsCompleteRadio.toFixed(1)
-            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
-            
-          } 
-           if (panelDataList[i].businessModel == "代运营") {
+            this.speedData.bottomClose1 = panelDataList[i].bmsCompleteRadio.toFixed(1)
+            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
+
+          }
+          if (panelDataList[i].businessModel == "代运营") {
             //  Console.log("代运营",panelDataList[i].dateRadio)
             this.progressData.bar1 = (
               panelDataList[i].grossProfitRadio * 100
@@ -1182,14 +1161,14 @@ export default {
             this.progressData.bottomGPM = (
               panelDataList[i].grossProfitRadio * 100
             ).toFixed(1);
-             this.speedData.ballRightNum =  panelDataList[i].saleTaskAmt.toFixed(1)
+            this.speedData.ballRightNum = panelDataList[i].saleTaskAmt.toFixed(1)
 
             //  <span>{{data.bottomTitle1}}:</span><span>完成率:{{data.bottomClose}}%</span><span>时间进度:{{data.bottomTime}}%</span>
-            this.speedData.bottomClose1 =  panelDataList[i].bmsCompleteRadio.toFixed(1)
-            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+            this.speedData.bottomClose1 = panelDataList[i].bmsCompleteRadio.toFixed(1)
+            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
           }
 
-          
+
         }
       } catch (error) {
         console.log(error);
@@ -1206,7 +1185,7 @@ export default {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             //  console.log()
             if (RightSAB[i].position === "S") {
-             
+
               this.sabData.sabArr.s = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
@@ -1219,9 +1198,9 @@ export default {
                 1
               );
             }
-          } 
-        if (RightSAB[i].businessModel == "直营") {
-          
+          }
+          if (RightSAB[i].businessModel == "直营") {
+
             this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position === "S") {
               this.sabData.topArr.s = (RightSAB[i].positionRatio * 100).toFixed(
@@ -1236,9 +1215,9 @@ export default {
                 1
               );
             }
-          } 
-        if (RightSAB[i].businessModel === "代运营") {
-             
+          }
+          if (RightSAB[i].businessModel === "代运营") {
+
             this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.s = (
@@ -1259,36 +1238,36 @@ export default {
         console.log(error);
       }
     },
-  init(model){
-       let params = {  /*年月*/
-      month_date:this.ontime
-    };
-    let listParams = { /*年月日*/
-      start_date:`${this.ontime}-01`,
-      end_date:`${this.ontime}-31`
-    }
+    init(model) {
+      let params = {  /*年月*/
+        month_date: this.ontime
+      };
+      let listParams = { /*年月日*/
+        start_date: `${this.ontime}-01`,
+        end_date: `${this.ontime}-31`
+      }
 
-    // let params = `${this.ontime},${model}`;
-    // let start=this.ontime+'-01';
-    // let end=this.ontime+'-31';;
-    // let time = `${this.ontime}-01,${this.ontime}-31`; /*年月日*/
-    // this.getList();
-    // this.getCard(this.ontime);
-    // this.getTable(this.ontime);
-    // this.getdashboard(this.ontime);
-    // this.queryCardSAB(this.ontime);
-    this.getList1(listParams);
-    this.getListInfo(listParams);
-    this.getTable(params);
-    this.getCard(params);
-    this.getdashboard(params);
-    this.queryCardSAB();
-    // this.myEcharts();
+      // let params = `${this.ontime},${model}`;
+      // let start=this.ontime+'-01';
+      // let end=this.ontime+'-31';;
+      // let time = `${this.ontime}-01,${this.ontime}-31`; /*年月日*/
+      // this.getList();
+      // this.getCard(this.ontime);
+      // this.getTable(this.ontime);
+      // this.getdashboard(this.ontime);
+      // this.queryCardSAB(this.ontime);
+      this.getList1(listParams);
+      this.getListInfo(listParams);
+      this.getTable(params);
+      this.getCard(params);
+      this.getdashboard(params);
+      this.queryCardSAB();
+      // this.myEcharts();
 
     },
 
- 
-      myEcharts2(data, time, lines, id) {
+
+    myEcharts2(data, time, lines, id) {
       var myChart2 = this.$echarts.init(document.getElementById(id));
       var option = {
         xAxis: {
@@ -1415,7 +1394,7 @@ export default {
       };
       myChart2.setOption(option);
     },
-   
+
     // myEcharts2() {
     //   var myChart2 = this.$echarts.init(document.getElementById("main2"));
     //   var option = {
@@ -1535,60 +1514,60 @@ export default {
     //   myChart2.setOption(option);
     // },
 
-  
-
- async getTable(time) {
-   // async getTable(model,ontime,ontime) {
-     // try {
-        // let tableInner = await API.getData(
-        //   "onlineBottomLevel3",
-        //   "2022-03,2022-03"
-        // );
 
 
-       
+    async getTable(time) {
+      // async getTable(model,ontime,ontime) {
+      // try {
+      // let tableInner = await API.getData(
+      //   "onlineBottomLevel3",
+      //   "2022-03,2022-03"
+      // );
+
+
+
       let online = {
-        code:'onlineBottomLevel3'
+        code: 'onlineBottomLevel3'
       };
-        let onlineStore = {
-        code:'onlineBottomStore'
+      let onlineStore = {
+        code: 'onlineBottomStore'
       };
       // Object.assign(time,online)
       // Object.assign(time,onlineStore)
-        // let tableInner = await API.getData(
-        //   "homeByDirectTotal",
-        //   ontime
-        // );
-       let tableInner =await API.getTotal( Object.assign(time,online));
+      // let tableInner = await API.getData(
+      //   "homeByDirectTotal",
+      //   ontime
+      // );
+      let tableInner = await API.getTotal(Object.assign(time, online));
 
 
-        // let tableInner = await API.getDataLine("onlineBottomLevel3",time);
+      // let tableInner = await API.getDataLine("onlineBottomLevel3",time);
 
 
-        // console.log("tableInner",tableInner);
-        // let tableOutter = await API.getData(
-        //   "onlineBottomStore",
-        //   "2022-03,2022-03"
-        // );
+      // console.log("tableInner",tableInner);
+      // let tableOutter = await API.getData(
+      //   "onlineBottomStore",
+      //   "2022-03,2022-03"
+      // );
 
-         let tableOutter = await API.getTotal(
-        Object.assign(time,onlineStore)
-        );
+      let tableOutter = await API.getTotal(
+        Object.assign(time, onlineStore)
+      );
 
 
-         console.log("tableInner",tableOutter);
+      console.log("tableInner", tableOutter);
 
-        this.tableInner = tableInner.rows;
-        this.tableOutter = tableOutter.rows;
+      this.tableInner = tableInner.rows;
+      this.tableOutter = tableOutter.rows;
       // } catch (err) {
       //   console.log(err);
       // }
     }
   },
 
-  computed:{
-    ontime(){
-      return this.$store.state.year +'-'+ this.$store.state.month//this.$store.state.model;
+  computed: {
+    ontime() {
+      return this.$store.state.year + '-' + this.$store.state.month//this.$store.state.model;
     },
     // ontime2(){
     //   return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month;
@@ -1596,48 +1575,48 @@ export default {
     // ontime3(){
     //   return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month +','+ this.$store.state.year +'-'+ this.$store.state.month+',' +this.$store.state.year +'-'+ this.$store.state.month;
     // },
-    showMoney(){
+    showMoney() {
       return this.$store.state.showMoney;
     },
-    modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'亿'
+    modelLabel() {
+      return this.$store.state.showMoney == true ? '亿' : '亿'
     },
-    model(){ /* 获取本部，OEM */
+    model() { /* 获取本部，OEM */
       return this.$store.state.model
     },
-   
-    
+
+
   },
-  watch:{
-    ontime:{ /*监听数据更改 调用接口 */
-     handler: function (newValue, oldValue) {
+  watch: {
+    ontime: { /*监听数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
         this.init(this.model);
       }
     },
-    model:{ /*监听数据更改 调用接口 */
-      handler: function(newValue,oldValue){
+    model: { /*监听数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
         this.init(newValue);
       }
 
     },
-    showMoney:{
-      handler:(newValue,oldValue)=>{
- 
+    showMoney: {
+      handler: (newValue, oldValue) => {
+
       }
     },
-   
+
 
   },
   mounted() {
     // this.getList1();
-  
+
     // this.getTable(this.mode,this.ontime,this.ontime);
     // this.getCard(this.ontime);
     // this.getdashboard();
     // this.queryCardSAB();
     // this.myEcharts();
 
-   this.init(this.model);
+    this.init(this.model);
   }
 };
 </script>
@@ -1650,19 +1629,23 @@ export default {
   margin: 10px auto;
   margin-bottom: 10px;
 }
+
 .echartsBox {
   width: 607px;
   height: 240px;
 }
+
 .flex-fang {
   display: flex;
   justify-content: space-between;
 }
+
 .fang-color {
   width: 10px;
   height: 10px;
   background-color: hsla(188, 100%, 50%, 1);
 }
+
 .middle-box {
   width: 98%;
   /* margin: 10px 20px 10px 10px; */
@@ -1670,6 +1653,7 @@ export default {
   margin: 20px auto;
   margin-bottom: 10px;
 }
+
 .flex-font-middle {
   display: flex;
   align-items: center;
@@ -1677,6 +1661,7 @@ export default {
   width: 60%;
   color: #fff;
 }
+
 .middle-font {
   font-size: 18px;
   color: #fff;
@@ -1684,6 +1669,7 @@ export default {
   text-align: center;
   margin-bottom: 6px;
 }
+
 .flex-bottom {
   display: flex;
   align-items: center;
@@ -1692,6 +1678,7 @@ export default {
   margin: 0 auto;
   padding-bottom: 20px;
 }
+
 .execl {
   background: url("../../../assets/img/tableVBackround.svg");
   width: 905px;
@@ -1701,37 +1688,38 @@ export default {
   border: 2px solid #0d53b7;
   border-radius: 0 0 10px 10px;
 }
-::v-deep .ant-table-thead > tr > th {
+
+::v-deep .ant-table-thead>tr>th {
   background: rgb(4, 19, 112);
   border-bottom: 1px solid rgb(55, 56, 112);
   border-right: 1px solid rgb(55, 56, 112);
 }
-::v-deep .ant-table-thead > tr > th .ant-table-header-column {
+
+::v-deep .ant-table-thead>tr>th .ant-table-header-column {
   color: #fff;
   font-size: 14px;
 }
-::v-deep .ant-table-bordered .ant-table-tbody > tr > td {
+
+::v-deep .ant-table-bordered .ant-table-tbody>tr>td {
   border: 1px solid rgb(55, 56, 112);
   color: #fff;
 }
-::v-deep
-  .ant-table-tbody
-  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
-  > td {
+
+::v-deep .ant-table-tbody>tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)>td {
   background: transparent;
 }
 
 ::v-deep .ant-spin-nested-loading {
   margin: 14px;
 }
-::v-deep .ant-table-thead > tr:first-child > th:first-child {
-  background: linear-gradient(
-    to right,
-    rgb(80, 192, 255),
-    rgb(90, 255, 163),
-    rgb(102, 255, 255)
-  );
+
+::v-deep .ant-table-thead>tr:first-child>th:first-child {
+  background: linear-gradient(to right,
+      rgb(80, 192, 255),
+      rgb(90, 255, 163),
+      rgb(102, 255, 255));
 }
+
 .top-flex {
   display: flex;
   align-items: center;
@@ -1739,6 +1727,7 @@ export default {
   width: 98%;
   margin: 0 auto;
 }
+
 .dashboard-box {
   width: 50%;
   position: relative;
@@ -1751,6 +1740,7 @@ export default {
   background-size: 100%;
   padding: 8px;
 }
+
 .card-font {
   font-size: 16px;
   color: #fff;
@@ -1762,6 +1752,7 @@ export default {
   color: #19ecff;
   padding-top: 3px;
 }
+
 .flex-card {
   display: flex;
   margin-top: 10px;
@@ -1769,16 +1760,19 @@ export default {
   justify-content: flex-start;
   flex-wrap: wrap;
 }
+
 .flex-top-card {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
 .top-left-font {
   font-size: 14px;
   color: #fff;
   margin-right: 20px;
 }
+
 .card-border-box {
   margin: 10px 10px 30px 10px;
   position: relative;
@@ -1792,6 +1786,7 @@ export default {
   /* border-left: 2px solid rgb(102, 255, 255);
   border-right: 2px solid rgb(102, 255, 255); */
 }
+
 .line1 {
   /* border-top: 2px solid rgb(102, 255, 255); */
   width: 10px;
@@ -1799,6 +1794,7 @@ export default {
   top: 0;
   left: 0;
 }
+
 .line2 {
   /* border-top: 2px solid rgb(102, 255, 255); */
   width: 10px;
@@ -1806,6 +1802,7 @@ export default {
   top: 0;
   right: 0;
 }
+
 .line3 {
   /* border-top: 2px solid rgb(102, 255, 255); */
   width: 10px;
@@ -1813,6 +1810,7 @@ export default {
   bottom: 0;
   left: 0;
 }
+
 .line4 {
   /* border-top: 2px solid rgb(102, 255, 255); */
   width: 10px;
@@ -1820,6 +1818,7 @@ export default {
   bottom: 0;
   right: 0;
 }
+
 .left-right-box {
   display: flex;
   justify-content: space-between;
@@ -1831,68 +1830,84 @@ export default {
   font-size: 12px;
   margin-right: 4px;
 }
+
 .finish-font span {
   color: #66ffff;
   margin-left: 2px;
 }
+
 .mt-border {
   border: 1px solid rgba(255, 255, 255, 0.24);
   width: 1px;
 }
+
 .card-big-num {
   color: #66ffff;
   font-size: 18px;
 }
+
 .progress {
   width: 60px;
   height: 10px;
 }
+
 .progress:last-child {
   margin-bottom: 12px;
 }
+
 .progress-middle {
   width: 34px;
   height: 10px;
 }
+
 .progress-middle:last-child {
   margin-bottom: 12px;
 }
+
 ::v-deep .ant-progress-bg {
   height: 4px !important;
   border-radius: 200px !important;
 }
+
 .card-middle-progress {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .flex-bottoms {
   display: flex;
   align-items: center;
   color: #a0a3c0;
   font-size: 12px;
 }
+
 .light-blue {
   color: #66ffff;
   opacity: 1;
 }
-::v-deep .ant-table-bordered .ant-table-body > table {
+
+::v-deep .ant-table-bordered .ant-table-body>table {
   border: none;
 }
+
 .flex-echrats-right {
   display: flex;
   align-items: center;
   padding: 4px 8px 4px 8px;
 }
+
 .echartsBox-min {
   width: 300px;
   height: 100px;
 }
+
 .right-font-title {
   font-size: 15px;
   color: #fff;
   margin-right: 40px;
 }
+
 .flex-right-bottom {
   display: flex;
   /* align-items: center; */
@@ -1903,6 +1918,7 @@ export default {
   margin-left: 10px;
   margin-top: 10px;
 }
+
 .border-left-line {
   border-top: 1px solid rgb(102, 255, 255);
   border-bottom: 1px solid rgb(102, 255, 255);
@@ -1911,6 +1927,7 @@ export default {
   top: 0;
   left: 0;
 }
+
 .border-left-line1 {
   border-top: 1px solid rgb(102, 255, 255);
   border-bottom: 1px solid rgb(102, 255, 255);
@@ -1919,6 +1936,7 @@ export default {
   top: 0;
   right: 0;
 }
+
 .border-left-line2 {
   border-top: 1px solid rgb(102, 255, 255);
   border-bottom: 1px solid rgb(102, 255, 255);
@@ -1927,6 +1945,7 @@ export default {
   bottom: 0;
   right: 0;
 }
+
 .border-left-line3 {
   border-top: 1px solid rgb(102, 255, 255);
   border-bottom: 1px solid rgb(102, 255, 255);
@@ -1935,11 +1954,13 @@ export default {
   bottom: 0;
   left: 0;
 }
+
 .border-top-line {
   border-left: 1px solid rgb(102, 255, 255);
   border-right: 1px solid rgb(102, 255, 255);
   height: 10px;
 }
+
 .right-box-qushi {
   display: flex;
   align-items: center;
@@ -1947,6 +1968,7 @@ export default {
   width: 100%;
   flex-wrap: wrap;
 }
+
 .panelList {
   height: 258px;
   width: 760px;
@@ -1955,6 +1977,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
 }
+
 .left-file {
   position: relative;
   bottom: 20px;
