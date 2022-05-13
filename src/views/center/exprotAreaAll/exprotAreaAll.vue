@@ -54,7 +54,7 @@
     </div>
 
     <!-- 底部表格 -->
-    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj" title1="区域" title2="大区"/>
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj" :title1="title1" :title2="title2"/>
   </div>
 </template>
 <script>
@@ -137,23 +137,26 @@ export default {
       },
       showLoadingCard:false,
       cardData:[],
+      /*表格配置*/
+      title1:'业务员',
+      title2:'区域客户',
       tableOutter:[],
       tableInner:[],
       leftObj:{   
-      name:'cooprLevel2',  /*标题*/
-      level:'cooprLevel2Manager',/*责任人*/
+      name:'salesMan',  /*标题*/
+      level:'salesMan',/*责任人*/
       tAvgAmt:'tAvgAmt',/*责任制*/
       },
       rightObj:{
-      name:'cooprLevel1',
+      name:'customerName',
       level:'customerName',
       tAvgAmt:'tAvgAmt'
       },
       cardObj:{
-       'title':'cooprLevel1',
-       'cnyAmt':'cooprLevel1NameAmt',
-       'saleTaskAmt':'cooprLevel1TaskAmt',
-       'saleAmtRadio':'cooprLevel1AmtRadio'
+       'title':'cooprLevel2', /*标题*/
+       'cnyAmt':'cnyAmt',/*金额*/
+       'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
+       'saleAmtRadio':'saleAmtRadio'  /*金额完成率*/
       },
      };
   },
@@ -207,8 +210,8 @@ export default {
     this.getdashboard(params);
     this.queryCardSAB(params);
     this.getCard(params);
-    this.getList(listParams);
-    this.getList1(listParams);
+    this.getChart(listParams);
+    this.getChartList(listParams);
     this.getTable(params);
     },
     // 三个仪表盘
@@ -302,34 +305,25 @@ export default {
     },
     // 中部
     //中间折线图
-    async getList(params) {
+    async getChart(params) {
       this.showLoading = true;
-      let chartObj = {
-        code:'outSellMacroRegionDashboardChart'
-      }
-      Object.assign(chartObj,params)
       try {
-        const res = await API.getData(chartObj);
+        const res = await API.getData('outSellMacroRegionDashboardChart',params);
 
         if(res.code !=200) return;
-      
           res.rows.filter((item) => {
-          var timeArr = item.orderDate
-            .replace(" ", ":")
-            .replace(/\:/g, "-")
-            .split("-");
-          var yue = timeArr[1];
-          var ri = timeArr[2];
-
           // 外销日内
           if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
-            this.AvgTaskAmtDate.push(yue + "-" + ri);
+            this.AvgTaskAmtDate.push(item.orderDate.substr(5));
             this.AvgTaskAmtList.push(item.totalAmt);
             this.AvgTaskAmtLine = item.totalAvgTaskAmt;
-            this.myEcharts();
+            
           }
-          // this.showLoading = false;
+          this.showLoading = false;
         });
+        console.log('this.AvgTaskAmtList',this.AvgTaskAmtList)
+        this.myEcharts();
+
       } catch (error) {
         console.log(error);
       }
@@ -341,17 +335,16 @@ export default {
     },
  
     // 右边接口
-    async getList1(params) {
+    async getChartList(params) {
       this.showLoading = true;
       let chartObj = {
         code:'outSellMacroRegionDashboardChart',
-        fields:'coopr_level1'
+        fields:'cooprLevel1'
       }
       Object.assign(chartObj,params)
-      console.log('chartObj',chartObj);
+   
       try {
         const res = await API.getChartTotal(chartObj);
-        console.log("res12",res);
         if(res.code !=200) return;
         let sellOutDataList = res.rows;
         this.showLoading = false;
@@ -360,7 +353,6 @@ export default {
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          console.log("11111111111", obj[i]);
           if (k < 6) {
             arr.push(obj[i]);
           }
@@ -368,14 +360,15 @@ export default {
         }
         console.log("obj", obj);
        
-        this.dhcarr = [];
+        // this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
+
+
        
-        arrs.forEach((v) => {
-          this.dhcarr.push(v[0].cooprLevel1);
+        arrs.forEach((v,i) => {
+          this.dhcarr[i] = v[i].cooprLevel1;
         });
         console.log("arr", this.dhcarr);
-        // this.dhcarr = [1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
@@ -384,17 +377,12 @@ export default {
           let AmericaList = [];
           let AmericaLine = 1;
           let Arrnum = datanum.filter((item) => {
-            var timeArr = item.orderDate
-              .replace(" ", ":")
-              .replace(/\:/g, "-")
-              .split("-");
-            var yue = timeArr[1];
-            var ri = timeArr[2];
-            console.log("sdvsd", timeArr);
 
-            AmericaDate.push(yue + "-" + ri);
+
+            AmericaDate.push(item.orderDate.substr(5));
             AmericaList.push(item.CnyAmt);
             AmericaLine = item.tAvgAmt;
+
           });
           console.log("Arrnum", this.sellOutDataList);
 
@@ -664,59 +652,11 @@ export default {
        async getCard(params) {
         this.showLoadingCard = true;
         const res = await API.getData('outSellMacroRegion',params);
-    
-        let onTitle = '';
         
-        let arr = [];
-       let sabArr = [];
+        if(res.code !=200) return;
 
-       if(res.code !=200) return;
-     
+        this.cardData = res.rows;
 
-        res.rows.forEach(v=>{
-      
-           if(onTitle!=v.cooprLevel1 && !!v.cooprLevel1){
-             console.log('title')
-             onTitle = v.cooprLevel1;
-            arr.push(v);
-           }
-        })
-
-
-        arr.splice(6);
-    
-        arr.length>0 && arr.forEach(v => {
-            //  v.title = v.cooprLevel1; /*标题*/
-            if(!!v.cooprLevel1NameAmt){
-             v.cooprLevel1NameAmt = v.cooprLevel1NameAmt.toFixed(0); /*达成金额*/
-            }else{
-              console.log('字段无数据','cooprLevel1NameAmt')
-            }
-            if(!!v.cooprLevel1TaskAmt){
-             v.cooprLevel1TaskAmt = v.cooprLevel1TaskAmt.toFixed(0); /*责任制金额*/
-            }else{
-              console.log('字段无数据','cooprLevel1TaskAmt')
-            }
-
-            if(!!v.grossProfitRadio){
-             v.grossProfitRadio = (v.grossProfitRadio * 100>100?100:v.grossProfitRadio * 100).toFixed(0); /*毛利率*/
-             v.grossProfitRadio = Number(v.grossProfitRadio);
-
-            }else{
-              console.log('字段无数据','cooprLevel1AmtRadio')
-            }
-
-            if(!!v.cooprLevel1AmtRadio){
-             v.cooprLevel1AmtRadio = (v.cooprLevel1AmtRadio * 100>100?100:v.cooprLevel1AmtRadio * 100).toFixed(0); /*完成率*/
-             v.cooprLevel1AmtRadio = Number(v.cooprLevel1AmtRadio);
-
-            }else{
-              console.log('字段无数据','cooprLevel1AmtRadio')
-            }
-    
-        });
-        this.cardData = arr;
-        console.log('this.cardData',this.cardData)
     },
 
     // 底部table/
@@ -748,9 +688,9 @@ export default {
     this.init(this.model);
   },
 
-  mounted() {
-    this.init(this.model);
-  },
+  // mounted() {
+  //   this.init(this.model);
+  // },
 };
 </script>
 <style scoped>

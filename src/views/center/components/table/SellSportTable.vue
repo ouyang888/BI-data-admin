@@ -20,7 +20,7 @@
       >
       </el-table-column>
            
-      <el-table-column
+      <el-table-column v-if="router !== 'exprotAreaAll'"
         :prop="headerObj.level"
         align="center"
         label="责任人"
@@ -186,6 +186,10 @@ export default{
       let numVal = number.toFixed(2);
       return numVal;
     },
+    router(){
+      return this.$route.name
+    }
+
   },
 
   methods: {
