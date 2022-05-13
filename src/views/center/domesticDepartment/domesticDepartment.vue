@@ -11,7 +11,7 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-      <Card :list="cardData" :cardObj="cardObj" />
+      <cardPro :list="cardData" :cardObj="cardObj" />
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -69,13 +69,15 @@ import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
 import Card from "./component/card.vue";
+
+import cardPro from "@/views/center/components/card/cardPro.vue"; 
 export default {
   components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
     TableCardBox,
-    Card,
+    cardPro,
   },
   data() {
     return {
@@ -169,19 +171,25 @@ export default {
         businessEntityName8: "其他",
       },
       cardObj: {
-        title: "cooprLevel1",
-        cnyAmt: "cooprLevel1NameAmt",
-        saleTaskAmt: "cooprLevel1TaskAmt",
-        saleAmtRadio: "cooprLevel1AmtRadio",
+        'title':'businessEntityName', /*标题*/
+        'cnyAmt':'cnyAmt',/*金额*/
+       'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
+       'saleAmtRadio':'cnyAmtRadio'  /*金额完成率*/
       },
-      leftObj: {
-        title: "cooprLevel1",
-        channel: "cooprLevel2",
+      /*表格配置*/
+      title1:'业务员',
+      title2:'区域客户',
+      leftObj:{   
+      name:'salesMan',  /*标题*/
+      level:'salesMan',/*责任人*/
+      tAvgAmt:'tAvgAmt',/*责任制*/
       },
-      rightObj: {
-        title: "cooprLevel1",
-        channel: "cooprLevel2",
+      rightObj:{
+      name:'customerName',
+      level:'customerName',
+      tAvgAmt:'tAvgAmt'
       },
+      /*表格配置 end*/
       showLoadingLeft: true,
       showLoadingRight: true,
       titleName: this.$route.query.key || "环境",
@@ -235,7 +243,7 @@ export default {
       // console.log("params", params);
       this.getdashboard(params);
       this.queryCardSAB(params);
-      // this.getTable(params, "cooprLevel1");
+      this.getTable(params);
       this.getCard(params);
       this.getList(listParams);
       this.getList1(listParams);
@@ -243,22 +251,30 @@ export default {
       // this.myEcharts2();
     },
     // 底部table/
-    async getTable(params, title) {
-      let tableInner = await API.getData("directLevelInnerBottom", params);
-      let tableOutter = await API.getData("directLeveOutterBottom", params);
+    async getTable(params) {
+      let innerObj = {
+        coopr_level1:'线上'
+      }
+      Object.assign(innerObj,params);
+      let outterObj = {
+        coopr_level1:'线下'
+      }
+      Object.assign(outterObj,params);
+      let tableInner = await API.getData("sellInnerBusinessTotalBottomDetail", innerObj);
+      let tableOutter = await API.getData("sellInnerBusinessTotalBottomDetail", outterObj);
       this.tableOutter = tableOutter.rows;
       this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
-      let innerTop = tableInner.rows.filter((v) => {
-        return v[title] == "线上";
-      });
+      // let innerTop = tableInner.rows.filter((v) => {
+      //   return v[title] == "线上";
+      // });
 
-      let innerBottom = tableInner.rows.filter((v) => {
-        return v[title] == "线下";
-      });
-      this.rowSpanNumber1 = [innerTop.length, innerBottom.length];
+      // let innerBottom = tableInner.rows.filter((v) => {
+      //   return v[title] == "线下";
+      // });
+      this.rowSpanNumber1 = [this.tableInner.length - 1];
 
-      this.tableInner = innerTop.concat(innerBottom);
+      this.tableInner = tableInner.rows;
       console.log("this.tableInner", this.tableInner);
     },
     gotoDomestic() {
@@ -279,61 +295,12 @@ export default {
         code: "sellInnerBusinessTotalKard",
       };
       Object.assign(obj, params);
-      this.showLoadingCard = true;
       const res = await API.getTotal(obj);
 
-      let onTitle = "";
+      if(res.code !=200) return;
 
-      let arr = [];
-      let sabArr = [];
+      this.cardData = res.rows;
 
-      res.rows.forEach((v) => {
-        if (onTitle != v.cooprLevel1 && !!v.cooprLevel1) {
-          console.log("title");
-          onTitle = v.cooprLevel1;
-          arr.push(v);
-        }
-      });
-
-      arr.splice(6);
-
-      arr.length > 0 &&
-        arr.forEach((v) => {
-          //  v.title = v.cooprLevel1; /*标题*/
-          if (!!v.cooprLevel1NameAmt) {
-            v.cooprLevel1NameAmt = v.cooprLevel1NameAmt.toFixed(0); /*达成金额*/
-          } else {
-            console.log("字段无数据", "cooprLevel1NameAmt");
-          }
-          if (!!v.cooprLevel1TaskAmt) {
-            v.cooprLevel1TaskAmt =
-              v.cooprLevel1TaskAmt.toFixed(0); /*责任制金额*/
-          } else {
-            console.log("字段无数据", "cooprLevel1TaskAmt");
-          }
-
-          if (!!v.grossProfitRadio) {
-            v.grossProfitRadio = (
-              v.grossProfitRadio * 100 > 100 ? 100 : v.grossProfitRadio * 100
-            ).toFixed(0); /*毛利率*/
-            v.grossProfitRadio = Number(v.grossProfitRadio);
-          } else {
-            console.log("字段无数据", "cooprLevel1AmtRadio");
-          }
-
-          if (!!v.cooprLevel1AmtRadio) {
-            v.cooprLevel1AmtRadio = (
-              v.cooprLevel1AmtRadio * 100 > 100
-                ? 100
-                : v.cooprLevel1AmtRadio * 100
-            ).toFixed(0); /*完成率*/
-            v.cooprLevel1AmtRadio = Number(v.cooprLevel1AmtRadio);
-          } else {
-            console.log("字段无数据", "cooprLevel1AmtRadio");
-          }
-        });
-      this.cardData = arr;
-      console.log("this.cardData", this.cardData);
     },
 
     //仪表盘(左中)

@@ -138,8 +138,8 @@ export default {
       showLoadingCard:false,
       cardData:[],
       /*表格配置*/
-      title1:'业务员',
-      title2:'区域客户',
+      title1:'线上',
+      title2:'线下',
       tableOutter:[],
       tableInner:[],
       leftObj:{   
@@ -152,6 +152,7 @@ export default {
       level:'customerName',
       tAvgAmt:'tAvgAmt'
       },
+      /*表格配置 end*/
       cardObj:{
        'title':'cooprLevel2', /*标题*/
        'cnyAmt':'cnyAmt',/*金额*/
