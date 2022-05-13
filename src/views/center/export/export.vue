@@ -28,6 +28,7 @@
         <div>
           <div class="middle-font">大区日达成趋势图</div>
           <div class="right-box-qushi">
+            <template v-show="!showLoading">
             <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
               <div class="content-cart">
                 <div class="border-top-line"></div>
@@ -42,6 +43,7 @@
                 <div class="border-left-line3"></div>
               </div>
             </div>
+            </template>
           </div>
         </div>
       </div>
@@ -222,6 +224,7 @@ export default {
         Object.assign(obj,params);
         try {
           const res = await API.getTotal(obj);
+          if(res!=200) return;
           //内销汇总仪表盘左边&&中间
           let panelDataList = res.rows;
           console.log("res仪表",res); 
@@ -274,6 +277,7 @@ export default {
       try {
         const res = await API.getTotal(obj);
         // console.log("右但是,", res);
+        if(res.code !=200) return;
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].obmOem == "OBM") {
@@ -315,6 +319,8 @@ export default {
           obj
           // 'cooprLevel1'
         );
+
+        if(res.code !=200) return;
       
           res.rows.filter((item) => {
           var timeArr = item.orderDate
@@ -355,6 +361,7 @@ export default {
       try {
         const res = await API.getChartTotal(chartObj);
         console.log("res12",res);
+        if(res.code !=200) return;
         let sellOutDataList = res.rows;
         this.showLoading = false;
         let obj = res.rows[0];
@@ -395,8 +402,8 @@ export default {
             console.log("sdvsd", timeArr);
 
             AmericaDate.push(yue + "-" + ri);
-            AmericaList.push(item.totalAmt);
-            AmericaLine = item.totalAvgTaskAmt;
+            AmericaList.push(item.CnyAmt);
+            AmericaLine = item.tAvgAmt;
           });
           console.log("Arrnum", this.sellOutDataList);
 
@@ -676,6 +683,9 @@ export default {
         let arr = [];
        let sabArr = [];
 
+       if(res.code !=200) return;
+     
+
         res.rows.forEach(v=>{
       
            if(onTitle!=v.cooprLevel1 && !!v.cooprLevel1){
@@ -736,6 +746,9 @@ export default {
       try {
         let tableInner = await API.getTotal(innerObj);
         let tableOutter = await API.getTotal(outterObj);
+
+        if(tableInner.code!=200) return;
+        
 
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;

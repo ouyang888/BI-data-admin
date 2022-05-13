@@ -13,9 +13,19 @@ export default class ApiService {
 
 
   //总的接口
-  static getData(code, date) {
-    return request.get(api.adminUrl + `query?code=${code}&parameter=${date}`);
+  static getData(code, params) {
+    // return request.get(api.adminUrl + `query?code=${code}&parameter=${date}`);
+    let obj = {
+      sql_type:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
+      prod_area_name:store.state.model, /*本部*/
+      code:code
+    };
+    Object.assign(obj,params);
+    return request.get( api.adminUrl +`query?`,
+    params
+    );
   }
+  //七图
   static getChartQuery(code, date, fields) {
     return request.get(api.adminUrl + `chartQuery?code=${code}&parameter=${date}&fields=${fields}`);
   }
