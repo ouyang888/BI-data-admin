@@ -625,12 +625,8 @@ export default {
   methods: {
     //三个仪表盘(左中)
     async getdashboard(params) {
-      let obj = {
-        code: 'innerDirectTopTotal'
-      };
-      Object.assign(params,obj)
       try {
-        const res = await API.getTotal(params);
+        const res = await API.getData('innerDirectTopTotal',params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         if (res.rows.length < 1) {
@@ -708,12 +704,8 @@ export default {
     },
     //三个仪表盘(右)
     async queryCardSAB(params) {
-      let obj = {
-        code: 'innerDirectTopSAB'
-      };
-      Object.assign(params,obj)
       try {
-        const res = await API.getTotal(params);
+        const res = await API.getData('innerDirectTopSAB',params);
         let RightSAB = res.rows;
         if (RightSAB.length < 1) {
           this.sabData = {
@@ -776,12 +768,9 @@ export default {
     //中间折线图
     async getList(params) {
       this.showLoading = true;
-       let obj = {
-        code:"innerDirectChart",
-      }
-       Object.assign(params,obj);
       try {
-        const res = await API.getTotal(
+        const res = await API.getData(
+         'innerDirectChart', 
          params
         );
 
@@ -1180,16 +1169,8 @@ export default {
       // try {
       this.showLoadingLeft = true;
       this.showLoadingRight = true;
-        let innerObj = {
-        code:"innerDirectInOutKard"
-      };
-      let outtObj = {
-        code:"innerDirectRightSAB"
-      };
-      Object.assign(innerObj,params);
-      Object.assign(outtObj,params);
-      const inner = await API.getTotal(innerObj);
-      const innersab = await API.getTotal(outtObj);
+      const inner = await API.getData('innerDirectInOutKard',params);
+      const innersab = await API.getData('innerDirectRightSAB',params);
       // console.log("inner,", inner);
       this.showLoadingLeft = false;
       this.showLoadingRight = false;
@@ -1241,18 +1222,11 @@ export default {
     async getTable(params) {
       // let time= params && params.splice('-','');
       try {
-        let tableInner = await API.getData(
-          "innerDirectOnOutline",
-          `${params}`
-        );
-        let tableOutter = await API.getData(
-          "innerDirectline",
-          `${params}`
-        );
-
+        let tableInner = await API.getData("innerDirectOnOutline",params);
+        let tableOutter = await API.getData("innerDirectline",params);
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
-
+        debugger;
         this.tableInner = tableInner.rows.filter(v => {
           return v.cooprLevel2Manager != '底部合计' && !!v.cooprLevel2
         })
@@ -1296,7 +1270,7 @@ export default {
       this.getdashboard(params);
       this.queryCardSAB(params);
       this.getCard(params);
-      // this.getTable(params);
+      this.getTable(params);
     }
   },
   created() {
