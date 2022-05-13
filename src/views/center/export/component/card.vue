@@ -129,6 +129,11 @@
         handler:function(newValue,oldValue){
           console.log('newValue',newValue);
         }
+      },
+      list:{
+        handler:function(newValue,oldValue){
+          this.list = newValue;
+        }
       }
 
     },
