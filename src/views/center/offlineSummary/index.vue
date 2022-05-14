@@ -12,7 +12,8 @@
       </div>
 
       <!-- 右侧卡片 -->
-      <Card :list="cardData" @gotoCatSeries="gotoCatSeries" />
+      <!-- @gotoCatSeries="gotoCatSeries" -->
+      <Card :list="cardData"  />
     </div>
     <!-- 中间echart -->
     <div class="middle-box">

@@ -9,46 +9,32 @@
       </div>
       <div class="flex-right">
         <div class="right-font">
-          <a-icon
-            type="printer"
-            style="color: #19ecff; margin-right: 4px"
-          />打印
+          <a-icon type="printer" style="color: #19ecff; margin-right: 4px" />打印
         </div>
         <div class="right-font">
-          <a-icon
-            type="upload"
-            style="color: #19ecff; margin-right: 4px"
-          />导出数据
+          <a-icon type="upload" style="color: #19ecff; margin-right: 4px" />导出数据
+        </div>
+
+        <div class="right-font" @click="logout">
+          <a-icon type="user" style="color: #19ecff; margin-right: 4px" />退出登录
         </div>
       </div>
     </div>
     <div class="flex-header">
       <div class="flex-font-left">
-        <div
-          @click="clickChange(1)"
-          :class="index == 1 ? 'head-box active' : 'head-box'"
-        >
+        <div @click="clickChange(1)" :class="index == 1 ? 'head-box active' : 'head-box'">
           <span>PSI</span>
         </div>
-        <div
-          @click="clickChange(2)"
-          :class="index == 2 ? 'head-box active' : 'head-box'"
-        >
+        <div @click="clickChange(2)" :class="index == 2 ? 'head-box active' : 'head-box'">
           <span>S</span>
         </div>
         <div class="head-box"><span>I</span></div>
         <div class="head-box"><span>P</span></div>
         <div class="change-flex" style="margin-left: 14px">
-          <div
-            :class="cus == 1 ? 'change-box active' : 'change-box'"
-            @click="changeNum(1)"
-          >
+          <div :class="cus == 1 ? 'change-box active' : 'change-box'" @click="changeNum(1)">
             <span>金额版</span>
           </div>
-          <div
-            :class="cus == 2 ? 'change-box active' : 'change-box'"
-            @click="changeNum(2)"
-          >
+          <div :class="cus == 2 ? 'change-box active' : 'change-box'" @click="changeNum(2)">
             <span>数量版</span>
           </div>
         </div>
@@ -58,10 +44,10 @@
       </div>
       <div class="flex-font-left">
         <div class="head-box-right" style="margin-right: 14px">
-          <span
-            >{{ land
-            }}<a-icon type="down" style="padding-left: 3px; font-size: 14px"
-          /></span>
+          <span>{{ land
+          }}
+            <a-icon type="down" style="padding-left: 3px; font-size: 14px" />
+          </span>
           <div class="drop-down">
             <div class="down-font" @click="changeland('本部')">本部</div>
             <div class="down-font" @click="changeland('OEM')">OEM</div>
@@ -70,20 +56,14 @@
         </div>
 
         <div class="change-flex">
-          <div
-            :class="
-              direction == '1' ? 'head-box-right active' : 'head-box-right'
-            "
-            @click="changedirection(1)"
-          >
+          <div :class="
+            direction == '1' ? 'head-box-right active' : 'head-box-right'
+          " @click="changedirection(1)">
             <span>销向</span>
           </div>
-          <div
-            :class="
-              direction == '2' ? 'head-box-right active' : 'head-box-right'
-            "
-            @click="changedirection(2)"
-          >
+          <div :class="
+            direction == '2' ? 'head-box-right active' : 'head-box-right'
+          " @click="changedirection(2)">
             <span>产司</span>
           </div>
         </div>
@@ -231,12 +211,12 @@ export default {
           this.$store.commit("setCurrPath", " 内销汇总产司页  ");
           break;
 
-            case "onlineSummaryDepartment":
+        case "onlineSummaryDepartment":
           this.title = "内销线上汇总产司页";
           this.$store.commit("setCurrPath", " 内销线上汇总产司页  ");
           break;
 
-            case "offlineSummaryDepartment":
+        case "offlineSummaryDepartment":
           this.title = "内销线下汇总产司页";
           this.$store.commit("setCurrPath", " 内销线下汇总产司页  ");
           break;
@@ -284,13 +264,18 @@ export default {
       } else if (index == "2" && urlName == "onlineSummary") {
         this.$router.push("/center/onlineSummaryDepartment");
         this.title = "线上汇总产司页";
-      }else if (index == "2" && urlName == "offlineSummary") {
+      } else if (index == "2" && urlName == "offlineSummary") {
         this.$router.push("/center/offlineSummaryDepartment");
         this.title = "线下汇总产司页";
       }
       // else {
 
       // }
+    },
+
+    logout() {
+      localStorage.removeItem("token");
+      this.$router.push("/login");
     },
 
     changeyear(item) {
@@ -335,6 +320,7 @@ export default {
   background: linear-gradient(180deg, #162770 0%, #1c2b72 41%, #0d182e 100%);
   background-repeat: no-repeat;
 }
+
 .title {
   font-size: 36px;
   font-weight: 600;
@@ -345,27 +331,32 @@ export default {
   position: relative;
   top: -16px;
 }
+
 .flex-title {
   display: flex;
   justify-content: space-between;
 }
+
 .left-font {
   color: #fff;
   letter-spacing: 2px;
   font-size: 18px;
   margin-left: 16px;
 }
+
 .back {
   color: #19ecff;
   font-size: 18px;
   cursor: pointer;
 }
+
 .flex-back {
   display: flex;
   margin-left: 16px;
   white-space: nowrap;
   margin-top: 10px;
 }
+
 .flex-right {
   color: #19ecff;
   display: flex;
@@ -373,19 +364,23 @@ export default {
   white-space: nowrap;
   margin-top: 10px;
 }
+
 .right-font {
   margin-right: 16px;
   cursor: pointer;
 }
+
 .title-bg {
   background: url("../../assets/img/navIcon.svg");
   background-size: 100% 100%;
   width: 100%;
   margin: 0 auto;
 }
+
 .flex-header {
   display: flex;
 }
+
 .head-box {
   display: flex;
   align-items: center;
@@ -399,21 +394,26 @@ export default {
   font-size: 18px;
   margin-left: 14px;
 }
+
 .head-box span {
   transform: skewX(-18deg);
 }
+
 .flex-font-left {
   margin-top: 10px;
   display: flex;
   align-items: center;
 }
+
 .head-box {
   cursor: pointer;
   opacity: 0.5;
 }
+
 .head-box:hover {
   opacity: 1;
 }
+
 .change-box {
   display: flex;
   align-items: center;
@@ -427,20 +427,25 @@ export default {
   height: 44px;
   opacity: 0.5;
 }
+
 .active {
   opacity: 1 !important;
 }
+
 .change-box:hover {
   opacity: 1;
 }
+
 .change-box span {
   transform: skewX(-18deg);
 }
+
 .change-flex {
   display: flex;
   align-items: center;
   margin-right: 14px;
 }
+
 .head-box-right {
   display: flex;
   align-items: center;
@@ -455,18 +460,23 @@ export default {
   cursor: pointer;
   opacity: 0.5;
 }
+
 .head-box-right:hover {
   opacity: 1;
 }
+
 .head-box-right span {
   transform: skewX(18deg);
 }
+
 .right-width {
   width: 90px !important;
 }
+
 .change-box {
   cursor: pointer;
 }
+
 .drop-down {
   display: none;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -475,6 +485,7 @@ export default {
   text-align: center;
   // padding-bottom: 6px;
 }
+
 .head-box-right:hover .drop-down {
   display: block;
   font-size: 18px;
@@ -484,23 +495,29 @@ export default {
   left: 7px;
   transform: skewX(18deg);
 }
+
 .down-font {
   // padding-top: 6px;
 }
+
 .down-font:hover {
   background-color: #0e5fff;
   color: #f1f1f1;
   display: block;
 }
+
 .drop-down-year {
   width: 90px;
 }
+
 .down-font-year:first-child {
   // padding-top: 10px;
 }
+
 .down-font-year {
   // padding-bottom: 10px;
 }
+
 .down-font-year:hover {
   background-color: #0e5fff;
   color: #f1f1f1;
@@ -510,6 +527,7 @@ export default {
 .drop-down-month {
   // padding-top: 10px;
 }
+
 .drop-month {
   left: 80px !important;
 }

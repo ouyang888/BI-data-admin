@@ -21,6 +21,7 @@ const routes = [
         redirect: '/center/psi'
     },
 
+
     {
         path: '/login',
         name: 'login',

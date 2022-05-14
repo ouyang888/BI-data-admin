@@ -168,11 +168,11 @@ export default {
         businessEntityName7: "调理",
         businessEntityName8: "其他",
       },
-      cardObj: {
-        title: "cooprLevel1",
-        cnyAmt: "cooprLevel1NameAmt",
-        saleTaskAmt: "cooprLevel1TaskAmt",
-        saleAmtRadio: "cooprLevel1AmtRadio",
+       cardObj: {
+        title: "businessEntityName",
+        cnyAmt: "cnyAmt",
+        saleTaskAmt: "saleTaskAmt",
+        saleAmtRadio: "cnyAmtRadio",
       },
       leftObj: {
         title: "cooprLevel1",
@@ -274,23 +274,21 @@ export default {
     },
 
     // 右边卡片/
-    async getCard(params) {
+   async getCard(params) {
       let obj = {
-        code: "sellInnerBusinessTotalKard",
-      };
+        code: 'sellInnerOnlineBusinessKard',
+        coopr_level1:'线下'
+      }
       Object.assign(obj, params);
-      this.showLoadingCard = true;
+      // this.showLoadingCard = true;
       const res = await API.getTotal(obj);
-
       let onTitle = "";
-
       let arr = [];
       let sabArr = [];
 
       res.rows.forEach((v) => {
-        if (onTitle != v.cooprLevel1 && !!v.cooprLevel1) {
-          console.log("title");
-          onTitle = v.cooprLevel1;
+        if (onTitle != v.businessEntityName && !!v.businessEntityName) {
+          onTitle = v.businessEntityName;
           arr.push(v);
         }
       });
@@ -300,16 +298,16 @@ export default {
       arr.length > 0 &&
         arr.forEach((v) => {
           //  v.title = v.cooprLevel1; /*标题*/
-          if (!!v.cooprLevel1NameAmt) {
-            v.cooprLevel1NameAmt = v.cooprLevel1NameAmt.toFixed(0); /*达成金额*/
+          if (!!v.cnyAmt ) {
+            v.cnyAmt  = v.cnyAmt .toFixed(0); /*达成金额*/
           } else {
-            console.log("字段无数据", "cooprLevel1NameAmt");
+            console.log("字段无数据", "cnyAmt ");
           }
-          if (!!v.cooprLevel1TaskAmt) {
-            v.cooprLevel1TaskAmt =
-              v.cooprLevel1TaskAmt.toFixed(0); /*责任制金额*/
+          if (!!v.saleTaskAmt) {
+            v.saleTaskAmt =
+              v.saleTaskAmt.toFixed(0); /*责任制金额*/
           } else {
-            console.log("字段无数据", "cooprLevel1TaskAmt");
+            console.log("字段无数据", "saleTaskAmt");
           }
 
           if (!!v.grossProfitRadio) {
@@ -321,19 +319,19 @@ export default {
             console.log("字段无数据", "cooprLevel1AmtRadio");
           }
 
-          if (!!v.cooprLevel1AmtRadio) {
-            v.cooprLevel1AmtRadio = (
-              v.cooprLevel1AmtRadio * 100 > 100
+          if (!!v.cnyAmtRadio) {
+            v.cnyAmtRadio = (
+              v.cnyAmtRadio * 100 > 100
                 ? 100
-                : v.cooprLevel1AmtRadio * 100
+                : v.cnyAmtRadio * 100
             ).toFixed(0); /*完成率*/
-            v.cooprLevel1AmtRadio = Number(v.cooprLevel1AmtRadio);
+            v.cnyAmtRadio = Number(v.cnyAmtRadio);
           } else {
-            console.log("字段无数据", "cooprLevel1AmtRadio");
+            console.log("字段无数据", "cnyAmtRadio");
           }
         });
       this.cardData = arr;
-      console.log("this.cardData", this.cardData);
+      console.log("this.cardData1111", this.cardData);
     },
 
     //三个仪表盘(左中)

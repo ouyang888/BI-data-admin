@@ -11,15 +11,9 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-      <div style="    display: flex;
-    margin-top: 10px;
-    align-items: center;
-    justify-content: right;
-    flex-wrap: wrap;">
-        <Card :list="cardData" @gotoCatSeries="gotoCatSeries" />
-      </div>
+     <Card :list="cardData"  />
     </div>
-
+<!-- @gotoCatSeries="gotoCatSeries" -->
 
     <div class="middle-box">
       <div class="flex-fang">
@@ -304,8 +298,6 @@ export default {
             this.AvgTaskAmtDate.push(yue + "-" + ri);
             this.AvgTaskAmtList.push(item.totalCnyAmt);
             this.AvgTaskAmtLine = item.saleAvgAmt;
-            console.log("this.AvgTaskAmtDate", this.AvgTaskAmtDate);
-            console.log("this.AvgTaskAmtLine", this.AvgTaskAmtLine);
             this.myEcharts();
           }
           this.showLoading = false;
@@ -535,6 +527,7 @@ export default {
         } else {
           this.cardData = [{}];
         }
+        console.log("2233377",this.cardData)
       } catch (err) {
         console.log(err);
       }
@@ -1186,7 +1179,7 @@ export default {
   display: flex;
   margin-top: 10px;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 

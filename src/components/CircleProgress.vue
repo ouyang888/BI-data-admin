@@ -67,11 +67,10 @@
       this.cav = this.$refs.cav;
       // console.log('this.cav',this.cav,this.$props) 
       if (this.cav) {
-        // console.log('props',this.$props)
         const goProgress = new circleProgress({
           el: this.cav,
-          progress: (this.$props.rate / 200).toString(),
-          number: this.$props.rate.toString(),
+          progress: this.$props.rate / 200,
+          number: this.$props.rate,
           color: this.$props.color,
           deg: this.$props.deg,
           barSize: this.$props.barSize,
@@ -86,11 +85,10 @@
     watch: {
       rate: {
         handler: function (newValue, oldValue) {
-          // console.log('newValue000000', newValue)
           const goProgress = new circleProgress({
             el: this.cav,
-            progress: (newValue / 200).toString(),
-            number: newValue.toString(),
+            progress: newValue / 200,
+            number: newValue,
             color: this.$props.color,
             deg: this.$props.deg,
             barSize: this.$props.barSize,

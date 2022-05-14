@@ -1,6 +1,6 @@
 <template>
   <a-ConfigProvider :locale="locale">
-    <router-view/>
+    <router-view />
   </a-ConfigProvider>
 </template>
 <script>
@@ -11,6 +11,11 @@ export default {
       locale: zhCN,
     };
   },
+  created() {
+    if (this.$router.path !== '/center/psi') {
+      this.$router.replace('/center/psi')
+    }
+  }
 };
 </script>
 
@@ -24,9 +29,12 @@ export default {
   color: #2c3e50;
   font-size: 12px;
 }
-html,body,#app{
 
-// height: auto !important;
+html,
+body,
+#app {
+
+  // height: auto !important;
 
 }
 

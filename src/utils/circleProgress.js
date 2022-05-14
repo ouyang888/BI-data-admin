@@ -7,7 +7,7 @@ class circleProgress {
             number 当前进度表示的数额
         */  
         const { el, progress, number, color, deg,barSize,circleSize,isBackground} = params;
-        
+        console.log("params",params)
         //获取canvas 元素 及其 2d context
         const cav = el
         this.ctx = cav.getContext('2d');
@@ -31,7 +31,7 @@ class circleProgress {
         // 圆形进度的开始 和 结束 路径角度度数
         this.beginDeg = deg.start;
         this.endDeg = deg.end;
-        
+  
         // 计算出真实进度条的结束 路径 角度度数
         this.progressDeg = this.beginDeg + (360 - this.beginDeg + this.endDeg) * progress;
         
