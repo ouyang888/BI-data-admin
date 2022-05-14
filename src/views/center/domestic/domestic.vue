@@ -1226,7 +1226,6 @@ export default {
         let tableOutter = await API.getData("innerDirectline",params);
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
-        debugger;
         this.tableInner = tableInner.rows.filter(v => {
           return v.cooprLevel2Manager != '底部合计' && !!v.cooprLevel2
         })
