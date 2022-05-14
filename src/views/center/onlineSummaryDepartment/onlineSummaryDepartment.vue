@@ -276,7 +276,7 @@ export default {
     // 右边卡片/
     async getCard(params) {
       let obj = {
-        code: "sellInnerBusinessTotalKard",
+        code: "sellInnerOnlineBusinessKard",
       };
       Object.assign(obj, params);
       this.showLoadingCard = true;
