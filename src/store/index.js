@@ -38,7 +38,7 @@ export default new Vuex.Store({
             state.showMoney = val
         },
         setModel(state,val){
-            console.log('model改制',val)
+            // console.log('model改制',val)
             state.model = val
         },
         setCurrPath(state,val){
@@ -56,7 +56,7 @@ export default new Vuex.Store({
             commit("mouseIng", envet)
         },
         mouseStart({ commit }, envet) {
-            console.log(envet, "envet");
+            // console.log(envet, "envet");
             envet.preventDefault();
             envet.stopPropagation();
             commit("mouseStart", envet)

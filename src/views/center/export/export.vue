@@ -227,7 +227,7 @@ export default {
           if(res!=200) return;
           //内销汇总仪表盘左边&&中间
           let panelDataList = res.rows;
-          console.log("res仪表",res); 
+          // console.log("res仪表",res); 
           // directProfitRadio: 0.2713  销向毛利率
           this.progressData.ballNum = (
             panelDataList[0].directProfitRadio * 100
@@ -355,22 +355,22 @@ export default {
       Object.assign(chartObj,params)
       try {
         const res = await API.getChartTotal(chartObj);
-        console.log("res12",res);
+        // console.log("res12",res);
         if(res.code !=200) return;
         let sellOutDataList = res.rows;
         this.showLoading = false;
         let obj = res.rows[0];
-        console.log("obj",obj);
+        // console.log("obj",obj);
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          console.log("11111111111", obj[i]);
+          // console.log("11111111111", obj[i]);
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
-        console.log("obj", obj);
+        // console.log("obj", obj);
        
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
@@ -378,12 +378,12 @@ export default {
         arrs.forEach((v) => {
           this.dhcarr.push(v[0].cooprLevel1);
         });
-        console.log("arr", this.dhcarr);
+        // console.log("arr", this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
-          console.log("datanum",datanum);
+          // console.log("datanum",datanum);
           let AmericaDate = [];
           let AmericaList = [];
           let AmericaLine = 1;
@@ -394,13 +394,13 @@ export default {
               .split("-");
             var yue = timeArr[1];
             var ri = timeArr[2];
-            console.log("sdvsd", timeArr);
+            // console.log("sdvsd", timeArr);
 
             AmericaDate.push(yue + "-" + ri);
             AmericaList.push(item.CnyAmt);
             AmericaLine = item.tAvgAmt;
           });
-          console.log("Arrnum", this.sellOutDataList);
+          // console.log("Arrnum", this.sellOutDataList);
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
@@ -698,12 +698,12 @@ export default {
             if(!!v.cooprLevel1NameAmt){
              v.cooprLevel1NameAmt = v.cooprLevel1NameAmt.toFixed(0); /*达成金额*/
             }else{
-              console.log('字段无数据','cooprLevel1NameAmt')
+              // console.log('字段无数据','cooprLevel1NameAmt')
             }
             if(!!v.cooprLevel1TaskAmt){
              v.cooprLevel1TaskAmt = v.cooprLevel1TaskAmt.toFixed(0); /*责任制金额*/
             }else{
-              console.log('字段无数据','cooprLevel1TaskAmt')
+              // console.log('字段无数据','cooprLevel1TaskAmt')
             }
 
             if(!!v.grossProfitRadio){
@@ -711,7 +711,7 @@ export default {
              v.grossProfitRadio = Number(v.grossProfitRadio);
 
             }else{
-              console.log('字段无数据','cooprLevel1AmtRadio')
+              // console.log('字段无数据','cooprLevel1AmtRadio')
             }
 
             if(!!v.cooprLevel1AmtRadio){
@@ -719,12 +719,12 @@ export default {
              v.cooprLevel1AmtRadio = Number(v.cooprLevel1AmtRadio);
 
             }else{
-              console.log('字段无数据','cooprLevel1AmtRadio')
+              // console.log('字段无数据','cooprLevel1AmtRadio')
             }
     
         });
         this.cardData = arr;
-        console.log('this.cardData',this.cardData)
+        // console.log('this.cardData',this.cardData)
     },
 
     // 底部table/
@@ -752,7 +752,7 @@ export default {
         this.rowSpanNumber1 = [this.tableInner.length -1];
         // debugger;
 
-        console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
+        // console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
 
         // console.log("this.data", this.data);
       } catch (err) {

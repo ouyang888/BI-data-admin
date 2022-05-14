@@ -7,7 +7,7 @@ class circleProgress {
             number 当前进度表示的数额
         */  
         const { el, progress, number, color, deg,barSize,circleSize,isBackground} = params;
-        console.log("params",params)
+        // console.log("params",params)
         //获取canvas 元素 及其 2d context
         const cav = el
         this.ctx = cav.getContext('2d');

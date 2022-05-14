@@ -1207,7 +1207,7 @@ export default {
       this.innerSabLeft.forEach(v => {
         v.positionRatio = (v.level1PositionRatio * 100).toFixed(0)
       })
-      console.log('this.innerSabLeft', this.innerSabLeft)
+      // console.log('this.innerSabLeft', this.innerSabLeft)
       this.outterSabLeft = innersab.rows.filter(v => {
         return v.cooprLevel1 == '线下' && v.position != '其他';
       })
@@ -1251,7 +1251,7 @@ export default {
           return v.cooprLevel2Manager == '合计'
         })
         this.tableOutter = this.tableOutter.concat(outterbottom);
-        console.log('outterbottom', outterbottom)
+        // console.log('outterbottom', outterbottom)
       } catch (err) {
         console.log(err);
       }

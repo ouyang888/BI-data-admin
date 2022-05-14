@@ -81,7 +81,7 @@
         this.mesInfo.forEach((item, idnex) => {
           number++;
         });
-        console.log(number, "numbernumbernumber");
+        // console.log(number, "numbernumbernumber");
         // 底部合计合并单元格
         if (rowIndex === number - 1) {
           if (columnIndex == 1 || columnIndex == 2) {

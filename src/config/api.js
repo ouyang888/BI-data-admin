@@ -24,7 +24,7 @@ switch (location.hostname) {
         local = 'prod';
 }
 
-console.log('admin_dev',admin_dev)
+// console.log('admin_dev',admin_dev)
 const api = {
     dev: {
         adminUrl: admin_dev,
@@ -39,5 +39,5 @@ const api = {
         adminUrl: admin_pro,
     }
 }
-console.log(api[local],"api[local]");
+// console.log(api[local],"api[local]");
 export default api[local];

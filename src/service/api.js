@@ -38,7 +38,7 @@ export default class ApiService {
       sql_type:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
       prod_area_name:store.state.model /*本部*/
     };
-    console.log('params11', JSON.stringify(params));
+    // console.log('params11', JSON.stringify(params));
     Object.assign(params,obj);
 
     return request.get( api.adminUrl +`query?`,
@@ -51,9 +51,9 @@ export default class ApiService {
       sql_type:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
       prod_area_name:store.state.model /*本部*/
     };
-    console.log('params', JSON.stringify(params));
+    // console.log('params', JSON.stringify(params));
     Object.assign(obj,params);
-    console.log('getChartTotal',params)
+    // console.log('getChartTotal',params)
     return request.get(api.adminUrl + `chartQuery?`,
     obj);
   }

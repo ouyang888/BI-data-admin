@@ -127,7 +127,7 @@
     watch:{
       cardObj:{
         handler:function(newValue,oldValue){
-          console.log('newValue',newValue);
+          // console.log('newValue',newValue);
         }
       }
 

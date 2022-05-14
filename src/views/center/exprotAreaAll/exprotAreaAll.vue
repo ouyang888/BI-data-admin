@@ -206,7 +206,7 @@ export default {
       end_date:`${this.ontime}-31`,
       coopr_level1:this.$route.query.key
     }
-    console.log('params',params,listParams)
+    // console.log('params',params,listParams)
 
     this.getdashboard(params);
     this.queryCardSAB(params);
@@ -229,7 +229,7 @@ export default {
           if(res!=200) return;
           //内销汇总仪表盘左边&&中间
           let panelDataList = res.rows;
-          console.log("res仪表",res); 
+          // console.log("res仪表",res); 
           // directProfitRadio: 0.2713  销向毛利率
           this.progressData.ballNum = (
             panelDataList[0].directProfitRadio * 100
@@ -322,7 +322,7 @@ export default {
           }
           this.showLoading = false;
         });
-        console.log('this.AvgTaskAmtList',this.AvgTaskAmtList)
+        // console.log('this.AvgTaskAmtList',this.AvgTaskAmtList)
         this.myEcharts();
 
       } catch (error) {
@@ -330,7 +330,7 @@ export default {
       }
     },
     gotoCatSeries(obj){
-      console.log('obj',obj);
+      // console.log('obj',obj);
       this.$router.push({'path':'exprotAreaAll'})
 
     },
@@ -350,7 +350,7 @@ export default {
         let sellOutDataList = res.rows;
         this.showLoading = false;
         let obj = res.rows[0];
-        console.log("obj",obj);
+        // console.log("obj",obj);
         var k = 0;
         var arr = [];
         for (var i in obj) {
@@ -359,7 +359,7 @@ export default {
           }
           k++;
         }
-        console.log("obj", obj);
+        // console.log("obj", obj);
        
         // this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
@@ -369,11 +369,11 @@ export default {
         arrs.forEach((v,i) => {
           this.dhcarr[i] = v[i].cooprLevel1;
         });
-        console.log("arr", this.dhcarr);
+        // console.log("arr", this.dhcarr);
 
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
-          console.log("datanum",datanum);
+          // console.log("datanum",datanum);
           let AmericaDate = [];
           let AmericaList = [];
           let AmericaLine = 1;
@@ -385,7 +385,7 @@ export default {
             AmericaLine = item.tAvgAmt;
 
           });
-          console.log("Arrnum", this.sellOutDataList);
+          // console.log("Arrnum", this.sellOutDataList);
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
@@ -676,7 +676,7 @@ export default {
         this.rowSpanNumber1 = [this.tableInner.length -1];
         // debugger;
 
-        console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
+        // console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
 
         // console.log("this.data", this.data);
       } catch (err) {

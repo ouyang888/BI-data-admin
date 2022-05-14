@@ -249,21 +249,21 @@ export default {
           params,
           "cooprLevel3"
         );
-        console.log("res12", res);
+        // console.log("res12", res);
         let sellOutDataList = res.rows;
         this.showLoading = false;
         let obj = res.rows[0];
-        console.log("obj", obj);
+        // console.log("obj", obj);
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          console.log("11111111111", obj[i]);
+          // console.log("11111111111", obj[i]);
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
-        console.log("obj", obj);
+        // console.log("obj", obj);
 
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
@@ -271,12 +271,12 @@ export default {
         arrs.forEach((v) => {
           this.dhcarr.push(v[0].cooprLevel3);
         });
-        console.log("arr", this.dhcarr);
+        // console.log("arr", this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
-          console.log("datanum", datanum);
+          // console.log("datanum", datanum);
           let AmericaDate = [];
           let AmericaList = [];
           let AmericaLine = 1;
@@ -287,13 +287,13 @@ export default {
               .split("-");
             var yue = timeArr[1];
             var ri = timeArr[2];
-            console.log("sdvsd", timeArr);
+            // console.log("sdvsd", timeArr);
 
             AmericaDate.push(yue + "-" + ri);
             AmericaList.push(item.totalCnyAmt);
             AmericaLine = item.totalSaleAvgTaskQty;
           });
-          console.log("Arrnum", this.sellOutDataList);
+          // console.log("Arrnum", this.sellOutDataList);
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }

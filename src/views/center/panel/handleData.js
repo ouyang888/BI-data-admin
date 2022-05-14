@@ -1,7 +1,7 @@
 export const handleData = (val)=> {
   switch(val) {
     case 's':
-      console.log(progressData,'progressDataprogressDataprogressData');
+      // console.log(progressData,'progressDataprogressDataprogressData');
       break;
     case 'productCoAll':
       break;
@@ -52,6 +52,6 @@ export const handleData = (val)=> {
     case 'exprotSales':
       break;
     default:
-      console.log('sssssssssssssss');   
+      // console.log('sssssssssssssss');   
   } 
 }

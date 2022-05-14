@@ -228,7 +228,7 @@ export default {
 
     // let params = `${this.ontime},${this.titleName},${model}`;
     // let listParams = `${this.ontime}-01,${this.ontime}-31,${model},${this.ontime}-01,${this.ontime}-31,${model}`
-    console.log('params',params);
+    // console.log('params',params);
     this.getdashboard(params);
     this.queryCardSAB(params);
     this.getTable(params);
@@ -278,7 +278,7 @@ export default {
       );
 
 
-      console.log("tableInner", tableOutter);
+      // console.log("tableInner", tableOutter);
 
       this.tableInner = tableInner.rows;
       this.tableOutter = tableOutter.rows;

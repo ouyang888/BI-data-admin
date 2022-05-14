@@ -276,7 +276,7 @@ export default {
       this.rowSpanNumber1 = [this.tableInner.length - 1];
 
       this.tableInner = tableInner.rows;
-      console.log("this.tableInner", this.tableInner);
+      // console.log("this.tableInner", this.tableInner);
     },
     gotoDomestic() {
       this.$router.push("/center/index");

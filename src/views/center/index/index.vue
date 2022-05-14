@@ -873,7 +873,7 @@ export default {
         const outter = await API.getTotal(outtObj);
         const innersab = await API.getTotal(innerSAB);
         const outtersab = await API.getTotal(outterSAB);
-        console.log("inner,", outter);
+        // console.log("inner,", outter);
           this.showLoadingLeft = false;
           this.showLoadingRight = false;
         if(inner.rows.length<1){
@@ -1050,12 +1050,12 @@ export default {
           return v.marketChannel == "线下";
         });
         this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
-        console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
+        // console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
         let innerTotal = tableInner.rows.filter((v) => {
           return v.marketChannel == "底部合计";
         });
         this.tableInner = innerTop.concat(innerBottom, innerTotal);
-        console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
+        // console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
 
         // console.log("this.data", this.data);
       } catch (err) {
@@ -1201,7 +1201,7 @@ export default {
             this.speedData.bottomTime1 = Number(panelDataList[i].dateRadio.toFixed(1));
           }
         }
-        console.log('this.speedData',this.speedData)
+        // console.log('this.speedData',this.speedData)
       } catch (error) {
         console.log(error);
       }
@@ -1641,7 +1641,7 @@ export default {
       myChart3.setOption(option);
     },
     changeDate(val) {
-      console.log("更新时间");
+      // console.log("更新时间");
     },
   },
 

@@ -259,7 +259,7 @@ export default {
       this.rowSpanNumber1 = [innerTop.length, innerBottom.length];
 
       this.tableInner = innerTop.concat(innerBottom);
-      console.log("this.tableInner", this.tableInner);
+      // console.log("this.tableInner", this.tableInner);
     },
     gotoDomestic() {
       this.$router.push("/center/index");
@@ -301,13 +301,13 @@ export default {
           if (!!v.cnyAmt ) {
             v.cnyAmt  = v.cnyAmt .toFixed(0); /*达成金额*/
           } else {
-            console.log("字段无数据", "cnyAmt ");
+            // console.log("字段无数据", "cnyAmt ");
           }
           if (!!v.saleTaskAmt) {
             v.saleTaskAmt =
               v.saleTaskAmt.toFixed(0); /*责任制金额*/
           } else {
-            console.log("字段无数据", "saleTaskAmt");
+            // console.log("字段无数据", "saleTaskAmt");
           }
 
           if (!!v.grossProfitRadio) {
@@ -316,7 +316,7 @@ export default {
             ).toFixed(0); /*毛利率*/
             v.grossProfitRadio = Number(v.grossProfitRadio);
           } else {
-            console.log("字段无数据", "cooprLevel1AmtRadio");
+            // console.log("字段无数据", "cooprLevel1AmtRadio");
           }
 
           if (!!v.cnyAmtRadio) {
@@ -327,11 +327,11 @@ export default {
             ).toFixed(0); /*完成率*/
             v.cnyAmtRadio = Number(v.cnyAmtRadio);
           } else {
-            console.log("字段无数据", "cnyAmtRadio");
+            // console.log("字段无数据", "cnyAmtRadio");
           }
         });
       this.cardData = arr;
-      console.log("this.cardData1111", this.cardData);
+      // console.log("this.cardData1111", this.cardData);
     },
 
     //三个仪表盘(左中)

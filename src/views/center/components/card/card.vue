@@ -143,7 +143,7 @@
     watch:{
       cardObj:{
         handler:function(newValue,oldValue){
-          console.log('newValue',newValue);
+          // console.log('newValue',newValue);
         }
       },
       list:{
@@ -166,7 +166,7 @@
     
     created(){
       
-      console.log('this.name',this.name)
+      // console.log('this.name',this.name)
 
     },
     methods: {

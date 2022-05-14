@@ -126,7 +126,7 @@ export default {
     $route: function (val) {
       if (val.meta.preMenuUrl || this.$route.path) {
         this.searchKeys = [this.$route.path, val.meta.preMenuUrl || ""];
-        console.log("路由", val.name);
+        // console.log("路由", val.name);
         this.getPageName(val.name);
       }
     },

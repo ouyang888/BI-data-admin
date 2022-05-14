@@ -1943,7 +1943,7 @@ export default {
         this.departmentInfo = res.rows.filter((v) => {
           return v.directName == "内销";
         })[0];
-        console.log( this.departmentInfo);
+        // console.log( this.departmentInfo);
         this.processInfo = res.rows.filter((v) => {
           return v.directName == "内销";
         });
@@ -1951,7 +1951,7 @@ export default {
          this.homeSabInfo = homeSab.rows.filter((v) => {
           return v.directName == "内销";
         })
-        console.log("this.homeSabInfo this.homeSabInfo this.homeSabInfo ",this.homeSabInfo );
+        // console.log("this.homeSabInfo this.homeSabInfo this.homeSabInfo ",this.homeSabInfo );
         this.homeGrossProfitRadio = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName ==this.sale;
         })[0];
@@ -1959,7 +1959,7 @@ export default {
            this.departmentInfo1 = res.rows.filter((v) => {
           return v.directName == this.sales;
         })[0];
-        console.log("外销",this.departmentInfo1);
+        // console.log("外销",this.departmentInfo1);
 
         this.processInfo1 = res.rows.filter((v) => {
           return v.directName == "外销";
@@ -1967,7 +1967,7 @@ export default {
         this.homeSabInfo1 = homeSab.rows.filter((v) => {
           return v.directName == "外销";
         });
-          console.log("homeSabInfo1",this.homeSabInfo );
+          // console.log("homeSabInfo1",this.homeSabInfo );
         this.homeGrossProfitRadio1 = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName == this.sales;
         })[0];
@@ -2009,7 +2009,7 @@ export default {
         //   return v.marketChannel == "底部合计";
         // });
         // this.tableInner = innerTop.concat(innerBottom,innerTotal);
-        console.log('this.tableInner',this.rowSpanNumber1,this.tableInner)
+        // console.log('this.tableInner',this.rowSpanNumber1,this.tableInner)
 
 
         // console.log("this.data", this.data);

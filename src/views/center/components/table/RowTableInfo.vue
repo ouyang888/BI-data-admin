@@ -117,11 +117,11 @@
       },
       objectSpanMethod({ row, column, rowIndex, columnIndex }) {
         let number = 0;
-        console.log('this.mesInfo',this.mesInfo)
+        // console.log('this.mesInfo',this.mesInfo)
         this.mesInfo.forEach((item, idnex) => {
           number++;
         });
-        console.log(number, "numbernumbernumber");
+        // console.log(number, "numbernumbernumber");
         // 底部合计合并单元格
         // if (rowIndex === number - 1) {
         //   if (columnIndex == 1 || columnIndex == 2) {

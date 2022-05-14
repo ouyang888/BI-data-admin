@@ -126,7 +126,7 @@ export const action = {
         })
         break
       default:
-        console.log('sssssssssssssss');
+        // console.log('sssssssssssssss');
     }
 
   },
@@ -143,7 +143,7 @@ export const action = {
         list.title.push(item.cooprLevel1)
         list.dataList.push(item.totalAmt)
         commit('getForExport', list);
-        console.log("000888111dddd", list)
+        // console.log("000888111dddd", list)
       })
     })
   },
@@ -244,7 +244,7 @@ export const action = {
   },
   getChartData({ state, commit }, params) {
     axios.get('/api/psi/directTotal/groupTendencyChart', { params: params }).then(res => {
-      console.log('ressss', res.rows[0]);
+      // console.log('ressss', res.rows[0]);
       let obj = res.rows[0];
 
       let nameObj = {
@@ -369,7 +369,7 @@ export const action = {
           outerDirect.push({ info: {}, list: [] })
         }
 
-        console.log('innerDirectinnerDirect', innerDirect, outerDirect)
+        // console.log('innerDirectinnerDirect', innerDirect, outerDirect)
         commit('setInnerDirect', innerDirect)
         commit('setOuterDirect', outerDirect)
 
@@ -382,7 +382,7 @@ export const action = {
     axios.get(`/api/query?code=${param.code}&parameter=${param.date ? param.date : d}`, {})
       .then(res => {
 
-        console.log(res)
+        // console.log(res)
         let innerSabUp = createInnerSab(res.rows, '线上');
         let outerSabUp = createInnerSab(res.rows, '线下');
         commit('SetSAB', { innerSabUp: innerSabUp, outerSabUp: outerSabUp })
@@ -431,7 +431,7 @@ export const action = {
           });
         }
         res.rows.splice(6)
-        console.log('getCard', res)
+        // console.log('getCard', res)
         commit('setCardList', res.rows)
       })
 
@@ -478,7 +478,7 @@ export const action = {
         console.log('innerDirectOnOutline', res.rows, obj)
       }).
       then(err => {
-        console.log(err, 'innerDirectOnOutline')
+        // console.log(err, 'innerDirectOnOutline')
       })
   },
   // 内销线上汇总表格
@@ -487,7 +487,7 @@ export const action = {
     axios.get('api/query?code=onlineBottomLevel3&parameter=2022-03%2C2022-03', {}).
       then(res => {
         obj.innerDirect.push(...res.rows);
-        console.log(res.rows, obj, state.tableList, 'getDomesticOnlineTableLeft')
+        // console.log(res.rows, obj, state.tableList, 'getDomesticOnlineTableLeft')
       }).
       catch(err => {
         console.log(err);
@@ -495,13 +495,13 @@ export const action = {
     axios.get('api/query?code=onlineBottomStore', {}).
       then(res => {
         obj.outerDirect.push(...res.rows);
-        console.log(res.rows, obj, state.tableList, 'getDomesticOnlineTableRight');
+        // console.log(res.rows, obj, state.tableList, 'getDomesticOnlineTableRight');
       }).
       catch(err => {
         console.log(err);
       })
     commit('setTableList', obj);
-    console.log(obj, state.tableList, 'getDomesticOnlineTablegetDomesticOnlineTable')
+    // console.log(obj, state.tableList, 'getDomesticOnlineTablegetDomesticOnlineTable')
   },
   // 外销汇总表格
   async getOutineSummaryTable({ state, commit }) {
@@ -519,7 +519,7 @@ export const action = {
       catch(err => {
       })
     commit('setTableList', obj)
-    console.log(obj, state.tableList, 'tableList');
+    // console.log(obj, state.tableList, 'tableList');
   },
   // 内销-线上-合作模式三汇总页（按平台类型）
   demosticOnlineShopTable({ state, commit }) {
@@ -535,10 +535,10 @@ export const action = {
         obj.outerDirect.push(...res.rows)
       }).
       catch(err => {
-        console.log(err, 'neixiaoneixiao')
+        // console.log(err, 'neixiaoneixiao')
       })
     commit('setTableList', obj)
-    console.log(obj, 'objobjobjobj', state.tableList);
+    // console.log(obj, 'objobjobjobj', state.tableList);
   },
   // 内销-线下-合作模式三汇总页（按渠道类型）
   demosticOfflineTable({ state, commit }) {
@@ -546,7 +546,7 @@ export const action = {
     axios.get('api/query?code=level3OfflineCategory&parameter=2022-03', {}).
       then(res => {
         obj.innerDirect.push(...res.rows)
-        console.log(res.rows, 'level3OfflineCategorylevel3OfflineCategorylevel3OfflineCategory')
+        // console.log(res.rows, 'level3OfflineCategorylevel3OfflineCategorylevel3OfflineCategory')
       }).
       catch(err => {
       })
@@ -555,10 +555,10 @@ export const action = {
         obj.outerDirect.push(...res.rows)
       }).
       catch(err => {
-        console.log(err, 'demosticOfflineTable')
+        // console.log(err, 'demosticOfflineTable')
       })
     commit('setTableList', obj)
-    console.log(obj, 'demosticOfflineTable', state.tableList);
+    // console.log(obj, 'demosticOfflineTable', state.tableList);
   },
   // domesticProductCoOnline 线上总产司页
   // domesticProductCoOnlineTable({state,commit}){
@@ -596,7 +596,7 @@ export const action = {
       }).
       catch(err => { })
     commit('setTableList', obj);
-    console.log(obj, state.tableList, 'offlineSummaryTable');
+    // console.log(obj, state.tableList, 'offlineSummaryTable');
   },
   // 外销-区域汇总页table
   outlineAreaSummaryTable({ state, commit }) {
@@ -618,7 +618,7 @@ export const action = {
       obj.innerDirect.push(...res.rows)
     })
     commit('setTableList',obj)
-    console.log(obj,state.tableList,'demosticOfflineWorkModeTable')
+    // console.log(obj,state.tableList,'demosticOfflineWorkModeTable')
   },
   // 产司汇总
   getTableList({state,commit},params){
@@ -642,7 +642,7 @@ export const action = {
       obj.outerDirect.push(...res.rows);
     })
     commit('setTableList',obj)
-    console.log(obj,state.tableList,'getTableList!!!!');
+    // console.log(obj,state.tableList,'getTableList!!!!');
   },
   queryrightShopData({ state, commit }, param) {
 
@@ -689,7 +689,7 @@ export const action = {
 
 
 
-        console.log('getCard', res)
+        // console.log('getCard', res)
         commit('setCardList', res.rows)
 
       })
@@ -715,7 +715,7 @@ export const action = {
         res.rows = res.rows.concat(arr)
         // }
 
-        console.log('json', JSON.stringify(res.rows))
+        // console.log('json', JSON.stringify(res.rows))
 
 
         let obj = {};
@@ -726,7 +726,7 @@ export const action = {
           if (!obj[v.businessEntityName + v.businessModel]) {
               obj[v.businessEntityName + v.businessModel] = { name: v.businessModel, data: [] }
               obj[v.businessEntityName + v.businessModel].data.push(v);
-              console.log(v.businessEntityName);
+              // console.log(v.businessEntityName);
           } else {
               obj[v.businessEntityName + v.businessModel].data.push(v);
 

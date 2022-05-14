@@ -327,14 +327,14 @@ export default {
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          console.log("11111111111", obj[i]);
+          // console.log("11111111111", obj[i]);
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
 
-        console.log("arr", arr);
+        // console.log("arr", arr);
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
         arrs.forEach((v) => {
@@ -354,13 +354,13 @@ export default {
               .split("-");
             var yue = timeArr[1];
             var ri = timeArr[2];
-            console.log("sdvsd", timeArr);
+            // console.log("sdvsd", timeArr);
 
             AmericaDate.push(yue + "-" + ri);
             AmericaList.push(item.totalCnyAmt);
             AmericaLine = item.saleAvgAmt;
           });
-          console.log("Arrnum", this.sellOutDataList);
+          // console.log("Arrnum", this.sellOutDataList);
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
@@ -527,7 +527,7 @@ export default {
         } else {
           this.cardData = [{}];
         }
-        console.log("2233377",this.cardData)
+        // console.log("2233377",this.cardData)
       } catch (err) {
         console.log(err);
       }
@@ -977,7 +977,7 @@ export default {
       );
 
 
-      console.log("tableInner", tableOutter);
+      // console.log("tableInner", tableOutter);
 
       this.tableInner = tableInner.rows;
       this.tableOutter = tableOutter.rows;
