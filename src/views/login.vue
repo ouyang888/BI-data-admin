@@ -64,6 +64,8 @@ export default {
         localStorage.setItem("token", result.data);
         this.cookie.set("JSESSIONID", result.data);
         this.$router.push("/");
+      }else{
+        this.$message.error("账号/密码错误");
       }
     },
     submit() {

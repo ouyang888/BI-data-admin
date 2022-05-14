@@ -10,8 +10,8 @@
           <SadPanel :data="sabData" />
         </div>
       </div>
-      <!-- 右侧卡片 -->
-      <Card :list="cardData" @gotoCatSeries="gotoCatSeries" :cardObj="cardObj"/>
+      <!-- 右侧卡片 @gotoCatSeries="gotoCatSeries"-->
+      <Card :list="cardData" :cardObj="cardObj" />
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -26,23 +26,23 @@
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
-          <div class="middle-font">大区日达成趋势图</div>
+          <div class="middle-font">外销产司日达成趋势图</div>
           <div class="right-box-qushi">
-            <!-- <template v-show="!showLoading"> -->
-            <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
-              <div class="content-cart">
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">{{ item }}</div>
-                  <div :id="i" class="echartsBox-min"></div>
+            <!-- <template> -->
+              <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
+                <div class="content-cart">
+                  <div class="border-top-line"></div>
+                  <div class="border-left-line"></div>
+                  <div class="flex-echrats-right">
+                    <div class="right-font-title">{{ item }}</div>
+                    <div :id="i" class="echartsBox-min"></div>
+                  </div>
+                  <div class="border-top-line"></div>
+                  <div class="border-left-line1"></div>
+                  <div class="border-left-line2"></div>
+                  <div class="border-left-line3"></div>
                 </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
               </div>
-            </div>
             <!-- </template> -->
           </div>
         </div>
@@ -54,7 +54,8 @@
     </div>
 
     <!-- 底部表格 -->
-    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj" title1="区域" title2="大区"/>
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
+      title1="区域" title2="大区" />
   </div>
 </template>
 <script>
@@ -63,7 +64,7 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
-import Card from '@/views/center/components/card/card.vue'; 
+import Card from '@/views/center/components/card/card.vue';
 import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
 export default {
   name: "s",
@@ -76,7 +77,7 @@ export default {
   },
   data() {
     return {
-      dhcarr: ['暂无数据','暂无数据','暂无数据','暂无数据','暂无数据','暂无数据'],
+      dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
       Arrnum: [],
       showLoading: false,
       AmericaDate: [],
@@ -99,7 +100,7 @@ export default {
         titleBottom: "OEM",
         topGPM: 0,
         bottomGPM: 0,
-        ballNum:0,
+        ballNum: 0,
       },
 
       speedData: {
@@ -135,79 +136,79 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
-      showLoadingCard:false,
-      cardData:[],
-      tableOutter:[],
-      tableInner:[],
-      leftObj:{   
-      name:'cooprLevel2',  /*标题*/
-      level:'cooprLevel2Manager',/*责任人*/
-      tAvgAmt:'tAvgAmt',/*责任制*/
+      showLoadingCard: false,
+      cardData: [],
+      tableOutter: [],
+      tableInner: [],
+      leftObj: {
+        name: 'cooprLevel2',  /*标题*/
+        level: 'cooprLevel2Manager',/*责任人*/
+        tAvgAmt: 'tAvgAmt',/*责任制*/
       },
-      rightObj:{
-      name:'cooprLevel1',
-      level:'customerName',
-      tAvgAmt:'tAvgAmt'
+      rightObj: {
+        name: 'cooprLevel1',
+        level: 'customerName',
+        tAvgAmt: 'tAvgAmt'
       },
-      cardObj:{
-       'title':'cooprLevel1',
-       'cnyAmt':'cooprLevel1NameAmt',
-       'saleTaskAmt':'cooprLevel1TaskAmt',
-       'saleAmtRadio':'cooprLevel1AmtRadio'
+      cardObj: {
+        'title': 'businessEntityName',
+        'cnyAmt': 'businessEntityAmt',
+        'saleTaskAmt': 'businessEntityTaskAmt',
+        'saleAmtRadio': 'businessEntityAmtRadio'
       },
-     };
+    };
   },
-  computed:{
-    ontime(){
-      return this.$store.state.year +'-'+ this.$store.state.month;
+  computed: {
+    ontime() {
+      return this.$store.state.year + '-' + this.$store.state.month;
     },
-    showMoney(){
+    showMoney() {
       return this.$store.state.showMoney;
     },
-    modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'台'
+    modelLabel() {
+      return this.$store.state.showMoney == true ? '亿' : '台'
     },
-    model(){ /* 获取本部，OEM */
+    model() { /* 获取本部，OEM */
       return this.$store.state.model
     }
-    
+
   },
-  watch:{
-    ontime:{ /*监听数据更改 调用接口 */
-     handler: function (newValue, oldValue) {
+  watch: {
+    ontime: { /*监听数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
         this.init();
       }
     },
-    model:{ /*监听数据更改 调用接口 */
-      handler: function(newValue,oldValue){
+    model: { /*监听数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
         this.init();
       }
 
     },
-    showMoney:{
-      handler:function(newValue,oldValue){
+    showMoney: {
+      handler: function (newValue, oldValue) {
         this.init()
       }
     }
 
   },
   methods: {
-    init(){
+    init() {
       let params = {  /*年月*/
-      month_date:this.ontime
-    };
-    let listParams = { /*年月日*/
-      start_date:`${this.ontime}-01`,
-      end_date:`${this.ontime}-31`
-    }
+        month_date: this.ontime
+      };
+      let listParams = { /*年月日*/
+        start_date: `${this.ontime}-01`,
+        end_date: `${this.ontime}-31`
+      }
 
 
-    this.getdashboard(params);
-    this.queryCardSAB(params);
-    this.getCard(params);
-    this.getList(listParams);
-    this.getList1(listParams);
-    this.getTable(params);
+      this.getdashboard(params);
+      this.queryCardSAB(params);
+      this.getCard(params);
+      this.getList(listParams);
+      this.getList1(listParams);
+      this.getTable(params);
     },
     // 三个仪表盘
     leftGo() {
@@ -216,53 +217,53 @@ export default {
     rightGo() {
       this.$router.push("/center/exprotAreaAll");
     },
-      //三个仪表盘(左中)
-      async getdashboard(params) {
-        let obj = {
-          code:'sellOutTopDashBoard'
-        }
-        Object.assign(obj,params);
-        try {
-          const res = await API.getTotal(obj);
-          if(res!=200) return;
-          //内销汇总仪表盘左边&&中间
-          let panelDataList = res.rows;
-          // console.log("res仪表",res); 
-          // directProfitRadio: 0.2713  销向毛利率
-          this.progressData.ballNum = (
-            panelDataList[0].directProfitRadio * 100
-          ).toFixed(1);
-          //    
-          // ⅵ. directCnyAmt: 5.8799  销向总销售金额
-          this.speedData.ballNum = panelDataList[0].directCnyAmt.toFixed(1)
-          // 销向金额完成率
-          // 销向数量完成率
-          this.speedData.speedBar = (panelDataList[0].directAmtRadio * 100).toFixed(1)
-          this.speedData.bar = (panelDataList[0].directQtyRadio * 100).toFixed(1)
-          //  销向总销售数量
-          this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(1)
+    //三个仪表盘(左中)
+    async getdashboard(params) {
+      let obj = {
+        code: 'sellOutBusinessDashBoard'
+      }
+      Object.assign(obj, params);
+      try {
+        const res = await API.getTotal(obj);
+        // if (res != 200) return;
+        //内销汇总仪表盘左边&&中间
+        let panelDataList = res.rows;
+        // console.log("res仪表",res); 
+        // directProfitRadio: 0.2713  销向毛利率
+        this.progressData.ballNum = (
+          panelDataList[0].directProfitRadio * 100
+        ).toFixed(1);
+        //    
+        // ⅵ. directCnyAmt: 5.8799  销向总销售金额
+        this.speedData.ballNum = panelDataList[0].directCnyAmt.toFixed(1)
+        // 销向金额完成率
+        // 销向数量完成率
+        this.speedData.speedBar = (panelDataList[0].directAmtRadio * 100).toFixed(1)
+        this.speedData.bar = (panelDataList[0].directQtyRadio * 100).toFixed(1)
+        //  销向总销售数量
+        this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(1)
 
-          // 责任制
-          this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
-          for (var i = 0; i < panelDataList.length; i++) {
-            if (panelDataList[i].obmOem == "OBM") {
-              this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
+        // 责任制
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+        for (var i = 0; i < panelDataList.length; i++) {
+          if (panelDataList[i].obmOem == "OBM") {
+            this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+            this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
 
-              this.speedData.bottomClose = panelDataList[i].orgQtyRadio.toFixed(1)
-              this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1)
+            this.speedData.bottomClose = panelDataList[i].orgQtyRadio.toFixed(1)
+            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1)
 
-            } else if (panelDataList[i].obmOem == "OEM") {
-              this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
-              this.speedData.bottomClose1 = panelDataList[i].orgQtyRadio.toFixed(1)
-              this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
+          } else if (panelDataList[i].obmOem == "OEM") {
+            this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+            this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
+            this.speedData.bottomClose1 = panelDataList[i].orgQtyRadio.toFixed(1)
+            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
 
-            }
           }
-        
+        }
+
       } catch (error) {
         console.log(error);
       }
@@ -271,13 +272,13 @@ export default {
     //三个仪表盘(右)
     async queryCardSAB(params) {
       let obj = {
-        code:'  '
+        code: 'sellOutBusinessDashBoardSAB'
       }
-      Object.assign(obj,params)
+      Object.assign(obj, params)
       try {
         const res = await API.getTotal(obj);
         // console.log("右但是,", res);
-        if(res.code !=200) return;
+        // if (res.code != 200) return;
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].obmOem == "OBM") {
@@ -302,7 +303,7 @@ export default {
             ).toFixed(1);
           }
         }
-      } catch (error) {
+      } catch (error) { 
         console.log(error);
       }
     },
@@ -310,18 +311,18 @@ export default {
     async getList(params) {
       this.showLoading = true;
       let obj = {
-        code:'sellOuttotalchart'
+        code: 'sellOutBusinessChart'
       }
-      Object.assign(obj,params);
+      Object.assign(obj, params);
       try {
         const res = await API.getTotal(
           obj
           // 'cooprLevel1'
         );
 
-        if(res.code !=200) return;
-      
-          res.rows.filter((item) => {
+        if (res.code != 200) return;
+
+        res.rows.filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
             .replace(/\:/g, "-")
@@ -330,10 +331,10 @@ export default {
           var ri = timeArr[2];
 
           // 外销日内
-          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+          if (item.cnyAmt !== null && item.tAvgQty !== null) {
             this.AvgTaskAmtDate.push(yue + "-" + ri);
-            this.AvgTaskAmtList.push(item.totalAmt);
-            this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+            this.AvgTaskAmtList.push(item.cnyAmt);
+            this.AvgTaskAmtLine = item.tAvgQty;
             this.myEcharts();
           }
           // this.showLoading = false;
@@ -342,21 +343,21 @@ export default {
         console.log(error);
       }
     },
-    gotoCatSeries(obj){
-      this.$router.push({'path':'exprotAreaAll'})
+    gotoCatSeries(obj) {
+      this.$router.push({ 'path': 'exprotAreaAll' })
     },
     // 中部边接口
     async getList1(params) {
       this.showLoading = true;
       let chartObj = {
-        code:'sellOuttotalchart',
-        fields:'cooprLevel1'
+        code: 'sellOutBusinessChart',
+        fields:'businessEntityName'
       }
-      Object.assign(chartObj,params)
+      Object.assign(chartObj, params)
       try {
         const res = await API.getChartTotal(chartObj);
         // console.log("res12",res);
-        if(res.code !=200) return;
+        if (res.code != 200) return;
         let sellOutDataList = res.rows;
         this.showLoading = false;
         let obj = res.rows[0];
@@ -371,12 +372,12 @@ export default {
           k++;
         }
         // console.log("obj", obj);
-       
+
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
-       
+
         arrs.forEach((v) => {
-          this.dhcarr.push(v[0].cooprLevel1);
+          this.dhcarr.push(v[0].businessEntityName);
         });
         // console.log("arr", this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
@@ -397,8 +398,8 @@ export default {
             // console.log("sdvsd", timeArr);
 
             AmericaDate.push(yue + "-" + ri);
-            AmericaList.push(item.CnyAmt);
-            AmericaLine = item.tAvgAmt;
+            AmericaList.push(item.cnyAmt);
+            AmericaLine = item.tAvgQty;
           });
           // console.log("Arrnum", this.sellOutDataList);
 
@@ -412,6 +413,7 @@ export default {
     gotoDomestic() {
       this.$router.push("/center/index");
     },
+
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -657,99 +659,99 @@ export default {
       };
       myChart2.setOption(option);
     },
-   
+
     online() {
       this.$router.push("/center/onlineSummary");
     },
     offline() {
       this.$router.push("/center/offlineSummary");
     },
-       // 右边卡片/
-       async getCard(params) {
-        let obj = {
-          code:'sellOutTopOnline'
+    // 右边卡片/
+    async getCard(params) {
+      let obj = {
+        code: 'sellOutBusinessKard'
+      }
+      Object.assign(obj, params);
+      this.showLoadingCard = true;
+      const res = await API.getTotal(obj);
+
+      let onTitle = '';
+
+      let arr = [];
+      let sabArr = [];
+
+      if (res.code != 200) return;
+
+
+      res.rows.forEach(v => {
+
+        if (onTitle != v.businessEntityName && !!v.businessEntityName) {
+          console.log('title')
+          onTitle = v.businessEntityName;
+          arr.push(v);
         }
-        Object.assign(obj,params);
-        this.showLoadingCard = true;
-        const res = await API.getTotal(obj);
-    
-        let onTitle = '';
-        
-        let arr = [];
-       let sabArr = [];
-
-       if(res.code !=200) return;
-     
-
-        res.rows.forEach(v=>{
-      
-           if(onTitle!=v.cooprLevel1 && !!v.cooprLevel1){
-             console.log('title')
-             onTitle = v.cooprLevel1;
-            arr.push(v);
-           }
-        })
+      })
 
 
-        arr.splice(6);
-    
-        arr.length>0 && arr.forEach(v => {
-            //  v.title = v.cooprLevel1; /*标题*/
-            if(!!v.cooprLevel1NameAmt){
-             v.cooprLevel1NameAmt = v.cooprLevel1NameAmt.toFixed(0); /*达成金额*/
-            }else{
-              // console.log('字段无数据','cooprLevel1NameAmt')
-            }
-            if(!!v.cooprLevel1TaskAmt){
-             v.cooprLevel1TaskAmt = v.cooprLevel1TaskAmt.toFixed(0); /*责任制金额*/
-            }else{
-              // console.log('字段无数据','cooprLevel1TaskAmt')
-            }
+      arr.splice(6);
 
-            if(!!v.grossProfitRadio){
-             v.grossProfitRadio = (v.grossProfitRadio * 100>100?100:v.grossProfitRadio * 100).toFixed(0); /*毛利率*/
-             v.grossProfitRadio = Number(v.grossProfitRadio);
+      arr.length > 0 && arr.forEach(v => {
+        //  v.title = v.cooprLevel1; /*标题*/
+        if (!!v.businessEntityAmt)  { 
+          v.businessEntityAmt = v.businessEntityAmt.toFixed(0); /*达成金额*/
+        } else {
+          // console.log('字段无数据','cooprLevel1NameAmt')
+        }
+        if (!!v.businessEntityTaskAmt) {
+          v.businessEntityTaskAmt  = v.businessEntityTaskAmt.toFixed(0); /*责任制金额*/
+        } else {
+          // console.log('字段无数据','cooprLevel1TaskAmt')
+        }
 
-            }else{
-              // console.log('字段无数据','cooprLevel1AmtRadio')
-            }
+        if (!!v.grossProfitRadio) {
+          v.grossProfitRadio = (v.grossProfitRadio * 100 > 100 ? 100 : v.grossProfitRadio * 100).toFixed(0); /*毛利率*/
+          v.grossProfitRadio = Number(v.grossProfitRadio);
 
-            if(!!v.cooprLevel1AmtRadio){
-             v.cooprLevel1AmtRadio = (v.cooprLevel1AmtRadio * 100>100?100:v.cooprLevel1AmtRadio * 100).toFixed(0); /*完成率*/
-             v.cooprLevel1AmtRadio = Number(v.cooprLevel1AmtRadio);
+        } else {
+          // console.log('字段无数据','cooprLevel1AmtRadio')
+        }
 
-            }else{
-              // console.log('字段无数据','cooprLevel1AmtRadio')
-            }
-    
-        });
-        this.cardData = arr;
-        // console.log('this.cardData',this.cardData)
+        if (!!v.businessEntityAmtRadio ) {
+          v.businessEntityAmtRadio  = (v.businessEntityAmtRadio  * 100 > 100 ? 100 : v.businessEntityAmtRadio  * 100).toFixed(0); /*完成率*/
+          v.businessEntityAmtRadio  = Number(v.businessEntityAmtRadio );
+
+        } else {
+          // console.log('字段无数据','cooprLevel1AmtRadio')
+        }
+
+      });
+      this.cardData = arr;
+      // console.log('this.cardData',this.cardData)
     },
 
     // 底部table/
     async getTable(params) {
       let innerObj = {
-        code:"sellOutTotalOnlineBottom"
+        code: "sellOutTotalOnlineBottom"
       }
-      Object.assign(innerObj,params);
+      Object.assign(innerObj, params);
 
       let outterObj = {
-        code:"sellOutTotalOfflineBottom"
+        code: "sellOutTotalOfflineBottom"
       }
-      Object.assign(outterObj,params);
+      Object.assign(outterObj, params);
       try {
         let tableInner = await API.getTotal(innerObj);
         let tableOutter = await API.getTotal(outterObj);
 
-        if(tableInner.code!=200) return;
-        
+        if (tableInner.code != 200) return;
+
 
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
         this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
-        this.rowSpanNumber1 = [this.tableInner.length -1];
+        this.rowSpanNumber1 = [this.tableInner.length - 1];
         // debugger;
 
         // console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
@@ -759,14 +761,10 @@ export default {
         console.log(err);
       }
     },
-   
+
   },
   created() {
-    this.init(this.model);
-  },
-
-  mounted() {
-    this.init(this.model);
+    this.init();
   },
 };
 </script>
@@ -839,26 +837,23 @@ export default {
   border-radius: 0 0 10px 10px;
 }
 
-::v-deep .ant-table-thead > tr > th {
+::v-deep .ant-table-thead>tr>th {
   background: rgb(4, 19, 112);
   border-bottom: 1px solid rgb(55, 56, 112);
   border-right: 1px solid rgb(55, 56, 112);
 }
 
-::v-deep .ant-table-thead > tr > th .ant-table-header-column {
+::v-deep .ant-table-thead>tr>th .ant-table-header-column {
   color: #fff;
   font-size: 14px;
 }
 
-::v-deep .ant-table-bordered .ant-table-tbody > tr > td {
+::v-deep .ant-table-bordered .ant-table-tbody>tr>td {
   border: 1px solid rgb(55, 56, 112);
   color: #fff;
 }
 
-::v-deep
-  .ant-table-tbody
-  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
-  > td {
+::v-deep .ant-table-tbody>tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)>td {
   background: transparent;
 }
 
@@ -866,13 +861,11 @@ export default {
   margin: 14px;
 }
 
-::v-deep .ant-table-thead > tr:first-child > th:first-child {
-  background: linear-gradient(
-    to right,
-    rgb(80, 192, 255),
-    rgb(90, 255, 163),
-    rgb(102, 255, 255)
-  );
+::v-deep .ant-table-thead>tr:first-child>th:first-child {
+  background: linear-gradient(to right,
+      rgb(80, 192, 255),
+      rgb(90, 255, 163),
+      rgb(102, 255, 255));
 }
 
 .top-flex {
@@ -1038,7 +1031,7 @@ export default {
   opacity: 1;
 }
 
-::v-deep .ant-table-bordered .ant-table-body > table {
+::v-deep .ant-table-bordered .ant-table-body>table {
   border: none;
 }
 
@@ -1060,9 +1053,11 @@ export default {
   /* margin-right: 1px; */
   width: 45%;
 }
+
 .content-cart {
   width: 100%;
 }
+
 .flex-right-bottom {
   display: flex;
   /* align-items: center; */
@@ -1130,13 +1125,11 @@ export default {
   height: 230px;
 }
 
-::v-deep .ant-table-thead > tr:first-child > th:first-child {
-  background: linear-gradient(
-    to right,
-    rgb(80, 192, 255),
-    rgb(90, 255, 163),
-    rgb(102, 255, 255)
-  );
+::v-deep .ant-table-thead>tr:first-child>th:first-child {
+  background: linear-gradient(to right,
+      rgb(80, 192, 255),
+      rgb(90, 255, 163),
+      rgb(102, 255, 255));
 }
 
 .content {
@@ -1284,7 +1277,7 @@ export default {
   opacity: 1;
 }
 
-::v-deep .ant-table-bordered .ant-table-body > table {
+::v-deep .ant-table-bordered .ant-table-body>table {
   border: none;
 }
 
@@ -1303,6 +1296,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
 }
+
 .flex-loading {
   position: relative;
   left: 50%;

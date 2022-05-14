@@ -50,14 +50,14 @@
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="innerLeftInfo.dateRadio"
+                          :percent="Number(innerLeftInfo.dateRadio)"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="innerLeftInfo.onLineRadio"
+                          :percent="Number(innerLeftInfo.onLineRadio)"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -824,9 +824,6 @@ export default {
      this.init();
    },
   methods: {
-
-
-
     init(){ /*初始化数据方法*/
     let params = {  /*年月*/
       month_date:this.ontime
@@ -838,7 +835,7 @@ export default {
 
     this.getList(listParams);
     this.getCard(params);
-    this.getTable(params);
+    // this.getTable(params);
     this.getdashboard(params);
     this.queryCardSAB(params);
     },
@@ -1130,45 +1127,43 @@ export default {
         code:'directTotalDashboard'
       };
       Object.assign(params,obj)
-
-      
       try {
         const res = await API.getTotal(params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
-        if(res.rows.length<1){
-          this.speedData = {
-            bar: 0,
-            speedBar: 0,
-            ballTitle: "事业部达成",
-            ballNum: 0,
-            ballLeftTitle: "内",
-            ballRightTitle: "外",
-            ballLeftNum: 0,
-            ballRightNum: 0,
-            bottomNum: 0,
-            bottomTitle1: "内",
-            bottomClose: 0,
-            bottomTime: 0,
-            bottomTitle2: "外",
-            bottomClose1: 0,
-            bottomTime1: 0,
-               };
-            this.progressData = {
-                bar1: 0,
-                bar2: 0,
-                ballTitle: "事业部",
-                bigBallTitle: "毛利率",
-                textLeft: "内",
-                textRight: "外",
-                titleTop: "内",
-                titleBottom: "外",
-                topGPM: 0,
-                bottomGPM: 0,
-                ballNum: 0,
-         };
-          return;
-        }
+        // if(res.rows.length<1){
+        //   this.speedData = {
+        //     bar: 0,
+        //     speedBar: 0,
+        //     ballTitle: "事业部达成",
+        //     ballNum: 0,
+        //     ballLeftTitle: "内",
+        //     ballRightTitle: "外",
+        //     ballLeftNum: 0,
+        //     ballRightNum: 0,
+        //     bottomNum: 0,
+        //     bottomTitle1: "内",
+        //     bottomClose: 0,
+        //     bottomTime: 0,
+        //     bottomTitle2: "外",
+        //     bottomClose1: 0,
+        //     bottomTime1: 0,
+        //        };
+        //     this.progressData = {
+        //         bar1: 0,
+        //         bar2: 0,
+        //         ballTitle: "事业部",
+        //         bigBallTitle: "毛利率",
+        //         textLeft: "内",
+        //         textRight: "外",
+        //         titleTop: "内",
+        //         titleBottom: "外",
+        //         topGPM: 0,
+        //         bottomGPM: 0,
+        //         ballNum: 0,
+        //  };
+        //   return;
+        // }
         this.progressData.ballNum = Number((
           panelDataList[0].grossProfitRadio * 100
         ).toFixed(1));
@@ -1215,22 +1210,22 @@ export default {
       try {
         const res = await API.getTotal(params);
         let RightSAB = res.rows;
-        if(RightSAB.length<1 ){
-            this.sabData = {
-              bar1: 0,
-              bar2: 0,
-              bar3: 0,
-              bar4: 0,
-              bar5: 0,
-              ballTitle: "事业部",
-              bottom: "外",
-              top: "内",
-              sabArr: { s: 0, a: 0, b: 0 },
-              topArr: { s: 0, a: 0, b: 0 },
-              bottomArr: { s: 0, a: 0, b: 0 },
-            };
-           return;
-        }
+        // if(RightSAB.length<1 ){
+        //     this.sabData = {
+        //       bar1: 0,
+        //       bar2: 0,
+        //       bar3: 0,
+        //       bar4: 0,
+        //       bar5: 0,
+        //       ballTitle: "事业部",
+        //       bottom: "外",
+        //       top: "内",
+        //       sabArr: { s: 0, a: 0, b: 0 },
+        //       topArr: { s: 0, a: 0, b: 0 },
+        //       bottomArr: { s: 0, a: 0, b: 0 },
+        //     };
+        //    return;
+        // }
 
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].directName == "事业部") {
@@ -1251,32 +1246,32 @@ export default {
           } else if (RightSAB[i].directName == "内销") {
             this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.s = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.s = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
-              );
+              ));
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.a = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.a = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
-              );
+              ));
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.b = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.b = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
-              );
+              ));
             }
           } else if (RightSAB[i].directName == "外销") {
             this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.bottomArr.s = (
+              this.sabData.bottomArr.s = Number((
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1);
+              ).toFixed(1));
             } else if (RightSAB[i].position == "A") {
-              this.sabData.bottomArr.a = (
+              this.sabData.bottomArr.a = Number((
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1);
+              ).toFixed(1));
             } else if (RightSAB[i].position == "B") {
-              this.sabData.bottomArr.b = (
+              this.sabData.bottomArr.b = Number((
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1);
+              ).toFixed(1));
             }
           }
         }

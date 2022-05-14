@@ -161,28 +161,37 @@ const routes = [
                 component: () => import('@/views/center/exprotProductCo/exprotProductCo.vue')
             },
 
-              //内销--内销汇总产司
+            //内销--内销汇总产司
 
-              {
+            {
                 path: 'domesticDepartment',
                 name: 'domesticDepartment',
                 component: () => import('@/views/center/domesticDepartment/domesticDepartment.vue')
             },
 
-             //线上--线上汇总产司
+            //线上--线上汇总产司
 
-             {
+            {
                 path: 'onlineSummaryDepartment',
                 name: 'onlineSummaryDepartment',
                 component: () => import('@/views/center/onlineSummaryDepartment/onlineSummaryDepartment.vue')
             },
 
-             //线下--线下汇总产司
+            //线下--线下汇总产司
 
-             {
+            {
                 path: 'offlineSummaryDepartment',
                 name: 'offlineSummaryDepartment',
                 component: () => import('@/views/center/offlineSummaryDepartment/offlineSummaryDepartment.vue')
+            },
+
+
+            //外销汇总产司
+
+            {
+                path: 'exportDepartment',
+                name: 'exportDepartment',
+                component: () => import('@/views/center/exportDepartment/exportDepartment.vue')
             },
         ],
     }
@@ -197,12 +206,12 @@ const router = new VueRouter({
  */
 router.beforeEach(async (to, from, next) => {
     let isLogin = localStorage.getItem("token")
-    if (to.name !== 'login' &&  isLogin == null) {
+    if (to.name !== 'login' && isLogin == null) {
         // if (to.fullPath === "/center" && from.fullPath !== "/center") {
-            // if (authoritys.includes('admin:quality')) {
-                next('/login');
-                return
-            // }
+        // if (authoritys.includes('admin:quality')) {
+        next('/login');
+        return
+        // }
         // }
         if (to.meta.permission) {
             let sign = false

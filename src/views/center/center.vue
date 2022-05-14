@@ -221,6 +221,11 @@ export default {
           this.$store.commit("setCurrPath", " 内销线下汇总产司页  ");
           break;
 
+            case "exportDepartment":
+          this.title = "外销产司汇总页";
+          this.$store.commit("setCurrPath", " 外销产司汇总页  ");
+          break;
+
         default:
           this.title = "总裁PSI页";
           this.$store.commit("setCurrPath", "总裁PSI页");
@@ -267,6 +272,9 @@ export default {
       } else if (index == "2" && urlName == "offlineSummary") {
         this.$router.push("/center/offlineSummaryDepartment");
         this.title = "线下汇总产司页";
+      }else if (index == "2" && urlName == "export") {
+        this.$router.push("/center/exportDepartment");
+        this.title = "外销产司汇总页";
       }
       // else {
 
