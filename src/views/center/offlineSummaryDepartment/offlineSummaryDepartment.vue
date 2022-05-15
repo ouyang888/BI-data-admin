@@ -59,6 +59,9 @@
       :titleHead="titleHead"
       :leftObj="leftObj"
       :rightObj="rightObj"
+      title1="通路"
+      title2="重点客户"
+      
     />
   </div>
 </template>
@@ -175,12 +178,14 @@ export default {
         saleAmtRadio: "cnyAmtRadio",
       },
       leftObj: {
-        title: "cooprLevel1",
-        channel: "cooprLevel2",
+          marketChannel:'marketChannel',
+          marketCenter:'marketCenter',
+          manager:'manager'
       },
       rightObj: {
-        title: "cooprLevel1",
-        channel: "cooprLevel2",
+          marketChannel:'customerName',
+          marketCenter:'marketChannel',
+          manager:'manager'
       },
       showLoadingLeft: true,
       showLoadingRight: true,
@@ -235,7 +240,7 @@ export default {
       // console.log("params", params);
       this.getdashboard(params);
       this.queryCardSAB(params);
-      // this.getTable(params, "cooprLevel1");
+      this.getTable(params);
       this.getCard(params);
       this.getList(listParams);
       this.getList1(listParams);
@@ -243,23 +248,19 @@ export default {
       // this.myEcharts2();
     },
     // 底部table/
-    async getTable(params, title) {
-      let tableInner = await API.getData("directLevelInnerBottom", params);
-      let tableOutter = await API.getData("directLeveOutterBottom", params);
+    async getTable(params) {
+
+      let tableInner = await API.getData("sellInnerOfflineBusinessBottomDetail", params);
+      let tableOutter = await API.getData("sellInnerOfflineBusinessBottomCustormer", params);
+      this.tableInner = tableInner.rows;
       this.tableOutter = tableOutter.rows;
+
+      
+      this.rowSpanNumber1 = [this.tableInner.length - 1];
       this.rowSpanNumber2 = [this.tableOutter.length - 1];
+      
 
-      let innerTop = tableInner.rows.filter((v) => {
-        return v[title] == "线上";
-      });
 
-      let innerBottom = tableInner.rows.filter((v) => {
-        return v[title] == "线下";
-      });
-      this.rowSpanNumber1 = [innerTop.length, innerBottom.length];
-
-      this.tableInner = innerTop.concat(innerBottom);
-      // console.log("this.tableInner", this.tableInner);
     },
     gotoDomestic() {
       this.$router.push("/center/index");

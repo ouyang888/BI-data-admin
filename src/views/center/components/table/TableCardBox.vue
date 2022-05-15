@@ -6,10 +6,9 @@
     >
       <RowTable
         :color="color"
-        :title="directName"
         :mesInfo="leftData"
         :titleHead="titleHead"
-        :directName="directName"
+        :directName="title1"
         :rowSpanNumber="rowSpanNumber1"
         @handleClick="namesClick"
         :setTrueOrFalse="setTrueOrFalse"
@@ -18,10 +17,9 @@
       />
       <RowTable
         :color="color2"
-        :title="directName2"
         :mesInfo="rightData"
         :titleHead="titleHead"
-        :directName="directName2"
+        :directName="title2"
         :rowSpanNumber="rowSpanNumber2"
         @handleClick="managerClick"
         :setTrueOrFalse="setTrueOrFalse"
@@ -84,7 +82,15 @@ export default {
     },
     rightObj:{
       type:Object,
-    }
+    },
+    title1:{
+      type:String,
+      default:'内销'
+    },
+    title2:{
+      type:String,
+      default:'外销'
+    },
   },
   data() {
     return {

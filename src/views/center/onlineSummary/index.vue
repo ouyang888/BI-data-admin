@@ -265,9 +265,7 @@ export default {
         //const res = await API.getTotal("offLineMiddleChart", listParams);
         // console.log("sell", res);
         let sellOutDataList = res.rows;
-        debugger;
         let newArr = res.rows.filter((item) => {
-          debugger;
           var timeArr = item.orderDate
             .replace(" ", ":")
 
