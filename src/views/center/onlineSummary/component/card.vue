@@ -261,7 +261,8 @@
     display: flex;
     margin-top: 10px;
     align-items: center;
-    justify-content: inherit;
+    /* justify-content: inherit; */
+    justify-content: flex-start;
     flex-wrap: wrap;
   }
 

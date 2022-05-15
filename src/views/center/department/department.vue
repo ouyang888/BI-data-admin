@@ -52,7 +52,7 @@
     </div>
 
     <!-- 底部表格 -->  
-    <!-- <TableCardBox
+     <!-- <TableCardBox
       :leftData="tableInner"
       :rightData="tableOutter"
       :rowSpanNumber2="rowSpanNumber2"
@@ -60,24 +60,30 @@
       :titleHead="titleHead"
       :leftObj="leftObj"
       :rightObj="rightObj"
-    />
-     -->
-     
+    /> -->
+<!--      
      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
+      title1="内销" title2="外销" /> -->
+         <innerTableInfo :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
       title1="内销" title2="外销" />
+
+      
   </div>
 </template>
 <script>
-import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
+import innerTableInfo from "@/views/center/components/table/innerTableInfo.vue";
+//  import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
 import Card from "./component/card.vue";
 import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
-// import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
+//  import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
 export default {
   components: {
-    innerTableCardBox,
+    //  innerTableCardBox,
+    //TableCardBox,
+    innerTableInfo,
     Card,
     ProgressPanel,
     SpeedPanel,
@@ -87,7 +93,7 @@ export default {
   data() {
     return {
        cardData:[],
-      dhcarr: [0, 1, 2, 3, 4, 5],
+       dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
       AmericaDate: [],
       AmericaList: [],
       
@@ -101,12 +107,12 @@ export default {
       progressData: {
         bar1: 0,
         bar2: 0,
-        ballTitle: "线上",
-        bigBallTitle: "毛利率",
+        ballTitle: "事业部",
+        bigBallTitle: "毛事业部利率",
         textLeft: "内销",
         textRight: "外销",
         titleTop: "外销",
-        titleBottom: "代运营",
+        titleBottom: "内销",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -114,7 +120,7 @@ export default {
       speedData: {
         bar: 0,
         speedBar: 0,
-        ballTitle: "线上达成",
+        ballTitle: "事业部达成",
         ballNum: 0,
         ballLeftTitle: "内销",
         ballRightTitle: "外销",
@@ -124,7 +130,7 @@ export default {
         bottomTitle1: "外销",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "代运营",
+        bottomTitle2: "内销",
         bottomClose1: 0,
         bottomTime1: 0,
       },
@@ -155,28 +161,90 @@ export default {
       outterSabLeft: [],
       outterSabRight: [],
       // 底部表格
-      tableInner: [],
-      tableOutter: [],
+        innerTableList:[
+          {
+            directName: "内销",
+            marketChannel: "线上",
+            marketCenter: null,
+            manager: "张茉欧",
+            cooprMode: "京东",
+            businessEntityName1: 23,
+            businessEntityName2: 23,
+            businessEntityName3: 23,
+            businessEntityName4: 23,
+            businessEntityName5: 23,
+            businessEntityName6: 23,
+            saleVolume1: 34,
+            saleVolume2: 34,
+            saleVolume3: 34,
+            saleVolume4: 34,
+            saleVolume5: 34,
+            saleVolume6: 34,
+            completeRadioAll: null,
+            cnyAmt: 22,
+            saleTaskAmt: 60,
+            saleVolumeAll: 50,
+            dateRadio: 1,
+          }
+        ],
+      outerTableList: [
+          {
+            directName: "外销",
+            marketChannel: "大区",
+            marketCenter: null,
+            manager: null,
+            cooprMode: "北美",
+            businessEntityName1: 23,
+            businessEntityName2: 23,
+            businessEntityName3: 23,
+            businessEntityName4: 23,
+            businessEntityName5: 23,
+            businessEntityName6: 23,
+            saleVolume1: 34,
+            saleVolume2: 34,
+            saleVolume3: 34,
+            saleVolume4: 34,
+            saleVolume5: 34,
+            saleVolume6: 34,
+            completeRadioAll: null,
+            cnyAmt: 24,
+            saleTaskAmt: 60,
+            saleVolumeAll: 50,
+            dateRadio: 1,
+          },
+
+        ],
       rowSpanNumber1: [0,0],
       rowSpanNumber2: [6],
       titleHead: {
-        businessEntityName1: "环境",
-        businessEntityName2: "电磁",
-        businessEntityName3: "饮品",
-        businessEntityName4: "电动",
-        businessEntityName5: "奇厨",
-        businessEntityName6: "烹饪",
-        businessEntityName7: "调理",
-        businessEntityName8: "其他",
+        environment: "环境",
+        electromagnetism: "电磁",
+        drink: "饮品",
+        electric: "电动",
+        kitchen: "奇厨",
+        drink: "烹饪",
+        kitchen: "调理",
+        // businessEntityName8: "其他",
       },
-      leftObj:{
-        title:'cooprLevel1',
-        channel:'cooprLevel2'
+      // leftObj:{
+      //   title:'cooprLevel1',
+      //   channel:'cooprLevel2'
+      // },
+
+          leftObj:{   
+      name:'environment',  /*标题*/
+      level:'cooprLevel2Manager',/*责任人*/
+      tAvgAmt:'cooprLevel2Manager',/*责任制*/
       },
-      rightObj:{
-        title:'cooprLevel1',
-        channel:'cooprLevel2'
+        rightObj:{
+      name:'environment',
+      level:'cooprLevel2Manager',
+      tAvgAmt:'cooprLevel2Manager'
       },
+      // rightObj:{
+      //   title:'cooprLevel1',
+      //   channel:'cooprLevel2'
+      // },
       showLoadingLeft:true,
       showLoadingRight:true,
       titleName:this.$route.query.key || '环境'
@@ -225,67 +293,223 @@ export default {
       start_date:`${this.ontime}-01`,
       end_date:`${this.ontime}-31`
     }
-
-    // let params = `${this.ontime},${this.titleName},${model}`;
-    // let listParams = `${this.ontime}-01,${this.ontime}-31,${model},${this.ontime}-01,${this.ontime}-31,${model}`
-    // console.log('params',params);
     this.getdashboard(params);
     this.queryCardSAB(params);
     this.getTable(params);
-     this.getCard(params);
-
-    // this.getListLeft();
-    // this.getListCharts();
+    this.getCard(params);
+    this.getListLeft(listParams);
+    this.getListCharts(listParams);
+    this.getList1(listParams);
     // this.myEcharts();
     // this.myEcharts2();
     },
+     // 底部table/
     async getTable(time) {
-      // async getTable(model,ontime,ontime) {
-      // try {
-      // let tableInner = await API.getData(
-      //   "onlineBottomLevel3",
-      //   "2022-03,2022-03"
-      // );
-
-
-
-      let online = {
-        code: 'onlineBottomLevel3'
+      //   let online = {
+      //   code: 'onlineBottomLevel3'
+      // };
+      // let onlineStore = {
+      //   code: 'onlineBottomStore'
+      // };
+       let online = {
+        code: 'directLevelInnerBottom'
       };
       let onlineStore = {
-        code: 'onlineBottomStore'
+        code: 'directLeveOutterBottom'
       };
-      // Object.assign(time,online)
-      // Object.assign(time,onlineStore)
-      // let tableInner = await API.getData(
-      //   "homeByDirectTotal",
-      //   ontime
-      // );
       let tableInner = await API.getTotal(Object.assign(time, online));
-
-
-      // let tableInner = await API.getDataLine("onlineBottomLevel3",time);
-
-
-      // console.log("tableInner",tableInner);
-      // let tableOutter = await API.getData(
-      //   "onlineBottomStore",
-      //   "2022-03,2022-03"
-      // );
-
-      let tableOutter = await API.getTotal(
+       let tableOutter = await API.getTotal(
         Object.assign(time, onlineStore)
       );
-
-
-      // console.log("tableInner", tableOutter);
-
       this.tableInner = tableInner.rows;
       this.tableOutter = tableOutter.rows;
-      // } catch (err) {
-      //   console.log(err);
+
+
+
+      
+      // let innerObj = {
+      //   coopr_level1:'线上'
+        
       // }
+      // Object.assign(innerObj,params);
+      // let outterObj = {
+      //   coopr_level1:'线下'
+      // }
+      // Object.assign(outterObj,params);
+      // let tableInner = await API.getData("directLevelInnerBottom", innerObj);
+      // let tableOutter = await API.getData("directLeveOutterBottom", outterObj);
+      // console.log("tableInner",tableInner);
+      // console.log("tableItableOutternner",tableOutter);
+      //  innerTableList:[
+      //     {
+      //       directName: "内销",
+      //       marketChannel: "线上",
+      //       marketCenter: null,
+      //       manager: "张茉欧",
+      //       cooprMode: "京东",
+      //       businessEntityName1: 23,
+      //       businessEntityName2: 23,
+      //       businessEntityName3: 23,
+      //       businessEntityName4: 23,
+      //       businessEntityName5: 23,
+      //       businessEntityName6: 23,
+      //       saleVolume1: 34,
+      //       saleVolume2: 34,
+      //       saleVolume3: 34,
+      //       saleVolume4: 34,
+      //       saleVolume5: 34,
+      //       saleVolume6: 34,
+      //       completeRadioAll: null,
+      //       cnyAmt: 22,
+      //       saleTaskAmt: 60,
+      //       saleVolumeAll: 50,
+      //       dateRadio: 1,
+      //     }
+      //   ],
+//       electromagnetismAmtRadio 电磁金额完成率
+// electric 电动
+// electricAmtRadio 电动金额完成率
+// drink 饮品
+// drinkAmtRadio 饮品金额完成率
+// kitchen 奇厨
+// kitchenAmtRadio 奇厨金额完成率
+// dateRadio 时间进度
+      // outerTableList: [
+      //     {
+      //       directName: "外销",
+      //       marketChannel: "大区",
+      //       marketCenter: null,
+      //       manager: null,
+      //       cooprMode: "北美",
+      //       businessEntityName1: 23,
+      //       businessEntityName2: 23,
+      //       businessEntityName3: 23,
+      //       businessEntityName4: 23,
+      //       businessEntityName5: 23,
+      //       businessEntityName6: 23,
+      //       saleVolume1: 34,
+      //       saleVolume2: 34,
+      //       saleVolume3: 34,
+      //       saleVolume4: 34,
+      //       saleVolume5: 34,
+      //       saleVolume6: 34,
+      //       completeRadioAll: null,
+      //       cnyAmt: 24,
+      //       saleTaskAmt: 60,
+      //       saleVolumeAll: 50,
+      //       dateRadio: 1,
+      //     },
+
+      //   ],
+
+        
+
+      // this.tableOutter = tableOutter.rows;
+
+      	
+//  this.tableOutter=JSON.parse(JSON.stringify(tableOutter.rows));
+//  this.console.log(" this.tableOutter", this.tableOutter);
+//       tableOutter.rows.forEach((element,i) => {
+//          this.innerTableList[i].manager=element[i].cooprLevel2Manager;
+
+         
+
+// // conditioning: null
+// // conditioningAmtRadio: (...)
+// // cooking: 277.2476
+// // cookingAmtRadio: (...)
+// // cooprLevel1: "北美KA营销中心"
+// // cooprLevel2: "KA一区域"
+// // cooprLevel2Manager: (...)
+// // dateRadio: (...)
+// // drink: (...)
+// // drinkAmtRadio: (...)
+// // electric: (...)
+// // electricAmtRadio: (...)
+// // electromagnetism: (...)
+// // electromagnetismAmtRadio: (...)
+// // environment: (...)
+// // environmentAmtRadio: (...)
+// // kitchen: (...)
+// // kitchenAmtRadio: null
+//   });
+
+
+  // for (var i = 0; i < tableOutter.rows.length; i++) {
+         
+  //           this.outerTableList[i].a=tableOutter[i].b;
+
+
+           
+
+  //   }
+
+
+
+
+      this.rowSpanNumber2 = [this.tableOutter.length - 1];
+
+      // let innerTop = tableInner.rows.filter((v) => {
+      //   return v[title] == "线上";
+      // });
+
+      // let innerBottom = tableInner.rows.filter((v) => {
+      //   return v[title] == "线下";
+      // });
+      // debugger;
+      // this.rowSpanNumber1 = [this.tableInner.length - 1];
+
+      // this.tableInner = tableInner.rows;
+      // console.log(tableInner)
+      // console.log("this.tableInner", this.tableInner);
     },
+    // async getTable(time) {
+    //   // async getTable(model,ontime,ontime) {
+    //   // try {
+    //   // let tableInner = await API.getData(
+    //   //   "onlineBottomLevel3",
+    //   //   "2022-03,2022-03"
+    //   // );
+
+
+
+    //   let online = {
+    //     code: 'onlineBottomLevel3'
+    //   };
+    //   let onlineStore = {
+    //     code: 'onlineBottomStore'
+    //   };
+    //   // Object.assign(time,online)
+    //   // Object.assign(time,onlineStore)
+    //   // let tableInner = await API.getData(
+    //   //   "homeByDirectTotal",
+    //   //   ontime
+    //   // );
+    //   let tableInner = await API.getTotal(Object.assign(time, online));
+
+
+    //   // let tableInner = await API.getDataLine("onlineBottomLevel3",time);
+
+
+    //   // console.log("tableInner",tableInner);
+    //   // let tableOutter = await API.getData(
+    //   //   "onlineBottomStore",
+    //   //   "2022-03,2022-03"
+    //   // );
+
+    //   let tableOutter = await API.getTotal(
+    //     Object.assign(time, onlineStore)
+    //   );
+
+
+    //   // console.log("tableInner", tableOutter);
+
+    //   this.tableInner = tableInner.rows;
+    //   this.tableOutter = tableOutter.rows;
+    //   // } catch (err) {
+    //   //   console.log(err);
+    //   // }
+    // },
     //     // 底部table/
     // async getTable(time) { 
          
@@ -348,19 +572,28 @@ export default {
 
     //仪表盘(左中)
     async getdashboard(getdashboard) {
-      localStorage.getItem("");
+      
       try {
         const res = await API.getData("directLevelTopDashBoard",getdashboard);
+        debugger;
+        console.log("resresresres",res);
         let panelDataList = res.rows;
+        debugger;
+        //  console.log("panelDataList",panelDataList);
+        console.log("progressData.ballNum",res.rows);
         this.progressData.ballNum = (
-          panelDataList[0].onLineGrossProfitRadio * 100
+          panelDataList[0].grossProfitRadio * 100
         ).toFixed(1);
+        console.log("progressData.ballNum",this.progressData.ballNum);
         this.speedData.speedBar = (
           panelDataList[0].businessModelCompleteRadio * 100
         ).toFixed(1);
+        console.log("panelDataList",this.speedData.speedBar);
         this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
-        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1);
-        // this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+        console.log("speedData.bar",this.speedData.bar);
+        this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(1);
+        
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
         //* monthDate 月份
 // * monthDate 月份
 
@@ -389,32 +622,37 @@ export default {
 //  * grossProfitRadio 事业部总毛利率 
 
         for (var i = 0; i < panelDataList.length; i++) {
-          if (panelDataList[i].businessModel == "直营") {
+          if (panelDataList[i].directName == "内销") {
             this.progressData.bar2 = (
-              panelDataList[i].cnyQtyRadio * 100
+              panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(1);
             this.progressData.topGPM = (
-              panelDataList[i].cnyQtyRadio * 100
+              panelDataList[i].grossProfitRadio * 100
             ).toFixed(1);
-            // this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(1)
-            // this.speedData.bottomClose =  panelDataList[i].orgQtyRadio.toFixed(1)
-            // this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
-          } else if (panelDataList[i].businessModel == "代运营") {
+            this.speedData.ballLeftNum =  panelDataList[i].sumCnyAmt.toFixed(1)
+             this.speedData.bottomClose = ( panelDataList[i].grossProfitRadio* 100).toFixed(1)
+             this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
+          } else if (panelDataList[i].directName == "外销") {
             this.progressData.bar1 = (
-              panelDataList[i].cnyQtyRadio * 100
+              panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(1);
             this.progressData.bottomGPM = (
-              panelDataList[i].cnyQtyRadio * 100
+              panelDataList[i].grossProfitRadio * 100
             ).toFixed(1);
-            //  this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(1)
-            //  this.speedData.bottomClose1 =  panelDataList[i].orgQtyRadio.toFixed(1)
-            // this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+            this.speedData.ballRightNum =  panelDataList[i].sumCnyAmt.toFixed(1)
+            this.speedData.bottomClose1 =  ( panelDataList[i].grossProfitRadio*100).toFixed(1)
+            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
           }
         }
       } catch (error) {
         console.log(error);
       }
     },
+
+//     directNameAmtSabRadio 内销/外销金额SAB占比
+// directNameQtySabRadio 内销/外销数量SAB占比
+// totalAmtSabRadio 事业部金额SAB占比
+// totalQtySabRadio 事业部数量SAB占比"	"select direct_name directName,
 
     //仪表盘(右)
     async queryCardSAB(params) {
@@ -422,49 +660,51 @@ export default {
         const res = await API.getData("directLevelTopDashBoardSAB",params);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
-          if (RightSAB[i].directName == "事业部") {
+          if (RightSAB[i].directName == "其他") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if (RightSAB[i].position == "S") {
-              this.sabData.sabArr.s = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.sabArr.s = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "A") {
-              this.sabData.sabArr.a = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.sabArr.a = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "B") {
-              this.sabData.sabArr.b = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.sabArr.b = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             }
-          } else if (RightSAB[i].directName == "内销") {
-            this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
+          } 
+           if (RightSAB[i].directName == "内销") {
+            this.sabData.bar1 = (RightSAB[i].totalAmtSabRadio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.s = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.s = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.a = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.a = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.b = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.b = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             }
-          } else if (RightSAB[i].directName == "外销") {
-            this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(1);
+          } 
+          if (RightSAB[i].directName == "外销") {
+            this.sabData.bar2 = (RightSAB[i].totalAmtSabRadio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.s = (
-                RightSAB[i].positionRatio * 100
+                RightSAB[i].totalAmtSabRadio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
               this.sabData.bottomArr.a = (
-                RightSAB[i].positionRatio * 100
+                RightSAB[i].totalAmtSabRadio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
               this.sabData.bottomArr.b = (
-                RightSAB[i].positionRatio * 100
+                RightSAB[i].totalAmtSabRadio * 100
               ).toFixed(1);
             }
           }
@@ -473,14 +713,17 @@ export default {
         console.log(error);
       }
     },
-
-    async getListLeft() {
-      // this.showLoading = true;
+      //中间折线图
+    async getListLeft(listParams) {
+      this.showLoading = true;
       try {
-        const res = await API.getData(
-          "directLevelChart",
-          "2022-01-01,2022-10-01,2022-01-01,2022-10-01"
-        );
+     
+         let chart = {
+          code: 'directLevelChart',
+          //  fields:'cooprLevel1'
+        };
+        Object.assign(chart, listParams)
+        const res = await API.getTotal(chart);
 
         // console.log("sell", res);
         let sellOutDataList = res.rows;
@@ -492,7 +735,7 @@ export default {
           var yue = timeArr[1];
           var ri = timeArr[2];
 
-          // console.log("sellOutDataList",sellOutDataList);
+
 
           // 外销日内
           if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
@@ -503,6 +746,63 @@ export default {
           }
           // this.showLoading = false;
         });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+        // 右边接口
+    async getList1(line) {
+      this.showLoading = true;
+      let chart = {
+        code: 'directLevelChart',
+        fields: "cooprLevel2"
+      };
+      Object.assign(chart, line)
+      try {
+        const res = await API.getChartTotal(chart);
+        let sellOutDataList = res.rows;
+        this.showLoading = false;
+        let obj = res.rows[0]
+        var k = 0;
+        var arr = [];
+        for (var i in obj) {
+          if (k < 6) {
+            arr.push(obj[i]);
+          }
+          k++;
+        }
+        this.dhcarr = [];
+        let arrs = JSON.parse(JSON.stringify(arr));
+        arrs.forEach((v) => {
+          this.dhcarr.push(v[0].cooprLevel2);
+        });
+        //this.dhcarr = [0,1,2,3,4,5];
+        for (let j = 0; j < arr.length; j++) {
+          var datanum = arr[j];
+          let AmericaDate = [];
+          let AmericaList = [];
+          let AmericaLine = 1;
+          let Arrnum = datanum.filter((item) => {
+            var timeArr = item.orderDate
+              .replace(" ", ":")
+              .replace(/\:/g, "-")
+              .split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+            // console.log("sdvsd", timeArr);
+            //tAvgAmt: 1134.8299
+// orgQty: 18.5954
+// tAvgAmt: 1134.8299
+// tAvgQty: 1682.1713
+
+            AmericaDate.push(yue + "-" + ri);
+            // AmericaList.push(item.cnyAmt);
+            // AmericaLine = item.saleAvgAmt;
+                        AmericaList.push(item.orgQty);
+            AmericaLine = item.tAvgQty;
+          });
+          this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
+        }
       } catch (error) {
         console.log(error);
       }
@@ -555,31 +855,40 @@ export default {
 
     //中间折线图
     async getListCharts() {
-      this.showLoading = true;
+        this.showLoading = true;
+      let chart = {
+        code: 'onlineMiddleChart',
+        fields: "cooprLevel2"
+      };
+      Object.assign(chart, line)
       try {
-        const res = await API.getChartQuery(
-          "directLevelChart",
-          "2022-01-01,2022-10-01,2022-01-01,2022-10-01",
-          "businessEntityName"
-        );
+
+        const res = await API.getChartTotal(chart);
+
         let sellOutDataList = res.rows;
-        // console.log("222333",res)
         this.showLoading = false;
 
-        let obj = res.rows[0];
+        let obj = res.rows[0]
+
+
         var k = 0;
         var arr = [];
         for (var i in obj) {
+          // console.log("11111111111", obj[i]);
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
+
+        // console.log("arr", arr);
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
         arrs.forEach((v) => {
-          this.dhcarr.push(v[0].businessEntityName);
+          this.dhcarr.push(v[0].cooprLevel2);
         });
+        //this.dhcarr = [0,1,2,3,4,5];
+
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
           let AmericaDate = [];
@@ -592,10 +901,14 @@ export default {
               .split("-");
             var yue = timeArr[1];
             var ri = timeArr[2];
+            // console.log("sdvsd", timeArr);
+
             AmericaDate.push(yue + "-" + ri);
-            AmericaList.push(item.cnyAmt);
-            AmericaLine = item.tAvgAmt;
+            AmericaList.push(item.totalCnyAmt);
+            AmericaLine = item.saleAvgAmt;
           });
+          // console.log("Arrnum", this.sellOutDataList);
+
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
       } catch (error) {
@@ -722,6 +1035,7 @@ export default {
       myChart.setOption(option);
     },
 
+   
     myEcharts2(data, time, lines, id) {
       var myChart2 = this.$echarts.init(document.getElementById(id));
       var option = {
@@ -752,6 +1066,9 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
+          // data: this.AmericaDate,
+          // data: ['01-02','03-03','04-04','01-04'],
+
           data: time,
           axisTick: {
             show: false, //刻度线
@@ -813,10 +1130,16 @@ export default {
                 },
               },
             },
+            // data: this.AmericaList,
+            // data:[10,20,100,250],
             data: data,
+            // data:data,
             markLine: {
+              // data:this.AmericaLine,
               data: [
                 {
+                  // yAxis: this.AmericaLine,
+                  // yAxis:400,
                   yAxis: lines,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
@@ -840,6 +1163,7 @@ export default {
       };
       myChart2.setOption(option);
     },
+
   },
   mounted() {
     this.init(this.model);
