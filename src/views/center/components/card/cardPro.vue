@@ -1,6 +1,7 @@
 <template>
   <div class="flex-card" >
-    <div class="card-box" v-for="(v,i) in cardList" :key="i">
+    <a-spin class="flex-loading" size="large" v-if="showLoading" />
+    <div class="card-box" v-for="(v,i) in cardList" :key="i" v-else>
       <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
         <div class="line"></div>
@@ -73,7 +74,7 @@
             <!-- {{list}} -->
             <template v-for="(item,k) in list"> 
             <div :key="k+22" v-if="k == i || k==i+1">
-              <span class="percent-title">{{item.cooprLevel1}}</span>
+              <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
               <span class="percent-text">{{(item.businessModelCompleteRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
             </div>
           </template>
@@ -83,21 +84,17 @@
             <div class="">
               <div class="sab-title">{{title1}}SAB</div>
               <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item.cooprLevel1 == title1">
+                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>
               </template>  
-                <!-- <span class="sab-title2">A</span>
-                <span class="sab-text">50%</span>
-                <span class="sab-title2">B</span>
-                <span class="sab-text">50%</span> -->
           
             </div>
             <div class="">
               <div class="sab-title">{{title2}}SAB</div>
               <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item.cooprLevel1 == title2">
+                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>
@@ -148,10 +145,9 @@
         pathObj:{
         'export':'exprotAreaAll'
       },
-      cardList:[0,1],/*卡片分类*/
-      // cardcontent:[0,1], /*中间分类*/
-      cardSabList:[0,1,2,3,4,5] /*sab分类*/
-      
+      cardList:[0,1,2,3,4,5],/*卡片分类*/
+      cardSabList:[0,1,2,3,4,5], /*sab分类*/
+      showLoading:true,
       }
     },
     computed:{
@@ -186,15 +182,7 @@
                 title = v[this.cardObj.title];
             }   
           });
-
-          // newValue && newValue.forEach((v,i) => { /*划分6个卡片*/
-          //   var k = 0;
-          //   if(i%2 == 0){
-          //     this.cardcontent[k] = newValue.slice(i,i+2);
-          //     k++;
-          //   }
-          // });
-          // console.log('cardcontent',JSON.stringify(this.cardcontent))
+          this.showLoading = false;
         }
       },
       cardSab:{
@@ -208,7 +196,7 @@
                 v.positionRatio = (v.positionRatio*100)>100?100:(v.positionRatio*100).toFixed(0);
               })
                 newValue && newValue.forEach((v,i)=>{  /*划分6个sab*/
-                  if(v[this.cardObj.title] !=title && v.cooprLevel1 !=cooprLevel1 ){
+                  if(v[this.cardObj.title] !=title && v[this.cardObj.cooprLevel1] !=cooprLevel1 ){
                   this.cardSabList[k] = newValue.slice(i,i+6);
                   title = v[this.cardObj.title];
                   k++;
@@ -216,8 +204,6 @@
 
                 });
 
-           
-               console.log('123',JSON.stringify(this.cardSabList),this.cardSabList)
 
         }
 
@@ -383,6 +369,9 @@
     align-items: center;
     justify-content: inherit;
     flex-wrap: wrap;
+    position: relative;
+    min-width: 56%;
+    min-height: 100px;
   }
 
   .flex-top-card {
@@ -688,5 +677,12 @@
       font-weight: 400;
       font-weight: 400;
       line-height: 17px;
+    }
+    .flex-loading{
+      position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
     }
 </style>
