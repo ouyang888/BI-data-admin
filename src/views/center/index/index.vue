@@ -1034,6 +1034,7 @@ export default {
       try {
         let tableInner = await API.getTotal(innerObj);
         let tableOutter = await API.getTotal(outterObj);
+        
     
         // this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
@@ -1049,10 +1050,11 @@ export default {
         this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
         // console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
         let innerTotal = tableInner.rows.filter((v) => {
-          return v.marketChannel == "底部合计";
+          return v.marketChannel == "底部合计" || v.marketChannel =='合计';
         });
         this.tableInner = innerTop.concat(innerBottom, innerTotal);
-        // console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
+        console.log('tableInner',JSON.stringify(this.tableInner));
+     
 
         // console.log("this.data", this.data);
       } catch (err) {

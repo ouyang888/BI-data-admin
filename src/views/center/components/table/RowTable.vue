@@ -3,8 +3,9 @@
     <el-table border :data="mesInfo" :span-method="objectSpanMethod"
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" height="287">
-      <!-- <el-table-column :prop="headerObj.marketChannel" align="center" :label="directName" v-if="router !== 'domesticDepartment'"></el-table-column> -->
-      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode" v-if="setTrueOrFalse"></el-table-column>
+      <!-- v-if="router !== 'domesticDepartment' -->
+      <el-table-column :prop="headerObj.marketChannel" align="center" :label="directName"></el-table-column>
+      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode"></el-table-column>
       <el-table-column :prop="headerObj.manager" align="center" label="责任人">
         <!-- <div class="nameColor" @click="handleClick">{{张茉欧}}</div> -->
         <template v-slot="scope">
@@ -98,12 +99,12 @@
         // console.log(number, "numbernumbernumber");
         // 底部合计合并单元格
         if (rowIndex === number - 1) {
-          if (columnIndex == 1 || columnIndex == 2) {
-            return [0, 0];
-          }
-          if (columnIndex === 0) {
-            return [1, 3];
-          }
+          // if (columnIndex == 1 || columnIndex == 2) {
+          //   return [0, 0];
+          // }
+          // if (columnIndex === 0) {
+          //   return [1, 3];
+          // }
         }
         //       if (rowIndex === 6) {
         //   if (columnIndex == 1 || columnIndex == 2) {

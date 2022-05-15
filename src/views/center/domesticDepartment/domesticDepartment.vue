@@ -54,11 +54,11 @@
     <TableCardBox
       :leftData="tableInner"
       :rightData="tableOutter"
-      :rowSpanNumber2="rowSpanNumber2"
-      :rowSpanNumber1="rowSpanNumber1"
       :titleHead="titleHead"
       title1="线上"
       title2="线下"
+      :leftObj="leftObj"
+      :rightObj="rightObj"
     />
   </div>
 </template>
@@ -175,6 +175,16 @@ export default {
        'saleAmtRadio':'cnyAmtRadio',  /*金额完成率*/
        'cooprLevel1':'cooprLevel1'  /*线上/线下 金额完成率*/
       },
+      leftObj:{
+        marketChannel:'marketChannel',
+        marketCenter:'marketCenter',
+        manager:'manager',
+      },
+      rightObj:{
+        marketChannel:'marketChannel',
+        marketCenter:'marketCenter',
+        manager:'manager',
+      },
       cardSab:[],
       cardSabTitle1:"线上",
       cardSabTitle2:"线下",
@@ -257,18 +267,9 @@ export default {
       let tableOutter = await API.getData("sellInnerBusinessTotalBottomDetail", outterObj);
       this.tableOutter = tableOutter.rows;
       this.rowSpanNumber2 = [this.tableOutter.length - 1];
-
-      // let innerTop = tableInner.rows.filter((v) => {
-      //   return v[title] == "线上";
-      // });
-
-      // let innerBottom = tableInner.rows.filter((v) => {
-      //   return v[title] == "线下";
-      // });
       this.rowSpanNumber1 = [this.tableInner.length - 1];
 
       this.tableInner = tableInner.rows;
-      // console.log("this.tableInner", this.tableInner);
     },
     gotoDomestic() {
       this.$router.push("/center/index");
@@ -794,7 +795,7 @@ export default {
       myChart2.setOption(option);
     },
   },
-  mounted() {
+  created() {
     this.init(this.model);
   },
 };
