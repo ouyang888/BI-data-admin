@@ -3,13 +3,13 @@
     <el-table border :data="mesInfo" :span-method="objectSpanMethod"
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" height="287">
-      <el-table-column prop="marketChannel" align="center" :label="directName"></el-table-column>
-      <el-table-column prop="marketCenter" align="center" :label="cooprMode" v-if="setTrueOrFalse"></el-table-column>
-      <el-table-column prop="manager" align="center" label="责任人">
+      <el-table-column :prop="headerObj.marketChannel" align="center" :label="directName"></el-table-column>
+      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode" v-if="setTrueOrFalse"></el-table-column>
+      <el-table-column :prop="headerObj.manager" align="center" label="责任人">
         <!-- <div class="nameColor" @click="handleClick">{{张茉欧}}</div> -->
         <template v-slot="scope">
             <div class="nameColor" @click="handleClick(scope.row)">
-              {{ scope.row.manager }}
+              {{ scope.row[headerObj.manager] }}
             </div>
           </template>
       </el-table-column>

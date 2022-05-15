@@ -835,7 +835,7 @@ export default {
 
     this.getList(listParams);
     this.getCard(params);
-    // this.getTable(params);
+    this.getTable(params);
     this.getdashboard(params);
     this.queryCardSAB(params);
     },
@@ -1034,7 +1034,7 @@ export default {
       try {
         let tableInner = await API.getTotal(innerObj);
         let tableOutter = await API.getTotal(outterObj);
-
+    
         // this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
         this.rowSpanNumber2 = [this.tableOutter.length - 1];
