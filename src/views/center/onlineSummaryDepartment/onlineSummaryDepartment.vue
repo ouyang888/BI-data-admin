@@ -52,7 +52,7 @@
 
     <!-- 底部表格 -->
     <TableCardBox :leftData="tableInner" :rightData="tableOutter" :rowSpanNumber2="rowSpanNumber2"
-      :rowSpanNumber1="rowSpanNumber1" :titleHead="titleHead" :leftObj="leftObj" :rightObj="rightObj" />
+      :rowSpanNumber1="rowSpanNumber1" :titleHead="titleHead" :leftObj="leftObj" :rightObj="rightObj"  title1="直营" title2="代运营" />
   </div>
 </template>
 <script>
@@ -237,26 +237,29 @@ export default {
     async getTable(params) {
       let innerObj = {
         code:"sellInnerOnlineBusinessBottomDetail",
-        coopr_level1: "线上"
+        coopr_level1: "线上",
+        operation_mode:'直营'
+        
       }
       Object.assign(innerObj,params);
 
+      let outterObj = {
+        code:"sellInnerOnlineBusinessBottomDetail",
+        coopr_level1: "线上",
+        operation_mode:'代运营'
+        
+      }
+      Object.assign(outterObj,params);
+  
+
       let tableInner = await API.getTotal(innerObj);
-      // let tableOutter = await API.getTotal(outterObj);
-      // this.tableOutter = tableOutter.rows;
-      // this.rowSpanNumber2 = [this.tableOutter.length - 1];
+      let tableOutter = await API.getTotal(outterObj);
+      this.tableInner = tableInner.rows;
+      this.tableOutter = tableOutter.rows;
+      this.rowSpanNumber1 = [this.tableInner.length];
+      this.rowSpanNumber2 = [this.tableOutter.length];
 
-      let innerTop = tableInner.rows.filter((v) => {
-        return v[title] == "线上";
-      });
-
-      // let innerBottom = tableInner.rows.filter((v) => {
-      //   return v[title] == "线下";
-      // });
-      this.rowSpanNumber1 = [innerTop.length, innerBottom.length];
-
-      this.tableInner = innerTop.concat(innerBottom);
-      console.log("this.tableInner", this.tableInner);
+    
     },
     gotoDomestic() {
       this.$router.push("/center/index");

@@ -11,7 +11,7 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-      <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab"/>
+      <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -174,7 +174,8 @@ export default {
         'title':'businessEntityName', /*标题*/
         'cnyAmt':'cnyAmt',/*金额*/
        'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
-       'saleAmtRadio':'cnyAmtRadio'  /*金额完成率*/
+       'saleAmtRadio':'cnyAmtRadio',  /*金额完成率*/
+       'cooprLevel1':'cooprLevel1'  /*线上/线下 金额完成率*/
       },
       /*表格配置*/
       title1:'业务员',
@@ -193,7 +194,9 @@ export default {
       showLoadingLeft: true,
       showLoadingRight: true,
       titleName: this.$route.query.key || "环境",
-      cardSab:[]
+      cardSab:[],
+      cardSabTitle1:"线上",
+      cardSabTitle2:"线下",
     };
   },
   computed: {

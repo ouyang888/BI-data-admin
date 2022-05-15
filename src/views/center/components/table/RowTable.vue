@@ -67,6 +67,14 @@
       cooprMode: {
         type: String,
       },
+      headerObj:{
+        type:Object,
+        default:function (){ return {
+          marketChannel:'marketChannel',
+          marketCenter:'marketCenter',
+          manager:'manager'
+        } }
+      }
     },
     components: {
       Progress,
