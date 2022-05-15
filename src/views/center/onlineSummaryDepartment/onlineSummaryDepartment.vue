@@ -173,13 +173,15 @@ export default {
       cardSab:[],
       cardSabTitle1:"直营",
       cardSabTitle2:"代运营",
-      leftObj: {
-        title: "cooprLevel1",
-        channel: "cooprLevel2",
+      leftObj:{
+        marketChannel:'marketChannel',
+        marketCenter:'marketCenter',
+        manager:'manager',
       },
-      rightObj: {
-        title: "cooprLevel1",
-        channel: "cooprLevel2",
+      rightObj:{
+        marketChannel:'marketChannel',
+        marketCenter:'marketCenter',
+        manager:'manager',
       },
       showLoadingLeft: true,
       showLoadingRight: true,

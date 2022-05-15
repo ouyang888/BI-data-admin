@@ -387,7 +387,8 @@
   }
 
   .card-border-box {
-    margin: 10px 8px 30px 4px;
+    /* margin: 10px px 30px 4px; */
+    margin: 10px 3px 30px 3px;
     position: relative;
     /* border: 1px solid red; */
     /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
@@ -617,7 +618,7 @@
       text-align: right;
       font-weight: 400;
       display: inline-block;
-      width:36px;
+      width:28px;
   
     }
   
@@ -670,7 +671,7 @@
       text-align: center;
       font-weight: 400;
       display: inline-block;
-      width:24px;
+      width:27px;
     }
   
     .title2 {
