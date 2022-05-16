@@ -758,6 +758,13 @@ export default {
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
 
+        this.tableInner.forEach(v=>{
+          if(v.coopr_level3_manager =='合计'){
+            v.coopr_level3 = '合计';
+          }
+
+        })
+
         // this.tableInner.forEach(v=>{
         //   v.cooprLevel2Manager = v.coopr_level3_manager;
         // })
