@@ -172,6 +172,8 @@
     methods: {
       gotoCatSeries(val) {
 
+        this.$store.commit('setCurrTitle',val);
+
         this.$router.push({name:this.pathObj[this.name],query:{key:val}});
 
 
