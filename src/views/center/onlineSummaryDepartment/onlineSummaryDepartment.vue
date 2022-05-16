@@ -11,7 +11,8 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-      <Card :list="cardData" :cardObj="cardObj" />
+      <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
+
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -61,14 +62,15 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
-import Card from "./component/card.vue";
+import cardPro from "./component/cardPro.vue"; 
+
 export default {
   components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
     TableCardBox,
-    Card,
+    cardPro,
   },
   data() {
     return {
@@ -162,18 +164,24 @@ export default {
         businessEntityName8: "其他",
       },
       cardObj: {
-        title: "businessEntityName",
-        cnyAmt: "cnyAmt",
-        saleTaskAmt: "saleTaskAmt",
-        saleAmtRadio: "cnyAmtRadio",
+        'title':'businessEntityName', /*标题*/
+        'cnyAmt':'cnyAmt',/*金额*/
+       'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
+       'saleAmtRadio':'cnyAmtRadio',  /*金额完成率*/
+       'cooprLevel1':'businessModel'  /*线上/线下 金额完成率*/
       },
-      leftObj: {
-        title: "cooprLevel1",
-        channel: "cooprLevel2",
+      cardSab:[],
+      cardSabTitle1:"直营",
+      cardSabTitle2:"代运营",
+      leftObj:{
+        marketChannel:'marketChannel',
+        marketCenter:'marketCenter',
+        manager:'manager',
       },
-      rightObj: {
-        title: "cooprLevel1",
-        channel: "cooprLevel2",
+      rightObj:{
+        marketChannel:'marketChannel',
+        marketCenter:'marketCenter',
+        manager:'manager',
       },
       showLoadingLeft: true,
       showLoadingRight: true,
@@ -275,63 +283,24 @@ export default {
 
     // 右边卡片/
     async getCard(params) {
-      let obj = {
+      let obj1 = {
         code: 'sellInnerOnlineBusinessKard',
         coopr_level1:'线上'
       }
-      Object.assign(obj, params);
-      // this.showLoadingCard = true;
-      const res = await API.getTotal(obj);
-      let onTitle = "";
-      let arr = [];
-      let sabArr = [];
+      Object.assign(obj1,params)
+      let obj2 = {
+        code: 'sellInnerOnlineBusinessKardSAB',
+        coopr_level1:'线上'
+      }
+      Object.assign(obj2,params)
+      const res = await API.getTotal(obj1);
+      const res2 = await API.getTotal(obj2);
+      if(res.code !=200) return;
+      this.cardData = res.rows;
+      console.log(this.cardData,this.cardData.length)
+   
 
-      res.rows.forEach((v) => {
-        if (onTitle != v.businessEntityName && !!v.businessEntityName) {
-          onTitle = v.businessEntityName;
-          arr.push(v);
-        }
-      });
-
-      arr.splice(6);
-
-      arr.length > 0 &&
-        arr.forEach((v) => {
-          //  v.title = v.cooprLevel1; /*标题*/
-          if (!!v.cnyAmt ) {
-            v.cnyAmt  = v.cnyAmt .toFixed(0); /*达成金额*/
-          } else {
-            // console.log("字段无数据", "cnyAmt ");
-          }
-          if (!!v.saleTaskAmt) {
-            v.saleTaskAmt =
-              v.saleTaskAmt.toFixed(0); /*责任制金额*/
-          } else {
-            // console.log("字段无数据", "saleTaskAmt");
-          }
-
-          if (!!v.grossProfitRadio) {
-            v.grossProfitRadio = (
-              v.grossProfitRadio * 100 > 100 ? 100 : v.grossProfitRadio * 100
-            ).toFixed(0); /*毛利率*/
-            v.grossProfitRadio = Number(v.grossProfitRadio);
-          } else {
-            // console.log("字段无数据", "cooprLevel1AmtRadio");
-          }
-
-          if (!!v.cnyAmtRadio) {
-            v.cnyAmtRadio = (
-              v.cnyAmtRadio * 100 > 100
-                ? 100
-                : v.cnyAmtRadio * 100
-            ).toFixed(0); /*完成率*/
-            v.cnyAmtRadio = Number(v.cnyAmtRadio);
-          } else {
-            // console.log("字段无数据", "cnyAmtRadio");
-          }
-        });
-      this.cardData = arr;
-      // console.log("this.cardData1111", this.cardData);
+      this.cardSab = res2.rows;
     },
 
     //仪表盘(左中)

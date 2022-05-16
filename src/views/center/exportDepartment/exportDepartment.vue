@@ -11,7 +11,8 @@
         </div>
       </div>
       <!-- 右侧卡片 @gotoCatSeries="gotoCatSeries"-->
-      <Card :list="cardData" :cardObj="cardObj" />
+      <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
+
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -64,7 +65,7 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
-import Card from '@/views/center/components/card/card.vue';
+import cardPro from "@/views/center/components/card/cardPro.vue"; 
 import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
 export default {
   name: "s",
@@ -72,7 +73,7 @@ export default {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
-    Card,
+    cardPro,
     innerTableCardBox
   },
   data() {
@@ -151,11 +152,16 @@ export default {
         tAvgAmt: 'tAvgAmt'
       },
       cardObj: {
-        'title': 'businessEntityName',
-        'cnyAmt': 'businessEntityAmt',
-        'saleTaskAmt': 'businessEntityTaskAmt',
-        'saleAmtRadio': 'businessEntityAmtRadio'
+        'title':'businessEntityName', /*标题*/
+        'cnyAmt':'businessEntityAmt',/*金额*/
+       'saleTaskAmt': 'businessEntityTaskAmt', /*责任制金额*/
+       'saleAmtRadio':'obmOemAmtRadio',  /*金额完成率*/
+       'cooprLevel1':'obmOem'  /*线上/线下 金额完成率*/
       },
+      sabObj:{},
+      cardSab:[],
+      cardSabTitle1:"OBM",
+      cardSabTitle2:"OEM",
     };
   },
   computed: {
@@ -672,61 +678,18 @@ export default {
         code: 'sellOutBusinessKard'
       }
       Object.assign(obj, params);
-      this.showLoadingCard = true;
       const res = await API.getTotal(obj);
+    
+      if(res.code !=200) return;
 
-      let onTitle = '';
+      this.cardData = res.rows;
 
-      let arr = [];
-      let sabArr = [];
-
-      if (res.code != 200) return;
-
-
-      res.rows.forEach(v => {
-
-        if (onTitle != v.businessEntityName && !!v.businessEntityName) {
-          console.log('title')
-          onTitle = v.businessEntityName;
-          arr.push(v);
-        }
+      this.cardSab = res.rows.filter(v=>{
+        return v.position.length<2
       })
+      debugger;
 
 
-      arr.splice(6);
-
-      arr.length > 0 && arr.forEach(v => {
-        //  v.title = v.cooprLevel1; /*标题*/
-        if (!!v.businessEntityAmt)  { 
-          v.businessEntityAmt = v.businessEntityAmt.toFixed(0); /*达成金额*/
-        } else {
-          // console.log('字段无数据','cooprLevel1NameAmt')
-        }
-        if (!!v.businessEntityTaskAmt) {
-          v.businessEntityTaskAmt  = v.businessEntityTaskAmt.toFixed(0); /*责任制金额*/
-        } else {
-          // console.log('字段无数据','cooprLevel1TaskAmt')
-        }
-
-        if (!!v.grossProfitRadio) {
-          v.grossProfitRadio = (v.grossProfitRadio * 100 > 100 ? 100 : v.grossProfitRadio * 100).toFixed(0); /*毛利率*/
-          v.grossProfitRadio = Number(v.grossProfitRadio);
-
-        } else {
-          // console.log('字段无数据','cooprLevel1AmtRadio')
-        }
-
-        if (!!v.businessEntityAmtRadio ) {
-          v.businessEntityAmtRadio  = (v.businessEntityAmtRadio  * 100 > 100 ? 100 : v.businessEntityAmtRadio  * 100).toFixed(0); /*完成率*/
-          v.businessEntityAmtRadio  = Number(v.businessEntityAmtRadio );
-
-        } else {
-          // console.log('字段无数据','cooprLevel1AmtRadio')
-        }
-
-      });
-      this.cardData = arr;
-      // console.log('this.cardData',this.cardData)
     },
 
     // 底部table/

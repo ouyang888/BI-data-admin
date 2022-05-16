@@ -1227,13 +1227,13 @@ export default {
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
         this.tableInner = tableInner.rows.filter(v => {
-          return v.cooprLevel2Manager != '底部合计' && !!v.cooprLevel2
+          return v.cooprLevel2Manager != '合计' && !!v.cooprLevel2
         })
         let innerbottom = tableInner.rows.filter(v => {
-          if (v.cooprLevel2Manager == '底部合计') {
-            v.cooprLevel2 = '底部合计'
+          if (v.cooprLevel2Manager == '合计') {
+            v.cooprLevel2 = '合计'
           }
-          return v.cooprLevel2Manager == '底部合计'
+          return v.cooprLevel2Manager == '合计'
         })
         this.tableInner = this.tableInner.concat(innerbottom);
 
