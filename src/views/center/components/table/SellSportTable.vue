@@ -20,7 +20,7 @@
       >
       </el-table-column>
            
-      <el-table-column v-if="router !== 'exprotAreaAll'"
+      <el-table-column v-if="router !== 'exprotAreaAll' || exprotAreaAllDepartment"
         :prop="headerObj.level"
         align="center"
         label="责任人"

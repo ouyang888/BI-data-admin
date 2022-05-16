@@ -1,8 +1,7 @@
 <template>
   <div class="flex-card" >
-    <a-spin class="flex-loading" size="large" v-if="showLoading" />
-    <div class="card-box" v-for="(v,i) in cardList" :key="i" v-else>
-      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
+    <div class="card-box" v-for="(v,i) in list" :key="i">
+      <div class="card-font" @click="gotoCatSeries(v)">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
         <div class="line"></div>
         <div class="line1"></div>
@@ -65,45 +64,40 @@
            
           </div>
           <div class="mt-border"></div>
- 
-          <div class="percent">
-            <div>
-              <span class="percent-title">毛利</span>
-              <span class="percent-text">{{(v.grossProfitRadio*100).toFixed(0)}}%</span>
+          <div style="margin-right: 14px">
+            <div class="flex-top-card">
+              <div class="top-left-font">库存达成</div>
+              <div class="flex-finish">
+                <div class="finish-font">责任制 <span>100亿</span></div>
+                <div class="finish-font">完成率 <span>75%</span></div>
+              </div>
             </div>
-            <!-- {{list}} -->
-            <template v-for="(item,k) in list"> 
-            <div :key="k+22" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
-              <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
-              <span class="percent-text">{{(item.businessModelCompleteRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+            <div class="flex-top-card">
+              <div class="card-big-num">75亿</div>
+              <div style="display: flex; align-items: center">
+                <div class="finish-font">毛利率<span>75%</span></div>
+      
+              </div>
             </div>
-            <div :key="k+223" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
-              <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
-              <span class="percent-text">{{(item.businessModelCompleteRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+             
             </div>
-          </template>
-          </div>
-          <div class="mt-border"></div>
-          <div class="sab">
-            <div class="">
-              <div class="sab-title">{{title1}}SAB</div>
-              <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1">
-                <span class="sab-title2">{{item.position}}</span>
-                <span class="sab-text">{{item.positionRatio}}%</span>
-              </span>
-              </template>  
-          
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+            
             </div>
-            <div class="">
-              <div class="sab-title">{{title2}}SAB</div>
-              <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2">
-                <span class="sab-title2">{{item.position}}</span>
-                <span class="sab-text">{{item.positionRatio}}%</span>
-              </span>
-              </template>  
-            </div>
+           
           </div>
     </div>
 
@@ -120,118 +114,27 @@
         type: Array,
         default: function () { return [] }
       },
-      cardSab: {
-        type: Array,
-        default: function () { return [] }
-      },
       cardObj: {
         type: Object,
         default: function () { return {
-        'title':'cooprLevel2', /*标题*/
-       'cnyAmt':'cnyAmt',/*金额*/
-       'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
-       'saleAmtRadio':'saleAmtRadio',  /*金额完成率*/
-       'cooprLevel1':'cooprLevel1'  /*线上/线下 金额完成率*/
-
-        } },
+       'title':'cooprLevel1',
+       'cnyAmt':'cooprLevel1NameAmt',
+       'saleTaskAmt':'cooprLevel1TaskAmt',
+       'cooprLevel1AmtRadio':'saleAmtRadio'
+        } }
       },
-      title1:{
-         type:String,
-         default:'线上'
-       }, 
-       title2:{
-         type:String,
-         default:'线下'
-       }, 
-    },
-    data(){
-      return{
-        pathObj:{
-        'export':'exprotAreaAll'
-      },
-      cardList:[0,1,2,3,4,5],/*卡片分类*/
-      cardSabList:[0,1,2,3,4,5], /*sab分类*/
-      showLoading:true,
-      }
-    },
-    computed:{
-     name(){
-       return this.$route.name;
-     }
-
-
-
     },
     watch:{
       cardObj:{
         handler:function(newValue,oldValue){
           // console.log('newValue',newValue);
         }
-      },
-      list:{
-        handler:function(newValue,oldValue){
-          let title = '';
-          this.cardList = [];
-          if(newValue.length<1) return;
-          newValue && newValue.forEach(v => { /*划分6个卡片*/
-            if(v[this.cardObj.title] !=title){
-              // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
-              v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(0);
-            v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt].toFixed(1);
-            v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(0));
-            // v.grossProfitRadio = Number((v.grossProfitRadio*100).toFixed(0));
-            // debugger;
-            if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
-            v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/
-              if(this.cardList.length<6){ /*只显示6条*/
-              this.cardList.push(v);
-            }
-                title = v[this.cardObj.title];
-            }   
-          });
-          this.showLoading = false;
-        }
-      },
-      cardSab:{
-        handler:function(newValue,oldValue){
-
-               let title = '';
-               let cooprLevel1 = '';
-               var k = 0;
-               newValue && newValue.forEach((v,i)=>{
-                v.positionRatio = (v.positionRatio*100)>100?100:(v.positionRatio*100).toFixed(0);
-              })
-                newValue && newValue.forEach((v,i)=>{  /*划分6个sab*/
-                  if(v[this.cardObj.title] !=title && v[this.cardObj.cooprLevel1] !=cooprLevel1 ){
-                  this.cardSabList[k] = newValue.slice(i,i+6);
-                  title = v[this.cardObj.title];
-                  k++;
-                }
-
-                });
-
-
-        }
-
       }
-
-    },
-    
-    created(){
-      
-      // console.log('this.name',this.name)
 
     },
     methods: {
       gotoCatSeries(val) {
-
-        this.$store.commit('setCurrTitle',val);
-        this.$router.push({name:this.pathObj[this.name],query:{key:val}});
-
-
-        // this.$emit('gotoCatSeries',val)
-
-
+        this.$emit('gotoCatSeries',val)
       }
     }
 
@@ -356,7 +259,6 @@
     background-repeat: no-repeat;
     /* margin-right: 20px; */
     background-size: 100%;
-    width:33%;
   }
 
   .card-font {
@@ -377,9 +279,6 @@
     align-items: center;
     justify-content: inherit;
     flex-wrap: wrap;
-    position: relative;
-    min-width: 56%;
-    min-height: 100px;
   }
 
   .flex-top-card {
@@ -391,12 +290,11 @@
   .top-left-font {
     font-size: 14px;
     color: #fff;
-    margin-right:10px;
+    margin-right: 20px;
   }
 
   .card-border-box {
-    /* margin: 10px px 30px 4px; */
-    margin: 10px 3px 30px 3px;
+    margin: 10px 10px 30px 10px;
     position: relative;
     /* border: 1px solid red; */
     /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
@@ -443,7 +341,7 @@
 
   .left-right-box {
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
   }
   .left-right-box .flex-top-card{
     align-items: flex-start;
@@ -610,91 +508,4 @@
     position: relative;
     bottom: 20px;
   }
-  .percent {
-      height: 100%;
-      margin-left: 5px;
-      margin-right: 5px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-  
-    .percent-title {
-      opacity: 0.5;
-      font-size: 12px;
-      color: #FFFFFF;
-      text-align: right;
-      font-weight: 400;
-      display: inline-block;
-      width:28px;
-  
-    }
-  
-    .percent-text {
-      font-size: 12px;
-      color: #66FFFF;
-      text-align: center;
-      font-weight: 400;
-      display: inline-block;
-      width:30px;
-    }
-  
-    .sab {
-      height: 100%;
-      margin-left: 5px;
-      margin-right: 5px;
-      margin-top:5px;
-      display: flex;
-      flex-direction: column;
-      /* width:120px; */
-      overflow: hidden;
-      text-overflow:ellipsis;
-      white-space: nowrap;
-    }
-  
-    .sab-title {
-      font-size: 12px;
-      color: #FFFFFF;
-      font-weight: 400;
-      font-weight: 400;
-      line-height: 17px;
-      margin-left:2px !important;
-      width: 60px;
-      margin: 0;
-    }
-  
-    .sab-title2 {
-      margin-left: 1px;
-      opacity: 0.5;
-      font-size: 11px;
-      color: #FFFFFF;
-      text-align: center;
-      font-weight: 400;
-    }
-  
-    .sab-text {
-      margin-left: 2px;
-      font-size: 10px;
-      color: #66FFFF;
-      text-align: center;
-      font-weight: 400;
-      display: inline-block;
-      /* width:27px; */
-    }
-  
-    .title2 {
-      font-size: 12px;
-      color: #FFFFFF;
-      font-weight: 400;
-      font-weight: 400;
-      line-height: 17px;
-    }
-    .flex-loading{
-      position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    }
 </style>

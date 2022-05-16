@@ -225,6 +225,10 @@ export default {
           this.title = "外销产司汇总页";
           this.$store.commit("setCurrPath", " 外销产司汇总页  ");
           break;
+          case "exprotAreaAllDepartment":
+          this.title = "外销大区产司汇总页";
+          this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
+          break;
 
         default:
           this.title = "总裁PSI页";
@@ -275,6 +279,12 @@ export default {
       }else if (index == "2" && urlName == "export") {
         this.$router.push("/center/exportDepartment");
         this.title = "外销产司汇总页";
+      }else if (index == "2" && urlName == "exprotAreaAll") {
+        console.log(this.$route.key);
+       
+
+        this.$router.push({name:'exprotAreaAllDepartment',query:{key:this.$route.key}});
+        this.title = "外销大区产司汇总页";
       }
       // else {
 

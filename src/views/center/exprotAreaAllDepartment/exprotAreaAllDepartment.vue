@@ -10,8 +10,9 @@
           <SadPanel :data="sabData" />
         </div>
       </div>
-      <!-- 右侧卡片 -->
-      <Card :list="cardData" @gotoCatSeries="gotoCatSeries" :cardObj="cardObj"/>
+      <!-- 右侧卡片 @gotoCatSeries="gotoCatSeries"-->
+      <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
+
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -20,30 +21,30 @@
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
-        <a-spin class="flex-loading" size="large" v-if="showLoading" />
+        <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
         <div>
-          <div class="middle-font left-file">外销{{$route.query.key}}日达成趋势图</div>
+          <div class="middle-font left-file">外销{{$store.state.currTitle}}日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
-          <div class="middle-font">各大区日达成趋势图</div>
+          <div class="middle-font">各区域日达成趋势图</div>
           <div class="right-box-qushi">
-            <template v-show="!showLoading">
-            <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
-              <div class="content-cart">
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">{{ item }}</div>
-                  <div :id="i" class="echartsBox-min"></div>
+            <!-- <template> -->
+              <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
+                <div class="content-cart">
+                  <div class="border-top-line"></div>
+                  <div class="border-left-line"></div>
+                  <div class="flex-echrats-right">
+                    <div class="right-font-title">{{ item }}</div>
+                    <div :id="i" class="echartsBox-min"></div>
+                  </div>
+                  <div class="border-top-line"></div>
+                  <div class="border-left-line1"></div>
+                  <div class="border-left-line2"></div>
+                  <div class="border-left-line3"></div>
                 </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
               </div>
-            </div>
-            </template>
+            <!-- </template> -->
           </div>
         </div>
       </div>
@@ -54,7 +55,8 @@
     </div>
 
     <!-- 底部表格 -->
-    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj" :title1="title1" :title2="title2"/>
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
+      title1="业务员" title2="KA客户" />
   </div>
 </template>
 <script>
@@ -63,7 +65,7 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
-import Card from '@/views/center/components/card/card.vue'; 
+import cardPro from "@/views/center/components/card/cardPro.vue"; 
 import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
 export default {
   name: "s",
@@ -71,12 +73,12 @@ export default {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
-    Card,
+    cardPro,
     innerTableCardBox
   },
   data() {
     return {
-      dhcarr: ['暂无数据','暂无数据','暂无数据','暂无数据','暂无数据','暂无数据'],
+      dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
       Arrnum: [],
       showLoading: false,
       AmericaDate: [],
@@ -99,7 +101,7 @@ export default {
         titleBottom: "OEM",
         topGPM: 0,
         bottomGPM: 0,
-        ballNum:0,
+        ballNum: 0,
       },
 
       speedData: {
@@ -135,85 +137,87 @@ export default {
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
-      showLoadingCard:false,
-      cardData:[],
-      /*表格配置*/
-      title1:'业务员',
-      title2:'KA客户',
-      tableOutter:[],
-      tableInner:[],
-      leftObj:{   
-      name:'salesMan',  /*标题*/
-      level:'salesMan',/*责任人*/
-      tAvgAmt:'tAvgAmt',/*责任制*/
+      showLoadingCard: false,
+      cardData: [],
+      tableOutter: [],
+      tableInner: [],
+      leftObj: {
+        name: 'salesMan',  /*标题*/
+        level: 'salesMan',/*责任人*/
+        tAvgAmt: 'tAvgAmt',/*责任制*/
       },
-      rightObj:{
-      name:'customerName',
-      level:'customerName',
-      tAvgAmt:'tAvgAmt'
+      rightObj: {
+        name: 'cooprLevel1',
+        level: 'customerName',
+        tAvgAmt: 'tAvgAmt'
       },
-      /*表格配置 end*/
-      cardObj:{
-       'title':'cooprLevel2', /*标题*/
-       'cnyAmt':'cnyAmt',/*金额*/
-       'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
-       'saleAmtRadio':'saleAmtRadio'  /*金额完成率*/
+      cardObj: {
+        'title':'businessEntityName', /*标题*/
+        'cnyAmt':'businessEntityAmt',/*金额*/
+       'saleTaskAmt': 'businessEntityTaskAmt', /*责任制金额*/
+       'saleAmtRadio':'businessEntityAmtRadio',  /*金额完成率*/
+       'cooprLevel1':'obmOem'  /*线上/线下 金额完成率*/
       },
-     };
+      sabObj:{},
+      cardSab:[],
+      cardSabTitle1:"OBM",
+      cardSabTitle2:"OEM",
+    };
   },
-  computed:{
-    ontime(){
-      return this.$store.state.year +'-'+ this.$store.state.month;
+  computed: {
+    ontime() {
+      return this.$store.state.year + '-' + this.$store.state.month;
     },
-    showMoney(){
+    showMoney() {
       return this.$store.state.showMoney;
     },
-    modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'台'
+    modelLabel() {
+      return this.$store.state.showMoney == true ? '亿' : '台'
     },
-    model(){ /* 获取本部，OEM */
+    model() { /* 获取本部，OEM */
       return this.$store.state.model
     }
-    
+
   },
-  watch:{
-    ontime:{ /*监听数据更改 调用接口 */
-     handler: function (newValue, oldValue) {
+  watch: {
+    ontime: { /*监听数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
         this.init();
       }
     },
-    model:{ /*监听数据更改 调用接口 */
-      handler: function(newValue,oldValue){
+    model: { /*监听数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
         this.init();
       }
 
     },
-    showMoney:{
-      handler:function(newValue,oldValue){
+    showMoney: {
+      handler: function (newValue, oldValue) {
         this.init()
       }
     }
 
   },
   methods: {
-    init(){
+    init() {
+      let title = this.$store.state.currTitle; /*当前标题*/
       let params = {  /*年月*/
-      month_date:this.ontime,
-      coopr_level1:this.$route.query.key
-    };
-    let listParams = { /*年月日*/
-      start_date:`${this.ontime}-01`,
-      end_date:`${this.ontime}-31`,
-      coopr_level1:this.$route.query.key
-    }
-    // console.log('params',params,listParams)
+        month_date: this.ontime,
+        coopr_level1:title
+      };
+      let listParams = { /*年月日*/
+        start_date: `${this.ontime}-01`,
+        end_date: `${this.ontime}-31`,
+        coopr_level1:title
+      }
 
-    this.getdashboard(params);
-    this.queryCardSAB(params);
-    this.getCard(params);
-    this.getChart(listParams);
-    this.getChartList(listParams);
-    this.getTable(params);
+
+      this.getdashboard(params);
+      this.queryCardSAB(params);
+      this.getCard(params);
+      this.getList(listParams);
+      this.getList1(listParams);
+      this.getTable(params);
     },
     // 三个仪表盘
     leftGo() {
@@ -222,49 +226,53 @@ export default {
     rightGo() {
       this.$router.push("/center/exprotAreaAll");
     },
-      //三个仪表盘(左中)
-      async getdashboard(params) {
-        try {
-          const res = await API.getData('getdashboard',params);
-          if(res!=200) return;
-          //内销汇总仪表盘左边&&中间
-          let panelDataList = res.rows;
-          // console.log("res仪表",res); 
-          // directProfitRadio: 0.2713  销向毛利率
-          this.progressData.ballNum = (
-            panelDataList[0].directProfitRadio * 100
-          ).toFixed(1);
-          //    
-          // ⅵ. directCnyAmt: 5.8799  销向总销售金额
-          this.speedData.ballNum = panelDataList[0].directCnyAmt.toFixed(1)
-          // 销向金额完成率
-          // 销向数量完成率
-          this.speedData.speedBar = (panelDataList[0].directAmtRadio * 100).toFixed(1)
-          this.speedData.bar = (panelDataList[0].directQtyRadio * 100).toFixed(1)
-          //  销向总销售数量
-          this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(1)
+    //三个仪表盘(左中)
+    async getdashboard(params) {
+      let obj = {
+        code: 'outSellRegionTotalDashboard'
+      }
+      Object.assign(obj, params);
+      try {
+        const res = await API.getTotal(obj);
+        // if (res != 200) return;
+        //内销汇总仪表盘左边&&中间
+        let panelDataList = res.rows;
+        // console.log("res仪表",res); 
+        // directProfitRadio: 0.2713  销向毛利率
+        this.progressData.ballNum = (
+          panelDataList[0].directProfitRadio * 100
+        ).toFixed(1);
+        //    
+        // ⅵ. directCnyAmt: 5.8799  销向总销售金额
+        this.speedData.ballNum = panelDataList[0].directCnyAmt.toFixed(1)
+        // 销向金额完成率
+        // 销向数量完成率
+        this.speedData.speedBar = (panelDataList[0].directAmtRadio * 100).toFixed(1)
+        this.speedData.bar = (panelDataList[0].directQtyRadio * 100).toFixed(1)
+        //  销向总销售数量
+        this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(1)
 
-          // 责任制
-          this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
-          for (var i = 0; i < panelDataList.length; i++) {
-            if (panelDataList[i].obmOem == "OBM") {
-              this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
+        // 责任制
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+        for (var i = 0; i < panelDataList.length; i++) {
+          if (panelDataList[i].obmOem == "OBM") {
+            this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+            this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
 
-              this.speedData.bottomClose = panelDataList[i].orgQtyRadio.toFixed(1)
-              this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1)
+            this.speedData.bottomClose = panelDataList[i].orgQtyRadio.toFixed(1)
+            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1)
 
-            } else if (panelDataList[i].obmOem == "OEM") {
-              this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
-              this.speedData.bottomClose1 = panelDataList[i].orgQtyRadio.toFixed(1)
-              this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
+          } else if (panelDataList[i].obmOem == "OEM") {
+            this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+            this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
+            this.speedData.bottomClose1 = panelDataList[i].orgQtyRadio.toFixed(1)
+            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
 
-            }
           }
-        
+        }
+
       } catch (error) {
         console.log(error);
       }
@@ -272,81 +280,94 @@ export default {
 
     //三个仪表盘(右)
     async queryCardSAB(params) {
+      let obj = {
+        code: 'outSellRegionTotalDashboardSAB'
+      }
+      Object.assign(obj, params)
       try {
-        const res = await API.getData('outSellMacroRegionDashboardSAB',params);
+        const res = await API.getTotal(obj);
         // console.log("右但是,", res);
-        if(res.code !=200) return;
+        // if (res.code != 200) return;
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].obmOem == "OBM") {
             this.sabData.bottomArr.s = (
-              RightSAB[i].directPositionRatio * 100
+              RightSAB[i].AmtPositionRatio  * 100
             ).toFixed(1);
             this.sabData.bottomArr.a = (
-              RightSAB[i].directPositionRatio * 100
+              RightSAB[i].AmtPositionRatio  * 100
             ).toFixed(1);
             this.sabData.bottomArr.b = (
-              RightSAB[i].directPositionRatio * 100
+              RightSAB[i].AmtPositionRatio  * 100
             ).toFixed(1);
           } else if (RightSAB[i].obmOem == "OEM") {
             this.sabData.topArr.s = (
-              RightSAB[i].directPositionRatio * 100
+              RightSAB[i].AmtPositionRatio  * 100
             ).toFixed(1);
             this.sabData.topArr.a = (
-              RightSAB[i].directPositionRatio * 100
+              RightSAB[i].AmtPositionRatio  * 100
             ).toFixed(1);
             this.sabData.topArr.b = (
-              RightSAB[i].directPositionRatio * 100
+              RightSAB[i].AmtPositionRatio  * 100
             ).toFixed(1);
           }
         }
-      } catch (error) {
+      } catch (error) { 
         console.log(error);
       }
     },
-    // 中部
     //中间折线图
-    async getChart(params) {
+    async getList(params) {
       this.showLoading = true;
+      let obj = {
+        code: 'outSellRegionTotaChart'
+      }
+      Object.assign(obj, params);
       try {
-        const res = await API.getData('outSellMacroRegionDashboardChart',params);
+        const res = await API.getTotal(
+          obj
+          // 'cooprLevel1'
+        );
 
-        if(res.code !=200) return;
-          res.rows.filter((item) => {
+        if (res.code != 200) return;
+
+        res.rows.filter((item) => {
+          var timeArr = item.orderDate
+            .replace(" ", ":")
+            .replace(/\:/g, "-")
+            .split("-");
+          var yue = timeArr[1];
+          var ri = timeArr[2];
+
           // 外销日内
-          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
-            this.AvgTaskAmtDate.push(item.orderDate.substr(5));
-            this.AvgTaskAmtList.push(item.totalAmt);
-            this.AvgTaskAmtLine = item.totalAvgTaskAmt;
-            
+          if (item.cnyAmt !== null && item.tAvgQty !== null) {
+            this.AvgTaskAmtDate.push(yue + "-" + ri);
+            this.AvgTaskAmtList.push(item.cnyAmt);
+            this.AvgTaskAmtLine = item.tAvgQty;
+      
           }
-          this.showLoading = false;
+          // this.showLoading = false;
         });
-        // console.log('this.AvgTaskAmtList',this.AvgTaskAmtList)
         this.myEcharts();
-
       } catch (error) {
         console.log(error);
       }
     },
-    gotoCatSeries(obj){
-      // console.log('obj',obj);
-      this.$router.push({'path':'exprotAreaAll'})
-
+    gotoCatSeries(obj) {
+      this.$router.push({ 'path': 'exprotAreaAll' })
     },
- 
-    // 右边接口
-    async getChartList(params) {
+    // 中部边接口
+    async getList1(params) {
       this.showLoading = true;
       let chartObj = {
-        code:'outSellMacroRegionDashboardChart',
-        fields:'cooprLevel1'
+        code: 'outSellRegionTotaChart',
+        fields:'businessEntityName'
       }
-      Object.assign(chartObj,params)
-   
+      Object.assign(chartObj, params)
       try {
         const res = await API.getChartTotal(chartObj);
-        if(res.code !=200) return;
+        // console.log("res12",res);
+        if (res.code != 200) return;
         let sellOutDataList = res.rows;
         this.showLoading = false;
         let obj = res.rows[0];
@@ -354,51 +375,46 @@ export default {
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          if (k < 6) {
+          // console.log("11111111111", obj[i]);
+          if (k < 6 && i!='daquridacheng') {
             arr.push(obj[i]);
           }
           k++;
         }
-      
-       
-        let Arrtitle = [];
-        let arrs = [];
-        let s = 0;
-        arr[0].forEach((v,i)=>{
+        // console.log("obj", obj);
 
-          if(Arrtitle.indexOf(v.cooprLevel2)<0){
-          
-            Arrtitle.push(v.cooprLevel2);
-            arrs.push([]); 
-            arrs[Arrtitle.indexOf(v.cooprLevel2)].push(v);
-            this.dhcarr[s] = v.cooprLevel2;
-            s++;
-          }else{
-            arrs[Arrtitle.indexOf(v.cooprLevel2)].push(v);
-          }
-        })
-       console.log('arrs',arrs,Arrtitle);
+        this.dhcarr = [];
+        let arrs = JSON.parse(JSON.stringify(arr));
 
+        arrs.forEach((v) => {
+          this.dhcarr.push(v[0].businessEntityName);
+        });
+        // console.log("arr", this.dhcarr);
+        // this.dhcarr = [1,2,3,4,5];
 
-        arrs.forEach((v,j)=>{
-          // debugger;
+        for (let j = 0; j < arr.length; j++) {
+          var datanum = arr[j];
+          // console.log("datanum",datanum);
           let AmericaDate = [];
           let AmericaList = [];
           let AmericaLine = 1;
-          v.filter((item) => {
+          let Arrnum = datanum.filter((item) => {
+            var timeArr = item.orderDate
+              .replace(" ", ":")
+              .replace(/\:/g, "-")
+              .split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+            // console.log("sdvsd", timeArr);
 
-
-            AmericaDate.push(item.orderDate.substr(5));
-            AmericaList.push(item.CnyAmt);
-            AmericaLine = item.tAvgAmt;
-
+            AmericaDate.push(yue + "-" + ri);
+            AmericaList.push(item.cnyAmt);
+            AmericaLine = item.tAvgQty;
           });
-          console.log("Arrnum",j);
+          // console.log("Arrnum", this.sellOutDataList);
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
-
-        })
-        
+        }
       } catch (error) {
         console.log(error);
       }
@@ -407,6 +423,7 @@ export default {
     gotoDomestic() {
       this.$router.push("/center/index");
     },
+
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -652,38 +669,73 @@ export default {
       };
       myChart2.setOption(option);
     },
-   
+
     online() {
       this.$router.push("/center/onlineSummary");
     },
     offline() {
       this.$router.push("/center/offlineSummary");
     },
-       // 右边卡片/
-       async getCard(params) {
-        this.showLoadingCard = true;
-        const res = await API.getData('outSellMacroRegion',params);
-        
-        if(res.code !=200) return;
+    // 右边卡片/
+    async getCard(params) {
+      let obj = {
+        code: 'outSellRegionTotalKard'
+      }
+      Object.assign(obj, params);
+      let res = await API.getTotal(obj);
+      let res2 =JSON.parse(JSON.stringify(res));
+      if(res.code !=200) return;
+      let obm = {};
+      let arr = [];
+      res.rows.filter(v=>{
 
-        this.cardData = res.rows;
+        if(!obm[v.businessEntityName+v.obmOem]){
+          obm[v.businessEntityName+v.obmOem] = 1;
+          v.businessModelCompleteRadio =  v.obmOemAmtRadio /*中间sab对应字段完成率*/
+          arr.push(v);
+        }
+       
+
+      });
+      this.cardData = arr;
+      this.cardData.forEach(v=>{
+        console.log(v.businessEntityName,v.obmOem);
+      })
+ 
+
+      this.cardSab = res2.rows.filter(v=>{
+              v.positionRatio = v.sabAmtRadio;  /*右边sab*/
+              return v.position.length<2
+      })
+      console.log('this.cardSab',JSON.stringify(this.cardData))
+    
+
 
     },
 
     // 底部table/
     async getTable(params) {
-      try {
-        let tableInner = await API.getData('outSellMacroRegionSalesDetail',params);
-        let tableOutter = await API.getData('outSellMacroRegionAKDetail',params);
+      let innerObj = {
+        code: "outSellRegionTotaSalesman"
+      }
+      Object.assign(innerObj, params);
 
-        if(tableInner.code!=200) return;
-        
+      let outterObj = {
+        code: "outSellRegionTotaFucos"
+      }
+      Object.assign(outterObj, params);
+      try {
+        let tableInner = await API.getTotal(innerObj);
+        let tableOutter = await API.getTotal(outterObj);
+
+        if (tableInner.code != 200) return;
+
 
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
         this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
-        this.rowSpanNumber1 = [this.tableInner.length -1];
+        this.rowSpanNumber1 = [this.tableInner.length - 1];
         // debugger;
 
         // console.log("this.tableInner", this.rowSpanNumber1, this.tableInner);
@@ -693,15 +745,11 @@ export default {
         console.log(err);
       }
     },
-   
+
   },
   created() {
-    this.init(this.model);
+    this.init();
   },
-
-  // mounted() {
-  //   this.init(this.model);
-  // },
 };
 </script>
 <style scoped>
@@ -773,26 +821,23 @@ export default {
   border-radius: 0 0 10px 10px;
 }
 
-::v-deep .ant-table-thead > tr > th {
+::v-deep .ant-table-thead>tr>th {
   background: rgb(4, 19, 112);
   border-bottom: 1px solid rgb(55, 56, 112);
   border-right: 1px solid rgb(55, 56, 112);
 }
 
-::v-deep .ant-table-thead > tr > th .ant-table-header-column {
+::v-deep .ant-table-thead>tr>th .ant-table-header-column {
   color: #fff;
   font-size: 14px;
 }
 
-::v-deep .ant-table-bordered .ant-table-tbody > tr > td {
+::v-deep .ant-table-bordered .ant-table-tbody>tr>td {
   border: 1px solid rgb(55, 56, 112);
   color: #fff;
 }
 
-::v-deep
-  .ant-table-tbody
-  > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)
-  > td {
+::v-deep .ant-table-tbody>tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected)>td {
   background: transparent;
 }
 
@@ -800,13 +845,11 @@ export default {
   margin: 14px;
 }
 
-::v-deep .ant-table-thead > tr:first-child > th:first-child {
-  background: linear-gradient(
-    to right,
-    rgb(80, 192, 255),
-    rgb(90, 255, 163),
-    rgb(102, 255, 255)
-  );
+::v-deep .ant-table-thead>tr:first-child>th:first-child {
+  background: linear-gradient(to right,
+      rgb(80, 192, 255),
+      rgb(90, 255, 163),
+      rgb(102, 255, 255));
 }
 
 .top-flex {
@@ -972,7 +1015,7 @@ export default {
   opacity: 1;
 }
 
-::v-deep .ant-table-bordered .ant-table-body > table {
+::v-deep .ant-table-bordered .ant-table-body>table {
   border: none;
 }
 
@@ -994,9 +1037,11 @@ export default {
   /* margin-right: 1px; */
   width: 45%;
 }
+
 .content-cart {
   width: 100%;
 }
+
 .flex-right-bottom {
   display: flex;
   /* align-items: center; */
@@ -1064,13 +1109,11 @@ export default {
   height: 230px;
 }
 
-::v-deep .ant-table-thead > tr:first-child > th:first-child {
-  background: linear-gradient(
-    to right,
-    rgb(80, 192, 255),
-    rgb(90, 255, 163),
-    rgb(102, 255, 255)
-  );
+::v-deep .ant-table-thead>tr:first-child>th:first-child {
+  background: linear-gradient(to right,
+      rgb(80, 192, 255),
+      rgb(90, 255, 163),
+      rgb(102, 255, 255));
 }
 
 .content {
@@ -1218,7 +1261,7 @@ export default {
   opacity: 1;
 }
 
-::v-deep .ant-table-bordered .ant-table-body > table {
+::v-deep .ant-table-bordered .ant-table-body>table {
   border: none;
 }
 
@@ -1237,6 +1280,7 @@ export default {
   flex-direction: row;
   justify-content: space-around;
 }
+
 .flex-loading {
   position: relative;
   left: 50%;
