@@ -175,6 +175,9 @@ export default {
        'saleAmtRadio':'cnyAmtRadio',  /*金额完成率*/
        'cooprLevel1':'cooprLevel1'  /*线上/线下 金额完成率*/
       },
+      cardSab:[],
+      cardSabTitle1:"线上",
+      cardSabTitle2:"线下",
       leftObj:{
         marketChannel:'marketChannel',
         marketCenter:'marketCenter',
@@ -185,9 +188,6 @@ export default {
         marketCenter:'marketCenter',
         manager:'manager',
       },
-      cardSab:[],
-      cardSabTitle1:"线上",
-      cardSabTitle2:"线下",
       /*表格配置*/
       title1:'业务员',
       title2:'区域客户',

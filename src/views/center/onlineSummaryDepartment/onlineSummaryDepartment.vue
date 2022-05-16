@@ -62,7 +62,7 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
-import cardPro from "@/views/center/components/card/cardPro.vue"; 
+import cardPro from "./component/cardPro.vue"; 
 
 export default {
   components: {
@@ -299,7 +299,8 @@ export default {
       this.cardData = res.rows.filter(v=>{
         return !!v.businessModel
       })
-      
+      console.log(this.cardData,this.cardData.length)
+   
 
       this.cardSab = res2.rows;
     },
