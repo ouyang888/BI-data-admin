@@ -240,38 +240,38 @@ export default {
         // console.log("res仪表",res); 
         // directProfitRadio: 0.2713  销向毛利率
         this.progressData.ballNum = (
-          panelDataList[0].directProfitRadio * 100
-        ).toFixed(1);
-        //    
-        // ⅵ. directCnyAmt: 5.8799  销向总销售金额
-        this.speedData.ballNum = panelDataList[0].directCnyAmt.toFixed(1)
-        // 销向金额完成率
-        // 销向数量完成率
-        this.speedData.speedBar = (panelDataList[0].directAmtRadio * 100).toFixed(1)
-        this.speedData.bar = (panelDataList[0].directQtyRadio * 100).toFixed(1)
-        //  销向总销售数量
-        this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(1)
+            panelDataList[0].level1ProfitRadio * 100
+          ).toFixed(1);
+          //    
+          // ⅵ. directCnyAmt: 5.8799  销向总销售金额
+          this.speedData.ballNum = panelDataList[0].level1CnyAmt.toFixed(1)
+          // 销向金额完成率
+          // 销向数量完成率
+          this.speedData.speedBar = (panelDataList[0].level1AmtRadio * 100).toFixed(1)
+          this.speedData.bar = (panelDataList[0].level1AmtRadio * 100).toFixed(1)
+          //  销向总销售数量
+          this.speedData.ballNum = (panelDataList[0].level1saleVolume / 1000000).toFixed(1)
 
-        // 责任制
-        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
-        for (var i = 0; i < panelDataList.length; i++) {
-          if (panelDataList[i].obmOem == "OBM") {
-            this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-            this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
+          // 责任制
+          this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+          for (var i = 0; i < panelDataList.length; i++) {
+            if (panelDataList[i].obmOem == "OBM") {
+              this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+              this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+              this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
 
-            this.speedData.bottomClose = panelDataList[i].orgQtyRadio.toFixed(1)
-            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1)
+              this.speedData.bottomClose = panelDataList[i].level1AmtRadio.toFixed(1)
+              this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1)
 
-          } else if (panelDataList[i].obmOem == "OEM") {
-            this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-            this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
-            this.speedData.bottomClose1 = panelDataList[i].orgQtyRadio.toFixed(1)
-            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
+            } else if (panelDataList[i].obmOem == "OEM") {
+              this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+              this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
+              this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
+              this.speedData.bottomClose1 = panelDataList[i].cnyAmtRadio.toFixed(1)
+              this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
 
+            }
           }
-        }
 
       } catch (error) {
         console.log(error);
@@ -290,7 +290,7 @@ export default {
         // if (res.code != 200) return;
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
-          if (RightSAB[i].obmOem == "OBM") {
+          if (RightSAB[i].obm_oem == "OBM") {
             this.sabData.bottomArr.s = (
               RightSAB[i].AmtPositionRatio  * 100
             ).toFixed(1);
@@ -300,7 +300,7 @@ export default {
             this.sabData.bottomArr.b = (
               RightSAB[i].AmtPositionRatio  * 100
             ).toFixed(1);
-          } else if (RightSAB[i].obmOem == "OEM") {
+          } else if (RightSAB[i].obm_oem == "OEM") {
             this.sabData.topArr.s = (
               RightSAB[i].AmtPositionRatio  * 100
             ).toFixed(1);
