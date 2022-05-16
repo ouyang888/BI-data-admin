@@ -57,7 +57,7 @@
     <innerTableCardBox
       :leftData="tableInner"
       :rightData="tableOutter"
-      title1="通路"
+      title1="合作模式三"
       :leftObj="leftObj"
       :rightObj="rightObj"
       title2="重点客户"
