@@ -296,9 +296,7 @@ export default {
       const res = await API.getTotal(obj1);
       const res2 = await API.getTotal(obj2);
       if(res.code !=200) return;
-      this.cardData = res.rows.filter(v=>{
-        return !!v.businessModel
-      })
+      this.cardData = res.rows;
       console.log(this.cardData,this.cardData.length)
    
 

@@ -73,8 +73,8 @@
             </div>
             <!-- {{list}} -->
             <template v-for="(item,k) in list"> 
-            <div :key="k+22" v-if="k == i || k==i+1">
-              <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
+            <div :key="k+22" v-if="k == i*2 || k==i*2+1">
+              <span class="percent-title">{{item[cardObj.cooprLevel1]}} </span>
               <span class="percent-text">{{(item.businessModelCompleteRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
             </div>
           </template>
