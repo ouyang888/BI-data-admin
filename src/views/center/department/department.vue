@@ -813,8 +813,15 @@ export default {
       this.showLoadingCard = true;
       try {
          let obj = {
-        code:"onlineTopCooprLevel2",
-      }
+             code:"onlineTopCooprLevel2",
+         }
+
+        //    let obj = {
+        //      code:"onlineTopCooprLevel2",
+        //  }
+      //     let obj = {
+      //   code:"directLevelTop"
+      // }
         const res = await API.getTotal( Object.assign(params,obj));
        // const res = await API.getData("onlineTopCooprLevel2", params);
 
