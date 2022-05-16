@@ -234,6 +234,7 @@ export default {
       Object.assign(obj, params);
       try {
         const res = await API.getTotal(obj);
+     
         // if (res != 200) return;
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
@@ -250,7 +251,7 @@ export default {
           this.speedData.speedBar = (panelDataList[0].level1AmtRadio * 100).toFixed(1)
           this.speedData.bar = (panelDataList[0].level1AmtRadio * 100).toFixed(1)
           //  销向总销售数量
-          this.speedData.ballNum = (panelDataList[0].level1saleVolume / 1000000).toFixed(1)
+          // this.speedData.ballNum = (panelDataList[0].level1saleVolume / 1000000).toFixed(1)
 
           // 责任制
           this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)

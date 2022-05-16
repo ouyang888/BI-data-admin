@@ -244,7 +244,7 @@ export default {
           this.speedData.speedBar = (panelDataList[0].directAmtRadio * 100).toFixed(1)
           this.speedData.bar = (panelDataList[0].directQtyRadio * 100).toFixed(1)
           //  销向总销售数量
-          this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(1)
+          // this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(1)
 
           // 责任制
           this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
