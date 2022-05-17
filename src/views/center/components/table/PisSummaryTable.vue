@@ -20,7 +20,7 @@
         >
          <template v-slot="scope">
             <div style="text-align: center" class="nameColor"  @click="handleClick">
-              {{ scope.row.cooprLevel }}
+              {{ scope.row.cooprLevel1 }}
             </div>
           </template>
         </el-table-column>

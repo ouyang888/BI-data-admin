@@ -10,8 +10,15 @@
           <SadPanel :data="sabData" />
         </div>
       </div>
+
+
+        <!-- 右侧卡片 -->
+        
+      <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
+
+    </div>
       <!-- 右侧卡片 -->
-      <div class="flex-card" >
+       <!-- <div class="flex-card" >
         <div class="card-box">
           <div class="card-font" >台扇</div>
           <div class="card-border-box">
@@ -32,8 +39,7 @@
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
                    <div class="flex-finish">
-                    <!-- <div class="finish-font">进度 <span>s</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div> -->
+                  
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -182,77 +188,6 @@
           
                   </div>
                 </div>
-                <!-- <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
                 <div
                   style="
                     display: flex;
@@ -373,8 +308,7 @@
                 <div class="flex-top-card">
                   <div class="card-big-num">75亿</div>
                    <div class="flex-finish">
-                    <!-- <div class="finish-font">进度 <span>s</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div> -->
+                  
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -623,9 +557,9 @@
         </div>
       </div>
       
-    </div>
+    </div> -->
     <!-- 中间echart -->
-    <div class="middle-box">
+     <div class="middle-box">
       <div class="flex-fang">
         <div class="fang-color"></div>
         <div class="fang-color"></div>
@@ -638,13 +572,13 @@
         <div>
           <div class="middle-font">大区日达成趋势图</div>
           <div class="right-box-qushi">
-            <div class="flex-right-bottom">
-              <div>
+            <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
+              <div style="width:100%">
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
                 <div class="flex-echrats-right">
-                  <div class="right-font-title">淘系</div>
-                  <div id="main2" class="echartsBox-min"></div>
+                  <div class="right-font-title">{{ item }}</div>
+                  <div :id="i" class="echartsBox-min"></div>
                 </div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line1"></div>
@@ -652,76 +586,7 @@
                 <div class="border-left-line3"></div>
               </div>
             </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">京东</div>
-                  <div id="main3" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">拼多多</div>
-                  <div id="main4" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">美的</div>
-                  <div id="main5" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">兴趣</div>
-                  <div id="main6" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
-            <div class="flex-right-bottom">
-              <div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line"></div>
-                <div class="flex-echrats-right">
-                  <div class="right-font-title">天猫自营</div>
-                  <div id="main7" class="echartsBox-min"></div>
-                </div>
-                <div class="border-top-line"></div>
-                <div class="border-left-line1"></div>
-                <div class="border-left-line2"></div>
-                <div class="border-left-line3"></div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -731,25 +596,51 @@
       </div>
     </div>
 
+
     <!-- 底部表格 -->
-      <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" title1="合作模式三" title2="线上客户" />
+    <productTableInfo :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
+      title1="内销" title2="外销" />
   </div>
 </template>
 <script>
+import cardPro from "./component/cardPro.vue"; 
 import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
-import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
+import productTableInfo from '@/views/center/components/table/productTableInfo.vue';
 export default {
    components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
-    innerTableCardBox
+    productTableInfo,
+    cardPro
   },
   data() {
     return {
+        cardObj: {
+        'title':'category', /*标题*/
+        'cnyAmt':'cnyAmt',/*金额*/
+       'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
+       'saleAmtRadio':'cnyAmtRadio',  /*金额完成率*/
+       'cooprLevel1':'directName'  /*线上/线下 金额完成率*/
+      },
+      cardSab:[],
+      cardSabTitle1:"内销",
+      cardSabTitle2:"外销",
+      leftObj:{
+        marketChannel:'marketChannel',
+        marketCenter:'marketCenter',
+        manager:'manager',
+      },
+      rightObj:{
+        marketChannel:'marketChannel',
+        marketCenter:'marketCenter',
+        manager:'manager',
+      },
+      cardData: [],
+      dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
       dateTime:"2022-03",
       dataTimeMany:"2022-01-01,2022-10-01,2022-01-01,2022-10-01",
       showLoading: false,
@@ -836,12 +727,12 @@ export default {
       progressData: {
         bar1: 0,
         bar2: 0,
-        ballTitle: "线上",
+        ballTitle: "产司",
         bigBallTitle: "毛利率",
-        textLeft: "自营",
-        textRight: "代运营",
-        titleTop: "自营",
-        titleBottom: "代运营",
+        textLeft: "内销",
+        textRight: "外销",
+        titleTop: "内销",
+        titleBottom: "外销",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -849,17 +740,17 @@ export default {
       speedData: {
         bar: 0,
         speedBar: 0,
-        ballTitle: "线上达成",
+        ballTitle: "产司达成",
         ballNum: 0,
-        ballLeftTitle: "自营",
-        ballRightTitle: "代运营",
+        ballLeftTitle: "内销",
+        ballRightTitle: "外销",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "自营",
+        bottomTitle1: "内销",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "代运营",
+        bottomTitle2: "外销",
         bottomClose1: 0,
         bottomTime1: 0,
       },
@@ -867,8 +758,8 @@ export default {
         bar1: 70,
         bar2: 50,
         ballTitle: "线上",
-        top: "自营",
-        bottom: "代运营",
+        top: "内销",
+        bottom: "外销",
         sabArr: { s: 0, a: 0, b: 0 },
         topArr: { s: 0, a: 0, b: 0 },
         bottomArr: { s: 0, a: 0, b: 0 },
@@ -883,7 +774,286 @@ export default {
       rowSpanNumber2:6,
     };
   },
+    computed: {
+    ontime() {
+      return this.$store.state.year + '-' + this.$store.state.month//this.$store.state.model;
+    },
+    // ontime2(){
+    //   return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month;
+    // },
+    // ontime3(){
+    //   return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month +','+ this.$store.state.year +'-'+ this.$store.state.month+',' +this.$store.state.year +'-'+ this.$store.state.month;
+    // },
+    showMoney() {
+      return this.$store.state.showMoney;
+    },
+    modelLabel() {
+      return this.$store.state.showMoney == true ? '亿' : '亿'
+    },
+    model() { /* 获取本部，OEM */
+      return this.$store.state.model
+    },
+
+
+  },
+  watch: {
+    ontime: { /*监听数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
+        //this.init(this.model);
+      }
+    },
+    model: { /*监听数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
+        //this.init(newValue);
+      }
+
+    },
+    showMoney: {
+      handler: (newValue, oldValue) => {
+
+      }
+    },
+  },
+
   methods: {
+        // 右边卡片/
+    async getCard(params) {
+      let obj1 = {
+        code: 'categoryTotalsTopKard',
+        coopr_level1:'线上'
+      }
+      Object.assign(obj1,params)
+      let obj2 = {
+        code: 'categoryTotalsTopKardSAB',
+         coopr_level1:'线上'
+      }
+      Object.assign(obj2,params)
+      const res = await API.getTotal(obj1);
+      const res2 = await API.getTotal(obj2);
+      if(res.code !=200) return;
+      this.cardData = res.rows.filter(v => {
+        return !!v.category;
+     });
+      this.cardSab = res2.rows.filter(v => {
+        return !!v.category;
+      });
+    },
+
+   
+     myEcharts2(data, time, lines, id) {
+      var myChart2 = this.$echarts.init(document.getElementById(id));
+      var option = {
+        xAxis: {
+          axisLabel: {
+            formatter: function (val) {
+              return "";
+            },
+          },
+        },
+        textStyle: {
+          color: "#3FB0FF",
+        },
+        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+        title: {
+          text: "",
+        },
+        tooltip: {
+          trigger: "axis",
+        },
+        grid: {
+          top: "5%",
+          left: "2%",
+          right: "5%",
+          bottom: "3%",
+          containLabel: true,
+        },
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          // data: this.AmericaDate,
+          // data: ['01-02','03-03','04-04','01-04'],
+
+          data: time,
+          axisTick: {
+            show: false, //刻度线
+          },
+          axisLine: {
+            show: false, //隐藏y轴
+          },
+          axisLabel: {
+            show: false, //隐藏刻度值
+          },
+        },
+        yAxis: {
+          name: "单位：万",
+          type: "value",
+          splitLine: {
+            lineStyle: {
+              type: "dashed",
+              color: "rgba(45,153,255,.3)",
+            },
+          },
+          axisTick: {
+            show: false, //刻度线
+          },
+          axisLine: {
+            show: false, //隐藏y轴
+          },
+          axisLabel: {
+            show: false, //隐藏刻度值
+          },
+        },
+        series: [
+          {
+            name: "实际达成",
+            type: "line",
+            stack: "Total",
+            // smooth: true,
+            lineStyle: {
+              width: 1,
+            },
+            showSymbol: false,
+            areaStyle: {
+              normal: {
+                color: {
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [
+                    {
+                      offset: 0,
+                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+                    },
+                    {
+                      offset: 0.7,
+                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+                    },
+                  ],
+                  globalCoord: false, // 缺省为 false
+                },
+              },
+            },
+            // data: this.AmericaList,
+            // data:[10,20,100,250],
+            data: data,
+            // data:data,
+            markLine: {
+              // data:this.AmericaLine,
+              data: [
+                {
+                  // yAxis: this.AmericaLine,
+                  // yAxis:400,
+                  yAxis: lines,
+                  silent: false, //鼠标悬停事件 true没有，false有
+                  lineStyle: {
+                    //警戒线的样式 ，虚实 颜色
+                    type: "dashed", //样式  ‘solid’和'dotted'
+                    color: "#FF8B2F",
+                    width: 2, //宽度
+                  },
+                  label: {
+                    formatter: "",
+                    color: "#FF8B2F",
+                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+                  },
+                },
+              ],
+
+              symbol: ["none", "none"],
+            },
+          },
+        ],
+      };
+      myChart2.setOption(option);
+    },
+    
+     // 右边接口
+    async getList1(line) {
+      this.showLoading = true;
+      let chart = {
+        code: 'categoryTotalsChart',
+        fields: "cooprLevel1"
+      };
+      Object.assign(chart, line)
+      try {
+
+        const res = await API.getChartTotal(chart);
+
+        let sellOutDataList = res.rows;
+        this.showLoading = false;
+
+        let obj = res.rows[0]
+
+
+        var k = 0;
+        var arr = [];
+        for (var i in obj) {
+          if (k < 6) {
+            arr.push(obj[i]);
+          }
+          k++;
+        }
+        this.dhcarr = [];
+        let arrs = JSON.parse(JSON.stringify(arr));
+        arrs.forEach((v) => {
+          this.dhcarr.push(v[0].cooprLevel1);
+        });
+        for (let j = 0; j < arr.length; j++) {
+          var datanum = arr[j];
+          let AmericaDate = [];
+          let AmericaList = [];
+          let AmericaLine = 1;
+          let Arrnum = datanum.filter((item) => {
+            var timeArr = item.orderDate
+              .replace(" ", ":")
+              .replace(/\:/g, "-")
+              .split("-");
+            var yue = timeArr[1];
+            var ri = timeArr[2];
+            AmericaDate.push(yue + "-" + ri);
+            AmericaList.push(item.totalCnyAmt);
+            AmericaLine = item.saleAvgAmt;
+          });
+          this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+     init(model) {
+       
+      let params = {  /*年月*/
+        month_date: this.ontime,
+        //business_entity_name:this.$route.query.key
+        business_entity_name:"环境"
+      };
+      let listParams = { /*年月日*/
+        start_date: `${this.ontime}-01`,
+        end_date: `${this.ontime}-31`,
+        business_entity_name:"环境"
+        //business_entity_name:this.$route.query.key
+      }
+      this.getList1(listParams);
+      this.getTable(params);
+      this.getCard(params);
+      this.getdashboard(params);
+    this.queryCardSAB(params);
+     
+
+    //this.getdashboard();
+    this.myEcharts();
+    // this.myEcharts2();
+    this.myEcharts3();
+    this.myEcharts4();
+    this.myEcharts5();
+    this.myEcharts6();
+    this.myEcharts7();
+    this.myEcharts8();
+    this.getTable();
+
+    },
+
     gotoDomestic(){
 this.$router.push("/center/index")
     },
@@ -898,32 +1068,77 @@ this.$router.push("/center/index")
 
 
   //仪表盘(左中)
-    async getdashboard() {
-      localStorage.getItem("")
+    async getdashboard(time) {
+      
+ 
+      console.log(time)
       try {
-        const res = await API.getData("onlineTopTotal", this.dateTime);
+          let obj = {
+          code: "categoryTotalsDashboard",
+        }
+         /* 仪表盘-金额版
+ * monthDate 月份
+ * directName 销向
+ * cnyAmt 销向金额
+ * sumCnyAmt 产司金额达成
+ * cnyAmtRadio 销向金额完成率
+ * saleTaskAmt 总责任制金额
+ * saleTaskAmtRadio 总金额完成率
+ * dateRadio 时间进度
+ * directNameGrossProfitRadio 销向毛利率
+ * grossProfitRadio 总毛利率
+ */
+ 
+        const res = await API.getTotal(Object.assign(obj,time));
         let panelDataList = res.rows;
         this.progressData.ballNum = (
-          panelDataList[0].onLineGrossProfitRadio * 100
+          panelDataList[0].directNameGrossProfitRadio * 100
         ).toFixed(1);
-        this.speedData.speedBar = (panelDataList[0].businessModelCompleteRadio*100).toFixed(1)
+        this.speedData.speedBar = (panelDataList[0].cnyAmtRadio*100).toFixed(1)
         this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1)
-        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1)
-        // this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
-        for (var i = 0; i < panelDataList.length; i++) {
-          if (panelDataList[i].businessModel == "直营") {
-            this.progressData.bar2 = (panelDataList[i].grossProfitRadio*100).toFixed(1)
-            this.progressData.topGPM = (panelDataList[i].grossProfitRadio*100).toFixed(1)
-            // this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(1)
-            // this.speedData.bottomClose =  panelDataList[i].orgQtyRadio.toFixed(1)
-            // this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
+        this.speedData.ballNum =panelDataList[0].sumCnyAmt.toFixed(1)
+        // this.speedData.speedBar = (panelDataList[0].businessModelCompleteRadio*100).toFixed(1)
+        // this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1)
+        // this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1)
 
-          } else if (panelDataList[i].businessModel == "代运营") {
-            this.progressData.bar1 = (panelDataList[i].grossProfitRadio*100).toFixed(1)
-            this.progressData.bottomGPM = (panelDataList[i].grossProfitRadio*100).toFixed(1)
-            //  this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(1)
-            //  this.speedData.bottomClose1 =  panelDataList[i].orgQtyRadio.toFixed(1)
-            // this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+//         cnyAmt: 2.7389
+// cnyAmtRadio: 0.7858
+// dateRadio: 1
+// directName: "外销"
+// directNameGrossProfitRadio: 0.268
+// grossProfitRadio: 0.2538
+// monthDate: "2022-03"
+// saleTaskAmt: 3.518
+// saleTaskAmtRadio: 1.9645
+// sumCnyAmt: 6.911
+        // this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+
+//          * cnyAmt 销向金额
+//  * sumCnyAmt 产司金额达成
+//  * cnyAmtRadio 销向金额完成率
+//  * saleTaskAmt 总责任制金额
+//  * saleTaskAmtRadio 总金额完成率
+        for (var i = 0; i < panelDataList.length; i++) {
+          if (panelDataList[i].directName == "外销") {
+            this.progressData.bar2 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
+            this.progressData.topGPM = (panelDataList[i].grossProfitRadio*100).toFixed(1)
+            this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(1)
+            this.speedData.bottomClose =  panelDataList[i].sumCnyAmt.toFixed(1)
+            this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
+
+          } else if (panelDataList[i].directName == "内销") {
+            // this.progressData.bar1 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
+            // this.progressData.bottomGPM = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
+            // //  this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(1)
+            // //  this.speedData.bottomClose1 =  panelDataList[i].orgQtyRadio.toFixed(1)
+            // // this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+
+            this.progressData.bar2 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
+            this.progressData.topGPM = (panelDataList[i].grossProfitRadio*100).toFixed(1)
+            this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(1)
+            this.speedData.bottomClose =  panelDataList[i].sumCnyAmt.toFixed(1)
+            this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
+
 
           }
         }
@@ -933,12 +1148,19 @@ this.$router.push("/center/index")
     },
 
     //仪表盘(右)
-    async queryCardSAB() {
+    async queryCardSAB(time) {
       try {
-        const res = await API.getData("directTotalDashboardSAB", this.dateTime);
+        let obj = {
+          code: "categoryTotalsTopKardSAB",
+        }
+        //const res = await API.getData("onlineTopTotal", this.dateTime);
+         const res = await API.getTotal(Object.assign(obj,time));
+       
+        // const res = await API.getData("", this.dateTime);
         let RightSAB = res.rows;
+        console.log(RightSAB);
         for (var i = 0; i < RightSAB.length; i++) {
-          if(RightSAB[i].directName == "事业部"){
+          if(RightSAB[3].directName == "内销"){
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if(RightSAB[i].position == "S"){
               this.sabData.sabArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
@@ -947,7 +1169,7 @@ this.$router.push("/center/index")
             }else if(RightSAB[i].position == "B"){
               this.sabData.sabArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
             }
-          }else if(RightSAB[i].directName == "内销"){
+          } if(RightSAB[i].directName == "内销"){
             this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
              if(RightSAB[i].position == "S"){
               this.sabData.topArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
@@ -956,7 +1178,8 @@ this.$router.push("/center/index")
             }else if(RightSAB[i].position == "B"){
               this.sabData.topArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
             }
-          }else if(RightSAB[i].directName == "外销"){
+          }
+          if(RightSAB[i].directName == "外销"){
               this.sabData.bar2 = (RightSAB[i].positionRatio*100).toFixed(1)
              if(RightSAB[i].position == "S"){
               this.sabData.bottomArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
@@ -1096,124 +1319,124 @@ this.$router.push("/center/index")
       };
       myChart.setOption(option);
     },
-    myEcharts2() {
-      var myChart2 = this.$echarts.init(document.getElementById("main2"));
-      var option = {
-        xAxis: {
-          axisLabel: {
-            formatter: function (val) {
-              return "";
-            },
-          },
-        },
-        textStyle: {
-          color: "#3FB0FF",
-        },
-        color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
-        title: {
-          text: "",
-        },
-        tooltip: {
-          trigger: "axis",
-        },
-        grid: {
-          top: "5%",
-          left: "2%",
-          right: "5%",
-          bottom: "3%",
-          containLabel: true,
-        },
-        xAxis: {
-          type: "category",
-          boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        yAxis: {
-          name: "单位：万",
-          type: "value",
-          splitLine: {
-            lineStyle: {
-              type: "dashed",
-              color: "rgba(45,153,255,.3)",
-            },
-          },
-          axisTick: {
-            show: false, //刻度线
-          },
-          axisLine: {
-            show: false, //隐藏y轴
-          },
-          axisLabel: {
-            show: false, //隐藏刻度值
-          },
-        },
-        series: [
-          {
-            name: "实际达成",
-            type: "line",
-            stack: "Total",
-            // smooth: true,
-            lineStyle: {
-              width: 1,
-            },
-            showSymbol: false,
-            areaStyle: {
-              normal: {
-                color: {
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [
-                    {
-                      offset: 0,
-                      color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
-                    },
-                    {
-                      offset: 0.7,
-                      color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
-                    },
-                  ],
-                  globalCoord: false, // 缺省为 false
-                },
-              },
-            },
-            data: [1948, 7308, 8949, 3839, 13857],
-            markLine: {
-              data: [
-                {
-                  yAxis: 8576,
-                  silent: false, //鼠标悬停事件 true没有，false有
-                  lineStyle: {
-                    //警戒线的样式 ，虚实 颜色
-                    type: "dashed", //样式  ‘solid’和'dotted'
-                    color: "#FF8B2F",
-                    width: 2, //宽度
-                  },
-                  label: {
-                    formatter: "",
-                    color: "#FF8B2F",
-                    position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
-                  },
-                },
-              ],
+    // myEcharts2() {
+    //   var myChart2 = this.$echarts.init(document.getElementById("main2"));
+    //   var option = {
+    //     xAxis: {
+    //       axisLabel: {
+    //         formatter: function (val) {
+    //           return "";
+    //         },
+    //       },
+    //     },
+    //     textStyle: {
+    //       color: "#3FB0FF",
+    //     },
+    //     color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+    //     title: {
+    //       text: "",
+    //     },
+    //     tooltip: {
+    //       trigger: "axis",
+    //     },
+    //     grid: {
+    //       top: "5%",
+    //       left: "2%",
+    //       right: "5%",
+    //       bottom: "3%",
+    //       containLabel: true,
+    //     },
+    //     xAxis: {
+    //       type: "category",
+    //       boundaryGap: false,
+    //       data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+    //       axisTick: {
+    //         show: false, //刻度线
+    //       },
+    //       axisLine: {
+    //         show: false, //隐藏y轴
+    //       },
+    //       axisLabel: {
+    //         show: false, //隐藏刻度值
+    //       },
+    //     },
+    //     yAxis: {
+    //       name: "单位：万",
+    //       type: "value",
+    //       splitLine: {
+    //         lineStyle: {
+    //           type: "dashed",
+    //           color: "rgba(45,153,255,.3)",
+    //         },
+    //       },
+    //       axisTick: {
+    //         show: false, //刻度线
+    //       },
+    //       axisLine: {
+    //         show: false, //隐藏y轴
+    //       },
+    //       axisLabel: {
+    //         show: false, //隐藏刻度值
+    //       },
+    //     },
+    //     series: [
+    //       {
+    //         name: "实际达成",
+    //         type: "line",
+    //         stack: "Total",
+    //         // smooth: true,
+    //         lineStyle: {
+    //           width: 1,
+    //         },
+    //         showSymbol: false,
+    //         areaStyle: {
+    //           normal: {
+    //             color: {
+    //               x: 0,
+    //               y: 0,
+    //               x2: 0,
+    //               y2: 1,
+    //               colorStops: [
+    //                 {
+    //                   offset: 0,
+    //                   color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+    //                 },
+    //                 {
+    //                   offset: 0.7,
+    //                   color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+    //                 },
+    //               ],
+    //               globalCoord: false, // 缺省为 false
+    //             },
+    //           },
+    //         },
+    //         data: [1948, 7308, 8949, 3839, 13857],
+    //         markLine: {
+    //           data: [
+    //             {
+    //               yAxis: 8576,
+    //               silent: false, //鼠标悬停事件 true没有，false有
+    //               lineStyle: {
+    //                 //警戒线的样式 ，虚实 颜色
+    //                 type: "dashed", //样式  ‘solid’和'dotted'
+    //                 color: "#FF8B2F",
+    //                 width: 2, //宽度
+    //               },
+    //               label: {
+    //                 formatter: "",
+    //                 color: "#FF8B2F",
+    //                 position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+    //               },
+    //             },
+    //           ],
 
-              symbol: ["none", "none"],
-            },
-          },
-        ],
-      };
-      myChart2.setOption(option);
-    },
+    //           symbol: ["none", "none"],
+    //         },
+    //       },
+    //     ],
+    //   };
+    //   myChart2.setOption(option);
+    // },
     myEcharts3() {
       var myChart3 = this.$echarts.init(document.getElementById("main3"));
       var option = {
@@ -1928,37 +2151,38 @@ this.$router.push("/center/index")
       };
       myChart8.setOption(option);
     },
-    async getTable() {
-      try {
-        let tableInner = await API.getData(
-          "onlineBottomLevel3",
-          "202203,202203"
-        );
-        let tableOutter = await API.getData(
-          "onlineBottomStore",
-          "2022-03,2022-03"
-        );
+    async getTable(time) {
+      
+      //   let online = {
+      //   code: 'onlineBottomLevel3'
+      // };
+      // let onlineStore = {
+      //   code: 'onlineBottomStore'
+      // };
+       let online = {
+        code: 'categoryTotalsChartInner'
+      };
+      let onlineStore = {
+        code: 'categoryOuterTotalsChartInner	'
+      };
+      let tableInner = await API.getTotal(Object.assign(online,time));
+       let tableOutter = await API.getTotal(
+        Object.assign(onlineStore,time)
+      );
+      console.log(Object.assign(online,time));
+        console.log( Object.assign(onlineStore,time));
 
-        this.tableInner = tableInner.rows;
-        this.tableOutter = tableOutter.rows;
-        
-      } catch (err) {
-        console.log(err);
-      }
+      console.log("tableOutter",tableOutter);
+        console.log("tableInner",tableInner);
+      this.tableInner = tableInner.rows;
+      this.tableOutter = tableOutter.rows;
+
+      this.rowSpanNumber2 = [this.tableOutter.length - 1];
     },
 
   },
   mounted() {
-    this.getdashboard();
-    this.myEcharts();
-    this.myEcharts2();
-    this.myEcharts3();
-    this.myEcharts4();
-    this.myEcharts5();
-    this.myEcharts6();
-    this.myEcharts7();
-    this.myEcharts8();
-    this.getTable();
+    this.init(this.model);
   },
 };
 </script>
@@ -2086,7 +2310,7 @@ this.$router.push("/center/index")
   display: flex;
   margin-top: 10px;
   align-items: center;
-  justify-content: inherit;
+  justify-content: end;
   flex-wrap: wrap;
 }
 .flex-top-card {

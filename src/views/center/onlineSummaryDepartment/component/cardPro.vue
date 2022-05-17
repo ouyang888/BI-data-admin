@@ -75,7 +75,7 @@
             <template v-for="(item,k) in list"> 
             <div :key="k+22" v-if="k == i*2 || k==i*2+1">
               <span class="percent-title">{{item[cardObj.cooprLevel1]}} </span>
-              <span class="percent-text">{{(item.businessModelCompleteRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+              <span class="percent-text">{{(item.directCnyAmtRadio*100)>100?100:(item.directCnyAmtRadio*100).toFixed(0) }}%</span>
             </div>
           </template>
           </div>
@@ -84,7 +84,7 @@
             <div class="">
               <div class="sab-title">{{title1}}SAB</div>
               <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1">
+                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1&&item.category!==null">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>
@@ -94,7 +94,7 @@
             <div class="">
               <div class="sab-title">{{title2}}SAB</div>
               <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2">
+                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2&&item.category!==null">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>

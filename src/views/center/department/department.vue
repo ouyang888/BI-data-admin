@@ -11,11 +11,11 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-      <Card :list="cardData" @gotoCatSeries="gotoCatSeries" />
 
+          <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2" @gotoCatSeries="gotoCatSeries(val)"/>
     </div>
     <!-- 中间echart -->
-    <div class="middle-box">
+       <div class="middle-box">
       <div class="flex-fang">
         <div class="fang-color"></div>
         <div class="fang-color"></div>
@@ -73,7 +73,8 @@
 <script>
 import innerTableInfo from "@/views/center/components/table/innerTableInfo.vue";
 //  import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
-import Card from "./component/card.vue";
+import cardPro from "./component/cardPro.vue";
+
 import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
@@ -84,7 +85,7 @@ export default {
     //  innerTableCardBox,
     //TableCardBox,
     innerTableInfo,
-    Card,
+    cardPro,
     ProgressPanel,
     SpeedPanel,
     SadPanel,
@@ -93,9 +94,37 @@ export default {
   data() {
     return {
        cardData:[],
+      cardSab:[],
+      cardSabTitle1:"内销",
+      cardSabTitle2:"外销",
        dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
       AmericaDate: [],
       AmericaList: [],
+
+//       monthDate 月份
+// businessEntityName 产司
+// directName 销向
+// `position`产品结构
+// businessEntityAmt 产司实时达成金额
+// businessEntityTaskAmt 产司责任制金额
+// businessEntityAmtRadio 产司金额完成率
+// directNameAmtRadio 内销/外销完成率
+// sabAmtRadio SAB金额占比
+// grossProfitRadio 毛利率
+// dateRadio  时间进度
+// sabQtyRadio SAB数量占比
+// directNameQtyRadio 内销/外销数量完成率
+// businessEntityQtyRadio 产司数量完成率
+// businessEntityQty 产司实时达成数量
+// businessEntityTaskQty 产司数量责任制
+
+     cardObj: {
+        'title':'businessEntityName', /*标题*/
+        'cnyAmt':'businessEntityAmt',/*金额*/
+       'saleTaskAmt': 'businessEntityTaskAmt', /*责任制金额*/
+       'saleAmtRadio':'businessEntityAmtRadio',  /*金额完成率*/
+       'cooprLevel1':'directName'  /*线上/线下 金额完成率*/
+      },
       
       AvgTaskAmtDate: [],
       AvgTaskAmtList: [],
@@ -317,152 +346,40 @@ export default {
       let onlineStore = {
         code: 'directLeveOutterBottom'
       };
-      let tableInner = await API.getTotal(Object.assign(time, online));
+      let tableInner = await API.getTotal(Object.assign(online,time ));
        let tableOutter = await API.getTotal(
-        Object.assign(time, onlineStore)
+        Object.assign(onlineStore,time)
       );
       this.tableInner = tableInner.rows;
       this.tableOutter = tableOutter.rows;
 
-
-
-      
-      // let innerObj = {
-      //   coopr_level1:'线上'
-        
-      // }
-      // Object.assign(innerObj,params);
-      // let outterObj = {
-      //   coopr_level1:'线下'
-      // }
-      // Object.assign(outterObj,params);
-      // let tableInner = await API.getData("directLevelInnerBottom", innerObj);
-      // let tableOutter = await API.getData("directLeveOutterBottom", outterObj);
-      // console.log("tableInner",tableInner);
-      // console.log("tableItableOutternner",tableOutter);
-      //  innerTableList:[
-      //     {
-      //       directName: "内销",
-      //       marketChannel: "线上",
-      //       marketCenter: null,
-      //       manager: "张茉欧",
-      //       cooprMode: "京东",
-      //       businessEntityName1: 23,
-      //       businessEntityName2: 23,
-      //       businessEntityName3: 23,
-      //       businessEntityName4: 23,
-      //       businessEntityName5: 23,
-      //       businessEntityName6: 23,
-      //       saleVolume1: 34,
-      //       saleVolume2: 34,
-      //       saleVolume3: 34,
-      //       saleVolume4: 34,
-      //       saleVolume5: 34,
-      //       saleVolume6: 34,
-      //       completeRadioAll: null,
-      //       cnyAmt: 22,
-      //       saleTaskAmt: 60,
-      //       saleVolumeAll: 50,
-      //       dateRadio: 1,
-      //     }
-      //   ],
-//       electromagnetismAmtRadio 电磁金额完成率
-// electric 电动
-// electricAmtRadio 电动金额完成率
-// drink 饮品
-// drinkAmtRadio 饮品金额完成率
-// kitchen 奇厨
-// kitchenAmtRadio 奇厨金额完成率
-// dateRadio 时间进度
-      // outerTableList: [
-      //     {
-      //       directName: "外销",
-      //       marketChannel: "大区",
-      //       marketCenter: null,
-      //       manager: null,
-      //       cooprMode: "北美",
-      //       businessEntityName1: 23,
-      //       businessEntityName2: 23,
-      //       businessEntityName3: 23,
-      //       businessEntityName4: 23,
-      //       businessEntityName5: 23,
-      //       businessEntityName6: 23,
-      //       saleVolume1: 34,
-      //       saleVolume2: 34,
-      //       saleVolume3: 34,
-      //       saleVolume4: 34,
-      //       saleVolume5: 34,
-      //       saleVolume6: 34,
-      //       completeRadioAll: null,
-      //       cnyAmt: 24,
-      //       saleTaskAmt: 60,
-      //       saleVolumeAll: 50,
-      //       dateRadio: 1,
-      //     },
-
-      //   ],
-
-        
-
-      // this.tableOutter = tableOutter.rows;
-
-      	
-//  this.tableOutter=JSON.parse(JSON.stringify(tableOutter.rows));
-//  this.console.log(" this.tableOutter", this.tableOutter);
-//       tableOutter.rows.forEach((element,i) => {
-//          this.innerTableList[i].manager=element[i].cooprLevel2Manager;
-
-         
-
-// // conditioning: null
-// // conditioningAmtRadio: (...)
-// // cooking: 277.2476
-// // cookingAmtRadio: (...)
-// // cooprLevel1: "北美KA营销中心"
-// // cooprLevel2: "KA一区域"
-// // cooprLevel2Manager: (...)
-// // dateRadio: (...)
-// // drink: (...)
-// // drinkAmtRadio: (...)
-// // electric: (...)
-// // electricAmtRadio: (...)
-// // electromagnetism: (...)
-// // electromagnetismAmtRadio: (...)
-// // environment: (...)
-// // environmentAmtRadio: (...)
-// // kitchen: (...)
-// // kitchenAmtRadio: null
-//   });
-
-
-  // for (var i = 0; i < tableOutter.rows.length; i++) {
-         
-  //           this.outerTableList[i].a=tableOutter[i].b;
-
-
-           
-
-  //   }
-
-
-
-
       this.rowSpanNumber2 = [this.tableOutter.length - 1];
-
-      // let innerTop = tableInner.rows.filter((v) => {
-      //   return v[title] == "线上";
-      // });
-
-      // let innerBottom = tableInner.rows.filter((v) => {
-      //   return v[title] == "线下";
-      // });
-      // debugger;
-      // this.rowSpanNumber1 = [this.tableInner.length - 1];
-
-      // this.tableInner = tableInner.rows;
-      // console.log(tableInner)
-      // console.log("this.tableInner", this.tableInner);
     },
+
+     // 右边卡片/
+    async getCard(params) {
+      let obj = {
+        code: 'directLevelTop'
+      }
+      Object.assign(obj, params);
+      const res = await API.getTotal(obj);
+    
+      if(res.code !=200) return;
+   
+      this.cardData = res.rows.filter(v=>{
+        return v.position.length<2
+      })
+      this.cardSab = res.rows.filter(v=>{
+        v.positionRatio = v.sabAmtRadio;  /*右边sab*/
+        return v.position.length<2
+      })
+
+         console.log("w",this.cardSab);
+
+
+
+    },
+
     // async getTable(time) {
     //   // async getTable(model,ontime,ontime) {
     //   // try {
@@ -559,8 +476,15 @@ export default {
       this.$router.push("/center/index");
     },
     // 品类汇总
-    gotoCatSeries() {
-      this.$router.push("/center/productCo");
+    gotoCatSeries(val) {
+      // this.$router.push({name:'page2',params:{id:1}});
+      // this.$router.push({path:'/page2',query:{id:1}});
+
+      this.$router.push({
+          name: "productCo",
+        query: { key: val},
+      });
+      // this.$router.push('/center/productCo',query:{id:val});
     },
 
     toModuleResponsible() {
@@ -575,10 +499,9 @@ export default {
       
       try {
         const res = await API.getData("directLevelTopDashBoard",getdashboard);
-        debugger;
         console.log("resresresres",res);
         let panelDataList = res.rows;
-        debugger;
+    
         //  console.log("panelDataList",panelDataList);
         console.log("progressData.ballNum",res.rows);
         this.progressData.ballNum = (
@@ -660,7 +583,7 @@ export default {
         const res = await API.getData("directLevelTopDashBoardSAB",params);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
-          if (RightSAB[i].directName == "其他") {
+          if (RightSAB[3].directName == "内销") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if (RightSAB[i].position == "S") {
               this.sabData.sabArr.s = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
@@ -808,60 +731,60 @@ export default {
       }
     },
     
-      // 右边卡片/
-    async getCard(params) {
-      this.showLoadingCard = true;
-      try {
-         let obj = {
-             code:"onlineTopCooprLevel2",
-         }
+    //   // 右边卡片/
+    // async getCard(params) {
+    //   this.showLoadingCard = true;
+    //   try {
+    //      let obj = {
+    //          code:"onlineTopCooprLevel2",
+    //      }
 
-        //    let obj = {
-        //      code:"onlineTopCooprLevel2",
-        //  }
-      //     let obj = {
-      //   code:"directLevelTop"
-      // }
-        const res = await API.getTotal( Object.assign(params,obj));
-       // const res = await API.getData("onlineTopCooprLevel2", params);
+    //     //    let obj = {
+    //     //      code:"onlineTopCooprLevel2",
+    //     //  }
+    //   //     let obj = {
+    //   //   code:"directLevelTop"
+    //   // }
+    //     const res = await API.getTotal( Object.assign(params,obj));
+    //    // const res = await API.getData("onlineTopCooprLevel2", params);
 
-        res.rows.length > 0 &&
-          res.rows.forEach((v) => {
-            if (!!v.cnyAmt) {
-              v.cnyAmt = v.cnyAmt.toFixed(0);
-            }
-            if (!!v.saleTaskAmt) {
-              v.saleTaskAmt = v.saleTaskAmt.toFixed(0);
-            }
+    //     res.rows.length > 0 &&
+    //       res.rows.forEach((v) => {
+    //         if (!!v.cnyAmt) {
+    //           v.cnyAmt = v.cnyAmt.toFixed(0);
+    //         }
+    //         if (!!v.saleTaskAmt) {
+    //           v.saleTaskAmt = v.saleTaskAmt.toFixed(0);
+    //         }
 
-            if (!!v.saleAmtRadio) {
-              v.saleAmtRadio = (
-                v.saleAmtRadio * 100 > 100 ? 100 : v.saleAmtRadio * 100
-              ).toFixed(0);
-            }
-            if (!!v.saleQtyRadio) {
-              v.saleQtyRadio = (
-                v.saleQtyRadio * 100 > 100 ? 100 : v.saleQtyRadio * 100
-              ).toFixed(0);
-            }
-          });
+    //         if (!!v.saleAmtRadio) {
+    //           v.saleAmtRadio = (
+    //             v.saleAmtRadio * 100 > 100 ? 100 : v.saleAmtRadio * 100
+    //           ).toFixed(0);
+    //         }
+    //         if (!!v.saleQtyRadio) {
+    //           v.saleQtyRadio = (
+    //             v.saleQtyRadio * 100 > 100 ? 100 : v.saleQtyRadio * 100
+    //           ).toFixed(0);
+    //         }
+    //       });
 
-        if (res.rows.length > 0) {
-          this.cardData = res.rows.filter((v) => {
-            return !!v.cooprLevel2;
-          });
-          this.cardData.splice(6);
-        } else {
-          this.cardData = [{}];
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    },
+    //     if (res.rows.length > 0) {
+    //       this.cardData = res.rows.filter((v) => {
+    //         return !!v.cooprLevel2;
+    //       });
+    //       this.cardData.splice(6);
+    //     } else {
+    //       this.cardData = [{}];
+    //     }
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
 
 
     //中间折线图
-    async getListCharts() {
+    async getListCharts(line) {
         this.showLoading = true;
       let chart = {
         code: 'onlineMiddleChart',
