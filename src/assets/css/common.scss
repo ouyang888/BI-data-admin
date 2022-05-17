@@ -286,6 +286,16 @@ color: #1890FF;
 
 /* 修改select样式 */
 
+.middle-box{
+  position: relative;
+}
+
+.select-box{
+  position:absolute;
+  right: 20px;
+  top:10px;
+}
+
 .el-select{
   background: transparent;
   color:#19ECFF;
