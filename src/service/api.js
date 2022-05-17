@@ -58,6 +58,11 @@ export default class ApiService {
     obj);
   }
 
+  //权限
+  static menuList(){
+    return request.post(api.adminUrl +  `system/menu/list`)
+  }
+
   // axios.get('/user', {
   //   params: {
   //     ID: 12345
@@ -67,5 +72,11 @@ export default class ApiService {
   //登录接口
   static login(data) {
     return request.post(api.adminUrl + `login`, data, { headers: { "content-Type": "multipart/form-data" } });
+  }
+
+
+  //登录接口
+  static textInfo() {
+    return request.get(api.adminUrl + `query?start_date=2022-03-01`, "", { headers: { "Accept": "application/json" } });
   }
 }

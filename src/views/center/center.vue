@@ -97,6 +97,7 @@
 
 <script>
 import Vue from "vue";
+import API from "../../service/api";
 export default {
   data() {
     return {
@@ -262,6 +263,11 @@ export default {
       }
     },
 
+    async menuInfo(){
+      let res = await API.menuList();
+      console.log("22222res",res)
+    },
+
     changedirection(index) {
       this.direction = index;
       let urlName = this.$route.name;
@@ -334,6 +340,7 @@ export default {
     },
   },
   mounted() {
+    this.menuInfo();
     localStorage.removeItem("showMoney");
   },
 };
