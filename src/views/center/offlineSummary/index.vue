@@ -57,7 +57,7 @@
     <innerTableCardBox
       :leftData="tableInner"
       :rightData="tableOutter"
-      title1="通路"
+      title1="合作模式三"
       :leftObj="leftObj"
       :rightObj="rightObj"
       title2="重点客户"
@@ -757,6 +757,13 @@ export default {
 
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
+
+        this.tableInner.forEach(v=>{
+          if(v.coopr_level3_manager =='合计'){
+            v.coopr_level3 = '合计';
+          }
+
+        })
 
         // this.tableInner.forEach(v=>{
         //   v.cooprLevel2Manager = v.coopr_level3_manager;

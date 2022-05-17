@@ -283,3 +283,52 @@ color: #1890FF;
 .percent>div{
   display:flex;
 }
+
+/* 修改select样式 */
+
+.el-select{
+  background: transparent;
+  color:#19ECFF;
+}
+.el-select:hover .el-input__inner{
+border:1px solid rgba(0,249,255,1);
+}    
+.el-select .el-input__inner{
+border:1px solid rgba(0,249,255,1);
+  background: transparent;
+}
+.select-box .el-select .el-input__inner,.select-box .el-select .el-input__inner::-webkit-input-placeholder{
+ color:#19ECFF;
+}
+.el-select .el-select-dropdown__item.selected{
+background: rgba(12,13,40,0.87);
+}
+.el-select .el-input .el-select__caret{
+  color:#05BCDC;
+}
+.el-select .el-select-dropdown{
+background: rgba(12,13,40,0.87);
+border:1px solid rgba(0,249,255,1)
+}      
+.el-select .el-select-dropdown__item{
+    color:rgba(25,236,255,.8);
+}
+.el-select .el-select-dropdown__item.selected{
+  color:rgba(25,236,255,.8);
+}
+.el-select .el-select-dropdown__item:hover{
+  background:rgba(0,0,0,.5);
+}
+.el-popper .el-popper__arrow{
+display:none;
+}
+.el-select .el-popper[x-placement^=bottom] .popper__arrow::after{
+  
+  border-bottom-color: #0b0d2a;
+}
+.el-select .el-select-dropdown__item.hover,.el-select .el-select-dropdown__item:hover{
+  background:rgba(0,0,0,.2);
+}
+.select-box .el-select .el-input .el-select__caret{
+  color:#19ECFF
+}

@@ -99,12 +99,12 @@
         // console.log(number, "numbernumbernumber");
         // 底部合计合并单元格
         if (rowIndex === number - 1) {
-          // if (columnIndex == 1 || columnIndex == 2) {
-          //   return [0, 0];
-          // }
-          // if (columnIndex === 0) {
-          //   return [1, 3];
-          // }
+          if (columnIndex == 1 || columnIndex == 2) {
+            return [0, 0];
+          }
+          if (columnIndex === 0) {
+            return [1, 3];
+          }
         }
         //       if (rowIndex === 6) {
         //   if (columnIndex == 1 || columnIndex == 2) {
@@ -115,6 +115,10 @@
         //   }
         // }
         if (columnIndex === 0) {
+
+
+          if(this.rowSpanNumber.length == 2){
+          
           if (rowIndex == 0) {
             return {
               rowspan: this.rowSpanNumber[0],
@@ -126,6 +130,11 @@
               colspan: 1,
             };
             
+          }else if(rowIndex == this.rowSpanNumber[0] + this.rowSpanNumber[1]){
+            return {
+              rowspan: 1,
+              colspan: 1,
+            };
           }
           
           else {
@@ -134,6 +143,28 @@
               colspan: 0,
             };
           }
+        }else if(this.rowSpanNumber.length == 1){
+
+          if (rowIndex == 0) {
+            return {
+              rowspan: this.rowSpanNumber[0],
+              colspan: 1,
+            };
+          } else if(rowIndex == this.rowSpanNumber[0]){
+            return {
+              rowspan: 1,
+              colspan: 1,
+            };
+            
+          }         
+          else {
+            return {
+              rowspan: 0,
+              colspan: 0,
+            };
+          }
+
+        }
         }
       },
       rowStyle({ row, rowIndex }) {

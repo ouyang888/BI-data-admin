@@ -1,8 +1,7 @@
 <template>
   <div class="flex-card" >
-    <a-spin class="flex-loading" size="large" v-if="showLoading" />
-    <div class="card-box" v-for="(v,i) in list" :key="i" v-else>
-      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
+    <div class="card-box" v-for="(v,i) in list" :key="i">
+      <div class="card-font" @click="gotoCatSeries(v)">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
         <div class="line"></div>
         <div class="line1"></div>
@@ -10,7 +9,7 @@
         <div class="line3"></div>
         <div class="line4"></div>
         <div class="left-right-box">
-          <div style="margin-left:14px;">
+          <div style="margin-left: 14px">
             <div class="flex-top-card">
               <div class="top-left-font">实时达成</div>
               <div class="flex-finish">
@@ -113,77 +112,29 @@
     props: {
       list: {
         type: Array,
-        default: function () { return [{}] }
+        default: function () { return [] }
       },
       cardObj: {
         type: Object,
         default: function () { return {
-        'title':'cooprLevel2', /*标题*/
-       'cnyAmt':'cnyAmt',/*金额*/
-       'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
-       'saleAmtRadio':'saleAmtRadio'  /*金额完成率*/
+       'title':'cooprLevel1',
+       'cnyAmt':'cooprLevel1NameAmt',
+       'saleTaskAmt':'cooprLevel1TaskAmt',
+       'cooprLevel1AmtRadio':'saleAmtRadio'
         } }
       },
-    },
-    data(){
-      return{
-        pathObj:{
-        'export':'exprotAreaAll'
-      },
-      showLoading:false,
-      }
-    },
-    computed:{
-     name(){
-       return this.$route.name;
-     }
-
-
-
     },
     watch:{
       cardObj:{
         handler:function(newValue,oldValue){
           // console.log('newValue',newValue);
         }
-      },
-      list:{
-        handler:function(newValue,oldValue){
-          this.showLoading = true;
-          newValue && newValue.forEach(v => {
-            v[this.cardObj.cnyAmt] =  (v[this.cardObj.cnyAmt]).toFixed(1);
-          
-            v[this.cardObj.saleTaskAmt] =  (v[this.cardObj.saleTaskAmt]).toFixed(1);
-            v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(0));
-            if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
-            v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/
-            
-          });
-        
-          this.list = newValue?newValue:[];
-          this.showLoading = false;
-        }
       }
-
-    },
-    
-    created(){
-      
-      // console.log('this.name',this.name)
 
     },
     methods: {
       gotoCatSeries(val) {
-
-        if(this.pathObj[this.name]){ /*存在路由,保存*/
-        this.$store.commit('setCurrTitle',val);
-        this.$router.push({name:this.pathObj[this.name],query:{key:val}});
-      }
-
-
-        // this.$emit('gotoCatSeries',val)
-
-
+        this.$emit('gotoCatSeries',val)
       }
     }
 
@@ -328,9 +279,6 @@
     align-items: center;
     justify-content: inherit;
     flex-wrap: wrap;
-    min-width: 56%;
-    min-height: 100px;
-    position: relative;
   }
 
   .flex-top-card {
@@ -342,7 +290,7 @@
   .top-left-font {
     font-size: 14px;
     color: #fff;
-    margin-right: 15px;
+    margin-right: 20px;
   }
 
   .card-border-box {
@@ -560,14 +508,4 @@
     position: relative;
     bottom: 20px;
   }
-  .flex-loading{
-      position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    }
-    .card-box{
-      width:33%;
-    }
 </style>

@@ -25,6 +25,7 @@ export default new Vuex.Store({
         month:'03',
         model:'本部,OEM,待定',
         currPath:'销向汇总',
+        currTitle:'',
         /* 图片框end */
     },
     mutations: {
@@ -43,6 +44,9 @@ export default new Vuex.Store({
         },
         setCurrPath(state,val){
             state.currPath = val
+        },
+        setCurrTitle(state,val){ //卡片标题
+            state.currTitle = val
         },
     },
     actions: {

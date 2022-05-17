@@ -193,6 +193,13 @@ const routes = [
                 name: 'exportDepartment',
                 component: () => import('@/views/center/exportDepartment/exportDepartment.vue')
             },
+            //外销大区产司
+
+            {
+                path: 'exprotAreaAllDepartment',
+                name: 'exprotAreaAllDepartment',
+                component: () => import('@/views/center/exprotAreaAllDepartment/exprotAreaAllDepartment.vue')
+            },
         ],
     }
 

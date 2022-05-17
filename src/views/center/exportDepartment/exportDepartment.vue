@@ -155,7 +155,7 @@ export default {
         'title':'businessEntityName', /*标题*/
         'cnyAmt':'businessEntityAmt',/*金额*/
        'saleTaskAmt': 'businessEntityTaskAmt', /*责任制金额*/
-       'saleAmtRadio':'obmOemAmtRadio',  /*金额完成率*/
+       'saleAmtRadio':'businessEntityAmtRadio',  /*金额完成率*/
        'cooprLevel1':'obmOem'  /*线上/线下 金额完成率*/
       },
       sabObj:{},
@@ -288,25 +288,48 @@ export default {
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].obmOem == "OBM") {
-            this.sabData.bottomArr.s = (
-              RightSAB[i].directPositionRatio * 100
+            this.sabData.bar1 = (
+              RightSAB[i].obmOemPositionRatio * 100
             ).toFixed(1);
-            this.sabData.bottomArr.a = (
-              RightSAB[i].directPositionRatio * 100
-            ).toFixed(1);
-            this.sabData.bottomArr.b = (
-              RightSAB[i].directPositionRatio * 100
-            ).toFixed(1);
+            if (RightSAB[i].position == "S") {
+              this.sabData.topArr.s = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+              this.sabData.sabArr.s = (
+                RightSAB[i].directPositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.topArr.a = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+              this.sabData.sabArr.a = (
+                RightSAB[i].directPositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.topArr.b = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+              this.sabData.sabArr.b = (
+                RightSAB[i].directPositionRatio * 100
+              ).toFixed(1);
+            }
           } else if (RightSAB[i].obmOem == "OEM") {
-            this.sabData.topArr.s = (
-              RightSAB[i].directPositionRatio * 100
+            this.sabData.bar2 = (
+              RightSAB[i].level1QtyPositionRatio * 100
             ).toFixed(1);
-            this.sabData.topArr.a = (
-              RightSAB[i].directPositionRatio * 100
-            ).toFixed(1);
-            this.sabData.topArr.b = (
-              RightSAB[i].directPositionRatio * 100
-            ).toFixed(1);
+            if (RightSAB[i].position == "S") {
+              this.sabData.bottomArr.s = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.bottomArr.a = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.bottomArr.b = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+            }
           }
         }
       } catch (error) { 
@@ -678,16 +701,33 @@ export default {
         code: 'sellOutBusinessKard'
       }
       Object.assign(obj, params);
-      const res = await API.getTotal(obj);
-    
+      let res = await API.getTotal(obj);
+      let res2 =JSON.parse(JSON.stringify(res));
       if(res.code !=200) return;
+      let obm = {};
+      let arr = [];
+      res.rows.filter(v=>{
 
-      this.cardData = res.rows;
+        if(!obm[v.businessEntityName+v.obmOem]){
+          obm[v.businessEntityName+v.obmOem] = 1;
+          v.businessModelCompleteRadio =  v.obmOemAmtRadio /*中间sab对应字段完成率*/
+          arr.push(v);
+        }
+       
 
-      this.cardSab = res.rows.filter(v=>{
-        return v.position.length<2
+      });
+      this.cardData = arr;
+      this.cardData.forEach(v=>{
+        console.log(v.businessEntityName,v.obmOem);
       })
-      debugger;
+ 
+
+      this.cardSab = res2.rows.filter(v=>{
+              v.positionRatio = v.sabAmtRadio;  /*右边sab*/
+              return v.position.length<2
+      })
+      console.log('this.cardSab',JSON.stringify(this.cardData))
+    
 
 
     },

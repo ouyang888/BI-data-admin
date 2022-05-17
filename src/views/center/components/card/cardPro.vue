@@ -73,7 +73,11 @@
             </div>
             <!-- {{list}} -->
             <template v-for="(item,k) in list"> 
-            <div :key="k+22" v-if="k == i*2 || k==i*2+1">
+            <div :key="k+22" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
+              <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
+              <span class="percent-text">{{(item.businessModelCompleteRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+            </div>
+            <div :key="k+223" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
               <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
               <span class="percent-text">{{(item.businessModelCompleteRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
             </div>
@@ -84,7 +88,7 @@
             <div class="">
               <div class="sab-title">{{title1}}SAB</div>
               <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1">
+                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>
@@ -94,7 +98,7 @@
             <div class="">
               <div class="sab-title">{{title2}}SAB</div>
               <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2">
+                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>
@@ -171,14 +175,17 @@
           if(newValue.length<1) return;
           newValue && newValue.forEach(v => { /*划分6个卡片*/
             if(v[this.cardObj.title] !=title){
-              v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
+              // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
+              v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(0);
             v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt].toFixed(1);
             v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(0));
             // v.grossProfitRadio = Number((v.grossProfitRadio*100).toFixed(0));
             // debugger;
             if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
             v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/
+              if(this.cardList.length<6){ /*只显示6条*/
               this.cardList.push(v);
+            }
                 title = v[this.cardObj.title];
             }   
           });
@@ -188,7 +195,6 @@
       cardSab:{
         handler:function(newValue,oldValue){
 
-               console.log('newValue',newValue);
                let title = '';
                let cooprLevel1 = '';
                var k = 0;
@@ -219,6 +225,7 @@
     methods: {
       gotoCatSeries(val) {
 
+        this.$store.commit('setCurrTitle',val);
         this.$router.push({name:this.pathObj[this.name],query:{key:val}});
 
 
@@ -384,7 +391,7 @@
   .top-left-font {
     font-size: 14px;
     color: #fff;
-    margin-right: 20px;
+    margin-right:10px;
   }
 
   .card-border-box {
@@ -436,7 +443,7 @@
 
   .left-right-box {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
   }
   .left-right-box .flex-top-card{
     align-items: flex-start;
@@ -605,7 +612,8 @@
   }
   .percent {
       height: 100%;
-      margin-right: 10px;
+      margin-left: 5px;
+      margin-right: 5px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -672,7 +680,7 @@
       text-align: center;
       font-weight: 400;
       display: inline-block;
-      width:27px;
+      /* width:27px; */
     }
   
     .title2 {
