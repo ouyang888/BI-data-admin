@@ -824,14 +824,6 @@ export default {
         this.init();
       }
     },
-    changeDate(start,end) { /*echart切换时间*/
-        let listParams = { /*年月日*/
-       start_date:start,
-      end_date:end
-      }
-        this.getList(listParams);
-      },
-
   },
   created() {
      this.init();
@@ -1069,7 +1061,7 @@ export default {
         this.tableInner = innerTop.concat(innerBottom, innerTotal);
      
 
-        console.log("this.data",JSON.stringify(this.tableInner));
+        // console.log("this.data",JSON.stringify(this.tableInner));
       } catch (err) {
         console.log(err);
       }
@@ -1653,9 +1645,13 @@ export default {
       };
       myChart3.setOption(option);
     },
-    changeDate(val) {
-      // console.log("更新时间");
-    },
+    changeDate(start,end) { /*echart切换时间*/
+        let listParams = { /*年月日*/
+       start_date:start,
+      end_date:end
+      }
+        this.getList(listParams);
+      },
   },
 
 };

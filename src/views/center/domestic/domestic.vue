@@ -780,7 +780,21 @@ export default {
          params
         );
 
-        let obj = { innerDirect: "", outerDirect: "" };
+        if(res.rows.length<1){
+            this.allList = [0];
+            this.divisionLine = 0;
+          this.innerDirectDate = [];
+            this.innerDirectList = [0];
+            this.innerDirectLine = 0;
+          this.outerDirectDate = [];
+            this.outerDirectList = [0];
+            this.outerDirectLine = 0;
+            this.showLoading = false;
+            this.myEcharts();
+            this.myEcharts2();
+            this.myEcharts3();
+            return;
+        }
         let newArr = res.rows.filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
