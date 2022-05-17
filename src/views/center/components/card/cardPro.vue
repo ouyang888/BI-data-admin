@@ -88,7 +88,7 @@
             <div class="">
               <div class="sab-title">{{title1}}SAB</div>
               <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1">
+                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>
@@ -98,7 +98,7 @@
             <div class="">
               <div class="sab-title">{{title2}}SAB</div>
               <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2">
+                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>
