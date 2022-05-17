@@ -51,6 +51,9 @@
         <div class="fang-color"></div>
         <div class="fang-color"></div>
       </div>
+      <div class="select-box">
+        <selectTime @changeDate="changeDate"/>
+      </div>
     </div>
 
     <!-- 底部表格 -->
@@ -65,6 +68,7 @@ import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
 import Card from '@/views/center/components/card/card.vue'; 
 import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
+import selectTime from '@/components/selectTime.vue'
 export default {
   name: "s",
   components: {
@@ -72,7 +76,8 @@ export default {
     SpeedPanel,
     SadPanel,
     Card,
-    innerTableCardBox
+    innerTableCardBox,
+    selectTime
   },
   data() {
     return {
@@ -216,12 +221,6 @@ export default {
     this.getTable(params);
     },
     // 三个仪表盘
-    leftGo() {
-      this.$router.push("/center/exprotAreaAll");
-    },
-    rightGo() {
-      this.$router.push("/center/exprotAreaAll");
-    },
       //三个仪表盘(左中)
       async getdashboard(params) {
         try {
@@ -339,6 +338,12 @@ export default {
         const res = await API.getData('outSellMacroRegionDashboardChart',params);
 
         if(res.code !=200) return;
+        if(res.rows.length == 0){
+          this.AvgTaskAmtDate = [];
+          this.AvgTaskAmtList = [0];
+          this.AvgTaskAmtLine = '';
+          this.showLoading = false;
+        }else{
           res.rows.filter((item) => {
           // 外销日内
           if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
@@ -347,8 +352,10 @@ export default {
             this.AvgTaskAmtLine = item.totalAvgTaskAmt;
             
           }
-          this.showLoading = false;
+         
         });
+      }
+      this.showLoading = false;
         // console.log('this.AvgTaskAmtList',this.AvgTaskAmtList)
         this.myEcharts();
 
@@ -376,7 +383,11 @@ export default {
         if(res.code !=200) return;
         let sellOutDataList = res.rows;
         this.showLoading = false;
+        if(res.rows.length == 0){
+          this.myEcharts2([0], [], 0, 0);
+        }
         let obj = res.rows[0];
+        
         // console.log("obj",obj);
         var k = 0;
         var arr = [];
@@ -720,6 +731,15 @@ export default {
         console.log(err);
       }
     },
+    changeDate(start,end) { /*echart切换时间*/
+        let listParams = { /*年月日*/
+       start_date:start,
+      end_date:end,
+      coopr_level1:this.$route.query.key
+      }
+        this.getChart(listParams);
+        this.getChartList(listParams);
+      },
    
   },
   created() {
@@ -1268,5 +1288,13 @@ export default {
   position: relative;
   left: 50%;
   right: 50%;
+}
+.middle-box{
+  position: relative;
+}
+.select-box{
+  position:absolute;
+  right: 20px;
+  top:10px;
 }
 </style>

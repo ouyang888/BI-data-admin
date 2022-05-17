@@ -349,7 +349,8 @@ export default {
         );
 
         if(res.code !=200) return;
-      
+        this.AvgTaskAmtDate = [];
+        this.AvgTaskAmtList = [];
           res.rows.filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
@@ -389,11 +390,9 @@ export default {
         let sellOutDataList = res.rows;
         this.showLoading = false;
         let obj = res.rows[0];
-        // console.log("obj",obj);
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          // console.log("11111111111", obj[i]);
           if (k < 6) {
             arr.push(obj[i]);
           }
@@ -402,9 +401,9 @@ export default {
         // console.log("obj", obj);
        
         this.dhcarr = [];
-        let arrs = JSON.parse(JSON.stringify(arr));
+     
        
-        arrs.forEach((v) => {
+        arr.forEach((v) => {
           this.dhcarr.push(v[0].cooprLevel1);
         });
         // console.log("arr", this.dhcarr);
