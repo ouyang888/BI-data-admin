@@ -166,11 +166,13 @@ export default{
   watch:{
     mesInfo:{
       handler:function(newValue,oldValue){
-
-        // console.log("更新数据",newValue);
-        newValue.forEach(v=>{
+        newValue.forEach((v,i)=>{
           v.amtRadio = Number((v.amtRadio*100).toFixed(0));
           v.profitRadio = Number((v.profitRadio*100).toFixed(0));
+          if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
+            console.log('headerObj.name',this.headerObj.name)
+            v[this.headerObj.name] = '合计';
+          }
         })
         this.mesInfo = newValue;
 

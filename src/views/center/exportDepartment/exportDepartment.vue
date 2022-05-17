@@ -288,25 +288,48 @@ export default {
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].obmOem == "OBM") {
-            this.sabData.bottomArr.s = (
-              RightSAB[i].directPositionRatio * 100
+            this.sabData.bar1 = (
+              RightSAB[i].obmOemPositionRatio * 100
             ).toFixed(1);
-            this.sabData.bottomArr.a = (
-              RightSAB[i].directPositionRatio * 100
-            ).toFixed(1);
-            this.sabData.bottomArr.b = (
-              RightSAB[i].directPositionRatio * 100
-            ).toFixed(1);
+            if (RightSAB[i].position == "S") {
+              this.sabData.topArr.s = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+              this.sabData.sabArr.s = (
+                RightSAB[i].directPositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.topArr.a = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+              this.sabData.sabArr.a = (
+                RightSAB[i].directPositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.topArr.b = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+              this.sabData.sabArr.b = (
+                RightSAB[i].directPositionRatio * 100
+              ).toFixed(1);
+            }
           } else if (RightSAB[i].obmOem == "OEM") {
-            this.sabData.topArr.s = (
-              RightSAB[i].directPositionRatio * 100
+            this.sabData.bar2 = (
+              RightSAB[i].level1QtyPositionRatio * 100
             ).toFixed(1);
-            this.sabData.topArr.a = (
-              RightSAB[i].directPositionRatio * 100
-            ).toFixed(1);
-            this.sabData.topArr.b = (
-              RightSAB[i].directPositionRatio * 100
-            ).toFixed(1);
+            if (RightSAB[i].position == "S") {
+              this.sabData.bottomArr.s = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.bottomArr.a = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.bottomArr.b = (
+                RightSAB[i].obmOemPositionRatio * 100
+              ).toFixed(1);
+            }
           }
         }
       } catch (error) { 

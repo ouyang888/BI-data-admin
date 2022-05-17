@@ -1053,7 +1053,6 @@ export default {
           return v.marketChannel == "底部合计" || v.marketChannel =='合计';
         });
         this.tableInner = innerTop.concat(innerBottom, innerTotal);
-        console.log('tableInner',JSON.stringify(this.tableInner));
      
 
         // console.log("this.data", this.data);
