@@ -13,6 +13,7 @@
 
 
         <!-- 右侧卡片 -->
+        
       <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
 
     </div>
@@ -2309,7 +2310,7 @@ this.$router.push("/center/index")
   display: flex;
   margin-top: 10px;
   align-items: center;
-  justify-content: inherit;
+  justify-content: end;
   flex-wrap: wrap;
 }
 .flex-top-card {

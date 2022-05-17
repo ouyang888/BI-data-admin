@@ -95,8 +95,8 @@ export default {
     return {
        cardData:[],
       cardSab:[],
-      cardSabTitle1:"OBM",
-      cardSabTitle2:"OEM",
+      cardSabTitle1:"内销",
+      cardSabTitle2:"外销",
        dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
       AmericaDate: [],
       AmericaList: [],
@@ -369,10 +369,8 @@ export default {
       this.cardData = res.rows.filter(v=>{
         return v.position.length<2
       })
-  
-      console.log("w",this.cardData);
-
       this.cardSab = res.rows.filter(v=>{
+        v.positionRatio = v.sabAmtRadio;  /*右边sab*/
         return v.position.length<2
       })
 
