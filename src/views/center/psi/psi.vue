@@ -2044,6 +2044,12 @@ export default {
         console.log(error);
       }
     },
+
+    // async infoList(){
+    //   let res = await API.textInfo()
+    //   console.log("88888",res)
+    // },
+    
     
 
     myEcharts() {
@@ -2433,6 +2439,7 @@ export default {
   },
   mounted() {
     this.init(this.model);
+    // this.infoList();
   },
 };
 </script><style scoped>
