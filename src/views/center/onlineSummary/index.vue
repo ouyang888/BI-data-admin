@@ -358,6 +358,8 @@ export default {
             AmericaList.push(item.totalCnyAmt);
             AmericaLine = item.saleAvgAmt;
           });
+
+
           // console.log("Arrnum", this.sellOutDataList);
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
@@ -596,9 +598,14 @@ export default {
     },
 
     //仪表盘(右)
-    async queryCardSAB() {
+    async queryCardSAB(time) {
       try {
-        const res = await API.getData("onlineTopSAB", this.dateTime);
+            let obj = {
+          code: "onlineTopSAB",
+        }
+        //const res = await API.getData("onlineTopTotal", this.dateTime);
+         const res = await API.getTotal(Object.assign(time, obj));
+        // const res = await API.getData("onlineTopSAB", this.dateTime);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].cooprLevel1 == "线上") {
@@ -681,7 +688,7 @@ export default {
       this.getTable(params);
       this.getCard(params);
       this.getdashboard(params);
-      this.queryCardSAB();
+      this.queryCardSAB(params);
       // this.myEcharts();
 
     },

@@ -13,21 +13,30 @@
         :header-cell-style="headerCellStyle"
       >
         <el-table-column
-          prop="directName"
+          prop="cooprLevel1 "
           align="center"
-          :label="directName"
+          label="内销"
           height="30px"
-        ></el-table-column>
+        >
+         <template v-slot="scope">
+            <div style="text-align: center" class="nameColor"  @click="handleClick">
+              {{ scope.row.cooprLevel1 }}
+            </div>
+          </template>
+        </el-table-column>
              
         <el-table-column
-          prop="cooprMode"
+          prop="cooprLevel2 "
           align="center"
           label="渠道"
           height="30px"
-          v-if="()=>mesInfo[0].cooprMode ? true : false "
-          
         >
-        <template>{{mesInfo[0].cooprMode}}</template>
+         <template v-slot="scope">
+            <div style="text-align: center" class="nameColor"  @click="handleClick">
+              {{ scope.row.cooprLevel2  }}
+            </div>
+          </template> 
+        <!-- <template>{{mesInfo[0].cooprMode}}</template> -->
         </el-table-column>
              
         <el-table-column
@@ -205,28 +214,28 @@
           </template>
         </el-table-column>
  
-        <!-- <el-table-column label="合计" prop="cnyAmt" align="center">
+        <el-table-column label="合计" prop="total" align="center">
           <template v-slot="scope">
             <div class="precent">
               <div style="width: 30px">
-                {{ scope.row.cnyAmt }}
+                {{ scope.row.total }}
               </div>
               <div style="margin-top: 5px">
                 <Progress
                   style="margin-bottom: 3px"
-                  :rate="scope.row.saleTaskAmt"
+                  :rate="scope.row.total"
                   :color="'#FF8B2F'"
                   class="precentCompentes"
                 />
                 <Progress
-                  :rate="scope.row.saleVolumeAll"
+                  :rate="scope.row.dateRadio"
                   :color="'#66FFFF'"
                   class="precentCompentes"
                 />
               </div>
             </div>
           </template>
-        </el-table-column> -->
+        </el-table-column>
       </el-table>
     </div>
   </div>

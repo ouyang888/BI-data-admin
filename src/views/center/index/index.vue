@@ -1048,15 +1048,15 @@ export default {
           return v.marketChannel == "线下";
         });
         this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
+        // this.rowSpanNumber1 = [0,0];
         // console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
         let innerTotal = tableInner.rows.filter((v) => {
           return v.marketChannel == "底部合计" || v.marketChannel =='合计';
         });
         this.tableInner = innerTop.concat(innerBottom, innerTotal);
-        console.log('tableInner',JSON.stringify(this.tableInner));
      
 
-        // console.log("this.data", this.data);
+        console.log("this.data",JSON.stringify(this.tableInner));
       } catch (err) {
         console.log(err);
       }
@@ -1231,11 +1231,13 @@ export default {
 
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].directName == "事业部") {
+          
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if (RightSAB[i].position == "S") {
               this.sabData.sabArr.s = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
               ));
+     
             } else if (RightSAB[i].position == "A") {
               this.sabData.sabArr.a = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
@@ -1277,6 +1279,7 @@ export default {
             }
           }
         }
+        console.log('this.sabData',this.sabData)
       } catch (error) {
         console.log(error);
       }

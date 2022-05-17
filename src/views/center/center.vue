@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="flex-header">
-      <div class="flex-font-left">
+      <div class="flex-font-left">  
         <div @click="clickChange(1)" :class="index == 1 ? 'head-box active' : 'head-box'">
           <span>PSI</span>
         </div>
@@ -127,7 +127,12 @@ export default {
     $route: function (val) {
       if (val.meta.preMenuUrl || this.$route.path) {
         this.searchKeys = [this.$route.path, val.meta.preMenuUrl || ""];
-        // console.log("路由", val.name);
+        console.log("路由", val.name);
+       if(val.name =='psi'){
+          this.index = 1;
+        }else{
+          this.index = 2;
+        }
         this.getPageName(val.name);
       }
     },
@@ -226,6 +231,10 @@ export default {
           this.title = "外销产司汇总页";
           this.$store.commit("setCurrPath", " 外销产司汇总页  ");
           break;
+          case "exprotAreaAllDepartment":
+          this.title = "外销大区产司汇总页";
+          this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
+          break;
 
         default:
           this.title = "总裁PSI页";
@@ -281,6 +290,12 @@ export default {
       }else if (index == "2" && urlName == "export") {
         this.$router.push("/center/exportDepartment");
         this.title = "外销产司汇总页";
+      }else if (index == "2" && urlName == "exprotAreaAll") {
+        console.log(this.$route.key);
+       
+
+        this.$router.push({name:'exprotAreaAllDepartment',query:{key:this.$route.key}});
+        this.title = "外销大区产司汇总页";
       }
       // else {
 

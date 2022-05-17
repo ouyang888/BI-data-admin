@@ -54,12 +54,11 @@
     <TableCardBox
       :leftData="tableInner"
       :rightData="tableOutter"
-      :rowSpanNumber2="rowSpanNumber2"
-      :rowSpanNumber1="rowSpanNumber1"
+
       :titleHead="titleHead"
       :leftObj="leftObj"
       :rightObj="rightObj"
-      title1="通路"
+      title1="合作模式三"
       title2="重点客户"
       
     />
