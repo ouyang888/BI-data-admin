@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="flex-header">
-      <div class="flex-font-left">
+      <div class="flex-font-left">  
         <div @click="clickChange(1)" :class="index == 1 ? 'head-box active' : 'head-box'">
           <span>PSI</span>
         </div>
@@ -126,7 +126,12 @@ export default {
     $route: function (val) {
       if (val.meta.preMenuUrl || this.$route.path) {
         this.searchKeys = [this.$route.path, val.meta.preMenuUrl || ""];
-        // console.log("路由", val.name);
+        console.log("路由", val.name);
+       if(val.name =='psi'){
+          this.index = 1;
+        }else{
+          this.index = 2;
+        }
         this.getPageName(val.name);
       }
     },
