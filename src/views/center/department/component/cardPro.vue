@@ -1,9 +1,9 @@
 <template>
   <div class="flex-card" >
     <a-spin class="flex-loading" size="large" v-if="showLoading" />
-    <div class="card-box"  v-for="(v,i) in cardList" :key="i" v-else>
-      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
-      <div class="card-border-box">
+    <div class="card-box"  v-for="(v,i) in cardList" :key="i" >
+      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])" v-if="i<6">{{v[cardObj.title]}} </div>
+      <div class="card-border-box" v-if="i<6">
         <div class="line"></div>
         <div class="line1"></div>
         <div class="line2"></div>
@@ -74,7 +74,7 @@
             <template v-for="(item,k) in list"> 
             <div :key="k+22" v-if="k == i*2 || k==i*2+1">
               <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
-              <span class="percent-text">{{(item.directNameAmtRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+              <span class="percent-text" v-if="!isNaN(item.directNameAmtRadio)">{{(item.directNameAmtRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
             </div>
           </template>
           </div>
@@ -82,7 +82,6 @@
           <div class="sab">
             <div class="">
               <div class="sab-title">{{title1}}SAB</div>
-        
               <template v-for="(item,s) in cardSabList[i]" >
                 <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1&&v[cardObj.title] == item[cardObj.title]">
                 <span class="sab-title2">{{item.position}}</span>
@@ -102,7 +101,6 @@
             </div>
           </div>
     </div>
-
   </div>
   </div>
   </div>
@@ -143,7 +141,7 @@
     data(){
       return{
         pathObj:{
-        'export':'exprotAreaAll'
+        'center':'productCo'
       },
       cardList:[0,1,2,3,4,5],/*卡片分类*/
       cardSabList:[0,1,2,3,4,5], /*sab分类*/
@@ -187,8 +185,6 @@
       },
       cardSab:{
         handler:function(newValue,oldValue){
-
-               console.log('newValue',newValue);
                let title = '';
                let cooprLevel1 = '';
                var k = 0;
@@ -219,11 +215,12 @@
     methods: {
       gotoCatSeries(val) {
          
-         console.log("val",val);
+         console.log("valval",val);
 
-        //this.$router.push({name:this.pathObj[this.name],query:{key:val}});
+        // this.$router.push({name:this.pathObj[this.name],query:{key:val}});
+       
 
-
+        // console.log("测试",this.pathObj);
         this.$emit('gotoCatSeries',val)
 
 

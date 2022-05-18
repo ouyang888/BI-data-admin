@@ -2,25 +2,26 @@
   <div class="execl">
     <div >
 
+    
        <el-table
         border
         :data="mesInfo"
         :span-method="objectSpanMethod"
         width="864px"
         class="exportTable"
-        :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }"
+        :cell-style="{padding: '5px 0', borderColor: '#1E1D51'  }"
         :row-style="rowStyle"
         height="240px"
         :header-cell-style="headerCellStyle"
       >
         <el-table-column
-          prop="category"
           align="center"
+          prop="category"
           label="品类"
           height="30px"
         >
-         <template v-slot="scope">
-            <div style="text-align: center" class="nameColor"  @click="handleClick">
+         <template v-slot="scope"  style="text-align: center;border:1px solid red;">
+            <div  class="nameColor"   @click="handleClick">
               {{ scope.row.category }}
             </div>
         
@@ -37,11 +38,11 @@
         >
          <template v-slot="scope">
             <div class="precent">
-                  <div style="width: 30px">
+              <div style="width: 30px">
               {{ scope.row.onLineCnyAmt }}
             </div>
             <div style="margin-top: 5px">
-                  <Progress style="margin-bottom: 3px" :rate="scope.row.onLineCompleteRatio" :color="'#FF8B2F'"
+                  <Progress style="margin-bottom: 3px;text-align: center;" :rate="scope.row.onLineCompleteRatio" :color="'#FF8B2F'"
                       class="precentCompentes" />
                   <Progress :rate="scope.row.dateRadio" :color="'#66FFFF'" class="precentCompentes" />
             </div>
@@ -58,7 +59,7 @@
         >
            <template v-slot="scope">
               <div class="precent">
-                  <div style="width: 30px">
+                  <div style="width: 30px;">
                       {{ scope.row.outLineCnyAmt .toFixed(1) }}
                   </div>
                   <div style="margin-top: 5px">

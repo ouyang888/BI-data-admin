@@ -2,9 +2,10 @@
   <div class="flex-card" >
 
     <a-spin class="flex-loading" size="large" v-if="showLoading" />
-    <div class="card-box" v-for="(v,i) in cardList" :key="i" v-else>
-      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
-      <div class="card-border-box">
+    <div class="card-box"  v-for="(v,i) in cardList"   :key="i" v-else>
+    
+      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])" v-if="i<6" >{{v[cardObj.title]}} </div>
+      <div class="card-border-box" v-if="i<6" >
         <div class="line"></div>
         <div class="line1"></div>
         <div class="line2"></div>
@@ -104,6 +105,9 @@
               </template>  
             </div>
           </div>
+    
+    
+    
     </div>
 
   </div>
@@ -146,7 +150,7 @@
     data(){
       return{
         pathObj:{
-        'export':'exprotAreaAll'
+        'export':'productCo'
       },
       cardList:[0,1,2,3,4,5],/*卡片分类*/
       cardSabList:[0,1,2,3,4,5], /*sab分类*/
@@ -223,6 +227,8 @@
       gotoCatSeries(val) {
 
         this.$router.push({name:this.pathObj[this.name],query:{key:val}});
+        console.log(this.pathObj[this.name]);
+        console.log("valval",val);
 
 
         // this.$emit('gotoCatSeries',val)

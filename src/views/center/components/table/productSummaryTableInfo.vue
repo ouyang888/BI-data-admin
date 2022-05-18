@@ -1,4 +1,19 @@
 <template>
+
+<!--
+* 品类外销-金额版
+ * monthDate 月份
+ * category 品类
+ * oemCnyAmt OEM金额
+ * obmCnyAmt OBM金额
+ * oemCompleteRatio OEM金额完成率
+ * obmCompleteRatio OBM金额完成率
+ * totalCnyAmt 合计金额
+ * totalCompleteRatio 合计金额完成率
+ * dateRadio 时间进度
+ */
+ >
+ -->
   <div class="execl">
     <div >
       <el-table
@@ -33,19 +48,18 @@
           label="线上"
           height="30px"
         >
-         <template v-slot="scope">
-                     <div class="precent">
-              <div style="width: 30px">
-              {{ scope.row.oemCnyAmt }}
-            </div>
-             <div style="margin-top: 5px">
+          <template v-slot="scope">
+              <div class="precent">
+                  <div style="width: 30px">
+                      {{ scope.row.obmCnyAmt .toFixed(1) }}
+                  </div>
+                  <div style="margin-top: 5px">
                       <Progress style="margin-bottom: 3px" :rate="scope.row.obmCnyAmt" :color="'#FF8B2F'"
                           class="precentCompentes" />
                       <Progress :rate="scope.row.dateRadio" :color="'#66FFFF'" class="precentCompentes" />
                   </div>
-                   </div>
-          </template> 
-      
+              </div>
+            </template>
         </el-table-column>
              
         <el-table-column
