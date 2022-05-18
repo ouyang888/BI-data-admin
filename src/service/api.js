@@ -79,4 +79,5 @@ export default class ApiService {
   static textInfo() {
     return request.get(api.adminUrl + `query?start_date=2022-03-01`, "", { headers: { "Accept": "application/json" } });
   }
+  
 }

@@ -61,8 +61,9 @@ export default {
       const result = await api.login(formData);
       // console.log(result);
       if (result.code === 0) {
-        localStorage.setItem("token", result.data);
-        this.cookie.set("JSESSIONID", result.data);
+        localStorage.setItem("token", result.data.sessionId);
+        localStorage.setItem("userName", result.data.loginName);
+        this.cookie.set("JSESSIONID", result.data.sessionId);
         this.$router.push("/");
       }else{
         this.$message.error("账号/密码错误");

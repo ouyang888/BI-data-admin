@@ -5,6 +5,7 @@
         <div class="back" @click="goBack">
           <a-icon type="left" style="color: #19ecff" />后退
         </div>
+        <div class="left-font">当前登录人：{{ userName }}</div>
         <div class="left-font">当前页面：{{ pathName }}</div>
       </div>
       <div class="flex-right">
@@ -110,6 +111,7 @@ export default {
       year: "2022",
       month: "3",
       date: new Date(),
+      userName:""
     };
   },
   computed: {
@@ -342,6 +344,7 @@ export default {
   mounted() {
     this.menuInfo();
     localStorage.removeItem("showMoney");
+    this.userName = localStorage.getItem("userName");
   },
 };
 </script>
