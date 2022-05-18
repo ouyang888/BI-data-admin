@@ -277,14 +277,14 @@ export default {
             this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
             this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
 
-            this.speedData.bottomClose = panelDataList[i].orgQtyRadio.toFixed(1)
+            this.speedData.bottomClose = panelDataList[i].cnyAmtRadio.toFixed(1)
             this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1)
 
           } else if (panelDataList[i].obmOem == "OEM") {
             this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
             this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
             this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
-            this.speedData.bottomClose1 = panelDataList[i].orgQtyRadio.toFixed(1)
+            this.speedData.bottomClose1 = panelDataList[i].cnyAmtRadio.toFixed(1)
             this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
 
           }
@@ -750,18 +750,10 @@ export default {
 
       });
       this.cardData = arr;
-      this.cardData.forEach(v=>{
-        console.log(v.businessEntityName,v.obmOem);
-      })
- 
-
       this.cardSab = res2.rows.filter(v=>{
               v.positionRatio = v.sabAmtRadio;  /*右边sab*/
               return v.position.length<2
       })
-      console.log('this.cardSab',JSON.stringify(this.cardData))
-    
-
 
     },
 

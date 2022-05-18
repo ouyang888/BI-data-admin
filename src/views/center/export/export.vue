@@ -378,8 +378,15 @@ export default {
         );
 
         if(res.code !=200) return;
+        if(res.rows.length<1){
+        this.AvgTaskAmtDate = [];
+        this.AvgTaskAmtList = [0];
+        this.AvgTaskAmtLine = ''
+      }else{
         this.AvgTaskAmtDate = [];
         this.AvgTaskAmtList = [];
+        this.AvgTaskAmtLine = ''
+      }
           res.rows.filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
@@ -727,26 +734,31 @@ export default {
           code:'sellOutTopOnline'
         }
         Object.assign(obj,params);
+    
         this.showLoadingCard = true;
-        const res = await API.getTotal(obj);
+        let res = await API.getTotal(obj);
     
         let onTitle = '';
         
         let arr = [];
-       let sabArr = [];
-
+      
        if(res.code !=200) return;
-     
 
-        res.rows.forEach(v=>{
+   
+       res.rows.length>0 && res.rows.forEach(v=>{
+           console.log('ontitle',onTitle!=v.cooprLevel1,v.cooprLevel1)
+      
       
            if(onTitle!=v.cooprLevel1 && !!v.cooprLevel1){
              console.log('title')
              onTitle = v.cooprLevel1;
+          
             arr.push(v);
            }
         })
         arr.splice(6);
+        console.log('arr',arr)
+    
         this.cardData = arr;
     },
 

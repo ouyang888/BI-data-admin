@@ -1,6 +1,7 @@
 <template>
   <div class="flex-card" >
     <a-spin class="flex-loading" size="large" v-if="showLoading" />
+    <div class="noData" v-else-if="!showLoading && cardList.length<1">暂无数据</div>
     <div class="card-box" v-for="(v,i) in cardList" :key="i" v-else>
       <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
@@ -172,7 +173,10 @@
         handler:function(newValue,oldValue){
           let title = '';
           this.cardList = [];
-          if(newValue.length<1) return;
+          if(newValue.length<1) {
+            this.showLoading = false;
+            return
+          };
           newValue && newValue.forEach(v => { /*划分6个卡片*/
             if(v[this.cardObj.title] !=title){
               // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
