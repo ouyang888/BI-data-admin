@@ -151,7 +151,7 @@
     computed:{
      name(){
        return this.$route.name;
-     }
+     },
 
 
 
