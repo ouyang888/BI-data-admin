@@ -239,6 +239,21 @@ export default {
         // if (res != 200) return;
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
+        if(res.rows.length<1){  /*处理切换月份数组为空，给数值字段重新赋值为0*/
+        for(var i in this.speedData){
+          if(Number(this.speedData[i]).toString()!='NaN'){
+            this.speedData[i] = 0;
+          }
+
+        }
+        for(var i in this.progressData){
+          if(Number(this.progressData[i]).toString()!='NaN'){
+            this.progressData[i] = 0;
+          } 
+        }
+        return;
+
+        }
         // console.log("res仪表",res); 
         // directProfitRadio: 0.2713  销向毛利率
         this.progressData.ballNum = (
@@ -291,6 +306,19 @@ export default {
         // console.log("右但是,", res);
         // if (res.code != 200) return;
         let RightSAB = res.rows;
+        if(RightSAB.length<1 ){
+
+          for(var i in this.sabData){
+          if(Number(this.sabData[i]).toString()!='NaN' && typeof(this.sabData[i])!='object'){ /*处理this.sabData下的值*/
+            this.sabData[i] = 0;
+          }else if(typeof(this.sabData[i])=='object'){  /*处理this.sabData下对象里的值*/
+              for(var s in this.sabData[i]){
+                this.sabData[i][s] = 0;
+              }
+          }
+          }
+          return;
+        }
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].obmOem == "OBM") {
             this.sabData.bar1 = (

@@ -782,18 +782,29 @@ export default {
 
         if(res.rows.length<1){
             this.allList = [0];
-            this.divisionLine = 0;
+            this.allLiine = '';
           this.innerDirectDate = [];
             this.innerDirectList = [0];
-            this.innerDirectLine = 0;
+            this.innerDirectLine = '';
           this.outerDirectDate = [];
             this.outerDirectList = [0];
-            this.outerDirectLine = 0;
+            this.outerDirectLine = '';
             this.showLoading = false;
             this.myEcharts();
             this.myEcharts2();
             this.myEcharts3();
             return;
+        }else{
+           // 先清空数据再赋值
+              this.allList = [0];
+              this.allLiine = '';
+              this.innerDirectDate = [];
+              this.innerDirectList = [0];
+              this.innerDirectLine = '';
+              this.outerDirectDate = [];
+              this.outerDirectList = [0];
+              this.outerDirectLine = '';
+          
         }
         let newArr = res.rows.filter((item) => {
           var timeArr = item.orderDate

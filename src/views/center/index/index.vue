@@ -50,14 +50,14 @@
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="Number(innerLeftInfo.dateRadio)"
+                          :percent="innerLeftInfo.dateRadio"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="Number(innerLeftInfo.onLineRadio)"
+                          :percent="innerLeftInfo.onLineRadio"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -774,8 +774,8 @@ export default {
       outterSabLeft: [],
       outterSabRight: [],
       // 底部表格
-      tableInner: [{}],
-      tableOutter: [{}],
+      tableInner: [],
+      tableOutter: [],
       rowSpanNumber1: [0,0],
       rowSpanNumber2: [6],
       titleHead: {
@@ -878,106 +878,55 @@ export default {
         // console.log("inner,", outter);
           this.showLoadingLeft = false;
           this.showLoadingRight = false;
+          // 内销判断
         if(inner.rows.length<1){
           this.innerLeft = [];
         } else{
           inner.rows.forEach((v) => {
-          v.dateRadio = v.dateRadio * 100>100?100: v.dateRadio * 100;
-          v.onLineRadio = v.onLineRadio * 100>100?100:v.onLineRadio * 100;
+          v.dateRadio = v.dateRadio * 100>=100?100: Number((v.dateRadio * 100).toFixed(0)); 
+          v.onLineRadio = v.onLineRadio * 100>100?100:Number((v.onLineRadio * 100).toFixed(0));
+          v.onLineProfitRadio = v.onLineProfitRadio * 100>100?100:Number((v.onLineProfitRadio * 100).toFixed(0));
+          
           v.sumCnyamt = v.sumCnyamt.toFixed(0);
           v.saleTaskAmt =  v.saleTaskAmt.toFixed(1);
         });
         
-        outter.rows.forEach((v) => {
-          v.dateRadio = v.dateRadio * 100;
-          v.onLineRadio = v.onLineRadio * 100;
-          v.sumCnyamt = v.sumCnyamt.toFixed(0);
-          v.saleTaskAmt =  v.saleTaskAmt.toFixed(1);
-        });
+   
 
         
         this.innerLeft = inner.rows.filter((v) => {
           return v.cooprLevel1 == "线上";
         });
         this.innerLeftInfo = this.innerLeft[0];
-        if (this.innerLeftInfo.onLineRadio) {
-          this.innerLeftInfo.onLineRadio =
-            this.innerLeftInfo.onLineRadio.toFixed(0);
-        }
-        if (this.innerLeftInfo.onLineProfitRadio) {
-          this.innerLeftInfo.onLineProfitRadio = (
-            this.innerLeftInfo.onLineProfitRadio * 100
-          ).toFixed(0);
-        }
-        if (this.innerLeftInfo.cnyAmt) {
-          this.innerLeftInfo.cnyAmt = this.innerLeftInfo.cnyAmt.toFixed(0);
-        }
-   
 
         this.innerRight = inner.rows.filter((v) => {
           return v.cooprLevel1 == "线下";
         });
         this.innerRightInfo = this.innerRight[0];
-        if (this.innerRightInfo.onLineRadio) {
-          this.innerRightInfo.onLineRadio =
-            this.innerRightInfo.onLineRadio.toFixed(0);
         }
-        if (this.innerRightInfo.onLineProfitRadio) {
-          this.innerRightInfo.onLineProfitRadio = (
-            this.innerRightInfo.onLineProfitRadio * 100
-          ).toFixed(0);
-        }
-
-        if (this.innerRightInfo.cnyAmt) {
-          this.innerRightInfo.cnyAmt = this.innerRightInfo.cnyAmt.toFixed(0);
-        }
-
-        }
+        // 外销判断
         if(outter.rows.length<1){
           this.outterLeft = [];
    
         }else{
 
           outter.rows.forEach((v) => {
-            v.dateRadio = v.dateRadio * 100;
-            v.onLineRadio = v.onLineRadio * 100;
-          });
-  
+          v.dateRadio = v.dateRadio * 100>=100?100: Number((v.dateRadio * 100).toFixed(0));
+          v.onLineRadio =  v.onLineRadio * 100>100?100:Number((v.onLineRadio * 100).toFixed(0));
+          v.onLineProfitRadio = v.onLineProfitRadio * 100>100?100:Number((v.onLineProfitRadio * 100).toFixed(0));
+          v.sumCnyamt = v.sumCnyamt.toFixed(0);
+          v.saleTaskAmt =  v.saleTaskAmt.toFixed(1);
+        });
+
+
           this.outterLeft = outter.rows.filter((v) => {
             return v.obmOem == "OBM";
           });
           this.outterLeftInfo = this.outterLeft[0];
-          if (this.outterLeftInfo.onLineRadio) {
-            this.outterLeftInfo.onLineRadio =
-              this.outterLeftInfo.onLineRadio.toFixed(0);
-          }
-          if (this.outterLeftInfo.onLineProfitRadio) {
-            this.outterLeftInfo.onLineProfitRadio = (
-              this.outterLeftInfo.onLineProfitRadio * 100
-            ).toFixed(0);
-          }
-          if (this.outterLeftInfo.cnyAmt) {
-            this.outterLeftInfo.cnyAmt = this.outterLeftInfo.cnyAmt.toFixed(0);
-          }
-     
-  
           this.outterRight = outter.rows.filter((v) => {
             return v.obmOem == "OEM";
           });
           this.outterRightInfo = this.outterRight[0];
-          if (this.outterRightInfo.onLineRadio) {
-            this.outterRightInfo.onLineRadio =
-              this.outterRightInfo.onLineRadio.toFixed(0);
-          }
-          if (this.outterRightInfo.onLineProfitRadio) {
-            this.outterRightInfo.onLineProfitRadio = (
-              this.outterRightInfo.onLineProfitRadio * 100
-            ).toFixed(0);
-          }
-          if (this.outterRightInfo.cnyAmt) {
-            this.outterRightInfo.cnyAmt = this.outterRightInfo.cnyAmt.toFixed(0);
-          }
-     
 
         }   
         if(innersab.rows.length<1){
@@ -1059,9 +1008,6 @@ export default {
           return v.marketChannel == "底部合计" || v.marketChannel =='合计';
         });
         this.tableInner = innerTop.concat(innerBottom, innerTotal);
-     
-
-        // console.log("this.data",JSON.stringify(this.tableInner));
       } catch (err) {
         console.log(err);
       }
@@ -1083,19 +1029,30 @@ export default {
         if(res.rows.length<1){
           this.divisionDate = [];
             this.divisionList = [0];
-            this.divisionLine = 0;
+            this.divisionLine = '';
           this.innerDirectDate = [];
             this.innerDirectList = [0];
-            this.innerDirectLine = 0;
+            this.innerDirectLine = '';
           this.outerDirectDate = [];
             this.outerDirectList = [0];
-            this.outerDirectLine = 0;
+            this.outerDirectLine = '';
             this.showLoading = false;
             this.myEcharts();
             this.myEcharts2();
             this.myEcharts3();
             return;
-        }
+        }else{
+            // 先清空数据再赋值
+            this.divisionDate = [];
+            this.divisionList = [];
+            this.divisionLine = '';
+            this.innerDirectDate = [];
+            this.innerDirectList = [];
+            this.innerDirectLine = '';
+            this.outerDirectDate = [];
+            this.outerDirectList = [];
+            this.outerDirectLine = '';
+          }
         
         let newArr = res.rows.filter((item) => {
           var timeArr = item.orderDate
@@ -1138,39 +1095,22 @@ export default {
         const res = await API.getTotal(params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
-        // if(res.rows.length<1){
-        //   this.speedData = {
-        //     bar: 0,
-        //     speedBar: 0,
-        //     ballTitle: "事业部达成",
-        //     ballNum: 0,
-        //     ballLeftTitle: "内",
-        //     ballRightTitle: "外",
-        //     ballLeftNum: 0,
-        //     ballRightNum: 0,
-        //     bottomNum: 0,
-        //     bottomTitle1: "内",
-        //     bottomClose: 0,
-        //     bottomTime: 0,
-        //     bottomTitle2: "外",
-        //     bottomClose1: 0,
-        //     bottomTime1: 0,
-        //        };
-        //     this.progressData = {
-        //         bar1: 0,
-        //         bar2: 0,
-        //         ballTitle: "事业部",
-        //         bigBallTitle: "毛利率",
-        //         textLeft: "内",
-        //         textRight: "外",
-        //         titleTop: "内",
-        //         titleBottom: "外",
-        //         topGPM: 0,
-        //         bottomGPM: 0,
-        //         ballNum: 0,
-        //  };
-        //   return;
-        // }
+        if(res.rows.length<1){  /*处理切换月份数组为空，给数值字段重新赋值为0*/
+        for(var i in this.speedData){
+          if(Number(this.speedData[i]).toString()!='NaN'){
+            this.speedData[i] = 0;
+          }
+
+        }
+        for(var i in this.progressData){
+          if(Number(this.progressData[i]).toString()!='NaN'){
+            this.progressData[i] = 0;
+          } 
+        }
+        return;
+
+        }
+      
         this.progressData.ballNum = Number((
           panelDataList[0].grossProfitRadio * 100
         ).toFixed(1));
@@ -1188,7 +1128,7 @@ export default {
             ).toFixed(1));
             this.speedData.ballLeftNum = Number(panelDataList[i].cnyAmt.toFixed(1));
             this.speedData.bottomClose =Number(
-              panelDataList[i].orgQtyRadio.toFixed(1));
+              panelDataList[i].cnyAmtRadio.toFixed(1));
             this.speedData.bottomTime =Number( panelDataList[i].dateRadio.toFixed(1));
           } else if (panelDataList[i].directName == "外销") {
             this.progressData.bar2 = Number((
@@ -1199,7 +1139,7 @@ export default {
             ).toFixed(1));
             this.speedData.ballRightNum = Number(panelDataList[i].cnyAmt.toFixed(1));
             this.speedData.bottomClose1 =Number(
-              panelDataList[i].orgQtyRadio.toFixed(1));
+              panelDataList[i].cnyAmtRadio.toFixed(1));
             this.speedData.bottomTime1 = Number(panelDataList[i].dateRadio.toFixed(1));
           }
         }
@@ -1217,6 +1157,19 @@ export default {
       try {
         const res = await API.getTotal(params);
         let RightSAB = res.rows;
+        if(RightSAB.length<1 ){
+
+          for(var i in this.sabData){
+          if(Number(this.sabData[i]).toString()!='NaN' && typeof(this.sabData[i])!='object'){ /*处理this.sabData下的值*/
+            this.sabData[i] = 0;
+          }else if(typeof(this.sabData[i])=='object'){  /*处理this.sabData下对象里的值*/
+              for(var s in this.sabData[i]){
+                this.sabData[i][s] = 0;
+              }
+          }
+        }
+        return;
+        }
         // if(RightSAB.length<1 ){
         //     this.sabData = {
         //       bar1: 0,
