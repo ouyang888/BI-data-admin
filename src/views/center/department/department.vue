@@ -12,29 +12,35 @@
       </div>
       <!-- 右侧卡片 -->
 
-          <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2" @gotoCatSeries="gotoCatSeries(val)"/>
+          <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2" @gotoCatSeries="gotoCatSeries(val)"/>
     </div>
     <!-- 中间echart -->
        <div class="middle-box">
+      
       <div class="flex-fang">
         <div class="fang-color"></div>
         <div class="fang-color"></div>
       </div>
-      <div class="flex-char">
+
+      <div class="flex-char">      
         <div>
           <div class="middle-font left-file">事业部日达成趋势图</div>
-          <div id="main" class="echartsBox"></div>
+            <a-spin class="flex-loading" size="large"  v-if="showLoading2" />
+          <div id="main" class="echartsBox" ></div>
         </div>
+
         <div>
           <div class="middle-font">产司日达成趋势图</div>
-          <div class="right-box-qushi">
-            <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
+          <div class="right-box-qushi"   >
+            <a-spin class="flex-loading" size="large"  v-if="showLoading3"/>
+            <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key= "i" >
               <div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line"></div>
                 <div class="flex-echrats-right">
-                  <div class="right-font-title">{{ item }}</div>
-                  <div :id="i" class="echartsBox-min"></div>
+            
+                  <div class="right-font-title"  v-if="item!=='isNull'"  >{{ item }}7777</div>
+                  <div :id="i" class="echartsBox-min" ></div>
                 </div>
                 <div class="border-top-line"></div>
                 <div class="border-left-line1"></div>
@@ -50,20 +56,6 @@
         <div class="fang-color"></div>
       </div>
     </div>
-
-    <!-- 底部表格 -->  
-     <!-- <TableCardBox
-      :leftData="tableInner"
-      :rightData="tableOutter"
-      :rowSpanNumber2="rowSpanNumber2"
-      :rowSpanNumber1="rowSpanNumber1"
-      :titleHead="titleHead"
-      :leftObj="leftObj"
-      :rightObj="rightObj"
-    /> -->
-<!--      
-     <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
-      title1="内销" title2="外销" /> -->
          <innerTableInfo :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
       title1="内销" title2="外销" />
 
@@ -97,27 +89,10 @@ export default {
       cardSab:[],
       cardSabTitle1:"内销",
       cardSabTitle2:"外销",
-       dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
+      //dhcarr:[],
+      dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
       AmericaDate: [],
       AmericaList: [],
-
-//       monthDate 月份
-// businessEntityName 产司
-// directName 销向
-// `position`产品结构
-// businessEntityAmt 产司实时达成金额
-// businessEntityTaskAmt 产司责任制金额
-// businessEntityAmtRadio 产司金额完成率
-// directNameAmtRadio 内销/外销完成率
-// sabAmtRadio SAB金额占比
-// grossProfitRadio 毛利率
-// dateRadio  时间进度
-// sabQtyRadio SAB数量占比
-// directNameQtyRadio 内销/外销数量完成率
-// businessEntityQtyRadio 产司数量完成率
-// businessEntityQty 产司实时达成数量
-// businessEntityTaskQty 产司数量责任制
-
      cardObj: {
         'title':'businessEntityName', /*标题*/
         'cnyAmt':'businessEntityAmt',/*金额*/
@@ -133,6 +108,9 @@ export default {
       Arrnum: [],
       dateTime: "2022-03",
       showLoading: false,
+      showLoading1: false,
+      showLoading2: true,
+      showLoading3: true,
       progressData: {
         bar1: 0,
         bar2: 0,
@@ -327,19 +305,10 @@ export default {
     this.getTable(params);
     this.getCard(params);
     this.getListLeft(listParams);
-    this.getListCharts(listParams);
     this.getList1(listParams);
-    // this.myEcharts();
-    // this.myEcharts2();
     },
      // 底部table/
     async getTable(time) {
-      //   let online = {
-      //   code: 'onlineBottomLevel3'
-      // };
-      // let onlineStore = {
-      //   code: 'onlineBottomStore'
-      // };
        let online = {
         code: 'directLevelInnerBottom'
       };
@@ -352,7 +321,6 @@ export default {
       );
       this.tableInner = tableInner.rows;
       this.tableOutter = tableOutter.rows;
-
       this.rowSpanNumber2 = [this.tableOutter.length - 1];
     },
 
@@ -373,113 +341,13 @@ export default {
         v.positionRatio = v.sabAmtRadio;  /*右边sab*/
         return v.position.length<2
       })
-
-         console.log("w",this.cardSab);
-
-
-
     },
 
-    // async getTable(time) {
-    //   // async getTable(model,ontime,ontime) {
-    //   // try {
-    //   // let tableInner = await API.getData(
-    //   //   "onlineBottomLevel3",
-    //   //   "2022-03,2022-03"
-    //   // );
-
-
-
-    //   let online = {
-    //     code: 'onlineBottomLevel3'
-    //   };
-    //   let onlineStore = {
-    //     code: 'onlineBottomStore'
-    //   };
-    //   // Object.assign(time,online)
-    //   // Object.assign(time,onlineStore)
-    //   // let tableInner = await API.getData(
-    //   //   "homeByDirectTotal",
-    //   //   ontime
-    //   // );
-    //   let tableInner = await API.getTotal(Object.assign(time, online));
-
-
-    //   // let tableInner = await API.getDataLine("onlineBottomLevel3",time);
-
-
-    //   // console.log("tableInner",tableInner);
-    //   // let tableOutter = await API.getData(
-    //   //   "onlineBottomStore",
-    //   //   "2022-03,2022-03"
-    //   // );
-
-    //   let tableOutter = await API.getTotal(
-    //     Object.assign(time, onlineStore)
-    //   );
-
-
-    //   // console.log("tableInner", tableOutter);
-
-    //   this.tableInner = tableInner.rows;
-    //   this.tableOutter = tableOutter.rows;
-    //   // } catch (err) {
-    //   //   console.log(err);
-    //   // }
-    // },
-    //     // 底部table/
-    // async getTable(time) { 
-         
-    //   let online = {
-    //     code:'onlineBottomLevel3'
-    //   };
-    //     let onlineStore = {
-    //     code:'onlineBottomStore'
-    //   };
-    //   // Object.assign(time,online)
-    //   // Object.assign(time,onlineStore)
-    //     // let tableInner = await API.getData(
-    //     //   "homeByDirectTotal",
-    //     //   ontime
-    //     // );
-    //    let tableInner =await API.getTotal( Object.assign(time,online));
-
-
-    //      let tableOutter = await API.getTotal(
-    //     Object.assign(time,onlineStore)
-    //     );
-
-
-    //      console.log("tableInner",tableOutter);
-
-    //     this.tableInner = tableInner.rows;
-    //     this.tableOutter = tableOutter.rows;
-  
-    //   //  let tableInner = await API.getData("directLevelInnerBottom", params);
-    //   //   let tableOutter = await API.getData("directLeveOutterBottom", params);
-    //   //   this.tableOutter = tableOutter.rows;
-    //   //   this.rowSpanNumber2 = [this.tableOutter.length - 1];
-
-    //   //   let innerTop = tableInner.rows.filter((v) => {
-    //   //     return v[title] == "线上";
-    //   //   });
-
-    //   //   let innerBottom = tableInner.rows.filter((v) => {
-    //   //     return v[title] == "线下";
-    //   //   });
-    //   //   this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
-  
-    //   //   this.tableInner = innerTop.concat(innerBottom);
-    //   //   console.log("this.tableInner", this.tableInner);
-    //  },
     gotoDomestic() {
       this.$router.push("/center/index");
     },
     // 品类汇总
     gotoCatSeries(val) {
-      // this.$router.push({name:'page2',params:{id:1}});
-      // this.$router.push({path:'/page2',query:{id:1}});
-
       this.$router.push({
           name: "productCo",
         query: { key: val},
@@ -499,51 +367,16 @@ export default {
       
       try {
         const res = await API.getData("directLevelTopDashBoard",getdashboard);
-        console.log("resresresres",res);
         let panelDataList = res.rows;
-    
-        //  console.log("panelDataList",panelDataList);
-        console.log("progressData.ballNum",res.rows);
         this.progressData.ballNum = (
           panelDataList[0].grossProfitRadio * 100
         ).toFixed(1);
-        console.log("progressData.ballNum",this.progressData.ballNum);
         this.speedData.speedBar = (
           panelDataList[0].businessModelCompleteRadio * 100
         ).toFixed(1);
-        console.log("panelDataList",this.speedData.speedBar);
         this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
-        console.log("speedData.bar",this.speedData.bar);
         this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(1);
-        
         this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
-        //* monthDate 月份
-// * monthDate 月份
-
-//  * directName 销向
-
-//  * cnyAmt 销向金额
-
-//  * directSaleVolume 销向销量
-
-//  * saleVolume 总销量
-
-//  * cnyAmtRadio 销向金额完成率
-
-//  * cnyQtyRadio 销向数量完成率
-
-//  * directNameGrossProfitRadio 销向毛利率
-
-//  * sumCnyAmt 事业部总金额达成
-
-//  * saleTaskAmt 事业部责任制总金额
-
-//  * dateRadio 时间进度
-
-//  * saleTaskAmtRadio 事业部总完成率
-
-//  * grossProfitRadio 事业部总毛利率 
-
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].directName == "内销") {
             this.progressData.bar2 = (
@@ -571,11 +404,6 @@ export default {
         console.log(error);
       }
     },
-
-//     directNameAmtSabRadio 内销/外销金额SAB占比
-// directNameQtySabRadio 内销/外销数量SAB占比
-// totalAmtSabRadio 事业部金额SAB占比
-// totalQtySabRadio 事业部数量SAB占比"	"select direct_name directName,
 
     //仪表盘(右)
     async queryCardSAB(params) {
@@ -643,12 +471,10 @@ export default {
      
          let chart = {
           code: 'directLevelChart',
-          //  fields:'cooprLevel1'
+           fields:'cooprLevel1'
         };
         Object.assign(chart, listParams)
         const res = await API.getTotal(chart);
-
-        // console.log("sell", res);
         let sellOutDataList = res.rows;
         let newArr = sellOutDataList.filter((item) => {
           var timeArr = item.orderDate
@@ -675,7 +501,9 @@ export default {
     },
         // 右边接口
     async getList1(line) {
-      this.showLoading = true;
+     
+
+     
       let chart = {
         code: 'directLevelChart',
         fields: "cooprLevel2"
@@ -684,7 +512,7 @@ export default {
       try {
         const res = await API.getChartTotal(chart);
         let sellOutDataList = res.rows;
-        this.showLoading = false;
+       
         let obj = res.rows[0]
         var k = 0;
         var arr = [];
@@ -712,17 +540,10 @@ export default {
               .split("-");
             var yue = timeArr[1];
             var ri = timeArr[2];
-            // console.log("sdvsd", timeArr);
-            //tAvgAmt: 1134.8299
-// orgQty: 18.5954
-// tAvgAmt: 1134.8299
-// tAvgQty: 1682.1713
-
             AmericaDate.push(yue + "-" + ri);
-            // AmericaList.push(item.cnyAmt);
-            // AmericaLine = item.saleAvgAmt;
-                        AmericaList.push(item.orgQty);
+            AmericaList.push(item.orgQty);
             AmericaLine = item.tAvgQty;
+            
           });
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
@@ -730,95 +551,32 @@ export default {
         console.log(error);
       }
     },
-    
-    //   // 右边卡片/
-    // async getCard(params) {
-    //   this.showLoadingCard = true;
-    //   try {
-    //      let obj = {
-    //          code:"onlineTopCooprLevel2",
-    //      }
-
-    //     //    let obj = {
-    //     //      code:"onlineTopCooprLevel2",
-    //     //  }
-    //   //     let obj = {
-    //   //   code:"directLevelTop"
-    //   // }
-    //     const res = await API.getTotal( Object.assign(params,obj));
-    //    // const res = await API.getData("onlineTopCooprLevel2", params);
-
-    //     res.rows.length > 0 &&
-    //       res.rows.forEach((v) => {
-    //         if (!!v.cnyAmt) {
-    //           v.cnyAmt = v.cnyAmt.toFixed(0);
-    //         }
-    //         if (!!v.saleTaskAmt) {
-    //           v.saleTaskAmt = v.saleTaskAmt.toFixed(0);
-    //         }
-
-    //         if (!!v.saleAmtRadio) {
-    //           v.saleAmtRadio = (
-    //             v.saleAmtRadio * 100 > 100 ? 100 : v.saleAmtRadio * 100
-    //           ).toFixed(0);
-    //         }
-    //         if (!!v.saleQtyRadio) {
-    //           v.saleQtyRadio = (
-    //             v.saleQtyRadio * 100 > 100 ? 100 : v.saleQtyRadio * 100
-    //           ).toFixed(0);
-    //         }
-    //       });
-
-    //     if (res.rows.length > 0) {
-    //       this.cardData = res.rows.filter((v) => {
-    //         return !!v.cooprLevel2;
-    //       });
-    //       this.cardData.splice(6);
-    //     } else {
-    //       this.cardData = [{}];
-    //     }
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
-
-
+   
     //中间折线图
     async getListCharts(line) {
-        this.showLoading = true;
+
       let chart = {
         code: 'onlineMiddleChart',
         fields: "cooprLevel2"
       };
       Object.assign(chart, line)
       try {
-
         const res = await API.getChartTotal(chart);
-
         let sellOutDataList = res.rows;
-        this.showLoading = false;
-
         let obj = res.rows[0]
-
-
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          // console.log("11111111111", obj[i]);
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
-
-        // console.log("arr", arr);
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
         arrs.forEach((v) => {
           this.dhcarr.push(v[0].cooprLevel2);
         });
-        //this.dhcarr = [0,1,2,3,4,5];
-
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
           let AmericaDate = [];
@@ -831,15 +589,12 @@ export default {
               .split("-");
             var yue = timeArr[1];
             var ri = timeArr[2];
-            // console.log("sdvsd", timeArr);
-
             AmericaDate.push(yue + "-" + ri);
             AmericaList.push(item.totalCnyAmt);
             AmericaLine = item.saleAvgAmt;
           });
-          // console.log("Arrnum", this.sellOutDataList);
-
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
+          
         }
       } catch (error) {
         console.log(error);
@@ -858,7 +613,6 @@ export default {
         },
         labelData: [
           { class: "plan", text: "实际达成" },
-          // { class: 'actual', text: '规划达成' },
           { class: "average", text: "日均线" },
         ],
         // echartsData: {
@@ -956,13 +710,13 @@ export default {
                   },
                 },
               ],
-
               symbol: ["none", "none"],
             },
           },
         ],
       };
       myChart.setOption(option);
+      this.showLoading3=false;
     },
 
    
@@ -1092,6 +846,7 @@ export default {
         ],
       };
       myChart2.setOption(option);
+      this.showLoading2=false;
     },
 
   },

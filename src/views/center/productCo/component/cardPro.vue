@@ -146,7 +146,7 @@
     data(){
       return{
         pathObj:{
-        'export':'exprotAreaAll'
+        'export':'productCo'
       },
       cardList:[0,1,2,3,4,5],/*卡片分类*/
       cardSabList:[0,1,2,3,4,5], /*sab分类*/
@@ -223,6 +223,8 @@
       gotoCatSeries(val) {
 
         this.$router.push({name:this.pathObj[this.name],query:{key:val}});
+        console.log(this.pathObj[this.name]);
+        console.log("valval",val);
 
 
         // this.$emit('gotoCatSeries',val)
