@@ -4,12 +4,12 @@ import router from "@/router";
 import { message } from "ant-design-vue";
 import { contentType, requestTimeout, successCode, errorTokenCode } from '@/config';
 import { objectToParamString } from '@/utils/utils';
-import { getToken,removeToken } from "@/utils/auth";
+import { getToken, removeToken } from "@/utils/auth";
 import { api } from '@/config/index'
 
 const httpConfig = {
     Headers: {
-        "Content-type" : "application/json"
+        "Content-type": "application/json"
     }
 }
 /**
@@ -18,15 +18,14 @@ const httpConfig = {
  * @param {*} msg
  */
 const handleCode = (code, msg) => {
-
-    // code && message.error(msg || "登录失效");
-    // console.log("wwww",errorTokenCode.indexOf(code))
+    console.log("errorcode", code)
     // if (errorTokenCode.indexOf(code) > -1) {
+    if (code == 1) {
+        code && message.error(msg || "登录失效");
         // location.href = api.adminUrl + 'login';
-        // removeToken()
-        // localStorage.removeItem("token")
-        // router.replace('/login')
-    // }
+        localStorage.removeItem("token")
+        location.href = api.adminUrl + '/login';
+    }
 };
 
 /**
@@ -38,7 +37,7 @@ const instance = axios.create({
         "Content-Type": contentType,
     },
 });
-instance.defaults.withCredentials=true
+instance.defaults.withCredentials = true
 
 /**
  * @description axios请求拦截器
@@ -56,13 +55,13 @@ instance.interceptors.request.use(
             console.log(error)
         }
         if (
-           
+
             config.data &&
             config.headers["Content-Type"] === "application/json;charset=UTF-8"
-         
+
         )
-            
-        config.data = qs.stringify(config.data);
+
+            config.data = qs.stringify(config.data);
         return config;
     },
     (error) => {
@@ -74,7 +73,7 @@ instance.interceptors.request.use(
  * @description axios响应拦截器
  */
 instance.interceptors.response.use(
-    
+
     (response) => {
         const { data, config } = response;
         const { code, msg } = data;
@@ -101,7 +100,7 @@ instance.interceptors.response.use(
         } else {
             let { message } = error;
             if (message === "Network Error") {
-               
+
                 message = "后端接口连接异常";
             }
             if (message.includes("timeout")) {
@@ -120,20 +119,20 @@ instance.interceptors.response.use(
 export default {
     $axios: instance,
     get(url, data, config) {
-        if(!config) {
+        if (!config) {
             config = httpConfig;
         }
         if (data) {
             url = url + objectToParamString(data)
         }
-       
+
         return instance.get(url, config)
     },
     post(url, data, config) {
-        if(!config) {
+        if (!config) {
             config = httpConfig;
         }
-      
+
         return instance.post(url, data, config)
     }
 };

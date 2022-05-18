@@ -2045,10 +2045,10 @@ export default {
       }
     },
 
-    // async infoList(){
-    //   let res = await API.textInfo()
-    //   console.log("88888",res)
-    // },
+    async infoList(){
+      let res = await API.textInfo()
+      console.log("88888",res)
+    },
     
     
 
@@ -2439,10 +2439,11 @@ export default {
   },
   mounted() {
     this.init(this.model);
-    // this.infoList();
+    this.infoList();
   },
 };
-</script><style scoped>
+</script>
+<style scoped>
      .fontInfo{
        color: #66ffff;
      }
