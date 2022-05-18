@@ -59,7 +59,7 @@
         >
            <template v-slot="scope">
               <div class="precent">
-                  <div style="width: 30px;text-align: center;">
+                  <div style="width: 30px;">
                       {{ scope.row.outLineCnyAmt .toFixed(1) }}
                   </div>
                   <div style="margin-top: 5px">

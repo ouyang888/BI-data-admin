@@ -48,17 +48,18 @@
           label="线上"
           height="30px"
         >
-         <template v-slot="scope">
-            <div style="text-align: center" class="nameColor"  @click="handleClick">
-              {{ scope.row.oemCnyAmt }}
-            </div>
-             <div style="margin-top: 5px">
+          <template v-slot="scope">
+              <div class="precent">
+                  <div style="width: 30px">
+                      {{ scope.row.obmCnyAmt .toFixed(1) }}
+                  </div>
+                  <div style="margin-top: 5px">
                       <Progress style="margin-bottom: 3px" :rate="scope.row.obmCnyAmt" :color="'#FF8B2F'"
                           class="precentCompentes" />
                       <Progress :rate="scope.row.dateRadio" :color="'#66FFFF'" class="precentCompentes" />
                   </div>
-          </template> 
-      
+              </div>
+            </template>
         </el-table-column>
              
         <el-table-column
