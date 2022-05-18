@@ -12,7 +12,7 @@
       </div>
       <!-- 右侧卡片 -->
 
-          <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2" @gotoCatSeries="gotoCatSeries(val)"/>
+          <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2" @gotoCatSeries="gotoCatSeries"/>
     </div>
     <!-- 中间echart -->
        <div class="middle-box">
@@ -39,7 +39,7 @@
                 <div class="border-left-line"></div>
                 <div class="flex-echrats-right">
             
-                  <div class="right-font-title"  v-if="item!=='isNull'"  >{{ item }}7777</div>
+                  <div class="right-font-title"  v-if="item!=='isNull'"  >{{ item }}</div>
                   <div :id="i" class="echartsBox-min" ></div>
                 </div>
                 <div class="border-top-line"></div>
@@ -352,7 +352,6 @@ export default {
           name: "productCo",
         query: { key: val},
       });
-      // this.$router.push('/center/productCo',query:{id:val});
     },
 
     toModuleResponsible() {

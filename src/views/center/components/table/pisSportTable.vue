@@ -6,7 +6,7 @@
       :span-method="objectSpanMethod"
       width="864px"
       class="execl-box"
-      :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }"
+      :cell-style="{textAlign: 'center',padding: '5px 0', borderColor: '#1E1D51' }"
       :row-style="rowStyle"
       :header-cell-style="headerCellStyle"
       height="287"

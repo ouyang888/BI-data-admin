@@ -22,6 +22,7 @@
       <div class="flex-char">
         <div>
           <div class="middle-font left-file">内销日达成趋势图</div>
+          
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
@@ -81,6 +82,7 @@ export default {
        'saleAmtRadio':'cnyAmtRadio',  /*金额完成率*/
        'cooprLevel1':'directName'  /*线上/线下 金额完成率*/
       },
+      
       cardSab:[],
       cardSabTitle1:"内销",
       cardSabTitle2:"外销",

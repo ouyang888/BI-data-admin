@@ -1,4 +1,19 @@
 <template>
+
+<!--
+* 品类外销-金额版
+ * monthDate 月份
+ * category 品类
+ * oemCnyAmt OEM金额
+ * obmCnyAmt OBM金额
+ * oemCompleteRatio OEM金额完成率
+ * obmCompleteRatio OBM金额完成率
+ * totalCnyAmt 合计金额
+ * totalCompleteRatio 合计金额完成率
+ * dateRadio 时间进度
+ */
+ >
+ -->
   <div class="execl">
     <div >
       <el-table
@@ -34,8 +49,7 @@
           height="30px"
         >
          <template v-slot="scope">
-                     <div class="precent">
-              <div style="width: 30px">
+            <div style="text-align: center" class="nameColor"  @click="handleClick">
               {{ scope.row.oemCnyAmt }}
             </div>
              <div style="margin-top: 5px">
@@ -43,7 +57,6 @@
                           class="precentCompentes" />
                       <Progress :rate="scope.row.dateRadio" :color="'#66FFFF'" class="precentCompentes" />
                   </div>
-                   </div>
           </template> 
       
         </el-table-column>

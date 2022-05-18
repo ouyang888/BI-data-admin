@@ -7,7 +7,7 @@
         :span-method="objectSpanMethod"
         width="864px"
         class="exportTable"
-        :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }"
+        :cell-style="{textAlign: 'center',padding: '5px 0', borderColor: '#1E1D51' }"
         :row-style="rowStyle"
         height="240px"
         :header-cell-style="headerCellStyle"
