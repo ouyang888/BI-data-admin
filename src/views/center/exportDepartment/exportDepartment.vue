@@ -52,6 +52,9 @@
         <div class="fang-color"></div>
         <div class="fang-color"></div>
       </div>
+      <div class="select-box">
+        <selectTime @changeDate="changeDate"/>
+      </div>
     </div>
 
     <!-- 底部表格 -->
@@ -67,6 +70,7 @@ import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
 import cardPro from "@/views/center/components/card/cardPro.vue"; 
 import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
+import selectTime from '@/components/selectTime.vue';
 export default {
   name: "s",
   components: {
@@ -74,7 +78,8 @@ export default {
     SpeedPanel,
     SadPanel,
     cardPro,
-    innerTableCardBox
+    innerTableCardBox,
+    selectTime
   },
   data() {
     return {
@@ -247,7 +252,7 @@ export default {
         this.speedData.speedBar = (panelDataList[0].directAmtRadio * 100).toFixed(1)
         this.speedData.bar = (panelDataList[0].directQtyRadio * 100).toFixed(1)
         //  销向总销售数量
-        this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(1)
+        // this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(1)
 
         // 责任制
         this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
@@ -764,6 +769,14 @@ export default {
         console.log(err);
       }
     },
+    changeDate(start,end) { /*echart切换时间*/
+        let listParams = { /*年月日*/
+       start_date:start,
+      end_date:end,
+      }
+      this.getList(listParams);
+      this.getList1(listParams);
+      },
 
   },
   created() {

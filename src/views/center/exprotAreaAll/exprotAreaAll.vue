@@ -216,8 +216,8 @@ export default {
     this.getdashboard(params);
     this.queryCardSAB(params);
     this.getCard(params);
-    this.getChart(listParams);
-    this.getChartList(listParams);
+    this.getList(listParams);
+    this.getList1(listParams);
     this.getTable(params);
     },
     // 三个仪表盘
@@ -332,7 +332,7 @@ export default {
     },
     // 中部
     //中间折线图
-    async getChart(params) {
+    async getList(params) {
       this.showLoading = true;
       try {
         const res = await API.getData('outSellMacroRegionDashboardChart',params);
@@ -370,7 +370,7 @@ export default {
     },
  
     // 右边接口
-    async getChartList(params) {
+    async getList1(params) {
       this.showLoading = true;
       let chartObj = {
         code:'outSellMacroRegionDashboardChart',
@@ -379,7 +379,7 @@ export default {
       Object.assign(chartObj,params)
    
       try {
-        const res = await API.getChartTotal(chartObj);
+        const res = await API.getListTotal(chartObj);
         if(res.code !=200) return;
         let sellOutDataList = res.rows;
         this.showLoading = false;
@@ -737,8 +737,8 @@ export default {
       end_date:end,
       coopr_level1:this.$route.query.key
       }
-        this.getChart(listParams);
-        this.getChartList(listParams);
+        this.getList(listParams);
+        this.getList1(listParams);
       },
    
   },
@@ -1292,9 +1292,5 @@ export default {
 .middle-box{
   position: relative;
 }
-.select-box{
-  position:absolute;
-  right: 20px;
-  top:10px;
-}
+
 </style>

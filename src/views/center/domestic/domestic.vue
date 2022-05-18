@@ -455,6 +455,9 @@
         <div class="fang-color"></div>
         <div class="fang-color"></div>
       </div>
+      <div class="select-box">
+        <selectTime @changeDate="changeDate"/>
+      </div>
     </div>
 
     <!-- 底部表格 -->
@@ -468,13 +471,16 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
+import selectTime from '@/components/selectTime.vue';
+
 export default {
   name: "s",
   components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
-    innerTableCardBox
+    innerTableCardBox,
+    selectTime
   },
   data() {
     return {
@@ -774,7 +780,21 @@ export default {
          params
         );
 
-        let obj = { innerDirect: "", outerDirect: "" };
+        if(res.rows.length<1){
+            this.allList = [0];
+            this.divisionLine = 0;
+          this.innerDirectDate = [];
+            this.innerDirectList = [0];
+            this.innerDirectLine = 0;
+          this.outerDirectDate = [];
+            this.outerDirectList = [0];
+            this.outerDirectLine = 0;
+            this.showLoading = false;
+            this.myEcharts();
+            this.myEcharts2();
+            this.myEcharts3();
+            return;
+        }
         let newArr = res.rows.filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
@@ -1270,7 +1290,14 @@ export default {
       this.queryCardSAB(params);
       this.getCard(params);
       this.getTable(params);
-    }
+    },
+    changeDate(start,end) { /*echart切换时间*/
+        let listParams = { /*年月日*/
+       start_date:start,
+      end_date:end
+      }
+        this.getList(listParams);
+      },
   },
   created() {
     this.init();

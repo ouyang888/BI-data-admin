@@ -50,6 +50,9 @@
         <div class="fang-color"></div>
         <div class="fang-color"></div>
       </div>
+      <div class="select-box">
+        <selectTime @changeDate="changeDate"/>
+      </div>
     </div>
 
     <!-- 底部表格 -->
@@ -64,6 +67,8 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
+import selectTime from '@/components/selectTime.vue';
+
 // import { Console } from "console";
 export default {
   components: {
@@ -71,7 +76,9 @@ export default {
     SpeedPanel,
     SadPanel,
     innerTableCardBox,
-    Card
+    Card,
+    selectTime
+
   },
   data() {
 
@@ -1031,7 +1038,14 @@ export default {
 
       }
     },
-
+    changeDate(start,end) { /*echart切换时间*/
+        let listParams = { /*年月日*/
+       start_date:start,
+      end_date:end
+      }
+        this.getList(listParams);
+        this.getListInfo(listParams);
+      },
 
   },
   mounted() {

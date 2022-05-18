@@ -72,6 +72,7 @@
               <span class="percent-text">{{(v.grossProfitRadio*100).toFixed(0)}}%</span>
             </div>
             <!-- {{list}} -->
+            
             <template v-for="(item,k) in list"> 
            <div :key="k+22" v-if="k == i*2 || k==i*2+1">
               <span class="percent-title">{{item[cardObj.cooprLevel1]}} </span>
@@ -86,7 +87,7 @@
  
               <template v-for="(item,s) in cardSabList[i]" >
            
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1">
+                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>
@@ -96,7 +97,7 @@
             <div class="">
               <div class="sab-title">{{title2}}SAB</div>
               <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2">
+                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2&& v[cardObj.title] == item[cardObj.title]">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>
@@ -145,7 +146,7 @@
     data(){
       return{
         pathObj:{
-        'export':'exprotAreaAll'
+        'export':'productCo'
       },
       cardList:[0,1,2,3,4,5],/*卡片分类*/
       cardSabList:[0,1,2,3,4,5], /*sab分类*/
@@ -222,6 +223,8 @@
       gotoCatSeries(val) {
 
         this.$router.push({name:this.pathObj[this.name],query:{key:val}});
+        console.log(this.pathObj[this.name]);
+        console.log("valval",val);
 
 
         // this.$emit('gotoCatSeries',val)
