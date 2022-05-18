@@ -69,18 +69,19 @@
         </div>
         <div class="change-flex">
           <div class="head-box-right right-width">
-            <span>{{ year }}</span>
-            <div class="drop-down drop-down-year">
+            <!-- <span>{{ year }}</span> -->
+            <!-- <div class="drop-down drop-down-year">
               <div class="down-font-year" @click="changeyear('2022')">2022</div>
               <div class="down-font-year" @click="changeyear('2021')">2021</div>
-            </div>
+            </div> -->
+            <span>年度</span>
           </div>
           <div class="head-box-right right-width drop-month">
-            <span>{{ month }}</span>
+            <span>{{year}}{{month}}</span>
             <div class="drop-down drop-down-year">
-              <!-- <div class="down-font-year" @click="changemonth('5')">5</div> -->
-              <div class="down-font-year" @click="changemonth('3')">3</div>
-              <div class="down-font-year" @click="changemonth('4')">4</div>
+              <div v-for="(item,i) in timeList" :key="i+12" class="down-font-year" @click="changemonth(item)">{{item}}</div>
+              <!-- <div class="down-font-year" @click="changemonth('04')">4</div>
+              <div class="down-font-year" @click="changemonth('05')">5</div> -->
             </div>
           </div>
         </div>
@@ -107,9 +108,10 @@ export default {
       cus: 1,
       land: "产地",
       direction: 1,
-      year: "2022",
-      month: "3",
+      year: new Date().getFullYear(),
+      month:'01',
       date: new Date(),
+      timeList:[],/*月度选项列表*/
     };
   },
   computed: {
@@ -312,9 +314,9 @@ export default {
       this.$store.commit("setYear", item);
     },
     changemonth(item) {
-      this.month = item;
+      this.month = item.substr(4);
       let val = item.length < 2 ? "0" + item : item;
-
+      // this.$store.commit("setYear",'2022');
       this.$store.commit("setMonth", val);
     },
     changeNum(index) {
@@ -338,11 +340,23 @@ export default {
         this.title = "销向汇总页";
       }
     },
+
   },
   mounted() {
     this.menuInfo();
     localStorage.removeItem("showMoney");
   },
+  created(){
+    let month = this.date.getMonth()+1;
+    let currMonth = month>=10?month:'0'+month;
+    this.month = currMonth;
+  
+    for(var i = month-2;i<=month;i++){
+      let onMonth = i>=10?i:'0'+i;
+      // debugger
+      this.timeList.push(`${this.year}${onMonth}`)
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
