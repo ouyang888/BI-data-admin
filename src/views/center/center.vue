@@ -314,7 +314,7 @@ export default {
       this.$store.commit("setYear", item);
     },
     changemonth(item) {
-      this.month = item.substr(4);
+      this.month = item =  item.substr(4); /*获取选项里的月份*/
       let val = item.length < 2 ? "0" + item : item;
       // this.$store.commit("setYear",'2022');
       this.$store.commit("setMonth", val);
