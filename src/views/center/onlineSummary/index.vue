@@ -1205,7 +1205,7 @@ export default {
 .flex-top-card {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+
 }
 
 .top-left-font {

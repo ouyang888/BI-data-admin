@@ -12,7 +12,7 @@
       </div>
       <!-- 右侧卡片 -->
 
-          <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2" @gotoCatSeries="gotoCatSeries"/>
+          <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2" @gotoCatSeries="gotoCatSeries"/>
     </div>
     <!-- 中间echart -->
        <div class="middle-box">
@@ -265,7 +265,7 @@ export default {
       return this.$store.state.showMoney;
     },
     modelLabel(){
-      return this.$store.state.showMoney==true?'亿': '万'
+      return this.$store.state.showMoney==true?'亿':'万'
     },
     model(){ /* 获取本部，OEM */
       return this.$store.state.model
