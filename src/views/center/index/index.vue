@@ -29,7 +29,7 @@
                   <div class="top-left-font">线上达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ innerLeftInfo.saleTaskAmt }} {{modelLabel}}</span>
+                      责任制 <span>{{ innerLeftInfo.saleTaskAmt }} {{$store.state.unit}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -44,7 +44,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}{{modelLabel}}</div>
+                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}{{$store.state.unit}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -172,7 +172,7 @@
                   <div class="top-left-font">线下达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ innerRightInfo.saleTaskAmt }}{{modelLabel}}</span>
+                      责任制 <span>{{ innerRightInfo.saleTaskAmt }}{{$store.state.unit}}</span>
                     </div>
                     <div class="finish-font">
                       完成率 <span>{{ innerRightInfo.onLineRadio }}%</span>
@@ -180,7 +180,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerRightInfo.sumCnyamt }}{{modelLabel}}</div>
+                  <div class="card-big-num">{{ innerRightInfo.sumCnyamt }}{{$store.state.unit}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -318,7 +318,7 @@
                   <div class="top-left-font">OBM达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ outterLeftInfo.saleTaskAmt }}{{modelLabel}}</span>
+                      责任制 <span>{{ outterLeftInfo.saleTaskAmt }}{{$store.state.unit}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -333,7 +333,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}{{modelLabel}}</div>
+                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}{{$store.state.unit}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -457,7 +457,7 @@
                   <div class="top-left-font">OEM达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ outterRightInfo.saleTaskAmt }}{{modelLabel}}</span>
+                      责任制 <span>{{ outterRightInfo.saleTaskAmt }}{{$store.state.unit}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -472,7 +472,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterRightInfo.sumCnyamt }}{{modelLabel}}</div>
+                  <div class="card-big-num">{{ outterRightInfo.sumCnyamt }}{{$store.state.unit}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -799,13 +799,9 @@ export default {
     showMoney(){
       return this.$store.state.showMoney;
     },
-    modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'万'
-    },
     model(){ /* 获取本部，OEM */
       return this.$store.state.model
     }
-    
   },
   watch:{
     ontime:{ /*监听数据更改 调用接口 */
