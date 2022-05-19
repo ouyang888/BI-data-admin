@@ -29,7 +29,7 @@
                   <div class="top-left-font">线上达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ innerLeftInfo.saleTaskAmt }} {{$store.state.unit}}</span>
+                      责任制 <span>{{ innerLeftInfo.saleTaskAmt }}{{$store.state.unit}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -44,7 +44,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}{{$store.state.unit}}</div>
+                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -180,7 +180,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerRightInfo.sumCnyamt }}{{$store.state.unit}}</div>
+                  <div class="card-big-num">{{ innerRightInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -333,7 +333,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}{{$store.state.unit}}</div>
+                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -457,7 +457,7 @@
                   <div class="top-left-font">OEM达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ outterRightInfo.saleTaskAmt }}{{$store.state.unit}}</span>
+                      责任制 <span>{{ outterRightInfo.saleTaskAmt}}{{$store.state.unit}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -472,7 +472,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterRightInfo.sumCnyamt }}{{$store.state.unit}}</div>
+                  <div class="card-big-num">{{ outterRightInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -804,18 +804,18 @@ export default {
     }
   },
   watch:{
-    ontime:{ /*监听数据更改 调用接口 */
+    ontime:{ /*监听月度 数据更改 调用接口 */
      handler: function (newValue, oldValue) {
         this.init();
       }
     },
-    model:{ /*监听数据更改 调用接口 */
+    model:{ /*监听产司 数据更改 调用接口 */
       handler: function(newValue,oldValue){
         this.init();
       }
 
     },
-    showMoney:{
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
       handler:function(newValue,oldValue){
         this.init();
       }
@@ -883,7 +883,7 @@ export default {
           v.onLineRadio = v.onLineRadio * 100>100?100:Number((v.onLineRadio * 100).toFixed(0));
           v.onLineProfitRadio = v.onLineProfitRadio * 100>100?100:Number((v.onLineProfitRadio * 100).toFixed(0));
           
-          v.sumCnyamt = v.sumCnyamt.toFixed(0);
+          v.sumCnyamt = v.sumCnyamt.toFixed(1);
           v.saleTaskAmt =  v.saleTaskAmt.toFixed(1);
         });
         
@@ -1760,7 +1760,7 @@ export default {
 .top-left-font {
   font-size: 14px;
   color: #fff;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .card-border-box {
@@ -1839,7 +1839,7 @@ export default {
 }
 
 .progress {
-  width: 120px;
+  width: 110px;
   height: 10px;
 }
 
@@ -1995,7 +1995,7 @@ export default {
   color: #66ffff;
   font-size: 28px;
 }
-.progress {
+/* .progress {
   width: 120px;
   height: 10px;
 }
@@ -2008,7 +2008,7 @@ export default {
 }
 .progress-middle:last-child {
   margin-bottom: 12px;
-}
+} */
 ::v-deep .ant-progress-bg {
   height: 4px !important;
   border-radius: 200px !important;

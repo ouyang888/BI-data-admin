@@ -10,7 +10,7 @@
           <SadPanel :data="sabData" />
         </div>
       </div>
-      <!-- 右侧卡片 @gotoCatSeries="gotoCatSeries"-->
+      <!-- 右侧卡片 @gotoCatSeries="gotoCatSeries"--> 
       <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
 
     </div>
@@ -68,7 +68,7 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
-import cardPro from "@/views/center/components/card/cardPro.vue"; 
+import cardPro from "@/views/center/components/card/cardPro1.vue"; 
 import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
 import selectTime from '@/components/selectTime.vue';
 
@@ -765,7 +765,7 @@ export default {
               v.positionRatio = v.sabAmtRadio;  /*右边sab*/
               return v.position.length<2
       })
-      console.log('this.cardSab',JSON.stringify(this.cardData))
+      console.log('this.cardSab',this.cardData,this.cardSab)
     
 
 

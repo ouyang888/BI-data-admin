@@ -138,7 +138,8 @@ export default {
   margin-bottom: 0;
 }
 .round-data{
-  width: 75px;
+  /* width: 75px; */
+  width: 80px;
   /* margin-top: 10px; */
   display: flex;
   align-items: center;
