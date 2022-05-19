@@ -15,12 +15,12 @@
             <div class="flex-top-card">
               <div class="top-left-font">实时达成</div>
               <div class="flex-finish">
-                <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}亿</span></div>
+                <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}{{$store.state.unit}}</span></div>
                 <div class="finish-font">完成率 <span>{{v[cardObj.saleAmtRadio]}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
-              <div class="card-big-num">{{v[cardObj.cnyAmt]}}亿</div>
+              <div class="card-big-num">{{v[cardObj.cnyAmt]}}{{$store.state.unit}}</div>
                <div class="flex-finish">
                 <!-- <div class="finish-font">进度 <span>s</span></div>
                 <div class="finish-font">完成率 <span>75%</span></div> -->
