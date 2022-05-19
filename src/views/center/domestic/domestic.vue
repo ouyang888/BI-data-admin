@@ -41,7 +41,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}{{ $store.state.unit }}</div>
+                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ innerRightInfo.sumCnyamt || 0 }}{{ $store.state.unit }}
+                    {{ innerRightInfo.sumCnyamt || 0 }}<span class="unit">{{$store.state.unit}}</span>
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -234,7 +234,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}{{ $store.state.unit }}</div>
+                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -333,7 +333,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ outterRightInfo.sumCnyamt || 0 }}{{ $store.state.unit }}
+                    {{ outterRightInfo.sumCnyamt || 0 }}<span class="unit">{{$store.state.unit}}</span>
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -1212,7 +1212,7 @@ export default {
         v.dateRadio = v.dateRadio * 100;
         v.onLineRadio = v.onLineRadio * 100 > 100 ? 100 : (v.onLineRadio * 100).toFixed(0);
         v.onLineProfitRadio = v.onLineProfitRadio * 100 > 100 ? 100 : (v.onLineProfitRadio * 100).toFixed(0);
-        v.sumCnyamt = v.sumCnyamt.toFixed(0);
+        v.sumCnyamt = v.sumCnyamt.toFixed(1);
         v.saleTaskAmt = v.saleTaskAmt.toFixed(1);
       });
 
@@ -1463,7 +1463,7 @@ export default {
 .top-left-font {
   font-size: 14px;
   color: #fff;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .card-border-box {
@@ -1541,7 +1541,7 @@ export default {
   font-size: 28px;
 }
 
-.progress {
+/* .progress {
   width: 120px;
   height: 10px;
 }
@@ -1557,7 +1557,7 @@ export default {
 
 .progress-middle:last-child {
   margin-bottom: 12px;
-}
+} */
 
 ::v-deep .ant-progress-bg {
   height: 4px !important;
@@ -1711,7 +1711,7 @@ export default {
 }
 
 .progress {
-  width: 120px;
+  width: 110px;
   height: 10px;
 }
 

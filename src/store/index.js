@@ -22,7 +22,7 @@ export default new Vuex.Store({
         previewVisible: false,
         showMoney:true,
         year:'2022',
-        month:'03',
+        month:new Date().getMonth()+1>=10?new Date().getMonth()+1>=10:'0'+(new Date().getMonth()+1),
         model:'本部,OEM,待定',
         currPath:'销向汇总',
         currTitle:'',

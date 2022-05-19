@@ -753,7 +753,9 @@ export default {
       this.cardSab = res2.rows.filter(v=>{
               v.positionRatio = v.sabAmtRadio;  /*右边sab*/
               return v.position.length<2
-      })
+      });
+      console.log('this.cardSab',this.cardData,this.cardSab)
+
 
     },
 

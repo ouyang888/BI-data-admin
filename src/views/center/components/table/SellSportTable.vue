@@ -172,6 +172,7 @@ export default{
           if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
             console.log('headerObj.name',this.headerObj.name)
             v[this.headerObj.name] = '合计';
+            v.ranking = '';
           }
         })
         this.mesInfo = newValue;

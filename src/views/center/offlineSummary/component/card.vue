@@ -268,7 +268,7 @@
   .flex-top-card {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    /* align-items: center; */
   }
 
   .top-left-font {
