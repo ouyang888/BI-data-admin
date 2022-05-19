@@ -831,7 +831,7 @@ export default {
     };
     let listParams = { /*年月日*/
       start_date:`${this.ontime}-01`,
-      end_date:`${this.ontime}-31`
+      end_date:`${this.ontime}-${this.$store.state.endDay}`
     }
 
     this.getList(listParams);

@@ -683,7 +683,7 @@ export default {
             this.progressData.bar1 = (
               panelDataList[i].onLineProfitRadio * 100
             ).toFixed(1);
-            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt || panelDataList[i].cnyAmt.toFixed(1);
             this.speedData.bottomClose =
               panelDataList[i].cnyAmtRadio.toFixed(1);
             this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
@@ -793,40 +793,41 @@ export default {
             return;
         }else{
            // 先清空数据再赋值
-              this.allList = [0];
+              this.allList = [];
               this.allLiine = '';
               this.innerDirectDate = [];
-              this.innerDirectList = [0];
+              this.innerDirectList = [];
               this.innerDirectLine = '';
               this.outerDirectDate = [];
-              this.outerDirectList = [0];
+              this.outerDirectList = [];
               this.outerDirectLine = '';
           
         }
-        let newArr = res.rows.filter((item) => {
-          var timeArr = item.orderDate
-            .replace(" ", ":")
-            .replace(/\:/g, "-")
-            .split("-");
-          var yue = timeArr[1];
-          var ri = timeArr[2];
+        // debugger;
+       res.rows.forEach((item) => {
           if (item.cooprLevel1 == "线上") {
-            this.innerDirectDate.push(yue + "-" + ri);
+            console.log(item.orderDate.substr(5));
+      
+            this.innerDirectDate.push(item.orderDate.substr(5));
             this.innerDirectList.push(item.CnyAmt);
-            this.innerDirectLine = item.saleAvgAmt;
-            this.myEcharts2();
+            this.innerDirectLine = item.saleAvgAmt || 0;
+     
           } else if (item.cooprLevel1 == "线下") {
-            this.outerDirectDate.push(yue + "-" + ri);
+            this.outerDirectDate.push(item.orderDate.substr(5));
             this.outerDirectList.push(item.CnyAmt);
-            this.outerDirectLine = item.saleAvgAmt;
-            this.myEcharts3();
+            this.outerDirectLine = item.saleAvgAmt || 0;
+           
           }
 
           this.allList.push(item.totalCnyAmt);
-          this.allLiine = item.saleAvgAmt;
-          this.myEcharts();
-          this.showLoading = false;
+          this.allLiine = item.totalsaleAvgAmt || 0;
+         
         });
+
+        this.myEcharts2();
+        this.myEcharts3();
+        this.myEcharts();
+        this.showLoading = false;
       } catch (error) {
         console.log(error);
       }
@@ -1291,11 +1292,11 @@ export default {
       };
       let listParams = { /*年月日*/
         start_date: `${this.ontime}-01`,
-        end_date: `${this.ontime}-31`
+        end_date: `${this.ontime}-${this.$store.state.endDay}`
       }
       this.getList(listParams);
-      this.getdashboard(params);
-      this.queryCardSAB(params);
+      // this.getdashboard(params);
+      // this.queryCardSAB(params);
       this.getCard(params);
       this.getTable(params);
     },
