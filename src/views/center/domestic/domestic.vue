@@ -1463,7 +1463,7 @@ export default {
 .top-left-font {
   font-size: 14px;
   color: #fff;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .card-border-box {

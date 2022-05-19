@@ -1001,7 +1001,15 @@ export default {
       // } catch (err) {
       //   console.log(err);
       // }
-    }
+    },
+    changeDate(start,end) { /*echart切换时间*/
+        let listParams = { /*年月日*/
+       start_date:start,
+      end_date:end
+      }
+        this.getList(listParams);
+        this.getListInfo(listParams);
+      },
   },
 
   computed: {
@@ -1043,15 +1051,6 @@ export default {
 
       }
     },
-    changeDate(start,end) { /*echart切换时间*/
-        let listParams = { /*年月日*/
-       start_date:start,
-      end_date:end
-      }
-        this.getList(listParams);
-        this.getListInfo(listParams);
-      },
-
   },
   mounted() {
     // this.getList1();
