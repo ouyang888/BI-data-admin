@@ -50,8 +50,8 @@
         >
           <template v-slot="scope">
               <div class="precent">
-                  <div style="width: 30px">
-                      {{ scope.row.obmCnyAmt .toFixed(1) }}
+                  <div style="width: 40%">
+                      {{ scope.row.oemCnyAmt.toFixed(1) }}
                   </div>
                   <div style="margin-top: 5px">
                       <Progress style="margin-bottom: 3px" :rate="scope.row.obmCnyAmt" :color="'#FF8B2F'"
@@ -70,7 +70,7 @@
         >
            <template v-slot="scope">
               <div class="precent">
-                  <div style="width: 30px">
+                  <div style="width: 40%">
                       {{ scope.row.obmCnyAmt .toFixed(1) }}
                   </div>
                   <div style="margin-top: 5px">
@@ -89,7 +89,7 @@
           height="30px">
           <template v-slot="scope">
             <div class="precent">
-              <div style="width: 30px">
+              <div style="width: 40%">
                 {{ scope.row.totalCnyAmt }}
               </div>
                 <div style="margin-top: 5px">
@@ -216,7 +216,7 @@ export default ({
 }
 
 .precent {
-  width: 90px;
+  width: 100%;
   height: 23px;
   display: flex;
 }
