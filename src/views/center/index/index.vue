@@ -804,18 +804,18 @@ export default {
     }
   },
   watch:{
-    ontime:{ /*监听数据更改 调用接口 */
+    ontime:{ /*监听月度 数据更改 调用接口 */
      handler: function (newValue, oldValue) {
         this.init();
       }
     },
-    model:{ /*监听数据更改 调用接口 */
+    model:{ /*监听产司 数据更改 调用接口 */
       handler: function(newValue,oldValue){
         this.init();
       }
 
     },
-    showMoney:{
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
       handler:function(newValue,oldValue){
         this.init();
       }

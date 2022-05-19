@@ -466,7 +466,7 @@
     color: #66ffff;
     margin-left: 2px;
     display: inline-block;
-    width:34px;
+    /* width:34px; */
   }
 
   .mt-border {

@@ -219,7 +219,7 @@
 
   .nameColor {
     color: #00ddff;
-    cursor: pointer;
+    /* cursor: pointer; */
   }
 
   .precent {
