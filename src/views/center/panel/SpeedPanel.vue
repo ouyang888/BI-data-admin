@@ -20,19 +20,19 @@
         <!-- <CircleProgress style="position:absolute" :rate="40" :size="155" /> -->
           <div class="round">
             <p class="round-title">{{data.ballTitle}}</p>
-            <p class="sort">{{data.ballNum}}亿</p> 
+            <p class="sort">{{data.ballNum}}{{modelLabel}}</p> 
             <div class="round-data">
               <span class="round-content">
                 <p>{{data.ballLeftTitle}}</p>
-                <p>{{data.ballLeftNum}}亿</p>
+                <p>{{data.ballLeftNum}}{{modelLabel}}</p>
               </span>
               <span class="round-content">
                 <p>{{data.ballRightTitle}}</p>
-                <p>{{data.ballRightNum}}亿</p>
+                <p>{{data.ballRightNum}}{{modelLabel}}</p>
               </span>
             </div>
           </div>
-          <div class="content">责任制{{data.bottomNum}}亿</div>
+          <div class="content">责任制{{data.bottomNum}}{{modelLabel}}</div>
     </div>
     <div class="bottom">
       <p>
@@ -57,6 +57,11 @@ export default {
   },
   components:{
     CircleProgress
+  },
+  computed:{
+    modelLabel(){
+      return this.$store.state.showMoney==true?'亿':'万'
+    }
   }
 
  

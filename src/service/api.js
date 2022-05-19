@@ -16,7 +16,7 @@ export default class ApiService {
   static getData(code, params) {
     // return request.get(api.adminUrl + `query?code=${code}&parameter=${date}`);
     let obj = {
-      sql_type:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
+      sqlType:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
       prod_area_name:store.state.model, /*本部*/
       code:code
     };
@@ -35,25 +35,24 @@ export default class ApiService {
   static getTotal(params) {
     
     let obj = {
-      sql_type:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
+      sqlType:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
       prod_area_name:store.state.model /*本部*/
     };
-    // console.log('params11', JSON.stringify(params));
-    Object.assign(params,obj);
+
+    Object.assign(obj,params);
+  
 
     return request.get( api.adminUrl +`query?`,
-    params
+    obj
     );
   }
   // 趋势图接口
   static getChartTotal(params) {
     let obj = {
-      sql_type:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
+      sqlType:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
       prod_area_name:store.state.model /*本部*/
     };
-    // console.log('params', JSON.stringify(params));
     Object.assign(obj,params);
-    // console.log('getChartTotal',params)
     return request.get(api.adminUrl + `chartQuery?`,
     obj);
   }

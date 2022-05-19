@@ -26,6 +26,7 @@ export default new Vuex.Store({
         model:'本部,OEM,待定',
         currPath:'销向汇总',
         currTitle:'',
+        unit:'亿',/*页面单位*/
         /* 图片框end */
     },
     mutations: {
@@ -36,7 +37,8 @@ export default new Vuex.Store({
             state.month = val
         },
         setShowMoney(state,val){
-            state.showMoney = val
+            state.showMoney = val;
+            state.unit = val==true?'亿':'万';
         },
         setModel(state,val){
             // console.log('model改制',val)
