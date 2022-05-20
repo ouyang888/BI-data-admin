@@ -12,8 +12,8 @@
       </div>
       <!-- 右侧卡片 -->
       <div class="flex-card">
-        <div class="card-box">
-          <div class="card-font" @click="online()">线上</div>
+        <div class="card-box" @click="online()">
+          <div class="card-font">线上</div>
           <a-spin class="cardLoad" size="large" v-if="showLoadingLeft" />
           <div class="noData" v-else-if="innerLeft && innerLeft.length < 1">暂无数据</div>
           <div class="card-border-box" v-else>
@@ -205,8 +205,8 @@
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box">
-          <div class="card-font" @click="gotoSummary">线下</div>
+        <div class="card-box" @click="gotoSummary">
+          <div class="card-font">线下</div>
           <a-spin class="cardLoad" size="large" v-if="showLoadingRight" />
           <div class="noData" v-else-if="outterLeft && outterLeft.length < 1">暂无数据</div>
           <div class="card-border-box" v-else>

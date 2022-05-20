@@ -24,6 +24,7 @@
         <div>
           <div class="middle-font left-file">外销{{$route.query.key}}日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
+          <div class="leftData" v-if="AvgTaskAmtList.length<1">暂无数据</div>
         </div>
         <div>
           <div class="middle-font">各大区日达成趋势图</div>
@@ -367,7 +368,7 @@ export default {
         if(res.code !=200) return;
         if(res.rows.length == 0){
           this.AvgTaskAmtDate = [];
-          this.AvgTaskAmtList = [0];
+          this.AvgTaskAmtList = [];
           this.AvgTaskAmtLine = '';
           this.showLoading = false;
         }else{

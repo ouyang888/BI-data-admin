@@ -353,4 +353,19 @@ display:none;
 .unit{
   font-size:14px;
 }
-
+.card-box{
+  cursor: pointer;
+}
+.leftData{
+height: 280px;
+width: 607px;
+position: absolute;
+top:48px;
+left: 0;
+color: #fff;
+background: rgb(2 0 77);
+z-index: 11;
+display: flex;
+justify-content: center;
+align-items: center;
+}

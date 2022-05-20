@@ -12,8 +12,8 @@
       </div>
       <!-- 右侧卡片 -->
       <div class="flex-card">
-        <div class="card-box">
-          <div class="card-font" @click="gotoDomestic">内销</div>
+        <div class="card-box" @click="gotoDomestic">
+          <div class="card-font">内销</div>
         
           <a-spin class="cardLoad" size="large" v-if="showLoadingLeft" />
           <div class="noData" v-else-if="innerLeft && innerLeft.length<1">暂无数据</div>
@@ -150,7 +150,7 @@
                     结构
                     <span v-for="(item, index) in innerSabLeft" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio}}%;</span>
+                      <span>{{ item.positionRatio }}%; </span>
                     </span>
                   </div>
                 </div>
@@ -282,7 +282,7 @@
                     结构
                     <span v-for="(item, index) in innerSabRight" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio * 100 }}%;</span>
+                      <span>{{ item.positionRatio }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -302,8 +302,8 @@
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box">
-          <div class="card-font" @click="gotoExport">外销</div>
+        <div class="card-box"  @click="gotoExport">
+          <div class="card-font">外销</div>
           <a-spin class="cardLoad" size="large" v-if="showLoadingRight" />
           <div class="noData" v-else-if="outterLeft && outterLeft.length<1">暂无数据</div>
           <div class="card-border-box" v-else>
@@ -435,7 +435,7 @@
                     结构
                     <span v-for="(item, index) in outterSabLeft" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio * 100 }}%;</span>
+                      <span>{{ item.positionRatio }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -574,7 +574,7 @@
                     结构
                     <span v-for="(item, index) in outterSabLeft" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio * 100 }}%;</span>
+                      <span>{{ item.positionRatio }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -954,6 +954,7 @@ export default {
               outtersab.rows.forEach(v=>{
                 v.positionRatio = (v.positionRatio*100).toFixed(1);
               })
+              console.log('outtersab',outtersab)
 
 
               this.outterSabLeft = outtersab.rows.filter((v) => {
