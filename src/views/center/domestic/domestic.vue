@@ -804,7 +804,6 @@ export default {
           this.outerDirectDate = [];
           this.outerDirectList = [];
           this.outerDirectLine = '';
-
         }
         // debugger;
         res.rows.forEach((item) => {
