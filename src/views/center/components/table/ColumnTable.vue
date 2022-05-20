@@ -1,13 +1,14 @@
 <template>
     <div class="execl">
+
         <el-table border :data="mesInfo" :cell-style="{padding: '5px 0',borderColor: '#1E1D51' }"
             :row-style="rowStyle" :header-cell-style="headerCellStyle" class="exportTable"  >
             <el-table-column prop="businessEntityName" label="产司" width="60"   height="287" >
             </el-table-column>
-            <el-table-column :label="'内销'+$store.state.unit" align="center" style="padding:0">
+            <el-table-column :label="'内销-'+$store.state.unit" align="center" style="padding:0">
                 <el-table-column :prop="headTitle.inSale.innerSaleTaskAmt" :label="headTitle.inSale.title" align="center">
                  <template v-slot="scope">
-                                {{ Number(scope.row.innerSaleTaskAmt).toFixed(1) }}
+                                {{ Number(scope.row.innerSaleTaskAmt).toFixed(2) }}
                 </template>
                 </el-table-column>
                 <el-table-column :prop="headTitle.inSale.innerCnyAmt" :label="headTitle.inSale.text" align="center"
@@ -15,12 +16,12 @@
                     <template v-slot="scope">
                         <div class="precent">
                             <div style="width: 30px">
-                                {{ scope.row.innerCnyAmt.toFixed(1) }}
+                                {{ scope.row.innerCnyAmt.toFixed(2) }}
                             </div>
                             <div style="margin-top: 5px">
-                                <Progress style="margin-bottom: 3px" :rate="40" :color="'#FF8B2F'"
+                                <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                                     class="precentCompentes" />
-                                <Progress :rate="60" :color="'#66FFFF'" class="precentCompentes" />
+                                <Progress :rate="scope.row.innerCnyAmtRatio*100" :color="'#66FFFF'" class="precentCompentes" />
                             </div>
                         </div>
                     </template>
@@ -32,9 +33,9 @@
                                 {{ scope.row.day }}
                             </div>
                             <div style="margin-top: 5px" v-if="headTitle.total.day!==null">
-                                <Progress style="margin-bottom: 3px" :rate="40" :color="'#FF8B2F'"
+                                  <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                                     class="precentCompentes" />
-                                <Progress :rate="60" :color="'#66FFFF'" class="precentCompentes" />
+                                <Progress :rate="scope.row.cnyAmtAllRatio*100" :color="'#66FFFF'" class="precentCompentes" />
                             </div>
                         </div>
                     </template>
@@ -42,23 +43,23 @@
 
                 <!-- <el-table-column v-for="(k,i) in tableList.headTitle.inSale" :label="k"></el-table-column> -->
             </el-table-column>
-            <el-table-column label="外销" align="center" height="20px">
+            <el-table-column :label="'外销-'+$store.state.unit" align="center" height="20px">
                 <el-table-column :prop="headTitle.outSale.outerSaleTaskAmt" :label="headTitle.outSale.title" height="20px"
                     align="center">
                      <template v-slot="scope">
-                                {{ Number(scope.row.outerSaleTaskAmt).toFixed(1) }}
+                                {{ Number(scope.row.outerSaleTaskAmt).toFixed(2) }}
                 </template>
                 </el-table-column>
                 <el-table-column :prop="headTitle.outSale.outerCnyAmt" :label="headTitle.outSale.text" align="center" height="20px" >
                     <template v-slot="scope">
                         <div class="precent">
                             <div style="width: 30px">
-                                {{ scope.row.outerCnyAmt }}
+                                 {{ Number(scope.row.outerCnyAmt).toFixed(2) }}
                             </div>
                             <div style="margin-top: 5px">
-                                <Progress style="margin-bottom: 3px" :rate="40" :color="'#FF8B2F'"
+                                  <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                                     class="precentCompentes" />
-                                <Progress :rate="60" :color="'#66FFFF'" class="precentCompentes" />
+                                <Progress :rate="scope.row.outerCnyAmtRatio*100" :color="'#66FFFF'" class="precentCompentes" />
                             </div>
                         </div>
                     </template>
@@ -70,33 +71,36 @@
                                 {{ scope.row.day }}
                             </div>
                             <div style="margin-top: 5px" v-if="headTitle.total.day!==null">
-                                <Progress style="margin-bottom: 3px" :rate="40" :color="'#FF8B2F'"
+                                  <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                                     class="precentCompentes" />
-                                <Progress :rate="60" :color="'#66FFFF'" class="precentCompentes" />
+                                <Progress :rate="scope.row.cnyAmtAllRatio*100" :color="'#66FFFF'" class="precentCompentes" />
                             </div>
                         </div>
                     </template>
                 </el-table-column>
                 <!-- <el-table-column v-for="(k,i) in tableList.headTitle.outSale" :label="k"></el-table-column> -->
             </el-table-column>
-            <el-table-column label="合计" align="center" height="20px" width="50">
+            <el-table-column :label="'合计-'+$store.state.unit" align="center" height="20px" width="50">
                 <!-- <el-table-column v-for="(k,i) in tableList.headTitle.totalDone" :label="k"></el-table-column> -->
                 <el-table-column :prop="headTitle.total.saleTaskAmtAll" :label="headTitle.total.title" align="center" height="20px">
                      <template v-slot="scope">
    
-                              {{ Number(scope.row.saleTaskAmtAll).toFixed(1) }}
+                              {{ Number(scope.row.saleTaskAmtAll).toFixed(2) }}
                      </template>
                 </el-table-column>
-                <el-table-column :prop="headTitle.total.orgQtyAll" :label="headTitle.total.text" align="center">
+
+              
+                <el-table-column :prop="headTitle.total.cnyAmtAll" :label="headTitle.total.text" align="center">
                     <template v-slot="scope">
                         <div class="precent">
+                      
                             <div style="width: 30px">
-                                {{ scope.row.orgQtyAll }}
+                           {{ Number(scope.row.cnyAmtAll).toFixed(2) }}
                             </div>
                             <div style="margin-top: 5px">
-                                <Progress style="margin-bottom: 3px" :rate="40" :color="'#FF8B2F'"
+                                  <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                                     class="precentCompentes" />
-                                <Progress :rate="60" :color="'#66FFFF'" class="precentCompentes" />
+                                <Progress :rate="scope.row.cnyAmtAllRatio*100" :color="'#66FFFF'" class="precentCompentes" />
                             </div>
                         </div>
                     </template>
@@ -109,9 +113,9 @@
                                 {{ scope.row.day }}
                             </div>
                             <div style="margin-top: 5px" v-if="headTitle.total.day!==null">
-                                <Progress style="margin-bottom: 3px" :rate="40" :color="'#FF8B2F'"
+                                <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                                     class="precentCompentes" />
-                                <Progress :rate="60" :color="'#66FFFF'" class="precentCompentes" />
+                                <Progress :rate="scope.row.cnyAmtAllRatio*100" :color="'#66FFFF'" class="precentCompentes" />
                             </div>
                         </div>
                     </template>
