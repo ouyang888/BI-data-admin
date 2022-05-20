@@ -39,7 +39,9 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
+                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}<span class="unit">{{ $store.state.unit
+                  }}</span>
+                  </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -135,7 +137,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ innerRightInfo.sumCnyamt || 0 }}<span class="unit">{{$store.state.unit}}</span>
+                    {{ innerRightInfo.sumCnyamt || 0 }}<span class="unit">{{ $store.state.unit }}</span>
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -230,7 +232,8 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
+                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}<span class="unit">{{ $store.state.unit
+                  }}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -327,7 +330,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ outterRightInfo.sumCnyamt || 0 }}<span class="unit">{{$store.state.unit}}</span>
+                    {{ outterRightInfo.sumCnyamt || 0 }}<span class="unit">{{ $store.state.unit }}</span>
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -450,7 +453,7 @@
         <div class="fang-color"></div>
       </div>
       <div class="select-box">
-        <selectTime @changeDate="changeDate"/>
+        <selectTime @changeDate="changeDate" />
       </div>
     </div>
 
@@ -478,10 +481,8 @@ export default {
   },
   data() {
     return {
-      dateTime: "2022-03",
-      dataTimeMany: "2022-01-01,2022-10-01,2022-01-01,2022-10-01",
       showLoading: false,
-
+      allInnerDirectDate: [],
       innerDirectList: [],
       innerDirectDate: [],
       innerDirectLine: "",
@@ -527,9 +528,9 @@ export default {
         ballTitle: "内销",
         bottom: "线上",
         top: "线下",
-        sabArr: { s: 0, a: 0, b: 0 },
-        topArr: { s: 0, a: 0, b: 0 },
-        bottomArr: { s: 0, a: 0, b: 0 },
+        sabArr: { S: 0, A: 0, B: 0 },
+        topArr: { S: 0, A: 0, B: 0 },
+        bottomArr: { S: 0, A: 0, B: 0 },
         // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
@@ -601,19 +602,19 @@ export default {
 
   },
   watch: {
-    ontime:{ /*监听月度 数据更改 调用接口 */
-     handler: function (newValue, oldValue) {
+    ontime: { /*监听月度 数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
         this.init(newValue);
       }
     },
-    model:{ /*监听产司 数据更改 调用接口 */
-      handler: function(newValue,oldValue){
+    model: { /*监听产司 数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
         this.init(this.ontime);
       }
 
     },
-    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
-      handler:function(newValue,oldValue){
+    showMoney: { /*监听金额:数量版 数据更改 调用接口 */
+      handler: function (newValue, oldValue) {
         this.init(this.ontime);
       }
     },
@@ -623,7 +624,7 @@ export default {
     //三个仪表盘(左中)
     async getdashboard(params) {
       try {
-        const res = await API.getData('innerDirectTopTotal',params);
+        const res = await API.getData('innerDirectTopTotal', params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
         if (res.rows.length < 1) {
@@ -702,7 +703,7 @@ export default {
     //三个仪表盘(右)
     async queryCardSAB(params) {
       try {
-        const res = await API.getData('innerDirectTopSAB',params);
+        const res = await API.getData('innerDirectTopSAB', params);
         let RightSAB = res.rows;
         if (RightSAB.length < 1) {
           this.sabData = {
@@ -726,15 +727,15 @@ export default {
               1
             );
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.s = (
+              this.sabData.topArr.S = (
                 RightSAB[i].level1PositionRatio * 100
               ).toFixed(2);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.a = (
+              this.sabData.topArr.A = (
                 RightSAB[i].level1PositionRatio * 100
               ).toFixed(2);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.b = (
+              this.sabData.topArr.B = (
                 RightSAB[i].level1PositionRatio * 100
               ).toFixed(2);
             }
@@ -758,15 +759,15 @@ export default {
               1
             );
             if (RightSAB[i].position == "S") {
-              this.sabData.bottomArr.s = (
+              this.sabData.bottomArr.S = (
                 RightSAB[i].level1PositionRatio * 100
               ).toFixed(2);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.bottomArr.a = (
+              this.sabData.bottomArr.A = (
                 RightSAB[i].level1PositionRatio * 100
               ).toFixed(2);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.bottomArr.b = (
+              this.sabData.bottomArr.B = (
                 RightSAB[i].level1PositionRatio * 100
               ).toFixed(2);
             }
@@ -782,55 +783,57 @@ export default {
       this.showLoading = true;
       try {
         const res = await API.getData(
-         'innerDirectChart', 
-         params
+          'innerDirectChart',
+          params
         );
 
-        if(res.rows.length<1){
-            this.allList = [0];
-            this.allLiine = '';
+        if (res.rows.length < 1) {
+          this.allList = [0];
+          this.allLiine = '';
           this.innerDirectDate = [];
-            this.innerDirectList = [0];
-            this.innerDirectLine = '';
+          this.allInnerDirectDate = [];
+          this.innerDirectList = [0];
+          this.innerDirectLine = '';
           this.outerDirectDate = [];
-            this.outerDirectList = [0];
-            this.outerDirectLine = '';
-            this.showLoading = false;
-            this.myEcharts();
-            this.myEcharts2();
-            this.myEcharts3();
-            return;
-        }else{
-           // 先清空数据再赋值
-              this.allList = [];
-              this.allLiine = '';
-              this.innerDirectDate = [];
-              this.innerDirectList = [];
-              this.innerDirectLine = '';
-              this.outerDirectDate = [];
-              this.outerDirectList = [];
-              this.outerDirectLine = '';
-          
+          this.outerDirectList = [0];
+          this.outerDirectLine = '';
+          this.showLoading = false;
+          this.myEcharts();
+          this.myEcharts2();
+          this.myEcharts3();
+          return;
+        } else {
+          // 先清空数据再赋值
+          this.allList = [];
+          this.allLiine = '';
+          this.innerDirectDate = [];
+          this.allInnerDirectDate = [];
+          this.innerDirectList = [];
+          this.innerDirectLine = '';
+          this.outerDirectDate = [];
+          this.outerDirectList = [];
+          this.outerDirectLine = '';
         }
         // debugger;
-       res.rows.forEach((item) => {
+        res.rows.forEach((item) => {
           if (item.cooprLevel1 == "线上") {
-            console.log(item.orderDate.substr(5));
-      
+            // console.log(item.orderDate.substr(5));
+
             this.innerDirectDate.push(item.orderDate.substr(5));
             this.innerDirectList.push(item.CnyAmt);
             this.innerDirectLine = item.saleAvgAmt || 0;
-     
+
           } else if (item.cooprLevel1 == "线下") {
             this.outerDirectDate.push(item.orderDate.substr(5));
             this.outerDirectList.push(item.CnyAmt);
             this.outerDirectLine = item.saleAvgAmt || 0;
-           
+
           }
 
           this.allList.push(item.totalCnyAmt);
+          this.allInnerDirectDate.push(item.orderDate.substr(5));
           this.allLiine = item.totalsaleAvgAmt || 0;
-         
+
         });
 
         this.myEcharts2();
@@ -878,7 +881,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: this.innerDirectDate,
+          data: this.allInnerDirectDate,
           axisTick: {
             show: false,
           },
@@ -1207,8 +1210,8 @@ export default {
       // try {
       this.showLoadingLeft = true;
       this.showLoadingRight = true;
-      const inner = await API.getData('innerDirectInOutKard',params);
-      const innersab = await API.getData('innerDirectRightSAB',params);
+      const inner = await API.getData('innerDirectInOutKard', params);
+      const innersab = await API.getData('innerDirectRightSAB', params);
       // console.log("inner,", inner);
       this.showLoadingLeft = false;
       this.showLoadingRight = false;
@@ -1260,8 +1263,8 @@ export default {
     async getTable(params) {
       // let time= params && params.splice('-','');
       try {
-        let tableInner = await API.getData("innerDirectOnOutline",params);
-        let tableOutter = await API.getData("innerDirectline",params);
+        let tableInner = await API.getData("innerDirectOnOutline", params);
+        let tableOutter = await API.getData("innerDirectline", params);
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
         this.tableInner = tableInner.rows.filter(v => {
@@ -1296,27 +1299,27 @@ export default {
     },
     init(ontime) { /*初始化数据方法*/
       // let tableParams = `${this.ontime},${this.ontime},${model},`;
-    
-    let params = {  /*年月*/
-      month_date:ontime
-    };
-    let listParams = { /*年月日*/
-      start_date:`${ontime}-01`,
-      end_date:`${ontime}-${this.$store.state.endDay}`
-    }
+
+      let params = {  /*年月*/
+        month_date: ontime
+      };
+      let listParams = { /*年月日*/
+        start_date: `${ontime}-01`,
+        end_date: `${ontime}-${this.$store.state.endDay}`
+      }
       this.getList(listParams);
       this.getdashboard(params);
       this.queryCardSAB(params);
       this.getCard(params);
       this.getTable(params);
     },
-    changeDate(start,end) { /*echart切换时间*/
-        let listParams = { /*年月日*/
-       start_date:start,
-      end_date:end
+    changeDate(start, end) { /*echart切换时间*/
+      let listParams = { /*年月日*/
+        start_date: start,
+        end_date: end
       }
-        this.getList(listParams);
-      },
+      this.getList(listParams);
+    },
   },
   created() {
     this.init(this.ontime);

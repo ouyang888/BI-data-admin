@@ -62,7 +62,7 @@ export default {
       // console.log(result);
       if (result.code === 0) {
         localStorage.setItem("token", result.data.sessionId);
-        localStorage.setItem("userName", result.data.loginName);
+        localStorage.setItem("userName", result.data.userName);
         this.cookie.set("JSESSIONID", result.data.sessionId);
         this.$router.push("/");
       }else{

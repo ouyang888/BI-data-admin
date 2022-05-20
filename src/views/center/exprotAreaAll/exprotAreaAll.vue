@@ -134,9 +134,9 @@ export default {
         ballTitle: "外销",
         bottom: "OBM",
         top: "OEM",
-        sabArr: { s: 0, a: 0, b: 0 },
-        topArr: { s: 0, a: 0, b: 0 },
-        bottomArr: { s: 0, a: 0, b: 0 },
+         sabArr: { S: 0, A: 0, B: 0 },
+        topArr: { S: 0, A: 0, B: 0  },
+        bottomArr: { S: 0, A: 0, B: 0  },
         // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
@@ -313,24 +313,24 @@ export default {
               RightSAB[i].AmtPositionRatio * 100
             ).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.s = (
+              this.sabData.topArr.S = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.s = (
+              this.sabData.sabArr.S = (
                 RightSAB[i].level2AmtPositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.a = (
+              this.sabData.topArr.A = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.a = (
+              this.sabData.sabArr.A = (
                 RightSAB[i].level2AmtPositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.b = (
+              this.sabData.topArr.B = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.b = (
+              this.sabData.sabArr.B = (
                 RightSAB[i].level2AmtPositionRatio * 100
               ).toFixed(1);
             }
@@ -339,15 +339,15 @@ export default {
               RightSAB[i].level1QtyPositionRatio * 100
             ).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.bottomArr.s = (
+              this.sabData.bottomArr.S = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.bottomArr.a = (
+              this.sabData.bottomArr.A = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.bottomArr.b = (
+              this.sabData.bottomArr.B = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
             }

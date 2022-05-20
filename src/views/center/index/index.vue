@@ -747,9 +747,9 @@ export default {
         ballTitle: "事业部",
         bottom: "外销",
         top: "内",
-        sabArr: { s: 0, a: 0, b: 0 },
-        topArr: { s: 0, a: 0, b: 0 },
-        bottomArr: { s: 0, a: 0, b: 0 },
+        sabArr: { S: 0, A: 0, B: 0 },
+        topArr: { S: 0, A: 0, B: 0  },
+        bottomArr: { S: 0, A: 0, B: 0  },
         // sabArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // topArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}],
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
@@ -1182,46 +1182,46 @@ export default {
           
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if (RightSAB[i].position == "S") {
-              this.sabData.sabArr.s = Number((RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.sabArr.S = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
               ));
      
             } else if (RightSAB[i].position == "A") {
-              this.sabData.sabArr.a = Number((RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.sabArr.A = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
               ));
             } else if (RightSAB[i].position == "B") {
-              this.sabData.sabArr.b = Number((RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.sabArr.B = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
               ));
             }
           } else if (RightSAB[i].directName == "内销") {
             this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.s = Number((RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.S = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
               ));
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.a = Number((RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.A = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
               ));
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.b = Number((RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.B = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
               ));
             }
           } else if (RightSAB[i].directName == "外销") {
             this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.bottomArr.s = Number((
+              this.sabData.bottomArr.S = Number((
                 RightSAB[i].positionRatio * 100
               ).toFixed(1));
             } else if (RightSAB[i].position == "A") {
-              this.sabData.bottomArr.a = Number((
+              this.sabData.bottomArr.A = Number((
                 RightSAB[i].positionRatio * 100
               ).toFixed(1));
             } else if (RightSAB[i].position == "B") {
-              this.sabData.bottomArr.b = Number((
+              this.sabData.bottomArr.B = Number((
                 RightSAB[i].positionRatio * 100
               ).toFixed(1));
             }

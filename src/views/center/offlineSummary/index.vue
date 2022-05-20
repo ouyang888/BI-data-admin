@@ -139,9 +139,9 @@ export default {
         ballTitle: "线下",
         top: "直营",
         bottom: "代运营",
-        sabArr: { s: 0, a: 0, b: 0 },
-        topArr: { s: 0, a: 0, b: 0 },
-        bottomArr: { s: 0, a: 0, b: 0 },
+         sabArr: { S: 0, A: 0, B: 0 },
+        topArr: { S: 0, A: 0, B: 0  },
+        bottomArr: { S: 0, A: 0, B: 0  },
       },
       cardData: [{}],
       showLoadingCard: true,
@@ -392,24 +392,24 @@ export default {
               RightSAB[i].operationPositionRatio * 100
             ).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.s = (
+              this.sabData.topArr.S = (
                 RightSAB[i].operationPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.s = (
+              this.sabData.sabArr.S = (
                 RightSAB[i].level1PositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.a = (
+              this.sabData.topArr.A = (
                 RightSAB[i].operationPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.a = (
+              this.sabData.sabArr.A = (
                 RightSAB[i].level1PositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.b = (
+              this.sabData.topArr.B = (
                 RightSAB[i].operationPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.b = (
+              this.sabData.sabArr.B = (
                 RightSAB[i].level1PositionRatio * 100
               ).toFixed(1);
             }
@@ -418,15 +418,15 @@ export default {
               RightSAB[i].level1QtyPositionRatio * 100
             ).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.bottomArr.s = (
+              this.sabData.bottomArr.S = (
                 RightSAB[i].operationPositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.bottomArr.a = (
+              this.sabData.bottomArr.A = (
                 RightSAB[i].operationPositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.bottomArr.b = (
+              this.sabData.bottomArr.B = (
                 RightSAB[i].operationPositionRatio * 100
               ).toFixed(1);
             }

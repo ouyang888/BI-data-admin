@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="flex-header">
-      <div class="flex-font-left">  
+      <div class="flex-font-left">
         <div @click="clickChange(1)" :class="index == 1 ? 'head-box active' : 'head-box'">
           <span>PSI</span>
         </div>
@@ -80,7 +80,8 @@
           <div class="head-box-right right-width drop-month">
             <span>{{year}}{{month}}<a-icon type="down" style="padding-left: 3px; font-size: 14px" /></span>
             <div class="drop-down drop-down-year">
-              <div v-for="(item,i) in timeList" :key="i+12" class="down-font-year" @click="changemonth(item)">{{item}}</div>
+              <div v-for="(item, i) in timeList" :key="i + 12" class="down-font-year" @click="changemonth(item)">{{ item }}
+              </div>
               <!-- <div class="down-font-year" @click="changemonth('04')">4</div>
               <div class="down-font-year" @click="changemonth('05')">5</div> -->
             </div>
@@ -110,10 +111,10 @@ export default {
       land: "产地",
       direction: 1,
       year: new Date().getFullYear(),
-      month:'01',
+      month: '01',
       date: new Date(),
-      userName:"",
-      timeList:[],/*月度选项列表*/
+      userName: "",
+      timeList: [],/*月度选项列表*/
     };
   },
   computed: {
@@ -132,9 +133,9 @@ export default {
       if (val.meta.preMenuUrl || this.$route.path) {
         this.searchKeys = [this.$route.path, val.meta.preMenuUrl || ""];
         console.log("路由", val.name);
-       if(val.name =='psi'){
+        if (val.name == 'psi') {
           this.index = 1;
-        }else{
+        } else {
           this.index = 2;
         }
         this.getPageName(val.name);
@@ -231,11 +232,11 @@ export default {
           this.$store.commit("setCurrPath", " 内销线下汇总产司页  ");
           break;
 
-            case "exportDepartment":
+        case "exportDepartment":
           this.title = "外销产司汇总页";
           this.$store.commit("setCurrPath", " 外销产司汇总页  ");
           break;
-          case "exprotAreaAllDepartment":
+        case "exprotAreaAllDepartment":
           this.title = "外销大区产司汇总页";
           this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
           break;
@@ -267,17 +268,20 @@ export default {
       }
     },
 
-    async menuInfo(){
+    async menuInfo() {
       let res = await API.menuList();
-      console.log("22222res",res)
+      console.log("22222res", res)
     },
 
     changedirection(index) {
       this.direction = index;
       let urlName = this.$route.name;
-      if (index == "1") {
+      if (index == "1" && urlName != "offlineSummaryDepartment") {
         this.$router.push("/center/index");
         this.title = "销向汇总页";
+      } else if (index == "1" && urlName == "offlineSummaryDepartment") {
+        this.$router.push("/center/offlineSummary");
+        this.title = "内销线下汇总";
       }
       if (index == "2" && urlName == "psi") {
         this.$router.push("/center/department");
@@ -291,15 +295,15 @@ export default {
       } else if (index == "2" && urlName == "offlineSummary") {
         this.$router.push("/center/offlineSummaryDepartment");
         this.title = "线下汇总产司页";
-      }else if (index == "2" && urlName == "export") {
+      } else if (index == "2" && urlName == "export") {
         this.$router.push("/center/exportDepartment");
         this.title = "外销产司汇总页";
-      }else if (index == "2" && urlName == "exprotAreaAll") {
-        console.log(this.$route.key);
-       
-
-        this.$router.push({name:'exprotAreaAllDepartment',query:{key:this.$route.key}});
+      } else if (index == "2" && urlName == "exprotAreaAll") {
+        this.$router.push({ name: 'exprotAreaAllDepartment', query: { key: this.$route.key } });
         this.title = "外销大区产司汇总页";
+      } else if (index == "2" && urlName == "index") {
+        this.$router.push("/center/department");
+        this.title = "产司汇总页";
       }
       // else {
 
@@ -316,14 +320,14 @@ export default {
       this.$store.commit("setYear", item);
     },
     changemonth(item) {
-      this.month  =  item.substr(4); /*获取选项里的月份*/
-      let year = item.substr(0,2);
+      this.month = item.substr(4); /*获取选项里的月份*/
+      let year = item.substr(0, 2);
       let val = this.month.length < 2 ? "0" + this.month : this.month;
-      
+
       // this.$store.commit("setYear",'2022');
       this.$store.commit("setMonth", val);
       ;
-      this.$store.commit('setEndDay',new Date(year,val,'0').getDate());
+      this.$store.commit('setEndDay', new Date(year, val, '0').getDate());
       // let date = new Date()
 
 
@@ -356,15 +360,15 @@ export default {
     localStorage.removeItem("showMoney");
     this.userName = localStorage.getItem("userName");
   },
-  created(){
-    let month = this.date.getMonth()+1;
-    let currMonth = month>=10?month:'0'+month;
+  created() {
+    let month = this.date.getMonth() + 1;
+    let currMonth = month >= 10 ? month : '0' + month;
     this.month = currMonth;
 
-    this.$store.commit('setEndDay',new Date(this.year,currMonth,'0').getDate());
-  
-    for(var i = month-2;i<=month;i++){
-      let onMonth = i>=10?i:'0'+i;
+    this.$store.commit('setEndDay', new Date(this.year, currMonth, '0').getDate());
+
+    for (var i = month - 2; i <= month; i++) {
+      let onMonth = i >= 10 ? i : '0' + i;
       // debugger
       this.timeList.push(`${this.year}${onMonth}`)
     }
