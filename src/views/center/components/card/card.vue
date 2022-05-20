@@ -22,7 +22,7 @@
               </div>
             </div>
             <div class="flex-top-card">
-              <div class="card-big-num">{{v[cardObj.cnyAmt]}}{{$store.state.unit}}</div>
+              <div class="card-big-num">{{v[cardObj.cnyAmt]}}<span class="unit">{{$store.state.unit}}</span></div>
                <div class="flex-finish">
                 <!-- <div class="finish-font">进度 <span>s</span></div>
                 <div class="finish-font">完成率 <span>75%</span></div> -->
@@ -156,9 +156,9 @@
           this.showLoading = true;
           let arr = JSON.parse(JSON.stringify(newValue));
           arr && arr.forEach(v => {
-            v[this.cardObj.cnyAmt] =  (v[this.cardObj.cnyAmt]).toFixed(1);
+            v[this.cardObj.cnyAmt] =  (v[this.cardObj.cnyAmt]).toFixed(2);
           
-            v[this.cardObj.saleTaskAmt] =  (v[this.cardObj.saleTaskAmt]).toFixed(1);
+            v[this.cardObj.saleTaskAmt] =  (v[this.cardObj.saleTaskAmt]).toFixed(2);
             v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(0));
             if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
             v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/

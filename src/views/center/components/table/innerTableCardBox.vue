@@ -1,9 +1,6 @@
 <template>
-  <div class="table-box">
-    <div
-      class="table"
-      style="margin-top: 10px"
-    >
+  <div class="table-box" style="margin-top: 10px">
+  
       <SellSportTable
         :mesInfo="leftData"
         :title="title1"
@@ -18,7 +15,6 @@
         :headerObj="rightObj"
         @handleClick="managerClick"
       />
-    </div>
   </div>
 </template>
 <script>
@@ -2993,11 +2989,17 @@ export default {
 };
 </script>
 <style scoped>
-.table {
-  width: 98%;
+.table-box{
+  width:98%;
   height: 330px;
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
+}  
+.table {
+  width: 100%;
+}
+::v-deep .execl-box{
+  background: #041370;
 }
 </style>
