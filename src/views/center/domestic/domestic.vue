@@ -1225,8 +1225,8 @@ export default {
         v.dateRadio = v.dateRadio * 100;
         v.onLineRadio = (v.onLineRadio * 100).toFixed(0);
         v.onLineProfitRadio = (v.onLineProfitRadio * 100).toFixed(2);
-        v.sumCnyamt = v.sumCnyamt.toFixed(1);
-        v.saleTaskAmt = v.saleTaskAmt.toFixed(1);
+        v.sumCnyamt = v.sumCnyamt.toFixed(2);
+        v.saleTaskAmt = v.saleTaskAmt.toFixed(2);
       });
 
       this.outterLeft = inner.rows.filter((v) => {
