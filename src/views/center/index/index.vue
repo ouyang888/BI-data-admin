@@ -1103,34 +1103,34 @@ export default {
       
         this.progressData.ballNum = Number((
           panelDataList[0].grossProfitRadio * 100
-        ).toFixed(1));
+        ).toFixed(2));
         this.speedData.speedBar = Number((panelDataList[0].cnyAmt * 100).toFixed(2));
-        this.speedData.bar = Number((panelDataList[0].dateRadio * 100).toFixed(1));
+        this.speedData.bar = Number((panelDataList[0].dateRadio * 100).toFixed(2));
         this.speedData.ballNum = Number(panelDataList[0].sumCnyAmt.toFixed(2));
         this.speedData.bottomNum = Number(panelDataList[0].saleTaskAmt.toFixed(2));
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].directName == "内销") {
             this.progressData.bar1 = Number((
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1));
+            ).toFixed(2));
             this.progressData.topGPM = Number((
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1));
+            ).toFixed(2));
             this.speedData.ballLeftNum = Number(panelDataList[i].cnyAmt.toFixed(2));
             this.speedData.bottomClose =Number(
-              panelDataList[i].cnyAmtRadio.toFixed(1));
-            this.speedData.bottomTime =Number( panelDataList[i].dateRadio.toFixed(1));
+              panelDataList[i].cnyAmtRadio.toFixed(2));
+            this.speedData.bottomTime =Number(( panelDataList[i].dateRadio*100).toFixed(2));
           } else if (panelDataList[i].directName == "外销") {
             this.progressData.bar2 = Number((
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1));
+            ).toFixed(2));
             this.progressData.bottomGPM = Number((
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1));
+            ).toFixed(2));
             this.speedData.ballRightNum = Number(panelDataList[i].cnyAmt.toFixed(2));
             this.speedData.bottomClose1 =Number(
-              panelDataList[i].cnyAmtRadio.toFixed(1));
-            this.speedData.bottomTime1 = Number(panelDataList[i].dateRadio.toFixed(1));
+              panelDataList[i].cnyAmtRadio.toFixed(2));
+            this.speedData.bottomTime1 = Number(panelDataList[i].dateRadio*100).toFixed(2);
           }
         }
         // console.log('this.speedData',this.speedData)
@@ -1180,7 +1180,7 @@ export default {
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].directName == "事业部") {
           
-            // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
+            // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(2)
             if (RightSAB[i].position == "S") {
               this.sabData.sabArr.S = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
@@ -1196,7 +1196,7 @@ export default {
               ));
             }
           } else if (RightSAB[i].directName == "内销") {
-            this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
+            this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(2);
             if (RightSAB[i].position == "S") {
               this.sabData.topArr.S = Number((RightSAB[i].positionRatio * 100).toFixed(
                 1
@@ -1211,19 +1211,19 @@ export default {
               ));
             }
           } else if (RightSAB[i].directName == "外销") {
-            this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(1);
+            this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(2);
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.S = Number((
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1));
+              ).toFixed(2));
             } else if (RightSAB[i].position == "A") {
               this.sabData.bottomArr.A = Number((
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1));
+              ).toFixed(2));
             } else if (RightSAB[i].position == "B") {
               this.sabData.bottomArr.B = Number((
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1));
+              ).toFixed(2));
             }
           }
         }

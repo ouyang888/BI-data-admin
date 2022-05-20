@@ -340,36 +340,36 @@ export default {
         let panelDataList = res.rows;
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
-        ).toFixed(1);
-        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
+        ).toFixed(2);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
         this.speedData.speedBar = (
           panelDataList[0].businessModelAmtRadio * 100
-        ).toFixed(1);
-        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1);
-        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1);
+        ).toFixed(2);
+        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(2);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2);
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].businessModel == "直营") {
             this.progressData.topGPM = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.bar1 = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1);
+            ).toFixed(2);
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2);
             this.speedData.bottomClose =
-              panelDataList[i].businessModelAmtRadio.toFixed(1);
-            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
+              panelDataList[i].businessModelAmtRadio.toFixed(2);
+            this.speedData.bottomTime =(panelDataList[i].dateRadio*100).toFixed(2);
           } else if (panelDataList[i].businessModel == "代运营") {
             this.progressData.bottomGPM = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.bar2 = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1);
+            ).toFixed(2);
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2);
             this.speedData.bottomClose1 =
-              panelDataList[i].businessModelAmtRadio.toFixed(1);
-            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1);
+              panelDataList[i].businessModelAmtRadio.toFixed(2);
+            this.speedData.bottomTime1 = (panelDataList[i].dateRadio*100).toFixed(2);
           }
         }
       } catch (error) {
@@ -390,45 +390,45 @@ export default {
           if (RightSAB[i].businessModel == "直营") {
             this.sabData.bar1 = (
               RightSAB[i].operationPositionRatio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             if (RightSAB[i].position == "S") {
               this.sabData.topArr.S = (
                 RightSAB[i].operationPositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
               this.sabData.sabArr.S = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "A") {
               this.sabData.topArr.A = (
                 RightSAB[i].operationPositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
               this.sabData.sabArr.A = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "B") {
               this.sabData.topArr.B = (
                 RightSAB[i].operationPositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
               this.sabData.sabArr.B = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             }
           } else if (RightSAB[i].businessModel == "代运营") {
             this.sabData.bar2 = (
               RightSAB[i].level1QtyPositionRatio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.S = (
                 RightSAB[i].operationPositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "A") {
               this.sabData.bottomArr.A = (
                 RightSAB[i].operationPositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "B") {
               this.sabData.bottomArr.B = (
                 RightSAB[i].operationPositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             }
           }
         }
@@ -713,21 +713,22 @@ export default {
         res.rows.length > 0 &&
           res.rows.forEach((v) => {
             if (!!v.cnyAmt) {
-              v.cnyAmt = v.cnyAmt.toFixed(0);
+              v.cnyAmt = v.cnyAmt.toFixed(2);
             }
             if (!!v.saleTaskAmt) {
-              v.saleTaskAmt = v.saleTaskAmt.toFixed(0);
+              v.saleTaskAmt = v.saleTaskAmt.toFixed(2);
             }
+            v.dateRadio = v.dateRadio*100;
 
             if (!!v.saleAmtRadio) {
               v.saleAmtRadio = (
                 v.saleAmtRadio * 100 > 100 ? 100 : v.saleAmtRadio * 100
-              ).toFixed(0);
+              ).toFixed(2);
             }
             if (!!v.saleQtyRadio) {
               v.saleQtyRadio = (
                 v.saleQtyRadio * 100 > 100 ? 100 : v.saleQtyRadio * 100
-              ).toFixed(0);
+              ).toFixed(2);
             }
           });
 

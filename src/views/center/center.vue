@@ -75,7 +75,7 @@
               <div class="down-font-year" @click="changeyear('2022')">2022</div>
               <div class="down-font-year" @click="changeyear('2021')">2021</div>
             </div> -->
-            <span>(建设中)</span>
+            <span @click="changeyear">年度</span>
           </div>
           <div class="head-box-right right-width drop-month">
             <span>{{year}}{{month}}<a-icon type="down" style="padding-left: 3px; font-size: 14px" /></span>
@@ -316,8 +316,12 @@ export default {
     },
 
     changeyear(item) {
-      this.year = item;
-      this.$store.commit("setYear", item);
+      this.$message({
+          message: '模块建设中...',
+          type: 'success'
+        });
+      // this.year = item;
+      // this.$store.commit("setYear", item);
     },
     changemonth(item) {
       this.month = item.substr(4); /*获取选项里的月份*/

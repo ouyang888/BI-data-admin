@@ -64,7 +64,7 @@
       >
         <template v-slot="scope">
           <div class="precent">
-            <div class="precent-in">
+            <div class="precent-in" style="width: 48px">
               {{
                 scope.row.amtRadio
                   ? Math.round(scope.row.amtRadio) + "%"

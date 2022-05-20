@@ -243,6 +243,7 @@
     background-repeat: no-repeat;
     /* margin-right: 20px; */
     background-size: 100%;
+    width:33%;
   }
 
   .card-font {
@@ -274,7 +275,7 @@
   .top-left-font {
     font-size: 14px;
     color: #fff;
-    margin-right: 20px;
+    margin-right: 10px;
   }
 
   .card-border-box {

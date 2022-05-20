@@ -686,10 +686,10 @@ export default {
             // this.progressData.bar1 = 10;
             this.progressData.bottomGPM = (
               panelDataList[i].onLineProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.bar2 = (
               panelDataList[i].onLineProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.speedData.ballRightNum = !!panelDataList[i].cnyAmt?panelDataList[i].cnyAmt.toFixed(2):0;
             this.speedData.bottomClose1 =
             !!panelDataList[i].cnyAmtRadio?(panelDataList[i].cnyAmtRadio*100).toFixed(2):0;
@@ -726,8 +726,9 @@ export default {
             this.sabData.bar1 = (RightSAB[i].level1PositionRatio * 100).toFixed(
               1
             );
+
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.S = (
+              this.sabData.topArr.  S = (
                 RightSAB[i].level1PositionRatio * 100
               ).toFixed(2);
             } else if (RightSAB[i].position == "A") {
@@ -739,17 +740,18 @@ export default {
                 RightSAB[i].level1PositionRatio * 100
               ).toFixed(2);
             }
+       
 
             if (RightSAB[i].position == "S") {
-              this.sabData.sabArr.s = (
+              this.sabData.sabArr.  S = (
                 RightSAB[i].directPositionRatio * 100
               ).toFixed(2);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.sabArr.a = (
+              this.sabData.sabArr.A = (
                 RightSAB[i].directPositionRatio * 100
               ).toFixed(2);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.sabArr.b = (
+              this.sabData.sabArr.B = (
                 RightSAB[i].directPositionRatio * 100
               ).toFixed(2);
             }

@@ -4,7 +4,7 @@
     <!-- :summary-method="getSummaries" -->
     <el-table border :data="mesInfo" :span-method="objectSpanMethod" 
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
-      :header-cell-style="headerCellStyle" class="execl-box" height="287">
+      :header-cell-style="headerCellStyle" class="execl-box" height="287" >
       <!-- v-if="router !== 'domesticDepartment' -->
       <el-table-column :prop="headerObj.marketChannel" align="center" :label="directName"></el-table-column>
       <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode"></el-table-column>
@@ -16,10 +16,10 @@
             </div>
           </template>
       </el-table-column>
-      <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center">
+      <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center" width="120">
         <template v-slot="scope">
           <div class="precent">
-            <div style="width: 30px">{{ scope.row[i].toFixed(0)}}</div>
+            <div style="width: 48px">{{ scope.row[i].toFixed(0)}}</div>
             <div style="margin-top: 5px"> 
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
@@ -28,10 +28,10 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="cnyAmt" label="总计" align="center">
+      <el-table-column prop="cnyAmt" label="总计" align="center" width="100">
         <template v-slot="scope">
           <div class="precent">
-            <div>{{ scope.row.cnyAmt.toFixed(0) }}</div>
+            <div style="width: 48px">{{ scope.row.cnyAmt.toFixed(0) }}</div>
             <div style="margin-top: 5px">
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />

@@ -15,7 +15,7 @@
                     style="font-weight: 400">
                     <template v-slot="scope">
                         <div class="precent">
-                            <div style="width: 30px">
+                            <div style="width: 46px">
                                 {{ scope.row.innerCnyAmt.toFixed(2) }}
                             </div>
                             <div style="margin-top: 5px">
@@ -29,7 +29,7 @@
                    <el-table-column v-if="headTitle.total.day!==null&&headTitle.total.day !==undefined" :prop="headTitle.total.day" :label="headTitle.total.day" align="center">
                     <template v-slot="scope" v-if="headTitle.total.day!==null">
                         <div class="precent" v-if="headTitle.total.day!==null">
-                            <div style="width: 30px">
+                            <div style="width: 46px">
                                 {{ scope.row.day }}
                             </div>
                             <div style="margin-top: 5px" v-if="headTitle.total.day!==null">
@@ -53,7 +53,7 @@
                 <el-table-column :prop="headTitle.outSale.outerCnyAmt" :label="headTitle.outSale.text" align="center" height="20px" >
                     <template v-slot="scope">
                         <div class="precent">
-                            <div style="width: 30px">
+                            <div style="width: 46px">
                                  {{ Number(scope.row.outerCnyAmt).toFixed(2) }}
                             </div>
                             <div style="margin-top: 5px">
@@ -67,7 +67,7 @@
                    <el-table-column v-if="headTitle.total.day!==null&&headTitle.total.day !==undefined" :prop="headTitle.total.day" :label="headTitle.total.day" align="center">
                     <template v-slot="scope" v-if="headTitle.total.day!==null">
                         <div class="precent" v-if="headTitle.total.day!==null">
-                            <div style="width: 30px">
+                            <div style="width: 46px">
                                 {{ scope.row.day }}
                             </div>
                             <div style="margin-top: 5px" v-if="headTitle.total.day!==null">
@@ -94,7 +94,7 @@
                     <template v-slot="scope">
                         <div class="precent">
                       
-                            <div style="width: 30px">
+                            <div style="width: 46px">
                            {{ Number(scope.row.cnyAmtAll).toFixed(2) }}
                             </div>
                             <div style="margin-top: 5px">
@@ -109,7 +109,7 @@
                 <el-table-column v-if="headTitle.total.day!==null&&headTitle.total.day !==undefined" :prop="headTitle.total.day" :label="headTitle.total.day" align="center">
                     <template v-slot="scope" v-if="headTitle.total.day!==null">
                         <div class="precent" v-if="headTitle.total.day!==null">
-                            <div style="width: 30px">
+                            <div style="width: 46px">
                                 {{ scope.row.day }}
                             </div>
                             <div style="margin-top: 5px" v-if="headTitle.total.day!==null">
