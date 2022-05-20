@@ -610,24 +610,24 @@ export default {
           if (RightSAB[i].businessModel == "直营") {
             this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.s = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.S = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
-              this.sabData.sabArr.s = (
+              this.sabData.sabArr.S = (
                 RightSAB[i].saleVolumePositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.a = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.A = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
-              this.sabData.sabArr.a = (
+              this.sabData.sabArr.A = (
                 RightSAB[i].saleVolumePositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.b = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.B = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
-              this.sabData.sabArr.b = (
+              this.sabData.sabArr.B = (
                 RightSAB[i].saleVolumePositionRatio * 100
               ).toFixed(1);
             }
@@ -636,15 +636,15 @@ export default {
               RightSAB[i].level1QtyPositionRatio * 100
             ).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.bottomArr.s = (
+              this.sabData.bottomArr.S = (
                 RightSAB[i].positionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.bottomArr.a = (
+              this.sabData.bottomArr.A = (
                 RightSAB[i].positionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.bottomArr.b = (
+              this.sabData.bottomArr.B = (
                 RightSAB[i].positionRatio * 100
               ).toFixed(1);
             }

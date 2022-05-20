@@ -620,30 +620,30 @@ this.$router.push("/center/index")
           if(RightSAB[3].directName == "内销"){
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if(RightSAB[i].position == "S"){
-              this.sabData.sabArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.sabArr.S = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "A"){
-              this.sabData.sabArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.sabArr.A = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "B"){
-              this.sabData.sabArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.sabArr.B = (RightSAB[i].positionRatio*100).toFixed(1)
             }
           } if(RightSAB[i].directName == "内销"){
             this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
              if(RightSAB[i].position == "S"){
-              this.sabData.topArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.topArr.S = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "A"){
-              this.sabData.topArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.topArr.A = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "B"){
-              this.sabData.topArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.topArr.B = (RightSAB[i].positionRatio*100).toFixed(1)
             }
           }
           if(RightSAB[i].directName == "外销"){
               this.sabData.bar2 = (RightSAB[i].positionRatio*100).toFixed(1)
              if(RightSAB[i].position == "S"){
-              this.sabData.bottomArr.s = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.bottomArr.S = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "A"){
-              this.sabData.bottomArr.a = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.bottomArr.A = (RightSAB[i].positionRatio*100).toFixed(1)
             }else if(RightSAB[i].position == "B"){
-              this.sabData.bottomArr.b = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.bottomArr.B = (RightSAB[i].positionRatio*100).toFixed(1)
             }
           }
         }

@@ -325,24 +325,24 @@ export default {
               RightSAB[i].obmOemPositionRatio * 100
             ).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.s = (
+              this.sabData.topArr.S = (
                 RightSAB[i].obmOemPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.s = (
+              this.sabData.sabArr.S = (
                 RightSAB[i].directPositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.a = (
+              this.sabData.topArr.A = (
                 RightSAB[i].obmOemPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.a = (
+              this.sabData.sabArr.A = (
                 RightSAB[i].directPositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.b = (
+              this.sabData.topArr.B = (
                 RightSAB[i].obmOemPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.b = (
+              this.sabData.sabArr.B = (
                 RightSAB[i].directPositionRatio * 100
               ).toFixed(1);
             }
@@ -351,15 +351,15 @@ export default {
               RightSAB[i].level1QtyPositionRatio * 100
             ).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.bottomArr.s = (
+              this.sabData.bottomArr.S = (
                 RightSAB[i].obmOemPositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.bottomArr.a = (
+              this.sabData.bottomArr.A = (
                 RightSAB[i].obmOemPositionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.bottomArr.b = (
+              this.sabData.bottomArr.B = (
                 RightSAB[i].obmOemPositionRatio * 100
               ).toFixed(1);
             }

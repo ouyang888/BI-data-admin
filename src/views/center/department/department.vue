@@ -413,15 +413,15 @@ export default {
           if (RightSAB[3].directName == "内销") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if (RightSAB[i].position == "S") {
-              this.sabData.sabArr.s = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
+              this.sabData.sabArr.S = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "A") {
-              this.sabData.sabArr.a = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
+              this.sabData.sabArr.A = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "B") {
-              this.sabData.sabArr.b = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
+              this.sabData.sabArr.B = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             }
@@ -429,15 +429,15 @@ export default {
            if (RightSAB[i].directName == "内销") {
             this.sabData.bar1 = (RightSAB[i].totalAmtSabRadio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.s = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
+              this.sabData.topArr.S = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.a = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
+              this.sabData.topArr.A = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.b = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
+              this.sabData.topArr.B = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
                 1
               );
             }
@@ -445,15 +445,15 @@ export default {
           if (RightSAB[i].directName == "外销") {
             this.sabData.bar2 = (RightSAB[i].totalAmtSabRadio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.bottomArr.s = (
+              this.sabData.bottomArr.S = (
                 RightSAB[i].totalAmtSabRadio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.bottomArr.a = (
+              this.sabData.bottomArr.A = (
                 RightSAB[i].totalAmtSabRadio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.bottomArr.b = (
+              this.sabData.bottomArr.B = (
                 RightSAB[i].totalAmtSabRadio * 100
               ).toFixed(1);
             }

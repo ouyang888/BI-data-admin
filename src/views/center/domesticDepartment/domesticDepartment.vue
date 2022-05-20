@@ -409,45 +409,45 @@ export default {
           if (RightSAB[i].cooprLevel1 == "线上") {
             this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.s = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.S = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.a = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.A = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.b = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.topArr.B = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
             }
           } else if (RightSAB[i].cooprLevel1 == "线下") {
             this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.bottomArr.s = (
+              this.sabData.bottomArr.S = (
                 RightSAB[i].positionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.bottomArr.a = (
+              this.sabData.bottomArr.A = (
                 RightSAB[i].positionRatio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.bottomArr.b = (
+              this.sabData.bottomArr.B = (
                 RightSAB[i].positionRatio * 100
               ).toFixed(1);
             }
           } else if (RightSAB[i].cooprLevel1 == "总") {
             this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.sabArr.s = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.sabArr.S = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "A") {
-              this.sabData.sabArr.a = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.sabArr.A = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "B") {
-              this.sabData.sabArr.b = (RightSAB[i].positionRatio * 100).toFixed(
+              this.sabData.sabArr.B = (RightSAB[i].positionRatio * 100).toFixed(
                 1
               );
             }
