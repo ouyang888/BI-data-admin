@@ -475,7 +475,7 @@ export default {
         for (let j = arr.length; j < noDatalen; j++) {
 
 
-          this.myEcharts2([0], [], '', j);
+          this.myEcharts2([], [], '', j);
 
 
         }

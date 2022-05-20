@@ -382,8 +382,10 @@ export default {
         );
 
         if (res.code != 200) return;
+       
 
         res.rows.filter((item) => {
+          if(item.businessEntityName=='总'){
           var timeArr = item.orderDate
             .replace(" ", ":")
             .replace(/\:/g, "-")
@@ -398,8 +400,10 @@ export default {
             this.AvgTaskAmtLine = item.tAvgQty;
             this.myEcharts();
           }
+        }
           // this.showLoading = false;
         });
+    
       } catch (error) {
         console.log(error);
       }
@@ -427,10 +431,12 @@ export default {
         var arr = [];
         for (var i in obj) {
           // console.log("11111111111", obj[i]);
+        //  if(obj[i][0].businessEntityName!='外销日达成' && obj[i][0].businessEntityName!='isNull'){ 
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
+        // }
         }
         // console.log("obj", obj);
 
@@ -465,6 +471,17 @@ export default {
           // console.log("Arrnum", this.sellOutDataList);
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
+        }
+
+      // 处理空数据
+      let noDatalen = 6 -  arr.length;
+
+        for (let j = arr.length; j < noDatalen; j++) {
+
+
+          this.myEcharts2([], [], '', j);
+
+
         }
       } catch (error) {
         console.log(error);
