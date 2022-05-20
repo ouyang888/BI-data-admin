@@ -31,6 +31,8 @@
                        <span v-if="departmentInfo.cnyAmtRadio===null"
                         >0%</span
                       >
+                   
+  
                         <span v-else
                         >{{
                           Number(departmentInfo.cnyAmtRadio*100).toFixed(2) > 100
@@ -129,6 +131,7 @@
                   </div>
                 </div>
               </div>
+    
               <div class="mt-border"></div>
               <div class="centerInfo"  >
                 <div class="flex-top-card">
@@ -146,14 +149,14 @@
                       <span
                         >
                     
-                       <span v-if="departmentInfo.cnyAmtRadio===null"
+                       <span v-if="departmentInfo1.cnyAmtRadio===null"
                         >0%</span
                       >
                         <span v-else
                         >{{
-                          Number(departmentInfo.cnyAmtRadio*100).toFixed(2) > 100
+                          Number(departmentInfo1.cnyAmtRadio*100).toFixed(2) > 100
                             ? 100
-                            :Number(departmentInfo.cnyAmtRadio*100).toFixed(2)
+                            :Number(departmentInfo1.cnyAmtRadio*100).toFixed(2)
                         }}%</span
                       >
                         
@@ -2058,11 +2061,12 @@ export default {
         this.homeGrossProfitRadio = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName ==this.sale;
         })[0];
+              console.log("外销",this.homeGrossProfitRadio);
       
            this.departmentInfo1 = res.rows.filter((v) => {
           return v.directName == this.sales;
         })[0];
-        // console.log("外销",this.departmentInfo1);
+        console.log("外销",this.departmentInfo1);
 
         this.processInfo1 = res.rows.filter((v) => {
           return v.directName == "外销";
