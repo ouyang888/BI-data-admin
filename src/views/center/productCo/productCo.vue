@@ -79,7 +79,7 @@ export default {
         'title':'category', /*标题*/
         'cnyAmt':'cnyAmt',/*金额*/
        'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
-       'saleAmtRadio':'cnyAmtRadio',  /*金额完成率*/
+       'cnyAmtRadio':'cnyAmtRadio',  /*金额完成率*/
        'cooprLevel1':'directName'  /*线上/线下 金额完成率*/
       },
       
@@ -1840,9 +1840,9 @@ this.$router.push("/center/index")
   border: 1px solid rgba(255, 255, 255, 0.24);
   width: 1px;
 }
-.card-big-num {
+::v-deep .card-big-num {
   color: #66ffff;
-  font-size: 18px;
+  font-size: 16px;
 }
 .progress {
   width: 60px;

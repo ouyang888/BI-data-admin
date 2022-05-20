@@ -1,9 +1,7 @@
 <template>
   <div class="flex-card" >
-
     <a-spin class="flex-loading" size="large" v-if="showLoading" />
     <div class="card-box"  v-for="(v,i) in cardList"   :key="i" v-else>
-    
       <div class="card-font" @click="gotoCatSeries(v[cardObj.title])" v-if="i<6" >{{v[cardObj.title]}} </div>
       <div class="card-border-box" v-if="i<6" >
         <div class="line"></div>
@@ -16,12 +14,12 @@
             <div class="flex-top-card">
               <div class="top-left-font">实时达成</div>
               <div class="flex-finish">
-                <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}亿</span></div>
+                <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}{{modelLabel}}</span></div>
                 <div class="finish-font">完成率 <span>{{v[cardObj.cnyAmtRadio]}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
-              <div class="card-big-num">{{v[cardObj.cnyAmt]}}亿</div>
+              <div class="card-big-num">{{v[cardObj.cnyAmt]}}{{modelLabel}}</div>
                <div class="flex-finish">
             
               </div>
@@ -133,7 +131,7 @@
         'title':'cooprLevel2', /*标题*/
        'cnyAmt':'cnyAmt',/*金额*/
        'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
-       'saleAmtRadio':'saleAmtRadio',  /*金额完成率*/
+       'cnyAmtRadio':'cnyAmtRadio',  /*金额完成率*/
        'cooprLevel1':'cooprLevel1'  /*线上/线下 金额完成率*/
 
         } },
@@ -160,10 +158,10 @@
     computed:{
      name(){
        return this.$route.name;
-     }
-
-
-
+     },
+    modelLabel(){
+      return this.$store.state.showMoney==true?'亿':'万'
+    }
     },
     watch:{
       cardObj:{
@@ -473,7 +471,7 @@
 
   .card-big-num {
     color: #66ffff;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .progress {
