@@ -1,8 +1,8 @@
 <template>
   <div class="execl">
+    <!-- show-summary=true -->
+    <!-- :summary-method="getSummaries" -->
     <el-table border :data="mesInfo" :span-method="objectSpanMethod" 
-     show-summary=true
-     :summary-method="getSummaries"
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" height="287">
       <!-- v-if="router !== 'domesticDepartment' -->
