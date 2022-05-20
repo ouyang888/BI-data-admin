@@ -4,6 +4,7 @@
       border
       :data="mesInfo"
       :span-method="objectSpanMethod"
+      show-summary
       width="864px"
       class="execl-box"
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }"

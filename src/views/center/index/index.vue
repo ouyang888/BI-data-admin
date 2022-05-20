@@ -806,32 +806,32 @@ export default {
   watch:{
     ontime:{ /*监听月度 数据更改 调用接口 */
      handler: function (newValue, oldValue) {
-        this.init();
+        this.init(newValue);
       }
     },
     model:{ /*监听产司 数据更改 调用接口 */
       handler: function(newValue,oldValue){
-        this.init();
+        this.init(this.ontime);
       }
 
     },
     showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
       handler:function(newValue,oldValue){
-        this.init();
+        this.init(this.ontime);
       }
     },
   },
   created() {
-     this.init();
+     this.init(this.ontime);
    },
   methods: {
-    init(){ /*初始化数据方法*/
+    init(ontime){ /*初始化数据方法*/
     let params = {  /*年月*/
-      month_date:this.ontime
+      month_date:ontime
     };
     let listParams = { /*年月日*/
-      start_date:`${this.ontime}-01`,
-      end_date:`${this.ontime}-${this.$store.state.endDay}`
+      start_date:`${ontime}-01`,
+      end_date:`${ontime}-${this.$store.state.endDay}`
     }
 
     this.getList(listParams);

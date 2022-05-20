@@ -179,33 +179,31 @@ export default {
     
   },
   watch:{
-    ontime:{ /*监听数据更改 调用接口 */
+    ontime:{ /*监听月度 数据更改 调用接口 */
      handler: function (newValue, oldValue) {
-
-        this.init();
+        this.init(newValue);
       }
     },
-    model:{ /*监听数据更改 调用接口 */
+    model:{ /*监听产司 数据更改 调用接口 */
       handler: function(newValue,oldValue){
-        this.init();
+        this.init(this.ontime);
       }
 
     },
-    showMoney:{
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
       handler:function(newValue,oldValue){
-        this.init()
+        this.init(this.ontime);
       }
-    }
-
+    },
   },
   methods: {
-    init(){
-      let params = {  /*年月*/
-      month_date:this.$store.state.year +'-'+ this.$store.state.month
+    init(ontime){ /*初始化数据方法*/
+    let params = {  /*年月*/
+      month_date:ontime
     };
     let listParams = { /*年月日*/
-      start_date:`${this.$store.state.year +'-'+ this.$store.state.month}-01`,
-      end_date:`${this.$store.state.year +'-'+ this.$store.state.month}-31`
+      start_date:`${ontime}-01`,
+      end_date:`${ontime}-${this.$store.state.endDay}`
     }
     console.log('params',params,listParams)
 
@@ -819,12 +817,12 @@ export default {
    
   },
   created() {
-    this.init(this.model);
+    this.init(this.ontime);
   },
 
-  mounted() {
-    this.init(this.model);
-  },
+  // mounted() {
+  //   this.init(this.model);
+  // },
 };
 </script>
 <style scoped>
