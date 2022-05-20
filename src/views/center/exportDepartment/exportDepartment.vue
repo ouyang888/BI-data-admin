@@ -25,6 +25,7 @@
         <div>
           <div class="middle-font left-file">外销日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
+          <div class="leftData" v-if="AvgTaskAmtList.length<1">暂无数据</div>
         </div>
         <div>
           <div class="middle-font">外销产司日达成趋势图</div>
@@ -184,34 +185,33 @@ export default {
     }
 
   },
-  watch: {
-    ontime: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
-        this.init();
+  watch:{
+    ontime:{ /*监听月度 数据更改 调用接口 */
+     handler: function (newValue, oldValue) {
+        this.init(newValue);
       }
     },
-    model: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
-        this.init();
+    model:{ /*监听产司 数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(this.ontime);
       }
 
     },
-    showMoney: {
-      handler: function (newValue, oldValue) {
-        this.init()
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
+      handler:function(newValue,oldValue){
+        this.init(this.ontime);
       }
-    }
-
+    },
   },
   methods: {
-    init() {
-      let params = {  /*年月*/
-        month_date: this.ontime
-      };
-      let listParams = { /*年月日*/
-        start_date: `${this.ontime}-01`,
-        end_date: `${this.ontime}-31`
-      }
+    init(ontime){ /*初始化数据方法*/
+    let params = {  /*年月*/
+      month_date:ontime
+    };
+    let listParams = { /*年月日*/
+      start_date:`${ontime}-01`,
+      end_date:`${ontime}-${this.$store.state.endDay}`
+    }
 
 
       this.getdashboard(params);
@@ -383,8 +383,10 @@ export default {
         );
 
         if (res.code != 200) return;
+       
 
         res.rows.filter((item) => {
+          if(item.businessEntityName=='总'){
           var timeArr = item.orderDate
             .replace(" ", ":")
             .replace(/\:/g, "-")
@@ -399,8 +401,10 @@ export default {
             this.AvgTaskAmtLine = item.tAvgQty;
             this.myEcharts();
           }
+        }
           // this.showLoading = false;
         });
+    
       } catch (error) {
         console.log(error);
       }
@@ -428,10 +432,12 @@ export default {
         var arr = [];
         for (var i in obj) {
           // console.log("11111111111", obj[i]);
+        //  if(obj[i][0].businessEntityName!='外销日达成' && obj[i][0].businessEntityName!='isNull'){ 
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
+        // }
         }
         // console.log("obj", obj);
 
@@ -466,6 +472,17 @@ export default {
           // console.log("Arrnum", this.sellOutDataList);
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
+        }
+
+      // 处理空数据
+      let noDatalen = 6 -  arr.length;
+
+        for (let j = arr.length; j < noDatalen; j++) {
+
+
+          this.myEcharts2([], [], '', j);
+
+
         }
       } catch (error) {
         console.log(error);
@@ -753,7 +770,9 @@ export default {
       this.cardSab = res2.rows.filter(v=>{
               v.positionRatio = v.sabAmtRadio;  /*右边sab*/
               return v.position.length<2
-      })
+      });
+      console.log('this.cardSab',this.cardData,this.cardSab)
+
 
     },
 
@@ -800,7 +819,7 @@ export default {
 
   },
   created() {
-    this.init();
+    this.init(this.ontime);
   },
 };
 </script>

@@ -271,8 +271,11 @@ export default {
         //const homeSab = await API.getTotal(Object.assign(timeInfo,homeSabInfo));
         //const res = await API.getTotal("offLineMiddleChart", listParams);
         // console.log("sell", res);
-        let sellOutDataList = res.rows;
-        let newArr = res.rows.filter((item) => {
+        let sellOutDataList = res.rows.filter(v=>{
+          return v.cooprLevel2 == '总'
+        });
+        console.log('sellOutDataList',sellOutDataList);
+        let newArr = sellOutDataList.filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
 
@@ -332,11 +335,13 @@ export default {
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          // console.log("11111111111", obj[i]);
+          console.log("11111111111", obj[i]);
+          if(obj[i][0].cooprLevel2!='总' && obj[i][0].cooprLevel2!='isNull'){
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
+        }
         }
 
         // console.log("arr", arr);
@@ -996,7 +1001,15 @@ export default {
       // } catch (err) {
       //   console.log(err);
       // }
-    }
+    },
+    changeDate(start,end) { /*echart切换时间*/
+        let listParams = { /*年月日*/
+       start_date:start,
+      end_date:end
+      }
+        this.getList(listParams);
+        this.getListInfo(listParams);
+      },
   },
 
   computed: {
@@ -1038,15 +1051,6 @@ export default {
 
       }
     },
-    changeDate(start,end) { /*echart切换时间*/
-        let listParams = { /*年月日*/
-       start_date:start,
-      end_date:end
-      }
-        this.getList(listParams);
-        this.getListInfo(listParams);
-      },
-
   },
   mounted() {
     // this.getList1();
@@ -1205,7 +1209,7 @@ export default {
 .flex-top-card {
   display: flex;
   justify-content: space-around;
-  align-items: center;
+
 }
 
 .top-left-font {

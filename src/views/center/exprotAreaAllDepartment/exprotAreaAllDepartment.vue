@@ -10,7 +10,7 @@
           <SadPanel :data="sabData" />
         </div>
       </div>
-      <!-- 右侧卡片 @gotoCatSeries="gotoCatSeries"-->
+      <!-- 右侧卡片 @gotoCatSeries="gotoCatSeries"--> 
       <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
 
     </div>
@@ -25,6 +25,7 @@
         <div>
           <div class="middle-font left-file">外销{{$store.state.currTitle}}日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
+          <div class="leftData" v-if="AvgTaskAmtList.length<1">暂无数据</div>
         </div>
         <div>
           <div class="middle-font">各区域日达成趋势图</div>
@@ -68,7 +69,7 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
-import cardPro from "@/views/center/components/card/cardPro.vue"; 
+import cardPro from "@/views/center/components/card/cardPro1.vue"; 
 import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
 import selectTime from '@/components/selectTime.vue';
 
@@ -185,37 +186,36 @@ export default {
     }
 
   },
-  watch: {
-    ontime: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
-        this.init();
+  watch:{
+    ontime:{ /*监听月度 数据更改 调用接口 */
+     handler: function (newValue, oldValue) {
+        this.init(newValue);
       }
     },
-    model: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
-        this.init();
+    model:{ /*监听产司 数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(this.ontime);
       }
 
     },
-    showMoney: {
-      handler: function (newValue, oldValue) {
-        this.init()
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
+      handler:function(newValue,oldValue){
+        this.init(this.ontime);
       }
-    }
-
+    },
   },
   methods: {
-    init() {
+    init(ontime) {
       let title = this.$store.state.currTitle; /*当前标题*/
-      let params = {  /*年月*/
-        month_date: this.ontime,
-        coopr_level1:title
-      };
-      let listParams = { /*年月日*/
-        start_date: `${this.ontime}-01`,
-        end_date: `${this.ontime}-31`,
-        coopr_level1:title
-      }
+    let params = {  /*年月*/
+      month_date:ontime,
+      coopr_level1:title
+    };
+    let listParams = { /*年月日*/
+      start_date:`${ontime}-01`,
+      end_date:`${ontime}-${this.$store.state.endDay}`,
+      coopr_level1:title
+    }
 
 
       this.getdashboard(params);
@@ -765,7 +765,7 @@ export default {
               v.positionRatio = v.sabAmtRadio;  /*右边sab*/
               return v.position.length<2
       })
-      console.log('this.cardSab',JSON.stringify(this.cardData))
+      console.log('this.cardSab',this.cardData,this.cardSab)
     
 
 
@@ -815,7 +815,7 @@ export default {
 
   },
   created() {
-    this.init();
+    this.init(this.ontime);
   },
 };
 </script>

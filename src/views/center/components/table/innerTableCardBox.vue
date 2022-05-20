@@ -2981,12 +2981,12 @@ export default {
   methods:{
     namesClick(){
 
-      this.$router.push("exprotAreaAll");
+      // this.$router.push("exprotAreaAll");
 
     },
     managerClick(){
 
-      this.$router.push("exprotAreaAll");
+      // this.$router.push("exprotAreaAll");
  
     }
   }

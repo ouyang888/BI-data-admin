@@ -12,8 +12,8 @@
       </div>
       <!-- 右侧卡片 -->
       <div class="flex-card">
-        <div class="card-box">
-          <div class="card-font" @click="gotoDomestic">内销</div>
+        <div class="card-box" @click="gotoDomestic">
+          <div class="card-font">内销</div>
         
           <a-spin class="cardLoad" size="large" v-if="showLoadingLeft" />
           <div class="noData" v-else-if="innerLeft && innerLeft.length<1">暂无数据</div>
@@ -29,7 +29,7 @@
                   <div class="top-left-font">线上达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ innerLeftInfo.saleTaskAmt }} {{$store.state.unit}}</span>
+                      责任制 <span>{{ innerLeftInfo.saleTaskAmt }}{{$store.state.unit}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -44,7 +44,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}{{$store.state.unit}}</div>
+                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -150,7 +150,7 @@
                     结构
                     <span v-for="(item, index) in innerSabLeft" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio}}%;</span>
+                      <span>{{ item.positionRatio }}%; </span>
                     </span>
                   </div>
                 </div>
@@ -180,7 +180,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerRightInfo.sumCnyamt }}{{$store.state.unit}}</div>
+                  <div class="card-big-num">{{ innerRightInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -282,7 +282,7 @@
                     结构
                     <span v-for="(item, index) in innerSabRight" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio * 100 }}%;</span>
+                      <span>{{ item.positionRatio }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -302,8 +302,8 @@
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box">
-          <div class="card-font" @click="gotoExport">外销</div>
+        <div class="card-box"  @click="gotoExport">
+          <div class="card-font">外销</div>
           <a-spin class="cardLoad" size="large" v-if="showLoadingRight" />
           <div class="noData" v-else-if="outterLeft && outterLeft.length<1">暂无数据</div>
           <div class="card-border-box" v-else>
@@ -333,7 +333,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}{{$store.state.unit}}</div>
+                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -435,7 +435,7 @@
                     结构
                     <span v-for="(item, index) in outterSabLeft" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio * 100 }}%;</span>
+                      <span>{{ item.positionRatio }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -457,7 +457,7 @@
                   <div class="top-left-font">OEM达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
-                      责任制 <span>{{ outterRightInfo.saleTaskAmt }}{{$store.state.unit}}</span>
+                      责任制 <span>{{ outterRightInfo.saleTaskAmt}}{{$store.state.unit}}</span>
                     </div>
                     <div class="finish-font">
                       完成率
@@ -472,7 +472,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterRightInfo.sumCnyamt }}{{$store.state.unit}}</div>
+                  <div class="card-big-num">{{ outterRightInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -574,7 +574,7 @@
                     结构
                     <span v-for="(item, index) in outterSabLeft" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio * 100 }}%;</span>
+                      <span>{{ item.positionRatio }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -804,34 +804,34 @@ export default {
     }
   },
   watch:{
-    ontime:{ /*监听数据更改 调用接口 */
+    ontime:{ /*监听月度 数据更改 调用接口 */
      handler: function (newValue, oldValue) {
-        this.init();
+        this.init(newValue);
       }
     },
-    model:{ /*监听数据更改 调用接口 */
+    model:{ /*监听产司 数据更改 调用接口 */
       handler: function(newValue,oldValue){
-        this.init();
+        this.init(this.ontime);
       }
 
     },
-    showMoney:{
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
       handler:function(newValue,oldValue){
-        this.init();
+        this.init(this.ontime);
       }
     },
   },
   created() {
-     this.init();
+     this.init(this.ontime);
    },
   methods: {
-    init(){ /*初始化数据方法*/
+    init(ontime){ /*初始化数据方法*/
     let params = {  /*年月*/
-      month_date:this.ontime
+      month_date:ontime
     };
     let listParams = { /*年月日*/
-      start_date:`${this.ontime}-01`,
-      end_date:`${this.ontime}-31`
+      start_date:`${ontime}-01`,
+      end_date:`${ontime}-${this.$store.state.endDay}`
     }
 
     this.getList(listParams);
@@ -883,7 +883,7 @@ export default {
           v.onLineRadio = v.onLineRadio * 100>100?100:Number((v.onLineRadio * 100).toFixed(0));
           v.onLineProfitRadio = v.onLineProfitRadio * 100>100?100:Number((v.onLineProfitRadio * 100).toFixed(0));
           
-          v.sumCnyamt = v.sumCnyamt.toFixed(0);
+          v.sumCnyamt = v.sumCnyamt.toFixed(1);
           v.saleTaskAmt =  v.saleTaskAmt.toFixed(1);
         });
         
@@ -954,6 +954,7 @@ export default {
               outtersab.rows.forEach(v=>{
                 v.positionRatio = (v.positionRatio*100).toFixed(1);
               })
+              console.log('outtersab',outtersab)
 
 
               this.outterSabLeft = outtersab.rows.filter((v) => {
@@ -1839,7 +1840,7 @@ export default {
 }
 
 .progress {
-  width: 120px;
+  width: 110px;
   height: 10px;
 }
 
@@ -1995,7 +1996,7 @@ export default {
   color: #66ffff;
   font-size: 28px;
 }
-.progress {
+/* .progress {
   width: 120px;
   height: 10px;
 }
@@ -2008,7 +2009,7 @@ export default {
 }
 .progress-middle:last-child {
   margin-bottom: 12px;
-}
+} */
 ::v-deep .ant-progress-bg {
   height: 4px !important;
   border-radius: 200px !important;

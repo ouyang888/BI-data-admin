@@ -75,7 +75,7 @@
               <div class="down-font-year" @click="changeyear('2022')">2022</div>
               <div class="down-font-year" @click="changeyear('2021')">2021</div>
             </div> -->
-            <span>年度</span>
+            <span>(建设中)</span>
           </div>
           <div class="head-box-right right-width drop-month">
             <span>{{year}}{{month}}</span>
@@ -316,10 +316,17 @@ export default {
       this.$store.commit("setYear", item);
     },
     changemonth(item) {
-      this.month = item =  item.substr(4); /*获取选项里的月份*/
-      let val = item.length < 2 ? "0" + item : item;
+      this.month  =  item.substr(4); /*获取选项里的月份*/
+      let year = item.substr(0,2);
+      let val = this.month.length < 2 ? "0" + this.month : this.month;
+      
       // this.$store.commit("setYear",'2022');
       this.$store.commit("setMonth", val);
+      ;
+      this.$store.commit('setEndDay',new Date(year,val,'0').getDate());
+      // let date = new Date()
+
+
     },
     changeNum(index) {
       this.cus = index;
@@ -353,6 +360,8 @@ export default {
     let month = this.date.getMonth()+1;
     let currMonth = month>=10?month:'0'+month;
     this.month = currMonth;
+
+    this.$store.commit('setEndDay',new Date(this.year,currMonth,'0').getDate());
   
     for(var i = month-2;i<=month;i++){
       let onMonth = i>=10?i:'0'+i;

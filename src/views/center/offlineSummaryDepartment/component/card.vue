@@ -259,6 +259,7 @@
     background-repeat: no-repeat;
     /* margin-right: 20px; */
     background-size: 100%;
+    width:33%;
   }
 
   .card-font {

@@ -22,11 +22,12 @@ export default new Vuex.Store({
         previewVisible: false,
         showMoney:true,
         year:'2022',
-        month:'03',
+        month:new Date().getMonth()+1>=10?new Date().getMonth()+1>=10:'0'+(new Date().getMonth()+1),
         model:'本部,OEM,待定',
         currPath:'销向汇总',
         currTitle:'',
         unit:'亿',/*页面单位*/
+        endDay:'',/*最后一天*/
         /* 图片框end */
     },
     mutations: {
@@ -50,6 +51,9 @@ export default new Vuex.Store({
         setCurrTitle(state,val){ //卡片标题
             state.currTitle = val
         },
+        setEndDay(state,val){
+            state.endDay = val;
+        }
     },
     actions: {
         // setCityName({commit,state}, name){

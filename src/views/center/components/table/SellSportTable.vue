@@ -4,6 +4,7 @@
       border
       :data="mesInfo"
       :span-method="objectSpanMethod"
+      show-summary
       width="864px"
       class="execl-box"
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }"
@@ -172,6 +173,7 @@ export default{
           if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
             console.log('headerObj.name',this.headerObj.name)
             v[this.headerObj.name] = '合计';
+            v.ranking = '';
           }
         })
         this.mesInfo = newValue;
@@ -266,7 +268,7 @@ export default{
 
 .nameColor {
   color: #00ddff;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .precent {

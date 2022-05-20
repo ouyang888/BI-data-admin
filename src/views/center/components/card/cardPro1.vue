@@ -1,9 +1,10 @@
 <template>
   <div class="flex-card" >
     <a-spin class="flex-loading" size="large" v-if="showLoading" />
-    <div class="card-box"  v-for="(v,i) in cardList"   :key="i" v-else>
-      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])" v-if="i<6" >{{v[cardObj.title]}} </div>
-      <div class="card-border-box" v-if="i<6" >
+    <div class="noData" v-else-if="!showLoading && cardList.length<1">暂无数据</div>
+    <div class="card-box" v-for="(v,i) in cardList" :key="i" v-else>
+      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
+      <div class="card-border-box">
         <div class="line"></div>
         <div class="line1"></div>
         <div class="line2"></div>
@@ -14,14 +15,15 @@
             <div class="flex-top-card">
               <div class="top-left-font">实时达成</div>
               <div class="flex-finish">
-                <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}{{modelLabel}}</span></div>
-                <div class="finish-font">完成率 <span>{{v[cardObj.cnyAmtRadio]}}%</span></div>
+                <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}{{$store.state.unit}}</span></div>
+                <div class="finish-font">完成率 <span>{{v[cardObj.saleAmtRadio]}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
-              <div class="card-big-num">{{v[cardObj.cnyAmt]}}{{modelLabel}}</div>
+              <div class="card-big-num">{{v[cardObj.cnyAmt]}}{{$store.state.unit}}</div>
                <div class="flex-finish">
-            
+                <!-- <div class="finish-font">进度 <span>s</span></div>
+                <div class="finish-font">完成率 <span>75%</span></div> -->
               </div>
               <div style="display: flex; align-items: center">
                 <div class="finish-font">进度</div>
@@ -71,22 +73,23 @@
               <span class="percent-text">{{(v.grossProfitRadio*100).toFixed(0)}}%</span>
             </div>
             <!-- {{list}} -->
-            
             <template v-for="(item,k) in list"> 
-           <div :key="k+22" v-if="k == i*2 || k==i*2+1">
-              <span class="percent-title">{{item[cardObj.cooprLevel1]}} </span>
-              <span class="percent-text">{{(item.directCnyAmtRadio*100)>100?100:(item.directCnyAmtRadio*100).toFixed(0) }}%</span>
-           </div>
+            <div :key="k+22" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
+              <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
+              <span class="percent-text">{{(item.businessModelCompleteRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+            </div>
+            <div :key="k+223" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
+              <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
+              <span class="percent-text">{{(item.businessModelCompleteRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+            </div>
           </template>
           </div>
           <div class="mt-border"></div>
           <div class="sab">
             <div class="">
               <div class="sab-title">{{title1}}SAB</div>
- 
-              <template v-for="(item,s) in cardSabList[i]" >
-           
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
+              <template v-for="(item,s) in cardSab" >
+                <span :key="s+111" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>
@@ -95,17 +98,14 @@
             </div>
             <div class="">
               <div class="sab-title">{{title2}}SAB</div>
-              <template v-for="(item,s) in cardSabList[i]" >
-                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2&& v[cardObj.title] == item[cardObj.title]">
+              <template v-for="(item,s) in cardSab" >
+                <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
               </span>
               </template>  
             </div>
           </div>
-    
-    
-    
     </div>
 
   </div>
@@ -131,37 +131,51 @@
         'title':'cooprLevel2', /*标题*/
        'cnyAmt':'cnyAmt',/*金额*/
        'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
-       'cnyAmtRadio':'cnyAmtRadio',  /*金额完成率*/
+       'saleAmtRadio':'saleAmtRadio',  /*金额完成率*/
        'cooprLevel1':'cooprLevel1'  /*线上/线下 金额完成率*/
 
         } },
       },
       title1:{
          type:String,
-         default:'内销'
+         default:'线上'
        }, 
        title2:{
          type:String,
-         default:'外销'
+         default:'线下'
        }, 
     },
     data(){
       return{
         pathObj:{
-        'export':'productCo'
+        'export':'exprotAreaAll'
       },
       cardList:[0,1,2,3,4,5],/*卡片分类*/
       cardSabList:[0,1,2,3,4,5], /*sab分类*/
+      cardSabList1:[
+        {S:0,A:0,B:0},
+        {S:0,A:0,B:0},
+        {S:0,A:0,B:0},
+        {S:0,A:0,B:0},
+        {S:0,A:0,B:0},
+        {S:0,A:0,B:0},
+        {S:0,A:0,B:0},
+        {S:0,A:0,B:0},
+        {S:0,A:0,B:0},
+        {S:0,A:0,B:0},
+        {S:0,A:0,B:0},
+        {S:0,A:0,B:0},
+      ],
       showLoading:true,
       }
     },
     computed:{
      name(){
        return this.$route.name;
-     },
-    modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'万'
-    }
+     }
+
+
+
     },
     watch:{
       cardObj:{
@@ -173,17 +187,23 @@
         handler:function(newValue,oldValue){
           let title = '';
           this.cardList = [];
-          if(newValue.length<1) return;
+          if(newValue.length<1) {
+            this.showLoading = false;
+            return
+          };
           newValue && newValue.forEach(v => { /*划分6个卡片*/
             if(v[this.cardObj.title] !=title){
-              v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
+              // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
+              v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(0);
             v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt].toFixed(1);
             v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(0));
             // v.grossProfitRadio = Number((v.grossProfitRadio*100).toFixed(0));
             // debugger;
             if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
             v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/
+              if(this.cardList.length<6){ /*只显示6条*/
               this.cardList.push(v);
+            }
                 title = v[this.cardObj.title];
             }   
           });
@@ -193,7 +213,6 @@
       cardSab:{
         handler:function(newValue,oldValue){
 
-               console.log('newValue',newValue);
                let title = '';
                let cooprLevel1 = '';
                var k = 0;
@@ -224,9 +243,8 @@
     methods: {
       gotoCatSeries(val) {
 
+        this.$store.commit('setCurrTitle',val);
         this.$router.push({name:this.pathObj[this.name],query:{key:val}});
-        console.log(this.pathObj[this.name]);
-        console.log("valval",val);
 
 
         // this.$emit('gotoCatSeries',val)
@@ -356,6 +374,7 @@
     background-repeat: no-repeat;
     /* margin-right: 20px; */
     background-size: 100%;
+    width:33%;
   }
 
   .card-font {
@@ -390,7 +409,7 @@
   .top-left-font {
     font-size: 14px;
     color: #fff;
-    margin-right: 7px;
+    margin-right:10px;
   }
 
   .card-border-box {
@@ -461,7 +480,7 @@
     color: #66ffff;
     margin-left: 2px;
     display: inline-block;
-    width:34px;
+    /* width:34px; */
   }
 
   .mt-border {
@@ -471,7 +490,7 @@
 
   .card-big-num {
     color: #66ffff;
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .progress {
@@ -611,9 +630,8 @@
   }
   .percent {
       height: 100%;
-      margin-left: 3px;
-      margin-right: 3px;
-
+      margin-left: 5px;
+      margin-right: 5px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -627,10 +645,7 @@
       text-align: right;
       font-weight: 400;
       display: inline-block;
-      width:24px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      width:28px;
   
     }
   
@@ -700,9 +715,4 @@
     top: 0;
     left: 0;
     }
-
-    .card-box{
-    width:33.2%;
-     }
-    
 </style>

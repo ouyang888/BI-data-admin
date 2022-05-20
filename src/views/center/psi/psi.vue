@@ -20,6 +20,7 @@
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
+                      {{departmentInfo.saleTaskAmt }}
                       <span>{{
                         Number(departmentInfo.saleTaskAmt * 100).toFixed(0)
                       }}</span
@@ -48,14 +49,14 @@
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="departmentInfo.dateRadio"
+                          :percent="departmentInfo.dateRadio * 100"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="departmentInfo.onLineRadio * 100"
+                          :percent="departmentInfo.businessCnyAmtRadio * 100"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -159,14 +160,14 @@
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="departmentInfo1.dateRadio"
+                          :percent="departmentInfo1.dateRadio* 100"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="departmentInfo1.onLineRadio * 100"
+                          :percent="departmentInfo1.businessCnyAmtRadio * 100"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -196,7 +197,7 @@
                       <div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="item.dateRadio"
+                            :percent="item.dateRadio* 100"
                             :show-info="false"
                             strokeColor="#FF8B2F"
                           />
@@ -495,12 +496,12 @@
                 <div class="flex-top-card">
                   <div class="top-left-font">内销达成</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
+                    <div class="finish-font">责任制 <span>100{{this.modelLabel}}</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
+                  <div class="card-big-num">75{{this.modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -686,12 +687,12 @@
                 <div class="flex-top-card">
                   <div class="top-left-font">外销达成</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
+                    <div class="finish-font">责任制 <span>100{{this.modelLabel}}</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
+                  <div class="card-big-num">75{{this.modelLabel}}</div>
                   <div style="display: flex; align-items: center;">
                     <div class="finish-font">进度</div>
                     <div>
@@ -935,12 +936,12 @@
                 <div class="flex-top-card">
                   <div class="top-left-font">内销库存</div>
                   <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
+                    <div class="finish-font">责任制 <span>100{{this.modelLabel}}</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
+                  <div class="card-big-num">76{{this.modelLabel}}</div>
                   <div style="display: flex; align-items: center">
                     <!-- <div class="finish-font">环境</div>
                     <div class="fontInfo">
@@ -1106,7 +1107,7 @@
                 <div class="flex-top-card">
                   <div class="top-left-font">外销库存</div>
                   <div class="flex-finish">
-                    <div class="finish-font">库存目标 <span>100亿</span></div>
+                    <div class="finish-font">库存目标 <span>100{{this.modelLabel}}</span></div>
                     <div class="finish-font">库存比 <span>75%</span></div>
                   </div>
                 </div>
@@ -1181,7 +1182,7 @@
                     <div style="display: flex; align-items: center">
                      <div class="finish-font">烹饪</div>
                       <div class="fontInfo">
-                        718亿
+                        71亿
                        
                       </div>
                     </div>
@@ -1882,7 +1883,7 @@ export default {
       return this.$store.state.showMoney;
     },
     modelLabel(){
-      return this.$store.state.showMoney==true?'亿':'亿'
+      return this.$store.state.showMoney==true?'亿':'万'
     },
     model(){ /* 获取本部，OEM */
       return this.$store.state.model
@@ -2035,7 +2036,8 @@ export default {
             // obj.divisionArr.push(item)
             this.divisionDate.push(yue+'-'+ri)
             this.divisionList.push(item.totalCnyAmt)
-            this.divisionLine = item.saleAvgAmt;
+            console.log("折线图",item.saleAvgAmt);
+            this.divisionLine=item.saleAvgAmt;
             this.myEcharts();
           this.showLoading = false
         })
@@ -2148,6 +2150,8 @@ export default {
               data: [
                 {
                     yAxis: this.divisionLine,
+
+             
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色

@@ -1,7 +1,10 @@
 <template>
   <div class="flex-card" >
     <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
-    <div class="card-box" v-for="(v,i) in list" :key="i">
+    <div class="noData" v-if="cardList.length<1">暂无数据</div>
+    <!-- <span >有数据</span> -->
+
+    <div class="card-box" v-for="(v,i) in cardList" :key="i" v-else>
       <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
         <div class="line"></div>
@@ -131,6 +134,7 @@
         'export':'exprotAreaAll'
       },
       showLoading:false,
+      cardList:[]
       }
     },
     computed:{
@@ -150,7 +154,8 @@
       list:{
         handler:function(newValue,oldValue){
           this.showLoading = true;
-          newValue && newValue.forEach(v => {
+          let arr = JSON.parse(JSON.stringify(newValue));
+          arr && arr.forEach(v => {
             v[this.cardObj.cnyAmt] =  (v[this.cardObj.cnyAmt]).toFixed(1);
           
             v[this.cardObj.saleTaskAmt] =  (v[this.cardObj.saleTaskAmt]).toFixed(1);
@@ -160,7 +165,9 @@
             
           });
         
-          this.list = newValue?newValue:[];
+          // this.list = arr.length>0?arr:[];
+          this.cardList = arr;
+ 
           this.showLoading = false;
         }
       }
@@ -412,7 +419,7 @@
     color: #66ffff;
     margin-left: 2px;
     display: inline-block;
-    width:34px;
+    /* width:34px; */
   }
 
   .mt-border {

@@ -345,9 +345,27 @@ display:none;
 /*卡片样式*/
 
 .card-box .top-left-font{
-  margin-right:10px!important;
+  // margin-right:20px!important;
 }
 .card-box .card-big-num{
-  font-size:24px!important;
+  font-size:20px!important;
 }
-
+.unit{
+  font-size:14px;
+}
+.card-box{
+  cursor: pointer;
+}
+.leftData{
+height: 280px;
+width: 607px;
+position: absolute;
+top:48px;
+left: 0;
+color: #fff;
+background: rgb(2 0 77);
+z-index: 11;
+display: flex;
+justify-content: center;
+align-items: center;
+}

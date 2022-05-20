@@ -12,8 +12,8 @@
       </div>
       <!-- 右侧卡片 -->
       <div class="flex-card">
-        <div class="card-box">
-          <div class="card-font" @click="online()">线上</div>
+        <div class="card-box" @click="online()">
+          <div class="card-font">线上</div>
           <a-spin class="cardLoad" size="large" v-if="showLoadingLeft" />
           <div class="noData" v-else-if="innerLeft && innerLeft.length < 1">暂无数据</div>
           <div class="card-border-box" v-else>
@@ -41,7 +41,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}{{ $store.state.unit }}</div>
+                  <div class="card-big-num">{{ innerLeftInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ innerRightInfo.sumCnyamt || 0 }}{{ $store.state.unit }}
+                    {{ innerRightInfo.sumCnyamt || 0 }}<span class="unit">{{$store.state.unit}}</span>
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -205,8 +205,8 @@
             <div class="line"></div>
           </div>
         </div>
-        <div class="card-box">
-          <div class="card-font" @click="gotoSummary">线下</div>
+        <div class="card-box" @click="gotoSummary">
+          <div class="card-font">线下</div>
           <a-spin class="cardLoad" size="large" v-if="showLoadingRight" />
           <div class="noData" v-else-if="outterLeft && outterLeft.length < 1">暂无数据</div>
           <div class="card-border-box" v-else>
@@ -234,7 +234,7 @@
                   </div>
                 </div>
                 <div class="flex-top-card">
-                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}{{ $store.state.unit }}</div>
+                  <div class="card-big-num">{{ outterLeftInfo.sumCnyamt }}<span class="unit">{{$store.state.unit}}</span></div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
@@ -333,7 +333,7 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ outterRightInfo.sumCnyamt || 0 }}{{ $store.state.unit }}
+                    {{ outterRightInfo.sumCnyamt || 0 }}<span class="unit">{{$store.state.unit}}</span>
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -607,22 +607,22 @@ export default {
 
   },
   watch: {
-    ontime: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
-        this.init();
+    ontime:{ /*监听月度 数据更改 调用接口 */
+     handler: function (newValue, oldValue) {
+        this.init(newValue);
       }
     },
-    model: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
-        this.init();
+    model:{ /*监听产司 数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(this.ontime);
       }
 
     },
-    showMoney: {
-      handler: function (newValue, oldValue) {
-        this.init();
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
+      handler:function(newValue,oldValue){
+        this.init(this.ontime);
       }
-    }
+    },
 
   },
   methods: {
@@ -683,7 +683,7 @@ export default {
             this.progressData.bar1 = (
               panelDataList[i].onLineProfitRadio * 100
             ).toFixed(1);
-            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt || panelDataList[i].cnyAmt.toFixed(1);
             this.speedData.bottomClose =
               panelDataList[i].cnyAmtRadio.toFixed(1);
             this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
@@ -793,40 +793,41 @@ export default {
             return;
         }else{
            // 先清空数据再赋值
-              this.allList = [0];
+              this.allList = [];
               this.allLiine = '';
               this.innerDirectDate = [];
-              this.innerDirectList = [0];
+              this.innerDirectList = [];
               this.innerDirectLine = '';
               this.outerDirectDate = [];
-              this.outerDirectList = [0];
+              this.outerDirectList = [];
               this.outerDirectLine = '';
           
         }
-        let newArr = res.rows.filter((item) => {
-          var timeArr = item.orderDate
-            .replace(" ", ":")
-            .replace(/\:/g, "-")
-            .split("-");
-          var yue = timeArr[1];
-          var ri = timeArr[2];
+        // debugger;
+       res.rows.forEach((item) => {
           if (item.cooprLevel1 == "线上") {
-            this.innerDirectDate.push(yue + "-" + ri);
+            console.log(item.orderDate.substr(5));
+      
+            this.innerDirectDate.push(item.orderDate.substr(5));
             this.innerDirectList.push(item.CnyAmt);
-            this.innerDirectLine = item.saleAvgAmt;
-            this.myEcharts2();
+            this.innerDirectLine = item.saleAvgAmt || 0;
+     
           } else if (item.cooprLevel1 == "线下") {
-            this.outerDirectDate.push(yue + "-" + ri);
+            this.outerDirectDate.push(item.orderDate.substr(5));
             this.outerDirectList.push(item.CnyAmt);
-            this.outerDirectLine = item.saleAvgAmt;
-            this.myEcharts3();
+            this.outerDirectLine = item.saleAvgAmt || 0;
+           
           }
 
           this.allList.push(item.totalCnyAmt);
-          this.allLiine = item.saleAvgAmt;
-          this.myEcharts();
-          this.showLoading = false;
+          this.allLiine = item.totalsaleAvgAmt || 0;
+         
         });
+
+        this.myEcharts2();
+        this.myEcharts3();
+        this.myEcharts();
+        this.showLoading = false;
       } catch (error) {
         console.log(error);
       }
@@ -1212,7 +1213,7 @@ export default {
         v.dateRadio = v.dateRadio * 100;
         v.onLineRadio = v.onLineRadio * 100 > 100 ? 100 : (v.onLineRadio * 100).toFixed(0);
         v.onLineProfitRadio = v.onLineProfitRadio * 100 > 100 ? 100 : (v.onLineProfitRadio * 100).toFixed(0);
-        v.sumCnyamt = v.sumCnyamt.toFixed(0);
+        v.sumCnyamt = v.sumCnyamt.toFixed(1);
         v.saleTaskAmt = v.saleTaskAmt.toFixed(1);
       });
 
@@ -1284,18 +1285,19 @@ export default {
         console.log(err);
       }
     },
-    init() { /*初始化数据方法*/
+    init(ontime) { /*初始化数据方法*/
       // let tableParams = `${this.ontime},${this.ontime},${model},`;
-      let params = {  /*年月*/
-        month_date: this.ontime
-      };
-      let listParams = { /*年月日*/
-        start_date: `${this.ontime}-01`,
-        end_date: `${this.ontime}-31`
-      }
+    
+    let params = {  /*年月*/
+      month_date:ontime
+    };
+    let listParams = { /*年月日*/
+      start_date:`${ontime}-01`,
+      end_date:`${ontime}-${this.$store.state.endDay}`
+    }
       this.getList(listParams);
-      this.getdashboard(params);
-      this.queryCardSAB(params);
+      // this.getdashboard(params);
+      // this.queryCardSAB(params);
       this.getCard(params);
       this.getTable(params);
     },
@@ -1308,7 +1310,7 @@ export default {
       },
   },
   created() {
-    this.init();
+    this.init(this.ontime);
   },
   mounted() { },
 };
@@ -1541,7 +1543,7 @@ export default {
   font-size: 28px;
 }
 
-.progress {
+/* .progress {
   width: 120px;
   height: 10px;
 }
@@ -1557,7 +1559,7 @@ export default {
 
 .progress-middle:last-child {
   margin-bottom: 12px;
-}
+} */
 
 ::v-deep .ant-progress-bg {
   height: 4px !important;
@@ -1711,7 +1713,7 @@ export default {
 }
 
 .progress {
-  width: 120px;
+  width: 110px;
   height: 10px;
 }
 

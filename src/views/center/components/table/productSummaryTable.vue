@@ -38,7 +38,7 @@
         >
          <template v-slot="scope">
             <div class="precent">
-              <div style="width: 30px">
+              <div style="width: 40%">
               {{ scope.row.onLineCnyAmt }}
             </div>
             <div style="margin-top: 5px">
@@ -59,7 +59,7 @@
         >
            <template v-slot="scope">
               <div class="precent">
-                  <div style="width: 30px;">
+                  <div style="width: 40%">
                       {{ scope.row.outLineCnyAmt .toFixed(1) }}
                   </div>
                   <div style="margin-top: 5px">
@@ -78,7 +78,7 @@
           height="30px">
           <template v-slot="scope">
             <div class="precent">
-              <div style="width: 30px">
+              <div style="width: 40%">
                 {{ scope.row.totalCnyAmt }}
               </div>
                 <div style="margin-top: 5px">
@@ -203,8 +203,9 @@ export default ({
   cursor: pointer;
 }
 
+
 .precent {
-  width: 90px;
+  width: 100%;
   height: 23px;
   display: flex;
 }
