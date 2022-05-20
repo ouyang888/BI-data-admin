@@ -13,24 +13,27 @@
             <div class="line3"></div>
             <div class="line4"></div>
             <div class="left-right-box">
-              <!-- {{departmentInfo}} -->
               <div class="centerInfo" v-if="sale === '内销'">
                 <div class="flex-top-card">
                   <div class="top-left-font">{{ sale }}达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
-                      {{departmentInfo.saleTaskAmt }}
                       <span>{{
-                        Number(departmentInfo.saleTaskAmt * 100).toFixed(0)
+                        Number(departmentInfo.saleTaskAmt).toFixed(2)
                       }}</span
                       >亿
                     </div>
+                
                     <div class="finish-font">
                       完成率
-                      <span
+                    
+                       <span v-if="departmentInfo.cnyAmtRadio===null"
+                        >0%</span
+                      >
+                        <span v-else
                         >{{
-                          departmentInfo.cnyAmtRadio > 100
+                          Number(departmentInfo.cnyAmtRadio*100).toFixed(2) > 100
                             ? 100
                             : departmentInfo.cnyAmtRadio
                         }}%</span
@@ -40,11 +43,9 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ Number(departmentInfo.cnyAmt).toFixed(0) }}亿
+                    {{ Number(departmentInfo.cnyAmt).toFixed(2) }}亿
                   </div>
-                  <div style=" display: flex;
-            align-items: center;
-         ">
+                  <div style=" display: flex; align-items: center; ">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
@@ -85,7 +86,7 @@
                       <div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="item.dateRadio"
+                            :percent="item.dateRadio*100"
                             :show-info="false"
                             strokeColor="#FF8B2F"
                           />
@@ -104,7 +105,7 @@
 
                 <div class="flex-bottoms">
                   <div>
-                    线上结构
+                    结构
                     <span v-for="(item, index) in homeSabInfo" :key="index">
                       <span>{{ item.position }}</span> -
                       <span>{{ item.positionRatio.toFixed(1) * 100 }}%;</span>
@@ -116,12 +117,12 @@
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
                   <div>
-                    线上毛利率
+                    毛利率
                     <span class="light-blue"
                       >{{
                         Number(
                           homeGrossProfitRadio.grossProfitRadio * 100
-                        ).toFixed(1)
+                        ).toFixed(2)
                       }}%</span
                     >
                   </div>
@@ -135,25 +136,34 @@
                     <div class="finish-font">
                       责任制
                       <span>{{
-                        Number(departmentInfo1.saleTaskAmt * 100).toFixed(0)
+                        Number(departmentInfo1.saleTaskAmt).toFixed(2)
                       }}</span
                       >亿
                     </div>
                     <div class="finish-font">
                       完成率
                       <span
+                        >
+                    
+                       <span v-if="departmentInfo.cnyAmtRadio===null"
+                        >0%</span
+                      >
+                        <span v-else
                         >{{
-                          departmentInfo1.cnyAmtRadio > 100
+                          Number(departmentInfo.cnyAmtRadio*100).toFixed(2) > 100
                             ? 100
-                            : Number(departmentInfo1.cnyAmtRadio*100).toFixed(0)
+                            : departmentInfo.cnyAmtRadio
                         }}%</span
+                      >
+                        
+                        </span
                       >
                     </div>
                   </div>
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ Number(departmentInfo1.cnyAmt).toFixed(0) }}亿
+                    {{ Number(departmentInfo1.cnyAmt).toFixed(2) }}亿
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -216,7 +226,7 @@
 
                 <div class="flex-bottoms">
                   <div>
-                    线上结构
+                    结构
              
                     <span v-for="(item, index) in homeSabInfo1" :key="index">
                       <span>{{ item.position }}</span> -
@@ -229,12 +239,12 @@
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
                   <div>
-                     线上毛利率
+                     毛利率
                     <span class="light-blue"
                       >{{
                         Number(
                           homeGrossProfitRadio1.grossProfitRadio * 100
-                        ).toFixed(1)
+                        ).toFixed(2)
                       }}%</span
                     >
                   </div>
@@ -673,13 +683,13 @@
                   </div>
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
+                  <div>结构 S-10%; A-20%; B-70%</div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">75%</span></div>
+                  <div>毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
               <div class="mt-border"></div>
@@ -864,13 +874,13 @@
                   </div>
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
+                  <div>结构 S-10%; A-20%; B-70%</div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">75%</span></div>
+                  <div>毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
             </div>
@@ -1093,13 +1103,13 @@
                   </div>
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
+                  <div>结构 S-10%; A-20%; B-70%</div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">75%</span></div>
+                  <div>毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
               <div class="mt-border"></div>
@@ -1198,13 +1208,13 @@
                   </div>
                 </div>
                 <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
+                  <div>结构 S-10%; A-20%; B-70%</div>
                 </div>
                 <div
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>线上毛利率 <span class="light-blue">75%</span></div>
+                  <div>毛利率 <span class="light-blue">75%</span></div>
                 </div>
               </div>
             </div>
@@ -1296,7 +1306,7 @@ export default {
                         title: "责任制",
                         text: "累计达成",
                         saleTaskAmtAll: "saleTaskAmtAll",
-                        orgQtyAll: "orgQtyAll",
+                        cnyAmtAll: "cnyAmtAll",
                     },
                 },
           headTitle2: {
@@ -1316,7 +1326,7 @@ export default {
                         title: "双向契约",
                         text: "累计达成",
                         saleTaskAmtAll: "saleTaskAmtAll",
-                        orgQtyAll: "orgQtyAll",
+                        cnyAmtAll: "cnyAmtAll",
                     },
           },
            headTitle3: {
@@ -1341,7 +1351,7 @@ export default {
                         text: "累计达成",
                         day:"周转天数",
                         saleTaskAmtAll: "saleTaskAmtAll",
-                        orgQtyAll: "orgQtyAll",
+                        cnyAmtAll: "cnyAmtAll",
                         dayAll:"day"
                     },
           },
@@ -1365,7 +1375,7 @@ export default {
                         text: "累计达成",
                       
                         SaleTaskAmtAll: "SaleTaskAmtAll",
-                        orgQtyAll: "orgQtyAll",
+                        cnyAmtAll: "cnyAmtAll",
                     },
                 },
                  nesInfo: [
@@ -1377,6 +1387,10 @@ export default {
                         outerCnyAmt: 65,
                         totalRespon: 79,
                         totalDone: 80,
+                        outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                    
                         
                     },
                     {
@@ -1386,6 +1400,9 @@ export default {
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 35,
                         totalRespon: 79,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                         totalDone: 80,
                     },
                     {
@@ -1396,6 +1413,9 @@ export default {
                         outerCnyAmt: 65,
                         totalRespon: 79,
                         totalDone: 80,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                     },
                     {
                         businessEntityName: "调理",
@@ -1405,6 +1425,9 @@ export default {
                         outerCnyAmt: 65,
                         totalRespon: 79,
                         totalDone: 80,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                     },
                     {
                         businessEntityName: "电动",
@@ -1414,6 +1437,9 @@ export default {
                         outerCnyAmt: 65,
                         totalRespon: 79,
                         totalDone: 80,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                     },
                     {
                         businessEntityName: "饮品",
@@ -1423,6 +1449,9 @@ export default {
                         outerCnyAmt: 65,
                         totalRespon: 79,
                         totalDone: 80,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                     },
                     {
                         businessEntityName: "合计",
@@ -1432,6 +1461,9 @@ export default {
                         outerCnyAmt: 65,
                         totalRespon: 79,
                         totalDone: 80,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                     },
                 ],
                   mesInfo3: [
@@ -1442,7 +1474,10 @@ export default {
                         outerSaleTaskAmt: 144,
                         outerCnyAmt: 165,
                         saleTaskAmtAll: 193,
-                        orgQtyAll: 230,
+                        cnyAmtAll: 230,
+                        outerCnyAmtRatio:30,
+                        outerCnyAmtRatio:13,
+                        outerCnyAmtRatio :2,
                         day:9
                     },
                     {
@@ -1452,7 +1487,10 @@ export default {
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 93,
-                        orgQtyAll: 130,
+                        cnyAmtAll: 130,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                        dateRadio :2,
                         day:10
                     },
                     {
@@ -1462,7 +1500,10 @@ export default {
                         outerSaleTaskAmt: 234,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 94,
-                        orgQtyAll: 101,
+                        cnyAmtAll: 101,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                        dateRadio :2,
                         day:11
                     },
                     {
@@ -1472,7 +1513,10 @@ export default {
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 365,
                         saleTaskAmtAll: 95,
-                        orgQtyAll: 103,
+                        cnyAmtAll: 103,
+                          innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                        dateRadio :2,
                         day:12
                     },
                     {
@@ -1482,7 +1526,10 @@ export default {
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 355,
-                        orgQtyAll: 93,
+                        cnyAmtAll: 93,
+                          innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                        dateRadio :2,
                          day:12
                     },
                     {
@@ -1492,7 +1539,10 @@ export default {
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 25,
-                        orgQtyAll: 108,
+                        cnyAmtAll: 108,
+                          innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                        dateRadio :2,
                          day:12
                     },
                      {
@@ -1502,8 +1552,12 @@ export default {
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 25,
-                        orgQtyAll: 108,
-                         day:12
+                        cnyAmtAll: 108,
+                        outerCnyAmtRatio:90,
+                        day:12,
+                          innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                        dateRadio :2,
                     }
                    
                 ],
@@ -1515,7 +1569,11 @@ export default {
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 93,
-                        orgQtyAll: 230,
+                        cnyAmtAll: 230,
+                          innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                        dateRadio :2,
+                        
                         day:9
                     },
                     {
@@ -1525,7 +1583,10 @@ export default {
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 93,
-                        orgQtyAll: 130,
+                        cnyAmtAll: 130,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                        dateRadio :2,
                         day:10
                     },
                     {
@@ -1535,7 +1596,10 @@ export default {
                         outerSaleTaskAmt: 234,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 94,
-                        orgQtyAll: 101,
+                        cnyAmtAll: 101,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                        dateRadio :2,
                         day:11
                     },
                     {
@@ -1545,7 +1609,11 @@ export default {
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 95,
-                        orgQtyAll: 103,
+                        cnyAmtAll: 103,
+                          innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                        dateRadio :2,
+                        dateRadio:10,
                         day:12
                     },
                     {
@@ -1555,8 +1623,14 @@ export default {
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 55,
-                        orgQtyAll: 93,
-                         day:12
+                        cnyAmtAll: 93,
+                        outerCnyAmtRatio:90,
+                        outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
+                        dateRadio :2,
+                        dateRadio:10,
+                        day:12
                     },
                     {
                         businessEntityName: "饮品",
@@ -1565,7 +1639,10 @@ export default {
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 25,
-                        orgQtyAll: 108,
+                        cnyAmtAll: 108,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                          day:12
                     },
                      {
@@ -1575,7 +1652,10 @@ export default {
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 25,
-                        orgQtyAll: 108,
+                        cnyAmtAll: 108,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                          day:12
                     }
                    
@@ -1588,7 +1668,10 @@ export default {
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
                         SaleTaskAmtAll: 93,
-                        orgQtyAll: 230,
+                        cnyAmtAll: 230,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                         
                     },
                     {
@@ -1598,7 +1681,10 @@ export default {
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
                         SaleTaskAmtAll: 93,
-                        orgQtyAll: 130,
+                        cnyAmtAll: 130,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                         
                     },
                     {
@@ -1608,7 +1694,10 @@ export default {
                         outerSaleTaskAmt: 234,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 94,
-                        orgQtyAll: 101,
+                        cnyAmtAll: 101,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                       
                     },
                     {
@@ -1618,7 +1707,10 @@ export default {
                         outerSaleTaskAmt: 34,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 95,
-                        orgQtyAll: 103,
+                        cnyAmtAll: 103,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                         
                     },
                     {
@@ -1628,7 +1720,10 @@ export default {
                         outerSaleTaskAmt: 44,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 55,
-                        orgQtyAll: 93,
+                        cnyAmtAll: 93,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                         
                     },
                     {
@@ -1638,7 +1733,10 @@ export default {
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 25,
-                        orgQtyAll: 108,
+                        cnyAmtAll: 108,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                     },
                      {
                         businessEntityName: "饮品",
@@ -1647,7 +1745,10 @@ export default {
                         outerSaleTaskAmt: 434,
                         outerCnyAmt: 65,
                         saleTaskAmtAll: 25,
-                        orgQtyAll: 108,
+                        cnyAmtAll: 108,
+                          outerCnyAmtRatio :20,
+                        innerCnyAmtRatio:90,
+                        outerCnyAmtRatio:13,
                     }
                    
                 ],
@@ -1891,23 +1992,22 @@ export default {
     
   },
   watch:{
-    ontime:{ /*监听数据更改 调用接口 */
+    ontime:{ /*监听月度 数据更改 调用接口 */
      handler: function (newValue, oldValue) {
-        this.init(this.model);
-      }
-    },
-    model:{ /*监听数据更改 调用接口 */
-      handler: function(newValue,oldValue){
         this.init(newValue);
       }
+    },
+    model:{ /*监听产司 数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(this.ontime);
+      }
 
     },
-    showMoney:{
-      handler:(newValue,oldValue)=>{
- 
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
+      handler:function(newValue,oldValue){
+        this.init(this.ontime);
       }
-    }
-
+    },
   },
   methods: {
     toggle(){
@@ -2027,6 +2127,7 @@ export default {
       Object.assign(params,chart)
 
         const res = await API.getTotal(params);
+        this.divisionDate=[];
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
         let newArr = res.rows.filter((item)=>{
         var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");

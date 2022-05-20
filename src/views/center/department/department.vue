@@ -319,6 +319,8 @@ export default {
        let tableOutter = await API.getTotal(
         Object.assign(onlineStore,time)
       );
+     console.log("tableInner2",tableInner);
+      console.log("tableInner3",tableOutter);
       this.tableInner = tableInner.rows;
       this.tableOutter = tableOutter.rows;
       this.rowSpanNumber2 = [this.tableOutter.length - 1];
