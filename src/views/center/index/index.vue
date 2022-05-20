@@ -35,9 +35,7 @@
                       完成率
                       <span
                         >{{
-                          innerLeftInfo.onLineRadio > 100
-                            ? 100
-                            : innerLeftInfo.onLineRadio
+                          innerLeftInfo.onLineRadio
                         }}%</span
                       >
                     </div>
@@ -324,9 +322,7 @@
                       完成率
                       <span
                         >{{
-                          outterLeftInfo.onLineRadio > 100
-                            ? 100
-                            : outterLeftInfo.onLineRadio
+                          outterLeftInfo.onLineRadio
                         }}%</span
                       >
                     </div>
@@ -463,9 +459,7 @@
                       完成率
                       <span
                         >{{
-                          outterRightInfo.onLineRadio > 100
-                            ? 100
-                            : outterRightInfo.onLineRadio
+                          outterRightInfo.onLineRadio
                         }}%</span
                       >
                     </div>
@@ -879,15 +873,14 @@ export default {
           this.innerLeft = [];
         } else{
           inner.rows.forEach((v) => {
-          v.dateRadio = v.dateRadio * 100>=100?100: Number((v.dateRadio * 100).toFixed(0)); 
-          v.onLineRadio = v.onLineRadio * 100>100?100:Number((v.onLineRadio * 100).toFixed(0));
-          v.onLineProfitRadio = v.onLineProfitRadio * 100>100?100:Number((v.onLineProfitRadio * 100).toFixed(0));
-          
-          v.sumCnyamt = v.sumCnyamt.toFixed(1);
-          v.saleTaskAmt =  v.saleTaskAmt.toFixed(1);
+          v.dateRadio = v.dateRadio * 100>=100?100: Number((v.dateRadio * 100).toFixed(2)); 
+          v.onLineRadio = Number((v.onLineRadio * 100).toFixed(0));
+          v.onLineProfitRadio = Number((v.onLineProfitRadio * 100).toFixed(2));
+          v.sumCnyamt = v.sumCnyamt.toFixed(2);
+          v.saleTaskAmt =  v.saleTaskAmt.toFixed(2);
         });
         
-   
+        
 
         
         this.innerLeft = inner.rows.filter((v) => {
@@ -907,11 +900,11 @@ export default {
         }else{
 
           outter.rows.forEach((v) => {
-          v.dateRadio = v.dateRadio * 100>=100?100: Number((v.dateRadio * 100).toFixed(0));
-          v.onLineRadio =  v.onLineRadio * 100>100?100:Number((v.onLineRadio * 100).toFixed(0));
-          v.onLineProfitRadio = v.onLineProfitRadio * 100>100?100:Number((v.onLineProfitRadio * 100).toFixed(0));
-          v.sumCnyamt = v.sumCnyamt.toFixed(0);
-          v.saleTaskAmt =  v.saleTaskAmt.toFixed(1);
+          v.dateRadio = !!v.dateRadio?Number((v.dateRadio * 100).toFixed(2)):0;
+          v.onLineRadio =  !!v.onLineRadio?Number((v.onLineRadio * 100).toFixed(0)):0;
+          v.onLineProfitRadio = !!v.onLineProfitRadio?Number((v.onLineProfitRadio * 100).toFixed(2)):0;
+          v.sumCnyamt = v.sumCnyamt.toFixed(2);
+          v.saleTaskAmt =  v.saleTaskAmt.toFixed(2);
         });
 
 
@@ -932,7 +925,7 @@ export default {
         }else{
 
         innersab.rows.forEach(v=>{
-          v.positionRatio = (v.positionRatio*100).toFixed(1);
+          v.positionRatio = (v.positionRatio*100).toFixed(2);
         })
 
 
@@ -952,7 +945,7 @@ export default {
               }else{
               
               outtersab.rows.forEach(v=>{
-                v.positionRatio = (v.positionRatio*100).toFixed(1);
+                v.positionRatio = (v.positionRatio*100).toFixed(2);
               })
               console.log('outtersab',outtersab)
 
@@ -1111,10 +1104,10 @@ export default {
         this.progressData.ballNum = Number((
           panelDataList[0].grossProfitRadio * 100
         ).toFixed(1));
-        this.speedData.speedBar = Number((panelDataList[0].cnyAmt * 100).toFixed(1));
+        this.speedData.speedBar = Number((panelDataList[0].cnyAmt * 100).toFixed(2));
         this.speedData.bar = Number((panelDataList[0].dateRadio * 100).toFixed(1));
-        this.speedData.ballNum = Number(panelDataList[0].sumCnyAmt.toFixed(1));
-        this.speedData.bottomNum = Number(panelDataList[0].saleTaskAmt.toFixed(1));
+        this.speedData.ballNum = Number(panelDataList[0].sumCnyAmt.toFixed(2));
+        this.speedData.bottomNum = Number(panelDataList[0].saleTaskAmt.toFixed(2));
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].directName == "内销") {
             this.progressData.bar1 = Number((
@@ -1123,7 +1116,7 @@ export default {
             this.progressData.topGPM = Number((
               panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(1));
-            this.speedData.ballLeftNum = Number(panelDataList[i].cnyAmt.toFixed(1));
+            this.speedData.ballLeftNum = Number(panelDataList[i].cnyAmt.toFixed(2));
             this.speedData.bottomClose =Number(
               panelDataList[i].cnyAmtRadio.toFixed(1));
             this.speedData.bottomTime =Number( panelDataList[i].dateRadio.toFixed(1));
@@ -1134,7 +1127,7 @@ export default {
             this.progressData.bottomGPM = Number((
               panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(1));
-            this.speedData.ballRightNum = Number(panelDataList[i].cnyAmt.toFixed(1));
+            this.speedData.ballRightNum = Number(panelDataList[i].cnyAmt.toFixed(2));
             this.speedData.bottomClose1 =Number(
               panelDataList[i].cnyAmtRadio.toFixed(1));
             this.speedData.bottomTime1 = Number(panelDataList[i].dateRadio.toFixed(1));
@@ -1761,7 +1754,7 @@ export default {
 .top-left-font {
   font-size: 14px;
   color: #fff;
-  margin-right: 20px;
+  margin-right: 8px;
 }
 
 .card-border-box {

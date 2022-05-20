@@ -348,7 +348,7 @@ display:none;
   // margin-right:20px!important;
 }
 .card-box .card-big-num{
-  font-size:20px!important;
+  font-size:18px!important;
 }
 .unit{
   font-size:14px;
@@ -368,4 +368,14 @@ z-index: 11;
 display: flex;
 justify-content: center;
 align-items: center;
+}
+/*修改*/
+.table{
+  width:100%;
+}
+/*修改样式*/
+.el-table{
+ th.el-table__cell.gutter:last-of-type{
+  border-bottom: 1px solid rgb(7 6 64);
+}
 }

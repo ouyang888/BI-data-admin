@@ -33,9 +33,7 @@
                     <div class="finish-font">
                       完成率
                       <span>{{
-                          innerLeftInfo.onLineRadio > 100
-                            ? 100
-                            : innerLeftInfo.onLineRadio || 0
+                          innerLeftInfo.onLineRadio
                       }}%</span>
                     </div>
                   </div>
@@ -228,9 +226,7 @@
                     <div class="finish-font">
                       完成率
                       <span>{{
-                          outterLeftInfo.onLineRadio > 100
-                            ? 100
-                            : outterLeftInfo.onLineRadio
+                          outterLeftInfo.onLineRadio
                       }}%</span>
                     </div>
                   </div>
@@ -327,9 +323,7 @@
                     <div class="finish-font">
                       完成率
                       <span>{{
-                          outterRightInfo.onLineRadio > 100
-                            ? 100
-                            : outterRightInfo.onLineRadio || 0
+                          outterRightInfo.onLineRadio
                       }}%</span>
                     </div>
                   </div>
@@ -668,26 +662,26 @@ export default {
         }
         this.progressData.ballNum = (
           panelDataList[0].directProfitRadio * 100
-        ).toFixed(1);
-        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
+        ).toFixed(2);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
         this.speedData.speedBar = (
           panelDataList[0].directAmtRadio * 100
-        ).toFixed(1);
-        this.speedData.ballNum = panelDataList[0].directCnyAmt.toFixed(1);
-        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1);
+        ).toFixed(2);
+        this.speedData.ballNum = panelDataList[0].directCnyAmt.toFixed(2);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2);
 
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].cooprLevel1 == "线上") {
             this.progressData.topGPM = (
               panelDataList[i].onLineProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.bar1 = (
               panelDataList[i].onLineProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballLeftNum = panelDataList[i].cnyAmt || panelDataList[i].cnyAmt.toFixed(1);
+            ).toFixed(2);
+            this.speedData.ballLeftNum = !!panelDataList[i].cnyAmt?panelDataList[i].cnyAmt.toFixed(2):0;
             this.speedData.bottomClose =
-              panelDataList[i].cnyAmtRadio.toFixed(1);
-            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
+              !!panelDataList[i].cnyAmtRadio?(panelDataList[i].cnyAmtRadio*100).toFixed(2):0;
+            this.speedData.bottomTime = (panelDataList[i].dateRadio*100).toFixed(2);
           } else if (panelDataList[i].cooprLevel1 == "线下") {
             // this.progressData.bar1 = 10;
             this.progressData.bottomGPM = (
@@ -696,10 +690,10 @@ export default {
             this.progressData.bar2 = (
               panelDataList[i].onLineProfitRadio * 100
             ).toFixed(1);
-            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1);
+            this.speedData.ballRightNum = !!panelDataList[i].cnyAmt?panelDataList[i].cnyAmt.toFixed(2):0;
             this.speedData.bottomClose1 =
-              panelDataList[i].cnyAmtRadio.toFixed(1);
-            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1);
+            !!panelDataList[i].cnyAmtRadio?(panelDataList[i].cnyAmtRadio*100).toFixed(2):0;
+            this.speedData.bottomTime1 = (panelDataList[i].dateRadio*100).toFixed(2);
           }
         }
       } catch (error) {
@@ -735,16 +729,31 @@ export default {
             if (RightSAB[i].position == "S") {
               this.sabData.topArr.S = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "A") {
               this.sabData.topArr.A = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "B") {
               this.sabData.topArr.B = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             }
+
+            if (RightSAB[i].position == "S") {
+              this.sabData.sabArr.s = (
+                RightSAB[i].directPositionRatio * 100
+              ).toFixed(2);
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.sabArr.a = (
+                RightSAB[i].directPositionRatio * 100
+              ).toFixed(2);
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.sabArr.b = (
+                RightSAB[i].directPositionRatio * 100
+              ).toFixed(2);
+            }
+
           } else if (RightSAB[i].cooprLevel1 == "线下") {
             this.sabData.bar2 = (RightSAB[i].level1PositionRatio * 100).toFixed(
               1
@@ -752,15 +761,15 @@ export default {
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.S = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "A") {
               this.sabData.bottomArr.A = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "B") {
               this.sabData.bottomArr.B = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             }
           }
         }
@@ -1214,8 +1223,8 @@ export default {
 
       inner.rows.forEach((v) => {
         v.dateRadio = v.dateRadio * 100;
-        v.onLineRadio = v.onLineRadio * 100 > 100 ? 100 : (v.onLineRadio * 100).toFixed(0);
-        v.onLineProfitRadio = v.onLineProfitRadio * 100 > 100 ? 100 : (v.onLineProfitRadio * 100).toFixed(0);
+        v.onLineRadio = (v.onLineRadio * 100).toFixed(0);
+        v.onLineProfitRadio = (v.onLineProfitRadio * 100).toFixed(2);
         v.sumCnyamt = v.sumCnyamt.toFixed(1);
         v.saleTaskAmt = v.saleTaskAmt.toFixed(1);
       });
@@ -1237,14 +1246,14 @@ export default {
         return v.cooprLevel1 == '线上' && v.position != '其他';
       })
       this.innerSabLeft.forEach(v => {
-        v.positionRatio = (v.level1PositionRatio * 100).toFixed(0)
+        v.positionRatio = (v.level1PositionRatio * 100).toFixed(2)
       })
       // console.log('this.innerSabLeft', this.innerSabLeft)
       this.outterSabLeft = innersab.rows.filter(v => {
         return v.cooprLevel1 == '线下' && v.position != '其他';
       })
       this.outterSabLeft.forEach(v => {
-        v.positionRatio = (v.level1PositionRatio * 100).toFixed(0)
+        v.positionRatio = (v.level1PositionRatio * 100).toFixed(2)
       })
 
       // }catch(err){
@@ -1299,8 +1308,8 @@ export default {
         end_date: `${ontime}-${this.$store.state.endDay}`
       }
       this.getList(listParams);
-      // this.getdashboard(params);
-      // this.queryCardSAB(params);
+      this.getdashboard(params);
+      this.queryCardSAB(params);
       this.getCard(params);
       this.getTable(params);
     },
@@ -1468,7 +1477,7 @@ export default {
 .top-left-font {
   font-size: 14px;
   color: #fff;
-  margin-right: 20px;
+  margin-right: 8px;
 }
 
 .card-border-box {

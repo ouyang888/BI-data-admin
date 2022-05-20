@@ -326,4 +326,8 @@ body .el-table::before {
 ::v-deep .el-table__body-wrapper{
   background: #070640;
 }
+::v-deep .el-table--border th.el-table__cell.gutter:last-of-type{
+  border-bottom: 1px solid rgb(7 6 64);
+}
+
 </style>

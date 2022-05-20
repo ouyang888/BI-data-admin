@@ -78,7 +78,7 @@
             <span>(建设中)</span>
           </div>
           <div class="head-box-right right-width drop-month">
-            <span>{{ year }}{{ month }}</span>
+            <span>{{year}}{{month}}<a-icon type="down" style="padding-left: 3px; font-size: 14px" /></span>
             <div class="drop-down drop-down-year">
               <div v-for="(item, i) in timeList" :key="i + 12" class="down-font-year" @click="changemonth(item)">{{ item }}
               </div>
