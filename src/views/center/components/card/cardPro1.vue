@@ -20,7 +20,7 @@
               </div>
             </div>
             <div class="flex-top-card">
-              <div class="card-big-num">{{v[cardObj.cnyAmt]}}{{$store.state.unit}}</div>
+              <div class="card-big-num">{{v[cardObj.cnyAmt]}}<span class="unit">{{$store.state.unit}}</span></div>
                <div class="flex-finish">
                 <!-- <div class="finish-font">进度 <span>s</span></div>
                 <div class="finish-font">完成率 <span>75%</span></div> -->
@@ -194,8 +194,8 @@
           newValue && newValue.forEach(v => { /*划分6个卡片*/
             if(v[this.cardObj.title] !=title){
               // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
-              v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(0);
-            v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt].toFixed(1);
+              v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(2);
+            v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt].toFixed(2);
             v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(0));
             // v.grossProfitRadio = Number((v.grossProfitRadio*100).toFixed(0));
             // debugger;
@@ -407,9 +407,9 @@
   }
 
   .top-left-font {
-    font-size: 14px;
+    font-size: 12px;
     color: #fff;
-    margin-right:10px;
+    margin-right:0px;
   }
 
   .card-border-box {
