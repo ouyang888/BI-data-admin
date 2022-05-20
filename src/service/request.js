@@ -24,7 +24,8 @@ const handleCode = (code, msg) => {
         code && message.error(msg || "登录失效");
         // location.href = api.adminUrl + 'login';
         localStorage.removeItem("token")
-        location.href = api.adminUrl + '/login';
+        location.href = 'http://10.18.4.139:8088/#/login';
+
     }
 };
 
