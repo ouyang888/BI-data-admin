@@ -15,14 +15,14 @@
             <div class="left-right-box">
               <div class="centerInfo" v-if="sale === '内销'">
                 <div class="flex-top-card">
-                  <div class="top-left-font">{{ sale }}达成</div>
+                  <div class="top-left-font">{{ sale }}</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
                       <span>{{
                         Number(departmentInfo.saleTaskAmt).toFixed(2)
                       }}</span
-                      >亿
+                      >{{modelLabel}}
                     </div>
                 
                     <div class="finish-font">
@@ -35,15 +35,16 @@
                         >{{
                           Number(departmentInfo.cnyAmtRadio*100).toFixed(2) > 100
                             ? 100
-                            : departmentInfo.cnyAmtRadio
+                            :  Number(departmentInfo.cnyAmtRadio*100).toFixed(2)
                         }}%</span
                       >
                     </div>
                   </div>
                 </div>
                 <div class="flex-top-card">
+              
                   <div class="card-big-num">
-                    {{ Number(departmentInfo.cnyAmt).toFixed(2) }}亿
+                    {{ Number(departmentInfo.cnyAmt).toFixed(2) }}{{modelLabel}}
                   </div>
                   <div style=" display: flex; align-items: center; ">
                     <div class="finish-font">进度</div>
@@ -131,14 +132,14 @@
               <div class="mt-border"></div>
               <div class="centerInfo"  >
                 <div class="flex-top-card">
-                  <div class="top-left-font">{{ sales }}达成</div>
+                  <div class="top-left-font">{{ sales }}</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
                       <span>{{
                         Number(departmentInfo1.saleTaskAmt).toFixed(2)
                       }}</span
-                      >亿
+                      >{{modelLabel}}
                     </div>
                     <div class="finish-font">
                       完成率
@@ -152,7 +153,7 @@
                         >{{
                           Number(departmentInfo.cnyAmtRadio*100).toFixed(2) > 100
                             ? 100
-                            : departmentInfo.cnyAmtRadio
+                            :Number(departmentInfo.cnyAmtRadio*100).toFixed(2)
                         }}%</span
                       >
                         
@@ -163,7 +164,8 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ Number(departmentInfo1.cnyAmt).toFixed(2) }}亿
+
+                    {{ Number(departmentInfo1.cnyAmt).toFixed(2) }}{{modelLabel}}
                   </div>
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
@@ -504,7 +506,7 @@
             <div class="left-right-box">
               <div class="centerInfo" >
                 <div class="flex-top-card">
-                  <div class="top-left-font">内销达成</div>
+                  <div class="top-left-font">内销</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100{{this.modelLabel}}</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -944,7 +946,7 @@
             <div class="left-right-box">
               <div class="centerInfo" >
                 <div class="flex-top-card">
-                  <div class="top-left-font">内销库存</div>
+                  <div class="top-left-font">内销</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100{{this.modelLabel}}</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
