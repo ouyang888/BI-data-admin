@@ -27,6 +27,7 @@
         label="责任人"
         height="30px"
       >
+      {{tableOutter}}
         <template v-slot="scope">
           <div class="nameColor" @click="handleClick">
             {{ scope.row[headerObj.level] }}
@@ -40,6 +41,7 @@
         label="责任制"
         height="30px"
       >
+      
         <template v-slot="scope">
           {{ scope.row[headerObj.tAvgAmt].toFixed(2) }}
         </template>
