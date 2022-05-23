@@ -14,8 +14,8 @@
             <div class="flex-top-card">
               <div class="top-left-font">实时达成</div>
               <div class="flex-finish">
-                <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}{{modelLabel}}</span></div>
-                <div class="finish-font">完成率 <span>{{v[cardObj.cnyAmtRadio]}}%</span></div>
+                <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt*100]}}{{modelLabel}}</span></div>
+                <div class="finish-font">完成率 <span>{{v[cardObj.cnyAmtRadio*100]}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
@@ -28,14 +28,14 @@
                 <div>
                   <div class="progress">
                     <a-progress
-                      :percent="v.dateRadio"
+                      :percent="v.dateRadio*100"
                       :show-info="false"
                       strokeColor="#FF8B2F"
                     />
                   </div>
                   <div class="progress">
                     <a-progress
-                      :percent="v[cardObj.saleAmtRadio]"
+                      :percent="v[cardObj.saleAmtRadio*100]"
                       :show-info="false"
                       strokeColor="rgb(102, 255, 255)"
                     />
@@ -68,14 +68,14 @@
           <div class="percent">
             <div>
               <span class="percent-title">毛利</span>
-              <span class="percent-text">{{(v.grossProfitRadio*100).toFixed(0)}}%</span>
+              <span class="percent-text">{{(v.grossProfitRadio*100).toFixed(2)}}%</span>
             </div>
             <!-- {{list}} -->
             
             <template v-for="(item,k) in list"> 
            <div :key="k+22" v-if="k == i*2 || k==i*2+1">
               <span class="percent-title">{{item[cardObj.cooprLevel1]}} </span>
-              <span class="percent-text">{{(item.directCnyAmtRadio*100)>100?100:(item.directCnyAmtRadio*100).toFixed(0) }}%</span>
+              <span class="percent-text">{{(item.directCnyAmtRadio*100) }}%</span>
            </div>
           </template>
           </div>

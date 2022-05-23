@@ -11,7 +11,6 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-
        <div style="color:white;" v-if="cardData.length===0">暂无数据</div>
      <Card :list="cardData"  @click="cardClick()"/>
     </div>
@@ -121,7 +120,7 @@ export default {
       },
       rightObj: {
         name: 'customerName',
-        level: 'salesMan',
+        level: '',
         tAvgAmt: 'saleTaskAmt',/*责任制*/
       },
       cardData: [],
@@ -521,7 +520,6 @@ export default {
         // }
         // const res = await API.getTotal(Object.assign(params, obj));
          const res = await API.getData("onlineTopCooprLevel2", params);
-         console.log("res",res);
 
         res.rows.length > 0 &&
           res.rows.forEach((v) => {
@@ -529,17 +527,26 @@ export default {
               v.cnyAmt = v.cnyAmt.toFixed(2);
             }
             if (!!v.saleTaskAmt) {
-              v.saleTaskAmt = v.saleTaskAmt.toFixed(2);
+              v.saleTaskAmt = v.saleTaskAmt .toFixed(2);
             }
-
-            if (!!v.saleAmtRadio) {
+            if (!!v.completeRadio) {
               v.saleAmtRadio = (
-                v.saleAmtRadio * 100
+                v.completeRadio * 100
               ).toFixed(2);
             }
             if (!!v.saleQtyRadio) {
               v.saleQtyRadio = (
                 v.saleQtyRadio * 100 
+              ).toFixed(2);
+            }
+             if (!!v.dateRadio) {
+              v.dateRadio = (
+                v.dateRadio * 100 
+              ).toFixed(2);
+            }
+              if (!!v.completeRadio) {
+              v.dateRadio = (
+                v.completeRadio * 100 
               ).toFixed(2);
             }
           });
@@ -548,6 +555,7 @@ export default {
           this.cardData = res.rows.filter((v) => {
             return !!v.cooprLevel2;
           });
+          console.log("this.cardData", this.cardData);
           this.cardData.splice(6);
         } else {
           this.cardData = [{}];
@@ -1028,7 +1036,10 @@ export default {
       // console.log("tableInner", tableOutter);
 
       this.tableInner = tableInner.rows;
+      console.log("线上汇总",tableInner);
+
       this.tableOutter = tableOutter.rows;
+      console.log("线吓唬总",tableOutter);
       // } catch (err) {
       //   console.log(err);
       // }
@@ -1215,6 +1226,8 @@ export default {
   /* margin-right: 20px; */
   background-size: 100%;
   padding: 8px;
+  width:33.3%
+  
 }
 
 .card-font {
@@ -1246,7 +1259,7 @@ export default {
 .top-left-font {
   font-size: 14px;
   color: #fff;
-  margin-right: 20px;
+  margin-right: 8px;
 }
 
 .card-border-box {

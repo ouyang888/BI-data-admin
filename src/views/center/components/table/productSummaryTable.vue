@@ -42,9 +42,10 @@
               {{ scope.row.onLineCnyAmt }}
             </div>
             <div style="margin-top: 5px">
-                  <Progress style="margin-bottom: 3px;text-align: center;" :rate="scope.row.onLineCompleteRatio" :color="'#FF8B2F'"
+                              <Progress :rate="scope.row.dateRadio*100" :color="'#66FFFF'" class="precentCompentes" />
+                  <Progress style="margin-bottom: 3px;text-align: center;" :rate="scope.row.onLineCompleteRatio*100" :color="'#FF8B2F'"
                       class="precentCompentes" />
-                  <Progress :rate="scope.row.dateRadio" :color="'#66FFFF'" class="precentCompentes" />
+
             </div>
             </div>
           </template> 
@@ -63,9 +64,9 @@
                       {{ scope.row.outLineCnyAmt .toFixed(1) }}
                   </div>
                   <div style="margin-top: 5px">
-                      <Progress style="margin-bottom: 3px" :rate="scope.row.outLineCompleteRatio" :color="'#FF8B2F'"
+                      <Progress style="margin-bottom: 3px" :rate="scope.row.outLineCompleteRatio*100" :color="'#FF8B2F'"
                           class="precentCompentes" />
-                      <Progress :rate="scope.row.dateRadio" :color="'#66FFFF'" class="precentCompentes" />
+                      <Progress :rate="scope.row.dateRadio*100" :color="'#66FFFF'" class="precentCompentes" />
                   </div>
               </div>
             </template>
@@ -82,9 +83,10 @@
                 {{ scope.row.totalCnyAmt }}
               </div>
                 <div style="margin-top: 5px">
-                  <Progress style="margin-bottom: 3px" :rate="scope.row.totalCompleteRatio" :color="'#FF8B2F'"
+                  <Progress :rate="scope.row.dateRadio*1000" :color="'#66FFFF'" class="precentCompentes" />
+                  <Progress style="margin-bottom: 3px" :rate="scope.row.totalCompleteRatio*100" :color="'#FF8B2F'"
                       class="precentCompentes" />
-                  <Progress :rate="scope.row.dateRadio" :color="'#66FFFF'" class="precentCompentes" />
+                
               </div>
             </div>
           </template>

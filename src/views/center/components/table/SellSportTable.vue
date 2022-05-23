@@ -27,6 +27,7 @@
         label="责任人"
         height="30px"
       >
+      {{tableOutter}}
         <template v-slot="scope">
           <div class="nameColor" @click="handleClick">
             {{ scope.row[headerObj.level] }}
@@ -40,6 +41,7 @@
         label="责任制"
         height="30px"
       >
+      
         <template v-slot="scope">
           {{ Math.abs(scope.row[headerObj.tAvgAmt]).toFixed(2) }}
         </template>
@@ -67,7 +69,7 @@
             <div class="precent-in">
               {{
                 scope.row.amtRadio
-                  ? Math.round(scope.row.amtRadio) + "%"
+                  ? Math.round(scope.row.amtRadio*100) + "%"
                   : 0 + "%"
               }}
             </div>
@@ -90,7 +92,7 @@
       <el-table-column prop="profitRadio" align="center" label="毛利率">
         <template v-slot="scope">
           {{
-            scope.row.profitRadio
+            scope.row.profitRadio*100
               ? Math.round(scope.row.profitRadio) + "%"
               : 0 + "%"
           }}
