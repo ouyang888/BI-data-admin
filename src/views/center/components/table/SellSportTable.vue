@@ -21,7 +21,7 @@
       >
       </el-table-column>
            
-      <el-table-column v-if="router !== 'exprotAreaAll' || exprotAreaAllDepartment"
+      <el-table-column v-if="router !== 'exprotAreaAll' || 'exprotAreaAllDepartment'"
         :prop="headerObj.level"
         align="center"
         label="责任人"
@@ -43,7 +43,7 @@
       >
       
         <template v-slot="scope">
-          {{ Math.abs(scope.row[headerObj.tAvgAmt]).toFixed(2) }}
+          {{ scope.row[headerObj.tAvgAmt].toFixed(2) }}
         </template>
       </el-table-column>
            
@@ -54,7 +54,7 @@
         height="30px"
       >
         <template v-slot="scope">
-          {{ Math.abs(scope.row.cnyAmt).toFixed(0) }}
+          {{ scope.row.cnyAmt.toFixed(2)}}
         </template>
       </el-table-column>
            
@@ -63,13 +63,14 @@
         align="center"
         label="任务完成率"
         height="30px"
+        width="130"
       >
         <template v-slot="scope">
           <div class="precent">
-            <div class="precent-in">
+            <div class="precent-in" style="width: 88px">
               {{
                 scope.row.amtRadio
-                  ? Math.round(scope.row.amtRadio*100) + "%"
+                  ? (scope.row.amtRadio*100).toFixed(2) + "%"
                   : 0 + "%"
               }}
             </div>
@@ -81,7 +82,7 @@
                 class="precentCompentes"
               />
               <Progress
-                :rate="scope.row.amtRadio"
+                :rate="scope.row.amtRadio*100"
                 :color="'#66FFFF'"
                 class="precentCompentes"
               />
@@ -92,8 +93,8 @@
       <el-table-column prop="profitRadio" align="center" label="毛利率">
         <template v-slot="scope">
           {{
-            scope.row.profitRadio*100
-              ? Math.round(scope.row.profitRadio) + "%"
+            scope.row.profitRadio
+              ? (scope.row.profitRadio*100).toFixed(2) + "%"
               : 0 + "%"
           }}
         </template>
@@ -121,12 +122,12 @@
             <div style="margin-top: 5px">
               <Progress
                 style="margin-bottom: 3px"
-                :rate="scope.row.dateRadio"
+                :rate="scope.row.dateRadio*100"
                 :color="'#FF8B2F'"
                 class="precentCompentes"
               />
               <Progress
-                :rate="scope.row.amtFinish"
+                :rate="scope.row.amtRadio*100"
                 :color="'#66FFFF'"
                 class="precentCompentes"
               />
@@ -170,8 +171,8 @@ export default{
     mesInfo:{
       handler:function(newValue,oldValue){
         newValue.forEach((v,i)=>{
-          v.amtRadio = Number((v.amtRadio*100).toFixed(0));
-          v.profitRadio = Number((v.profitRadio*100).toFixed(0));
+          // v.amtRadio = Number((v.amtRadio*100).toFixed(2));
+          // v.profitRadio = Number((v.profitRadio*100).toFixed(2));
           if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
             console.log('headerObj.name',this.headerObj.name)
             v[this.headerObj.name] = '合计';
@@ -194,7 +195,10 @@ export default{
     },
     router(){
       return this.$route.name
-    }
+    },
+    modelLabel() {
+      return this.$store.state.showMoney == true ? "亿" : "万";
+    },
 
   },
 
@@ -274,7 +278,7 @@ export default{
 }
 
 .precent {
-  width: 90px;
+  /* width: 90px; */
   height: 23px;
   display: flex;
 }

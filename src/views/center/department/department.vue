@@ -99,6 +99,7 @@ export default {
        'saleTaskAmt': 'businessEntityTaskAmt', /*责任制金额*/
        'saleAmtRadio':'businessEntityAmtRadio',  /*金额完成率*/
        'cooprLevel1':'directName'  /*线上/线下 金额完成率*/
+   
       },
       
       AvgTaskAmtDate: [],
@@ -115,11 +116,11 @@ export default {
         bar1: 0,
         bar2: 0,
         ballTitle: "事业部",
-        bigBallTitle: "毛事业部利率",
-        textLeft: "内销",
-        textRight: "外销",
-        titleTop: "外销",
-        titleBottom: "内销",
+        bigBallTitle: "毛利率",
+        textLeft: "内",
+        textRight: "外",
+        titleTop: "外",
+        titleBottom: "内",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -129,15 +130,15 @@ export default {
         speedBar: 0,
         ballTitle: "事业部达成",
         ballNum: 0,
-        ballLeftTitle: "内销",
-        ballRightTitle: "外销",
+        ballLeftTitle: "内",
+        ballRightTitle: "外",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "外销",
+        bottomTitle1: "内",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "内销",
+        bottomTitle2: "外",
         bottomClose1: 0,
         bottomTime1: 0,
       },
@@ -145,8 +146,8 @@ export default {
         bar1: 70,
         bar2: 50,
         ballTitle: "线上",
-        top: "内销",
-        bottom: "外销",
+        top: "内",
+        bottom: "外",
          sabArr: { S: 0, A: 0, B: 0 },
         topArr: { S: 0, A: 0, B: 0  },
         bottomArr: { S: 0, A: 0, B: 0  },
@@ -412,7 +413,7 @@ export default {
         const res = await API.getData("directLevelTopDashBoardSAB",params);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
-          if (RightSAB[3].directName == "内销") {
+          // if (RightSAB[3].directName == "内销") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if (RightSAB[i].position == "S") {
               this.sabData.sabArr.S = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
@@ -427,7 +428,7 @@ export default {
                 2
               );
             }
-          } 
+          // } 
            if (RightSAB[i].directName == "内销") {
             this.sabData.bar1 = (RightSAB[i].totalAmtSabRadio * 100).toFixed(2);
             if (RightSAB[i].position == "S") {
@@ -472,30 +473,36 @@ export default {
      
          let chart = {
           code: 'directLevelChart',
-           fields:'cooprLevel1'
+          //  fields:'cooprLevel2'
         };
         Object.assign(chart, listParams)
         const res = await API.getTotal(chart);
-        let sellOutDataList = res.rows;
-        let newArr = sellOutDataList.filter((item) => {
-          var timeArr = item.orderDate
-            .replace(" ", ":")
-            .replace(/\:/g, "-")
-            .split("-");
-          var yue = timeArr[1];
-          var ri = timeArr[2];
+        let sellOutDataList = res.rows.filter(v=>{
+          return v.businessEntityName == '总';
+        });
+        console.log('sellOutDataList',sellOutDataList);
+        // debugger;
+        this.AvgTaskAmtDate = [];
+        this.AvgTaskAmtList = [];
+        let onTime = '';
+        sellOutDataList.filter((item) => {
+          var timeArr = item.orderDate.substr(5);
 
 
 
           // 外销日内
-          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
-            this.AvgTaskAmtDate.push(yue + "-" + ri);
+          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null && onTime!=timeArr) {
+            onTime = timeArr;
+            this.AvgTaskAmtDate.push(timeArr);
             this.AvgTaskAmtList.push(item.cnyAmt);
             this.AvgTaskAmtLine = item.tAvgAmt;
-            this.myEcharts();
+     
           }
           // this.showLoading = false;
         });
+        this.AvgTaskAmtDate = [...new Set( this.AvgTaskAmtDate)];
+        this.AvgTaskAmtList = [...new Set( this.AvgTaskAmtList)];
+        this.myEcharts();
       } catch (error) {
         console.log(error);
       }
@@ -507,7 +514,7 @@ export default {
      
       let chart = {
         code: 'directLevelChart',
-        fields: "cooprLevel2"
+        fields: "businessEntityName"
       };
       Object.assign(chart, line)
       try {
@@ -517,6 +524,7 @@ export default {
         let obj = res.rows[0]
         var k = 0;
         var arr = [];
+      
         for (var i in obj) {
           if(obj[i][0].cooprLevel2!=='总' && obj[i][0].cooprLevel2!='isNull'){
           if (k < 6) {
@@ -545,8 +553,8 @@ export default {
             var yue = timeArr[1];
             var ri = timeArr[2];
             AmericaDate.push(yue + "-" + ri);
-            AmericaList.push(item.orgQty);
-            AmericaLine = item.tAvgQty;
+            AmericaList.push(item.cnyAmt);
+            AmericaLine = item.tAvgAmt;
             
           });
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);

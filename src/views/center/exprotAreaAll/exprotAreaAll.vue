@@ -132,8 +132,8 @@ export default {
         // bar4: 12,
         // bar5: 7,
         ballTitle: "外销",
-        bottom: "OBM",
-        top: "OEM",
+        top: "OBM",
+        bottom: "OEM",
          sabArr: { S: 0, A: 0, B: 0 },
         topArr: { S: 0, A: 0, B: 0  },
         bottomArr: { S: 0, A: 0, B: 0  },
@@ -144,18 +144,18 @@ export default {
       showLoadingCard:false,
       cardData:[],
       /*表格配置*/
-      title1:'业务员',
+      title1:'区域',
       title2:'KA客户',
       tableOutter:[],
       tableInner:[],
       leftObj:{   
-      name:'salesMan',  /*标题*/
+      name:'cooprLevel1',  /*标题*/
       level:'salesMan',/*责任人*/
       tAvgAmt:'tAvgAmt',/*责任制*/
       },
       rightObj:{
       name:'customerName',
-      level:'customerName',
+      level:'',
       tAvgAmt:'tAvgAmt'
       },
       /*表格配置 end*/
@@ -249,34 +249,34 @@ export default {
           // this.speedData.ballTitle =  panelDataList[0].cooprLevel1+'达成';  
           this.progressData.ballNum = (
             panelDataList[0].level1ProfitRadio * 100
-          ).toFixed(1);
+          ).toFixed(2);
           //    
           // ⅵ. directCnyAmt: 5.8799  销向总销售金额
-          this.speedData.ballNum = panelDataList[0].level1CnyAmt.toFixed(1)
+          this.speedData.ballNum = panelDataList[0].level1CnyAmt.toFixed(2)
           // 销向金额完成率
           // 销向数量完成率
-          this.speedData.speedBar = (panelDataList[0].level1AmtRadio * 100).toFixed(1)
-          this.speedData.bar = (panelDataList[0].level1AmtRadio * 100).toFixed(1)
+          this.speedData.speedBar = (panelDataList[0].level1AmtRadio * 100).toFixed(2)
+          this.speedData.bar = (panelDataList[0].level1AmtRadio * 100).toFixed(2)
           //  销向总销售数量
-          // this.speedData.ballNum = (panelDataList[0].level1saleVolume / 1000000).toFixed(1)
+          // this.speedData.ballNum = (panelDataList[0].level1saleVolume / 1000000).toFixed(2)
 
           // 责任制
-          this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+          this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2)
           for (var i = 0; i < panelDataList.length; i++) {
             if (panelDataList[i].obmOem == "OBM") {
-              this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
+              this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+              this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+              this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2)
 
-              this.speedData.bottomClose = panelDataList[i].level1AmtRadio.toFixed(1)
-              this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1)
+              this.speedData.bottomClose = (panelDataList[i].cnyAmtRadio*100).toFixed(2)
+              this.speedData.bottomTime = (panelDataList[i].dateRadio*100).toFixed(2)
 
             } else if (panelDataList[i].obmOem == "OEM") {
-              this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
-              this.speedData.bottomClose1 = panelDataList[i].cnyAmtRadio.toFixed(1)
-              this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
+              this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+              this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+              this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2)
+              this.speedData.bottomClose1 = (panelDataList[i].cnyAmtRadio*100).toFixed(2)
+              this.speedData.bottomTime1 = (panelDataList[i].dateRadio*100).toFixed(2)
 
             }
           }
@@ -307,32 +307,47 @@ export default {
         }
         return;
         }
+     
         for (var i = 0; i < RightSAB.length; i++) {
+
+          if (RightSAB[i].position == "S") {
+            this.sabData.sabArr.S = (
+                RightSAB[i].level2AmtPositionRatio * 100
+              ).toFixed(1);
+          }else if (RightSAB[i].position == "B") {
+            this.sabData.sabArr.B = (
+                RightSAB[i].level2AmtPositionRatio * 100
+              ).toFixed(1);
+
+          }else if (RightSAB[i].position == "A") {
+            this.sabData.sabArr.A = (
+                RightSAB[i].level2AmtPositionRatio * 100
+              ).toFixed(1);
+          }
+
+
+            
           if (RightSAB[i].operationMode == "OBM") {
             this.sabData.bar1 = (
               RightSAB[i].AmtPositionRatio * 100
             ).toFixed(1);
             if (RightSAB[i].position == "S") {
+            
               this.sabData.topArr.S = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.S = (
-                RightSAB[i].level2AmtPositionRatio * 100
-              ).toFixed(1);
+           
             } else if (RightSAB[i].position == "A") {
               this.sabData.topArr.A = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.A = (
-                RightSAB[i].level2AmtPositionRatio * 100
-              ).toFixed(1);
+    
+            
             } else if (RightSAB[i].position == "B") {
               this.sabData.topArr.B = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.B = (
-                RightSAB[i].level2AmtPositionRatio * 100
-              ).toFixed(1);
+          
             }
           } else if (RightSAB[i].operationMode == "OEM") {
             this.sabData.bar2 = (
@@ -366,16 +381,21 @@ export default {
         const res = await API.getData('outSellMacroRegionDashboardChart',params);
 
         if(res.code !=200) return;
-        if(res.rows.length == 0){
           this.AvgTaskAmtDate = [];
           this.AvgTaskAmtList = [];
           this.AvgTaskAmtLine = '';
+        if(res.rows.length == 0){
           this.showLoading = false;
         }else{
+
+
+          let ontime = ''; /*过滤数据使用*/
           res.rows.filter((item) => {
+            var timeArr = item.orderDate.substr(5);
           // 外销日内
-          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
-            this.AvgTaskAmtDate.push(item.orderDate.substr(5));
+          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null && ontime!=timeArr) {
+            ontime = timeArr;
+            this.AvgTaskAmtDate.push(timeArr);
             this.AvgTaskAmtList.push(item.totalAmt);
             this.AvgTaskAmtLine = item.totalAvgTaskAmt;
             
@@ -407,7 +427,7 @@ export default {
       Object.assign(chartObj,params)
    
       try {
-        const res = await API.getListTotal(chartObj);
+        const res = await API.getChartTotal(chartObj);
         if(res.code !=200) return;
         let sellOutDataList = res.rows;
         this.showLoading = false;

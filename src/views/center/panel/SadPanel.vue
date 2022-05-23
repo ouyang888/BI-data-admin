@@ -145,6 +145,7 @@ export default {
 .bottom-title span{
   display: inline-block;
   padding-bottom: 5px;
+  margin-right:10px;
 }
 .mt{
   margin-top:20px;

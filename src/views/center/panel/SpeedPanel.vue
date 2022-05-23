@@ -70,13 +70,14 @@ export default {
 
 <style scoped>
 .panel-content {
-  height: 280px;
+  height: 255px;
   width: 280px;
   position: relative;
   display: flex;
   align-items:center;
   justify-content:center;
   flex-direction: column;
+  margin-top:10px;
 }
 .backgroundPic{
   height: 256px;
@@ -98,10 +99,11 @@ export default {
 }
 .bottom {
   position: absolute;
-  bottom: 2px
+  bottom: -17px
 }
 .bottom p{
   margin-bottom: -1px;
+  line-height:1.3;
 }
 .bottom span {
   opacity: 0.7;

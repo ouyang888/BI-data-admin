@@ -75,7 +75,7 @@
               <div class="down-font-year" @click="changeyear('2022')">2022</div>
               <div class="down-font-year" @click="changeyear('2021')">2021</div>
             </div> -->
-            <span>(建设中)</span>
+            <span @click="changeyear">年度</span>
           </div>
           <div class="head-box-right right-width drop-month">
             <span>{{year}}{{month}}<a-icon type="down" style="padding-left: 3px; font-size: 14px" /></span>
@@ -106,7 +106,7 @@ export default {
     return {
       searchKeys: [this.$route.path, this.$route.meta.preMenuUrl || ""],
       index: 1,
-      title: "销向汇总页",
+      title: "总裁PSI页",
       cus: 1,
       land: "产地",
       direction: 1,
@@ -250,17 +250,17 @@ export default {
       this.$router.go(-1);
     },
     changeland(item) {
-      if (item == "所有") {
-        this.land = "本地";
-      } else {
+      // if (item == "所有") {
+      //   this.land = "所有";
+      // } else {
         this.land = item;
-      }
+      // }
       switch (item) {
         case "本部":
-          this.$store.commit("setModel", "本部,本部,本部");
+          this.$store.commit("setModel", "本部");
           break;
         case "OEM":
-          this.$store.commit("setModel", "OEM,OEM,OEM");
+          this.$store.commit("setModel", "OEM");
           break;
         case "所有":
           this.$store.commit("setModel", "本部,OEM,待定");
@@ -283,7 +283,7 @@ export default {
         this.$router.push("/center/offlineSummary");
         this.title = "内销线下汇总";
       }
-      if (index == "2" && urlName == "psi") {
+      if (index == "2" && urlName == "psi" || urlName == "index" ) {
         this.$router.push("/center/department");
         this.title = "产司汇总页";
       } else if (index == "2" && urlName == "domestic") {
@@ -316,8 +316,12 @@ export default {
     },
 
     changeyear(item) {
-      this.year = item;
-      this.$store.commit("setYear", item);
+      this.$message({
+          message: '模块建设中...',
+          type: 'success'
+        });
+      // this.year = item;
+      // this.$store.commit("setYear", item);
     },
     changemonth(item) {
       this.month = item.substr(4); /*获取选项里的月份*/

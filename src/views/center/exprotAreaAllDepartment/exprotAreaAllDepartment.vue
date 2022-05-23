@@ -389,17 +389,14 @@ export default {
 
         if (res.code != 200) return;
 
+        let ontime = ''; /*过滤数据使用*/
         res.rows.filter((item) => {
-          var timeArr = item.orderDate
-            .replace(" ", ":")
-            .replace(/\:/g, "-")
-            .split("-");
-          var yue = timeArr[1];
-          var ri = timeArr[2];
+          var timeArr = item.orderDate.substr(5);
 
           // 外销日内
-          if (item.cnyAmt !== null && item.tAvgQty !== null) {
-            this.AvgTaskAmtDate.push(yue + "-" + ri);
+          if (item.cnyAmt !== null && item.tAvgQty !== null && ontime!=timeArr) {
+            ontime = timeArr
+            this.AvgTaskAmtDate.push(timeArr);
             this.AvgTaskAmtList.push(item.cnyAmt);
             this.AvgTaskAmtLine = item.tAvgQty;
       
