@@ -253,21 +253,21 @@ export default {
 
 
   },
-  watch: {
-    ontime: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
-        //this.init(this.model);
+  watch:{
+    ontime:{ /*监听月度 数据更改 调用接口 */
+     handler: function (newValue, oldValue) {
+        this.init(newValue);
       }
     },
-    model: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
-        //this.init(newValue);
+    model:{ /*监听产司 数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(this.ontime);
       }
 
     },
-    showMoney: {
-      handler: (newValue, oldValue) => {
-
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
+      handler:function(newValue,oldValue){
+        this.init(this.ontime);
       }
     },
   },
@@ -483,12 +483,12 @@ export default {
       let params = {  /*年月*/
         month_date: this.ontime,
         //business_entity_name:this.$route.query.key
-        business_entity_name:"环境"
+        business_entity_name:this.$route.query.key
       };
       let listParams = { /*年月日*/
         start_date: `${this.ontime}-01`,
-        end_date: `${this.ontime}-31`,
-        business_entity_name:"环境"
+        end_date:`${this.ontime}-${this.$store.state.endDay}`,
+        business_entity_name:this.$route.query.key
         //business_entity_name:this.$route.query.key
       }
       this.getList1(listParams);
@@ -551,9 +551,9 @@ this.$router.push("/center/index")
         this.progressData.ballNum = (
           panelDataList[0].directNameGrossProfitRadio * 100
         ).toFixed(1);
-        this.speedData.speedBar = (panelDataList[0].cnyAmtRadio*100).toFixed(1)
-        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1)
-        this.speedData.ballNum =panelDataList[0].sumCnyAmt.toFixed(1)
+        this.speedData.speedBar = (panelDataList[0].cnyAmtRadio*100).toFixed(2)
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2)
+        this.speedData.ballNum =panelDataList[0].sumCnyAmt.toFixed(2)
         // this.speedData.speedBar = (panelDataList[0].businessModelCompleteRadio*100).toFixed(1)
         // this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1)
         // this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1)
@@ -1639,7 +1639,7 @@ this.$router.push("/center/index")
 
   },
   mounted() {
-    this.init(this.model);
+    this.init(this.ontime);
   },
 };
 </script>

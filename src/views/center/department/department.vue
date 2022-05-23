@@ -273,33 +273,33 @@ export default {
     
   },
   watch:{
-    ontime:{ /*监听数据更改 调用接口 */
+    ontime:{ /*监听月度 数据更改 调用接口 */
      handler: function (newValue, oldValue) {
-        this.init(this.model);
-      }
-    },
-    model:{ /*监听数据更改 调用接口 */
-      handler: function(newValue,oldValue){
         this.init(newValue);
       }
+    },
+    model:{ /*监听产司 数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(this.ontime);
+      }
 
     },
-    showMoney:{
-      handler:(newValue,oldValue)=>{
- 
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
+      handler:function(newValue,oldValue){
+        this.init(this.ontime);
       }
-    }
-
+    },
   },
   methods: {
-    init(model){ /*初始化数据方法 model产地字段*/   
+    init(ontime){ /*初始化数据方法 model产地字段*/   
    let params = {  /*年月*/
-      month_date:this.ontime
+      month_date:ontime
     };
-    let listParams = { /*年月日*/
+     let listParams = { /*年月日*/
       start_date:`${this.ontime}-01`,
-      end_date:`${this.ontime}-31`
+      end_date:`${this.ontime}-${this.$store.state.endDay}`
     }
+
     this.getdashboard(params);
     this.queryCardSAB(params);
     this.getTable(params);
@@ -371,34 +371,34 @@ export default {
         let panelDataList = res.rows;
         this.progressData.ballNum = (
           panelDataList[0].grossProfitRadio * 100
-        ).toFixed(1);
+        ).toFixed(2);
         this.speedData.speedBar = (
           panelDataList[0].businessModelCompleteRadio * 100
-        ).toFixed(1);
-        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
-        this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(1);
-        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+        ).toFixed(2);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
+        this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(2);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2)
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].directName == "内销") {
             this.progressData.bar2 = (
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.topGPM = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballLeftNum =  panelDataList[i].sumCnyAmt.toFixed(1)
-             this.speedData.bottomClose = ( panelDataList[i].grossProfitRadio* 100).toFixed(1)
-             this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
+            ).toFixed(2);
+            this.speedData.ballLeftNum =  panelDataList[i].sumCnyAmt.toFixed(2)
+             this.speedData.bottomClose = ( panelDataList[i].grossProfitRadio* 100).toFixed(2)
+             this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(2)
           } else if (panelDataList[i].directName == "外销") {
             this.progressData.bar1 = (
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.bottomGPM = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballRightNum =  panelDataList[i].sumCnyAmt.toFixed(1)
-            this.speedData.bottomClose1 =  ( panelDataList[i].grossProfitRadio*100).toFixed(1)
-            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+            ).toFixed(2);
+            this.speedData.ballRightNum =  panelDataList[i].sumCnyAmt.toFixed(2)
+            this.speedData.bottomClose1 =  ( panelDataList[i].grossProfitRadio*100).toFixed(2)
+            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(2)
           }
         }
       } catch (error) {
@@ -416,48 +416,48 @@ export default {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if (RightSAB[i].position == "S") {
               this.sabData.sabArr.S = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
-                1
+                2
               );
             } else if (RightSAB[i].position == "A") {
               this.sabData.sabArr.A = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
-                1
+                2
               );
             } else if (RightSAB[i].position == "B") {
               this.sabData.sabArr.B = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
-                1
+                2
               );
             }
           } 
            if (RightSAB[i].directName == "内销") {
-            this.sabData.bar1 = (RightSAB[i].totalAmtSabRadio * 100).toFixed(1);
+            this.sabData.bar1 = (RightSAB[i].totalAmtSabRadio * 100).toFixed(2);
             if (RightSAB[i].position == "S") {
               this.sabData.topArr.S = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
-                1
+                2
               );
             } else if (RightSAB[i].position == "A") {
               this.sabData.topArr.A = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
-                1
+                2
               );
             } else if (RightSAB[i].position == "B") {
               this.sabData.topArr.B = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
-                1
+                2
               );
             }
           } 
           if (RightSAB[i].directName == "外销") {
-            this.sabData.bar2 = (RightSAB[i].totalAmtSabRadio * 100).toFixed(1);
+            this.sabData.bar2 = (RightSAB[i].totalAmtSabRadio * 100).toFixed(2);
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.S = (
                 RightSAB[i].totalAmtSabRadio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "A") {
               this.sabData.bottomArr.A = (
                 RightSAB[i].totalAmtSabRadio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "B") {
               this.sabData.bottomArr.B = (
                 RightSAB[i].totalAmtSabRadio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             }
           }
         }
@@ -518,15 +518,18 @@ export default {
         var k = 0;
         var arr = [];
         for (var i in obj) {
+          if(obj[i][0].cooprLevel2!=='总' && obj[i][0].cooprLevel2!='isNull'){
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
+        }
         this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
-        arrs.forEach((v) => {
-          this.dhcarr.push(v[0].cooprLevel2);
+         arrs.forEach((v) => {
+          this.dhcarr[i]=v[0].cooprLevel2;
+          //this.dhcarr.push(v[0].cooprLevel2);
         });
         //this.dhcarr = [0,1,2,3,4,5];
         for (let j = 0; j < arr.length; j++) {
@@ -548,6 +551,14 @@ export default {
           });
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
+             // 处理空数据
+          let noDatalen = 6 -  arr.length;
+          for (let j = arr.length; j < noDatalen; j++) {
+            this.myEcharts2([], [], '', j);
+            this.dhcarr[j] = '暂无数据';
+
+          }
+
       } catch (error) {
         console.log(error);
       }
@@ -852,7 +863,7 @@ export default {
 
   },
   mounted() {
-    this.init(this.model);
+    this.init(this.ontime);
   },
 };
 </script>
