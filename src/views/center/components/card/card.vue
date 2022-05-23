@@ -160,7 +160,7 @@
           
             v[this.cardObj.saleTaskAmt] =  (v[this.cardObj.saleTaskAmt]).toFixed(2);
             v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(2));
-            if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
+            // if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
             v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/
             
           });
@@ -349,7 +349,8 @@
   .top-left-font {
     font-size: 14px;
     color: #fff;
-    margin-right: 15px;
+    /* margin-right: 15px; */
+    margin-right: 6px;
   }
 
   .card-border-box {

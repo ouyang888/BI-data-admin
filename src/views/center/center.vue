@@ -250,11 +250,11 @@ export default {
       this.$router.go(-1);
     },
     changeland(item) {
-      if (item == "所有") {
-        this.land = "本地";
-      } else {
+      // if (item == "所有") {
+      //   this.land = "所有";
+      // } else {
         this.land = item;
-      }
+      // }
       switch (item) {
         case "本部":
           this.$store.commit("setModel", "本部");
@@ -283,7 +283,7 @@ export default {
         this.$router.push("/center/offlineSummary");
         this.title = "内销线下汇总";
       }
-      if (index == "2" && urlName == "psi") {
+      if (index == "2" && urlName == "psi" || urlName == "index" ) {
         this.$router.push("/center/department");
         this.title = "产司汇总页";
       } else if (index == "2" && urlName == "domestic") {

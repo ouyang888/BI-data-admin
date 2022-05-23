@@ -360,6 +360,7 @@ export default {
             }
           }
         }
+        console.log('this.sabData.sabArr',this.sabData.sabArr)
       } catch (error) {
         console.log(error);
       }

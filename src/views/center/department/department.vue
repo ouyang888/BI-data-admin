@@ -99,6 +99,7 @@ export default {
        'saleTaskAmt': 'businessEntityTaskAmt', /*责任制金额*/
        'saleAmtRadio':'businessEntityAmtRadio',  /*金额完成率*/
        'cooprLevel1':'directName'  /*线上/线下 金额完成率*/
+   
       },
       
       AvgTaskAmtDate: [],
@@ -115,11 +116,11 @@ export default {
         bar1: 0,
         bar2: 0,
         ballTitle: "事业部",
-        bigBallTitle: "毛事业部利率",
-        textLeft: "内销",
-        textRight: "外销",
-        titleTop: "外销",
-        titleBottom: "内销",
+        bigBallTitle: "毛利率",
+        textLeft: "内",
+        textRight: "外",
+        titleTop: "外",
+        titleBottom: "内",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -129,15 +130,15 @@ export default {
         speedBar: 0,
         ballTitle: "事业部达成",
         ballNum: 0,
-        ballLeftTitle: "内销",
-        ballRightTitle: "外销",
+        ballLeftTitle: "内",
+        ballRightTitle: "外",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "外销",
+        bottomTitle1: "内",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "内销",
+        bottomTitle2: "外",
         bottomClose1: 0,
         bottomTime1: 0,
       },
@@ -145,8 +146,8 @@ export default {
         bar1: 70,
         bar2: 50,
         ballTitle: "线上",
-        top: "内销",
-        bottom: "外销",
+        top: "内",
+        bottom: "外",
          sabArr: { S: 0, A: 0, B: 0 },
         topArr: { S: 0, A: 0, B: 0  },
         bottomArr: { S: 0, A: 0, B: 0  },
@@ -272,33 +273,33 @@ export default {
     }
     
   },
-  watch:{
-    ontime:{ /*监听数据更改 调用接口 */
+  watch: {
+    ontime:{ /*监听月度 数据更改 调用接口 */
      handler: function (newValue, oldValue) {
-        this.init(this.model);
+        this.init(newValue);
       }
     },
-    model:{ /*监听数据更改 调用接口 */
+    model:{ /*监听产司 数据更改 调用接口 */
       handler: function(newValue,oldValue){
-        this.init(newValue);
+        this.init(this.ontime);
       }
 
     },
-    showMoney:{
-      handler:(newValue,oldValue)=>{
- 
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
+      handler:function(newValue,oldValue){
+        this.init(this.ontime);
       }
-    }
+    },
 
   },
   methods: {
-    init(model){ /*初始化数据方法 model产地字段*/   
+    init(ontime){ /*初始化数据方法 model产地字段*/   
    let params = {  /*年月*/
-      month_date:this.ontime
+      month_date:ontime
     };
     let listParams = { /*年月日*/
-      start_date:`${this.ontime}-01`,
-      end_date:`${this.ontime}-31`
+      start_date:`${ontime}-01`,
+      end_date:`${ontime}-${this.$store.state.endDay}`
     }
     this.getdashboard(params);
     this.queryCardSAB(params);
@@ -371,34 +372,34 @@ export default {
         let panelDataList = res.rows;
         this.progressData.ballNum = (
           panelDataList[0].grossProfitRadio * 100
-        ).toFixed(1);
+        ).toFixed(2);
         this.speedData.speedBar = (
-          panelDataList[0].businessModelCompleteRadio * 100
-        ).toFixed(1);
-        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
-        this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(1);
-        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+          panelDataList[0].saleTaskAmtRadio * 100
+        ).toFixed(2);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
+        this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(2);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2)
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].directName == "内销") {
             this.progressData.bar2 = (
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.topGPM = (
-              panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballLeftNum =  panelDataList[i].sumCnyAmt.toFixed(1)
-             this.speedData.bottomClose = ( panelDataList[i].grossProfitRadio* 100).toFixed(1)
-             this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
+              panelDataList[i].directNameGrossProfitRadio * 100
+            ).toFixed(2);
+            this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(2)
+             this.speedData.bottomClose = ( panelDataList[i].cnyAmtRadio* 100).toFixed(2)
+             this.speedData.bottomTime =  (panelDataList[i].dateRadio*100).toFixed(2)
           } else if (panelDataList[i].directName == "外销") {
             this.progressData.bar1 = (
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.bottomGPM = (
-              panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballRightNum =  panelDataList[i].sumCnyAmt.toFixed(1)
-            this.speedData.bottomClose1 =  ( panelDataList[i].grossProfitRadio*100).toFixed(1)
-            this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
+              panelDataList[i].directNameGrossProfitRadio * 100
+            ).toFixed(2);
+            this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(2)
+            this.speedData.bottomClose1 =  ( panelDataList[i].cnyAmtRadio*100).toFixed(2)
+            this.speedData.bottomTime1 =  (panelDataList[i].dateRadio*100).toFixed(2)
           }
         }
       } catch (error) {
@@ -412,7 +413,7 @@ export default {
         const res = await API.getData("directLevelTopDashBoardSAB",params);
         let RightSAB = res.rows;
         for (var i = 0; i < RightSAB.length; i++) {
-          if (RightSAB[3].directName == "内销") {
+          // if (RightSAB[3].directName == "内销") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if (RightSAB[i].position == "S") {
               this.sabData.sabArr.S = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
@@ -427,19 +428,19 @@ export default {
                 1
               );
             }
-          } 
+          // } 
            if (RightSAB[i].directName == "内销") {
             this.sabData.bar1 = (RightSAB[i].totalAmtSabRadio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.S = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
+              this.sabData.topArr.S = (RightSAB[i].directNameAmtSabRadio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.A = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
+              this.sabData.topArr.A = (RightSAB[i].directNameAmtSabRadio * 100).toFixed(
                 1
               );
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.B = (RightSAB[i].totalAmtSabRadio * 100).toFixed(
+              this.sabData.topArr.B = (RightSAB[i].directNameAmtSabRadio * 100).toFixed(
                 1
               );
             }
@@ -448,15 +449,15 @@ export default {
             this.sabData.bar2 = (RightSAB[i].totalAmtSabRadio * 100).toFixed(1);
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.S = (
-                RightSAB[i].totalAmtSabRadio * 100
+                RightSAB[i].directNameAmtSabRadio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
               this.sabData.bottomArr.A = (
-                RightSAB[i].totalAmtSabRadio * 100
+                RightSAB[i].directNameAmtSabRadio * 100
               ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
               this.sabData.bottomArr.B = (
-                RightSAB[i].totalAmtSabRadio * 100
+                RightSAB[i].directNameAmtSabRadio * 100
               ).toFixed(1);
             }
           }
@@ -472,30 +473,36 @@ export default {
      
          let chart = {
           code: 'directLevelChart',
-           fields:'cooprLevel1'
+          //  fields:'cooprLevel2'
         };
         Object.assign(chart, listParams)
         const res = await API.getTotal(chart);
-        let sellOutDataList = res.rows;
-        let newArr = sellOutDataList.filter((item) => {
-          var timeArr = item.orderDate
-            .replace(" ", ":")
-            .replace(/\:/g, "-")
-            .split("-");
-          var yue = timeArr[1];
-          var ri = timeArr[2];
+        let sellOutDataList = res.rows.filter(v=>{
+          return v.businessEntityName == '总';
+        });
+        console.log('sellOutDataList',sellOutDataList);
+        // debugger;
+        this.AvgTaskAmtDate = [];
+        this.AvgTaskAmtList = [];
+        let onTime = '';
+        sellOutDataList.filter((item) => {
+          var timeArr = item.orderDate.substr(5);
 
 
 
           // 外销日内
-          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
-            this.AvgTaskAmtDate.push(yue + "-" + ri);
+          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null && onTime!=timeArr) {
+            onTime = timeArr;
+            this.AvgTaskAmtDate.push(timeArr);
             this.AvgTaskAmtList.push(item.cnyAmt);
             this.AvgTaskAmtLine = item.tAvgAmt;
-            this.myEcharts();
+     
           }
           // this.showLoading = false;
         });
+        this.AvgTaskAmtDate = [...new Set( this.AvgTaskAmtDate)];
+        this.AvgTaskAmtList = [...new Set( this.AvgTaskAmtList)];
+        this.myEcharts();
       } catch (error) {
         console.log(error);
       }
@@ -507,7 +514,7 @@ export default {
      
       let chart = {
         code: 'directLevelChart',
-        fields: "cooprLevel2"
+        fields: "businessEntityName"
       };
       Object.assign(chart, line)
       try {
@@ -517,16 +524,19 @@ export default {
         let obj = res.rows[0]
         var k = 0;
         var arr = [];
+      
         for (var i in obj) {
+          if(obj[i][0].businessEntityName !='总'){
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
-        this.dhcarr = [];
-        let arrs = JSON.parse(JSON.stringify(arr));
-        arrs.forEach((v) => {
-          this.dhcarr.push(v[0].cooprLevel2);
+        }
+        // this.dhcarr = [];
+     
+        arr.forEach((v,i) => {
+          this.dhcarr[i] =v[0].businessEntityName;
         });
         //this.dhcarr = [0,1,2,3,4,5];
         for (let j = 0; j < arr.length; j++) {
@@ -542,8 +552,8 @@ export default {
             var yue = timeArr[1];
             var ri = timeArr[2];
             AmericaDate.push(yue + "-" + ri);
-            AmericaList.push(item.orgQty);
-            AmericaLine = item.tAvgQty;
+            AmericaList.push(item.cnyAmt);
+            AmericaLine = item.tAvgAmt;
             
           });
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
@@ -852,7 +862,7 @@ export default {
 
   },
   mounted() {
-    this.init(this.model);
+    this.init(this.ontime);
   },
 };
 </script>

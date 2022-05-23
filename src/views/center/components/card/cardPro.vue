@@ -182,10 +182,10 @@
               // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
               v[this.cardObj.cnyAmt] =  !!v[this.cardObj.cnyAmt]?v[this.cardObj.cnyAmt].toFixed(2):0;
             v[this.cardObj.saleTaskAmt] =  !!v[this.cardObj.saleTaskAmt]?v[this.cardObj.saleTaskAmt].toFixed(2):0;
-            v[this.cardObj.saleAmtRadio] = !!v[this.cardObj.saleAmtRadio]?Number((v[this.cardObj.saleAmtRadio]*100).toFixed(0)):0;
+            v[this.cardObj.saleAmtRadio] = !!v[this.cardObj.saleAmtRadio]?Number((v[this.cardObj.saleAmtRadio]*100).toFixed(2)):0;
             // v.grossProfitRadio = Number((v.grossProfitRadio*100).toFixed(0));
             // debugger;
-            if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
+            // if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
             v.dateRadio = !!v.dateRadio?Number((v.dateRadio*100).toFixed(0)):0; /*时间进度*/
               if(this.cardList.length<6){ /*只显示6条*/
               this.cardList.push(v);
