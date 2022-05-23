@@ -61,8 +61,8 @@
         >
            <template v-slot="scope">
                         <div class="precent">
-                            <div style="width: 70px">
-                                {{ scope.row.environment.toFixed(2) }}
+                            <div style="width: 30px">
+                                {{ scope.row.environment.toFixed(1) }}
                             </div>
                             <div style="margin-top: 5px">
                                 <Progress style="margin-bottom: 3px" :rate="scope.row.environment" :color="'#FF8B2F'"
@@ -82,8 +82,8 @@
   
           <template v-slot="scope">
             <div class="precent">
-              <div style="width: 70px">
-                {{ scope.row.cookingAmtRadio.toFixed(2) }}
+              <div style="width: 30px">
+                {{ scope.row.cookingAmtRadio }}
               </div>
                 <div style="margin-top: 5px">
                   <Progress style="margin-bottom: 3px" :rate="scope.row.cookingAmtRadio" :color="'#FF8B2F'"
@@ -102,8 +102,8 @@
         >
           <template v-slot="scope">
             <div class="precent">
-              <div style="width: 70px">
-                {{ scope.row.electromagnetismAmtRadio.toFixed(2) }}
+              <div style="width: 30px">
+                {{ scope.row.electromagnetismAmtRadio }}
               </div>
               <div style="margin-top: 5px">
                   <Progress style="margin-bottom: 3px" :rate="scope.row.electromagnetismAmtRadio" :color="'#FF8B2F'"
@@ -131,8 +131,8 @@
         >
           <template v-slot="scope">
             <div class="precent">
-              <div style="width: 70px">
-                {{ scope.row.Conditioning.toFixed(2) }}
+              <div style="width: 30px">
+                {{ scope.row.Conditioning }}
               </div>
               <div style="margin-top: 5px">
                   <Progress style="margin-bottom: 3px" :rate="scope.row.Conditioning" :color="'#FF8B2F'"
@@ -153,7 +153,7 @@
         >
           <template v-slot="scope">
             <div class="precent">
-              <div style="width: 70px">
+              <div style="width: 30px">
                 {{ scope.row.electricAmtRadio }}
               </div>
               <div style="margin-top: 5px">
@@ -177,7 +177,7 @@
         >
           <template v-slot="scope">
             <div class="precent">
-              <div style="width: 70px">
+              <div style="width: 30px">
                 {{ scope.row.drinkAmtRadio }}
               </div>
               <div style="margin-top: 5px">
@@ -198,7 +198,7 @@
         >
           <template v-slot="scope">
             <div class="precent">
-              <div style="width: 70px">
+              <div style="width: 30px">
                 {{ scope.row.kitchenAmtRadio }}
               </div>
               <div style="margin-top: 5px">
@@ -217,7 +217,7 @@
         <el-table-column label="合计" prop="total" align="center">
           <template v-slot="scope">
             <div class="precent">
-              <div style="width: 70px">
+              <div style="width: 30px">
                 {{ scope.row.total }}
               </div>
               <div style="margin-top: 5px">
