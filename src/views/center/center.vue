@@ -106,7 +106,7 @@ export default {
     return {
       searchKeys: [this.$route.path, this.$route.meta.preMenuUrl || ""],
       index: 1,
-      title: "销向汇总页",
+      title: "总裁PSI页",
       cus: 1,
       land: "产地",
       direction: 1,
@@ -257,10 +257,10 @@ export default {
       }
       switch (item) {
         case "本部":
-          this.$store.commit("setModel", "本部,本部,本部");
+          this.$store.commit("setModel", "本部");
           break;
         case "OEM":
-          this.$store.commit("setModel", "OEM,OEM,OEM");
+          this.$store.commit("setModel", "OEM");
           break;
         case "所有":
           this.$store.commit("setModel", "本部,OEM,待定");

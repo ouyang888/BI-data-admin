@@ -25,7 +25,7 @@
             <div class="left-right-box">
               <div style="margin-left: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线上达成</div>
+                  <div class="top-left-font">达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制 <span>{{ innerLeftInfo.saleTaskAmt || 0 }}{{ $store.state.unit }}</span>
@@ -124,7 +124,7 @@
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线上库存</div>
+                  <div class="top-left-font">库存</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
@@ -218,7 +218,7 @@
             <div class="left-right-box">
               <div style="margin-left: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线下达成</div>
+                  <div class="top-left-font">达成</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制 <span>{{ outterLeftInfo.saleTaskAmt }}{{ $store.state.unit }}</span>
@@ -314,7 +314,7 @@
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线下库存</div>
+                  <div class="top-left-font">库存</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
@@ -526,8 +526,8 @@ export default {
         bar1: 0,
         bar2: 0,
         ballTitle: "内销",
-        bottom: "线上",
-        top: "线下",
+        top: "线上",
+        bottom: "线下",
         sabArr: { S: 0, A: 0, B: 0 },
         topArr: { S: 0, A: 0, B: 0 },
         bottomArr: { S: 0, A: 0, B: 0 },
@@ -730,30 +730,30 @@ export default {
             if (RightSAB[i].position == "S") {
               this.sabData.topArr.  S = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(2);
+              ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
               this.sabData.topArr.A = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(2);
+              ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
               this.sabData.topArr.B = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(2);
+              ).toFixed(1);
             }
        
 
             if (RightSAB[i].position == "S") {
               this.sabData.sabArr.  S = (
                 RightSAB[i].directPositionRatio * 100
-              ).toFixed(2);
+              ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
               this.sabData.sabArr.A = (
                 RightSAB[i].directPositionRatio * 100
-              ).toFixed(2);
+              ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
               this.sabData.sabArr.B = (
                 RightSAB[i].directPositionRatio * 100
-              ).toFixed(2);
+              ).toFixed(1);
             }
 
           } else if (RightSAB[i].cooprLevel1 == "线下") {
@@ -763,15 +763,15 @@ export default {
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.S = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(2);
+              ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
               this.sabData.bottomArr.A = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(2);
+              ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
               this.sabData.bottomArr.B = (
                 RightSAB[i].level1PositionRatio * 100
-              ).toFixed(2);
+              ).toFixed(1);
             }
           }
         }
@@ -817,6 +817,7 @@ export default {
           this.outerDirectLine = '';
         }
         // debugger;
+        let title = '';
         res.rows.forEach((item) => {
           if (item.cooprLevel1 == "线上") {
             // console.log(item.orderDate.substr(5));
@@ -832,9 +833,12 @@ export default {
 
           }
 
+          if(title!=item.orderDate.substr(5)){ /*过滤重复数据*/
+            title = item.orderDate.substr(5)
           this.allList.push(item.totalCnyAmt);
           this.allInnerDirectDate.push(item.orderDate.substr(5));
           this.allLiine = item.totalsaleAvgAmt || 0;
+        }
 
         });
 
@@ -1225,7 +1229,7 @@ export default {
 
       inner.rows.forEach((v) => {
         v.dateRadio = v.dateRadio * 100;
-        v.onLineRadio = (v.onLineRadio * 100).toFixed(0);
+        v.onLineRadio = (v.onLineRadio * 100).toFixed(2);
         v.onLineProfitRadio = (v.onLineProfitRadio * 100).toFixed(2);
         v.sumCnyamt = v.sumCnyamt.toFixed(2);
         v.saleTaskAmt = v.saleTaskAmt.toFixed(2);

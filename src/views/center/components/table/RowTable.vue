@@ -19,7 +19,7 @@
       <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center" width="120">
         <template v-slot="scope">
           <div class="precent">
-            <div style="width: 48px">{{ scope.row[i].toFixed(0)}}</div>
+            <div style="width: 58px">{{ scope.row[i].toFixed(2)}}</div>
             <div style="margin-top: 5px"> 
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
@@ -31,7 +31,7 @@
       <el-table-column prop="cnyAmt" label="总计" align="center" width="100">
         <template v-slot="scope">
           <div class="precent">
-            <div style="width: 48px">{{ scope.row.cnyAmt.toFixed(0) }}</div>
+            <div style="width: 58px">{{ scope.row.cnyAmt.toFixed(2) }}</div>
             <div style="margin-top: 5px">
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />

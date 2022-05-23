@@ -372,10 +372,13 @@ export default {
           this.AvgTaskAmtLine = '';
           this.showLoading = false;
         }else{
+          let ontime = ''; /*过滤数据使用*/
           res.rows.filter((item) => {
+            var timeArr = item.orderDate.substr(5);
           // 外销日内
-          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
-            this.AvgTaskAmtDate.push(item.orderDate.substr(5));
+          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null && ontime!=timeArr) {
+            ontime = timeArr;
+            this.AvgTaskAmtDate.push(timeArr);
             this.AvgTaskAmtList.push(item.totalAmt);
             this.AvgTaskAmtLine = item.totalAvgTaskAmt;
             
@@ -407,7 +410,7 @@ export default {
       Object.assign(chartObj,params)
    
       try {
-        const res = await API.getListTotal(chartObj);
+        const res = await API.getChartTotal(chartObj);
         if(res.code !=200) return;
         let sellOutDataList = res.rows;
         this.showLoading = false;
