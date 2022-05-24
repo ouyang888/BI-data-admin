@@ -1,8 +1,8 @@
 <template>
   <div class="flex-card" >
 
-    <a-spin class="flex-loading" size="large" v-if="showLoading" />
-    <div class="card-box"  v-for="(v,i) in list" :key="i"  >
+    <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
+    <div class="card-box"  v-for="(v,i) in list" :key="i">
   
       <div class="card-font" @click="gotoCatSeries(v[cardObj.title])" v-if="i<6">{{v[cardObj.title]}} </div>
       <div class="card-border-box" v-if="i<6">
@@ -187,6 +187,7 @@
                 title = v[this.cardObj.title];
             }   
           });
+          this.list = newValue;
           this.showLoading = false;
         }
       },
