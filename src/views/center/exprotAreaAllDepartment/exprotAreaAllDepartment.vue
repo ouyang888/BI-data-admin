@@ -264,34 +264,34 @@ export default {
         // directProfitRadio: 0.2713  销向毛利率
         this.progressData.ballNum = (
             panelDataList[0].level1ProfitRadio * 100
-          ).toFixed(1);
+          ).toFixed(2);
           //    
           // ⅵ. directCnyAmt: 5.8799  销向总销售金额
-          this.speedData.ballNum = panelDataList[0].level1CnyAmt.toFixed(1)
+          this.speedData.ballNum = panelDataList[0].level1CnyAmt.toFixed(2)
           // 销向金额完成率
           // 销向数量完成率
-          this.speedData.speedBar = (panelDataList[0].level1AmtRadio * 100).toFixed(1)
-          this.speedData.bar = (panelDataList[0].level1AmtRadio * 100).toFixed(1)
+          this.speedData.speedBar = (panelDataList[0].level1AmtRadio * 100).toFixed(2)
+          this.speedData.bar = (panelDataList[0].level1AmtRadio * 100).toFixed(2)
           //  销向总销售数量
-          // this.speedData.ballNum = (panelDataList[0].level1saleVolume / 1000000).toFixed(1)
+          // this.speedData.ballNum = (panelDataList[0].level1saleVolume / 1000000).toFixed(2)
 
           // 责任制
-          this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+          this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2)
           for (var i = 0; i < panelDataList.length; i++) {
             if (panelDataList[i].obmOem == "OBM") {
-              this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
+              this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+              this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+              this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2)
 
-              this.speedData.bottomClose = panelDataList[i].level1AmtRadio.toFixed(1)
-              this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1)
+              this.speedData.bottomClose = (panelDataList[i].level1AmtRadio*100).toFixed(2)
+              this.speedData.bottomTime = (panelDataList[i].dateRadio*100).toFixed(2)
 
             } else if (panelDataList[i].obmOem == "OEM") {
-              this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-              this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
-              this.speedData.bottomClose1 = panelDataList[i].cnyAmtRadio.toFixed(1)
-              this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
+              this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+              this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+              this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2)
+              this.speedData.bottomClose1 = (panelDataList[i].cnyAmtRadio*100).toFixed(2)
+              this.speedData.bottomTime1 = (panelDataList[i].dateRadio*100).toFixed(2)
 
             }
           }
@@ -389,10 +389,16 @@ export default {
         );
 
         if (res.code != 200) return;
+        this.AvgTaskAmtDate = [];
+        this.AvgTaskAmtList = [];
+        this.AvgTaskAmtLine = '';
 
         let ontime = ''; /*过滤数据使用*/
         res.rows.filter((item) => {
+          if(item.businessEntityName=='总'){
           var timeArr = item.orderDate.substr(5);
+
+          
 
           // 外销日内
           if (item.cnyAmt !== null && item.tAvgQty !== null && ontime!=timeArr) {
@@ -402,6 +408,8 @@ export default {
             this.AvgTaskAmtLine = item.tAvgQty;
       
           }
+        }
+
           // this.showLoading = false;
         });
         this.myEcharts();
@@ -432,10 +440,12 @@ export default {
         var arr = [];
         for (var i in obj) {
           // console.log("11111111111", obj[i]);
-          if (k < 6 && i!='daquridacheng') {
+          if(obj[i][0].businessEntityName!='总'){
+          if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
+        }
         }
         // console.log("obj", obj);
 

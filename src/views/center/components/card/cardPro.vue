@@ -1,7 +1,8 @@
 <template>
   <div class="flex-card" >
-    <a-spin class="flex-loading" size="large" v-if="showLoading" />
-    <div class="noData" v-else-if="!showLoading && cardList.length<1">暂无数据</div>
+    <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" />
+    <div class="noData" v-if="!showLoading && cardList.length<1">暂无数据</div> -->
+    <div class="noData" v-if="cardList.length<1">暂无数据</div>
     <div class="card-box" v-for="(v,i) in cardList" :key="i" v-else>
       <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
@@ -88,7 +89,7 @@
           <div class="sab">
             <div class="">
               <div class="sab-title">{{title1}}SAB</div>
-              <template v-for="(item,s) in cardSabList[i]" >
+              <template v-for="(item,s) in cardSabList" >
                 <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
@@ -98,7 +99,7 @@
             </div>
             <div class="">
               <div class="sab-title">{{title2}}SAB</div>
-              <template v-for="(item,s) in cardSabList[i]" >
+              <template v-for="(item,s) in cardSabList" >
                 <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
                 <span class="sab-title2">{{item.position}}</span>
                 <span class="sab-text">{{item.positionRatio}}%</span>
@@ -150,7 +151,7 @@
         pathObj:{
         'export':'exprotAreaAll'
       },
-      cardList:[0,1,2,3,4,5],/*卡片分类*/
+      cardList:[],/*卡片分类*/
       cardSabList:[0,1,2,3,4,5], /*sab分类*/
       showLoading:true,
       }
@@ -171,12 +172,14 @@
       },
       list:{
         handler:function(newValue,oldValue){
+          console.log('newValue11',newValue);
           let title = '';
-          this.cardList = [];
+      
           if(newValue.length<1) {
+            this.cardList = [];
             this.showLoading = false;
             return
-          };
+          }else{
           newValue && newValue.length>0 && newValue.forEach(v => { /*划分6个卡片*/
             if(v[this.cardObj.title] !=title && !!v[this.cardObj.title]){
               // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
@@ -193,27 +196,29 @@
                 title = v[this.cardObj.title];
             }   
           });
+        }
+
           this.showLoading = false;
         }
       },
       cardSab:{
         handler:function(newValue,oldValue){
-
                let title = '';
                let cooprLevel1 = '';
                var k = 0;
                newValue && newValue.forEach((v,i)=>{
                 v.positionRatio = !!v.positionRatio?(v.positionRatio*100)>100?100:(v.positionRatio*100).toFixed(0):0;
+                console.log('v',v);
               })
                 newValue && newValue.forEach((v,i)=>{  /*划分6个sab*/
                   if(v[this.cardObj.title] !=title && v[this.cardObj.cooprLevel1] !=cooprLevel1 ){
-                  this.cardSabList[k] = newValue.slice(i,i+6);
+                  // this.cardSabList[k] = newValue.slice(i,i+6);
                   title = v[this.cardObj.title];
                   k++;
                 }
 
                 });
-
+            this.cardSabList = newValue;
 
         }
 

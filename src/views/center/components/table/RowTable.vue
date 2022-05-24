@@ -7,11 +7,14 @@
       :header-cell-style="headerCellStyle" class="execl-box" height="287" >
       <!-- v-if="router !== 'domesticDepartment' -->
       <el-table-column :prop="headerObj.marketChannel" align="center" :label="directName"></el-table-column>
-      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode" v-if="router !== 'domesticDepartment'"></el-table-column>
-      <el-table-column :prop="headerObj.manager" align="center" label="责任人">
+      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode" v-if="!arr.includes(router)"></el-table-column>
+      <el-table-column align="center" label="责任人">
         <!-- <div class="nameColor" @click="handleClick">{{张茉欧}}</div> -->
         <template v-slot="scope">
-            <div class="nameColor" @click="handleClick(scope.row)">
+            <div class="nameColor" @click="handleClick(scope.row)" v-if="router == 'exportDepartment'">
+              {{ scope.row.cooprLevel1Manager }}
+            </div>
+            <div class="nameColor" @click="handleClick(scope.row)" v-else>
               {{ scope.row[headerObj.manager] }}
             </div>
           </template>
@@ -24,8 +27,8 @@
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
 
-              <Progress  v-if="router !== 'department'" :rate="scope.row[i+'AmtRadio']*100" :color="'#66FFFF'" class="precentCompentes" />
-              <Progress v-else :rate="scope.row[i.replace('businessEntityName','completeRadio')]*100" :color="'#66FFFF'" class="precentCompentes" />
+              <Progress  v-if="!complete.includes(router)" :rate="scope.row[i+'AmtRadio']*100" :color="'#66FFFF'" class="precentCompentes" />
+              <Progress v-else :rate="!!scope.row[i.replace('businessEntityName','completeRadio')]?scope.row[i.replace('businessEntityName','completeRadio')]*100:10" :color="'#66FFFF'" class="precentCompentes" />
             </div>
           </div>
         </template>
@@ -34,11 +37,11 @@
         <template v-slot="scope">
           <div class="precent">
             <div style="width: 68px">{{ !scope.row.cnyAmt?0:scope.row.cnyAmt.toFixed(2) }}</div>
-            <div style="margin-top: 5px">
+            <!-- <div style="margin-top: 5px">
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
               <Progress :rate="scope.row.saleVolumeAll*100" :color="'#66FFFF'" class="precentCompentes" />
-            </div>
+            </div> -->
           </div>
         </template>
       </el-table-column>
@@ -87,7 +90,9 @@
     data(){
       return{
         cell:2,
-        arr:['domesticDepartment'] /*渠道路由名*/
+        arr:['domesticDepartment','department','exportDepartment'], /*渠道路由名*/
+        complete:['department','exportDepartment'] /*控制不同模版完成率显示*/
+
       }
     },
     computed: {
@@ -109,7 +114,7 @@
         // console.log(number, "numbernumbernumber");
         // 底部合计合并单元格
         let cell = 2; //设置跨列
-        if(this.router == 'domesticDepartment'){
+        if(this.arr.includes(this.router)){
           cell--;
         }
         if (rowIndex === number - 1) {
@@ -117,7 +122,7 @@
             return [0, 0];
           }
           if (columnIndex === 0) {
-            if(this.router !== 'domesticDepartment'){
+            if(!this.arr.includes(this.router)){
 
               return [1, 3];
             }else{

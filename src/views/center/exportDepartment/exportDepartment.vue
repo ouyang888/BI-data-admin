@@ -59,8 +59,15 @@
     </div>
 
     <!-- 底部表格 -->
-    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
-      title1="区域" title2="大区" />
+    <TableCardBox
+      :leftData="tableInner"
+      :rightData="tableOutter"
+      :titleHead="titleHead"
+      title1="大区"
+      title2="重点客户"
+      :leftObj="leftObj"
+      :rightObj="rightObj"
+    />
   </div>
 </template>
 <script>
@@ -70,7 +77,7 @@ import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
 import cardPro from "@/views/center/components/card/cardPro.vue"; 
-import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
+import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
 import selectTime from '@/components/selectTime.vue';
 export default {
   name: "s",
@@ -79,7 +86,7 @@ export default {
     SpeedPanel,
     SadPanel,
     cardPro,
-    innerTableCardBox,
+    TableCardBox,
     selectTime
   },
   data() {
@@ -134,8 +141,8 @@ export default {
         // bar4: 12,
         // bar5: 7,
         ballTitle: "外销",
-        bottom: "OBM",
-        top: "OEM",
+        top: "OBM",
+        bottom: "OEM",
          sabArr: { S: 0, A: 0, B: 0 },
         topArr: { S: 0, A: 0, B: 0  },
         bottomArr: { S: 0, A: 0, B: 0  },
@@ -147,15 +154,35 @@ export default {
       cardData: [],
       tableOutter: [],
       tableInner: [],
-      leftObj: {
-        name: 'cooprLevel2',  /*标题*/
-        level: 'cooprLevel2Manager',/*责任人*/
-        tAvgAmt: 'tAvgAmt',/*责任制*/
+      // leftObj: {
+      //   name: 'cooprLevel2',  /*标题*/
+      //   level: 'cooprLevel2Manager',/*责任人*/
+      //   tAvgAmt: 'tAvgAmt',/*责任制*/
+      // },
+      // rightObj: {
+      //   name: 'cooprLevel1',
+      //   level: 'customerName',
+      //   tAvgAmt: 'tAvgAmt'
+      // },
+      leftObj:{
+      marketChannel:'cooprLevel1',  /*标题*/
+      marketCenter:'cooprLevel1',
+      manager:'cooprLevel1 ',/*责任制*/
       },
-      rightObj: {
-        name: 'cooprLevel1',
-        level: 'customerName',
-        tAvgAmt: 'tAvgAmt'
+      rightObj:{
+        marketChannel:'customerName',
+        marketCenter:'customerName',
+      manager:'customerName'
+      },
+      titleHead: {
+        environment: "环境",
+        electromagnetism: "电磁",
+        drink: "饮品",
+        electric: "电动",
+        kitchen: "奇厨",
+        cooking: "烹饪",
+        conditioning: "调理",
+        // businessEntityName8: "其他",
       },
       cardObj: {
         'title':'businessEntityName', /*标题*/
@@ -256,36 +283,36 @@ export default {
         }
         // console.log("res仪表",res); 
         // directProfitRadio: 0.2713  销向毛利率
-        this.progressData.ballNum = (
+        this.progressData.ballNum = Number((
           panelDataList[0].directProfitRadio * 100
-        ).toFixed(1);
+        ).toFixed(2));
         //    
         // ⅵ. directCnyAmt: 5.8799  销向总销售金额
-        this.speedData.ballNum = panelDataList[0].directCnyAmt.toFixed(1)
+        this.speedData.ballNum = panelDataList[0].directCnyAmt.toFixed(2)
         // 销向金额完成率
         // 销向数量完成率
-        this.speedData.speedBar = (panelDataList[0].directAmtRadio * 100).toFixed(1)
-        this.speedData.bar = (panelDataList[0].directQtyRadio * 100).toFixed(1)
+        this.speedData.speedBar = Number((panelDataList[0].directAmtRadio * 100).toFixed(2));
+        this.speedData.bar = Number((panelDataList[0].directQtyRadio * 100).toFixed(2));
         //  销向总销售数量
-        // this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(1)
+        // this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(2)
 
         // 责任制
-        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2)
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].obmOem == "OBM") {
-            this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-            this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1)
+            this.progressData.bar1 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+            this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2)
 
-            this.speedData.bottomClose = panelDataList[i].cnyAmtRadio.toFixed(1)
-            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1)
+            this.speedData.bottomClose = (panelDataList[i].cnyAmtRadio*100).toFixed(2)
+            this.speedData.bottomTime = (panelDataList[i].dateRadio*100).toFixed(2)
 
           } else if (panelDataList[i].obmOem == "OEM") {
-            this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-            this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(1)
-            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1)
-            this.speedData.bottomClose1 = panelDataList[i].cnyAmtRadio.toFixed(1)
-            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
+            this.progressData.bar2 = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+            this.progressData.bottomGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2)
+            this.speedData.bottomClose1 = (panelDataList[i].cnyAmtRadio*100).toFixed(2)
+            this.speedData.bottomTime1 = (panelDataList[i].dateRadio*100).toFixed(2)
 
           }
         }
@@ -377,13 +404,15 @@ export default {
       }
       Object.assign(obj, params);
       try {
-        const res = await API.getTotal(
+        let res = await API.getTotal(
           obj
           // 'cooprLevel1'
         );
 
         if (res.code != 200) return;
-       
+        this.AvgTaskAmtDate = [];
+        this.AvgTaskAmtList = [];
+        this.AvgTaskAmtLine = '';
 
         res.rows.filter((item) => {
           if(item.businessEntityName=='总'){
@@ -395,15 +424,16 @@ export default {
           var ri = timeArr[2];
 
           // 外销日内
-          if (item.cnyAmt !== null && item.tAvgQty !== null) {
+          if (item.cnyAmt !== null && item.tAvgAmt !== null) {
             this.AvgTaskAmtDate.push(yue + "-" + ri);
             this.AvgTaskAmtList.push(item.cnyAmt);
-            this.AvgTaskAmtLine = item.tAvgQty;
-            this.myEcharts();
+            this.AvgTaskAmtLine = item.tAvgAmt;
+         
           }
         }
           // this.showLoading = false;
         });
+        this.myEcharts();
     
       } catch (error) {
         console.log(error);
@@ -432,12 +462,12 @@ export default {
         var arr = [];
         for (var i in obj) {
           // console.log("11111111111", obj[i]);
-        //  if(obj[i][0].businessEntityName!='外销日达成' && obj[i][0].businessEntityName!='isNull'){ 
+         if(obj[i][0].businessEntityName!='总' && obj[i][0].businessEntityName!='isNull'){ 
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
-        // }
+        }
         }
         // console.log("obj", obj);
 
@@ -467,7 +497,7 @@ export default {
 
             AmericaDate.push(yue + "-" + ri);
             AmericaList.push(item.cnyAmt);
-            AmericaLine = item.tAvgQty;
+            AmericaLine = item.tAvgAmt || 0;
           });
           // console.log("Arrnum", this.sellOutDataList);
 
@@ -771,7 +801,7 @@ export default {
               v.positionRatio = v.sabAmtRadio;  /*右边sab*/
               return v.position.length<2
       });
-      console.log('this.cardSab',this.cardData,this.cardSab)
+      console.log('this.cardSab',this.cardSab);
 
 
     },
@@ -779,12 +809,12 @@ export default {
     // 底部table/
     async getTable(params) {
       let innerObj = {
-        code: "sellOutTotalOnlineBottom"
+        code: "sellOutBusinessBottom"
       }
       Object.assign(innerObj, params);
 
       let outterObj = {
-        code: "sellOutTotalOfflineBottom"
+        code: "sellOutBusinessBottomCustomer"
       }
       Object.assign(outterObj, params);
       try {
@@ -796,6 +826,15 @@ export default {
 
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
+        this.tableInner.forEach(v=>{
+          v.cnyAmt= v.total;
+          v.manager= v.cooprLevel1Manager;
+          
+        })
+        this.tableOutter.forEach(v=>{
+          v.cnyAmt= v.total;
+          v.manager= v.cooprLevel1Manager;
+        })
         this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
         this.rowSpanNumber1 = [this.tableInner.length - 1];
@@ -811,7 +850,7 @@ export default {
     changeDate(start,end) { /*echart切换时间*/
         let listParams = { /*年月日*/
        start_date:start,
-      end_date:end,
+       end_date:end,
       }
       this.getList(listParams);
       this.getList1(listParams);

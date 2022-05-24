@@ -84,9 +84,11 @@ export default {
     },
     leftObj:{
       type:Object,
+      default:function(){ return {}}
     },
     rightObj:{
       type:Object,
+      default:function(){ return {}}
     },
     title1:{
       type:String,
@@ -98,21 +100,21 @@ export default {
     },
    
   },
-  watch:{
+  // watch:{
 
-    leftData:{
-      handler:function(newValue,oldValue){
-        console.log('leftData更新',newValue);
-        this.leftData = newValue;
-      }
-    },
-    rightData:{
-      handler:function(newValue,oldValue){
-        this.rightData = newValue;
-      }
-    }
+  //   leftData:{
+  //     handler:function(newValue,oldValue){
+  //       console.log('leftData更新',newValue);
+  //       this.leftData = newValue;
+  //     }
+  //   },
+  //   rightData:{
+  //     handler:function(newValue,oldValue){
+  //       this.rightData = newValue;
+  //     }
+  //   }
 
-  },
+  // },
   data() {
     return {
 
