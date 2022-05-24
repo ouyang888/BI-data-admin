@@ -105,9 +105,7 @@
                 </div>
 
                 <div class="flex-bottoms">
-                 长度:      {{homeSabInfo.length}}
-              
-                  <div v-if="homeSabInfo.length>0">
+                  <div >
                     结构
                     <span v-for="(item, index) in homeSabInfo" :key="index">
                       <span>{{ item.position }}</span> -
@@ -122,7 +120,7 @@
                   <div>
                     毛利率
                     <span class="light-blue"
-                    v-if="this.homeGrossProfitRadio[0].length>=1"
+                  
                       >{{
                         Number(
                           this.homeGrossProfitRadio[0].grossProfitRadio * 100
@@ -150,7 +148,7 @@
               </div>
     
               <div class="mt-border"></div>
-              <div class="centerInfo"  >
+              <div class="centerInfo" v-if="sales==='外销'" >
                 <div class="flex-top-card">
                   <div class="top-left-font">{{ sales }}</div>
                   <div class="flex-finish">
@@ -186,19 +184,20 @@
 
                     {{ Number(departmentInfo1.cnyAmt).toFixed(2) }}{{modelLabel}}
                   </div>
+           
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="departmentInfo1.dateRadio* 100"
+                          :percent="departmentInfo1.dateRadio*100"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="departmentInfo1.businessCnyAmtRadio * 100"
+                          :percent="departmentInfo1.cnyAmtRadio*100"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -216,6 +215,7 @@
             min-width: 200px;"
                 
                 >
+             
                   <div
                     class="card-middle-progress"
                     v-for="(item, index) in processInfo1"
@@ -235,7 +235,7 @@
                         </div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="item.cnyAmtRadio * 100"
+                            :percent="item.businessCnyAmtRadio * 100"
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
@@ -246,7 +246,7 @@
                 </div>
 
                 <div class="flex-bottoms">
-                  <div v-if="homeSabInfo1.length>0" >
+                  <div  >
                     结构
                     <span v-for="(item1, index) in homeSabInfo1" :key="index">
                       <span>{{ item1.position }}</span> -
@@ -262,7 +262,7 @@
                 >
                   <div>
                      毛利率
-                    <span class="light-blue" v-if="homeGrossProfitRadio1[0].length>0"
+                    <span class="light-blue" 
                       >{{Number(homeGrossProfitRadio1[0].grossProfitRadio * 100).toFixed(2)
                       }}%</span>
                   </div>
@@ -1887,7 +1887,8 @@ export default {
       showLoading:false,
       divisionList:[],
       divisionDate:[],
-      divisionLine:"",
+      divisionLine:[],
+      Line:[],
       innerDirectList:[],
       innerDirectDate:[],
       innerDirectLine:"",
@@ -2176,19 +2177,22 @@ export default {
 
         const res = await API.getTotal(params);
         this.divisionDate=[];
+        this.divisionList=[];
+         this.divisionLine="";
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
         let newArr = res.rows.filter((item)=>{
         var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
         var yue = timeArr[1];
         var ri = timeArr[2];
-          // if(item.事业部S == "事业部S"){
+          if(item.divisionS === "事业部S"){
             // obj.divisionArr.push(item)
             this.divisionDate.push(yue+'-'+ri)
             this.divisionList.push(item.totalCnyAmt)
+              console.log("totalCnyAmt",item.totalCnyAmt);
             console.log("折线图",item.saleAvgAmt);
             //saleAvgAmt
             this.divisionLine=item.saleAvgAmt;
-      
+          }
             this.myEcharts();
           this.showLoading = false
         })
@@ -2300,7 +2304,7 @@ export default {
             markLine: {
               data: [
                 {
-                    yAxis: this.divisionLine,
+                  yAxis: this.divisionLine,
 
              
                   silent: false, //鼠标悬停事件 true没有，false有

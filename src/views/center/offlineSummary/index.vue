@@ -269,6 +269,8 @@ export default {
       };
       Object.assign(chartObj, listParams);
       try {
+        
+    
         const res = await API.getChartTotal(chartObj);
 
         let sellOutDataList = res.rows[0];

@@ -20,10 +20,10 @@
 
 
 
-                   <span v-if="v.saleAmtRadio===null"
+                   <span v-if="v.completeRadio===null"
                         >0%</span
                       >
-                 <span v-else>{{v.saleAmtRadio}}%</span></div>
+                 <span v-else>{{v.completeRadio}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
@@ -252,6 +252,7 @@
     background-repeat: no-repeat;
     /* margin-right: 20px; */
     background-size: 100%;
+    width:33%;
   }
 
   .card-font {
