@@ -1,5 +1,6 @@
 <template>
   <div class="panel-content">
+
     <CircleProgress 
       style="position:absolute" 
       :rate="data.bar" 

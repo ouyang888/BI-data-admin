@@ -23,11 +23,11 @@
       </div>
       <div class="flex-char">
         <div>
-          <div class="middle-font left-file">内销日达成趋势图</div>
+          <div class="middle-font left-file">内销线上日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
-          <div class="middle-font">大区日达成趋势图</div>
+          <div class="middle-font">线上通路日达成趋势图</div>
           <div class="right-box-qushi">
             <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
               <div style="width:100%">
@@ -328,7 +328,6 @@ export default {
       };
       Object.assign(chart, line)
       try {
-
         const res = await API.getChartTotal(chart);
 
         let sellOutDataList = res.rows;
@@ -351,10 +350,11 @@ export default {
         // console.log("arr", arr);
         //this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
-        arrs.forEach((v) => {
+        arrs.forEach((v,i) => {
           this.dhcarr[i]=v[0].cooprLevel2;
           //this.dhcarr.push(v[0].cooprLevel2);
         });
+        console.log("this.dhcarrthis.dhcarrthis.dhcarr",this.dhcarr);
         //this.dhcarr = [0,1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {
@@ -380,7 +380,6 @@ export default {
           for (let j = arr.length; j < noDatalen; j++) {
             this.myEcharts2([], [], '', j);
             this.dhcarr[j] = '暂无数据';
-
           }
       } catch (error) {
         console.log(error);
@@ -530,7 +529,7 @@ export default {
               v.saleTaskAmt = v.saleTaskAmt .toFixed(2);
             }
             if (!!v.completeRadio) {
-              v.saleAmtRadio = (
+              v.completeRadio = (
                 v.completeRadio * 100
               ).toFixed(2);
             }
@@ -594,6 +593,7 @@ export default {
         this.speedData.speedBar = (
           panelDataList[0].businessModelCompleteRadio * 100
         ).toFixed(2);
+         this.speedData.ballLeftNum= (panelDataList[0].cnyAmt * 100).toFixed(2);
         this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
         this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(2);
         this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2)
@@ -621,9 +621,10 @@ export default {
             this.progressData.topGPM = (
               panelDataList[i].grossProfitRadio * 100
             ).toFixed(2);
-            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2)
-            this.speedData.bottomClose1 = (panelDataList[i].businessModelCompleteRadio*100).toFixed(2)
-            this.speedData.bottomTime1 = (panelDataList[i].dateRadio*100).toFixed(2)
+            // this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2)
+             this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2)
+            this.speedData.bottomClose = (panelDataList[i].businessModelCompleteRadio*100).toFixed(2)
+            this.speedData.bottomTime = (panelDataList[i].dateRadio*100).toFixed(2)
             console.log("panelDataList[i].dateRadio",panelDataList[i].dateRadio);
 
           }
@@ -636,6 +637,7 @@ export default {
               panelDataList[i].grossProfitRadio * 100
             ).toFixed(2);
             this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2)
+            // this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2)
             this.speedData.bottomClose1 = (panelDataList[i].businessModelCompleteRadio*100).toFixed(2)
             this.speedData.bottomTime1 = (panelDataList[i].dateRadio*100).toFixed(2)
           }
@@ -1246,7 +1248,7 @@ export default {
   display: flex;
   margin-top: 10px;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 

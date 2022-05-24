@@ -29,7 +29,7 @@
       <span :style="{ background: '#5AFFA4' }" class="bottom-color"></span>
       <span class="bottom-title">{{ data.textLeft }}</span>
       <span :style="{ background: '#7A5AFF' }" class="bottom-color"></span>
-      <span class="bottom-title">{{ data.textRight }}</span>
+      <span class="bottom-title"> {{ data.textRight }}</span>
       <div class="bottom-text">
         <span>{{ data.textLeft }}</span>
         <span>毛利率{{ data.topGPM }}%</span>
@@ -37,7 +37,7 @@
       <div class="bottom-text">
         <span>{{ data.textRight }}</span>
 
-        <span>毛利率{{ data.bottomGPM }}%</span>
+        <span>毛利率 {{ data.bottomGPM }}%</span>
       </div>
     </div>
   </div>

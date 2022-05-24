@@ -27,7 +27,6 @@
         label="责任人"
         height="30px"
       >
-      {{tableOutter}}
         <template v-slot="scope">
           <div class="nameColor" @click="handleClick">
             {{ scope.row[headerObj.level] }}
