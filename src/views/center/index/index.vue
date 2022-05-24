@@ -147,8 +147,8 @@
                   <div>
                     结构
                     <span v-for="(item, index) in innerSabLeft" :key="index">
-                      <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio }}%; </span>
+                      <span>{{ !!item?item.position:'' }}</span> -
+                      <span>{{ !!item?item.positionRatio:'' }}%; </span>
                     </span>
                   </div>
                 </div>
@@ -279,8 +279,8 @@
                   <div>
                     结构
                     <span v-for="(item, index) in innerSabRight" :key="index">
-                      <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio }}%;</span>
+                      <span>{{ !!item?item.position:'' }}</span> -
+                      <span>{{ !!item?item.positionRatio:'' }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -430,8 +430,8 @@
                   <div>
                     结构
                     <span v-for="(item, index) in outterSabLeft" :key="index">
-                      <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio }}%;</span>
+                      <span>{{ !!item?item.position:'' }}</span> -
+                      <span>{{ !!item?item.positionRatio:'' }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -567,8 +567,8 @@
                   <div>
                     结构
                     <span v-for="(item, index) in outterSabRight" :key="index">
-                      <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio }}%;</span>
+                      <span>{{ !!item?item.position:'' }}</span> -
+                      <span>{{ !!item?item.positionRatio:'' }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -759,14 +759,14 @@ export default {
       innerLeftInfo: {},
       innerRight: [],
       innerRightInfo: {},
-      innerSabLeft: [],
-      innerSabRight: [],
+      innerSabLeft: [{}],
+      innerSabRight: [{}],
       outterLeft: [],
       outterLeftInfo: {},
       outterRight: [],
       outterRightInfo: {},
-      outterSabLeft: [],
-      outterSabRight: [],
+      outterSabLeft: [{}],
+      outterSabRight: [{}],
       // 底部表格
       tableInner: [],
       tableOutter: [],
@@ -920,8 +920,8 @@ export default {
         }   
         if(innersab.rows.length<1){
 
-          this.innerSabLeft = [];
-          this.innerSabRight = [];
+          this.innerSabLeft = [{}];
+          this.innerSabRight = [{}];
         }else{
 
 
@@ -931,7 +931,7 @@ export default {
         })
 
       
-        let innerSabLeft = innersab.rows.filter((v) => {
+        let innerSabLeft = innersab.rows.length>0 && innersab.rows.filter((v) => {
           return v.cooprLevel1 == "线上";
         });
         this.innerSabLeft = new Array(innerSabLeft.length);
@@ -949,13 +949,13 @@ export default {
         })
 
 
-        let innerSabRight = innersab.rows.filter((v) => {
+        let innerSabRight = innersab.rows.length>0 && innersab.rows.filter((v) => {
           return v.cooprLevel1 == "线下";
         });
 
 
         this.innerSabRight = new Array(innerSabRight.length);
-        innerSabRight.forEach(v=>{
+        this.innerSabRight>0 && innerSabRight.forEach(v=>{
           if(v.position == 'S'){
 
             this.innerSabRight[0] = v;
@@ -972,8 +972,8 @@ export default {
 
           if(outtersab.rows.length<1){
 
-                this.outterSabLeft = [];
-                this.outterSabRight = [];
+                this.outterSabLeft = [{}];
+                this.outterSabRight = [{}];
               }else{
               
               outtersab.rows.forEach(v=>{
