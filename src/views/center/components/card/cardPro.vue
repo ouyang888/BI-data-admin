@@ -76,11 +76,11 @@
             <template v-for="(item,k) in list"> 
             <div :key="k+22" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
               <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
-              <span class="percent-text">{{(item.businessModelCompleteRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+              <span class="percent-text">{{(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
             </div>
             <div :key="k+223" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
               <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
-              <span class="percent-text">{{(item.businessModelCompleteRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+              <span class="percent-text">{{(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
             </div>
           </template>
           </div>

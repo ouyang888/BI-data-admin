@@ -101,10 +101,10 @@ export default {
         bar2: 0,
         ballTitle: "内销",
         bigBallTitle: "毛利率",
-        textLeft: "线上",
-        textRight: "线下",
-        titleTop: "线上",
-        titleBottom: "线下",
+        textLeft: "直营",
+        textRight: "代运营",
+        titleTop: "直营",
+        titleBottom: "代运营",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -114,15 +114,15 @@ export default {
         speedBar: 0,
         ballTitle: "内销达成",
         ballNum: 0,
-        ballLeftTitle: "线上",
-        ballRightTitle: "线下",
+        ballLeftTitle: "直营",
+        ballRightTitle: "代运营",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "线上",
+        bottomTitle1: "直营",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "线下",
+        bottomTitle2: "代运营",
         bottomClose1: 0,
         bottomTime1: 0,
       },
@@ -130,8 +130,8 @@ export default {
         bar1: 0,
         bar2: 0,
         ballTitle: "内销",
-        top: "线上",
-        bottom: "线下",
+        top: "直营",
+        bottom: "代运营",
         sabArr: { S: 0, A: 0, B: 0 },
         topArr: { S: 0, A: 0, B: 0 },
         bottomArr: { S: 0, A: 0, B: 0 },
@@ -295,6 +295,8 @@ export default {
 
 
       this.cardSab = res2.rows;
+      
+
     },
 
     //三个仪表盘(左中)
@@ -309,36 +311,36 @@ export default {
         let panelDataList = res.rows;
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
-        ).toFixed(1);
-        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
+        ).toFixed(2);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
         this.speedData.speedBar = (
-          panelDataList[0].businessModelAmtRadio * 100
-        ).toFixed(1);
-        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1);
-        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1);
+          panelDataList[0].onLineAmtRadioRadio * 100
+        ).toFixed(2);
+        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(2);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2);
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].businessModel == "直营") {
             this.progressData.topGPM = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.bar1 = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1);
+            ).toFixed(2);
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2);
             this.speedData.bottomClose =
-              panelDataList[i].businessModelAmtRadio.toFixed(1);
-            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
+              (panelDataList[i].businessModelAmtRadio*100).toFixed(2);
+            this.speedData.bottomTime = (panelDataList[i].dateRadio*100).toFixed(2);
           } else if (panelDataList[i].businessModel == "代运营") {
             this.progressData.bottomGPM = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.bar2 = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1);
+            ).toFixed(2);
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2);
             this.speedData.bottomClose1 =
-              panelDataList[i].businessModelAmtRadio.toFixed(1);
-            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1);
+              (panelDataList[i].businessModelAmtRadio*100).toFixed(2);
+            this.speedData.bottomTime1 = (panelDataList[i].dateRadio*100).toFixed(2);
           }
         }
       } catch (error) {

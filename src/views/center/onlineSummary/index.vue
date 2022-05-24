@@ -320,7 +320,7 @@ export default {
     },
     // 右边接口
     async getList1(line) {
-      debugger;
+      // debugger;
       this.showLoading = true;
       let chart = {
         code: 'onlineMiddleChart',

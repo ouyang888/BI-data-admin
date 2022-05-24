@@ -98,6 +98,21 @@ export default {
     },
    
   },
+  watch:{
+
+    leftData:{
+      handler:function(newValue,oldValue){
+        console.log('leftData更新',newValue);
+        this.leftData = newValue;
+      }
+    },
+    rightData:{
+      handler:function(newValue,oldValue){
+        this.rightData = newValue;
+      }
+    }
+
+  },
   data() {
     return {
 

@@ -1054,8 +1054,6 @@ export default {
           return v.marketChannel == "线下";
         });
         this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
-        // this.rowSpanNumber1 = [0,0];
-        // console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
         let innerTotal = tableInner.rows.filter((v) => {
           return v.marketChannel == "底部合计" || v.marketChannel =='合计';
         });

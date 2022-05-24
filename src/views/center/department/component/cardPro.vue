@@ -76,7 +76,7 @@
             <template v-for="(item,k) in list"> 
             <div :key="k+22" v-if="k == i*2 || k==i*2+1">
               <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
-              <span class="percent-text" v-if="!isNaN(item.directNameAmtRadio)">{{(item.directNameAmtRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+              <span class="percent-text" v-if="!isNaN(item.directNameAmtRadio)">{{(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
             </div>
           </template>
           </div>
@@ -355,7 +355,7 @@
     background-repeat: no-repeat;
     /* margin-right: 20px; */
     background-size: 100%;
-    width:33%;
+    width:33.33%;
   }
 
   .card-font {

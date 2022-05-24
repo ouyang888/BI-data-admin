@@ -59,7 +59,7 @@
       </el-table-column>
            
       <el-table-column
-        prop="amtRadio"
+        :prop="headerObj2.amtRadio"
         align="center"
         label="任务完成率"
         height="30px"
@@ -69,8 +69,8 @@
           <div class="precent">
             <div class="precent-in" style="width: 88px">
               {{
-                scope.row.amtRadio
-                  ? (scope.row.amtRadio*100).toFixed(2) + "%"
+                scope.row[headerObj2.amtRadio]
+                  ? (scope.row[headerObj2.amtRadio]*100).toFixed(2) + "%"
                   : 0 + "%"
               }}
             </div>
@@ -82,7 +82,7 @@
                 class="precentCompentes"
               />
               <Progress
-                :rate="scope.row.amtRadio*100"
+                :rate="scope.row[headerObj2.amtRadio]*100"
                 :color="'#66FFFF'"
                 class="precentCompentes"
               />
@@ -90,11 +90,11 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="profitRadio" align="center" label="毛利率">
+      <el-table-column :prop="headerObj2.profitRadio" align="center" label="毛利率">
         <template v-slot="scope">
           {{
-            scope.row.profitRadio
-              ? (scope.row.profitRadio*100).toFixed(2) + "%"
+            scope.row[headerObj2.profitRadio]
+              ? (scope.row[headerObj2.profitRadio]*100).toFixed(2) + "%"
               : 0 + "%"
           }}
         </template>
@@ -161,7 +161,16 @@ export default{
         return {
           name:'cooprLevel2',
          level:'coopr_level3_manager',
-         tAvgAmt:'tAvgAmt' 
+         tAvgAmt:'tAvgAmt'
+      } 
+     }
+    },
+    headerObj2:{
+      type:Object,
+      default:function(){
+        return {
+          profitRadio:'profitRadio',/*任务完成率*/
+          amtRadio:'amtRadio',/*毛利率*/
       } 
      }
     },

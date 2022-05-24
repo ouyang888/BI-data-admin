@@ -19,11 +19,13 @@
       <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center" width="120">
         <template v-slot="scope">
           <div class="precent">
-            <div style="width: 68px">{{ scope.row[i].toFixed(2)}}</div>
+            <div style="width: 68px">{{ !scope.row[i]?0:scope.row[i].toFixed(2)}}</div>
             <div style="margin-top: 5px"> 
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
-              <Progress :rate="scope.row[i.replace('businessEntityName','completeRadio')]*100" :color="'#66FFFF'" class="precentCompentes" />
+
+              <Progress  v-if="router !== 'department'" :rate="scope.row[i+'AmtRadio']*100" :color="'#66FFFF'" class="precentCompentes" />
+              <Progress v-else :rate="scope.row[i.replace('businessEntityName','completeRadio')]*100" :color="'#66FFFF'" class="precentCompentes" />
             </div>
           </div>
         </template>
@@ -31,7 +33,7 @@
       <el-table-column prop="cnyAmt" label="总计" align="center" width="100">
         <template v-slot="scope">
           <div class="precent">
-            <div style="width: 68px">{{ scope.row.cnyAmt.toFixed(2) }}</div>
+            <div style="width: 68px">{{ !scope.row.cnyAmt?0:scope.row.cnyAmt.toFixed(2) }}</div>
             <div style="margin-top: 5px">
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
@@ -212,6 +214,7 @@
     watch:{
     mesInfo:{
       handler:function(newValue,oldValue){
+        console.log('更新newValue',newValue)
         newValue.forEach((v,i)=>{
           // v.amtRadio = Number((v.amtRadio*100).toFixed(2));
           // v.profitRadio = Number((v.profitRadio*100).toFixed(2));
