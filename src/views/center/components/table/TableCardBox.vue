@@ -84,11 +84,9 @@ export default {
     },
     leftObj:{
       type:Object,
-      default:function(){ return {}}
     },
     rightObj:{
       type:Object,
-      default:function(){ return {}}
     },
     title1:{
       type:String,
