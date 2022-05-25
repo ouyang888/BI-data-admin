@@ -68,8 +68,8 @@
           <div class="precent">
             <div class="precent-in" style="width: 88px">
               {{
-                scope.row[headerObj2.amtRadio1]
-                  ? (scope.row[headerObj2.amtRadio1]*100).toFixed(2) + "%"
+                scope.row[headerObj2.amtRadio]
+                  ? (scope.row[headerObj2.amtRadio]*100).toFixed(2) + "%"
                   : 0 + "%"
               }}
             </div>

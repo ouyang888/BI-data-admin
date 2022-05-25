@@ -345,10 +345,11 @@ display:none;
 /*卡片样式*/
 
 .card-box .top-left-font{
+  margin-right:10px;
   // margin-right:20px!important;
 }
 .card-box .card-big-num{
-  font-size:12px!important;
+  font-size:14px!important;
 }
 .unit{
   font-size:14px;
@@ -378,4 +379,7 @@ align-items: center;
  th.el-table__cell.gutter:last-of-type{
   border-bottom: 1px solid rgb(7 6 64);
 }
+}
+.left-right-box .flex-top-card:nth-child(2){
+  align-items:center!important;
 }
