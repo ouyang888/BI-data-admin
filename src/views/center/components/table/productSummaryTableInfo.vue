@@ -45,7 +45,7 @@
         <el-table-column
           prop="oemCnyAmt"
           align="center"
-          label="线上"
+          label="OEM"
           height="30px"
         >
           <template v-slot="scope">
@@ -54,7 +54,7 @@
                       {{ scope.row.oemCnyAmt.toFixed(1) }}
                   </div>
                   <div style="margin-top: 5px">
-                      <Progress style="margin-bottom: 3px" :rate="scope.row.obmCnyAmt" :color="'#FF8B2F'"
+                      <Progress style="margin-bottom: 3px" :rate="scope.row.oemCompleteRatio*100" :color="'#FF8B2F'"
                           class="precentCompentes" />
                       <Progress :rate="scope.row.dateRadio" :color="'#66FFFF'" class="precentCompentes" />
                   </div>
@@ -65,7 +65,7 @@
         <el-table-column
           prop="obmCnyAmt"
           align="center"
-          label="线下"
+          label="OBM"
           height="30px"
         >
            <template v-slot="scope">
@@ -74,7 +74,7 @@
                       {{ scope.row.obmCnyAmt .toFixed(1) }}
                   </div>
                   <div style="margin-top: 5px">
-                      <Progress style="margin-bottom: 3px" :rate="scope.row.obmCnyAmt" :color="'#FF8B2F'"
+                      <Progress style="margin-bottom: 3px" :rate="scope.row.obmCompleteRatio*100" :color="'#FF8B2F'"
                           class="precentCompentes" />
                       <Progress :rate="scope.row.dateRadio" :color="'#66FFFF'" class="precentCompentes" />
                   </div>
@@ -93,9 +93,10 @@
                 {{ scope.row.totalCnyAmt }}
               </div>
                 <div style="margin-top: 5px">
-                  <Progress style="margin-bottom: 3px" :rate="scope.row.cookingAmtRadio" :color="'#FF8B2F'"
-                      class="precentCompentes" />
                   <Progress :rate="scope.row.dateRadio" :color="'#66FFFF'" class="precentCompentes" />
+                  <Progress style="margin-bottom: 3px" :rate="scope.row.totalCompleteRatio*100" :color="'#FF8B2F'"
+                      class="precentCompentes" />
+              
               </div>
             </div>
           </template>

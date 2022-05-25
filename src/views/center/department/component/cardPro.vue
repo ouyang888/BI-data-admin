@@ -2,7 +2,7 @@
   <div class="flex-card" >
 
     <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
-    <div class="card-box"  v-for="(v,i) in list" :key="i">
+    <div class="card-box"  v-for="(v,i) in cardList" :key="i">
   
       <div class="card-font" @click="gotoCatSeries(v[cardObj.title])" v-if="i<6">{{v[cardObj.title]}} </div>
       <div class="card-border-box" v-if="i<6">
@@ -14,14 +14,14 @@
         <div class="left-right-box">
           <div style="margin-left: 14px">
             <div class="flex-top-card">
-              <div class="top-left-font">实时达成</div>
+              <div class="top-left-font">达成</div>
               <div class="flex-finish">
                 <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}  {{modelLabel}} </span></div>
                 <div class="finish-font">完成率 <span>{{v[cardObj.saleAmtRadio]}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
-              <div class="card-big-num">{{v[cardObj.cnyAmt]}}{{modelLabel}}</div>
+              <div class="card-big-num">{{v[cardObj.cnyAmt]}} <span class="unit"> {{modelLabel}}</span></div>
                <div class="flex-finish">
                 <!-- <div class="finish-font">进度 <span>s</span></div>
                 <div class="finish-font">完成率 <span>75%</span></div> -->
@@ -38,7 +38,7 @@
                   </div>
                   <div class="progress">
                     <a-progress
-                      :percent="v[cardObj.saleAmtRadio]"
+                      :percent="v[cardObj.saleAmtRadio] || 0"
                       :show-info="false"
                       strokeColor="rgb(102, 255, 255)"
                     />
@@ -175,18 +175,19 @@
           this.cardList = [];
           if(newValue.length<1) return;
           newValue && newValue.forEach(v => { /*划分6个卡片*/
-            if(v[this.cardObj.title] !=title){
-              v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
-            v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt].toFixed(1);
-            v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(0));
+            if(v[this.cardObj.title] !=title && !!v[this.cardObj.title]){
+              // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(2);
+            // v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt].toFixed(2);
+            // v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(2));
             // v.grossProfitRadio = Number((v.grossProfitRadio*100).toFixed(0));
             // debugger;
-            if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
-            v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/
+            // if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
+            // v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/
               this.cardList.push(v);
                 title = v[this.cardObj.title];
             }   
           });
+          console.log('this.cardList',this.cardList)
           this.list = newValue;
           this.showLoading = false;
         }
@@ -197,7 +198,7 @@
                let cooprLevel1 = '';
                var k = 0;
                newValue && newValue.forEach((v,i)=>{
-                v.positionRatio = (v.positionRatio*100)>100?100:(v.positionRatio*100).toFixed(0);
+                v.positionRatio = (v.positionRatio*100)>100?100:(v.positionRatio*100).toFixed(2);
               })
                 newValue && newValue.forEach((v,i)=>{  /*划分6个sab*/
                   if(v[this.cardObj.title] !=title && v[this.cardObj.cooprLevel1] !=cooprLevel1 ){
@@ -695,5 +696,8 @@
     height: 100%;
     top: 0;
     left: 0;
+    }
+    .unit{
+      font-size:13px; 
     }
 </style>

@@ -11,7 +11,6 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-
           <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2" @gotoCatSeries="gotoCatSeries"/>
     </div>
     <!-- 中间echart -->
@@ -379,12 +378,20 @@ export default {
 
       let obm = {};
       let arr = [];
+
+      // 'cnyAmt':'businessEntityAmt',/*金额*/
+      //  'saleTaskAmt': 'businessEntityTaskAmt', /*责任制金额*/
+      //  'saleAmtRadio':'businessEntityAmtRadio',  /*金额完成率*/
       res.rows.filter(v=>{
 
         if(!obm[v.businessEntityName+v.directName]){
           obm[v.businessEntityName+v.directName] = 1;
           v.businessModelCompleteRadio =  v.directNameAmtRadio /*中间sab对应字段完成率*/
-          v.businessEntityAmt = v.businessEntityAmt.toFixed(2);
+          v.businessEntityAmt = !!v.businessEntityAmt?  Number((v.businessEntityAmt*100).toFixed(2)):0;
+          v.businessEntityAmtRadio = !!v.businessEntityAmtRadio?v.businessEntityAmtRadio:0;
+          v.businessEntityTaskAmt = !!v.businessEntityTaskAmt?v.businessEntityTaskAmt.toFixed(2):0;
+          v.dateRadio = Number((v.dateRadio*100).toFixed(2)); /*时间进度*/
+
           arr.push(v);
         }
        
