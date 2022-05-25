@@ -1,8 +1,7 @@
 <template>
   <div class="execl">
-    <div >
 
-    
+    <div >
        <el-table
         border
         :data="mesInfo"
@@ -20,11 +19,10 @@
           label="品类"
           height="30px"
         >
-         <template v-slot="scope"  style="text-align: center;border:1px solid red;">
+         <template v-slot="scope"  style="text-align: center;">
             <div  class="nameColor"   @click="handleClick">
-              {{ scope.row.category }}
+              {{ scope.row.category}}
             </div>
-        
           </template>
         </el-table-column>
              
@@ -39,7 +37,7 @@
          <template v-slot="scope">
             <div class="precent">
               <div style="width: 40%">
-              {{ scope.row.onLineCnyAmt }}
+              {{ scope.row.onLineCnyAmt.toFixed(2)  }}
             </div>
             <div style="margin-top: 5px">
                               <Progress :rate="scope.row.dateRadio*100" :color="'#66FFFF'" class="precentCompentes" />
@@ -48,8 +46,7 @@
 
             </div>
             </div>
-          </template> 
-      
+          </template>
         </el-table-column>
              
         <el-table-column
@@ -61,12 +58,13 @@
            <template v-slot="scope">
               <div class="precent">
                   <div style="width: 40%">
-                      {{ scope.row.outLineCnyAmt .toFixed(1) }}
+                      {{ scope.row.outLineCnyAmt .toFixed(2) }}
                   </div>
                   <div style="margin-top: 5px">
-                      <Progress style="margin-bottom: 3px" :rate="scope.row.outLineCompleteRatio*100" :color="'#FF8B2F'"
+                   <Progress :rate="scope.row.dateRadio*100" :color="'#66FFFF'" class="precentCompentes" />
+                  <Progress style="margin-bottom: 3px" :rate="scope.row.outLineCompleteRatio*100" :color="'#FF8B2F'"
                           class="precentCompentes" />
-                      <Progress :rate="scope.row.dateRadio*100" :color="'#66FFFF'" class="precentCompentes" />
+                     
                   </div>
               </div>
             </template>
@@ -80,7 +78,7 @@
           <template v-slot="scope">
             <div class="precent">
               <div style="width: 40%">
-                {{ scope.row.totalCnyAmt }}
+                {{ scope.row.totalCnyAmt.toFixed(2)  }}
               </div>
                 <div style="margin-top: 5px">
                   <Progress :rate="scope.row.dateRadio*1000" :color="'#66FFFF'" class="precentCompentes" />

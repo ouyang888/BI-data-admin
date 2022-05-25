@@ -11,7 +11,6 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-
           <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2" @gotoCatSeries="gotoCatSeries"/>
     </div>
     <!-- 中间echart -->
@@ -384,7 +383,6 @@ export default {
         if(!obm[v.businessEntityName+v.directName]){
           obm[v.businessEntityName+v.directName] = 1;
           v.businessModelCompleteRadio =  v.directNameAmtRadio /*中间sab对应字段完成率*/
-          v.businessEntityAmt = v.businessEntityAmt.toFixed(2);
           arr.push(v);
         }
        

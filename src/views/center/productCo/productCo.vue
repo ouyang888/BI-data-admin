@@ -22,12 +22,12 @@
       </div>
       <div class="flex-char">
         <div>
-          <div class="middle-font left-file">内销日达成趋势图</div>
+          <div class="middle-font left-file">产司日达成趋势图</div>
           
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
-          <div class="middle-font">大区日达成趋势图</div>
+          <div class="middle-font">品类日达成趋势图</div>
           <div class="right-box-qushi">
             <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
               <div style="width:100%">
@@ -52,11 +52,19 @@
         <div class="fang-color"></div>
       </div>
     </div>
-
+         <TableCardBoxInfo
+      :leftData="tableInner"
+      :rightData="tableOutter"
+      :titleHead1="titleHead1"
+      :titleHead2="titleHead2"
+      :leftObj="TableLeftObj"
+      :rightObj="TableRightObj"
+    />
 
     <!-- 底部表格 -->
-    <productTableInfo :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
-      title1="内销" title2="外销" />
+    <!-- <productTableInfo :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
+      title1="内销" title2="外销" />-->
+
   </div>
 </template>
 <script>
@@ -65,13 +73,14 @@ import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
-import productTableInfo from '@/views/center/components/table/productTableInfo.vue';
+// import productTableInfo from '@/views/center/components/table/productTableInfo.vue';
+import TableCardBoxInfo from '@/views/center/components/table/TableCardBoxInfo.vue';
 export default {
    components: {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
-    productTableInfo,
+    TableCardBoxInfo,
     cardPro
   },
   data() {
@@ -83,19 +92,32 @@ export default {
        'cnyAmtRadio':'cnyAmtRadio',  /*金额完成率*/
        'cooprLevel1':'directName'  /*线上/线下 金额完成率*/
       },
-      
+      tableInner:[],    
+      tableOutter:[],  
       cardSab:[],
       cardSabTitle1:"内销",
       cardSabTitle2:"外销",
       leftObj:{
-        marketChannel:'marketChannel',
-        marketCenter:'marketCenter',
-        manager:'manager',
+        marketChannel:'onLineCnyAmt',
+        marketCenter:'outLineCnyAmt',
+        manager:'category ',
       },
       rightObj:{
-        marketChannel:'marketChannel',
-        marketCenter:'marketCenter',
-        manager:'manager',
+        marketChannel:'oemCnyAmt',
+        marketCenter:'obmCnAmt',
+        manager:'category',
+      },
+       titleHead1: {
+        // category:"品类",
+        onLineCnyAmt: "线上",
+        outLineCnyAmt : "线下",
+        totalCnyAmt : "合计",
+      },
+             titleHead2: {
+        // category:"品类",
+        oemCnyAmt: "oem",
+        obmCnyAmt : "obm",
+        totalCnyAmt : "合计",
       },
       cardData: [],
       dhcarr: ['暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据', '暂无数据'],
@@ -226,8 +248,6 @@ export default {
         // bottomArr: [{'高端机':32},{'明星机':18},{'入口机':21},{'常规机':9},{'结构及':5}]
       },
       // 底部表格
-      tableInner:[],
-      tableOutter:[],
       rowSpanNumber1:6,
       rowSpanNumber2:6,
     };
@@ -1627,6 +1647,8 @@ this.$router.push("/center/index")
         console.log("tableInner",tableInner);
       this.tableInner = tableInner.rows;
       this.tableOutter = tableOutter.rows;
+      console.log("this.tableInner",this.tableInner);
+         console.log("this.tableInner",this.tableOutter);
 
       this.rowSpanNumber2 = [this.tableOutter.length - 1];
     },
