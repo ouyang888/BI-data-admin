@@ -19,23 +19,18 @@
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
-                      <span v-if="departmentInfo.saleTaskAmt!==null&&departmentInfo.saleTaskAmt!==undefined">{{
-                        Number(departmentInfo.saleTaskAmt).toFixed(2)
+                      <span>{{
+                        !!departmentInfo.saleTaskAmt?Number(departmentInfo.saleTaskAmt).toFixed(2):0
                       }}</span
                       >{{modelLabel}}
                     </div>
                 
                     <div class="finish-font">
                       完成率
-                    
-                       <span v-if="departmentInfo.cnyAmtRadio===null"
-                        >0%</span
-                      >
-                   
   
-                        <span v-else
+                        <span
                         >{{
-                          Number(departmentInfo.cnyAmtRadio*100).toFixed(2)
+                          !!departmentInfo.cnyAmtRadio?Number(departmentInfo.cnyAmtRadio*100).toFixed(2):0
                         }}%</span
                       >
                     </div>
@@ -44,7 +39,7 @@
                 <div class="flex-top-card">
               
                   <div class="card-big-num">
-                    {{ Number(departmentInfo.cnyAmt).toFixed(2) }}{{modelLabel}}
+                    {{ !!departmentInfo.cnyAmt?Number(departmentInfo.cnyAmt).toFixed(2):0 }}{{modelLabel}}
                   </div>
                   <div style=" display: flex; align-items: center; ">
                     <div class="finish-font">进度</div>
@@ -87,14 +82,14 @@
                       <div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="item.dateRadio*100"
+                            :percent="item.dateRadio*100 || 0"
                             :show-info="false"
                             strokeColor="#FF8B2F"
                           />
                         </div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="item.cnyAmtRadio * 100"
+                            :percent="item.cnyAmtRadio * 100 || 0"
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
@@ -155,8 +150,8 @@
                
                     <div class="finish-font">
                       责任制
-                      <span v-if="departmentInfo1.saleTaskAmt!==null&&departmentInfo1.saleTaskAmt!==undefined">{{
-                        Number(departmentInfo1.saleTaskAmt).toFixed(2)
+                      <span>{{
+                        !!departmentInfo1.saleTaskAmt?Number(departmentInfo1.saleTaskAmt).toFixed(2):0
                       }}</span
                       >{{modelLabel}}
                     </div>
@@ -165,12 +160,9 @@
                       <span
                         >
                     
-                       <span v-if="departmentInfo1.cnyAmtRadio===null"
-                        >0%</span
-                      >
-                        <span v-else
+                        <span
                         >{{
-                          Number(departmentInfo1.cnyAmtRadio*100).toFixed(2) 
+                          !!departmentInfo1.cnyAmtRadio?Number(departmentInfo1.cnyAmtRadio*100).toFixed(2):0
                         }}%</span
                       >
                         
@@ -182,7 +174,7 @@
                 <div class="flex-top-card">
                   <div class="card-big-num">
 
-                    {{ Number(departmentInfo1.cnyAmt).toFixed(2) }}{{modelLabel}}
+                    {{ !!departmentInfo1.cnyAmt?Number(departmentInfo1.cnyAmt).toFixed(2):0 }}{{modelLabel}}
                   </div>
            
                   <div style="display: flex; align-items: center">
@@ -263,18 +255,18 @@
                   <div>
                      毛利率
                     <span class="light-blue" 
-                      >{{Number(homeGrossProfitRadio1[0].grossProfitRadio * 100).toFixed(2)
+                      >{{!!homeGrossProfitRadio1[0].grossProfitRadio?Number(homeGrossProfitRadio1[0].grossProfitRadio * 100).toFixed(2):0
                       }}%</span>
                   </div>
                    <div>
                    OEM
-                    <span class="light-blue"> {{Number(this.info3.profitRadio*100).toFixed(2) }}  %</span>
+                    <span class="light-blue"> {{!!info3.profitRadio?Number(info3.profitRadio*100).toFixed(2):0 }}  %</span>
 
                   </div>
                   <div>
                     OBM
                     <span class="light-blue"
-                      >{{ Number(this.info4.profitRadio*100).toFixed(2)}}
+                      >{{ !!info4.profitRadio?Number(info4.profitRadio*100).toFixed(2):0}}
                       </span> %
                   </div>
 
