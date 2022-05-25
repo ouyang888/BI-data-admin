@@ -68,8 +68,8 @@
           <div class="precent">
             <div class="precent-in" style="width: 88px">
               {{
-                scope.row[headerObj2.amtRadio]
-                  ? (scope.row[headerObj2.amtRadio]*100).toFixed(2) + "%"
+                scope.row[headerObj2.amtRadio1]
+                  ? (scope.row[headerObj2.amtRadio1]*100).toFixed(2) + "%"
                   : 0 + "%"
               }}
             </div>
@@ -108,7 +108,7 @@
       </el-table-column> -->
            
       <el-table-column
-        prop="amtFinish"
+        :prop="headerObj2.amtFinish"
         align="center"
         label="说到做到"
         height="30px"
@@ -116,7 +116,12 @@
         <template v-slot="scope">
           <div class="precent">
             <div class="precent-in">
-              {{ scope.row.amtFinish }}
+             {{
+                scope.row[headerObj2.amtFinish]
+                  ? (scope.row[headerObj2.amtFinish]).toFixed(2) 
+                  : 0 
+              }}
+  <!--{{ scope.row.amtFinish }}-->
             </div>
             <div style="margin-top: 5px">
               <Progress
@@ -125,8 +130,11 @@
                 :color="'#FF8B2F'"
                 class="precentCompentes"
               />
+
+      
+           
               <Progress
-                :rate="!!scope.row.amtRadio?scope.row.amtRadio*100:0"
+                :rate="scope.row[headerObj2.amtFinishRadio]*100"
                 :color="'#66FFFF'"
                 class="precentCompentes"
               />
@@ -170,9 +178,14 @@ export default{
         return {
           profitRadio:'profitRadio',/*任务完成率*/
           amtRadio:'amtRadio',/*毛利率*/
+          amtFinish:'amtFinish',/*amtFinish*/
+          amtFinishRadio:'amtFinishRadio'
+          
       } 
      }
     },
+
+    
   
   },
   watch:{

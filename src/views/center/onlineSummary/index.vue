@@ -57,8 +57,9 @@
     </div>
 
     <!-- 底部表格 -->
-    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
-      title1="合作模式三" title2="线上客户" />
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" 
+    :leftObj="leftObj" :rightObj="rightObj" :rightObj2="rightObj2"
+      title1="合作模式三" title2="线上客户" :leftObj2="leftObj2" />
   </div>
 </template>
 <script>
@@ -92,6 +93,22 @@ export default {
       AvgTaskAmtList: [],
       AvgTaskAmtLine: "",
       AmericaLine: [],
+      rightObj2:{
+        profitRadio:"ProfitRadio",
+        amtRadio:"cnyAmtRadio",
+        amtRadio1:"amtFinishRadio",
+        amtFinish:'amtFinish',/*amtFinish*/
+      amtFinishRadio:'amtFinishRadio'
+      },
+    leftObj2:{
+      profitRadio:"ProfitRadio",
+      amtRadio:"cnyAmtRadio",
+      amtRadio1:"amtFinishRadio",
+      amtFinish:'amtFinish',/*amtFinish*/
+      amtFinishRadio:'amtFinishRadio'
+    },
+
+
 
       //       info:[{
       // name:"name",
@@ -590,9 +607,7 @@ export default {
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
         ).toFixed(2);
-        this.speedData.speedBar = (
-          panelDataList[0].businessModelCompleteRadio * 100
-        ).toFixed(2);
+        this.speedData.speedBar = (panelDataList[0].businessModelCompleteRadio * 100).toFixed(2) > 200 ? 200 :(panelDataList[0].businessModelCompleteRadio * 100).toFixed(2);
          this.speedData.ballLeftNum= (panelDataList[0].cnyAmt * 100).toFixed(2);
         this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
         this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(2);

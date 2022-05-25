@@ -122,6 +122,10 @@ class circleProgress {
         ctx.beginPath();
         ctx.fillStyle = "rgb(255,105,180,0.7)";
         const { xPos, yPos } = this.getPointPos(aniDeg)
+
+        // ctx.moveTo(circle.x,circle.y);
+        // ctx.lineTo(endpt.x,endpt.y);
+
         // ctx.moveTo(xPos-2,yPos-20);
         // ctx.lineTo(xPos,xPos);
         // ctx.lineTo(xPos-10,xPos-10);
