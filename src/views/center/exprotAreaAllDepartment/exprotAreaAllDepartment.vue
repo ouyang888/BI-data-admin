@@ -326,6 +326,20 @@ export default {
           return;
           }
         for (var i = 0; i < RightSAB.length; i++) {
+
+          if (RightSAB[i].position == "S") {
+              this.sabData.sabArr.S = (RightSAB[i].level2AmtPositionRatio * 100).toFixed(
+                1
+              );
+            } else if (RightSAB[i].position == "A") {
+              this.sabData.sabArr.A = (RightSAB[i].level2AmtPositionRatio * 100).toFixed(
+                1
+              );
+            } else if (RightSAB[i].position == "B") {
+              this.sabData.sabArr.B = (RightSAB[i].level2AmtPositionRatio * 100).toFixed(
+                1
+              );
+            }
           if (RightSAB[i].obm_oem == "OBM") {
             this.sabData.bar1 = (
               RightSAB[i].AmtPositionRatio * 100
@@ -334,23 +348,17 @@ export default {
               this.sabData.topArr.S = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.S = (
-                RightSAB[i].level2AmtPositionRatio * 100
-              ).toFixed(1);
+        
             } else if (RightSAB[i].position == "A") {
               this.sabData.topArr.A = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.A = (
-                RightSAB[i].level2AmtPositionRatio * 100
-              ).toFixed(1);
+       
             } else if (RightSAB[i].position == "B") {
               this.sabData.topArr.B = (
                 RightSAB[i].AmtPositionRatio * 100
               ).toFixed(1);
-              this.sabData.sabArr.B = (
-                RightSAB[i].level2AmtPositionRatio * 100
-              ).toFixed(1);
+      
             }
           } else if (RightSAB[i].obm_oem == "OEM") {
             this.sabData.bar2 = (

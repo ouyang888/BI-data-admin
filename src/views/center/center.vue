@@ -328,13 +328,16 @@ export default {
     },
     changemonth(item) {
       this.month = item.substr(4); /*获取选项里的月份*/
-      let year = item.substr(0, 2);
+      let year = item.substr(0, 4);
       let val = this.month.length < 2 ? "0" + this.month : this.month;
 
       // this.$store.commit("setYear",'2022');
       this.$store.commit("setMonth", val);
-      ;
-      this.$store.commit('setEndDay', new Date(year, val, '0').getDate());
+  
+      let end = new Date(year, val, '0').getDate();
+      console.log('year',year,val,'0',end)
+      
+      this.$store.commit('setEndDay',end );
       // let date = new Date()
 
 

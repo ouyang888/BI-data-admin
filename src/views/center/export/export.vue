@@ -382,7 +382,7 @@ export default {
         if(res.code !=200) return;
         if(res.rows.length<1){
         this.AvgTaskAmtDate = [];
-        this.AvgTaskAmtList = [0];
+        this.AvgTaskAmtList = [];
         this.AvgTaskAmtLine = ''
       }else{
         this.AvgTaskAmtDate = [];
