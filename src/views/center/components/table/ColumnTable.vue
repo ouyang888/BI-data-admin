@@ -137,7 +137,7 @@
             //     type: Object
             // },
             mesInfo: {
-                type: Object
+                type: Array
             },
             headTitle: {
                 type: Object

@@ -121,25 +121,25 @@
                     毛利率
                     <span class="light-blue"
                   
-                      >{{
+                      >{{!!homeGrossProfitRadio[0].grossProfitRadio?
                         Number(
-                          this.homeGrossProfitRadio[0].grossProfitRadio * 100
-                        ).toFixed(2)
+                          homeGrossProfitRadio[0].grossProfitRadio * 100
+                        ).toFixed(2):0
                       }} %</span
                     >
                   </div>
                    <div >
                     线上
                     <span class="light-blue"> 
-                         {{
-                          Number(this.info.profitRadio*100).toFixed(2) 
+                         {{!!info.profitRadio?
+                          Number(info.profitRadio*100).toFixed(2):0 
                          }}  %</span>
 
                   </div>
                   <div>
                     线下
                     <span class="light-blue"
-                      >{{ Number(this.info2.profitRadio*100).toFixed(2)}}
+                      >{{ !!info2.profitRadio?Number(info2.profitRadio*100).toFixed(2):0}}
                       </span> %
                   </div>
 
@@ -1320,8 +1320,8 @@ export default {
           { class: "plan", text: "规划达成" },
           { class: "average", text: "日均线" },
         ],
-        info:[],
-        info2:[],  
+        info:[{}],
+        info2:[{}],  
         info3:[],
         info4:[],    
           headTitle1: {
@@ -1877,11 +1877,11 @@ export default {
       departmentInfo: [],
       processInfo: [],
       homeSabInfo: [],
-      homeGrossProfitRadio: {},
-      departmentInfo1: [],
+      homeGrossProfitRadio: [{}],
+      departmentInfo1: [{}],
       processInfo1: [],
       homeSabInfo1: [],
-      homeGrossProfitRadio1: {},
+      homeGrossProfitRadio1: [{}],
       sale: "内销",
       sales: "外销",
       showLoading:false,
