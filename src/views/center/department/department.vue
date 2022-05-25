@@ -11,7 +11,6 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-
           <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2" @gotoCatSeries="gotoCatSeries"/>
     </div>
     <!-- 中间echart -->
