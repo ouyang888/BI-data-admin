@@ -103,7 +103,7 @@
   },
     methods: {
       handleClick(obj) {
-        this.$emit("handleClick",obj);
+        // this.$emit("handleClick",obj);
       },
       objectSpanMethod({ row, column, rowIndex, columnIndex }) {
         let number = 0;
