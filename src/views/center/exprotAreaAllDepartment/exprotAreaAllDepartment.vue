@@ -136,8 +136,8 @@ export default {
         // bar4: 12,
         // bar5: 7,
         ballTitle: "外销",
-        bottom: "OBM",
-        top: "OEM",
+        top: "OBM",
+        bottom: "OEM",
          sabArr: { S: 0, A: 0, B: 0 },
         topArr: { S: 0, A: 0, B: 0  },
         bottomArr: { S: 0, A: 0, B: 0  },
@@ -271,7 +271,7 @@ export default {
           // 销向金额完成率
           // 销向数量完成率
           this.speedData.speedBar = (panelDataList[0].level1AmtRadio * 100).toFixed(2)
-          this.speedData.bar = (panelDataList[0].level1AmtRadio * 100).toFixed(2)
+          this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2)
           //  销向总销售数量
           // this.speedData.ballNum = (panelDataList[0].level1saleVolume / 1000000).toFixed(2)
 
@@ -283,7 +283,7 @@ export default {
               this.progressData.topGPM = (panelDataList[i].obmOemProfitRadio * 100).toFixed(2)
               this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2)
 
-              this.speedData.bottomClose = (panelDataList[i].level1AmtRadio*100).toFixed(2)
+              this.speedData.bottomClose = (panelDataList[i].cnyAmtRadio*100).toFixed(2)
               this.speedData.bottomTime = (panelDataList[i].dateRadio*100).toFixed(2)
 
             } else if (panelDataList[i].obmOem == "OEM") {
@@ -401,11 +401,11 @@ export default {
           
 
           // 外销日内
-          if (item.cnyAmt !== null && item.tAvgQty !== null && ontime!=timeArr) {
+          if (item.cnyAmt !== null && ontime!=timeArr) {
             ontime = timeArr
             this.AvgTaskAmtDate.push(timeArr);
             this.AvgTaskAmtList.push(item.cnyAmt);
-            this.AvgTaskAmtLine = item.tAvgQty;
+            this.AvgTaskAmtLine = item.tAvgQty || 0;
       
           }
         }
@@ -475,7 +475,7 @@ export default {
 
             AmericaDate.push(yue + "-" + ri);
             AmericaList.push(item.cnyAmt);
-            AmericaLine = item.tAvgQty;
+            AmericaLine = item.tAvgQty || 0;
           });
           // console.log("Arrnum", this.sellOutDataList);
 

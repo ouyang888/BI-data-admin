@@ -49,19 +49,15 @@ export default {
     },
     leftObj:{
       type:Object,
-      default:function(){ return {}}
     },
     rightObj:{
       type:Object,
-      default:function(){ return {}}
     },
     leftObj2:{
       type:Object,
-      default:function(){ return {}}
     },
     rightObj2:{
       type:Object,
-      default:function(){ return {}}
     },
   },
   data() {
