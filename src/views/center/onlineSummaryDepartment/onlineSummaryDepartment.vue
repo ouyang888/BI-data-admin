@@ -318,6 +318,8 @@ export default {
         ).toFixed(1);
         this.speedData.speedBar = (
           panelDataList[0].businessModelCompleteRadio * 100
+        ).toFixed(1) > 200 ? 200 : (
+          panelDataList[0].businessModelCompleteRadio * 100
         ).toFixed(1);
         this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
         this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1);

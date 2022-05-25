@@ -357,9 +357,7 @@ export default {
           panelDataList[0].grossProfitRadio * 100
         ).toFixed(2);
         this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
-        this.speedData.speedBar = (panelDataList[0].cnyAmtRadio * 100).toFixed(
-          1
-        );
+        this.speedData.speedBar = (panelDataList[0].cnyAmtRadio * 100).toFixed(1) > 200 ? 200 :(panelDataList[0].cnyAmtRadio * 100).toFixed(1);
         this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(2);
         this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2);
 
