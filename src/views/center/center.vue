@@ -9,10 +9,10 @@
         <div class="left-font">当前页面：{{ pathName }}</div>
       </div>
       <div class="flex-right">
-        <div class="right-font">
+        <!-- <div class="right-font">
           <a-icon type="printer" style="color: #19ecff; margin-right: 4px" />打印
-        </div>
-        <div class="right-font">
+        </div> -->
+        <div class="right-font" @click="changeyear">
           <a-icon type="upload" style="color: #19ecff; margin-right: 4px" />导出数据
         </div>
 
@@ -328,13 +328,16 @@ export default {
     },
     changemonth(item) {
       this.month = item.substr(4); /*获取选项里的月份*/
-      let year = item.substr(0, 2);
+      let year = item.substr(0, 4);
       let val = this.month.length < 2 ? "0" + this.month : this.month;
 
       // this.$store.commit("setYear",'2022');
       this.$store.commit("setMonth", val);
-      ;
-      this.$store.commit('setEndDay', new Date(year, val, '0').getDate());
+  
+      let end = new Date(year, val, '0').getDate();
+      console.log('year',year,val,'0',end)
+      
+      this.$store.commit('setEndDay',end );
       // let date = new Date()
 
 

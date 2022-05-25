@@ -25,7 +25,7 @@
             <div class="left-right-box">
               <div style="margin-left: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">达成</div>
+                  <div class="top-left-font">实时</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制 <span>{{ innerLeftInfo.saleTaskAmt || 0 }}{{ $store.state.unit }}</span>
@@ -218,7 +218,7 @@
             <div class="left-right-box">
               <div style="margin-left: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">达成</div>
+                  <div class="top-left-font">实时</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制 <span>{{ outterLeftInfo.saleTaskAmt }}{{ $store.state.unit }}</span>

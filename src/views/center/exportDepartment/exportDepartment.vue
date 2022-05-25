@@ -265,6 +265,7 @@ export default {
         const res = await API.getTotal(obj);
         // if (res != 200) return;
         //内销汇总仪表盘左边&&中间
+        if(res.code!=200) return;
         let panelDataList = res.rows;
         if(res.rows.length<1){  /*处理切换月份数组为空，给数值字段重新赋值为0*/
         for(var i in this.speedData){
@@ -424,10 +425,10 @@ export default {
           var ri = timeArr[2];
 
           // 外销日内
-          if (item.cnyAmt !== null && item.tAvgAmt !== null) {
+          if (item.cnyAmt !== null) {
             this.AvgTaskAmtDate.push(yue + "-" + ri);
             this.AvgTaskAmtList.push(item.cnyAmt);
-            this.AvgTaskAmtLine = item.tAvgAmt;
+            this.AvgTaskAmtLine = item.tAvgAmt || 0;
          
           }
         }
@@ -827,11 +828,21 @@ export default {
         this.tableInner = tableInner.rows;
         this.tableOutter = tableOutter.rows;
         this.tableInner.forEach(v=>{
+          for(var i in v){
+            if(v[i]==null){
+              v[i] = 0;
+            }
+          }
           v.cnyAmt= v.total;
           v.manager= v.cooprLevel1Manager;
           
         })
         this.tableOutter.forEach(v=>{
+          for(var i in v){
+            if(v[i]==null){
+              v[i] = 0;
+            }
+          }
           v.cnyAmt= v.total;
           v.manager= v.cooprLevel1Manager;
         })

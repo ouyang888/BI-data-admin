@@ -42,7 +42,7 @@
       >
       
         <template v-slot="scope">
-          {{ scope.row[headerObj.tAvgAmt].toFixed(2) }}
+          {{ !!scope.row[headerObj.tAvgAmt]?scope.row[headerObj.tAvgAmt].toFixed(2):0 }}
         </template>
       </el-table-column>
            
@@ -53,7 +53,7 @@
         height="30px"
       >
         <template v-slot="scope">
-          {{ scope.row.cnyAmt.toFixed(2)}}
+          {{ !!scope.row.cnyAmt?scope.row.cnyAmt.toFixed(2):0}}
         </template>
       </el-table-column>
            
@@ -76,12 +76,12 @@
             <div style="margin-top: 5px">
               <Progress
                 style="margin-bottom: 3px"
-                :rate="scope.row.dateRadio*100"
+                :rate="!!scope.row.dateRadio?scope.row.dateRadio*100:0"
                 :color="'#FF8B2F'"
                 class="precentCompentes"
               />
               <Progress
-                :rate="scope.row[headerObj2.amtRadio]*100"
+                :rate="!!scope.row[headerObj2.amtRadio]?scope.row[headerObj2.amtRadio]*100:0"
                 :color="'#66FFFF'"
                 class="precentCompentes"
               />
@@ -126,7 +126,7 @@
             <div style="margin-top: 5px">
               <!-- <Progress
                 style="margin-bottom: 3px"
-                :rate="scope.row.dateRadio*100"
+                :rate="!!scope.row.dateRadio*100?scope.row.dateRadio*100:0"
                 :color="'#FF8B2F'"
                 class="precentCompentes"
               />-->

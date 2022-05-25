@@ -382,7 +382,7 @@ export default {
         if(res.code !=200) return;
         if(res.rows.length<1){
         this.AvgTaskAmtDate = [];
-        this.AvgTaskAmtList = [0];
+        this.AvgTaskAmtList = [];
         this.AvgTaskAmtLine = ''
       }else{
         this.AvgTaskAmtDate = [];
@@ -395,7 +395,7 @@ export default {
           var timeArr = item.orderDate.substr(5);
 
           // 外销日内
-          if (item.totalAmt !== null && ontime !=timeArr && item.totalAvgTaskAmt) {
+          if (item.totalAmt !== null && ontime !=timeArr) {
             ontime = timeArr;
             this.AvgTaskAmtDate.push(timeArr);
             this.AvgTaskAmtList.push(item.totalAmt);
@@ -464,7 +464,7 @@ export default {
 
             AmericaDate.push(yue + "-" + ri);
             AmericaList.push(item.CnyAmt);
-            AmericaLine = item.tAvgAmt;
+            AmericaLine = item.tAvgAmt || 0;
           });
           // console.log("Arrnum", this.sellOutDataList);
 
