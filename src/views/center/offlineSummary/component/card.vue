@@ -11,7 +11,7 @@
         <div class="left-right-box">
           <div style="margin-left: 14px">
             <div class="flex-top-card">
-              <div class="top-left-font">实时达成</div>
+              <div class="top-left-font">实时</div>
               <div class="flex-finish">
                 <div class="finish-font">责任制 <span>{{v.saleTaskAmt}}{{$store.state.unit}}</span></div>
                 <div class="finish-font">完成率 <span>{{v.saleAmtRadio}}%</span></div>
@@ -66,7 +66,7 @@
           <div class="mt-border"></div>
           <div style="margin-right: 14px">
             <div class="flex-top-card">
-              <div class="top-left-font">库存达成</div>
+              <div class="top-left-font">库存</div>
               <div class="flex-finish">
                 <div class="finish-font">责任制 <span>100{{$store.state.unit}}</span></div>
                 <div class="finish-font">完成率 <span>75%</span></div>

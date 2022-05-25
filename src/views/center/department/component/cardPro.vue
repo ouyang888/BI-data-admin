@@ -14,7 +14,7 @@
         <div class="left-right-box">
           <div style="margin-left: 14px">
             <div class="flex-top-card">
-              <div class="top-left-font">达成</div>
+              <div class="top-left-font">实时</div>
               <div class="flex-finish">
                 <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}  {{modelLabel}} </span></div>
                 <div class="finish-font">完成率 <span>{{v[cardObj.saleAmtRadio]}}%</span></div>

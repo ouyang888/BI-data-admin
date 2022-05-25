@@ -14,7 +14,7 @@
         <div class="left-right-box">
           <div style="margin-left: 14px">
             <div class="flex-top-card">
-              <div class="top-left-font">实时达成</div>
+              <div class="top-left-font">实时</div>
               <div class="flex-finish">
                 <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}{{$store.state.unit}}</span></div>
                 <div class="finish-font">完成率 <span>{{v[cardObj.saleAmtRadio]}}%</span></div>
@@ -180,6 +180,7 @@
             this.showLoading = false;
             return
           }else{
+            this.cardList = [];
           newValue && newValue.length>0 && newValue.forEach(v => { /*划分6个卡片*/
             if(v[this.cardObj.title] !=title && !!v[this.cardObj.title]){
               // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
@@ -208,7 +209,7 @@
                var k = 0;
                newValue && newValue.forEach((v,i)=>{
                 v.positionRatio = !!v.positionRatio?(v.positionRatio*100)>100?100:(v.positionRatio*100).toFixed(0):0;
-                console.log('v',v);
+                // console.log('v',v);
               })
                 newValue && newValue.forEach((v,i)=>{  /*划分6个sab*/
                   if(v[this.cardObj.title] !=title && v[this.cardObj.cooprLevel1] !=cooprLevel1 ){

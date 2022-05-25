@@ -241,10 +241,10 @@ export default {
           // console.log("sellOutDataList",sellOutDataList);
 
           // 外销日内
-          if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+          if (item.totalAmt !== null) {
             this.AvgTaskAmtDate.push(yue + "-" + ri);
             this.AvgTaskAmtList.push(item.totalAmt);
-            this.AvgTaskAmtLine = item.totalAvgTaskAmt;
+            this.AvgTaskAmtLine = item.totalAvgTaskAmt || 0;
          
           }
      
@@ -308,7 +308,7 @@ export default {
             var ri = timeArr[2];
             AmericaDate.push(yue + "-" + ri);
             AmericaList.push(item.CnyAmt);
-            AmericaLine = item.tAvgAmt;
+            AmericaLine = item.tAvgAmt || 0;
           });
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }

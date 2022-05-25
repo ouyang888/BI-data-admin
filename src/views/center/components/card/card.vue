@@ -4,8 +4,8 @@
     <div class="noData" v-if="cardList.length<1">暂无数据</div>
     <!-- <span >有数据</span> -->
 
-    <div class="card-box" v-for="(v,i) in cardList" :key="i" v-else>
-      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
+    <div class="card-box" v-for="(v,i) in cardList" :key="i" @click="gotoCatSeries(v[cardObj.title])" v-else>
+      <div class="card-font">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
         <div class="line"></div>
         <div class="line1"></div>
@@ -15,7 +15,7 @@
         <div class="left-right-box">
           <div style="margin-left:14px;">
             <div class="flex-top-card">
-              <div class="top-left-font">实时达成</div>
+              <div class="top-left-font">实时</div>
               <div class="flex-finish">
                 <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}{{$store.state.unit}}</span></div>
                 <div class="finish-font">完成率 <span>{{v[cardObj.saleAmtRadio]}}%</span></div>
@@ -70,7 +70,7 @@
           <div class="mt-border"></div>
           <div style="margin-right: 14px">
             <div class="flex-top-card">
-              <div class="top-left-font">库存达成</div>
+              <div class="top-left-font">库存</div>
               <div class="flex-finish">
                 <div class="finish-font">责任制 <span>100{{$store.state.unit}}</span></div>
                 <div class="finish-font">完成率 <span>75%</span></div>

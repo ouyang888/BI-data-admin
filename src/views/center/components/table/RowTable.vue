@@ -24,10 +24,10 @@
           <div class="precent">
             <div style="width: 68px">{{ !scope.row[i]?0:scope.row[i].toFixed(2)}}</div>
             <div style="margin-top: 5px"> 
-              <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
+              <Progress style="margin-bottom: 3px" :rate="!!scope.row.dateRadio?scope.row.dateRadio*100:0" :color="'#FF8B2F'"
                 class="precentCompentes" />
 
-              <Progress  v-if="!complete.includes(router)" :rate="scope.row[i+'AmtRadio']*100" :color="'#66FFFF'" class="precentCompentes" />
+              <Progress  v-if="!complete.includes(router)" :rate="!!scope.row[i+'AmtRadio']?scope.row[i+'AmtRadio']*100:0" :color="'#66FFFF'" class="precentCompentes" />
               <Progress v-else :rate="!!scope.row[i.replace('businessEntityName','completeRadio')]?scope.row[i.replace('businessEntityName','completeRadio')]*100:10" :color="'#66FFFF'" class="precentCompentes" />
             </div>
           </div>
