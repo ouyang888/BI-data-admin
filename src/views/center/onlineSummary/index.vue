@@ -607,9 +607,7 @@ export default {
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
         ).toFixed(2);
-        this.speedData.speedBar = (
-          panelDataList[0].businessModelCompleteRadio * 100
-        ).toFixed(2);
+        this.speedData.speedBar = (panelDataList[0].businessModelCompleteRadio * 100).toFixed(2) > 200 ? 200 :(panelDataList[0].businessModelCompleteRadio * 100).toFixed(2);
          this.speedData.ballLeftNum= (panelDataList[0].cnyAmt * 100).toFixed(2);
         this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
         this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(2);

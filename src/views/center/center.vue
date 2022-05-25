@@ -78,9 +78,12 @@
             <span @click="changeyear">年度</span>
           </div>
           <div class="head-box-right right-width drop-month">
-            <span>{{year}}{{month}}<a-icon type="down" style="padding-left: 3px; font-size: 14px" /></span>
+            <span>{{ year }}{{ month }}
+              <a-icon type="down" style="padding-left: 3px; font-size: 14px" />
+            </span>
             <div class="drop-down drop-down-year">
-              <div v-for="(item, i) in timeList" :key="i + 12" class="down-font-year" @click="changemonth(item)">{{ item }}
+              <div v-for="(item, i) in timeList" :key="i + 12" class="down-font-year" @click="changemonth(item)">{{ item
+              }}
               </div>
               <!-- <div class="down-font-year" @click="changemonth('04')">4</div>
               <div class="down-font-year" @click="changemonth('05')">5</div> -->
@@ -253,7 +256,7 @@ export default {
       // if (item == "所有") {
       //   this.land = "所有";
       // } else {
-        this.land = item;
+      this.land = item;
       // }
       switch (item) {
         case "本部":
@@ -270,7 +273,7 @@ export default {
 
     async menuInfo() {
       let res = await API.menuList();
-      console.log("22222res", res)
+      localStorage.setItem("menu", JSON.stringify(res))
     },
 
     changedirection(index) {
@@ -283,7 +286,7 @@ export default {
         this.$router.push("/center/offlineSummary");
         this.title = "内销线下汇总";
       }
-      if (index == "2" && urlName == "psi" || urlName == "index" ) {
+      if (index == "2" && urlName == "psi" || urlName == "index") {
         this.$router.push("/center/department");
         this.title = "产司汇总页";
       } else if (index == "2" && urlName == "domestic") {
@@ -317,9 +320,9 @@ export default {
 
     changeyear(item) {
       this.$message({
-          message: '模块建设中...',
-          type: 'success'
-        });
+        message: '模块建设中...',
+        type: 'success'
+      });
       // this.year = item;
       // this.$store.commit("setYear", item);
     },
