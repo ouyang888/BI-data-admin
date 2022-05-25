@@ -14,7 +14,16 @@
               <div class="top-left-font">实时达成</div>
               <div class="flex-finish">
                 <div class="finish-font">责任制 <span>{{v.saleTaskAmt}}亿</span></div>
-                <div class="finish-font">完成率 <span>{{v.saleAmtRadio}}%</span></div>
+              
+             
+                <div  class="finish-font">完成率
+
+
+
+                   <span v-if="v.completeRadio===null"
+                        >0%</span
+                      >
+                 <span v-else>{{v.completeRadio}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
@@ -35,7 +44,7 @@
                   </div>
                   <div class="progress">
                     <a-progress
-                      :percent="v.saleAmtRadio"
+                      :percent="v.completeRadio"
                       :show-info="false"
                       strokeColor="rgb(102, 255, 255)"
                     />
@@ -243,6 +252,7 @@
     background-repeat: no-repeat;
     /* margin-right: 20px; */
     background-size: 100%;
+    width:33%;
   }
 
   .card-font {

@@ -7,6 +7,7 @@
         :color="color"
         @handleClick="namesClick"
         :headerObj="leftObj"
+        :headerObj2="leftObj2"
       />
       <SellSportTable
         :mesInfo="rightData"
@@ -14,6 +15,7 @@
         :color="color2"
         :headerObj="rightObj"
         @handleClick="managerClick"
+        :headerObj2="rightObj2"
       />
   </div>
 </template>
@@ -50,6 +52,14 @@ export default {
       default:function(){ return {}}
     },
     rightObj:{
+      type:Object,
+      default:function(){ return {}}
+    },
+    leftObj2:{
+      type:Object,
+      default:function(){ return {}}
+    },
+    rightObj2:{
       type:Object,
       default:function(){ return {}}
     },

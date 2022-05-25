@@ -4,6 +4,7 @@
       class="table"
       style="margin-top: 10px"
     >
+
       <RowTable
         :color="color"
         :mesInfo="leftData"
@@ -57,6 +58,10 @@ export default {
     RowTable,
   },
   props:{
+     mesInfo:{
+       type:Array,
+      default:function(){ return []},
+    },
     leftData:{
       type:Array,
       default:function(){ return []}
@@ -91,14 +96,32 @@ export default {
       type:String,
       default:'外销'
     },
+   
   },
+  // watch:{
+
+  //   leftData:{
+  //     handler:function(newValue,oldValue){
+  //       console.log('leftData更新',newValue);
+  //       this.leftData = newValue;
+  //     }
+  //   },
+  //   rightData:{
+  //     handler:function(newValue,oldValue){
+  //       this.rightData = newValue;
+  //     }
+  //   }
+
+  // },
   data() {
     return {
+
       color: "linear-gradient(to right , #50C0FF,#5AFFA3,#66FFFF) ",
       color2: "linear-gradient(to right , #1B6FFF, #7A5AFF, #7066FF) ",
       // directName: computed(() => Store.state.tableOneHeading),
       // directName2: computed(() => Store.state.tableTwoHeading),
       cooprMode: "渠道",
+
       directName: "内销",
       directName2: "外销",
       setTrueOrFalse: true,

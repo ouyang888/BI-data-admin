@@ -11,7 +11,8 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-     <Card :list="cardData"  />
+       <div style="color:white;" v-if="cardData.length===0">暂无数据</div>
+     <Card :list="cardData"  @click="cardClick()"/>
     </div>
 <!-- @gotoCatSeries="gotoCatSeries" -->
 
@@ -22,11 +23,11 @@
       </div>
       <div class="flex-char">
         <div>
-          <div class="middle-font left-file">内销日达成趋势图</div>
+          <div class="middle-font left-file">内销线上日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
-          <div class="middle-font">大区日达成趋势图</div>
+          <div class="middle-font">线上通路日达成趋势图</div>
           <div class="right-box-qushi">
             <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
               <div style="width:100%">
@@ -89,7 +90,7 @@ export default {
       AmericaList: [],
       AvgTaskAmtDate: [],
       AvgTaskAmtList: [],
-      AvgTaskAmtLine: [],
+      AvgTaskAmtLine: "",
       AmericaLine: [],
 
       //       info:[{
@@ -119,7 +120,7 @@ export default {
       },
       rightObj: {
         name: 'customerName',
-        level: 'salesMan',
+        level: '',
         tAvgAmt: 'saleTaskAmt',/*责任制*/
       },
       cardData: [],
@@ -264,7 +265,7 @@ export default {
       try {
         let chart = {
           code: 'onlineMiddleChart',
-          //  fields:'cooprLevel1'
+          fields:'cooprLevel1'
         };
         Object.assign(chart, listParams)
         const res = await API.getTotal(chart);
@@ -275,6 +276,8 @@ export default {
           return v.cooprLevel2 == '总'
         });
         console.log('sellOutDataList',sellOutDataList);
+        this.AvgTaskAmtDate=[];
+        this.AvgTaskAmtList=[];
         let newArr = sellOutDataList.filter((item) => {
           var timeArr = item.orderDate
             .replace(" ", ":")
@@ -305,6 +308,7 @@ export default {
           if (item.saleAvgAmt !== null && item.totalCnyAmt !== null) {
             this.AvgTaskAmtDate.push(yue + "-" + ri);
             this.AvgTaskAmtList.push(item.totalCnyAmt);
+                console.log("折线图222",item.saleAvgAmt);
             this.AvgTaskAmtLine = item.saleAvgAmt;
             this.myEcharts();
           }
@@ -316,6 +320,7 @@ export default {
     },
     // 右边接口
     async getList1(line) {
+      // debugger;
       this.showLoading = true;
       let chart = {
         code: 'onlineMiddleChart',
@@ -323,7 +328,6 @@ export default {
       };
       Object.assign(chart, line)
       try {
-
         const res = await API.getChartTotal(chart);
 
         let sellOutDataList = res.rows;
@@ -335,8 +339,7 @@ export default {
         var k = 0;
         var arr = [];
         for (var i in obj) {
-          console.log("11111111111", obj[i]);
-          if(obj[i][0].cooprLevel2!='总' && obj[i][0].cooprLevel2!='isNull'){
+          if(obj[i][0].cooprLevel2!=='总' && obj[i][0].cooprLevel2!='isNull'){
           if (k < 6) {
             arr.push(obj[i]);
           }
@@ -345,11 +348,13 @@ export default {
         }
 
         // console.log("arr", arr);
-        this.dhcarr = [];
+        //this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
-        arrs.forEach((v) => {
-          this.dhcarr.push(v[0].cooprLevel2);
+        arrs.forEach((v,i) => {
+          this.dhcarr[i]=v[0].cooprLevel2;
+          //this.dhcarr.push(v[0].cooprLevel2);
         });
+        console.log("this.dhcarrthis.dhcarrthis.dhcarr",this.dhcarr);
         //this.dhcarr = [0,1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {
@@ -364,22 +369,27 @@ export default {
               .split("-");
             var yue = timeArr[1];
             var ri = timeArr[2];
-            // console.log("sdvsd", timeArr);
-
             AmericaDate.push(yue + "-" + ri);
             AmericaList.push(item.totalCnyAmt);
             AmericaLine = item.saleAvgAmt;
           });
-
-
-          // console.log("Arrnum", this.sellOutDataList);
-
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
+              // 处理空数据
+          let noDatalen = 6 -  arr.length;
+          for (let j = arr.length; j < noDatalen; j++) {
+            this.myEcharts2([], [], '', j);
+            this.dhcarr[j] = '暂无数据';
+          }
       } catch (error) {
         console.log(error);
       }
     },
+
+    cardClick(){
+       this.$router.push("/center/index");
+    },
+
     myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
@@ -504,30 +514,39 @@ export default {
     async getCard(params) {
       this.showLoadingCard = true;
       try {
-        let obj = {
-          code: "onlineTopCooprLevel2",
-        }
-        const res = await API.getTotal(Object.assign(params, obj));
-        // const res = await API.getData("onlineTopCooprLevel2", params);
+        // let obj = {
+        //   code: "onlineTopCooprLevel2",
+        // }
+        // const res = await API.getTotal(Object.assign(params, obj));
+         const res = await API.getData("onlineTopCooprLevel2", params);
 
         res.rows.length > 0 &&
           res.rows.forEach((v) => {
             if (!!v.cnyAmt) {
-              v.cnyAmt = v.cnyAmt.toFixed(0);
+              v.cnyAmt = v.cnyAmt.toFixed(2);
             }
             if (!!v.saleTaskAmt) {
-              v.saleTaskAmt = v.saleTaskAmt.toFixed(0);
+              v.saleTaskAmt = v.saleTaskAmt .toFixed(2);
             }
-
-            if (!!v.saleAmtRadio) {
-              v.saleAmtRadio = (
-                v.saleAmtRadio * 100 > 100 ? 100 : v.saleAmtRadio * 100
-              ).toFixed(0);
+            if (!!v.completeRadio) {
+              v.completeRadio = (
+                v.completeRadio * 100
+              ).toFixed(2);
             }
             if (!!v.saleQtyRadio) {
               v.saleQtyRadio = (
-                v.saleQtyRadio * 100 > 100 ? 100 : v.saleQtyRadio * 100
-              ).toFixed(0);
+                v.saleQtyRadio * 100 
+              ).toFixed(2);
+            }
+             if (!!v.dateRadio) {
+              v.dateRadio = (
+                v.dateRadio * 100 
+              ).toFixed(2);
+            }
+              if (!!v.completeRadio) {
+              v.dateRadio = (
+                v.completeRadio * 100 
+              ).toFixed(2);
             }
           });
 
@@ -535,6 +554,7 @@ export default {
           this.cardData = res.rows.filter((v) => {
             return !!v.cooprLevel2;
           });
+          console.log("this.cardData", this.cardData);
           this.cardData.splice(6);
         } else {
           this.cardData = [{}];
@@ -563,43 +583,63 @@ export default {
         let obj = {
           code: "onlineTopTotal",
         }
-        //const res = await API.getData("onlineTopTotal", this.dateTime);
-        const res = await API.getTotal(Object.assign(time, obj));
+        const res = await API.getData("onlineTopTotal", time);
+        //const res = await API.getTotal(Object.assign(time, obj));
         let panelDataList = res.rows;
+        console.log("panelDataList",panelDataList);
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
-        ).toFixed(1);
+        ).toFixed(2);
         this.speedData.speedBar = (
           panelDataList[0].businessModelCompleteRadio * 100
-        ).toFixed(1);
-        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
-        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1);
-        // this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+        ).toFixed(2);
+         this.speedData.ballLeftNum= (panelDataList[0].cnyAmt * 100).toFixed(2);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
+        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(2);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2)
+
+        /* 顶部：仪表盘-金额版
+ * monthDate 月份
+ * directName 销向
+ * cooprLevel1 线上/线下
+ * businessModel 自营/代运营
+ * saleTaskAmt 线上责任制金额
+ * cnyAmt 自营/代运营金额
+ * onLineCnyAmt 线上总金额
+ * businessModelCompleteRadio 自营/代运营金额完成率
+ * onLineCompleteRadioRadio 线上金额完成率
+ * grossProfitRadio 自营/代运营毛利率
+ * onLineGrossProfitRadio 线上毛利率
+ * dateRadio 时间进度
+ */
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].businessModel == "直营") {
+            console.log("panelDataList[i]",panelDataList[i]);
             this.progressData.bar2 = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.topGPM = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.bottomClose1 = panelDataList[i].bmsCompleteRadio.toFixed(1)
-            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
+            ).toFixed(2);
+            // this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2)
+             this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2)
+            this.speedData.bottomClose = (panelDataList[i].businessModelCompleteRadio*100).toFixed(2)
+            this.speedData.bottomTime = (panelDataList[i].dateRadio*100).toFixed(2)
+            console.log("panelDataList[i].dateRadio",panelDataList[i].dateRadio);
 
           }
-          if (panelDataList[i].businessModel == "代运营") {
+         if (panelDataList[i].businessModel == "代运营") {
             //  Console.log("代运营",panelDataList[i].dateRadio)
             this.progressData.bar1 = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.bottomGPM = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballRightNum = panelDataList[i].saleTaskAmt.toFixed(1)
-
-            //  <span>{{data.bottomTitle1}}:</span><span>完成率:{{data.bottomClose}}%</span><span>时间进度:{{data.bottomTime}}%</span>
-            this.speedData.bottomClose1 = panelDataList[i].bmsCompleteRadio.toFixed(1)
-            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
+            ).toFixed(2);
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2)
+            // this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2)
+            this.speedData.bottomClose1 = (panelDataList[i].businessModelCompleteRadio*100).toFixed(2)
+            this.speedData.bottomTime1 = (panelDataList[i].dateRadio*100).toFixed(2)
           }
 
 
@@ -615,10 +655,11 @@ export default {
             let obj = {
           code: "onlineTopSAB",
         }
-        //const res = await API.getData("onlineTopTotal", this.dateTime);
-         const res = await API.getTotal(Object.assign(time, obj));
+        const res = await API.getData("onlineTopSAB", time);
+        //  const res = await API.getTotal(Object.assign(time, obj));
         // const res = await API.getData("onlineTopSAB", this.dateTime);
         let RightSAB = res.rows;
+          console.log("RightSABRightSABRightSAB",RightSAB);
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].cooprLevel1 == "线上") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
@@ -630,11 +671,11 @@ export default {
               );
             } else if (RightSAB[i].position == "A") {
               this.sabData.sabArr.A = (RightSAB[i].positionRatio * 100).toFixed(
-                1
+                2
               );
             } else if (RightSAB[i].position == "B") {
               this.sabData.sabArr.B = (RightSAB[i].positionRatio * 100).toFixed(
-                1
+                2
               );
             }
           }
@@ -643,15 +684,15 @@ export default {
             this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position === "S") {
               this.sabData.topArr.S = (RightSAB[i].positionRatio * 100).toFixed(
-                1
+                2
               );
             } else if (RightSAB[i].position === "A") {
               this.sabData.topArr.A = (RightSAB[i].positionRatio * 100).toFixed(
-                1
+                2
               );
             } else if (RightSAB[i].position === "B") {
               this.sabData.topArr.B = (RightSAB[i].positionRatio * 100).toFixed(
-                1
+                2
               );
             }
           }
@@ -661,15 +702,15 @@ export default {
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.S = (
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "A") {
               this.sabData.bottomArr.A = (
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "B") {
               this.sabData.bottomArr.B = (
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             }
           }
         }
@@ -677,14 +718,14 @@ export default {
         console.log(error);
       }
     },
-    init(model) {
+    init(ontime) {
       let params = {  /*年月*/
         month_date: this.ontime
       };
-      let listParams = { /*年月日*/
-        start_date: `${this.ontime}-01`,
-        end_date: `${this.ontime}-31`
-      }
+    let listParams = { /*年月日*/
+      start_date:`${this.ontime}-01`,
+      end_date:`${this.ontime}-${this.$store.state.endDay}`
+    }
 
       // let params = `${this.ontime},${model}`;
       // let start=this.ontime+'-01';
@@ -977,7 +1018,7 @@ export default {
       //   "homeByDirectTotal",
       //   ontime
       // );
-      let tableInner = await API.getTotal(Object.assign(time, online));
+      let tableInner = await API.getTotal(Object.assign( online,time));
 
 
       // let tableInner = await API.getDataLine("onlineBottomLevel3",time);
@@ -990,14 +1031,17 @@ export default {
       // );
 
       let tableOutter = await API.getTotal(
-        Object.assign(time, onlineStore)
+        Object.assign( onlineStore,time)
       );
 
 
       // console.log("tableInner", tableOutter);
 
       this.tableInner = tableInner.rows;
+      console.log("线上汇总",tableInner);
+
       this.tableOutter = tableOutter.rows;
+      console.log("线吓唬总",tableOutter);
       // } catch (err) {
       //   console.log(err);
       // }
@@ -1034,21 +1078,21 @@ export default {
 
 
   },
-  watch: {
-    ontime: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
-        this.init(this.model);
-      }
-    },
-    model: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
+  watch:{
+    ontime:{ /*监听月度 数据更改 调用接口 */
+     handler: function (newValue, oldValue) {
         this.init(newValue);
       }
+    },
+    model:{ /*监听产司 数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(this.ontime);
+      }
 
     },
-    showMoney: {
-      handler: (newValue, oldValue) => {
-
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
+      handler:function(newValue,oldValue){
+        this.init(this.ontime);
       }
     },
   },
@@ -1061,7 +1105,7 @@ export default {
     // this.queryCardSAB();
     // this.myEcharts();
 
-    this.init(this.model);
+    this.init(this.ontime);
   }
 };
 </script>
@@ -1184,6 +1228,8 @@ export default {
   /* margin-right: 20px; */
   background-size: 100%;
   padding: 8px;
+  width:33.3%
+  
 }
 
 .card-font {
@@ -1202,7 +1248,7 @@ export default {
   display: flex;
   margin-top: 10px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -1215,7 +1261,7 @@ export default {
 .top-left-font {
   font-size: 14px;
   color: #fff;
-  margin-right: 20px;
+  margin-right: 8px;
 }
 
 .card-border-box {

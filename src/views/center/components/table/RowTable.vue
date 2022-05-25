@@ -1,42 +1,47 @@
 <template>
   <div class="execl">
+    <!-- show-summary=true -->
+    <!-- :summary-method="getSummaries" -->
     <el-table border :data="mesInfo" :span-method="objectSpanMethod" 
-     show-summary=true
-     :summary-method="getSummaries"
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
-      :header-cell-style="headerCellStyle" class="execl-box" height="287">
+      :header-cell-style="headerCellStyle" class="execl-box" height="287" >
       <!-- v-if="router !== 'domesticDepartment' -->
       <el-table-column :prop="headerObj.marketChannel" align="center" :label="directName"></el-table-column>
-      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode"></el-table-column>
-      <el-table-column :prop="headerObj.manager" align="center" label="责任人">
+      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode" v-if="!arr.includes(router)"></el-table-column>
+      <el-table-column align="center" label="责任人">
         <!-- <div class="nameColor" @click="handleClick">{{张茉欧}}</div> -->
         <template v-slot="scope">
-            <div class="nameColor" @click="handleClick(scope.row)">
+            <div class="nameColor" @click="handleClick(scope.row)" v-if="router == 'exportDepartment'">
+              {{ scope.row.cooprLevel1Manager }}
+            </div>
+            <div class="nameColor" @click="handleClick(scope.row)" v-else>
               {{ scope.row[headerObj.manager] }}
             </div>
           </template>
       </el-table-column>
-      <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center">
+      <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center" width="120">
         <template v-slot="scope">
           <div class="precent">
-            <div style="width: 30px">{{ scope.row[i].toFixed(0)}}</div>
+            <div style="width: 68px">{{ !scope.row[i]?0:scope.row[i].toFixed(2)}}</div>
             <div style="margin-top: 5px"> 
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
-              <Progress :rate="scope.row[i.replace('businessEntityName','completeRadio')]*100" :color="'#66FFFF'" class="precentCompentes" />
+
+              <Progress  v-if="!complete.includes(router)" :rate="scope.row[i+'AmtRadio']*100" :color="'#66FFFF'" class="precentCompentes" />
+              <Progress v-else :rate="!!scope.row[i.replace('businessEntityName','completeRadio')]?scope.row[i.replace('businessEntityName','completeRadio')]*100:10" :color="'#66FFFF'" class="precentCompentes" />
             </div>
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="cnyAmt" label="总计" align="center">
+      <el-table-column prop="cnyAmt" label="总计" align="center" width="100">
         <template v-slot="scope">
           <div class="precent">
-            <div>{{ scope.row.cnyAmt.toFixed(0) }}</div>
-            <div style="margin-top: 5px">
+            <div style="width: 68px">{{ !scope.row.cnyAmt?0:scope.row.cnyAmt.toFixed(2) }}</div>
+            <!-- <div style="margin-top: 5px">
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
               <Progress :rate="scope.row.saleVolumeAll*100" :color="'#66FFFF'" class="precentCompentes" />
-            </div>
+            </div> -->
           </div>
         </template>
       </el-table-column>
@@ -82,6 +87,14 @@
     components: {
       Progress,
     },
+    data(){
+      return{
+        cell:2,
+        arr:['domesticDepartment','department','exportDepartment'], /*渠道路由名*/
+        complete:['department','exportDepartment'] /*控制不同模版完成率显示*/
+
+      }
+    },
     computed: {
     router(){
       return this.$route.name
@@ -100,12 +113,21 @@
         });
         // console.log(number, "numbernumbernumber");
         // 底部合计合并单元格
+        let cell = 2; //设置跨列
+        if(this.arr.includes(this.router)){
+          cell--;
+        }
         if (rowIndex === number - 1) {
-          if (columnIndex == 1 || columnIndex == 2) {
+          if (0<columnIndex && columnIndex<=cell) {
             return [0, 0];
           }
           if (columnIndex === 0) {
-            return [1, 3];
+            if(!this.arr.includes(this.router)){
+
+              return [1, 3];
+            }else{
+            return [1, 2];
+          }
           }
         }
         //       if (rowIndex === 6) {
@@ -194,6 +216,24 @@
         }
       },
     },
+    watch:{
+    mesInfo:{
+      handler:function(newValue,oldValue){
+        console.log('更新newValue',newValue)
+        newValue.forEach((v,i)=>{
+          // v.amtRadio = Number((v.amtRadio*100).toFixed(2));
+          // v.profitRadio = Number((v.profitRadio*100).toFixed(2));
+          if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
+            console.log('headerObj.marketChannel',this.headerObj.marketChannel)
+            v[this.headerObj.marketChannel] = '合计';
+            v.ranking = '';
+          }
+        })
+        this.mesInfo = newValue;
+
+      }
+    }
+  }
   };
 </script>
 <style scoped lang="scss">
@@ -235,7 +275,7 @@
   }
 
   .precent {
-    width: 90px;
+    /* width: 90px; */
     height: 23px;
     display: flex;
   }

@@ -11,7 +11,8 @@
         </div>
       </div>
         <!-- 右侧卡片 -->
-      <cardPro :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
+    
+      <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
     </div>
     <!-- 中间echart -->
      <div class="middle-box">
@@ -214,7 +215,7 @@ export default {
       sabData: {
         bar1: 70,
         bar2: 50,
-        ballTitle: "线上",
+        ballTitle: "产司",
         top: "内销",
         bottom: "外销",
          sabArr: { S: 0, A: 0, B: 0 },
@@ -253,21 +254,21 @@ export default {
 
 
   },
-  watch: {
-    ontime: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
-        //this.init(this.model);
+  watch:{
+    ontime:{ /*监听月度 数据更改 调用接口 */
+     handler: function (newValue, oldValue) {
+        this.init(newValue);
       }
     },
-    model: { /*监听数据更改 调用接口 */
-      handler: function (newValue, oldValue) {
-        //this.init(newValue);
+    model:{ /*监听产司 数据更改 调用接口 */
+      handler: function(newValue,oldValue){
+        this.init(this.ontime);
       }
 
     },
-    showMoney: {
-      handler: (newValue, oldValue) => {
-
+    showMoney:{ /*监听金额:数量版 数据更改 调用接口 */
+      handler:function(newValue,oldValue){
+        this.init(this.ontime);
       }
     },
   },
@@ -285,19 +286,33 @@ export default {
          coopr_level1:'线上'
       }
       Object.assign(obj2,params)
+      // debugger;  
       const res = await API.getTotal(obj1);
       const res2 = await API.getTotal(obj2);
       if(res.code !=200) return;
       this.cardData = res.rows.filter(v => {
         return !!v.category;
      });
+      // let obm = {};
+      // let arr = [];
+      // res.rows.filter(v=>{
+
+      //   if(!obm[v.category+v.directName]){
+      //     obm[v.category+v.directName] = 1;
+      //     v.businessModelCompleteRadio =  v.obmOemAmtRadio /*中间sab对应字段完成率*/
+      //     arr.push(v);
+      //   }
+       
+
+      // });
+     console.log("cardData",this.cardData);
       this.cardSab = res2.rows.filter(v => {
         return !!v.category;
       });
     },
 
    
-     myEcharts2(data, time, lines, id) {
+  myEcharts2(data, time, lines, id) {
       var myChart2 = this.$echarts.init(document.getElementById(id));
       var option = {
         xAxis: {
@@ -424,20 +439,21 @@ export default {
       };
       myChart2.setOption(option);
     },
-    
+
      // 右边接口
     async getList1(line) {
       this.showLoading = true;
       let chart = {
         code: 'categoryTotalsChart',
-        fields: "cooprLevel1"
+        fields: "category"
       };
       Object.assign(chart, line)
       try {
-
+        // debugger;
         const res = await API.getChartTotal(chart);
 
         let sellOutDataList = res.rows;
+        console.log("res.rows",res.rows);
         this.showLoading = false;
 
         let obj = res.rows[0]
@@ -446,15 +462,18 @@ export default {
         var k = 0;
         var arr = [];
         for (var i in obj) {
+           if(obj[i][0].category!=='总' && obj[i][0].cooprLevel2!='isNull'){
           if (k < 6) {
             arr.push(obj[i]);
           }
           k++;
         }
-        this.dhcarr = [];
+        }
+        // this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
-        arrs.forEach((v) => {
-          this.dhcarr.push(v[0].cooprLevel1);
+        arrs.forEach((v,i) => {
+          //this.dhcarr.push(v[0].cooprLevel2);
+           this.dhcarr[i]=v[0].category;
         });
         for (let j = 0; j < arr.length; j++) {
           var datanum = arr[j];
@@ -474,6 +493,12 @@ export default {
           });
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
+            // 处理空数据
+          let noDatalen = 6 -  arr.length;
+          for (let j = arr.length; j < noDatalen; j++) {
+            this.myEcharts2([], [], '', j);
+            this.dhcarr[j] = '暂无数据';
+          }
       } catch (error) {
         console.log(error);
       }
@@ -483,12 +508,12 @@ export default {
       let params = {  /*年月*/
         month_date: this.ontime,
         //business_entity_name:this.$route.query.key
-        business_entity_name:"环境"
+        business_entity_name:this.$route.query.key
       };
       let listParams = { /*年月日*/
         start_date: `${this.ontime}-01`,
-        end_date: `${this.ontime}-31`,
-        business_entity_name:"环境"
+        end_date:`${this.ontime}-${this.$store.state.endDay}`,
+        business_entity_name:this.$route.query.key
         //business_entity_name:this.$route.query.key
       }
       this.getList1(listParams);
@@ -501,12 +526,12 @@ export default {
     //this.getdashboard();
     this.myEcharts();
     // this.myEcharts2();
-    this.myEcharts3();
-    this.myEcharts4();
-    this.myEcharts5();
-    this.myEcharts6();
-    this.myEcharts7();
-    this.myEcharts8();
+    // this.myEcharts3();
+    // this.myEcharts4();
+    // this.myEcharts5();
+    // this.myEcharts6();
+    // this.myEcharts7();
+    // this.myEcharts8();
     this.getTable();
 
     },
@@ -526,62 +551,31 @@ this.$router.push("/center/index")
 
   //仪表盘(左中)
     async getdashboard(time) {
-      
- 
-      console.log(time)
+      console.log(time);
       try {
           let obj = {
           code: "categoryTotalsDashboard",
         }
-         /* 仪表盘-金额版
- * monthDate 月份
- * directName 销向
- * cnyAmt 销向金额
- * sumCnyAmt 产司金额达成
- * cnyAmtRadio 销向金额完成率
- * saleTaskAmt 总责任制金额
- * saleTaskAmtRadio 总金额完成率
- * dateRadio 时间进度
- * directNameGrossProfitRadio 销向毛利率
- * grossProfitRadio 总毛利率
- */
- 
         const res = await API.getTotal(Object.assign(obj,time));
         let panelDataList = res.rows;
-        this.progressData.ballNum = (
-          panelDataList[0].directNameGrossProfitRadio * 100
-        ).toFixed(1);
-        this.speedData.speedBar = (panelDataList[0].cnyAmtRadio*100).toFixed(1)
-        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1)
-        this.speedData.ballNum =panelDataList[0].sumCnyAmt.toFixed(1)
-        // this.speedData.speedBar = (panelDataList[0].businessModelCompleteRadio*100).toFixed(1)
-        // this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1)
-        // this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1)
-
-//         cnyAmt: 2.7389
-// cnyAmtRadio: 0.7858
-// dateRadio: 1
-// directName: "外销"
-// directNameGrossProfitRadio: 0.268
-// grossProfitRadio: 0.2538
-// monthDate: "2022-03"
-// saleTaskAmt: 3.518
-// saleTaskAmtRadio: 1.9645
-// sumCnyAmt: 6.911
-        // this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
-
-//          * cnyAmt 销向金额
-//  * sumCnyAmt 产司金额达成
-//  * cnyAmtRadio 销向金额完成率
-//  * saleTaskAmt 总责任制金额
-//  * saleTaskAmtRadio 总金额完成率
+        this.progressData.ballNum = (panelDataList[0].grossProfitRadio*100).toFixed(2);
+        this.speedData.speedBar = (panelDataList[0].saleTaskAmtRadio*100).toFixed(2)
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2)
+        this.speedData.ballNum =panelDataList[0].sumCnyAmt.toFixed(2)
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2)
+          //  * cnyAmt 销向金额
+          //  * sumCnyAmt 产司金额达成
+          //  * cnyAmtRadio 销向金额完成率
+          //  * saleTaskAmt 总责任制金额
+          //  * saleTaskAmtRadio 总金额完成率
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].directName == "外销") {
-            this.progressData.bar2 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
-            this.progressData.topGPM = (panelDataList[i].grossProfitRadio*100).toFixed(1)
-            this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(1)
-            this.speedData.bottomClose =  panelDataList[i].sumCnyAmt.toFixed(1)
-            this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
+            this.progressData.bottomGPM = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(2)
+            this.progressData.bar1 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(2)
+             this.speedData.bar = (panelDataList[i].dateRadio*100).toFixed(2);
+            this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(2)
+            this.speedData.bottomClose1 =  (panelDataList[i].cnyAmtRadio*100).toFixed(2)
+            this.speedData.bottomTime1 =  (panelDataList[i].dateRadio*100).toFixed(2)
 
           } else if (panelDataList[i].directName == "内销") {
             // this.progressData.bar1 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
@@ -589,14 +583,13 @@ this.$router.push("/center/index")
             // //  this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(1)
             // //  this.speedData.bottomClose1 =  panelDataList[i].orgQtyRadio.toFixed(1)
             // // this.speedData.bottomTime1 =  panelDataList[i].dateRadio.toFixed(1)
-
-            this.progressData.bar2 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(1)
-            this.progressData.topGPM = (panelDataList[i].grossProfitRadio*100).toFixed(1)
-            this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(1)
-            this.speedData.bottomClose =  panelDataList[i].sumCnyAmt.toFixed(1)
-            this.speedData.bottomTime =  panelDataList[i].dateRadio.toFixed(1)
-
-
+            
+            this.progressData.bar2 = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(2)
+            this.progressData.bar = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(2)
+              this.progressData.topGPM = (panelDataList[i].directNameGrossProfitRadio*100).toFixed(2)
+            this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(2)
+            this.speedData.bottomClose =  (panelDataList[i].cnyAmtRadio*100).toFixed(2)
+            this.speedData.bottomTime =  (panelDataList[i].dateRadio*100).toFixed(2)
           }
         }
       } catch (error) {
@@ -620,30 +613,31 @@ this.$router.push("/center/index")
           if(RightSAB[3].directName == "内销"){
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
             if(RightSAB[i].position == "S"){
-              this.sabData.sabArr.S = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.sabArr.S = (RightSAB[i].positionRatio*100).toFixed(2)
             }else if(RightSAB[i].position == "A"){
-              this.sabData.sabArr.A = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.sabArr.A = (RightSAB[i].positionRatio*100).toFixed(2)
             }else if(RightSAB[i].position == "B"){
-              this.sabData.sabArr.B = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.sabArr.B = (RightSAB[i].positionRatio*100).toFixed(2)
             }
-          } if(RightSAB[i].directName == "内销"){
-            this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
-             if(RightSAB[i].position == "S"){
-              this.sabData.topArr.S = (RightSAB[i].positionRatio*100).toFixed(1)
-            }else if(RightSAB[i].position == "A"){
-              this.sabData.topArr.A = (RightSAB[i].positionRatio*100).toFixed(1)
-            }else if(RightSAB[i].position == "B"){
-              this.sabData.topArr.B = (RightSAB[i].positionRatio*100).toFixed(1)
-            }
-          }
+          } 
+          // if(RightSAB[i].directName == "内销"){
+          //   this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(2)
+          //    if(RightSAB[i].position == "S"){
+          //     this.sabData.topArr.S = (RightSAB[i].positionRatio*100).toFixed(2)
+          //   }else if(RightSAB[i].position == "A"){
+          //     this.sabData.topArr.A = (RightSAB[i].positionRatio*100).toFixed(2)
+          //   }else if(RightSAB[i].position == "B"){
+          //     this.sabData.topArr.B = (RightSAB[i].positionRatio*100).toFixed(2)
+          //   }
+          // }
           if(RightSAB[i].directName == "外销"){
-              this.sabData.bar2 = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.bar2 = (RightSAB[i].positionRatio*100).toFixed(2)
              if(RightSAB[i].position == "S"){
-              this.sabData.bottomArr.S = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.bottomArr.S = (RightSAB[i].positionRatio*100).toFixed(2)
             }else if(RightSAB[i].position == "A"){
-              this.sabData.bottomArr.A = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.bottomArr.A = (RightSAB[i].positionRatio*100).toFixed(2)
             }else if(RightSAB[i].position == "B"){
-              this.sabData.bottomArr.B = (RightSAB[i].positionRatio*100).toFixed(1)
+              this.sabData.bottomArr.B = (RightSAB[i].positionRatio*100).toFixed(2)
             }
           }
         }
@@ -1639,7 +1633,7 @@ this.$router.push("/center/index")
 
   },
   mounted() {
-    this.init(this.model);
+    this.init(this.ontime);
   },
 };
 </script>
@@ -1892,7 +1886,6 @@ this.$router.push("/center/index")
 .right-font-title {
   font-size: 15px;
   color: #fff;
-  margin-right: 40px;
 }
 .flex-right-bottom {
   display: flex;

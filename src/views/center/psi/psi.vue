@@ -2,7 +2,7 @@
   <div style="background: #02004d" >
     <div class="main-box">
       <!-- 整列左边 -->
-      <div class="left-box">
+      <div class="left-box" @click="toggle">
         <!-- 上 -->
         <div class="card-box">
           <div class="card-font" @click="toggle">S</div>
@@ -15,14 +15,14 @@
             <div class="left-right-box">
               <div class="centerInfo" v-if="sale === '内销'">
                 <div class="flex-top-card">
-                  <div class="top-left-font">{{ sale }}达成</div>
+                  <div class="top-left-font">{{ sale }}</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制
-                      <span>{{
+                      <span v-if="departmentInfo.saleTaskAmt!==null&&departmentInfo.saleTaskAmt!==undefined">{{
                         Number(departmentInfo.saleTaskAmt).toFixed(2)
                       }}</span
-                      >亿
+                      >{{modelLabel}}
                     </div>
                 
                     <div class="finish-font">
@@ -31,19 +31,20 @@
                        <span v-if="departmentInfo.cnyAmtRadio===null"
                         >0%</span
                       >
+                   
+  
                         <span v-else
                         >{{
-                          Number(departmentInfo.cnyAmtRadio*100).toFixed(2) > 100
-                            ? 100
-                            : departmentInfo.cnyAmtRadio
+                          Number(departmentInfo.cnyAmtRadio*100).toFixed(2)
                         }}%</span
                       >
                     </div>
                   </div>
                 </div>
                 <div class="flex-top-card">
+              
                   <div class="card-big-num">
-                    {{ Number(departmentInfo.cnyAmt).toFixed(2) }}亿
+                    {{ Number(departmentInfo.cnyAmt).toFixed(2) }}{{modelLabel}}
                   </div>
                   <div style=" display: flex; align-items: center; ">
                     <div class="finish-font">进度</div>
@@ -104,11 +105,11 @@
                 </div>
 
                 <div class="flex-bottoms">
-                  <div>
+                  <div >
                     结构
                     <span v-for="(item, index) in homeSabInfo" :key="index">
                       <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio.toFixed(1) * 100 }}%;</span>
+                      <span>{{ Number(item.positionRatio * 100).toFixed(2) }}% </span>
                     </span>
                   </div>
                 </div>
@@ -119,40 +120,57 @@
                   <div>
                     毛利率
                     <span class="light-blue"
+                  
                       >{{
                         Number(
-                          homeGrossProfitRadio.grossProfitRadio * 100
+                          this.homeGrossProfitRadio[0].grossProfitRadio * 100
                         ).toFixed(2)
-                      }}%</span
+                      }} %</span
                     >
                   </div>
+                   <div >
+                    线上
+                    <span class="light-blue"> 
+                         {{
+                          Number(this.info.profitRadio*100).toFixed(2) 
+                         }}  %</span>
+
+                  </div>
+                  <div>
+                    线下
+                    <span class="light-blue"
+                      >{{ Number(this.info2.profitRadio*100).toFixed(2)}}
+                      </span> %
+                  </div>
+
+
                 </div>
               </div>
+    
               <div class="mt-border"></div>
-              <div class="centerInfo"  >
+              <div class="centerInfo" v-if="sales==='外销'" >
                 <div class="flex-top-card">
-                  <div class="top-left-font">{{ sales }}达成</div>
+                  <div class="top-left-font">{{ sales }}</div>
                   <div class="flex-finish">
+               
                     <div class="finish-font">
                       责任制
-                      <span>{{
+                      <span v-if="departmentInfo1.saleTaskAmt!==null&&departmentInfo1.saleTaskAmt!==undefined">{{
                         Number(departmentInfo1.saleTaskAmt).toFixed(2)
                       }}</span
-                      >亿
+                      >{{modelLabel}}
                     </div>
                     <div class="finish-font">
                       完成率
                       <span
                         >
                     
-                       <span v-if="departmentInfo.cnyAmtRadio===null"
+                       <span v-if="departmentInfo1.cnyAmtRadio===null"
                         >0%</span
                       >
                         <span v-else
                         >{{
-                          Number(departmentInfo.cnyAmtRadio*100).toFixed(2) > 100
-                            ? 100
-                            : departmentInfo.cnyAmtRadio
+                          Number(departmentInfo1.cnyAmtRadio*100).toFixed(2) 
                         }}%</span
                       >
                         
@@ -163,21 +181,23 @@
                 </div>
                 <div class="flex-top-card">
                   <div class="card-big-num">
-                    {{ Number(departmentInfo1.cnyAmt).toFixed(2) }}亿
+
+                    {{ Number(departmentInfo1.cnyAmt).toFixed(2) }}{{modelLabel}}
                   </div>
+           
                   <div style="display: flex; align-items: center">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="departmentInfo1.dateRadio* 100"
+                          :percent="departmentInfo1.dateRadio*100"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="departmentInfo1.businessCnyAmtRadio * 100"
+                          :percent="departmentInfo1.cnyAmtRadio*100"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -195,6 +215,7 @@
             min-width: 200px;"
                 
                 >
+             
                   <div
                     class="card-middle-progress"
                     v-for="(item, index) in processInfo1"
@@ -214,7 +235,7 @@
                         </div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="item.cnyAmtRadio * 100"
+                            :percent="item.businessCnyAmtRadio * 100"
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
@@ -225,13 +246,14 @@
                 </div>
 
                 <div class="flex-bottoms">
-                  <div>
+                  <div  >
                     结构
-             
-                    <span v-for="(item, index) in homeSabInfo1" :key="index">
-                      <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio.toFixed(1) * 100 }}%;</span>
+                    <span v-for="(item1, index) in homeSabInfo1" :key="index">
+                      <span>{{ item1.position }}</span> -
+                      <span>{{ Number(item1.positionRatio * 100).toFixed(2) }}% </span>
                     </span>
+
+
                   </div>
                 </div>
                 <div
@@ -240,16 +262,25 @@
                 >
                   <div>
                      毛利率
-                    <span class="light-blue"
-                      >{{
-                        Number(
-                          homeGrossProfitRadio1.grossProfitRadio * 100
-                        ).toFixed(2)
-                      }}%</span
-                    >
+                    <span class="light-blue" 
+                      >{{Number(homeGrossProfitRadio1[0].grossProfitRadio * 100).toFixed(2)
+                      }}%</span>
                   </div>
+                   <div>
+                   OEM
+                    <span class="light-blue"> {{Number(this.info3.profitRadio*100).toFixed(2) }}  %</span>
+
+                  </div>
+                  <div>
+                    OBM
+                    <span class="light-blue"
+                      >{{ Number(this.info4.profitRadio*100).toFixed(2)}}
+                      </span> %
+                  </div>
+
                 </div>
               </div>
+       
               <!-- <div style="flex: 1; padding: 10px" v-if="this.sales='外销'">
                 <div class="flex-top-card">
                   <div class="top-left-font">外销达成</div>
@@ -504,7 +535,7 @@
             <div class="left-right-box">
               <div class="centerInfo" >
                 <div class="flex-top-card">
-                  <div class="top-left-font">内销达成</div>
+                  <div class="top-left-font">内销</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100{{this.modelLabel}}</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -683,7 +714,7 @@
                   </div>
                 </div>
                 <div class="flex-bottoms">
-                  <div>结构 S-10%; A-20%; B-70%</div>
+                  <div>结构 S-10%  A-20%  B-70%</div>
                 </div>
                 <div
                   class="flex-bottoms"
@@ -695,7 +726,7 @@
               <div class="mt-border"></div>
               <div class="centerInfo" >
                 <div class="flex-top-card">
-                  <div class="top-left-font">外销达成</div>
+                  <div class="top-left-font">外销</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100{{this.modelLabel}}</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -944,7 +975,7 @@
             <div class="left-right-box">
               <div class="centerInfo" >
                 <div class="flex-top-card">
-                  <div class="top-left-font">内销库存</div>
+                  <div class="top-left-font">内销</div>
                   <div class="flex-finish">
                     <div class="finish-font">责任制 <span>100{{this.modelLabel}}</span></div>
                     <div class="finish-font">完成率 <span>75%</span></div>
@@ -1115,7 +1146,7 @@
               <div class="mt-border"></div>
               <div class="centerInfo">
                 <div class="flex-top-card">
-                  <div class="top-left-font">外销库存</div>
+                  <div class="top-left-font">外销</div>
                   <div class="flex-finish">
                     <div class="finish-font">库存目标 <span>100{{this.modelLabel}}</span></div>
                     <div class="finish-font">库存比 <span>75%</span></div>
@@ -1289,6 +1320,10 @@ export default {
           { class: "plan", text: "规划达成" },
           { class: "average", text: "日均线" },
         ],
+        info:[],
+        info2:[],  
+        info3:[],
+        info4:[],    
           headTitle1: {
                     inSale: {
                         title: "责任制",
@@ -1355,7 +1390,7 @@ export default {
                         dayAll:"day"
                     },
           },
-         headTitle: {
+        headTitle: {
                     inSale: {
                         title: "责任制",
                         text: "累计达成",
@@ -1852,7 +1887,8 @@ export default {
       showLoading:false,
       divisionList:[],
       divisionDate:[],
-      divisionLine:"",
+      divisionLine:[],
+      Line:[],
       innerDirectList:[],
       innerDirectDate:[],
       innerDirectLine:"",
@@ -2028,23 +2064,18 @@ export default {
        let homeSabInfo = {
         code:"homeSab",
       }
-        const res = await API.getTotal(
+      const res = await API.getTotal(
          Object.assign(timeInfo,obj)
-        );
-        const homeSab = await API.getTotal(Object.assign(timeInfo,homeSabInfo));
-         let homeGross = {
+      );
+      const homeSab = await API.getTotal(Object.assign(timeInfo,homeSabInfo));
+      let homeGross = {
         code:"homeGrossProfitRadio",
-        }
-        const homeGrossProfitRadio = await API.getTotal(
-         Object.assign(timeInfo,homeGross)
-        );
-      //const homeSab = await API.getTotal(Object.assign(timeInfo,homeSabInfo));
-  
-         
+      }
+   
         this.departmentInfo = res.rows.filter((v) => {
           return v.directName == "内销";
         })[0];
-        // console.log( this.departmentInfo);
+         console.log("内销",this.departmentInfo);
         this.processInfo = res.rows.filter((v) => {
           return v.directName == "内销";
         });
@@ -2052,15 +2083,26 @@ export default {
          this.homeSabInfo = homeSab.rows.filter((v) => {
           return v.directName == "内销";
         })
-        // console.log("this.homeSabInfo this.homeSabInfo this.homeSabInfo ",this.homeSabInfo );
+        console.log("SAB",this.homeSabInfo);
+          const homeGrossProfitRadio = await API.getTotal(
+         Object.assign(timeInfo,homeGross)
+        );
+      
         this.homeGrossProfitRadio = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName ==this.sale;
+        });
+
+        console.log("homeGrossProfitRadio.rows",homeGrossProfitRadio.rows);
+        this.info=  this.homeGrossProfitRadio.filter((v) => {
+          return v.cooprLevel1 ==="线上"
         })[0];
-      
-           this.departmentInfo1 = res.rows.filter((v) => {
+        this.info2=  this.homeGrossProfitRadio.filter((v) => {
+          return v.cooprLevel1 ==="线下"
+        })[0];
+        this.departmentInfo1 = res.rows.filter((v) => {
           return v.directName == this.sales;
         })[0];
-        // console.log("外销",this.departmentInfo1);
+        console.log("外销",this.departmentInfo1);
 
         this.processInfo1 = res.rows.filter((v) => {
           return v.directName == "外销";
@@ -2068,9 +2110,16 @@ export default {
         this.homeSabInfo1 = homeSab.rows.filter((v) => {
           return v.directName == "外销";
         });
-          // console.log("homeSabInfo1",this.homeSabInfo );
+
         this.homeGrossProfitRadio1 = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName == this.sales;
+        });
+            this.info3=  this.homeGrossProfitRadio1.filter((v) => {
+          return v.cooprLevel1 ==="OEM"
+        })[0];
+          
+        this.info4=  this.homeGrossProfitRadio1.filter((v) => {
+          return v.cooprLevel1 ==="OBM"
         })[0];
 
     },
@@ -2128,17 +2177,22 @@ export default {
 
         const res = await API.getTotal(params);
         this.divisionDate=[];
+        this.divisionList=[];
+         this.divisionLine="";
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
         let newArr = res.rows.filter((item)=>{
         var timeArr = item.orderDate.replace(" ", ":").replace(/\:/g, "-").split("-");
         var yue = timeArr[1];
         var ri = timeArr[2];
-          // if(item.事业部S == "事业部S"){
+          if(item.divisionS === "事业部S"){
             // obj.divisionArr.push(item)
             this.divisionDate.push(yue+'-'+ri)
             this.divisionList.push(item.totalCnyAmt)
+              console.log("totalCnyAmt",item.totalCnyAmt);
             console.log("折线图",item.saleAvgAmt);
+            //saleAvgAmt
             this.divisionLine=item.saleAvgAmt;
+          }
             this.myEcharts();
           this.showLoading = false
         })
@@ -2250,7 +2304,7 @@ export default {
             markLine: {
               data: [
                 {
-                    yAxis: this.divisionLine,
+                  yAxis: this.divisionLine,
 
              
                   silent: false, //鼠标悬停事件 true没有，false有
@@ -2513,8 +2567,12 @@ export default {
       };
       myChart3.setOption(option);
     },
+    cardClick(){
+       this.$router.push("/center/index");
+    },
+
     
-    init(model){
+    init(ontime){
     // this.getList();
     // this.getCard(this.ontime);
     // this.getTable(this.ontime);
@@ -2526,11 +2584,11 @@ export default {
     // let lineParams =  `${time},${model},${time},${model}`;
 
     let params = {  /*年月*/
-      month_date:this.ontime
+      month_date:ontime
     };
     let listParams = { /*年月日*/
       start_date:`${this.ontime}-01`,
-      end_date:`${this.ontime}-31`
+      end_date:`${this.ontime}-${this.$store.state.endDay}`
     }
 
    
@@ -2543,7 +2601,7 @@ export default {
     }
   },
   mounted() {
-    this.init(this.model);
+    this.init(this.ontime);
     this.infoList();
   },
 };
@@ -2775,11 +2833,13 @@ margin-top: 20px;
         align-items: center;
         color: #a0a3c0;
         font-size: 12px;
+        padding-right: 10px;
     }
 
     .light-blue {
         color: #66ffff;
         opacity: 1;
+        padding:0.3px;
     }
 
     ::v-deep .ant-table-bordered .ant-table-body>table {

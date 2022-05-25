@@ -21,11 +21,11 @@
       </div>
       <div class="flex-char">
         <div>
-          <div class="middle-font left-file">外销日达成趋势图</div>
+          <div class="middle-font left-file">内销日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
-          <div class="middle-font">外销产司日达成趋势图</div>
+          <div class="middle-font">内销产司日达成趋势图</div>
           <div class="right-box-qushi">
             <div class="flex-right-bottom" v-for="(item, i) in dhcarr" :key="i">
               <div>
@@ -185,15 +185,25 @@ export default {
       cardSabTitle1:"线上",
       cardSabTitle2:"线下",
       leftObj:{
-        marketChannel:'marketChannel',
+        marketChannel:'marketCenter',
         marketCenter:'marketCenter',
         manager:'manager',
       },
       rightObj:{
-        marketChannel:'marketChannel',
+        marketChannel:'marketCenter',
         marketCenter:'marketCenter',
         manager:'manager',
       },
+      // leftObj: {
+      //   name: 'cooprLevel2',  /*标题*/
+      //   level: 'cooprLevel2Manager',/*责任人*/
+      //   tAvgAmt: 'tAvgAmt',/*责任制*/
+      // },
+      // rightObj: {
+      //   name: 'cooprLevel2',
+      //   level: 'cooprLevel2Manager',
+      //   tAvgAmt: 'tAvgAmt'
+      // },
       /*表格配置*/
       title1:'业务员',
       title2:'区域客户',
@@ -345,37 +355,37 @@ export default {
         }
         this.progressData.ballNum = (
           panelDataList[0].grossProfitRadio * 100
-        ).toFixed(1);
-        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
+        ).toFixed(2);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
         this.speedData.speedBar = (panelDataList[0].cnyAmtRadio * 100).toFixed(
           1
         );
-        this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(1);
-        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1);
+        this.speedData.ballNum = panelDataList[0].sumCnyAmt.toFixed(2);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2);
 
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].cooprLevel1 == "线上") {
             this.progressData.topGPM = (
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.bar1 = (
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(1);
+            ).toFixed(2);
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2);
             this.speedData.bottomClose =
-              panelDataList[i].cnyAmtRadio.toFixed(1);
-            this.speedData.bottomTime = panelDataList[i].dateRadio.toFixed(1);
+              Number(panelDataList[i].cnyAmtRadio*100).toFixed(2);
+            this.speedData.bottomTime = Number(panelDataList[i].dateRadio*100).toFixed(2);
           } else if (panelDataList[i].cooprLevel1 == "线下") {
             this.progressData.bottomGPM = (
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
             this.progressData.bar2 = (
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(1);
+            ).toFixed(2);
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2);
             this.speedData.bottomClose1 =
-              panelDataList[i].cnyAmtRadio.toFixed(1);
-            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1);
+            Number(panelDataList[i].cnyAmtRadio*100).toFixed(2);
+            this.speedData.bottomTime1 = Number(panelDataList[i].dateRadio*100).toFixed(2);
           }
         }
       } catch (error) {
@@ -470,6 +480,10 @@ export default {
           obj
           // 'cooprLevel1'
         );
+        if(res.code!=200) return;
+        this.AvgTaskAmtDate = [];
+        this.AvgTaskAmtList = [];
+        this.AvgTaskAmtLine = '';
 
         res.rows.filter((item) => {
           if (item.businessEntityName == "总") {

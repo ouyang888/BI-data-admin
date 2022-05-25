@@ -13,7 +13,7 @@
       <!-- 右侧卡片 -->
       <div class="flex-card">
         <div class="card-box" @click="gotoDomestic">
-          <div class="card-font">内销</div>
+          <div class="card-font">内销</div> 
         
           <a-spin class="cardLoad" size="large" v-if="showLoadingLeft" />
           <div class="noData" v-else-if="innerLeft && innerLeft.length<1">暂无数据</div>
@@ -26,7 +26,7 @@
             <div class="left-right-box">
               <div style="margin-left: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线上达成</div>
+                  <div class="top-left-font">线上</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制 <span>{{ innerLeftInfo.saleTaskAmt }}{{$store.state.unit}}</span>
@@ -147,8 +147,8 @@
                   <div>
                     结构
                     <span v-for="(item, index) in innerSabLeft" :key="index">
-                      <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio }}%; </span>
+                      <span>{{ !!item?item.position:'' }}</span> -
+                      <span>{{ !!item?item.positionRatio:'' }}%; </span>
                     </span>
                   </div>
                 </div>
@@ -167,7 +167,7 @@
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">线下达成</div>
+                  <div class="top-left-font">线下</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制 <span>{{ innerRightInfo.saleTaskAmt }}{{$store.state.unit}}</span>
@@ -279,8 +279,8 @@
                   <div>
                     结构
                     <span v-for="(item, index) in innerSabRight" :key="index">
-                      <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio }}%;</span>
+                      <span>{{ !!item?item.position:'' }}</span> -
+                      <span>{{ !!item?item.positionRatio:'' }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -313,7 +313,7 @@
             <div class="left-right-box">
               <div style="margin-left: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">OBM达成</div>
+                  <div class="top-left-font">OBM</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制 <span>{{ outterLeftInfo.saleTaskAmt }}{{$store.state.unit}}</span>
@@ -430,8 +430,8 @@
                   <div>
                     结构
                     <span v-for="(item, index) in outterSabLeft" :key="index">
-                      <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio }}%;</span>
+                      <span>{{ !!item?item.position:'' }}</span> -
+                      <span>{{ !!item?item.positionRatio:'' }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -450,7 +450,7 @@
               <div class="mt-border"></div>
               <div style="margin-right: 14px">
                 <div class="flex-top-card">
-                  <div class="top-left-font">OEM达成</div>
+                  <div class="top-left-font">OEM</div>
                   <div class="flex-finish">
                     <div class="finish-font">
                       责任制 <span>{{ outterRightInfo.saleTaskAmt}}{{$store.state.unit}}</span>
@@ -566,9 +566,9 @@
                 <div class="flex-bottoms">
                   <div>
                     结构
-                    <span v-for="(item, index) in outterSabLeft" :key="index">
-                      <span>{{ item.position }}</span> -
-                      <span>{{ item.positionRatio }}%;</span>
+                    <span v-for="(item, index) in outterSabRight" :key="index">
+                      <span>{{ !!item?item.position:'' }}</span> -
+                      <span>{{ !!item?item.positionRatio:'' }}%;</span>
                     </span>
                   </div>
                 </div>
@@ -745,7 +745,7 @@ export default {
         bar4: 0,
         bar5: 0,
         ballTitle: "事业部",
-        bottom: "外销",
+        bottom: "外",
         top: "内",
         sabArr: { S: 0, A: 0, B: 0 },
         topArr: { S: 0, A: 0, B: 0  },
@@ -759,14 +759,14 @@ export default {
       innerLeftInfo: {},
       innerRight: [],
       innerRightInfo: {},
-      innerSabLeft: [],
-      innerSabRight: [],
+      innerSabLeft: [{}],
+      innerSabRight: [{}],
       outterLeft: [],
       outterLeftInfo: {},
       outterRight: [],
       outterRightInfo: {},
-      outterSabLeft: [],
-      outterSabRight: [],
+      outterSabLeft: [{}],
+      outterSabRight: [{}],
       // 底部表格
       tableInner: [],
       tableOutter: [],
@@ -874,7 +874,7 @@ export default {
         } else{
           inner.rows.forEach((v) => {
           v.dateRadio = v.dateRadio * 100>=100?100: Number((v.dateRadio * 100).toFixed(2)); 
-          v.onLineRadio = Number((v.onLineRadio * 100).toFixed(0));
+          v.onLineRadio = (v.onLineRadio * 100).toFixed(2);
           v.onLineProfitRadio = Number((v.onLineProfitRadio * 100).toFixed(2));
           v.sumCnyamt = v.sumCnyamt.toFixed(2);
           v.saleTaskAmt =  v.saleTaskAmt.toFixed(2);
@@ -901,7 +901,7 @@ export default {
 
           outter.rows.forEach((v) => {
           v.dateRadio = !!v.dateRadio?Number((v.dateRadio * 100).toFixed(2)):0;
-          v.onLineRadio =  !!v.onLineRadio?Number((v.onLineRadio * 100).toFixed(0)):0;
+          v.onLineRadio =  !!v.onLineRadio?(v.onLineRadio * 100).toFixed(2):0;
           v.onLineProfitRadio = !!v.onLineProfitRadio?Number((v.onLineProfitRadio * 100).toFixed(2)):0;
           v.sumCnyamt = v.sumCnyamt.toFixed(2);
           v.saleTaskAmt =  v.saleTaskAmt.toFixed(2);
@@ -920,28 +920,60 @@ export default {
         }   
         if(innersab.rows.length<1){
 
-          this.innerSabLeft = [];
-          this.innerSabRight = [];
+          this.innerSabLeft = [{}];
+          this.innerSabRight = [{}];
         }else{
+
+
 
         innersab.rows.forEach(v=>{
           v.positionRatio = (v.positionRatio*100).toFixed(2);
         })
 
-
-        this.innerSabLeft = innersab.rows.filter((v) => {
+      
+        let innerSabLeft = innersab.rows.length>0 && innersab.rows.filter((v) => {
           return v.cooprLevel1 == "线上";
         });
+        this.innerSabLeft = new Array(innerSabLeft.length);
+        innerSabLeft.forEach(v=>{
+          if(v.position == 'S'){
 
-        this.innerSabRight = innersab.rows.filter((v) => {
+            this.innerSabLeft[0] = v;
+          }
+          if(v.position == 'A'){
+            this.innerSabLeft[1] = v;
+          }
+          if(v.position == 'B'){
+            this.innerSabLeft[2] = v;
+          }
+        })
+
+
+        let innerSabRight = innersab.rows.length>0 && innersab.rows.filter((v) => {
           return v.cooprLevel1 == "线下";
         });
+
+
+        this.innerSabRight = new Array(innerSabRight.length);
+        this.innerSabRight>0 && innerSabRight.forEach(v=>{
+          if(v.position == 'S'){
+
+            this.innerSabRight[0] = v;
+          }
+          if(v.position == 'A'){
+            this.innerSabRight[1] = v;
+          }
+          if(v.position == 'B'){
+            this.innerSabRight[2] = v;
+          }
+        })
+     
       }
 
           if(outtersab.rows.length<1){
 
-                this.outterSabLeft = [];
-                this.outterSabRight = [];
+                this.outterSabLeft = [{}];
+                this.outterSabRight = [{}];
               }else{
               
               outtersab.rows.forEach(v=>{
@@ -950,13 +982,43 @@ export default {
               console.log('outtersab',outtersab)
 
 
-              this.outterSabLeft = outtersab.rows.filter((v) => {
+              let outterSabLeft = outtersab.rows.filter((v) => {
                 return v.obmOem == "OBM";
               });
 
-              this.outterSabRight = outtersab.rows.filter((v) => {
+              this.outterSabLeft = new Array(outterSabLeft.length);
+               outterSabLeft.forEach(v=>{
+              if(v.position == 'S'){
+
+                this.outterSabLeft[0] = v;
+              }
+              if(v.position == 'A'){
+                this.outterSabLeft[1] = v;
+              }
+              if(v.position == 'B'){
+                this.outterSabLeft[2] = v;
+              }
+            })
+
+              let outterSabRight = outtersab.rows.filter((v) => {
                 return v.obmOem == "OEM";
               });
+
+              this.outterSabRight = new Array(outterSabRight.length);
+               outterSabRight.forEach(v=>{
+              if(v.position == 'S'){
+
+                this.outterSabRight[0] = v;
+              }
+              if(v.position == 'A'){
+                this.outterSabRight[1] = v;
+              }
+              if(v.position == 'B'){
+                this.outterSabRight[2] = v;
+              }
+            })
+
+              
             }
 
 
@@ -992,8 +1054,6 @@ export default {
           return v.marketChannel == "线下";
         });
         this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
-        // this.rowSpanNumber1 = [0,0];
-        // console.log('innerBottom.length',innerBottom.length,this.rowSpanNumber1)
         let innerTotal = tableInner.rows.filter((v) => {
           return v.marketChannel == "底部合计" || v.marketChannel =='合计';
         });
@@ -1103,34 +1163,34 @@ export default {
       
         this.progressData.ballNum = Number((
           panelDataList[0].grossProfitRadio * 100
-        ).toFixed(1));
-        this.speedData.speedBar = Number((panelDataList[0].cnyAmt * 100).toFixed(2));
-        this.speedData.bar = Number((panelDataList[0].dateRadio * 100).toFixed(1));
-        this.speedData.ballNum = Number(panelDataList[0].sumCnyAmt.toFixed(2));
-        this.speedData.bottomNum = Number(panelDataList[0].saleTaskAmt.toFixed(2));
+        ).toFixed(2));
+        this.speedData.speedBar =(panelDataList[0].cnyAmt * 100).toFixed(2);
+        this.speedData.bar =(panelDataList[0].dateRadio * 100).toFixed(2);
+        this.speedData.ballNum =panelDataList[0].sumCnyAmt.toFixed(2);
+        this.speedData.bottomNum =panelDataList[0].saleTaskAmt.toFixed(2);
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].directName == "内销") {
-            this.progressData.bar1 = Number((
+            this.progressData.bar1 = (
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1));
-            this.progressData.topGPM = Number((
+            ).toFixed(2);
+            this.progressData.topGPM = (
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1));
-            this.speedData.ballLeftNum = Number(panelDataList[i].cnyAmt.toFixed(2));
-            this.speedData.bottomClose =Number(
-              panelDataList[i].cnyAmtRadio.toFixed(1));
-            this.speedData.bottomTime =Number( panelDataList[i].dateRadio.toFixed(1));
+            ).toFixed(2);
+            this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2);
+            this.speedData.bottomClose =
+              (panelDataList[i].cnyAmtRadio*100).toFixed(2);
+            this.speedData.bottomTime =( panelDataList[i].dateRadio*100).toFixed(2);
           } else if (panelDataList[i].directName == "外销") {
             this.progressData.bar2 = Number((
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1));
-            this.progressData.bottomGPM = Number((
+            ).toFixed(2));
+            this.progressData.bottomGPM = (
               panelDataList[i].directNameGrossProfitRadio * 100
-            ).toFixed(1));
-            this.speedData.ballRightNum = Number(panelDataList[i].cnyAmt.toFixed(2));
-            this.speedData.bottomClose1 =Number(
-              panelDataList[i].cnyAmtRadio.toFixed(1));
-            this.speedData.bottomTime1 = Number(panelDataList[i].dateRadio.toFixed(1));
+            ).toFixed(2);
+            this.speedData.ballRightNum =panelDataList[i].cnyAmt.toFixed(2);
+            this.speedData.bottomClose1 =
+              (panelDataList[i].cnyAmtRadio*100).toFixed(2);
+            this.speedData.bottomTime1 = (panelDataList[i].dateRadio*100).toFixed(2);
           }
         }
         // console.log('this.speedData',this.speedData)
@@ -1180,50 +1240,50 @@ export default {
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].directName == "事业部") {
           
-            // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
+            // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(2)
             if (RightSAB[i].position == "S") {
-              this.sabData.sabArr.S = Number((RightSAB[i].positionRatio * 100).toFixed(
-                1
-              ));
+              this.sabData.sabArr.S = (RightSAB[i].positionRatio * 100).toFixed(
+               1
+              );
      
             } else if (RightSAB[i].position == "A") {
-              this.sabData.sabArr.A = Number((RightSAB[i].positionRatio * 100).toFixed(
-                1
-              ));
+              this.sabData.sabArr.A = (RightSAB[i].positionRatio * 100).toFixed(
+               1
+              );
             } else if (RightSAB[i].position == "B") {
-              this.sabData.sabArr.B = Number((RightSAB[i].positionRatio * 100).toFixed(
-                1
-              ));
+              this.sabData.sabArr.B = (RightSAB[i].positionRatio * 100).toFixed(
+               1
+              );
             }
           } else if (RightSAB[i].directName == "内销") {
-            this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
+            this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(2);
             if (RightSAB[i].position == "S") {
-              this.sabData.topArr.S = Number((RightSAB[i].positionRatio * 100).toFixed(
-                1
-              ));
+              this.sabData.topArr.S = (RightSAB[i].positionRatio * 100).toFixed(
+               1
+              );
             } else if (RightSAB[i].position == "A") {
-              this.sabData.topArr.A = Number((RightSAB[i].positionRatio * 100).toFixed(
-                1
-              ));
+              this.sabData.topArr.A = (RightSAB[i].positionRatio * 100).toFixed(
+               1
+              );
             } else if (RightSAB[i].position == "B") {
-              this.sabData.topArr.B = Number((RightSAB[i].positionRatio * 100).toFixed(
-                1
-              ));
+              this.sabData.topArr.B = (RightSAB[i].positionRatio * 100).toFixed(
+               1
+              );
             }
           } else if (RightSAB[i].directName == "外销") {
-            this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(1);
+            this.sabData.bar2 = (RightSAB[i].positionRatio * 100).toFixed(2);
             if (RightSAB[i].position == "S") {
-              this.sabData.bottomArr.S = Number((
+              this.sabData.bottomArr.S = (
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1));
+              ).toFixed(1);
             } else if (RightSAB[i].position == "A") {
-              this.sabData.bottomArr.A = Number((
+              this.sabData.bottomArr.A = (
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1));
+              ).toFixed(1);
             } else if (RightSAB[i].position == "B") {
-              this.sabData.bottomArr.B = Number((
+              this.sabData.bottomArr.B = (
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1));
+              ).toFixed(1);
             }
           }
         }
