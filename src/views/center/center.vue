@@ -9,10 +9,10 @@
         <div class="left-font">当前页面：{{ pathName }}</div>
       </div>
       <div class="flex-right">
-        <div class="right-font">
+        <!-- <div class="right-font">
           <a-icon type="printer" style="color: #19ecff; margin-right: 4px" />打印
-        </div>
-        <div class="right-font">
+        </div> -->
+        <div class="right-font" @click="changeyear">
           <a-icon type="upload" style="color: #19ecff; margin-right: 4px" />导出数据
         </div>
 
