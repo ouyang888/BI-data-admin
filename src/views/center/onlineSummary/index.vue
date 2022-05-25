@@ -57,8 +57,9 @@
     </div>
 
     <!-- 底部表格 -->
-    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
-      title1="合作模式三" title2="线上客户" />
+    <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" 
+    :leftObj="leftObj" :rightObj="rightObj" :rightObj2="rightObj2"
+      title1="合作模式三" title2="线上客户" :leftObj2="leftObj2" />
   </div>
 </template>
 <script>
@@ -92,6 +93,22 @@ export default {
       AvgTaskAmtList: [],
       AvgTaskAmtLine: "",
       AmericaLine: [],
+      rightObj2:{
+        profitRadio:"ProfitRadio",
+        amtRadio:"cnyAmtRadio",
+        amtRadio1:"amtFinishRadio",
+        amtFinish:'amtFinish',/*amtFinish*/
+      amtFinishRadio:'amtFinishRadio'
+      },
+    leftObj2:{
+      profitRadio:"ProfitRadio",
+      amtRadio:"cnyAmtRadio",
+      amtRadio1:"amtFinishRadio",
+      amtFinish:'amtFinish',/*amtFinish*/
+      amtFinishRadio:'amtFinishRadio'
+    },
+
+
 
       //       info:[{
       // name:"name",
