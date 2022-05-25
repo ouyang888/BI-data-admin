@@ -124,20 +124,20 @@
   <!--{{ scope.row.amtFinish }}-->
             </div>
             <div style="margin-top: 5px">
-              <Progress
+              <!-- <Progress
                 style="margin-bottom: 3px"
                 :rate="scope.row.dateRadio*100"
                 :color="'#FF8B2F'"
                 class="precentCompentes"
-              />
+              />-->
 
       
            
-              <Progress
+             <!--   <Progress
                 :rate="scope.row[headerObj2.amtFinishRadio]*100"
                 :color="'#66FFFF'"
                 class="precentCompentes"
-              />
+              />-->
             </div>
           </div>
         </template>
