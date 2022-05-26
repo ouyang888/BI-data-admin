@@ -1,6 +1,9 @@
 <template>
   <div class="execl">
-    <el-table border :data="mesInfo" :span-method="objectSpanMethod" 
+    <el-table border :data="tableData" :span-method="objectSpanMethod" 
+     show-summary
+      :summary-method="getSummaries"
+      
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" height="287" >
       <el-table-column prop="category" align="center" label="品类"></el-table-column>
@@ -64,6 +67,8 @@
         },
         data() {
             return {
+                tableData:[],/*talbe*/
+                endObj:{}, /*最后一条数据*/
                 cell: 2,
                 arr: ['domesticDepartment', 'department', 'exportDepartment'],
                 /*渠道路由名*/
@@ -78,97 +83,96 @@
 
         },
         methods: {
+ 
             handleClick(obj) {
                 this.$emit("handleClick", obj);
             },
-            objectSpanMethod({
-                row,
-                column,
-                rowIndex,
-                columnIndex
-            }) {
-                let number = 0;
-                console.log('this.mesInfo', this.mesInfo)
-                this.mesInfo.forEach((item, idnex) => {
-                    number++;
-                });
-                // console.log(number, "numbernumbernumber");
-                // 底部合计合并单元格
-                let cell = 0; //设置跨列
-                if (this.arr.includes(this.router)) {
-                    cell--;
-                }
-                // if (rowIndex === number - 1) {
-                //   if (0<columnIndex && columnIndex<=cell) {
-                //     return [0, 0];
-                //   }
-                //   if (columnIndex === 0) {
-                //     if(!this.arr.includes(this.router)){
+            objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+        let number = 0;
+        // console.log('this.mesInfo',this.mesInfo)
+        this.mesInfo.forEach((item, idnex) => {
+          number++;
+        });
+        // console.log(number, "numbernumbernumber");
+        // 底部合计合并单元格
+        let cell = 2; //设置跨列
+        if(this.arr.includes(this.router)){
+          cell--;
+        }
+        if (rowIndex === number - 1) {
+          if (0<columnIndex && columnIndex<=cell) {
+            return [0, 0];
+          }
+          if (columnIndex === 0) {
+            if(!this.arr.includes(this.router)){
 
-                //       return [1, 3];
-                //     }else{
-                //     return [1, 2];
-                //   }
-                //   }
-                // }
-                //       if (rowIndex === 6) {
-                //   if (columnIndex == 1 || columnIndex == 2) {
-                //     return [0, 0];
-                //   }
-                //   if (columnIndex === 0) {
-                //     return [1, 3];
-                //   }
-                // }
-                if (columnIndex === 0) {
+              return [1, 3];
+            }else{
+            return [1, 2];
+          }
+          }
+        }
+        //       if (rowIndex === 6) {
+        //   if (columnIndex == 1 || columnIndex == 2) {
+        //     return [0, 0];
+        //   }
+        //   if (columnIndex === 0) {
+        //     return [1, 3];
+        //   }
+        // }
+        if (columnIndex === 0) {
 
 
-                    if (this.rowSpanNumber.length == 2) {
+          if(this.rowSpanNumber.length == 2){
+          
+          if (rowIndex == 0) {
+            return {
+              rowspan: this.rowSpanNumber[0],
+              colspan: 1,
+            };
+          } else if(rowIndex == this.rowSpanNumber[0]){
+            return {
+              rowspan: this.rowSpanNumber[1],
+              colspan: 1,
+            };
+            
+          }else if(rowIndex == this.rowSpanNumber[0] + this.rowSpanNumber[1]){
+            return {
+              rowspan: 1,
+              colspan: 1,
+            };
+          }
+          
+          else {
+            return {
+              rowspan: 0,
+              colspan: 0,
+            };
+          }
+        }else if(this.rowSpanNumber.length == 1){
 
-                        if (rowIndex == 0) {
-                            return {
-                                rowspan: this.rowSpanNumber[0],
-                                colspan: 1,
-                            };
-                        } else if (rowIndex == this.rowSpanNumber[0]) {
-                            return {
-                                rowspan: this.rowSpanNumber[1],
-                                colspan: 1,
-                            };
+          if (rowIndex == 0) {
+            return {
+              rowspan: this.rowSpanNumber[0],
+              colspan: 1,
+            };
+          } else if(rowIndex == this.rowSpanNumber[0]){
+            return {
+              rowspan: 1,
+              colspan: 1,
+            };
+            
+          }         
+          else {
+            return {
+              rowspan: 0,
+              colspan: 0,
+            };
+          }
 
-                        } else if (rowIndex == this.rowSpanNumber[0] + this.rowSpanNumber[1]) {
-                            return {
-                                rowspan: 1,
-                                colspan: 1,
-                            };
-                        } else {
-                            return {
-                                rowspan: 0,
-                                colspan: 0,
-                            };
-                        }
-                    } else if (this.rowSpanNumber.length == 1) {
-
-                        if (rowIndex == 0) {
-                            return {
-                                rowspan: this.rowSpanNumber[0],
-                                colspan: 1,
-                            };
-                        } else if (rowIndex == this.rowSpanNumber[0]) {
-                            return {
-                                rowspan: 1,
-                                colspan: 1,
-                            };
-
-                        } else {
-                            return {
-                                rowspan: 0,
-                                colspan: 0,
-                            };
-                        }
-
-                    }
-                }
-            },
+        }
+        }
+      },
             rowStyle({
                 row,
                 rowIndex
@@ -201,21 +205,27 @@
                     return color;
                 }
             },
+              getSummaries(){
+           
+          console.log('this.endObj',this.endObj);
+          let arr = ['合计'];
+
+          for(var i in this.titleHead){
+
+              arr.push(this.endObj[i]);
+
+          }
+          return arr;
+
+
+      }
         },
         watch: {
             mesInfo: {
                 handler: function(newValue, oldValue) {
-                    console.log('更新newValue', newValue)
-                    newValue.forEach((v, i) => {
-                        // v.amtRadio = Number((v.amtRadio*100).toFixed(2));
-                        // v.profitRadio = Number((v.profitRadio*100).toFixed(2));
-                        // if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
-                        //   console.log('headerObj.marketChannel',this.headerObj.marketChannel)
-                        //   v[this.headerObj.marketChannel] = '合计';
-                        //   v.ranking = '';
-                        // }
-                    })
-                    this.mesInfo = newValue;
+         
+                   this.tableData = newValue.slice(0,newValue.length - 1);
+            this.endObj = newValue.slice(newValue.length -1 ,newValue.length)[0];
 
                 }
             }
