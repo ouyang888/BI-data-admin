@@ -1,8 +1,8 @@
 <template>
   <div class="flex-card" >
 
-    <div class="card-box"  v-for="(v,i) in cardList"   :key="i" >
-      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])" v-if="i<6" >{{v[cardObj.title]}} </div>
+    <div class="card-box"  v-for="(v,i) in cardList"   :key="i"  @click="gotoCatSeries(v[cardObj.title])">
+      <div class="card-font"  v-if="i<6" >{{v[cardObj.title]}} </div>
       <div class="card-border-box" v-if="i<6" >
         <div class="line"></div>
         <div class="line1"></div>

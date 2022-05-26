@@ -64,6 +64,10 @@ export default {
        type:Array,
       default:function(){ return []},
     },
+    headerObj:{
+       type:Array,
+       default:function(){ return []},
+    },
     leftData:{
       type:Array,
       default:function(){ return []}

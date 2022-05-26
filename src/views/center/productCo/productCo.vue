@@ -57,8 +57,7 @@
       :rightData="tableOutter"
       :titleHead1="titleHead1"
       :titleHead2="titleHead2"
-      :leftObj="TableLeftObj"
-      :rightObj="TableRightObj"
+ 
     />
 
     <!-- 底部表格 -->
@@ -92,8 +91,8 @@ export default {
        'cnyAmtRadio':'cnyAmtRadio',  /*金额完成率*/
        'cooprLevel1':'directName'  /*线上/线下 金额完成率*/
       },
-      tableInner:[],    
-      tableOutter:[],  
+      tableInner:[{}],    
+      tableOutter:[{}],  
       cardSab:[],
       cardSabTitle1:"内销",
       cardSabTitle2:"外销",
@@ -459,6 +458,49 @@ export default {
       };
       myChart2.setOption(option);
     },
+    async getListInfo(listParams) {
+      this.showLoading = true;
+      try {
+        let chart = {
+          code: 'categoryTotalsChart',
+          fields:'category'
+        };
+          Object.assign(chart, listParams)
+        const res = await API.getTotal(chart);
+        let sellOutDataList = res.rows.filter(v=>{
+          return v.category == '总';
+        });
+        console.log('sellOutDataList22',sellOutDataList);
+        // debugger;
+        this.AvgTaskAmtDate = [];
+        this.AvgTaskAmtList = [];
+        let onTime = '';
+
+// orderDate: "2022-05-02"
+// saleAvgAmt: 0
+// totalCnyAmt: 71.5341
+        sellOutDataList.filter((item) => {
+          var timeArr = item.orderDate.substr(5);
+
+          // 外销日内
+          if (item.totalCnyAmt !== null && item.totalCnyAmt !== null && onTime!=timeArr) {
+            onTime = timeArr;
+            this.AvgTaskAmtDate.push(timeArr);
+            this.AvgTaskAmtList.push(item.totalCnyAmt);
+            
+            this.AvgTaskAmtLine = item.saleAvgAmt;
+     
+          }
+         
+           this.showLoading = false;
+        });
+        // this.AvgTaskAmtDate = [...new Set( this.AvgTaskAmtDate)];
+        // this.AvgTaskAmtList = [...new Set( this.AvgTaskAmtList)];
+        this.myEcharts();
+      } catch (error) {
+        console.log(error);
+      }
+    },
 
      // 右边接口
     async getList1(line) {
@@ -473,7 +515,6 @@ export default {
         const res = await API.getChartTotal(chart);
 
         let sellOutDataList = res.rows;
-        console.log("res.rows",res.rows);
         this.showLoading = false;
 
         let obj = res.rows[0]
@@ -540,19 +581,11 @@ export default {
       this.getTable(params);
       this.getCard(params);
       this.getdashboard(params);
-    this.queryCardSAB(params);
+      this.queryCardSAB(params);
+      this.getListInfo(listParams)
      
 
-    //this.getdashboard();
-    this.myEcharts();
-    // this.myEcharts2();
-    // this.myEcharts3();
-    // this.myEcharts4();
-    // this.myEcharts5();
-    // this.myEcharts6();
-    // this.myEcharts7();
-    // this.myEcharts8();
-    this.getTable();
+
 
     },
 
@@ -670,9 +703,7 @@ this.$router.push("/center/index")
 
 
 
-
-
-    myEcharts() {
+myEcharts() {
       var myChart = this.$echarts.init(document.getElementById("main"));
       var option = {
         xAxis: {
@@ -708,7 +739,7 @@ this.$router.push("/center/index")
         xAxis: {
           type: "category",
           boundaryGap: false,
-          data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+          data: this.AvgTaskAmtDate,
           axisTick: {
             show: false,
           },
@@ -763,11 +794,11 @@ this.$router.push("/center/index")
                 },
               },
             },
-            data: [1948, 7308, 8949, 3839, 13857],
+            data: this.AvgTaskAmtList,
             markLine: {
               data: [
                 {
-                  yAxis: 8576,
+                  yAxis: this.AvgTaskAmtLine,
                   silent: false, //鼠标悬停事件 true没有，false有
                   lineStyle: {
                     //警戒线的样式 ，虚实 颜色
@@ -790,6 +821,125 @@ this.$router.push("/center/index")
       };
       myChart.setOption(option);
     },
+
+    // myEcharts() {
+    //   var myChart = this.$echarts.init(document.getElementById("main"));
+    //   var option = {
+    //     xAxis: {
+    //       axisLabel: {
+    //         formatter: function (val) {
+    //           return "";
+    //         },
+    //       },
+    //     },
+    //     labelData: [
+    //       { class: "plan", text: "实际达成" },
+    //       // { class: 'actual', text: '规划达成' },
+    //       { class: "average", text: "日均线" },
+    //     ],
+    //     // echartsData: {
+    //     textStyle: {
+    //       color: "#3FB0FF",
+    //     },
+    //     color: ["#66FFFF", "#6C02CF", "#FF8B2F"],
+    //     title: {
+    //       text: "",
+    //     },
+    //     tooltip: {
+    //       trigger: "axis",
+    //     },
+    //     grid: {
+    //       top: "5%",
+    //       left: "2%",
+    //       right: "5%",
+    //       bottom: "3%",
+    //       containLabel: true,
+    //     },
+    //     xAxis: {
+    //       type: "category",
+    //       boundaryGap: false,
+    //       data: ["2022-01", "2022-02", "2022-03", "2022-04", "2022-05"],
+    //       axisTick: {
+    //         show: false,
+    //       },
+    //       axisLine: {
+    //         show: false,
+    //       },
+    //     },
+    //     yAxis: {
+    //       name: "单位：万",
+    //       type: "value",
+    //       splitLine: {
+    //         lineStyle: {
+    //           type: "dashed",
+    //           color: "rgba(45,153,255,.3)",
+    //         },
+    //       },
+    //       axisTick: {
+    //         show: false,
+    //       },
+    //       axisLine: {
+    //         show: false,
+    //       },
+    //     },
+    //     series: [
+    //       {
+    //         name: "实际达成",
+    //         type: "line",
+    //         stack: "Total",
+    //         // smooth: true,
+    //         lineStyle: {
+    //           width: 1,
+    //         },
+    //         showSymbol: false,
+    //         areaStyle: {
+    //           normal: {
+    //             color: {
+    //               x: 0,
+    //               y: 0,
+    //               x2: 0,
+    //               y2: 1,
+    //               colorStops: [
+    //                 {
+    //                   offset: 0,
+    //                   color: "hsla(197, 100%, 50%, .3)", // 0% 处的颜色
+    //                 },
+    //                 {
+    //                   offset: 0.7,
+    //                   color: "hsla(215, 95%, 39%, .3)", // 100% 处的颜色
+    //                 },
+    //               ],
+    //               globalCoord: false, // 缺省为 false
+    //             },
+    //           },
+    //         },
+    //         data: [1948, 7308, 8949, 3839, 13857],
+    //         markLine: {
+    //           data: [
+    //             {
+    //               yAxis: 8576,
+    //               silent: false, //鼠标悬停事件 true没有，false有
+    //               lineStyle: {
+    //                 //警戒线的样式 ，虚实 颜色
+    //                 type: "dashed", //样式  ‘solid’和'dotted'
+    //                 color: "#FF8B2F",
+    //                 width: 2, //宽度
+    //               },
+    //               label: {
+    //                 formatter: "",
+    //                 color: "#FF8B2F",
+    //                 position: "start", //将警示值放在哪个位置，三个值“start”,"middle","end" 开始 中点 结束
+    //               },
+    //             },
+    //           ],
+
+    //           symbol: ["none", "none"],
+    //         },
+    //       },
+    //     ],
+    //   };
+    //   myChart.setOption(option);
+    // },
     // myEcharts2() {
     //   var myChart2 = this.$echarts.init(document.getElementById("main2"));
     //   var option = {
@@ -1640,13 +1790,12 @@ this.$router.push("/center/index")
        let tableOutter = await API.getTotal(
         Object.assign(onlineStore,time)
       );
-      console.log(Object.assign(online,time));
-        console.log( Object.assign(onlineStore,time));
+
 
       console.log("tableOutter",tableOutter);
-        console.log("tableInner",tableInner);
-      this.tableInner = tableInner.rows;
-      this.tableOutter = tableOutter.rows;
+      console.log("tableInner",tableInner);
+      this.tableInner = tableInner&&tableInner.rows;
+      this.tableOutter = tableOutter&&tableOutter.rows;
       console.log("this.tableInner",this.tableInner);
          console.log("this.tableInner",this.tableOutter);
 
