@@ -28,14 +28,14 @@
                 <div>
                   <div class="progress">
                     <a-progress
-                      :percent="v.dateRadio"
+                      :percent="!!v.dateRadio?Number(v.dateRadio):0"
                       :show-info="false"
                       strokeColor="#FF8B2F"
                     />
                   </div>
                   <div class="progress">
                     <a-progress
-                      :percent="v[cardObj.saleAmtRadio]"
+                      :percent="!!v[cardObj.saleAmtRadio]?Number(v[cardObj.saleAmtRadio]):0"
                       :show-info="false"
                       strokeColor="rgb(102, 255, 255)"
                     />

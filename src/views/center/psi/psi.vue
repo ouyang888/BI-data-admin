@@ -20,7 +20,7 @@
                     <div class="finish-font">
                       责任制
                       <span>{{
-                        !!departmentInfo.saleTaskAmt?Number(departmentInfo.saleTaskAmt).toFixed(2):0
+                        !!departmentInfo.saleTaskAmt?Number(departmentInfo.saleTaskAmt).toFixed(2):0.00
                       }}</span
                       >{{modelLabel}}
                     </div>
@@ -30,7 +30,7 @@
   
                         <span
                         >{{
-                          !!departmentInfo?Number(departmentInfo.cnyAmtRadio*100).toFixed(2):0
+                          !!departmentInfo?Number(departmentInfo.cnyAmtRadio*100).toFixed(2):0.00
                         }}%</span
                       >
                     </div>
@@ -102,7 +102,10 @@
                 <div class="flex-bottoms">
                   <div >
                     结构
-                    <span v-for="(item, index) in homeSabInfo" :key="index">
+               <span v-if="homeSabInfo.length===0">
+                  A-0.00% B-0.00% S-0.00%
+               </span>
+                    <span v-for="(item, index) in homeSabInfo" :key="index" v-else>
                       <span>{{ item.position }}</span> -
                       <span>{{ Number(item.positionRatio * 100).toFixed(2) }}% </span>
                     </span>
@@ -112,7 +115,7 @@
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>
+                  <div class="rightInfo">
                     毛利率
                     <span class="light-blue"
                   
@@ -120,22 +123,22 @@
                         Number(
                           homeGrossProfitRadio[0].grossProfitRadio * 100
                         ).toFixed(2):0
-                      }} %</span
+                      }}%</span
                     >
                   </div>
-                   <div >
+                   <div   class="rightInfo">
                     线上
                     <span class="light-blue"> 
                          {{!!info?
                           Number(info.profitRadio*100).toFixed(2):0 
-                         }}  %</span>
+                         }}%</span>
 
                   </div>
-                  <div>
+                  <div  class="rightInfo">
                     线下
                     <span class="light-blue"
-                      >{{ !!info2?Number(info2.profitRadio*100).toFixed(2):0}}
-                      </span> %
+                      >{{ !!info2?Number(info2.profitRadio*100).toFixed(2):0}}%
+                      </span> 
                   </div>
 
 
@@ -143,7 +146,7 @@
               </div>
     
               <div class="mt-border"></div>
-              <div class="centerInfo" v-if="sales==='外销'" >
+              <div class="centerInfo"  >
                 <div class="flex-top-card">
                   <div class="top-left-font">{{ sales }}</div>
                   <div class="flex-finish">
@@ -251,22 +254,21 @@
                   class="flex-bottoms"
                   style="padding-bottom: 10px; padding-top: 4px"
                 >
-                  <div>
+                  <div class="rightInfo1">
                      毛利率
                     <span class="light-blue" 
                       >{{!!homeGrossProfitRadio1[0]?Number(homeGrossProfitRadio1[0].grossProfitRadio * 100).toFixed(2):0
                       }}%</span>
                   </div>
-                   <div>
+                   <div class="rightInfo1">
                    OEM
-                    <span class="light-blue"> {{!!info3?Number(info3.profitRadio*100).toFixed(2):0 }}  %</span>
+                    <span class="light-blue"> {{!!info3?Number(info3.profitRadio*100).toFixed(2):0 }}%</span>
 
                   </div>
-                  <div>
-                    OBM
-                    <span class="light-blue"
-                      >{{ !!info4?Number(info4.profitRadio*100).toFixed(2):0}}
-                      </span> %
+                  <div class="rightInfo1">
+                    OBM <span class="light-blue"
+                      >{{!!info4.profitRadio?Number(info4.profitRadio*100).toFixed(2):0}}%
+                      </span> 
                   </div>
 
                 </div>
@@ -2741,7 +2743,7 @@ margin-top: 20px;
         right: 0;
     }
     .centerInfo{
-      flex: 1;padding-top: 10px;padding-left: 40px;
+      flex: 1;padding-top: 10px;padding-left: 20px;
        
        
     }
@@ -2943,5 +2945,11 @@ margin-top: 20px;
     }
     ::v-deep .el-table .el-table__body-wrapper .el-table__cell{
       padding:2px 0;
+    }
+    .rightInfo{
+      padding-right:5px;
+    }
+    .rightInfo1{
+      padding-right:3px;
     }
 </style>

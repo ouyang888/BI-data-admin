@@ -271,7 +271,7 @@ export default{
   display: flex;
 }
 .precent-in{
-  width:40px;
+  // width:40px;
 }
 .precentCompentes {
   width: 35px;

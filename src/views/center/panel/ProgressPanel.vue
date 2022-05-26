@@ -4,14 +4,14 @@
       <div class="content">
         <CircleProgress
           style="position: absolute"
-          :rate="data.bar1"
+          :rate="!!data.bar1?Number(data.bar1):0"
           :size="130"
           :circleSize="130"
           :color="'#5AFFA3'"
         />
         <CircleProgress
           style="position: absolute"
-          :rate="data.bar2"
+          :rate="!!data.bar2?Number(data.bar2):0"
           :size="155"
           :circleSize="155"
           :color="'#7A5AFF'"

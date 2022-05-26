@@ -27,6 +27,7 @@ export default new Vuex.Store({
         currPath:'销向汇总',
         currTitle:'',
         unit:'亿',/*页面单位*/
+        tableUnit:' (万)',
         endDay:'',/*最后一天*/
         /* 图片框end */
     },

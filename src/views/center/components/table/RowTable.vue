@@ -1,13 +1,16 @@
 <template>
   <div class="execl">
-    <!-- show-summary=true -->
-    <!-- :summary-method="getSummaries" -->
-    <el-table border :data="mesInfo" :span-method="objectSpanMethod" 
+
+  
+
+    <el-table border :data="tableData" :span-method="objectSpanMethod" 
+       show-summary
+      :summary-method="getSummaries"
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" height="287" >
       <!-- v-if="router !== 'domesticDepartment' -->
       <el-table-column :prop="headerObj.marketChannel" align="center" :label="directName"></el-table-column>
-      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode" v-if="!arr.includes(router)"></el-table-column>
+      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode" v-if="marketCenter==false && arr.includes(router)==false"></el-table-column>
       <el-table-column align="center" label="责任人">
         <!-- <div class="nameColor" @click="handleClick">{{张茉欧}}</div> -->
         <template v-slot="scope">
@@ -19,15 +22,15 @@
             </div>
           </template>
       </el-table-column>
-      <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center" width="120">
+      <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item+$store.state.tableUnit" align="center" width="120">
         <template v-slot="scope">
           <div class="precent">
             <div style="width: 68px">{{ !scope.row[i]?0:scope.row[i].toFixed(2)}}</div>
             <div style="margin-top: 5px"> 
               <Progress style="margin-bottom: 3px" :rate="!!scope.row.dateRadio?scope.row.dateRadio*100:0" :color="'#FF8B2F'"
                 class="precentCompentes" />
-
-              <Progress  v-if="!complete.includes(router)" :rate="!!scope.row[i+'AmtRadio']?scope.row[i+'AmtRadio']*100:0" :color="'#66FFFF'" class="precentCompentes" />
+                   
+              <Progress  v-if="complete.includes(router)" :rate="!!scope.row[i+'AmtRadio']?scope.row[i+'AmtRadio']*100:0" :color="'#66FFFF'" class="precentCompentes" />
               <Progress v-else :rate="!!scope.row[i.replace('businessEntityName','completeRadio')]?scope.row[i.replace('businessEntityName','completeRadio')]*100:10" :color="'#66FFFF'" class="precentCompentes" />
             </div>
           </div>
@@ -75,6 +78,10 @@
       cooprMode: {
         type: String,
       },
+      marketCenter:{ /*控制渠道是否隐藏*/
+        type:Boolean,
+        default:false
+      },
       headerObj:{
         type:Object,
         default:function (){ return {
@@ -90,8 +97,10 @@
     data(){
       return{
         cell:2,
-        arr:['domesticDepartment','department','exportDepartment'], /*渠道路由名*/
-        complete:['department','exportDepartment'] /*控制不同模版完成率显示*/
+        arr:['domesticDepartment','offlineSummaryDepartment','onlineSummaryDepartment','exportDepartment'], /*过滤掉渠道 路由名*/
+        complete:['department','exportDepartment'], /*控制不同模版完成率显示*/
+        tableData:[],/*talbe*/
+        endObj:{} /*最后一条数据*/
 
       }
     },
@@ -215,21 +224,42 @@
           return color;
         }
       },
+      getSummaries(){
+           
+          console.log('this.endObj',this.endObj);
+          let arr = ['合计',''];
+
+          if(this.marketCenter==false && this.arr.includes(this.router)==false){
+            arr.push('');
+          }
+
+          // 遍历产司数据
+          for(var i in this.titleHead){
+            arr.push(this.endObj[i]);
+          }
+          // 增加右边合计
+          arr.push(this.endObj.cnyAmt);
+
+          return arr;
+
+
+      }
     },
     watch:{
     mesInfo:{
       handler:function(newValue,oldValue){
         console.log('更新newValue',newValue)
-        newValue.forEach((v,i)=>{
-          // v.amtRadio = Number((v.amtRadio*100).toFixed(2));
-          // v.profitRadio = Number((v.profitRadio*100).toFixed(2));
-          if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
-            console.log('headerObj.marketChannel',this.headerObj.marketChannel)
-            v[this.headerObj.marketChannel] = '合计';
-            v.ranking = '';
-          }
-        })
-        this.mesInfo = newValue;
+        // newValue.forEach((v,i)=>{
+        //   // v.amtRadio = Number((v.amtRadio*100).toFixed(2));
+        //   // v.profitRadio = Number((v.profitRadio*100).toFixed(2));
+        //   // if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
+        //   //   console.log('headerObj.marketChannel',this.headerObj.marketChannel)
+        //   //   v[this.headerObj.marketChannel] = '合计';
+        //   //   v.ranking = '';
+        //   // }
+        // })
+        this.tableData = newValue.slice(0,newValue.length - 1);
+        this.endObj = newValue.slice(newValue.length -1 ,newValue.length)[0];
 
       }
     }
@@ -316,4 +346,5 @@
   ::v-deep .el-table__cell.gutter{
     background:#041370;
   }
+
 </style>

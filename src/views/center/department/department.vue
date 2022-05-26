@@ -10,6 +10,7 @@
           <SadPanel :data="sabData" />
         </div>
       </div>
+ 
       <!-- 右侧卡片 -->
           <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2" @gotoCatSeries="gotoCatSeries"/>
     </div>
@@ -64,10 +65,11 @@
       <TableCardBox
       :leftData="tableInner"
       :rightData="tableOutter"
-  
+      :rowSpanNumber1="rowSpanNumber1"
       :titleHead="titleHead"
       :leftObj="TableLeftObj"
       :rightObj="TableRightObj"
+      :rightmarketCenter="rightmarketCenter"
     />
 
       
@@ -281,7 +283,8 @@ export default {
       // },
       showLoadingLeft:true,
       showLoadingRight:true,
-      titleName:this.$route.query.key || '环境'
+      titleName:this.$route.query.key || '环境',
+      rightmarketCenter:true
     };
   },
   computed:{
@@ -344,18 +347,18 @@ export default {
       this.tableOutter = tableOutter.rows;
         // this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
-        // let innerTop = tableInner.rows.filter((v) => {
-        //   return v.cooprLevel1 == "线上";
-        // });
+        let innerTop = tableInner.rows.filter((v) => {
+          return v.cooprLevel1 == "线上";
+        });
 
-        // let innerBottom = tableInner.rows.filter((v) => {
-        //   return v.cooprLevel1 == "线下";
-        // });
-        // this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
-        // let innerTotal = tableInner.rows.filter((v) => {
-        //   return v.cooprLevel2Manager == "底部合计" || v.cooprLevel2Manager =='合计';
-        // });
-        // this.tableInner = innerTop.concat(innerBottom, innerTotal);
+        let innerBottom = tableInner.rows.filter((v) => {
+          return v.cooprLevel1 == "线下";
+        });
+        this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
+        let innerTotal = tableInner.rows.filter((v) => {
+          return v.cooprLevel2Manager == "底部合计" || v.cooprLevel2Manager =='合计';
+        });
+        this.tableInner = innerTop.concat(innerBottom, innerTotal);
         this.tableInner.forEach(v=>{
           v.cnyAmt = v.total;
         })
@@ -387,7 +390,7 @@ export default {
         if(!obm[v.businessEntityName+v.directName]){
           obm[v.businessEntityName+v.directName] = 1;
           v.businessModelCompleteRadio =  v.directNameAmtRadio /*中间sab对应字段完成率*/
-          v.businessEntityAmt = !!v.businessEntityAmt?  Number((v.businessEntityAmt*100).toFixed(2)):0;
+          v.businessEntityAmt = !!v.businessEntityAmt?  Number((v.businessEntityAmt).toFixed(2)):0;
           v.businessEntityAmtRadio = !!v.businessEntityAmtRadio?v.businessEntityAmtRadio:0;
           v.businessEntityTaskAmt = !!v.businessEntityTaskAmt?v.businessEntityTaskAmt.toFixed(2):0;
           v.dateRadio = Number((v.dateRadio*100).toFixed(2)); /*时间进度*/
@@ -398,10 +401,8 @@ export default {
 
       });
       this.cardData = arr;
-   
-      // this.cardData = res.rows.filter(v=>{
-      //   return v.position.length<2
-      // })
+      console.log();
+
       this.cardSab = res2.rows.filter(v=>{
         v.positionRatio = v.sabAmtRadio;  /*右边sab*/
         return v.position.length<2
@@ -446,20 +447,20 @@ export default {
         this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2)
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].directName == "内销") {
-            this.progressData.bar2 = (
+            this.progressData.bar2 = Number(
               panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(2);
-            this.progressData.topGPM = (
+            this.progressData.topGPM = Number(
               panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(2);
             this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(2)
              this.speedData.bottomClose = ( panelDataList[i].cnyAmtRadio* 100).toFixed(2)
              this.speedData.bottomTime =  (panelDataList[i].dateRadio*100).toFixed(2)
           } else if (panelDataList[i].directName == "外销") {
-            this.progressData.bar1 = (
+            this.progressData.bar1 =Number (
               panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(2);
-            this.progressData.bottomGPM = (
+            this.progressData.bottomGPM = Number(
               panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(2);
             this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(2)
@@ -545,7 +546,7 @@ export default {
         let sellOutDataList = res.rows.filter(v=>{
           return v.businessEntityName == '总';
         });
-        console.log('sellOutDataList',sellOutDataList);
+        // console.log('sellOutDataList',sellOutDataList);
         // debugger;
         this.AvgTaskAmtDate = [];
         this.AvgTaskAmtList = [];
@@ -632,8 +633,10 @@ export default {
     async getListCharts(line) {
 
       let chart = {
-        code: 'onlineMiddleChart',
-        fields: "cooprLevel2"
+        // code: 'onlineMiddleChart',
+        // fields: "cooprLevel2"
+        code: 'directLevelChart',
+        fields: "businessEntityName"
       };
       Object.assign(chart, line)
       try {

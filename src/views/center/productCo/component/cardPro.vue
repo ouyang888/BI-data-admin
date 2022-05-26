@@ -1,8 +1,8 @@
 <template>
   <div class="flex-card" >
 
-    <div class="card-box"  v-for="(v,i) in cardList"   :key="i" >
-      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])" v-if="i<6" >{{v[cardObj.title]}} </div>
+    <div class="card-box"  v-for="(v,i) in cardList"   :key="i"  @click="gotoCatSeries(v[cardObj.title])">
+      <div class="card-font"  v-if="i<6" >{{v[cardObj.title]}} </div>
       <div class="card-border-box" v-if="i<6" >
         <div class="line"></div>
         <div class="line1"></div>
@@ -15,7 +15,7 @@
               <div class="top-left-font">实时</div>
               <div class="flex-finish">
                 <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}{{modelLabel}}</span></div>
-                <div class="finish-font">完成率 <span>{{v[cardObj.cnyAmtRadio]}}%</span></div>
+                <div class="finish-font">完成率 <span>{{Number(v[cardObj.cnyAmtRadio])}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
@@ -28,14 +28,14 @@
                 <div>
                   <div class="progress">
                     <a-progress
-                      :percent="v[cardObj.dateRadio]"
+                      :percent="Number(v.dateRadio*100)"
                       :show-info="false"
                       strokeColor="#FF8B2F"
                     />
                   </div>
                   <div class="progress">
                     <a-progress
-                      :percent="v[cardObj.saleAmtRadio]"
+                    :percent="Number(v[cardObj.saleAmtRadio]*100)"
                       :show-info="false"
                       strokeColor="rgb(102, 255, 255)"
                     />
@@ -67,16 +67,20 @@
           <div class="percent">
             <div>
               <span class="percent-title">毛利</span>
-              <span class="percent-text">{{v.grossProfitRadio}}%</span>
+              
+              <span class="percent-text">{{!!v.grossProfitRadio*100?Number(v.grossProfitRadio*100).toFixed(2):0.00}} %</span>
             </div>
             <template v-for="(item,k) in list"> 
           <div :key="k+22" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
-              <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
-              <span class="percent-text">{{(item.directCnyAmtRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+
+
+              <span class="percent-title">{{!!item[cardObj.cooprLevel1]?item[cardObj.cooprLevel1]:0}}</span>
+              
+              <span class="percent-text">{{!!item.businessModelCompleteRadio*100?Number(item.businessModelCompleteRadio*100):0.00}}%</span>
             </div>
             <div :key="k+223" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
               <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
-              <span class="percent-text">{{(item.directCnyAmtRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+              <span class="percent-text">{{(item.directCnyAmtRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(2) }}%</span>
             </div>
           </template>
 </div>
@@ -84,7 +88,6 @@
 <div class="sab">
     <div class="">
         <div class="sab-title">{{title1}}SAB</div>
-
         <template v-for="(item,s) in cardSab">
                  
                 <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
@@ -635,7 +638,7 @@
         justify-content: center;
         align-items: center;
         margin-left: 2px;
-        margin-right: 15px;
+        margin-right: 5px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -661,7 +664,7 @@
         text-align: center;
         font-weight: 400;
         display: inline-block;
-        width: 30px;
+        width: 50px;
     }
     
     .sab {
