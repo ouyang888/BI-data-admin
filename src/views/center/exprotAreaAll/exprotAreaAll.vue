@@ -149,7 +149,7 @@ export default {
       tableOutter:[],
       tableInner:[],
       leftObj:{   
-      name:'cooprLevel1',  /*标题*/
+      name:'cooprLevel2',  /*标题*/
       level:'salesMan',/*责任人*/
       tAvgAmt:'tAvgAmt',/*责任制*/
       },

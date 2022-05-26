@@ -94,7 +94,7 @@
     data(){
       return{
         cell:2,
-        arr:['domesticDepartment','department','exportDepartment'], /*过滤掉渠道 路由名*/
+        arr:['department','domesticDepartment','offlineSummaryDepartment','onlineSummaryDepartment','exportDepartment'], /*过滤掉渠道 路由名*/
         complete:['department','exportDepartment'] /*控制不同模版完成率显示*/
 
       }

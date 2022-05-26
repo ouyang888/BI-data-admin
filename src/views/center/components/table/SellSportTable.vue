@@ -21,7 +21,7 @@
       >
       </el-table-column>
            
-      <el-table-column v-if="router !== 'exprotAreaAll' || 'exprotAreaAllDepartment'"
+      <el-table-column v-if="!level.includes(router)"
         :prop="headerObj.level"
         align="center"
         label="责任人"
@@ -187,6 +187,13 @@ export default{
 
     
   
+  },
+  data(){
+    return{
+
+    level:['exprotAreaAll','exprotAreaAllDepartment'] /* 过滤责任人路由 */
+  }
+
   },
   watch:{
     mesInfo:{

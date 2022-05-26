@@ -2,13 +2,13 @@
   <div class="wrapper">
     <div class="backgroundPic">
       <div class="content">
-        <CircleProgress style="position:absolute" :rate="100" :size="130" :circleSize="130" />
-        <CircleProgress style="position:absolute" :rate="70" :color="'#7100E0'" :size="130" :circleSize="130"/>
-        <CircleProgress style="position:absolute" :rate="30" :color="'#0050E0'" :size="130" :circleSize="130"/>
+        <CircleProgress style="position:absolute" :rate="Math.round(Number(data.topArr.S)+Number(data.topArr.A)+Number(data.topArr.B))" :size="130" :circleSize="130" />
+        <CircleProgress style="position:absolute" :rate="Math.round(Number(data.topArr.S)+Number(data.topArr.A))" :color="'#7100E0'" :size="130" :circleSize="130"/>
+        <CircleProgress style="position:absolute" :rate="Math.round(Number(data.topArr.S))" :color="'#0050E0'" :size="130" :circleSize="130"/>
 
-        <CircleProgress style="position:absolute" :rate="100" :size="155" :circleSize="155" />
-        <CircleProgress style="position:absolute" :rate="70" :color="'#7100E0'" :size="155" :circleSize="155"/>
-        <CircleProgress style="position:absolute" :rate="30" :color="'#0050E0'" :size="155" :circleSize="155" />
+        <CircleProgress style="position:absolute" :rate="Math.round(Number(data.bottomArr.S)+Number(data.bottomArr.A)+Number(data.bottomArr.B))" :size="155" :circleSize="155" />
+        <CircleProgress style="position:absolute" :rate="Math.round(Number(data.bottomArr.S)+Number(data.bottomArr.A))" :color="'#7100E0'" :size="155" :circleSize="155"/>
+        <CircleProgress style="position:absolute" :rate="Math.round(Number(data.bottomArr.S))" :color="'#0050E0'" :size="155" :circleSize="155" />
         <div class="big-round">
           <div class="round">
             <p class="round-title">{{data.ballTitle}}</p>
@@ -54,6 +54,14 @@ export default {
     CircleProgress,
     // ProgressPanel
   },
+  watch:{
+    data:{
+      handler:function(newValue,oldValue){
+        debugger;
+        console.log('newValue1111',newValue)
+      }
+    }
+  }
 
 }
 </script>
