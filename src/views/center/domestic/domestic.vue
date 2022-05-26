@@ -775,14 +775,14 @@ export default {
         );
 
         if (res.rows.length < 1) {
-          this.allList = [0];
+          this.allList = [];
           this.allLiine = '';
           this.innerDirectDate = [];
           this.allInnerDirectDate = [];
-          this.innerDirectList = [0];
+          this.innerDirectList = [];
           this.innerDirectLine = '';
           this.outerDirectDate = [];
-          this.outerDirectList = [0];
+          this.outerDirectList = [];
           this.outerDirectLine = '';
           this.showLoading = false;
           this.myEcharts();

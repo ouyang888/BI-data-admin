@@ -2,9 +2,10 @@
   <div class="execl">
 
   
-    <!-- show-summary
-    :summary-method="getSummaries" -->
+
     <el-table border :data="tableData" :span-method="objectSpanMethod" 
+       show-summary
+      :summary-method="getSummaries"
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" height="287" >
       <!-- v-if="router !== 'domesticDepartment' -->
@@ -98,7 +99,8 @@
         cell:2,
         arr:['domesticDepartment','offlineSummaryDepartment','onlineSummaryDepartment','exportDepartment'], /*过滤掉渠道 路由名*/
         complete:['department','exportDepartment'], /*控制不同模版完成率显示*/
-        tableData:[]
+        tableData:[],/*talbe*/
+        endObj:{} /*最后一条数据*/
 
       }
     },
@@ -222,23 +224,42 @@
           return color;
         }
       },
+      getSummaries(){
+           
+          console.log('this.endObj',this.endObj);
+          let arr = ['合计',''];
+
+          if(this.marketCenter==false && this.arr.includes(this.router)==false){
+            arr.push('');
+          }
+
+          // 遍历产司数据
+          for(var i in this.titleHead){
+            arr.push(this.endObj[i]);
+          }
+          // 增加右边合计
+          arr.push(this.endObj.cnyAmt);
+
+          return arr;
+
+
+      }
     },
     watch:{
     mesInfo:{
       handler:function(newValue,oldValue){
         console.log('更新newValue',newValue)
-        newValue.forEach((v,i)=>{
-          // v.amtRadio = Number((v.amtRadio*100).toFixed(2));
-          // v.profitRadio = Number((v.profitRadio*100).toFixed(2));
-          if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
-            console.log('headerObj.marketChannel',this.headerObj.marketChannel)
-            v[this.headerObj.marketChannel] = '合计';
-            v.ranking = '';
-          }
-        })
-        this.tableData = newValue;
-        // this.tableData = newValue.slice(0,newValue.length - 1);
-        // console.log( 'this.tableData',this.tableData)
+        // newValue.forEach((v,i)=>{
+        //   // v.amtRadio = Number((v.amtRadio*100).toFixed(2));
+        //   // v.profitRadio = Number((v.profitRadio*100).toFixed(2));
+        //   // if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
+        //   //   console.log('headerObj.marketChannel',this.headerObj.marketChannel)
+        //   //   v[this.headerObj.marketChannel] = '合计';
+        //   //   v.ranking = '';
+        //   // }
+        // })
+        this.tableData = newValue.slice(0,newValue.length - 1);
+        this.endObj = newValue.slice(newValue.length -1 ,newValue.length)[0];
 
       }
     }
@@ -326,9 +347,4 @@
     background:#041370;
   }
 
-  ::v-deep .el-table__footer-wrapper tbody td.el-table__cell{
-  background-color: #070640;
-  color: #fff;
-  border-color: rgb(30, 29, 81);
-}
 </style>

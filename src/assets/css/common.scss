@@ -379,6 +379,14 @@ align-items: center;
  th.el-table__cell.gutter:last-of-type{
   border-bottom: 1px solid rgb(7 6 64);
 }
+.el-table__footer-wrapper{
+  td.el-table__cell{
+    background-color: #070640;
+    color: #fff;
+    border-color: rgb(30, 29, 81);
+  }
+}
+
 }
 .left-right-box .flex-top-card:nth-child(2){
   align-items:center!important;
