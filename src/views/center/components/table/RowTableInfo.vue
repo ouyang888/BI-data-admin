@@ -1,14 +1,11 @@
 <template>
   <div class="execl">
-    <!-- show-summary=true -->
-    <!-- :summary-method="getSummaries" -->
-
     <el-table border :data="mesInfo" :span-method="objectSpanMethod" 
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" height="287" >
       <el-table-column prop="category" align="center" label="品类"></el-table-column>
       
-<el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center" width="220">
+   <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item+$store.state.tableUnit" align="center" width="220">
     <template v-slot="scope">
           <div class="precent">
             <div style="width: 45%">{{ !scope.row[i]?0:scope.row[i].toFixed(2)}}</div>

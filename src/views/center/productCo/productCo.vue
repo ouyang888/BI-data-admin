@@ -305,26 +305,13 @@ export default {
          coopr_level1:'线上'
       }
       Object.assign(obj2,params)
-      // debugger;  
       const res = await API.getTotal(obj1);
       const res2 = await API.getTotal(obj2);
       if(res.code !=200) return;
       this.cardData = res.rows.filter(v => {
         return !!v.category;
      });
-      // let obm = {};
-      // let arr = [];
-      // res.rows.filter(v=>{
-
-      //   if(!obm[v.category+v.directName]){
-      //     obm[v.category+v.directName] = 1;
-      //     v.businessModelCompleteRadio =  v.obmOemAmtRadio /*中间sab对应字段完成率*/
-      //     arr.push(v);
-      //   }
-       
-
-      // });
-     console.log("cardData",this.cardData);
+     console.log("res2res2res2",res2);
       this.cardSab = res2.rows.filter(v => {
         return !!v.category;
       });
@@ -487,7 +474,6 @@ export default {
             onTime = timeArr;
             this.AvgTaskAmtDate.push(timeArr);
             this.AvgTaskAmtList.push(item.totalCnyAmt);
-            
             this.AvgTaskAmtLine = item.saleAvgAmt;
      
           }

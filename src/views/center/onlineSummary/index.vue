@@ -59,7 +59,7 @@
     <!-- 底部表格 -->
     <innerTableCardBox :leftData="tableInner" :rightData="tableOutter" 
     :leftObj="leftObj" :rightObj="rightObj" :rightObj2="rightObj2"
-      title1="合作模式三" title2="线上客户" :leftObj2="leftObj2" />
+      title1="合作模式三" title2="KA客户" :leftObj2="leftObj2" />
   </div>
 </template>
 <script>
@@ -1048,18 +1048,8 @@ export default {
       let tableOutter = await API.getTotal(
         Object.assign( onlineStore,time)
       );
-
-
-      // console.log("tableInner", tableOutter);
-
       this.tableInner = tableInner.rows;
-      console.log("线上汇总",tableInner);
-
       this.tableOutter = tableOutter.rows;
-      console.log("线吓唬总",tableOutter);
-      // } catch (err) {
-      //   console.log(err);
-      // }
     },
     changeDate(start,end) { /*echart切换时间*/
         let listParams = { /*年月日*/
@@ -1075,12 +1065,6 @@ export default {
     ontime() {
       return this.$store.state.year + '-' + this.$store.state.month//this.$store.state.model;
     },
-    // ontime2(){
-    //   return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month;
-    // },
-    // ontime3(){
-    //   return this.$store.state.year +'-'+ this.$store.state.month +',' + this.$store.state.year +'-'+ this.$store.state.month +','+ this.$store.state.year +'-'+ this.$store.state.month+',' +this.$store.state.year +'-'+ this.$store.state.month;
-    // },
     showMoney() {
       return this.$store.state.showMoney;
     },
@@ -1112,14 +1096,6 @@ export default {
     },
   },
   mounted() {
-    // this.getList1();
-
-    // this.getTable(this.mode,this.ontime,this.ontime);
-    // this.getCard(this.ontime);
-    // this.getdashboard();
-    // this.queryCardSAB();
-    // this.myEcharts();
-
     this.init(this.ontime);
   }
 };
