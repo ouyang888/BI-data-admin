@@ -18,11 +18,15 @@ export const objectToParamString = (paramObj) => {
     })
     return paramList.join('&')
 }
-export const clearObj = (obj)=>{
-    for(var i in obj){
-        if(Number(obj[i]).toString()!='NaN'){
-          obj[i] = 0;
-        }
+export const clearObj = (obj)=>{ /*处理仪表盘清空数据*/
 
+    for(var i in obj){
+        if(Number(obj[i]).toString()!='NaN' && typeof(obj[i])!='object'){ /*处理obj下的值*/
+          obj[i] = 0;
+        }else if(typeof(obj[i])=='object'){  /*处理obj下对象里的值*/
+            for(var s in obj[i]){
+              obj[i][s] = 0;
+            }
+        }
       }
 }

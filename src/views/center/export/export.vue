@@ -266,19 +266,19 @@ export default {
           this.speedData.bottomNum = !!panelDataList[0].saleTaskAmt?panelDataList[0].saleTaskAmt.toFixed(2):0
           for (var i = 0; i < panelDataList.length; i++) {
             if (panelDataList[i].obmOem == "OBM") {
-              this.progressData.bar1 = !!panelDataList[0].saleTaskAmt?(panelDataList[i].obmOemProfitRadio * 100).toFixed(2):0
-              this.progressData.topGPM = !!panelDataList[0].saleTaskAmt?(panelDataList[i].obmOemProfitRadio * 100).toFixed(2):0
-              this.speedData.ballLeftNum =!!panelDataList[0].saleTaskAmt? panelDataList[i].cnyAmt.toFixed(2):0
+              this.progressData.bar1 = !!panelDataList[i].obmOemProfitRadio?(panelDataList[i].obmOemProfitRadio * 100).toFixed(2):0
+              this.progressData.topGPM = !!panelDataList[i].obmOemProfitRadio?(panelDataList[i].obmOemProfitRadio * 100).toFixed(2):0
+              this.speedData.ballLeftNum =!!panelDataList[i].cnyAmt? panelDataList[i].cnyAmt.toFixed(2):0
 
-              this.speedData.bottomClose =!!panelDataList[0].saleTaskAmt?Number((panelDataList[i].cnyAmtRadio*100).toFixed(2)):0
-              this.speedData.bottomTime =!!panelDataList[0].saleTaskAmt?Number((panelDataList[i].dateRadio*100).toFixed(2)):0
+              this.speedData.bottomClose =!!panelDataList[i].cnyAmtRadio?Number((panelDataList[i].cnyAmtRadio*100).toFixed(2)):0
+              this.speedData.bottomTime =!!panelDataList[i].dateRadio?Number((panelDataList[i].dateRadio*100).toFixed(2)):0
 
             } else if (panelDataList[i].obmOem == "OEM") {
-              this.progressData.bar2 = !!panelDataList[0].saleTaskAmt?(panelDataList[i].obmOemProfitRadio * 100).toFixed(2):0
-              this.progressData.bottomGPM = !!panelDataList[0].saleTaskAmt?(panelDataList[i].obmOemProfitRadio * 100).toFixed(2):0
-              this.speedData.ballRightNum =!!panelDataList[0].saleTaskAmt? panelDataList[i].cnyAmt.toFixed(2):0
-              this.speedData.bottomClose1 =!!panelDataList[0].saleTaskAmt?Number((panelDataList[i].cnyAmtRadio*100).toFixed(2)):0
-              this.speedData.bottomTime1 =!!panelDataList[0].saleTaskAmt?Number((panelDataList[i].dateRadio*100).toFixed(2)):0
+              this.progressData.bar2 = !!panelDataList[i].obmOemProfitRadio?(panelDataList[i].obmOemProfitRadio * 100).toFixed(2):0
+              this.progressData.bottomGPM = !!panelDataList[i].obmOemProfitRadio?(panelDataList[i].obmOemProfitRadio * 100).toFixed(2):0
+              this.speedData.ballRightNum =!!panelDataList[i].cnyAmt? panelDataList[i].cnyAmt.toFixed(2):0
+              this.speedData.bottomClose1 =!!panelDataList[i].cnyAmtRadio?Number((panelDataList[i].cnyAmtRadio*100).toFixed(2)):0
+              this.speedData.bottomTime1 =!!panelDataList[i].dateRadio?Number((panelDataList[i].dateRadio*100).toFixed(2)):0
           }
 
         }

@@ -178,8 +178,8 @@ export default {
           this.$store.commit("setCurrPath", "外销汇总");
           break;
         case "onlineSummary":
-          this.title = "内销线上汇总";
-          this.$store.commit("setCurrPath", "内销线上汇总");
+          this.title = "内销线上汇总产司";
+          this.$store.commit("setCurrPath", "内销线上汇总产司");
           break;
 
         case "catSeries":

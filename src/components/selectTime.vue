@@ -11,15 +11,17 @@ export default {
   name: 'selectTime',
   data() {
     return {
-      currentTime: 30,
+      currentTime: 0,
       timeOptions: [
         { value: 15, label: "近15天" },
         { value: 30, label: "近30天" },
+        { value: 0, label: "本月" }
       ],
     }
   },
   methods: {
     changeDate(val) { /*echart切换时间*/
+      if(val>0){
       let dd = new Date();
       dd.setDate(dd.getDate() - val);
       var y = dd.getFullYear();
@@ -34,6 +36,12 @@ export default {
       let start_date = `${y}-${m}-${d}`;
       let end_date = `${ony}-${onm}-${ond}`;
       this.$emit('changeDate', start_date, end_date);
+    }else{
+      let ontime = this.$store.state.year +'-'+ this.$store.state.month;
+      let start_date =`${ontime}-01`;
+      let end_date =`${ontime}-${this.$store.state.endDay}`;
+      this.$emit('changeDate', start_date, end_date);
+    }
     },
 
   },

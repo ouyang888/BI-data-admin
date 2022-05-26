@@ -151,12 +151,12 @@ export default {
       tableInner: [],
       leftObj: {
         name: 'salesMan',  /*标题*/
-        level: 'salesMan',/*责任人*/
+        level: '',/*责任人*/
         tAvgAmt: 'tAvgAmt',/*责任制*/
       },
       rightObj: {
-        name: 'cooprLevel1',
-        level: 'customerName',
+        name: 'customerName',
+        level: '',
         tAvgAmt: 'tAvgAmt'
       },
       cardObj: {

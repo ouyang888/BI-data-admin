@@ -2,9 +2,10 @@
   <div class="execl">
     <el-table
       border
-      :data="mesInfo"
+      :data="tableData"
       :span-method="objectSpanMethod"
       show-summary
+      :summary-method="getSummaries"
       width="864px"
       class="execl-box"
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }"
@@ -21,7 +22,7 @@
       >
       </el-table-column>
            
-      <el-table-column v-if="router !== 'exprotAreaAll' || 'exprotAreaAllDepartment'"
+      <el-table-column v-if="!level.includes(router)"
         :prop="headerObj.level"
         align="center"
         label="责任人"
@@ -114,16 +115,16 @@
         height="30px"
       >
         <template v-slot="scope">
-          <div class="precent">
-            <div class="precent-in">
+          <!-- <div class="precent">
+            <div class="precent-in"> -->
              {{
                 scope.row[headerObj2.amtFinish]
                   ? (scope.row[headerObj2.amtFinish]).toFixed(2) 
                   : 0 
               }}
   <!--{{ scope.row.amtFinish }}-->
-            </div>
-            <div style="margin-top: 5px">
+            <!-- </div>
+            <div style="margin-top: 5px"> -->
               <!-- <Progress
                 style="margin-bottom: 3px"
                 :rate="!!scope.row.dateRadio*100?scope.row.dateRadio*100:0"
@@ -138,8 +139,8 @@
                 :color="'#66FFFF'"
                 class="precentCompentes"
               />-->
-            </div>
-          </div>
+            <!-- </div>
+          </div> -->
         </template>
       </el-table-column>
            
@@ -188,19 +189,29 @@ export default{
     
   
   },
+  data(){
+    return{
+
+    level:['exprotAreaAll','exprotAreaAllDepartment'], /* 过滤责任人路由 */
+    tableData:[],/*talbe*/
+    endObj:{} /*最后一条数据*/
+  }
+
+  },
   watch:{
     mesInfo:{
       handler:function(newValue,oldValue){
-        newValue.forEach((v,i)=>{
-          // v.amtRadio = Number((v.amtRadio*100).toFixed(2));
-          // v.profitRadio = Number((v.profitRadio*100).toFixed(2));
-          if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
-            console.log('headerObj.name',this.headerObj.name)
-            v[this.headerObj.name] = '合计';
-            v.ranking = '';
-          }
-        })
-        this.mesInfo = newValue;
+        // newValue.forEach((v,i)=>{
+        //   // v.amtRadio = Number((v.amtRadio*100).toFixed(2));
+        //   // v.profitRadio = Number((v.profitRadio*100).toFixed(2));
+        //   if(newValue.length == i+1){ /*统一处理底部合计名称问题*/
+        //     console.log('headerObj.name',this.headerObj.name)
+        //     v[this.headerObj.name] = '合计';
+        //     v.ranking = '';
+        //   }
+        // })
+        this.tableData = newValue.slice(0,newValue.length - 1);
+        this.endObj = newValue.slice(newValue.length -1 ,newValue.length)[0];
 
       }
     }
@@ -268,94 +279,106 @@ export default{
         return countenance;
       }
     },
+    getSummaries(){
+           
+          //  console.log('this.endObj',this.endObj);
+           let arr = ['合计',''];
+ 
+           let arrContent = [this.endObj[this.headerObj.tAvgAmt] && this.endObj[this.headerObj.tAvgAmt].toFixed(2) || 0,this.endObj.cnyAmt && this.endObj.cnyAmt.toFixed(2) || 0,this.endObj[this.headerObj2.amtRadio] && this.endObj[this.headerObj2.amtRadio]*100+'%' || 0,this.endObj[this.headerObj2.profitRadio] && this.endObj[this.headerObj2.profitRadio]*100+'%' || 0,this.endObj[this.headerObj2.amtFinish] || 0,''];
+         
+           arr = arr.concat(arrContent);
+          
+           // 增加右边合计
+          //  arr.push(this.endObj.cnyAmt);
+          // debugger;
+ 
+           return arr;
+ 
+ 
+       }
   },
 };
 </script>
 <style scoped lang="scss">
-.execl {
-  width:calc(50% - 15px);
-  height: 324px;
-  background-color: rgba(2, 0, 77, 0.4);
-  box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
-  border: 2px solid #0d53b7;
-  background-image: url("../../../../assets/img/tableVBackround.svg");
-  border-radius: 0 0 10px 10px;
-  background-size: cover;
+.el-table {
+                display: flex;
+                flex-direction: column;
 }
 
-.execl-box {
-  /* width: 864px; */
-  height: 287px;
-  margin: 5px auto 0;
-  border-color: #1e1d51;
+.el-table__body-wrapper {
+     order:1;
 }
 
-::v-deep.el-table--enable-row-hover .el-table__body tr:hover > td {
-  background-color: #070640 !important;
-}
 
-.nameColor {
-  color: #00ddff;
-  /* cursor: pointer; */
-}
-
-.precent {
-  /* width: 90px; */
-  height: 23px;
-  display: flex;
-}
-.precent-in{
-  // width:40px;
-}
-.precentCompentes {
-  width: 35px;
-  height: 4px;
-}
-
-.exportTable {
-}
-
-body .el-table::before {
-  z-index: inherit;
-}
-
-.el-table--border::after,
-.el-table--group::after {
-  width: 0;
-  height: 0;
-}
-
-::v-deep.el-table__body-wrapper {
-  &::-webkit-scrollbar {
-    height: 6px;
-    width: 6px;
+  .execl {
+    /* width: 900px; */
+    width:calc(50% - 15px);
+    height: 324px;
+    background-color: rgba(2, 0, 77, 0.4);
+    box-shadow: inset 0px 0px 34px 0px rgba(17, 40, 255, 0.66);
+    border: 2px solid #0d53b7;
+    background-image: url("../../../../assets/img/tableVBackround.svg");
+    border-radius: 0 0 10px 10px;
+    background-repeat: no-repeat;
+    background-size: 100%;
   }
-  &::-webkit-scrollbar-track {
-    background-color: #070640;
+
+  .execl-box {
+    /* width: 864px; */
+    /* height: 287px; */
+    margin: 20px auto 0;
+    border-color: #1e1d51;
+    background: #070640;
   }
-  &::-webkit-scrollbar-thumb {
-    background-color: #8383a5;
+
+
+  .nameColor {
+    color: #00ddff;
+    /* cursor: pointer; */
   }
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: #8383a5;
+
+  .precent {
+    /* width: 90px; */
+    height: 23px;
+    display: flex;
   }
-}
-::v-deep.el-table__fixed-right {
-  height: 100% !important;
-  bottom: 7px !important;
-  right: 7px !important;
-  .el-table__fixed-body-wrapper {
-    height: calc(100% - 43px) !important;
+
+  .precentCompentes {
+    width: 35px;
+    height: 4px;
   }
-}
-::v-deep .el-table .el-table__cell.gutter{
-  background:#041370;
-}
-::v-deep .el-table__body-wrapper{
-  background: #070640;
-}
-::v-deep .el-table--border th.el-table__cell.gutter:last-of-type{
-  border-bottom: 1px solid rgb(7 6 64);
-}
+
+  body .el-table::before {
+    z-index: inherit;
+  }
+
+  .el-table--border::after,
+  .el-table--group::after {
+    width: 0;
+    height: 0;
+  }
+
+  .el-table__fixed-right {
+    height: 100% !important;
+    bottom: 7px !important;
+    right: 7px !important;
+
+    .el-table__fixed-body-wrapper {
+      height: calc(100% - 43px) !important;
+    }
+  }
+  ::v-deep .el-table .el-table__cell{
+    padding:8px 0;
+  }
+
+  /* 头部加粗 */
+  ::v-deep.el-table .el-table__header tr {
+    font-weight: 600;
+  }
+  /*去掉空白*/
+  ::v-deep .el-table__cell.gutter{
+    background:#041370;
+  }
+
 
 </style>

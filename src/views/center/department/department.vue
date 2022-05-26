@@ -65,10 +65,11 @@
       <TableCardBox
       :leftData="tableInner"
       :rightData="tableOutter"
-  
+      :rowSpanNumber1="rowSpanNumber1"
       :titleHead="titleHead"
       :leftObj="TableLeftObj"
       :rightObj="TableRightObj"
+      :rightmarketCenter="rightmarketCenter"
     />
 
       
@@ -282,7 +283,8 @@ export default {
       // },
       showLoadingLeft:true,
       showLoadingRight:true,
-      titleName:this.$route.query.key || '环境'
+      titleName:this.$route.query.key || '环境',
+      rightmarketCenter:true
     };
   },
   computed:{
@@ -345,18 +347,18 @@ export default {
       this.tableOutter = tableOutter.rows;
         // this.rowSpanNumber2 = [this.tableOutter.length - 1];
 
-        // let innerTop = tableInner.rows.filter((v) => {
-        //   return v.cooprLevel1 == "线上";
-        // });
+        let innerTop = tableInner.rows.filter((v) => {
+          return v.cooprLevel1 == "线上";
+        });
 
-        // let innerBottom = tableInner.rows.filter((v) => {
-        //   return v.cooprLevel1 == "线下";
-        // });
-        // this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
-        // let innerTotal = tableInner.rows.filter((v) => {
-        //   return v.cooprLevel2Manager == "底部合计" || v.cooprLevel2Manager =='合计';
-        // });
-        // this.tableInner = innerTop.concat(innerBottom, innerTotal);
+        let innerBottom = tableInner.rows.filter((v) => {
+          return v.cooprLevel1 == "线下";
+        });
+        this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
+        let innerTotal = tableInner.rows.filter((v) => {
+          return v.cooprLevel2Manager == "底部合计" || v.cooprLevel2Manager =='合计';
+        });
+        this.tableInner = innerTop.concat(innerBottom, innerTotal);
         this.tableInner.forEach(v=>{
           v.cnyAmt = v.total;
         })
