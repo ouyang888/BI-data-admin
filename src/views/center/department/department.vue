@@ -446,20 +446,20 @@ export default {
         this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2)
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].directName == "内销") {
-            this.progressData.bar2 = (
+            this.progressData.bar2 = Number(
               panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(2);
-            this.progressData.topGPM = (
+            this.progressData.topGPM = Number(
               panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(2);
             this.speedData.ballLeftNum =  panelDataList[i].cnyAmt.toFixed(2)
              this.speedData.bottomClose = ( panelDataList[i].cnyAmtRadio* 100).toFixed(2)
              this.speedData.bottomTime =  (panelDataList[i].dateRadio*100).toFixed(2)
           } else if (panelDataList[i].directName == "外销") {
-            this.progressData.bar1 = (
+            this.progressData.bar1 =Number (
               panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(2);
-            this.progressData.bottomGPM = (
+            this.progressData.bottomGPM = Number(
               panelDataList[i].directNameGrossProfitRadio * 100
             ).toFixed(2);
             this.speedData.ballRightNum =  panelDataList[i].cnyAmt.toFixed(2)
@@ -545,7 +545,7 @@ export default {
         let sellOutDataList = res.rows.filter(v=>{
           return v.businessEntityName == '总';
         });
-        console.log('sellOutDataList',sellOutDataList);
+        // console.log('sellOutDataList',sellOutDataList);
         // debugger;
         this.AvgTaskAmtDate = [];
         this.AvgTaskAmtList = [];
@@ -632,8 +632,10 @@ export default {
     async getListCharts(line) {
 
       let chart = {
-        code: 'onlineMiddleChart',
-        fields: "cooprLevel2"
+        // code: 'onlineMiddleChart',
+        // fields: "cooprLevel2"
+        code: 'directLevelChart',
+        fields: "businessEntityName"
       };
       Object.assign(chart, line)
       try {

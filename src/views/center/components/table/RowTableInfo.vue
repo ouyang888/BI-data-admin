@@ -7,48 +7,11 @@
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" height="287" >
       <el-table-column prop="category" align="center" label="品类"></el-table-column>
-      <!-- v-if="router !== 'domesticDepartment' -->
-      <!-- <el-table-column :prop="headerObj.marketChannel" align="center" :label="directName"></el-table-column>
-      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode" v-if="!arr.includes(router)"></el-table-column>
-      <el-table-column align="center" label="责任人">
-        <template v-slot="scope">
-            <div class="nameColor" @click="handleClick(scope.row)" v-if="router == 'exportDepartment'">
-              {{ scope.row.cooprLevel1Manager }}
-            </div>
-            <div class="nameColor" @click="handleClick(scope.row)" v-else>
-              {{ scope.row[headerObj.manager] }}
-            </div>
-          </template>
-</el-table-column>
--->
-<!--       {
-  "onLineCompleteRatio": 0,
-  "monthDate": "2022-05",
-  "onLineCnyAmt": 0.7402,
-  "outLineCompleteRatio": 0,
-  "totalCnyAmt": 47.647,
-  "dateRadio": 0.8065,
-  "totalCompleteRatio": 0,
-  "category": "多士炉",
-  "outLineCnyAmt": 46.9068
-} 80.65 NaN NaN {s{cope.row.totalCompleteRatio*100 }} -->
-
-<!--  {
-  "monthDate": "2022-05",
-  "oemCnyAmt": 421.6014,
-  "obmCnyAmt": 97.4783,
-  "totalCnyAmt": 519.0798,
-  "dateRadio": 0.8065,
-  "obmCompleteRatio": 0,
-  "totalCompleteRatio": 0,
-  "category": null,
-  "oemCompleteRatio": 0
-}  -->
-
+      
 <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center" width="220">
     <template v-slot="scope">
           <div class="precent">
-            <div style="width: 45%">{{ !scope.row[i]?"":scope.row[i].toFixed(2)}}</div>
+            <div style="width: 45%">{{ !scope.row[i]?0:scope.row[i].toFixed(2)}}</div>
             <div style="margin-top: 5px"> 
               <Progress style="margin-bottom: 3px" :rate="scope.row.dateRadio*100" :color="'#FF8B2F'"
                 class="precentCompentes" />
