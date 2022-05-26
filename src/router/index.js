@@ -11,9 +11,7 @@ import {
     api
 } from '@/config/index'
 
-
 Vue.use(VueRouter)
-
 const routes = [
     {
         path: '/',
@@ -27,8 +25,6 @@ const routes = [
         name: 'login',
         component: () => import('@/views/login.vue'),
     },
-
-
 
     {
         path: '/center',
@@ -50,11 +46,6 @@ const routes = [
                 name: 'export',
                 component: () => import('@/views/center/export/export.vue')
             },
-            // {
-            //     path: 'onlineSummary',
-            //     name: 'onlineSummary',
-            //     component: () => import('@/views/center/offlineSummaryInfo/index.vue')
-            // },
             {
                 path: 'onlineSummary',
                 name: 'onlineSummary',
@@ -214,23 +205,21 @@ const router = new VueRouter({
 router.beforeEach(async (to, from, next) => {
     let isLogin = localStorage.getItem("token")
     if (to.name !== 'login' && isLogin == null) {
-        // if (to.fullPath === "/center" && from.fullPath !== "/center") {
-        // if (authoritys.includes('admin:quality')) {
         next('/login');
-        return
-        // }
-        // }
-        if (to.meta.permission) {
-            let sign = false
-            if (to.meta.permission instanceof Array) {
-                to.meta.permission.forEach(item => {
-                    if (authoritys.indexOf(item) >= 0) {
-                        sign = true
-                    }
-                })
-            } else if (authoritys.indexOf(to.meta.permission) > -1) sign = true
-        }
     }
+    let urlArr = JSON.parse(localStorage.getItem("menu"))
+    let newUrlArr = []
+    for (var i = 0; i < urlArr.length; i++) {
+        newUrlArr.push(urlArr[i].url)
+    }
+    // if (newUrlArr.indexOf(to.name) == -1) {
+       
+        // this.$message({
+        //     message: '模块建设中...',
+        //     type: 'success'
+        //   });
+        // this.$message.info("权限不足");
+    // }
     next();
 })
 
