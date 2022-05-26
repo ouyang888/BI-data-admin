@@ -13,7 +13,7 @@ export default {
   },
   created() {
     if (this.$router.path !== '/center/psi') {
-      this.$router.replace('/center/psi')
+      // this.$router.replace('/center/psi')
     }
   }
 };

@@ -14,6 +14,7 @@ Vue.config.productionTip = false
 Vue.use(antd)
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+import { clearObj } from '@/utils/utils';
 
 Vue.use(ElementUI);
 Vue.component('page-header', pageHeader);
@@ -32,7 +33,7 @@ Vue.directive('permission', {
 })
 
 Vue.mixin(mixin)
-
+Vue.prototype.clearObj = clearObj;
 
 new Vue({
   router,

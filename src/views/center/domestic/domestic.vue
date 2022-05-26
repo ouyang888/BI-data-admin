@@ -627,6 +627,8 @@ export default {
         const res = await API.getData('innerDirectTopTotal', params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
+        // this.clearObj(this.speedData);
+        // this.clearObj(this.progressData);
         if (res.rows.length < 1) {
           this.speedData = {
             bar: 0,
@@ -703,22 +705,7 @@ export default {
       try {
         const res = await API.getData('innerDirectTopSAB', params);
         let RightSAB = res.rows;
-        if (RightSAB.length < 1) {
-          this.sabData = {
-            bar1: 0,
-            bar2: 0,
-            bar3: 0,
-            bar4: 0,
-            bar5: 0,
-            ballTitle: "事业部",
-            bottom: "外销",
-            top: "内销",
-            sabArr: { s: 0, a: 0, b: 0 },
-            topArr: { s: 0, a: 0, b: 0 },
-            bottomArr: { s: 0, a: 0, b: 0 },
-          };
-          return;
-        }
+        this.clearObj(this.sabData);
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].cooprLevel1 == "线上") {
             this.sabData.bar1 = (RightSAB[i].level1PositionRatio * 100).toFixed(

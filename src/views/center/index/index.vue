@@ -1171,20 +1171,11 @@ export default {
         const res = await API.getTotal(params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
+        this.clearObj(this.speedData);
+        this.clearObj(this.progressData);
+
         if(res.rows.length<1){  /*处理切换月份数组为空，给数值字段重新赋值为0*/
-        for(var i in this.speedData){
-          if(Number(this.speedData[i]).toString()!='NaN'){
-            this.speedData[i] = 0;
-          }
-
-        }
-        for(var i in this.progressData){
-          if(Number(this.progressData[i]).toString()!='NaN'){
-            this.progressData[i] = 0;
-          } 
-        }
         return;
-
         }
       
         this.progressData.ballNum = Number((
@@ -1233,35 +1224,10 @@ export default {
       try {
         const res = await API.getTotal(params);
         let RightSAB = res.rows;
+        this.clearObj(this.sabData);
         if(RightSAB.length<1 ){
-
-          for(var i in this.sabData){
-          if(Number(this.sabData[i]).toString()!='NaN' && typeof(this.sabData[i])!='object'){ /*处理this.sabData下的值*/
-            this.sabData[i] = 0;
-          }else if(typeof(this.sabData[i])=='object'){  /*处理this.sabData下对象里的值*/
-              for(var s in this.sabData[i]){
-                this.sabData[i][s] = 0;
-              }
-          }
-        }
         return;
         }
-        // if(RightSAB.length<1 ){
-        //     this.sabData = {
-        //       bar1: 0,
-        //       bar2: 0,
-        //       bar3: 0,
-        //       bar4: 0,
-        //       bar5: 0,
-        //       ballTitle: "事业部",
-        //       bottom: "外",
-        //       top: "内",
-        //       sabArr: { s: 0, a: 0, b: 0 },
-        //       topArr: { s: 0, a: 0, b: 0 },
-        //       bottomArr: { s: 0, a: 0, b: 0 },
-        //     };
-        //    return;
-        // }
 
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].directName == "事业部") {

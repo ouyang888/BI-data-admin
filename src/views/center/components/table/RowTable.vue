@@ -1,8 +1,10 @@
 <template>
   <div class="execl">
-    <!-- show-summary=true -->
-    <!-- :summary-method="getSummaries" -->
-    <el-table border :data="mesInfo" :span-method="objectSpanMethod" 
+
+  
+    <!-- show-summary
+    :summary-method="getSummaries" -->
+    <el-table border :data="tableData" :span-method="objectSpanMethod" 
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" height="287" >
       <!-- v-if="router !== 'domesticDepartment' -->
@@ -94,8 +96,9 @@
     data(){
       return{
         cell:2,
-        arr:['department','domesticDepartment','offlineSummaryDepartment','onlineSummaryDepartment','exportDepartment'], /*过滤掉渠道 路由名*/
-        complete:['department','exportDepartment'] /*控制不同模版完成率显示*/
+        arr:['domesticDepartment','offlineSummaryDepartment','onlineSummaryDepartment','exportDepartment'], /*过滤掉渠道 路由名*/
+        complete:['department','exportDepartment'], /*控制不同模版完成率显示*/
+        tableData:[]
 
       }
     },
@@ -233,7 +236,9 @@
             v.ranking = '';
           }
         })
-        this.mesInfo = newValue;
+        this.tableData = newValue;
+        // this.tableData = newValue.slice(0,newValue.length - 1);
+        // console.log( 'this.tableData',this.tableData)
 
       }
     }
@@ -320,4 +325,10 @@
   ::v-deep .el-table__cell.gutter{
     background:#041370;
   }
+
+  ::v-deep .el-table__footer-wrapper tbody td.el-table__cell{
+  background-color: #070640;
+  color: #fff;
+  border-color: rgb(30, 29, 81);
+}
 </style>

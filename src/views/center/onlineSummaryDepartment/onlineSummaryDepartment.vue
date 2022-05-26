@@ -52,8 +52,8 @@
     </div>
 
     <!-- 底部表格 -->
-    <TableCardBox :leftData="tableInner" :rightData="tableOutter" :rowSpanNumber2="rowSpanNumber2"
-      :rowSpanNumber1="rowSpanNumber1" :titleHead="titleHead" :leftObj="leftObj" :rightObj="rightObj"  title1="直营" title2="代运营" />
+    <TableCardBox :leftData="tableInner" :rightData="tableOutter" 
+       :titleHead="titleHead" :leftObj="leftObj" :rightObj="rightObj" title1="直营" title2="代运营"/>
   </div>
 </template>
 <script>
@@ -62,8 +62,7 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
-import cardPro from "./component/cardPro.vue"; 
-
+import cardPro from "@/views/center/components/card/cardPro.vue";
 export default {
   components: {
     ProgressPanel,
@@ -95,12 +94,12 @@ export default {
       progressData: {
         bar1: 0,
         bar2: 0,
-        ballTitle: "内销",
+        ballTitle: "线上",
         bigBallTitle: "毛利率",
-        textLeft: "线上",
-        textRight: "线下",
-        titleTop: "线上",
-        titleBottom: "线下",
+        textLeft: "直营",
+        textRight: "代运营",
+        titleTop: "直营",
+        titleBottom: "代运营",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -108,26 +107,26 @@ export default {
       speedData: {
         bar: 0,
         speedBar: 0,
-        ballTitle: "内销达成",
+        ballTitle: "线上达成",
         ballNum: 0,
-        ballLeftTitle: "线上",
-        ballRightTitle: "线下",
+        ballLeftTitle: "直营",
+        ballRightTitle: "代运营",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "线上",
+        bottomTitle1: "直营",
         bottomClose: 0,
         bottomTime: 0,
-        bottomTitle2: "线下",
+        bottomTitle2: "代运营",
         bottomClose1: 0,
         bottomTime1: 0,
       },
       sabData: {
-        bar1: 0,
-        bar2: 0,
-        ballTitle: "内销",
-        top: "线上",
-        bottom: "线下",
+        bar1: 70,
+        bar2: 50,
+        ballTitle: "线上",
+        top: "直营",
+        bottom: "代运营",
          sabArr: { S: 0, A: 0, B: 0 },
         topArr: { S: 0, A: 0, B: 0  },
         bottomArr: { S: 0, A: 0, B: 0  },
@@ -174,13 +173,13 @@ export default {
       cardSabTitle1:"直营",
       cardSabTitle2:"代运营",
       leftObj:{
-        marketChannel:'marketChannel',
-        marketCenter:'marketCenter',
+        marketChannel:'marketCenter',
+        marketCenter:'',
         manager:'manager',
       },
       rightObj:{
-        marketChannel:'marketChannel',
-        marketCenter:'marketCenter',
+        marketChannel:'marketCenter',
+        marketCenter:'',
         manager:'manager',
       },
       showLoadingLeft: true,
@@ -235,7 +234,7 @@ export default {
       };
       // console.log("params", params);
       this.getdashboard(params);
-      // this.queryCardSAB(params);
+      this.queryCardSAB(params);
       this.getTable(params);
       this.getCard(params);
       this.getList(listParams);
@@ -297,58 +296,75 @@ export default {
       const res2 = await API.getTotal(obj2);
       if(res.code !=200) return;
       this.cardData = res.rows;
+      // this.cardData.forEach(v=>{
+      //   v.businessModelCompleteRadio = v.businessModelCompleteRadio;
+      // })
       console.log(this.cardData,this.cardData.length)
    
 
       this.cardSab = res2.rows;
     },
 
-    //仪表盘(左中)
-    async getdashboard(params) {
+    async getdashboard(time) {
       try {
         let obj = {
           code: "onlineTopTotal",
         }
-        Object.assign(obj, params);
-        //const res = await API.getData("onlineTopTotal", this.dateTime);
-        const res = await API.getTotal(obj);
+        const res = await API.getData("onlineTopTotal", time);
+        //const res = await API.getTotal(Object.assign(time, obj));
         let panelDataList = res.rows;
+        console.log("panelDataList",panelDataList);
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
-        ).toFixed(1);
-        this.speedData.speedBar = (
-          panelDataList[0].businessModelCompleteRadio * 100
-        ).toFixed(1) > 200 ? 200 : (
-          panelDataList[0].businessModelCompleteRadio * 100
-        ).toFixed(1);
-        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(1);
-        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(1);
-        // this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(1)
+        ).toFixed(2);
+        this.speedData.speedBar = (panelDataList[0].businessModelCompleteRadio * 100).toFixed(2) > 200 ? 200 :(panelDataList[0].businessModelCompleteRadio * 100).toFixed(2);
+         this.speedData.ballLeftNum= (panelDataList[0].cnyAmt * 100).toFixed(2);
+        this.speedData.bar = (panelDataList[0].dateRadio * 100).toFixed(2);
+        this.speedData.ballNum = panelDataList[0].onLineCnyAmt.toFixed(2);
+        this.speedData.bottomNum = panelDataList[0].saleTaskAmt.toFixed(2)
+
+        /* 顶部：仪表盘-金额版
+ * monthDate 月份
+ * directName 销向
+ * cooprLevel1 线上/线下
+ * businessModel 自营/代运营
+ * saleTaskAmt 线上责任制金额
+ * cnyAmt 自营/代运营金额
+ * onLineCnyAmt 线上总金额
+ * businessModelCompleteRadio 自营/代运营金额完成率
+ * onLineCompleteRadioRadio 线上金额完成率
+ * grossProfitRadio 自营/代运营毛利率
+ * onLineGrossProfitRadio 线上毛利率
+ * dateRadio 时间进度
+ */
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].businessModel == "直营") {
-            this.progressData.bar2 = (
-              panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.progressData.topGPM = (
-              panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.bottomClose1 = panelDataList[i].bmsCompleteRadio.toFixed(1)
-            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
-
-          }
-          if (panelDataList[i].businessModel == "代运营") {
-            //  Console.log("代运营",panelDataList[i].dateRadio)
+            console.log("panelDataList[i]",panelDataList[i]);
             this.progressData.bar1 = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
+            ).toFixed(2);
+            this.progressData.topGPM = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(2);
+            // this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2)
+             this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2)
+            this.speedData.bottomClose = (panelDataList[i].businessModelCompleteRadio*100).toFixed(2)
+            this.speedData.bottomTime = (panelDataList[i].dateRadio*100).toFixed(2)
+            console.log("panelDataList[i].dateRadio",panelDataList[i].dateRadio);
+
+          }
+         if (panelDataList[i].businessModel == "代运营") {
+            //  Console.log("代运营",panelDataList[i].dateRadio)
+            this.progressData.bar2 = (
+              panelDataList[i].grossProfitRadio * 100
+            ).toFixed(2);
             this.progressData.bottomGPM = (
               panelDataList[i].grossProfitRadio * 100
-            ).toFixed(1);
-            this.speedData.ballRightNum = panelDataList[i].saleTaskAmt.toFixed(1)
-
-            //  <span>{{data.bottomTitle1}}:</span><span>完成率:{{data.bottomClose}}%</span><span>时间进度:{{data.bottomTime}}%</span>
-            this.speedData.bottomClose1 = panelDataList[i].bmsCompleteRadio.toFixed(1)
-            this.speedData.bottomTime1 = panelDataList[i].dateRadio.toFixed(1)
+            ).toFixed(2);
+            this.speedData.ballRightNum = panelDataList[i].cnyAmt.toFixed(2)
+            // this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2)
+            this.speedData.bottomClose1 = (panelDataList[i].businessModelCompleteRadio*100).toFixed(2)
+            this.speedData.bottomTime1 = (panelDataList[i].dateRadio*100).toFixed(2)
           }
 
 
@@ -359,10 +375,17 @@ export default {
     },
 
     //仪表盘(右)
-    async queryCardSAB() {
+    async queryCardSAB(time) {
       try {
-        const res = await API.getData("onlineTopSAB", this.dateTime);
+            let obj = {
+          code: "onlineTopSAB",
+        }
+        const res = await API.getData("onlineTopSAB", time);
+        //  const res = await API.getTotal(Object.assign(time, obj));
+        // const res = await API.getData("onlineTopSAB", this.dateTime);
         let RightSAB = res.rows;
+    
+          console.log("RightSABRightSABRightSAB",RightSAB);
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].cooprLevel1 == "线上") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
@@ -383,6 +406,7 @@ export default {
             }
           }
           if (RightSAB[i].businessModel == "直营") {
+   
 
             this.sabData.bar1 = (RightSAB[i].positionRatio * 100).toFixed(1);
             if (RightSAB[i].position === "S") {
@@ -405,15 +429,15 @@ export default {
             if (RightSAB[i].position == "S") {
               this.sabData.bottomArr.S = (
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "A") {
               this.sabData.bottomArr.A = (
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             } else if (RightSAB[i].position == "B") {
               this.sabData.bottomArr.B = (
                 RightSAB[i].positionRatio * 100
-              ).toFixed(1);
+              ).toFixed(2);
             }
           }
         }
@@ -421,8 +445,6 @@ export default {
         console.log(error);
       }
     },
-
-
     //中间折线图
     async getList(params) {
       this.showLoading = true;
@@ -436,7 +458,9 @@ export default {
           obj
           // 'cooprLevel1'
         );
-
+        this.AvgTaskAmtDate = [];
+        this.AvgTaskAmtList = [];
+        this.AvgTaskAmtLine = '';
         res.rows.filter((item) => {
           if (item.businessEntityName == "总") {
             var timeArr = item.orderDate

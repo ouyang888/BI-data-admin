@@ -54,15 +54,6 @@ export default {
     CircleProgress,
     // ProgressPanel
   },
-  watch:{
-    data:{
-      handler:function(newValue,oldValue){
-        debugger;
-        console.log('newValue1111',newValue)
-      }
-    }
-  }
-
 }
 </script>
 
