@@ -37,7 +37,7 @@
       <el-table-column
         :prop="headerObj.tAvgAmt"
         align="center"
-        label="责任制"
+        :label="'责任制'+$store.state.tableUnit"
         height="30px"
       >
       
@@ -49,7 +49,7 @@
       <el-table-column
         prop="cnyAmt"
         align="center"
-        label="累计达成"
+        :label="'累计达成'+$store.state.tableUnit"
         height="30px"
       >
         <template v-slot="scope">
@@ -280,6 +280,7 @@ export default{
   border: 2px solid #0d53b7;
   background-image: url("../../../../assets/img/tableVBackround.svg");
   border-radius: 0 0 10px 10px;
+  background-size: cover;
 }
 
 .execl-box {
