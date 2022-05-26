@@ -151,102 +151,118 @@ export default {
         case "psi":
           this.title = "总裁PSI页";
           this.$store.commit("setCurrPath", "总裁PSI页");
+          // this.direction = 1
           break;
         case "index":
           this.title = "销向汇总页";
           this.$store.commit("setCurrPath", "销向汇总页");
-
+          this.direction = 1
           break;
         case "department":
           this.title = "产司汇总页";
           this.$store.commit("setCurrPath", "产司汇总页");
-
+          this.direction = 1
           break;
 
         case "productCo":
           this.title = "品类汇总";
           this.$store.commit("setCurrPath", "品类汇总");
-
+          this.direction = 1
           break;
         case "domestic":
           this.title = "内销汇总";
           this.$store.commit("setCurrPath", "内销汇总");
-
+          this.direction = 1
           break;
         case "export":
           this.title = "外销汇总";
           this.$store.commit("setCurrPath", "外销汇总");
+          this.direction = 1
           break;
         case "onlineSummary":
           this.title = "内销线上汇总";
           this.$store.commit("setCurrPath", "内销线上汇总");
+          this.direction = 1
           break;
-
         case "catSeries":
           this.title = "合作模式二负责人";
           this.$store.commit("setCurrPath", "合作模式二负责人");
+          this.direction = 1
           break;
 
         case "modeCo":
           this.title = "合作模式三负责人";
           this.$store.commit("setCurrPath", "  合作模式三负责人 ");
+          this.direction = 1
           break;
         case "onlineModeCo":
           this.title = "合作模式四负责人";
           this.$store.commit("setCurrPath", "  合作模式四负责人 ");
+          this.direction = 1
           break;
 
         case "offlineSummary":
           this.title = "内销线下汇总";
           this.$store.commit("setCurrPath", "内销线下汇总");
+          this.direction = 1
           break;
 
         case "offlineCatSeries":
           this.title = "合作模式二负责人";
           this.$store.commit("setCurrPath", "  合作模式二负责人 ");
+          this.direction = 1
           break;
         case "offlineCode":
           this.title = "合作模式三负责人";
           this.$store.commit("setCurrPath", " 合作模式三负责人  ");
+          this.direction = 1
           break;
         /*外销*/
         case "exprotAreaAll":
           this.title = "外销大区汇总页";
           this.$store.commit("setCurrPath", " 外销大区汇总页");
+          this.direction = 1
           break;
 
         case "exprotProductCo":
           this.title = "外销大区产司汇总页";
           this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
+          this.direction = 2
           break;
 
         case "domesticDepartment":
           this.title = "内销汇总产司页";
           this.$store.commit("setCurrPath", " 内销汇总产司页  ");
+          this.direction = 2
           break;
 
         case "onlineSummaryDepartment":
           this.title = "内销线上汇总产司页";
           this.$store.commit("setCurrPath", " 内销线上汇总产司页  ");
+          this.direction = 2
           break;
 
         case "offlineSummaryDepartment":
           this.title = "内销线下汇总产司页";
           this.$store.commit("setCurrPath", " 内销线下汇总产司页  ");
+          this.direction = 2
           break;
 
         case "exportDepartment":
           this.title = "外销产司汇总页";
           this.$store.commit("setCurrPath", " 外销产司汇总页  ");
+          this.direction = 2
           break;
         case "exprotAreaAllDepartment":
           this.title = "外销大区产司汇总页";
           this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
+          this.direction = 2
           break;
 
         default:
           this.title = "总裁PSI页";
           this.$store.commit("setCurrPath", "总裁PSI页");
+          // this.direction = 1
       }
     },
     goBack() {
@@ -333,11 +349,11 @@ export default {
 
       // this.$store.commit("setYear",'2022');
       this.$store.commit("setMonth", val);
-  
+
       let end = new Date(year, val, '0').getDate();
-      console.log('year',year,val,'0',end)
-      
-      this.$store.commit('setEndDay',end );
+      console.log('year', year, val, '0', end)
+
+      this.$store.commit('setEndDay', end);
       // let date = new Date()
 
 

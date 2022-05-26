@@ -12,9 +12,9 @@ export default {
     };
   },
   created() {
-    if (this.$router.path !== '/center/psi') {
-      this.$router.replace('/center/psi')
-    }
+    // if (this.$router.path !== '/center/psi') {
+    //   this.$router.replace('/center/psi')
+    // }
   }
 };
 </script>
