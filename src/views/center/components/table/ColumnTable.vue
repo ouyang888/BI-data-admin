@@ -1,7 +1,9 @@
 <template>
     <div class="execl">
 
-        <el-table border :data="mesInfo" :cell-style="{padding: '5px 0',borderColor: '#1E1D51' }"
+        <el-table border :data="tableData" :cell-style="{padding: '5px 0',borderColor: '#1E1D51' }"
+        show-summary
+        :summary-method="getSummaries"
             :row-style="rowStyle" :header-cell-style="headerCellStyle" class="exportTable"  >
             <el-table-column prop="businessEntityName" label="产司" width="60"   height="287" >
             </el-table-column>
@@ -145,6 +147,15 @@
             
             
         },
+        watch:{
+    mesInfo:{
+      handler:function(newValue,oldValue){
+        this.tableData = newValue.slice(0,newValue.length - 1);
+        this.endObj = newValue.slice(newValue.length -1 ,newValue.length)[0];
+
+      }
+    }
+  },
         data() {
             return {
                 // tableList: [
@@ -405,6 +416,8 @@
                 //         totalDone: 80,
                 //     },
                 // ],
+                tableData:[],
+                endObj:{}
             };
         },
         methods: {
@@ -441,7 +454,25 @@
                         fontWeight: 400
                     };
                 }
-            }
+            },
+            getSummaries(){
+            
+            // debugger;
+
+      let tempArr  = ['innerSaleTaskAmt','innerCnyAmt','outerSaleTaskAmt','outerCnyAmt','saleTaskAmtAll','cnyAmtAll']   
+       
+       console.log('this.endObj',this.endObj);
+       let arr = ['合计'];
+
+       tempArr.forEach(v=>{
+        arr.push(this.endObj[v].toFixed(2));
+       })
+
+
+       return arr;
+
+
+   }
         },
     };
 </script>
@@ -461,7 +492,7 @@
     .exportTable {
         font-size: 13px;
         /* width: 550px; */
-        height: 267px;
+        /* height: 267px; */
         border-color: #1E1D51;
         margin: 5px auto 0;
         /* background-color: rgb(4, 19, 112); */

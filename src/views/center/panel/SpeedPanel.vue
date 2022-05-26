@@ -37,10 +37,10 @@
     </div>
     <div class="bottom">
       <p>
-        <span>{{data.bottomTitle1}}:</span><span class="change">完成率:{{data.bottomClose}}%</span><span class="time">进度:{{data.bottomTime}}%</span>
+        <span>{{data.bottomTitle1}}：</span><span style="margin-right:6px;">完成率:{{data.bottomClose}}%</span><span>时间进度：{{data.bottomTime}}%</span>
       </p>
       <p>
-        <span>{{data.bottomTitle2}}:</span><span class="change">完成率:{{data.bottomClose1}}%</span><span class="time">进度:{{data.bottomTime1}}%</span>
+        <span>{{data.bottomTitle2}}：</span><span style="margin-right:6px;">完成率:{{data.bottomClose1}}%</span><span>时间进度：{{data.bottomTime1}}%</span>
       </p>
 
     </div>
