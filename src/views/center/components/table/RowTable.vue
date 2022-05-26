@@ -7,7 +7,7 @@
       :header-cell-style="headerCellStyle" class="execl-box" height="287" >
       <!-- v-if="router !== 'domesticDepartment' -->
       <el-table-column :prop="headerObj.marketChannel" align="center" :label="directName"></el-table-column>
-      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode" v-if="!arr.includes(router)"></el-table-column>
+      <el-table-column :prop="headerObj.marketCenter" align="center" :label="cooprMode" v-if="marketCenter==false && arr.includes(router)==false"></el-table-column>
       <el-table-column align="center" label="责任人">
         <!-- <div class="nameColor" @click="handleClick">{{张茉欧}}</div> -->
         <template v-slot="scope">
@@ -19,15 +19,15 @@
             </div>
           </template>
       </el-table-column>
-      <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item" align="center" width="120">
+      <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item+$store.state.tableUnit" align="center" width="120">
         <template v-slot="scope">
           <div class="precent">
             <div style="width: 68px">{{ !scope.row[i]?0:scope.row[i].toFixed(2)}}</div>
             <div style="margin-top: 5px"> 
               <Progress style="margin-bottom: 3px" :rate="!!scope.row.dateRadio?scope.row.dateRadio*100:0" :color="'#FF8B2F'"
                 class="precentCompentes" />
-
-              <Progress  v-if="!complete.includes(router)" :rate="!!scope.row[i+'AmtRadio']?scope.row[i+'AmtRadio']*100:0" :color="'#66FFFF'" class="precentCompentes" />
+                   
+              <Progress  v-if="complete.includes(router)" :rate="!!scope.row[i+'AmtRadio']?scope.row[i+'AmtRadio']*100:0" :color="'#66FFFF'" class="precentCompentes" />
               <Progress v-else :rate="!!scope.row[i.replace('businessEntityName','completeRadio')]?scope.row[i.replace('businessEntityName','completeRadio')]*100:10" :color="'#66FFFF'" class="precentCompentes" />
             </div>
           </div>
@@ -75,6 +75,10 @@
       cooprMode: {
         type: String,
       },
+      marketCenter:{ /*控制渠道是否隐藏*/
+        type:Boolean,
+        default:false
+      },
       headerObj:{
         type:Object,
         default:function (){ return {
@@ -90,7 +94,7 @@
     data(){
       return{
         cell:2,
-        arr:['domesticDepartment','department','exportDepartment'], /*渠道路由名*/
+        arr:['domesticDepartment','department','exportDepartment'], /*过滤掉渠道 路由名*/
         complete:['department','exportDepartment'] /*控制不同模版完成率显示*/
 
       }
@@ -103,7 +107,7 @@
   },
     methods: {
       handleClick(obj) {
-        this.$emit("handleClick",obj);
+        // this.$emit("handleClick",obj);
       },
       objectSpanMethod({ row, column, rowIndex, columnIndex }) {
         let number = 0;

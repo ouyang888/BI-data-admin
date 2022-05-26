@@ -3,14 +3,14 @@
 
     <CircleProgress 
       style="position:absolute" 
-      :rate="data.bar" 
+      :rate="!!data.bar?Number(data.bar):0" 
       :size="255" 
       :circleSize="255"
       :color="'#FFA500'" 
       :deg="{start: 135,end:45}" />
     <CircleProgress 
       style="position:absolute" 
-      :rate="data.speedBar" 
+      :rate="!!data.speedBar?Number(data.speedBar):0" 
       :size="215" 
       :circleSize="215"
       :barSize="30"
@@ -37,10 +37,10 @@
     </div>
     <div class="bottom">
       <p>
-        <span>{{data.bottomTitle1}}:</span><span>完成率:{{data.bottomClose}}%</span><span>时间进度:{{data.bottomTime}}%</span>
+        <span>{{data.bottomTitle1}}:</span><span class="change">完成率:{{data.bottomClose}}%</span><span class="time">进度:{{data.bottomTime}}%</span>
       </p>
       <p>
-        <span>{{data.bottomTitle2}}:</span><span>完成率:{{data.bottomClose1}}%</span><span>时间进度:{{data.bottomTime1}}%</span>
+        <span>{{data.bottomTitle2}}:</span><span class="change">完成率:{{data.bottomClose1}}%</span><span class="time">进度:{{data.bottomTime1}}%</span>
       </p>
 
     </div>
@@ -111,7 +111,7 @@ export default {
   font-size: 10px;
   color: #FFFFFF;
   letter-spacing: 0;
-  text-align: center;
+  /* text-align: center; */
   line-height: 10px;
   font-weight: 400;
 }
@@ -160,5 +160,13 @@ export default {
 }
 .round-content p {
   margin-top: 5px;
+}
+.change{
+  display: inline-block;
+  /* width:100px; */
+}
+.time{
+  display:inline-block;
+  margin-left:10px;
 }
 </style>

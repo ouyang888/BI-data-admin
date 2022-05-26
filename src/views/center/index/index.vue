@@ -665,9 +665,10 @@
     <TableCardBox
       :leftData="tableInner"
       :rightData="tableOutter"
-      :rowSpanNumber2="rowSpanNumber2"
+
       :rowSpanNumber1="rowSpanNumber1"
       :titleHead="titleHead"
+      :rightmarketCenter="rightmarketCenter"
     />
   </div>
 </template>
@@ -713,10 +714,10 @@ export default {
         bar2: 0,
         ballTitle: "事业部",
         bigBallTitle: "毛利率",
-        textLeft: "内销",
-        textRight: "外销",
-        titleTop: "内销",
-        titleBottom: "外销",
+        textLeft: "内",
+        textRight: "外",
+        titleTop: "内",
+        titleBottom: "外",
         topGPM: 0,
         bottomGPM: 0,
         ballNum: 0,
@@ -784,6 +785,7 @@ export default {
       },
       showLoadingLeft:true,
       showLoadingRight:true,
+      rightmarketCenter:true
     };
   },
   computed:{
@@ -918,13 +920,27 @@ export default {
           this.outterRightInfo = this.outterRight[0];
 
         }   
-        if(innersab.rows.length<1){
 
-          this.innerSabLeft = [{}];
-          this.innerSabRight = [{}];
-        }else{
-
-
+             this.innerSabLeft = [
+                  {
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                },
+              ];
+                this.innerSabRight = [{
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }];
 
         innersab.rows.forEach(v=>{
           v.positionRatio = (v.positionRatio*100).toFixed(2);
@@ -934,7 +950,7 @@ export default {
         let innerSabLeft = innersab.rows.length>0 && innersab.rows.filter((v) => {
           return v.cooprLevel1 == "线上";
         });
-        this.innerSabLeft = new Array(innerSabLeft.length);
+        // this.innerSabLeft = new Array(innerSabLeft.length);
         innerSabLeft.forEach(v=>{
           if(v.position == 'S'){
 
@@ -954,7 +970,7 @@ export default {
         });
 
 
-        this.innerSabRight = new Array(innerSabRight.length);
+        // this.innerSabRight = new Array(innerSabRight.length);
         this.innerSabRight>0 && innerSabRight.forEach(v=>{
           if(v.position == 'S'){
 
@@ -967,15 +983,28 @@ export default {
             this.innerSabRight[2] = v;
           }
         })
-     
-      }
 
-          if(outtersab.rows.length<1){
+            this.outterSabLeft = [
+                  {
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                },
+              ];
+                this.outterSabRight = [{
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }];
 
-                this.outterSabLeft = [{}];
-                this.outterSabRight = [{}];
-              }else{
-              
               outtersab.rows.forEach(v=>{
                 v.positionRatio = (v.positionRatio*100).toFixed(2);
               })
@@ -986,7 +1015,7 @@ export default {
                 return v.obmOem == "OBM";
               });
 
-              this.outterSabLeft = new Array(outterSabLeft.length);
+              // this.outterSabLeft = new Array(outterSabLeft.length);
                outterSabLeft.forEach(v=>{
               if(v.position == 'S'){
 
@@ -1004,7 +1033,7 @@ export default {
                 return v.obmOem == "OEM";
               });
 
-              this.outterSabRight = new Array(outterSabRight.length);
+              // this.outterSabRight = new Array(outterSabRight.length);
                outterSabRight.forEach(v=>{
               if(v.position == 'S'){
 
@@ -1017,9 +1046,6 @@ export default {
                 this.outterSabRight[2] = v;
               }
             })
-
-              
-            }
 
 
 
@@ -1078,13 +1104,13 @@ export default {
         // let obj = { divisionArr: [], innerDirect:[],outerDirect: [] };
         if(res.rows.length<1){
           this.divisionDate = [];
-            this.divisionList = [0];
+            this.divisionList = [];
             this.divisionLine = '';
           this.innerDirectDate = [];
-            this.innerDirectList = [0];
+            this.innerDirectList = [];
             this.innerDirectLine = '';
           this.outerDirectDate = [];
-            this.outerDirectList = [0];
+            this.outerDirectList = [];
             this.outerDirectLine = '';
             this.showLoading = false;
             this.myEcharts();

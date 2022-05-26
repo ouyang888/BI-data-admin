@@ -37,7 +37,7 @@
       <el-table-column
         :prop="headerObj.tAvgAmt"
         align="center"
-        label="责任制"
+        :label="'责任制'+$store.state.tableUnit"
         height="30px"
       >
       
@@ -49,7 +49,7 @@
       <el-table-column
         prop="cnyAmt"
         align="center"
-        label="累计达成"
+        :label="'累计达成'+$store.state.tableUnit"
         height="30px"
       >
         <template v-slot="scope">
@@ -68,8 +68,8 @@
           <div class="precent">
             <div class="precent-in" style="width: 88px">
               {{
-                scope.row[headerObj2.amtRadio1]
-                  ? (scope.row[headerObj2.amtRadio1]*100).toFixed(2) + "%"
+                scope.row[headerObj2.amtRadio]
+                  ? (scope.row[headerObj2.amtRadio]*100).toFixed(2) + "%"
                   : 0 + "%"
               }}
             </div>
@@ -280,6 +280,7 @@ export default{
   border: 2px solid #0d53b7;
   background-image: url("../../../../assets/img/tableVBackround.svg");
   border-radius: 0 0 10px 10px;
+  background-size: cover;
 }
 
 .execl-box {

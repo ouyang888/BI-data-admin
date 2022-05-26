@@ -15,6 +15,7 @@
         :setTrueOrFalse="setTrueOrFalse"
         :cooprMode="cooprMode"
         :headerObj="leftObj"
+        :marketCenter="leftmarketCenter"
       />
       <RowTable
         :color="color2"
@@ -26,6 +27,7 @@
         :setTrueOrFalse="setTrueOrFalse"
         :cooprMode="cooprMode"
         :headerObj="rightObj"
+        :marketCenter="rightmarketCenter"
       />
     </div>
     <!-- <div
@@ -96,6 +98,12 @@ export default {
       type:String,
       default:'外销'
     },
+    leftmarketCenter:{
+      type:Boolean
+    },
+    rightmarketCenter:{
+      type:Boolean
+    }
    
   },
   // watch:{

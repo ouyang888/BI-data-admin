@@ -18,3 +18,11 @@ export const objectToParamString = (paramObj) => {
     })
     return paramList.join('&')
 }
+export const clearObj = (obj)=>{
+    for(var i in obj){
+        if(Number(obj[i]).toString()!='NaN'){
+          obj[i] = 0;
+        }
+
+      }
+}
