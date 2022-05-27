@@ -43,7 +43,7 @@
       >
       
         <template v-slot="scope">
-          {{ !scope.row[headerObj.tAvgAmt] || Math.abs(scope.row[headerObj.tAvgAmt].toFixed(2)) ==0?0:?scope.row[headerObj.tAvgAmt].toFixed(2) }}
+          {{ !scope.row[headerObj.tAvgAmt] || Math.abs(scope.row[headerObj.tAvgAmt].toFixed(2)) ==0?0:scope.row[headerObj.tAvgAmt].toFixed(2) }}
         </template>
       </el-table-column>
            
