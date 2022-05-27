@@ -7,7 +7,8 @@
       :cell-style="{ padding: '5px 0', borderColor: '#1E1D51' }" :row-style="rowStyle" type="index"
       :header-cell-style="headerCellStyle" class="execl-box" height="287" >
       <el-table-column prop="category" align="center" label="品类"></el-table-column>
-      
+
+
    <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item+$store.state.tableUnit" align="center" width="220">
     <template v-slot="scope">
           <div class="precent">
@@ -206,15 +207,14 @@
                 }
             },
               getSummaries(){
-           
-          console.log('this.endObj',this.endObj);
           let arr = ['合计'];
-
+          
+          if(!!this.endObj){
           for(var i in this.titleHead){
-
-              arr.push(this.endObj[i]);
-
+           arr.push(!!this.endObj[i] &&!!this.endObj[i]?this.endObj[i].toFixed(2):0);
           }
+           }
+
           return arr;
 
 
@@ -223,9 +223,8 @@
         watch: {
             mesInfo: {
                 handler: function(newValue, oldValue) {
-         
-                   this.tableData = newValue.slice(0,newValue.length - 1);
-            this.endObj = newValue.slice(newValue.length -1 ,newValue.length)[0];
+                   this.tableData = this.mesInfo.slice(0,newValue.length - 1);
+                  this.endObj = this.mesInfo.slice(this.mesInfo.length -1 ,this.mesInfo.length)[0];
 
                 }
             }

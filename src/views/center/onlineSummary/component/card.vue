@@ -13,7 +13,7 @@
             <div class="flex-top-card">
               <div class="top-left-font">实时</div>
               <div class="flex-finish">
-                <div class="finish-font">责任制 <span>{{!!v.saleTaskAmt?Number(v.saleTaskAmt).toFixed(2):0.00}}亿</span></div>
+                <div class="finish-font">责任制<span>{{!!v.saleTaskAmt?(v.saleTaskAmt).toFixed(2): 0.00 }}{{modelLabel}}</span></div>
                 <div  class="finish-font">完成率
 
 
@@ -75,7 +75,7 @@
             <div class="flex-top-card">
               <div class="top-left-font">库存</div>
               <div class="flex-finish">
-                <div class="finish-font">责任制 <span>100亿</span></div>
+                <div class="finish-font">责任制 <span>100{{modelLabel}}</span></div>
                 <div class="finish-font">完成率 <span>75%</span></div>
               </div>
             </div>
@@ -123,6 +123,11 @@
         default: function () { return [] }
       },
     },
+    computed: {
+            modelLabel() {
+                return this.$store.state.showMoney == true ? '亿' : '万'
+            }
+        },
     methods: {
       gotoCatSeries(val) {
         this.$emit('gotoCatSeries',val)
