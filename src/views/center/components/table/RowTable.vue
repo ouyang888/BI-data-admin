@@ -235,10 +235,10 @@
 
           // 遍历产司数据
           for(var i in this.titleHead){
-            arr.push(this.endObj[i]);
+            arr.push(this.endObj[i] && this.endObj[i].toFixed(2) || 0);
           }
           // 增加右边合计
-          arr.push(this.endObj.cnyAmt);
+          arr.push(this.endObj.cnyAmt && this.endObj.cnyAmt.toFixed(2) || 0);
 
           return arr;
 
