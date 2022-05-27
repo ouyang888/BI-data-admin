@@ -4,7 +4,6 @@
       class="table"
       style="margin-top: 10px"
     >
-
       <RowTable
         :color="color"
         :mesInfo="leftData"

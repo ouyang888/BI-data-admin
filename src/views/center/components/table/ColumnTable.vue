@@ -1,7 +1,6 @@
 <template>
     <div class="execl">
-
-        <el-table border :data="tableData" :cell-style="{padding: '5px 0',borderColor: '#1E1D51' }"
+        <el-table border :data="mesInfo" :cell-style="{padding: '5px 0',borderColor: '#1E1D51' }"
         show-summary
         :summary-method="getSummaries"
             :row-style="rowStyle" :header-cell-style="headerCellStyle" class="exportTable"  >
@@ -150,8 +149,10 @@
         watch:{
     mesInfo:{
       handler:function(newValue,oldValue){
-        this.tableData = newValue.slice(0,newValue.length - 1);
-        this.endObj = newValue.slice(newValue.length -1 ,newValue.length)[0];
+          console.log(newValue);
+           console.log(oldValue);
+        this.tableData = this.mesInfo.slice(0,this.mesInfo.length - 1);
+        this.endObj = this.mesInfo.slice(this.mesInfo.length -1 ,this.mesInfo.length)[0];
 
       }
     }
@@ -456,16 +457,11 @@
                 }
             },
             getSummaries(){
-            
-            // debugger;
-
-      let tempArr  = ['innerSaleTaskAmt','innerCnyAmt','outerSaleTaskAmt','outerCnyAmt','saleTaskAmtAll','cnyAmtAll']   
-       
-       console.log('this.endObj',this.endObj);
+      let tempArr  = ['innerSaleTaskAmt','innerCnyAmt','outerSaleTaskAmt','outerCnyAmt','saleTaskAmtAll','cnyAmtAll','day']   
        let arr = ['合计'];
 
        tempArr.forEach(v=>{
-        arr.push(this.endObj[v].toFixed(2));
+        arr.push(this.endObj[v]);
        })
 
 

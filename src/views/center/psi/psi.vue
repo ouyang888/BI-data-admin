@@ -1310,7 +1310,7 @@ export default {
       //* orgQtyAll 合计累计达成销量
         echartsLabel: [
           { class: "plan", text: "实际达成" },
-          { class: "plan", text: "规划达成" },
+        
           { class: "average", text: "日均线" },
         ],
         info:[{}],
@@ -2588,7 +2588,7 @@ export default {
     this.getList(params);
     this.getLine(listParams);
     this.getTable(params);
-    this.myEcharts();
+    // this.myEcharts();
     this.myEcharts2();
     this.myEcharts3();
     }
