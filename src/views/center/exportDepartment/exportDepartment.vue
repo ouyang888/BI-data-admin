@@ -454,11 +454,11 @@ export default {
         }
         // console.log("obj", obj);
 
-        this.dhcarr = [];
+        // this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
 
-        arrs.forEach((v) => {
-          this.dhcarr.push(v[0].businessEntityName);
+        arrs.forEach((v,i) => {
+          this.dhcarr[i] = v[0].businessEntityName;
         });
         // console.log("arr", this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
@@ -494,7 +494,7 @@ export default {
 
 
           this.myEcharts2([], [], '', j);
-
+          this.dhcarr[j] = '暂无数据';
 
         }
       } catch (error) {
