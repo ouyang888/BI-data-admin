@@ -284,7 +284,7 @@ export default {
         // 销向金额完成率
         // 销向数量完成率
         this.speedData.speedBar = (panelDataList[0].directAmtRadio * 100).toFixed(2)> 200 ? 200 : (panelDataList[0].directAmtRadio * 100).toFixed(2);
-        this.speedData.bar = (panelDataList[0].directQtyRadio * 100).toFixed(2)
+        this.speedData.bar = !!panelDataList[0].dateRadio?(panelDataList[0].dateRadio * 100).toFixed(2):0;
         //  销向总销售数量
         // this.speedData.ballNum = (panelDataList[0].directsaleVolume / 1000000).toFixed(2)
 

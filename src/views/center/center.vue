@@ -143,9 +143,9 @@ export default {
         this.searchKeys = [this.$route.path, val.meta.preMenuUrl || ""];
         console.log("路由", val.name);
         if (val.name == 'psi') {
-          this.index = 1;
+          this.$store.commit('setIndex',1);
         } else {
-          this.index = 2;
+          this.$store.commit('setIndex',2);
         }
         this.getPageName(val.name);
       }
