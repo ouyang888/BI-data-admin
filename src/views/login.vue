@@ -49,7 +49,7 @@ export default {
         localStorage.setItem("userName", result.data.userName);
         this.cookie.set("JSESSIONID", result.data.sessionId);
         let res = await api.menuList();
-        this.$router.push(`/center/${res[0].url}`);
+        this.$router.push(`/center/psi`);
       } else {
         this.$message.error("账号/密码错误");
       }

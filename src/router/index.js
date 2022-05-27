@@ -206,12 +206,12 @@ router.beforeEach(async (to, from, next) => {
     let isLogin = localStorage.getItem("token")
     if (to.name !== 'login' && isLogin == null) {
         next('/login');
-    }
-    let urlArr = JSON.parse(localStorage.getItem("menu"))
-    let newUrlArr = []
-    for (var i = 0; i < urlArr.length; i++) {
-        newUrlArr.push(urlArr[i].url)
-    }
+    }   
+    // let urlArr = JSON.parse(localStorage.getItem("menu"))
+    // let newUrlArr = []
+    // for (var i = 0; i < urlArr.length; i++) {
+    //     newUrlArr.push(urlArr[i].url)
+    // }
     // if (newUrlArr.indexOf(to.name) == -1) {
        
         // this.$message({
