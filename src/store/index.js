@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { getToken } from '@/utils/auth';
 import API from '../service/authorityApi'
+import createPersistedState from 'vuex-persistedstate'
 import router from "@/router";
 
 Vue.use(Vuex)
@@ -29,6 +30,8 @@ export default new Vuex.Store({
         unit:'亿',/*页面单位*/
         tableUnit:' (万)',
         endDay:'',/*最后一天*/
+        direction:1, /*产司/销向*/
+        index:1 /*psi/s*/
         /* 图片框end */
     },
     mutations: {
@@ -54,7 +57,13 @@ export default new Vuex.Store({
         },
         setEndDay(state,val){
             state.endDay = val;
-        }
+        },
+        setDirection(state,val){
+            state.direction = val;
+        },
+        setIndex(state,val){
+            state.index = val;
+        },
     },
     actions: {
         // setCityName({commit,state}, name){
@@ -100,4 +109,15 @@ export default new Vuex.Store({
     },
     // modules: {
     // }
+    plugins:[createPersistedState({
+    storage:window.sessionStorage,
+    reducer(val){
+        return{
+            currPath:val.currPath,
+            direction:val.direction,
+            index:val.index,
+
+        }
+    }    
+    })]
 })

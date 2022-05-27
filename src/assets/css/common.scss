@@ -391,5 +391,8 @@ align-items: center;
 .left-right-box .flex-top-card:nth-child(2){
   align-items:center!important;
 }
-
+/*table 右边进度条显示*/
+.precent>div:nth-child(2) {
+  flex: auto;
+}
 

@@ -58,12 +58,12 @@
 
         <div class="change-flex">
           <div :class="
-            direction == '1' ? 'head-box-right active' : 'head-box-right'
+          direction == '1' ? 'head-box-right active' : 'head-box-right'
           " @click="changedirection(1)">
             <span>销向</span>
           </div>
           <div :class="
-            direction == '2' ? 'head-box-right active' : 'head-box-right'
+          direction == '2' ? 'head-box-right active' : 'head-box-right'
           " @click="changedirection(2)">
             <span>产司</span>
           </div>
@@ -108,11 +108,11 @@ export default {
   data() {
     return {
       searchKeys: [this.$route.path, this.$route.meta.preMenuUrl || ""],
-      index: 1,
-      title: "总裁PSI页",
+      // index: 1,
+      // title: "总裁PSI页",
       cus: 1,
       land: "产地",
-      direction: 1,
+      // direction: 1,
       year: new Date().getFullYear(),
       month: '01',
       date: new Date(),
@@ -130,6 +130,12 @@ export default {
     pathName() {
       return this.$store.state.currPath;
     },
+    direction(){
+      return this.$store.state.direction;
+    },
+    index(){
+      return this.$store.state.index;
+    }
   },
   watch: {
     $route: function (val) {
@@ -137,9 +143,9 @@ export default {
         this.searchKeys = [this.$route.path, val.meta.preMenuUrl || ""];
         console.log("路由", val.name);
         if (val.name == 'psi') {
-          this.index = 1;
+          this.$store.commit('setIndex',1);
         } else {
-          this.index = 2;
+          this.$store.commit('setIndex',2);
         }
         this.getPageName(val.name);
       }
@@ -149,98 +155,98 @@ export default {
     getPageName(path) {
       switch (path) {
         case "psi":
-          this.title = "总裁PSI页";
+          
           this.$store.commit("setCurrPath", "总裁PSI页");
           break;
         case "index":
-          this.title = "销向汇总页";
+          
           this.$store.commit("setCurrPath", "销向汇总页");
           break;
         case "department":
-          this.title = "产司汇总页";
+          
           this.$store.commit("setCurrPath", "产司汇总页");
           break;
 
         case "productCo":
-          this.title = "品类汇总";
+          
           this.$store.commit("setCurrPath", "品类汇总");
           break;
         case "domestic":
-          this.title = "内销汇总";
+          
           this.$store.commit("setCurrPath", "内销汇总");
           break;
         case "export":
-          this.title = "外销汇总";
+          
           this.$store.commit("setCurrPath", "外销汇总");
           break;
         case "onlineSummary":
-          this.title = "内销线上汇总";
+          
           this.$store.commit("setCurrPath", "内销线上汇总");
           break;
         case "catSeries":
-          this.title = "合作模式二负责人";
+          
           this.$store.commit("setCurrPath", "合作模式二负责人");
           break;
 
         case "modeCo":
-          this.title = "合作模式三负责人";
+          
           this.$store.commit("setCurrPath", "  合作模式三负责人 ");
           break;
         case "onlineModeCo":
-          this.title = "合作模式四负责人";
+          
           this.$store.commit("setCurrPath", "  合作模式四负责人 ");
           break;
 
         case "offlineSummary":
-          this.title = "内销线下汇总";
+          
           this.$store.commit("setCurrPath", "内销线下汇总");
           break;
 
         case "offlineCatSeries":
-          this.title = "合作模式二负责人";
+          
           this.$store.commit("setCurrPath", "  合作模式二负责人 ");
           break;
         case "offlineCode":
-          this.title = "合作模式三负责人";
+          
           this.$store.commit("setCurrPath", " 合作模式三负责人  ");
           break;
         /*外销*/
         case "exprotAreaAll":
-          this.title = "外销大区汇总页";
+          
           this.$store.commit("setCurrPath", " 外销大区汇总页");
           break;
 
         case "exprotProductCo":
-          this.title = "外销大区产司汇总页";
+          
           this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
           break;
 
         case "domesticDepartment":
-          this.title = "内销汇总产司页";
+          
           this.$store.commit("setCurrPath", " 内销汇总产司页  ");
           break;
 
         case "onlineSummaryDepartment":
-          this.title = "内销线上汇总产司页";
+          
           this.$store.commit("setCurrPath", " 内销线上汇总产司页  ");
           break;
 
         case "offlineSummaryDepartment":
-          this.title = "内销线下汇总产司页";
+          
           this.$store.commit("setCurrPath", " 内销线下汇总产司页  ");
           break;
 
         case "exportDepartment":
-          this.title = "外销产司汇总页";
+          
           this.$store.commit("setCurrPath", " 外销产司汇总页  ");
           break;
         case "exprotAreaAllDepartment":
-          this.title = "外销大区产司汇总页";
+          
           this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
           break;
 
         default:
-          this.title = "总裁PSI页";
+          
           this.$store.commit("setCurrPath", "总裁PSI页");
           // this.direction = 1
       }
@@ -273,36 +279,37 @@ export default {
     },
 
     changedirection(index) {
-      this.direction = index;
+      this.$store.commit('setDirection',index);
+    
       let urlName = this.$route.name;
       if (index == "1" && urlName != "offlineSummaryDepartment") {
         this.$router.push("/center/index");
-        this.title = "销向汇总页";
+        
       } else if (index == "1" && urlName == "offlineSummaryDepartment") {
         this.$router.push("/center/offlineSummary");
-        this.title = "内销线下汇总";
+        
       }
       if (index == "2" && urlName == "psi" || urlName == "index") {
         this.$router.push("/center/department");
-        this.title = "产司汇总页";
+        
       } else if (index == "2" && urlName == "domestic") {
         this.$router.push("/center/domesticDepartment");
-        this.title = "内销汇总产司页";
+        
       } else if (index == "2" && urlName == "onlineSummary") {
         this.$router.push("/center/onlineSummaryDepartment");
-        this.title = "线上汇总产司页";
+        
       } else if (index == "2" && urlName == "offlineSummary") {
         this.$router.push("/center/offlineSummaryDepartment");
-        this.title = "线下汇总产司页";
+        
       } else if (index == "2" && urlName == "export") {
         this.$router.push("/center/exportDepartment");
-        this.title = "外销产司汇总页";
+        
       } else if (index == "2" && urlName == "exprotAreaAll") {
         this.$router.push({ name: 'exprotAreaAllDepartment', query: { key: this.$route.key } });
-        this.title = "外销大区产司汇总页";
+        
       } else if (index == "2" && urlName == "index") {
         this.$router.push("/center/department");
-        this.title = "产司汇总页";
+        
       }
       // else {
 
@@ -349,14 +356,14 @@ export default {
       }
     },
     clickChange(i) {
-      this.index = i;
-      this.direction = 1;
+      this.$store.commit('setIndex',i);
+      this.$store.commit('setDirection',1);
       if (i == 1) {
         this.$router.push("/center/psi");
-        this.title = "总裁PSI页";
+        
       } else {
         this.$router.push("/center/index");
-        this.title = "销向汇总页";
+        
       }
     },
 

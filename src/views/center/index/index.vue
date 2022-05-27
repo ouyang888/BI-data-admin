@@ -48,14 +48,14 @@
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="innerLeftInfo.dateRadio"
+                          :percent="innerLeftInfo.dateRadio || 0"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="innerLeftInfo.onLineRadio"
+                          :percent="innerLeftInfo.onLineRadio || 0"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -86,14 +86,14 @@
                         <div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.dateRadio"
+                              :percent="item.dateRadio || 0"
                               :show-info="false"
                               strokeColor="#FF8B2F"
                             />
                           </div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.cnyAmtRadio * 100"
+                              :percent="item.cnyAmtRadio || 0 * 100"
                               :show-info="false"
                               strokeColor="rgb(102, 255, 255)"
                             />
@@ -125,14 +125,14 @@
                         <div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.dateRadio"
+                              :percent="item.dateRadio || 0"
                               :show-info="false"
                               strokeColor="#FF8B2F"
                             />
                           </div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.cnyAmtRadio * 100"
+                              :percent="item.cnyAmtRadio || 0 * 100"
                               :show-info="false"
                               strokeColor="rgb(102, 255, 255)"
                             />
@@ -184,14 +184,14 @@
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="innerRightInfo.dateRadio"
+                          :percent="innerRightInfo.dateRadio || 0"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="innerRightInfo.onLineRadio"
+                          :percent="innerRightInfo.onLineRadio || 0"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -220,14 +220,14 @@
                         <div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.dateRadio"
+                              :percent="item.dateRadio || 0"
                               :show-info="false"
                               strokeColor="#FF8B2F"
                             />
                           </div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.cnyAmtRadio * 100"
+                              :percent="item.cnyAmtRadio || 0 * 100"
                               :show-info="false"
                               strokeColor="rgb(102, 255, 255)"
                             />
@@ -258,14 +258,14 @@
                         <div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.dateRadio"
+                              :percent="item.dateRadio || 0"
                               :show-info="false"
                               strokeColor="#FF8B2F"
                             />
                           </div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.cnyAmtRadio * 100"
+                              :percent="item.cnyAmtRadio || 0 * 100"
                               :show-info="false"
                               strokeColor="rgb(102, 255, 255)"
                             />
@@ -335,14 +335,14 @@
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="outterLeftInfo.dateRadio"
+                          :percent="outterLeftInfo.dateRadio || 0"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="outterLeftInfo.onLineRadio"
+                          :percent="outterLeftInfo.onLineRadio || 0"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -371,14 +371,14 @@
                         <div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.dateRadio"
+                              :percent="item.dateRadio || 0"
                               :show-info="false"
                               strokeColor="#FF8B2F"
                             />
                           </div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.cnyAmtRadio * 100"
+                              :percent="item.cnyAmtRadio || 0 * 100"
                               :show-info="false"
                               strokeColor="rgb(102, 255, 255)"
                             />
@@ -409,14 +409,14 @@
                         <div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.dateRadio"
+                              :percent="item.dateRadio || 0"
                               :show-info="false"
                               strokeColor="#FF8B2F"
                             />
                           </div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.cnyAmtRadio * 100"
+                              :percent="item.cnyAmtRadio || 0 * 100"
                               :show-info="false"
                               strokeColor="rgb(102, 255, 255)"
                             />
@@ -472,14 +472,14 @@
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="outterRightInfo.dateRadio"
+                          :percent="outterRightInfo.dateRadio || 0"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="outterRightInfo.onLineRadio"
+                          :percent="outterRightInfo.onLineRadio || 0"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -508,14 +508,14 @@
                         <div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.dateRadio"
+                              :percent="item.dateRadio || 0"
                               :show-info="false"
                               strokeColor="#FF8B2F"
                             />
                           </div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.cnyAmtRadio * 100"
+                              :percent="item.cnyAmtRadio || 0 * 100"
                               :show-info="false"
                               strokeColor="rgb(102, 255, 255)"
                             />
@@ -546,14 +546,14 @@
                         <div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.dateRadio"
+                              :percent="item.dateRadio || 0"
                               :show-info="false"
                               strokeColor="#FF8B2F"
                             />
                           </div>
                           <div class="progress-middle">
                             <a-progress
-                              :percent="item.cnyAmtRadio * 100"
+                              :percent="item.cnyAmtRadio || 0 * 100"
                               :show-info="false"
                               strokeColor="rgb(102, 255, 255)"
                             />
@@ -908,7 +908,7 @@ export default {
         } else{
           inner.rows.forEach((v) => {
           v.dateRadio = v.dateRadio * 100>=100?100: Number((v.dateRadio * 100).toFixed(2)); 
-          v.onLineRadio = (v.onLineRadio * 100).toFixed(2);
+          v.onLineRadio = !!v.onLineRadio?(v.onLineRadio * 100).toFixed(2):0;
           v.onLineProfitRadio = Number((v.onLineProfitRadio * 100).toFixed(2));
           v.sumCnyamt = v.sumCnyamt.toFixed(2);
           v.saleTaskAmt =  v.saleTaskAmt.toFixed(2);
@@ -983,7 +983,7 @@ export default {
           return v.cooprLevel1 == "线上";
         });
         // this.innerSabLeft = new Array(innerSabLeft.length);
-        innerSabLeft.forEach(v=>{
+        innerSabLeft && innerSabLeft.length>0 && innerSabLeft.forEach(v=>{
           if(v.position == 'S'){
 
             this.innerSabLeft[0] = v;
@@ -1048,7 +1048,7 @@ export default {
               });
 
               // this.outterSabLeft = new Array(outterSabLeft.length);
-               outterSabLeft.forEach(v=>{
+              outterSabLeft && outterSabLeft.length>0 && outterSabLeft.forEach(v=>{
               if(v.position == 'S'){
 
                 this.outterSabLeft[0] = v;
@@ -1066,7 +1066,7 @@ export default {
               });
 
               // this.outterSabRight = new Array(outterSabRight.length);
-               outterSabRight.forEach(v=>{
+              outterSabRight && outterSabRight.length>0 && outterSabRight.forEach(v=>{
               if(v.position == 'S'){
 
                 this.outterSabRight[0] = v;
