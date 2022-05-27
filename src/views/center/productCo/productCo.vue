@@ -11,6 +11,10 @@
         </div>
       </div>
         <!-- 右侧卡片 -->
+     
+       
+    
+    <!-- <div class="noData" v-if="cardData.length===0">暂无数据</div> -->
     
       <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
     </div>
@@ -114,8 +118,8 @@ export default {
       },
              titleHead2: {
         // category:"品类",
-        oemCnyAmt: "oem",
-        obmCnyAmt : "obm",
+        oemCnyAmt: "OEM",
+        obmCnyAmt : "OBM",
         totalCnyAmt : "合计",
       },
       cardData: [],
@@ -1929,7 +1933,7 @@ myEcharts() {
 .top-left-font {
   font-size: 14px;
   color: #fff;
-  margin-right: 20px;
+
 }
 .card-border-box {
   margin: 10px 10px 30px 10px;

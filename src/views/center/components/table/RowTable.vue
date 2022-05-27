@@ -232,11 +232,13 @@
           if(this.marketCenter==false && this.arr.includes(this.router)==false){
             arr.push('');
           }
-
+         
+         if(!!this.endObj){
           // 遍历产司数据
           for(var i in this.titleHead){
-            arr.push(this.endObj[i] && this.endObj[i].toFixed(2) || 0);
+            arr.push(!!this.endObj[i] &&!!this.endObj[i]?this.endObj[i].toFixed(2):0);
           }
+         }
           // 增加右边合计
           arr.push(this.endObj.cnyAmt && this.endObj.cnyAmt.toFixed(2) || 0);
 

@@ -15,7 +15,7 @@
               <div class="top-left-font">实时</div>
               <div class="flex-finish">
                 <div class="finish-font">责任制 <span>{{v[cardObj.saleTaskAmt]}}{{modelLabel}}</span></div>
-                <div class="finish-font">完成率 <span>{{Number(v[cardObj.cnyAmtRadio])}}%</span></div>
+                <div class="finish-font">完成率 <span>{{Number(v[cardObj.cnyAmtRadio]).toFixed(2)}}%</span></div>
               </div>
             </div>
             <div class="flex-top-card">
@@ -79,7 +79,7 @@
               <span class="percent-text">{{!!item.businessModelCompleteRadio*100?Number(item.businessModelCompleteRadio*100):0.00}}%</span>
             </div>
             <div :key="k+223" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
-              <span class="percent-title">{{item[cardObj.cooprLevel1]}}</span>
+              <span class="percent-title">{{!!item[cardObj.cooprLevel1]?item[cardObj.cooprLevel1]:0}}</span>
               <span class="percent-text">{{(item.directCnyAmtRadio*100)>100?100:(item.businessModelCompleteRadio*100).toFixed(2) }}%</span>
             </div>
           </template>
@@ -216,7 +216,7 @@
                     let cooprLevel1 = '';
                     var k = 0;
                     newValue && newValue.forEach((v, i) => {
-                        v.positionRatio = (v.positionRatio * 100) > 100 ? 100 : (v.positionRatio * 100).toFixed(0);
+                        v.positionRatio = (v.positionRatio * 100) > 100 ? 100 : (v.positionRatio * 100).toFixed(1);
                     })
                     newValue && newValue.forEach((v, i) => { /*划分6个sab*/
                         console.log('V', v)
@@ -475,7 +475,6 @@
         color: #fff;
         opacity: 0.6;
         font-size: 12px;
-        margin-right: 4px;
         display: flex;
     }
     

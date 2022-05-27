@@ -194,11 +194,12 @@
           let title = '';
           this.cardList = [];
           if(newValue.length<1) return;
+        
           newValue && newValue.forEach(v => { /*划分6个卡片*/
-            if(v[this.cardObj.title] !=title && !!v[this.cardObj.title]){
-              // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(2);
-            // v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt].toFixed(2);
-            // v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(2));
+            if(v[this.cardObj.title] !=title && !!v[this.cardObj.title]&&!!this.cardObj){
+            v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(2);
+            v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt];
+            v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(1));
             // v.grossProfitRadio = Number((v.grossProfitRadio*100).toFixed(0));
             // debugger;
             // if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
@@ -218,7 +219,7 @@
                let cooprLevel1 = '';
                var k = 0;
                newValue && newValue.forEach((v,i)=>{
-                v.positionRatio = (v.positionRatio*100)>100?100:(v.positionRatio*100).toFixed(2);
+                v.positionRatio = (v.positionRatio*100)>100?100:(v.positionRatio*100).toFixed(1);
               })
                 newValue && newValue.forEach((v,i)=>{  /*划分6个sab*/
                   if(v[this.cardObj.title] !=title && v[this.cardObj.cooprLevel1] !=cooprLevel1 ){
@@ -475,7 +476,7 @@
     color: #fff;
     opacity: 0.6;
     font-size: 12px;
-    margin-right: 4px;
+
     display:flex;
   }
 
@@ -483,7 +484,7 @@
     color: #66ffff;
     margin-left: 2px;
     display: inline-block;
-    width:34px;
+ 
   }
 
   .mt-border {
@@ -638,6 +639,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      line-height:20px;
     }
   
     .percent-title {
