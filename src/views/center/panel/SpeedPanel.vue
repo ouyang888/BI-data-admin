@@ -20,7 +20,8 @@
     <div class="backgroundPic">
         <!-- <CircleProgress style="position:absolute" :rate="40" :size="155" /> -->
           <div class="round">
-            <p class="round-title">{{data.ballTitle}}</p>
+            <p class="round-title" v-if="!!this.$route.query.key"> {{ this.$route.query.key}}达成</p>
+            <p class="round-title" v-else> {{data.ballTitle}}</p>
             <p class="sort">{{data.ballNum}}{{modelLabel}}</p> 
             <div class="round-data">
               <span class="round-content">

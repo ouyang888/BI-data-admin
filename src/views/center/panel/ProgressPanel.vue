@@ -18,7 +18,10 @@
         />
         <div class="big-round">
           <div class="round">
-            <p class="round-title">{{ data.ballTitle }}</p>
+
+          
+            <p class="round-title" v-if="!!this.$route.query.key"> {{ this.$route.query.key}}达成</p>
+            <p class="round-title" v-else>{{ data.ballTitle }}</p>
             <p class="sort">{{ data.ballNum }}%</p>
           </div>
         </div>
