@@ -309,6 +309,11 @@ export default {
         const res = await API.getTotal(obj);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
+        this.clearObj(this.speedData);
+        this.clearObj(this.progressData);
+        if(res.rows.length<1){  /*处理切换月份数组为空，给数值字段重新赋值为0*/
+        return;
+        }
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
         ).toFixed(2);
@@ -358,7 +363,13 @@ export default {
       Object.assign(obj, params);
       try {
         const res = await API.getTotal(obj);
+        if(res.code !=200) return;
         let RightSAB = res.rows;
+        this.clearObj(this.sabData);
+
+        if(RightSAB.length<1 ){
+          return;
+        }
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].businessModel == "直营") {
             this.sabData.bar1 = (

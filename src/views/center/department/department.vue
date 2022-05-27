@@ -434,6 +434,12 @@ export default {
       try {
         const res = await API.getData("directLevelTopDashBoard",getdashboard);
         let panelDataList = res.rows;
+        this.clearObj(this.speedData);
+        this.clearObj(this.progressData);
+
+        if(res.rows.length<1){  /*处理切换月份数组为空，给数值字段重新赋值为0*/
+        return;
+        }
         this.progressData.ballNum = (
           panelDataList[0].grossProfitRadio * 100
         ).toFixed(2);
@@ -477,7 +483,13 @@ export default {
     async queryCardSAB(params) {
       try {
         const res = await API.getData("directLevelTopDashBoardSAB",params);
+        if(res.code !=200) return;
         let RightSAB = res.rows;
+        this.clearObj(this.sabData);
+        if(RightSAB.length<1 ){
+          return;
+        }
+
         for (var i = 0; i < RightSAB.length; i++) {
           // if (RightSAB[3].directName == "内销") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)

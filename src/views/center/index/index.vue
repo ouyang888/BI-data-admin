@@ -760,14 +760,46 @@ export default {
       innerLeftInfo: {},
       innerRight: [],
       innerRightInfo: {},
-      innerSabLeft: [{}],
-      innerSabRight: [{}],
+      innerSabLeft: [{
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }],
+      innerSabRight: [ {
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }],
       outterLeft: [],
       outterLeftInfo: {},
       outterRight: [],
       outterRightInfo: {},
-      outterSabLeft: [{}],
-      outterSabRight: [{}],
+      outterSabLeft: [  {
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                },],
+      outterSabRight: [  {
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }],
       // 底部表格
       tableInner: [],
       tableOutter: [],
@@ -1171,10 +1203,11 @@ export default {
         const res = await API.getTotal(params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
+        /*处理切换月份数组为空，给数值字段重新赋值为0*/
         this.clearObj(this.speedData);
         this.clearObj(this.progressData);
 
-        if(res.rows.length<1){  /*处理切换月份数组为空，给数值字段重新赋值为0*/
+        if(res.rows.length<1){  
         return;
         }
       

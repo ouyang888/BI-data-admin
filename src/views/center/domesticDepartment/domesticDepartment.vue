@@ -320,38 +320,11 @@ export default {
         const res = await API.getTotal(obj);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
-        if (res.rows.length < 1) {
-          this.speedData = {
-            bar: 0,
-            speedBar: 0,
-            ballTitle: "内销达成",
-            ballNum: 0,
-            ballLeftTitle: "线上",
-            ballRightTitle: "线下",
-            ballLeftNum: 0,
-            ballRightNum: 0,
-            bottomNum: 0,
-            bottomTitle1: "线上",
-            bottomClose: 0,
-            bottomTime: 0,
-            bottomTitle2: "线下",
-            bottomClose1: 0,
-            bottomTime1: 0,
-          };
-          this.progressData = {
-            bar1: 0,
-            bar2: 0,
-            ballTitle: "内销",
-            bigBallTitle: "毛利率",
-            textLeft: "线上",
-            textRight: "线下",
-            titleTop: "线上",
-            titleBottom: "线下",
-            topGPM: 0,
-            bottomGPM: 0,
-            ballNum: 0,
-          };
-          return;
+        this.clearObj(this.speedData);
+        this.clearObj(this.progressData);
+
+        if(res.rows.length<1){  /*处理切换月份数组为空，给数值字段重新赋值为0*/
+        return;
         }
         this.progressData.ballNum = (
           panelDataList[0].grossProfitRadio * 100
@@ -400,17 +373,8 @@ export default {
       try {
         const res = await API.getTotal(obj);
         let RightSAB = res.rows;
+        this.clearObj(this.sabData);
         if (RightSAB.length < 1) {
-          this.sabData = {
-            bar1: 0,
-            bar2: 0,
-            ballTitle: "内销",
-            bottom: "线下",
-            top: "线上",
-            sabArr: { s: 0, a: 0, b: 0 },
-            topArr: { s: 0, a: 0, b: 0 },
-            bottomArr: { s: 0, a: 0, b: 0 },
-          };
           return;
         }
         for (var i = 0; i < RightSAB.length; i++) {

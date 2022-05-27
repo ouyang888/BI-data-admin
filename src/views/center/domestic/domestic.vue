@@ -627,40 +627,11 @@ export default {
         const res = await API.getData('innerDirectTopTotal', params);
         //内销汇总仪表盘左边&&中间
         let panelDataList = res.rows;
-        // this.clearObj(this.speedData);
-        // this.clearObj(this.progressData);
-        if (res.rows.length < 1) {
-          this.speedData = {
-            bar: 0,
-            speedBar: 0,
-            ballTitle: "事业部达成",
-            ballNum: 0,
-            ballLeftTitle: "内销",
-            ballRightTitle: "外销",
-            ballLeftNum: 0,
-            ballRightNum: 0,
-            bottomNum: 0,
-            bottomTitle1: "内销",
-            bottomClose: 0,
-            bottomTime: 0,
-            bottomTitle2: "外销",
-            bottomClose1: 0,
-            bottomTime1: 0,
-          };
-          this.progressData = {
-            bar1: 0,
-            bar2: 0,
-            ballTitle: "事业部",
-            bigBallTitle: "毛利率",
-            textLeft: "内销",
-            textRight: "外销",
-            titleTop: "内销",
-            titleBottom: "外销",
-            topGPM: 0,
-            bottomGPM: 0,
-            ballNum: 0,
-          };
-          return;
+        this.clearObj(this.speedData);
+        this.clearObj(this.progressData);
+
+        if(res.rows.length<1){  /*处理切换月份数组为空，给数值字段重新赋值为0*/
+        return;
         }
         this.progressData.ballNum = (
           panelDataList[0].directProfitRadio * 100

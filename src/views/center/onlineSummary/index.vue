@@ -603,6 +603,13 @@ export default {
         const res = await API.getData("onlineTopTotal", time);
         //const res = await API.getTotal(Object.assign(time, obj));
         let panelDataList = res.rows;
+            /*处理切换月份数组为空，给数值字段重新赋值为0*/
+            this.clearObj(this.speedData);
+        this.clearObj(this.progressData);
+
+        if(res.rows.length<1){  
+        return;
+        }
         console.log("panelDataList",panelDataList);
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
@@ -674,6 +681,10 @@ export default {
         //  const res = await API.getTotal(Object.assign(time, obj));
         // const res = await API.getData("onlineTopSAB", this.dateTime);
         let RightSAB = res.rows;
+        this.clearObj(this.sabData);
+        if(RightSAB.length<1 ){
+        return;
+        }
           console.log("RightSABRightSABRightSAB",RightSAB);
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].cooprLevel1 == "线上") {
