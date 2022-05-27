@@ -1,8 +1,5 @@
 <template>
   <div class="execl">
-
-  
-
     <el-table border :data="tableData" :span-method="objectSpanMethod" 
        show-summary
       :summary-method="getSummaries"

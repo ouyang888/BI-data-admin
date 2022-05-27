@@ -56,6 +56,9 @@
         <div class="fang-color"></div>
         <div class="fang-color"></div>
       </div>
+       <div class="select-box">
+        <selectTime @changeDate="changeDate" />
+      </div>
     </div>
          <!-- <innerTableInfo :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
       title1="内销" title2="外销" /> -->
@@ -77,9 +80,8 @@
   </div>
 </template>
 <script>
-// import innerTableInfo from "@/views/center/components/table/innerTableInfo.vue";
 import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
-
+import selectTime from '@/components/selectTime.vue';
 //  import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
 import cardPro from "./component/cardPro.vue";
 
@@ -97,6 +99,7 @@ export default {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
+    selectTime
 
   },
   data() {
@@ -323,6 +326,14 @@ export default {
 
   },
   methods: {
+   changeDate(start, end) { /*echart切换时间*/
+      let listParams = { /*年月日*/
+        start_date: start,
+        end_date: end
+      }
+      this.getList1(listParams);
+      this.getListLeft(listParams);
+    },
     init(ontime){ /*初始化数据方法 model产地字段*/   
    let params = {  /*年月*/
       month_date:ontime
