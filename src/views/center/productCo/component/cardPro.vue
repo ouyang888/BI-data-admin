@@ -88,6 +88,7 @@
 <div class="sab">
     <div class="">
         <div class="sab-title">{{title1}}SAB</div>
+
         <template v-for="(item,s) in cardSab">
                  
                 <span :key="s+11" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">

@@ -274,188 +274,6 @@
                 </div>
               </div>
        
-              <!-- <div style="flex: 1; padding: 10px" v-if="this.sales='外销'">
-                <div class="flex-top-card">
-                  <div class="top-left-font">外销达成</div>
-                  <div class="flex-finish">
-                    <div class="finish-font">责任制 <span>100亿</span></div>
-                    <div class="finish-font">完成率 <span>75%</span></div>
-                  </div>
-                </div>
-                <div class="flex-top-card">
-                  <div class="card-big-num">75亿</div>
-                  <div style="display: flex; align-items: center">
-                    <div class="finish-font">进度</div>
-                    <div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="#FF8B2F"
-                        />
-                      </div>
-                      <div class="progress">
-                        <a-progress
-                          :percent="50"
-                          :show-info="false"
-                          strokeColor="rgb(102, 255, 255)"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                  "
-                >
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card-middle-progress">
-                    <div style="display: flex; align-items: center">
-                      <div class="finish-font">进度</div>
-                      <div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="#FF8B2F"
-                          />
-                        </div>
-                        <div class="progress-middle">
-                          <a-progress
-                            :percent="50"
-                            :show-info="false"
-                            strokeColor="rgb(102, 255, 255)"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="flex-bottoms">
-                  <div>线上结构 S-10%; A-20%; B-70%</div>
-                </div>
-                <div
-                  class="flex-bottoms"
-                  style="padding-bottom: 10px; padding-top: 4px"
-                >
-                  <div>线上毛利率 <span class="light-blue">75%</span></div>
-                </div>
-              </div> -->
             </div>
             <div class="line"></div>
           </div>
@@ -1574,18 +1392,18 @@ export default {
                          day:12
                     },
                      {
-                        businessEntityName: "饮品",
-                        innerSaleTaskAmt: 49,
-                        innerCnyAmt: 3363,
-                        outerSaleTaskAmt: 434,
-                        outerCnyAmt: 65,
-                        saleTaskAmtAll: 25,
-                        cnyAmtAll: 108,
-                        outerCnyAmtRatio:90,
-                        day:12,
-                          innerCnyAmtRatio:90,
-                        outerCnyAmtRatio:13,
-                        dateRadio :2,
+                       businessEntityName: "合计",
+                        cnyAmtAll: 492.7632,
+                        cnyAmtAllRatio: 0,
+                        dateRadio: 0.871,
+                        innerCnyAmt: 366.0353,
+                        innerCnyAmtRatio: 0,
+                        innerSaleTaskAmt: 0,
+                        monthDate: "2022-05",
+                        outerCnyAmt: 126.7279,
+                        outerCnyAmtRatio: 10000,
+                        outerSaleTaskAmt:1000,
+                        saleTaskAmtAll: 10000
                     }
                    
                 ],
@@ -1685,6 +1503,20 @@ export default {
                         innerCnyAmtRatio:90,
                         outerCnyAmtRatio:13,
                          day:12
+                    },
+                            {
+                       businessEntityName: "合计",
+                        cnyAmtAll: 492.7632,
+                        cnyAmtAllRatio: 0,
+                        dateRadio: 0.871,
+                        innerCnyAmt: 366.0353,
+                        innerCnyAmtRatio: 0,
+                        innerSaleTaskAmt: 0,
+                        monthDate: "2022-05",
+                        outerCnyAmt: 126.7279,
+                        outerCnyAmtRatio: 10000,
+                        outerSaleTaskAmt:1000,
+                        saleTaskAmtAll: 10000
                     }
                    
                 ],
@@ -2181,8 +2013,6 @@ export default {
             // obj.divisionArr.push(item)
             this.divisionDate.push(yue+'-'+ri)
             this.divisionList.push(item.totalCnyAmt)
-              console.log("totalCnyAmt",item.totalCnyAmt);
-            console.log("折线图",item.saleAvgAmt);
             //saleAvgAmt
             this.divisionLine=item.saleAvgAmt;
           }
