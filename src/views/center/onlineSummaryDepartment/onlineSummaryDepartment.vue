@@ -473,6 +473,9 @@ export default {
         this.AvgTaskAmtDate = [];
         this.AvgTaskAmtList = [];
         this.AvgTaskAmtLine = '';
+        if(res.rows.length<1){
+          this.myEcharts();
+        }
         res.rows.filter((item) => {
           if (item.businessEntityName == "总") {
             var timeArr = item.orderDate
@@ -523,14 +526,10 @@ export default {
           k++;
         }
         // console.log("obj",arr, arr.length);
-
-        this.dhcarr = [];
-
-        arr.forEach((v) => {
-          // if (v[0].businessEntityName != "总") {
-          this.dhcarr.push(v[0].businessEntityName);
-          // }
+        arr.forEach((v,i) => {
+          this.dhcarr[i] =v[0].businessEntityName;
         });
+
         this.dhcarr.splice(6);
         // console.log("arr5555", this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
@@ -539,6 +538,7 @@ export default {
           let AmericaDate = [];
           let AmericaList = [];
           let AmericaLine = 1;
+    
           v.forEach((item) => {
             // console.log("!112222",item)
             if (item.businessEntityName != "总") {
@@ -552,7 +552,7 @@ export default {
 
               AmericaDate.push(yue + "-" + ri);
               AmericaList.push(item.totalCnyAmt);
-              AmericaLine = item.saleAvgAmt;
+              AmericaLine = item.saleAvgAmt || 0;
             }
           });
 
