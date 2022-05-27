@@ -24,6 +24,7 @@
         <div>
           <div class="middle-font left-file">内销线上日达成趋势图</div>
           <div id="main" class="echartsBox"></div>
+          <div class="leftData" v-if="AvgTaskAmtList.length<1">暂无数据</div>
         </div>
         <div>
           <div class="middle-font">产司线上日达成趋势图</div>
@@ -484,10 +485,10 @@ export default {
               .split("-");
             var yue = timeArr[1];
             var ri = timeArr[2];
-            if (item.totalAvgTaskAmt !== null && item.totalAmt !== null) {
+            if (item.totalCnyAmt !== null) {
               this.AvgTaskAmtDate.push(yue + "-" + ri);
               this.AvgTaskAmtList.push(item.totalCnyAmt);
-              this.AvgTaskAmtLine = item.saleAvgAmt;
+              this.AvgTaskAmtLine = item.saleAvgAmt || 0;
               this.myEcharts();
             }
           }
@@ -561,6 +562,20 @@ export default {
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         });
+        // 处理空数据
+        let noDatalen = 6 -  arr.length;
+
+        for (let j = arr.length; j < noDatalen; j++) {
+
+
+          this.myEcharts2([], [], '', j);
+          this.dhcarr[j] = '暂无数据';
+
+
+        }
+
+
+
       } catch (error) {
         console.log(error);
       }
