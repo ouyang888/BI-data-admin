@@ -760,14 +760,46 @@ export default {
       innerLeftInfo: {},
       innerRight: [],
       innerRightInfo: {},
-      innerSabLeft: [{}],
-      innerSabRight: [{}],
+      innerSabLeft: [{
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }],
+      innerSabRight: [ {
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }],
       outterLeft: [],
       outterLeftInfo: {},
       outterRight: [],
       outterRightInfo: {},
-      outterSabLeft: [{}],
-      outterSabRight: [{}],
+      outterSabLeft: [  {
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                },],
+      outterSabRight: [  {
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }],
       // 底部表格
       tableInner: [],
       tableOutter: [],
