@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import store from "../store";
+import api from "@/service/api";
+import VueCookies from "vue-cookies";
+Vue.prototype.cookie = VueCookies;
 import VueRouter, {
     RouteConfig
 } from 'vue-router'
@@ -7,9 +10,6 @@ import VueRouter, {
 import {
     getToken
 } from '@/utils/auth';
-import {
-    api
-} from '@/config/index'
 
 Vue.use(VueRouter)
 const routes = [
@@ -205,20 +205,35 @@ const router = new VueRouter({
 router.beforeEach(async (to, from, next) => {
     let isLogin = localStorage.getItem("token")
     if (to.name !== 'login' && isLogin == null) {
-        next('/login');
-    }   
+        // next('/login');
+        location.href = "https://signin.midea.com/oauth2.0/authorize?response_type=code&client_id=0k9m1deaadmin8&redirect_uri=http://p.midea.com"
+    }
+    let urlCode = this.$route.params.code
+    if (urlCode) {
+        let formData = new FormData();
+        formData.append("password", "all-purpose-password");
+        formData.append("code", urlCode);
+        formData.append("rememberMe", false);
+        const result = await api.login(formData);
+        if (result.code === 0) {
+            localStorage.setItem("token", result.data.sessionId);
+            this.cookie.set("mip_sso_id", result.data.sessionId);
+            // let res = await api.menuList();
+            this.$router.push(`/center/psi`);
+        }
+    }
     // let urlArr = JSON.parse(localStorage.getItem("menu"))
     // let newUrlArr = []
     // for (var i = 0; i < urlArr.length; i++) {
     //     newUrlArr.push(urlArr[i].url)
     // }
     // if (newUrlArr.indexOf(to.name) == -1) {
-       
-        // this.$message({
-        //     message: '模块建设中...',
-        //     type: 'success'
-        //   });
-        // this.$message.info("权限不足");
+
+    // this.$message({
+    //     message: '模块建设中...',
+    //     type: 'success'
+    //   });
+    // this.$message.info("权限不足");
     // }
     next();
 })

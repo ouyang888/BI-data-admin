@@ -3,9 +3,9 @@ let admin_dev = ''
 
 const admin_test ='http://10.33.119.107:80/'
 
-const admin_uat = 'http://10.18.4.139:8083/'
+const admin_uat = 'http://p.midea.com:8083/'
 
-const admin_pro = 'http://10.18.4.139:8083/'
+const admin_pro = 'http://p.midea.com:8083/'
 
 let local = 'test'
 
