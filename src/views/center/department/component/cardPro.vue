@@ -413,7 +413,7 @@
   .top-left-font {
     font-size: 14px;
     color: #fff;
-    margin-right: 20px;
+ 
   }
 
   .card-border-box {

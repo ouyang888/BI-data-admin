@@ -1,8 +1,5 @@
 <template>
   <div class="execl">
-
-  
-
     <el-table border :data="tableData" :span-method="objectSpanMethod" 
        show-summary
       :summary-method="getSummaries"
@@ -25,7 +22,7 @@
       <el-table-column v-for="(item, i) in titleHead" :key="i" :prop="i" :label="item+$store.state.tableUnit" align="center" width="120">
         <template v-slot="scope">
           <div class="precent">
-            <div style="width: 68px">{{ !scope.row[i]?0:scope.row[i].toFixed(2)}}</div>
+            <div style="width: 68px">{{ !scope.row[i] || Math.abs(scope.row[i].toFixed(2)) == 0?0:scope.row[i].toFixed(2)}}</div>
             <div style="margin-top: 5px"> 
               <Progress style="margin-bottom: 3px" :rate="!!scope.row.dateRadio?scope.row.dateRadio*100:0" :color="'#FF8B2F'"
                 class="precentCompentes" />

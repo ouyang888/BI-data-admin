@@ -32,10 +32,10 @@
         <div class="head-box"><span>I</span></div>
         <div class="head-box"><span>P</span></div>
         <div class="change-flex" style="margin-left: 14px">
-          <div :class="cus == 1 ? 'change-box active' : 'change-box'" @click="changeNum(1)">
+          <div :class="cus == true ? 'change-box active' : 'change-box'" @click="changeNum(1)">
             <span>金额版</span>
           </div>
-          <div :class="cus == 2 ? 'change-box active' : 'change-box'" @click="changeNum(2)">
+          <div :class="cus == false ? 'change-box active' : 'change-box'" @click="changeNum(2)">
             <span>数量版</span>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default {
       searchKeys: [this.$route.path, this.$route.meta.preMenuUrl || ""],
       // index: 1,
       // title: "总裁PSI页",
-      cus: 1,
+      // cus: 1,
       land: "产地",
       // direction: 1,
       year: new Date().getFullYear(),
@@ -135,13 +135,21 @@ export default {
     },
     index(){
       return this.$store.state.index;
+    },
+    cus(){
+      return this.$store.state.showMoney
     }
   },
   watch: {
     $route: function (val) {
       if (val.meta.preMenuUrl || this.$route.path) {
         this.searchKeys = [this.$route.path, val.meta.preMenuUrl || ""];
-        console.log("路由", val.name);
+        console.log("路由", val.name,val.name.indexOf('epartment'));
+        if(val.name.indexOf('epartment')>0){
+          this.$store.commit('setDirection',2); /*产司*/
+        }else{
+          this.$store.commit('setDirection',1);/*销向*/
+        }
         if (val.name == 'psi') {
           this.$store.commit('setIndex',1);
         } else {
@@ -348,10 +356,8 @@ export default {
     changeNum(index) {
       this.cus = index;
       if (index == 2) {
-        localStorage.setItem("showMoney", "money");
         this.$store.commit("setShowMoney", false);
       } else {
-        localStorage.removeItem("showMoney");
         this.$store.commit("setShowMoney", true);
       }
     },

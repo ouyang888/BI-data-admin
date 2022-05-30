@@ -116,6 +116,7 @@ export default new Vuex.Store({
             currPath:val.currPath,
             direction:val.direction,
             index:val.index,
+            showMoney:val.showMoney
 
         }
     }    

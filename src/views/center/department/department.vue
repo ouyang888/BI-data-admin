@@ -27,6 +27,7 @@
           <div class="middle-font left-file">事业部日达成趋势图</div>
             <a-spin class="flex-loading" size="large"  v-if="showLoading2" />
           <div id="main" class="echartsBox" ></div>
+          <div class="leftData" v-if="AvgTaskAmtList.length<1">暂无数据</div>
         </div>
 
         <div>
@@ -55,6 +56,9 @@
         <div class="fang-color"></div>
         <div class="fang-color"></div>
       </div>
+       <div class="select-box">
+        <selectTime @changeDate="changeDate" />
+      </div>
     </div>
          <!-- <innerTableInfo :leftData="tableInner" :rightData="tableOutter" :leftObj="leftObj" :rightObj="rightObj"
       title1="内销" title2="外销" /> -->
@@ -76,9 +80,8 @@
   </div>
 </template>
 <script>
-// import innerTableInfo from "@/views/center/components/table/innerTableInfo.vue";
 import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
-
+import selectTime from '@/components/selectTime.vue';
 //  import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
 import cardPro from "./component/cardPro.vue";
 
@@ -96,6 +99,7 @@ export default {
     ProgressPanel,
     SpeedPanel,
     SadPanel,
+    selectTime
 
   },
   data() {
@@ -322,6 +326,14 @@ export default {
 
   },
   methods: {
+   changeDate(start, end) { /*echart切换时间*/
+      let listParams = { /*年月日*/
+        start_date: start,
+        end_date: end
+      }
+      this.getList1(listParams);
+      this.getListLeft(listParams);
+    },
     init(ontime){ /*初始化数据方法 model产地字段*/   
    let params = {  /*年月*/
       month_date:ontime
@@ -636,6 +648,18 @@ export default {
           });
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
         }
+            // 处理空数据
+            let noDatalen = 6 -  arr.length;
+
+          for (let j = arr.length; j < noDatalen; j++) {
+
+
+            this.myEcharts2([], [], '', j);
+            this.dhcarr[j] = '暂无数据';
+
+
+          }
+
       } catch (error) {
         console.log(error);
       }

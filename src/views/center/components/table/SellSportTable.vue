@@ -43,7 +43,7 @@
       >
       
         <template v-slot="scope">
-          {{ !!scope.row[headerObj.tAvgAmt]?scope.row[headerObj.tAvgAmt].toFixed(2):0 }}
+          {{ !scope.row[headerObj.tAvgAmt] || Math.abs(scope.row[headerObj.tAvgAmt].toFixed(2)) ==0?0:scope.row[headerObj.tAvgAmt].toFixed(2) }}
         </template>
       </el-table-column>
            
@@ -54,7 +54,7 @@
         height="30px"
       >
         <template v-slot="scope">
-          {{ !!scope.row.cnyAmt?scope.row.cnyAmt.toFixed(2):0}}
+          {{ !!scope.row.cnyAmt && Math.abs(scope.row.cnyAmt.toFixed(2))!=0 ?scope.row.cnyAmt.toFixed(2):0}}
         </template>
       </el-table-column>
            
@@ -69,7 +69,7 @@
           <div class="precent">
             <div class="precent-in" style="width: 88px">
               {{
-                scope.row[headerObj2.amtRadio]
+                scope.row[headerObj2.amtRadio] && scope.row[headerObj2.amtRadio]
                   ? (scope.row[headerObj2.amtRadio]*100).toFixed(2) + "%"
                   : 0 + "%"
               }}

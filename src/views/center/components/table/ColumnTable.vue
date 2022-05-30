@@ -149,8 +149,8 @@
         watch:{
     mesInfo:{
       handler:function(newValue,oldValue){
-          console.log(newValue);
-           console.log(oldValue);
+          console.log('newValue',newValue);
+           console.log('oldValue',oldValue);
         this.tableData = this.mesInfo.slice(0,this.mesInfo.length - 1);
         this.endObj = this.mesInfo.slice(this.mesInfo.length -1 ,this.mesInfo.length)[0];
 
@@ -457,12 +457,39 @@
                 }
             },
             getSummaries(){
-      let tempArr  = ['innerSaleTaskAmt','innerCnyAmt','outerSaleTaskAmt','outerCnyAmt','saleTaskAmtAll','cnyAmtAll','day']   
-       let arr = ['合计'];
+                console.log('this.headTitle',this.headTitle);
+                // debugger;
 
+       let tempArr  = ['innerSaleTaskAmt','innerCnyAmt','outerSaleTaskAmt','outerCnyAmt','saleTaskAmtAll','cnyAmtAll'];   
+       let arr = ['合计'];
+       if(this.headTitle.inSale.title =='责任制'){
+        console.log('this.endObj',this.endObj);
+        // debugger;
        tempArr.forEach(v=>{
         arr.push(this.endObj[v]);
        })
+      }else if(this.headTitle.inSale.title =='双向契约'){
+
+        let endObj = this.mesInfo.slice(this.mesInfo.length -1 ,this.mesInfo.length)[0];
+
+        tempArr.forEach(v=>{
+        arr.push(endObj[v]);
+       })
+
+      }else if(this.headTitle.inSale.title =='目标'){
+      
+        tempArr  = ['innerSaleTaskAmt','innerCnyAmt','day','outerSaleTaskAmt','outerCnyAmt','day','saleTaskAmtAll','cnyAmtAll','day'];  
+        
+
+        let endObj = this.mesInfo.slice(this.mesInfo.length -1 ,this.mesInfo.length)[0];
+
+        tempArr.forEach(v=>{
+        arr.push(endObj[v]);
+       })
+
+      
+
+    }
 
 
        return arr;

@@ -55,6 +55,9 @@
         <div class="fang-color"></div>
         <div class="fang-color"></div>
       </div>
+       <div class="select-box">
+        <selectTime @changeDate="changeDate" />
+      </div>
     </div>
          <TableCardBoxInfo
       :leftData="tableInner"
@@ -71,6 +74,7 @@
   </div>
 </template>
 <script>
+import selectTime from '@/components/selectTime.vue';
 import cardPro from "./component/cardPro.vue"; 
 import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
@@ -84,7 +88,8 @@ export default {
     SpeedPanel,
     SadPanel,
     TableCardBoxInfo,
-    cardPro
+    cardPro,
+    selectTime
   },
   data() {
     return {
@@ -297,6 +302,15 @@ export default {
   },
 
   methods: {
+    changeDate(start, end) { /*echart切换时间*/
+      let listParams = { /*年月日*/
+        start_date: start,
+        end_date: end,
+        business_entity_name:this.$route.query.key
+      }
+      this.getList1(listParams);
+      this.getListInfo(listParams);
+    },
         // 右边卡片/
     async getCard(params) {
       let obj1 = {
@@ -454,7 +468,8 @@ export default {
       try {
         let chart = {
           code: 'categoryTotalsChart',
-          fields:'category'
+          fields:'category',
+         business_entity_name:this.$route.query.key
         };
           Object.assign(chart, listParams)
         const res = await API.getTotal(chart);
@@ -505,6 +520,7 @@ export default {
         const res = await API.getChartTotal(chart);
 
         let sellOutDataList = res.rows;
+        console.log("sellOutDataList",sellOutDataList);
         this.showLoading = false;
 
         let obj = res.rows[0]
