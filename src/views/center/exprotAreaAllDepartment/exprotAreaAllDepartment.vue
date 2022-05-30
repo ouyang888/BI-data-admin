@@ -69,7 +69,6 @@ import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import API from "../../../service/api";
-// import cardPro from "@/views/center/components/card/cardPro1.vue"; 
 import cardPro from "@/views/center/components/card/cardPro.vue"; 
 import innerTableCardBox from '@/views/center/components/table/innerTableCardBox.vue';
 import selectTime from '@/components/selectTime.vue';
