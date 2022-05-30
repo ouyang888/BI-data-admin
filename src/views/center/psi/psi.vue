@@ -738,7 +738,7 @@
           </div>
           <div class="flex-char">
             <div>
-              <div class="middle-font"> 事业部年度生产规划及达成趋势图</div>
+              <div class="middle-font"> 事业部月度生产规划及达成趋势图</div>
                 <div class="legend"> 
                 <template v-if="echartsLabel">
                   <div class="item" v-for="(item,index) in echartsLabel" :key="index">
@@ -1071,7 +1071,7 @@
           </div>
           <div class="flex-char">
             <div>
-              <div class="middle-font">事业部年库存生产规划及达成趋势图</div>
+              <div class="middle-font">事业部月库存生产规划及达成趋势图</div>
                   <div class="legend"> 
                 <template v-if="echartsLabel">
                   <div class="item" v-for="(item,index) in echartsLabel" :key="index">
