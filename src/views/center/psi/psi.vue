@@ -1405,7 +1405,8 @@ export default {
                         outerCnyAmt: 126.7279,
                         outerCnyAmtRatio: 10000,
                         outerSaleTaskAmt:1000,
-                        saleTaskAmtAll: 10000
+                        saleTaskAmtAll: 10000,
+                        day:12
                 },
                  mesInfo2: [
                     {
