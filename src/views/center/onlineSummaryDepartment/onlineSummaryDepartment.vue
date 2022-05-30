@@ -23,6 +23,14 @@
       <div class="flex-char">
         <div>
           <div class="middle-font left-file">内销线上日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="(item, index) in echartsLabel" :key="index">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{ item.text }}</div>
+              </div>
+            </template>
+          </div>
           <div id="main" class="echartsBox"></div>
           <div class="leftData" v-if="AvgTaskAmtList.length<1">暂无数据</div>
         </div>
@@ -50,6 +58,9 @@
         <div class="fang-color"></div>
         <div class="fang-color"></div>
       </div>
+      <div class="select-box">
+        <selectTime @changeDate="changeDate" />
+      </div>
     </div>
 
     <!-- 底部表格 -->
@@ -64,6 +75,7 @@ import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
 import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
 import cardPro from "@/views/center/components/card/cardPro.vue";
+import selectTime from '@/components/selectTime.vue';
 export default {
   components: {
     ProgressPanel,
@@ -71,6 +83,7 @@ export default {
     SadPanel,
     TableCardBox,
     cardPro,
+    selectTime
   },
   data() {
     return {
@@ -186,6 +199,10 @@ export default {
       showLoadingLeft: true,
       showLoadingRight: true,
       titleName: this.$route.query.key || "环境",
+      echartsLabel: [
+        { class: "plan", text: "实际达成" },
+        { class: "average", text: "日均线" },
+      ],
     };
   },
   computed: {
@@ -817,6 +834,14 @@ export default {
         ],
       };
       myChart2.setOption(option);
+    },
+    changeDate(start, end) { /*echart切换时间*/
+      let listParams = { /*年月日*/
+        start_date: start,
+        end_date: end
+      }
+      this.getList(listParams);
+      this.getList1(listParams);
     },
   },
   mounted() {

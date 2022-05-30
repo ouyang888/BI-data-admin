@@ -24,6 +24,14 @@
         <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
         <div>
           <div class="middle-font left-file">外销日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="(item, index) in echartsLabel" :key="index">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{ item.text }}</div>
+              </div>
+            </template>
+          </div>
           <div id="main" class="echartsBox"></div>
           <div class="leftData" v-if="AvgTaskAmtList.length<1">暂无数据</div>
         </div>
@@ -163,6 +171,10 @@ export default {
        'saleTaskAmt':'cooprLevel1TaskAmt',
        'saleAmtRadio':'cooprLevel1AmtRadio'
       },
+      echartsLabel: [
+        { class: "plan", text: "实际达成" },
+        { class: "average", text: "日均线" },
+      ],
      };
   },
   computed:{

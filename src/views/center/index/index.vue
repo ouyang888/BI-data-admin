@@ -760,46 +760,14 @@ export default {
       innerLeftInfo: {},
       innerRight: [],
       innerRightInfo: {},
-      innerSabLeft: [{
-                  position:'S',positionRatio:0
-                },
-                  {
-                  position:'A',positionRatio:0
-                },
-                  {
-                  position:'B',positionRatio:0
-                }],
-      innerSabRight: [ {
-                  position:'S',positionRatio:0
-                },
-                  {
-                  position:'A',positionRatio:0
-                },
-                  {
-                  position:'B',positionRatio:0
-                }],
+      innerSabLeft: [],
+      innerSabRight: [],
       outterLeft: [],
       outterLeftInfo: {},
       outterRight: [],
       outterRightInfo: {},
-      outterSabLeft: [  {
-                  position:'S',positionRatio:0
-                },
-                  {
-                  position:'A',positionRatio:0
-                },
-                  {
-                  position:'B',positionRatio:0
-                },],
-      outterSabRight: [  {
-                  position:'S',positionRatio:0
-                },
-                  {
-                  position:'A',positionRatio:0
-                },
-                  {
-                  position:'B',positionRatio:0
-                }],
+      outterSabLeft: [],
+      outterSabRight: [],
       // 底部表格
       tableInner: [],
       tableOutter: [],
@@ -817,7 +785,16 @@ export default {
       },
       showLoadingLeft:true,
       showLoadingRight:true,
-      rightmarketCenter:true
+      rightmarketCenter:true,
+      sabList:[{
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }],     
     };
   },
   computed:{
@@ -902,10 +879,12 @@ export default {
         // console.log("inner,", outter);
           this.showLoadingLeft = false;
           this.showLoadingRight = false;
+      this.innerSabLeft = this.sabList.slice(0);
+      this.innerSabRight = this.sabList.slice(0);
+      this.outterSabLeft = this.sabList.slice(0);
+      this.outterSabRight = this.sabList.slice(0);
           // 内销判断
-        if(inner.rows.length<1){
-          this.innerLeft = [];
-        } else{
+        if(inner.rows.length>0){
           inner.rows.forEach((v) => {
           v.dateRadio = v.dateRadio * 100>=100?100: Number((v.dateRadio * 100).toFixed(2)); 
           v.onLineRadio = !!v.onLineRadio?(v.onLineRadio * 100).toFixed(2):0;
@@ -928,10 +907,7 @@ export default {
         this.innerRightInfo = this.innerRight[0];
         }
         // 外销判断
-        if(outter.rows.length<1){
-          this.outterLeft = [];
-   
-        }else{
+        if(outter.rows.length>0){
 
           outter.rows.forEach((v) => {
           v.dateRadio = !!v.dateRadio?Number((v.dateRadio * 100).toFixed(2)):0;

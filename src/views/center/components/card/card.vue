@@ -131,7 +131,10 @@
     data(){
       return{
         pathObj:{
-        'export':'exprotAreaAll'
+        'export':'exprotAreaAll',
+        'offlineSummary':'offlineCatSeries',
+        'onlineSummary':'catSeries'
+
       },
       showLoading:false,
       cardList:[]
@@ -181,6 +184,7 @@
     },
     methods: {
       gotoCatSeries(val) {
+        console.log('123',this.pathObj,this.name)
 
         if(this.pathObj[this.name]){ /*存在路由,保存*/
         this.$store.commit('setCurrTitle',val);
@@ -354,7 +358,7 @@
   }
 
   .card-border-box {
-    margin: 10px 10px 30px 10px;
+    margin: 20px 10px 20px 10px;
     position: relative;
     /* border: 1px solid red; */
     /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
@@ -405,7 +409,7 @@
   }
   .left-right-box .flex-top-card{
     align-items: flex-start;
-    padding-top:5px;
+    /* padding-top:5px; */
   }
 
   .finish-font {

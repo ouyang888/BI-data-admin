@@ -22,6 +22,14 @@
       <div class="flex-char">
         <div>
           <div class="middle-font left-file">内销线下日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="(item, index) in echartsLabel" :key="index">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{ item.text }}</div>
+              </div>
+            </template>
+          </div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
@@ -190,6 +198,10 @@ export default {
       showLoadingLeft: true,
       showLoadingRight: true,
       titleName: this.$route.query.key || "环境",
+      echartsLabel: [
+        { class: "plan", text: "实际达成" },
+        { class: "average", text: "日均线" },
+      ],
     };
   },
   computed: {

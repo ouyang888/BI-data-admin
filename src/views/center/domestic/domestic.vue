@@ -559,8 +559,17 @@ export default {
       { cnyAmtRadio: 20, businessEntityName: '电动', dateRadio: 12 },
       { cnyAmtRadio: 20, businessEntityName: '饮品', dateRadio: 12 },],
       outterRightInfo: {},
-      outterSabLeft: [],
+      outterSabLeft:[],
       outterSabRight: [],
+      sabList:[{
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }],          
       // 底部表格
       tableInner: [],
       tableOutter: [],
@@ -1177,9 +1186,12 @@ export default {
       // console.log("inner,", inner);
       this.showLoadingLeft = false;
       this.showLoadingRight = false;
+      
+      this.innerSabLeft = this.sabList.slice(0);
+      this.innerSabRight = this.sabList.slice(0);
+      this.outterSabLeft = this.sabList.slice(0);
+      this.outterSabRight = this.sabList.slice(0);
       if (inner.rows.length == 0) {
-        this.innerLeft = [];
-        this.outterLeft = [];
         return;
       }
 
@@ -1204,19 +1216,37 @@ export default {
       this.innerLeftInfo = this.innerLeft[0];
 
 
-      this.innerSabLeft = innersab.rows.filter(v => {
+     let innerSabLeft = innersab.rows.filter(v => {
         return v.cooprLevel1 == '线上' && v.position != '其他';
       })
-      this.innerSabLeft.forEach(v => {
-        v.positionRatio = (v.level1PositionRatio * 100).toFixed(2)
+      innerSabLeft.forEach(v => {
+       if(v.position == 'S'){
+        this.innerSabLeft[0].positionRatio = (v.level1PositionRatio * 100).toFixed(2)
+       }
+       if(v.position == 'A'){
+        this.innerSabLeft[1].positionRatio = (v.level1PositionRatio * 100).toFixed(2)
+       }
+       if(v.position == 'B'){
+        this.innerSabLeft[2].positionRatio = (v.level1PositionRatio * 100).toFixed(2)
+       }
       })
-      // console.log('this.innerSabLeft', this.innerSabLeft)
-      this.outterSabLeft = innersab.rows.filter(v => {
+
+      let outterSabLeft = innersab.rows.filter(v => {
         return v.cooprLevel1 == '线下' && v.position != '其他';
       })
-      this.outterSabLeft.forEach(v => {
-        v.positionRatio = (v.level1PositionRatio * 100).toFixed(2)
+
+      outterSabLeft.forEach(v => {
+       if(v.position == 'S'){
+        this.outterSabLeft[0].positionRatio = (v.level1PositionRatio * 100).toFixed(2)
+       }
+       if(v.position == 'A'){
+        this.outterSabLeft[1].positionRatio = (v.level1PositionRatio * 100).toFixed(2)
+       }
+       if(v.position == 'B'){
+        this.outterSabLeft[2].positionRatio = (v.level1PositionRatio * 100).toFixed(2)
+       }
       })
+
 
       // }catch(err){
       //   console.log(err)
