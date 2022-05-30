@@ -1938,14 +1938,6 @@ export default {
   border: none;
 }
 
-.select-box {
-  position: absolute;
-  right: 20px;
-  top: 30px;
-  z-index: 11;
-  width: 186px;
-}
-
 /* 仪表盘样式 */
 .main {
   height: 230px;
@@ -2104,13 +2096,6 @@ export default {
 .text {
   color: #fff;
   font-size: 12px;
-}
-.select-box {
-  position: absolute;
-  right: 20px;
-  top: 30px;
-  z-index: 11;
-  width: 186px;
 }
 
 /* 仪表盘样式 */

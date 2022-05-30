@@ -293,8 +293,8 @@ color: #1890FF;
 
 .select-box{
   position:absolute;
-  right: 20px;
-  top:10px;
+  right: 15px;
+  top:15px!important;
 }
 
 .el-select{
@@ -307,6 +307,8 @@ border:1px solid rgba(0,249,255,1);
 .el-select .el-input__inner{
 border:1px solid rgba(0,249,255,1);
   background: transparent;
+  height:35px;
+  line-height:35px;
 }
 .select-box .el-select .el-input__inner,.select-box .el-select .el-input__inner::-webkit-input-placeholder{
  color:#19ECFF;
@@ -408,10 +410,15 @@ align-items: center;
   font-size:12px;
 }
 .flex-char{
+  margin-top:10px!important;
+  margin-bottom:10px!important;
   position: relative;
   .legend::after{
     left:15px;
   }
+}
+.el-input__icon{
+  line-height: 35px;
 }
 
 

@@ -292,7 +292,7 @@
   }
 
   .card-border-box {
-    margin: 10px 10px 30px 10px;
+    margin: 20px 10px 20px 10px;
     position: relative;
     /* border: 1px solid red; */
     /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
