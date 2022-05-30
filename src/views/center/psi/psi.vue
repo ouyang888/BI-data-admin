@@ -287,7 +287,7 @@
           <div class="flex-char">
             
             <div>
-              <div class="middle-font">事业部年度销售规划及达成趋势图</div>
+              <div class="middle-font">事业部月度销售规划及达成趋势图</div>
                <div class="legend"> 
                 <template v-if="echartsLabel">
                   <div class="item" v-for="(item,index) in echartsLabel" :key="index">
@@ -1065,10 +1065,7 @@
         </div>
         <!-- 内容中 -->
         <div class="middle-box">
-          <div class="flex-fang">
-            <div class="fang-color"></div>
-            <div class="fang-color"></div>
-          </div>
+
           <div class="flex-char">
             <div>
               <div class="middle-font">事业部月库存生产规划及达成趋势图</div>
@@ -1131,6 +1128,7 @@ export default {
         
           { class: "average", text: "日均线" },
         ],
+        cardSabObj: {},
         info:[{}],
         info2:[{}],  
         info3:[],
@@ -1897,7 +1895,7 @@ export default {
          this.homeSabInfo = homeSab.rows.filter((v) => {
           return v.directName == "内销";
         })
-        console.log("SAB",this.homeSabInfo);
+        //console.log("SAB",this.homeSabInfo);
           const homeGrossProfitRadio = await API.getTotal(
          Object.assign(timeInfo,homeGross)
         );
@@ -1905,8 +1903,7 @@ export default {
         this.homeGrossProfitRadio = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName ==this.sale;
         });
-
-        console.log("homeGrossProfitRadio.rows",homeGrossProfitRadio.rows);
+        //console.log("homeGrossProfitRadio.rows",homeGrossProfitRadio.rows);
         this.info=  this.homeGrossProfitRadio.filter((v) => {
           return v.cooprLevel1 ==="线上"
         })[0];
