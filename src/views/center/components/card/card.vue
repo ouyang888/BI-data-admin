@@ -132,8 +132,8 @@
       return{
         pathObj:{
         'export':'exprotAreaAll',
-        'offlineSummary':'offlineCatSeries',
-        'onlineSummary':'catSeries'
+        // 'offlineSummary':'offlineCatSeries',
+        // 'onlineSummary':'catSeries'
 
       },
       showLoading:false,
@@ -354,7 +354,7 @@
     font-size: 14px;
     color: #fff;
     /* margin-right: 15px; */
-    margin-right: 6px;
+    margin-right: 30px;
   }
 
   .card-border-box {
@@ -435,6 +435,7 @@
   .card-big-num {
     color: #66ffff;
     font-size: 18px;
+    /* margin-right:10px; */
   }
 
   .progress {

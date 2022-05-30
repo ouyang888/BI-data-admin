@@ -420,6 +420,21 @@ align-items: center;
 .el-input__icon{
   line-height: 35px;
 }
+.layout-content{
+.top-flex{
+  align-items:flex-start!important;
+}
+.dashboard-box{
+  height:275px;
+}
+}
+/*调整echartbox大小设置屏幕自适应*/
+.echartsBox{
+  height:240px!important;
+}
+.echartsBox-min{
+  height:80px!important;
+}
 
 
 

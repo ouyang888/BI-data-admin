@@ -287,7 +287,7 @@
           <div class="flex-char">
             
             <div>
-              <div class="middle-font">事业部年度销售规划及达成趋势图</div>
+              <div class="middle-font">事业部月度销售达成趋势图</div>
                <div class="legend"> 
                 <template v-if="echartsLabel">
                   <div class="item" v-for="(item,index) in echartsLabel" :key="index">
@@ -738,7 +738,7 @@
           </div>
           <div class="flex-char">
             <div>
-              <div class="middle-font"> 事业部年度生产规划及达成趋势图</div>
+              <div class="middle-font"> 事业部月度销售达成趋势图</div>
                 <div class="legend"> 
                 <template v-if="echartsLabel">
                   <div class="item" v-for="(item,index) in echartsLabel" :key="index">
@@ -1071,7 +1071,7 @@
           </div>
           <div class="flex-char">
             <div>
-              <div class="middle-font">事业部年库存生产规划及达成趋势图</div>
+              <div class="middle-font">事业部月度库存达成趋势图</div>
                   <div class="legend"> 
                 <template v-if="echartsLabel">
                   <div class="item" v-for="(item,index) in echartsLabel" :key="index">
@@ -1819,6 +1819,15 @@ export default {
         },
       ],
       endnesInfo:{},
+      sabList:[{
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }]  
     };
   },
     computed:{
@@ -1894,10 +1903,27 @@ export default {
         this.processInfo = res.rows.filter((v) => {
           return v.directName == "内销";
         });
+
+        this.homeSabInfo = this.sabList.slice(0);
+        this.homeSabInfo1 = this.sabList.slice(0);
         //this.homeSabInfo = homeSab.rows;
-         this.homeSabInfo = homeSab.rows.filter((v) => {
+         let homeSabList = homeSab.rows.filter((v) => {
           return v.directName == "内销";
+        });
+        homeSabList.forEach(v=>{
+          if(v.position == 'S'){
+
+          this.homeSabInfo[0] = v;
+          }
+          if(v.position == 'A'){
+          this.homeSabInfo[1] = v;
+          }
+          if(v.position == 'B'){
+          this.homeSabInfo[2] = v;
+          }
+
         })
+
         console.log("SAB",this.homeSabInfo);
           const homeGrossProfitRadio = await API.getTotal(
          Object.assign(timeInfo,homeGross)
@@ -1922,9 +1948,23 @@ export default {
         this.processInfo1 = res.rows.filter((v) => {
           return v.directName == "外销";
         });
-        this.homeSabInfo1 = homeSab.rows.filter((v) => {
+        let homeSabList2 = homeSab.rows.filter((v) => {
           return v.directName == "外销";
         });
+
+        homeSabList2.forEach(v=>{
+          if(v.position == 'S'){
+
+          this.homeSabInfo1[0] = v;
+          }
+          if(v.position == 'A'){
+          this.homeSabInfo1[1] = v;
+          }
+          if(v.position == 'B'){
+          this.homeSabInfo1[2] = v;
+          }
+
+        })
 
         this.homeGrossProfitRadio1 = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName == this.sales;

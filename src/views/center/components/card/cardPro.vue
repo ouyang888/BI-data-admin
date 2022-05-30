@@ -135,7 +135,7 @@
        'saleAmtRadio':'saleAmtRadio',  /*金额完成率*/
        'grossProfitRadio':'grossProfitRadio', /*毛利率*/
        'cooprLevel1':'cooprLevel1',  /*线上/线下 中间sab名称对应的字段*/
-       'businessModelCompleteRadio':''  /*线上/线下 中间sab名称后面的完成率*/
+       'businessModelCompleteRadio':'businessModelCompleteRadio'  /*线上/线下 中间sab名称后面的完成率*/
 
 
         } },
@@ -185,8 +185,15 @@
             this.showLoading = false;
             return
           }else{
+
+            if(!this.cardObj.businessModelCompleteRadio){
+              this.cardObj.businessModelCompleteRadio = 'businessModelCompleteRadio';
+            }
+
+
             this.cardList = [];
           newValue && newValue.length>0 && newValue.forEach(v => { /*划分6个卡片*/
+            if(v[this.cardObj.businessModelCompleteRadio || 'businessModelCompleteRadio']>6){  v[this.cardObj.businessModelCompleteRadio || 'businessModelCompleteRadio'] = 6 }; /*线上/线下 中间sab名称后面的完成率*/
             if(v[this.cardObj.title] !=title && !!v[this.cardObj.title]){
               // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
               v[this.cardObj.cnyAmt] =  !!v[this.cardObj.cnyAmt]?v[this.cardObj.cnyAmt].toFixed(2):0;
@@ -194,7 +201,8 @@
             v[this.cardObj.saleAmtRadio] = !!v[this.cardObj.saleAmtRadio]?Number((v[this.cardObj.saleAmtRadio]*100).toFixed(2)):0;
             // v.grossProfitRadio = Number((v.grossProfitRadio*100).toFixed(0));
             // debugger;
-            // if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
+            if(v[this.cardObj.saleAmtRadio]>1000){  v[this.cardObj.saleAmtRadio] = 1000 }; /*完成率*/
+          
             v.dateRadio = !!v.dateRadio?Number((v.dateRadio*100).toFixed(0)):0; /*时间进度*/
               if(this.cardList.length<6){ /*只显示6条*/
               this.cardList.push(v);
@@ -399,7 +407,7 @@
   .top-left-font {
     font-size: 14px;
     color: #fff;
-    margin-right:10px;
+    margin-right:35px;
   }
 
   .card-border-box {
@@ -484,7 +492,7 @@
   }
 
   .progress {
-    width: 60px;
+    width: 30px;
     height: 10px;
   }
 

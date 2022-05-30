@@ -1175,13 +1175,13 @@ export default {
   padding-top: 3px;
 }
 
-.flex-card {
+/* .flex-card {
   display: flex;
   margin-top: 10px;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-}
+} */
 
 .flex-top-card {
   display: flex;
