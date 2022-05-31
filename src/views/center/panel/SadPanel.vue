@@ -11,7 +11,7 @@
         <CircleProgress style="position:absolute" :rate="Math.round(Number(data.bottomArr.S))" :color="'#0050E0'" :size="155" :circleSize="155" :isShow="isShow"/>
         <div class="big-round">
           <div class="round">
-            <p class="round-title" v-if="!!this.$route.query.key"> {{ this.$route.query.key}}达成</p>
+            <p class="round-title" v-if="!!this.$route.query.key"> {{ this.$route.query.key}}</p>
             <p class="round-title" v-else> {{data.ballTitle}}</p>
             <p class="sort" v-for="(v,name,i) in data.sabArr" :key="i">
               {{name}}:
