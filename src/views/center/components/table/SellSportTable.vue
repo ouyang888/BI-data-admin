@@ -286,7 +286,7 @@ export default{
           //  console.log('this.endObj',this.endObj);
            let arr = ['合计',''];
  
-           let arrContent = [this.endObj[this.headerObj.tAvgAmt] && this.endObj[this.headerObj.tAvgAmt].toFixed(2) || 0,this.endObj.cnyAmt && this.endObj.cnyAmt.toFixed(2) || 0,this.endObj[this.headerObj2.amtRadio] && (Number(this.endObj[this.headerObj2.amtRadio])*100).toFixed(2)+'%' || 0+'%',this.endObj[this.headerObj2.profitRadio] && Number(this.endObj[this.headerObj2.profitRadio]*100).toFixed(2)+'%' || 0+'%',''];
+           let arrContent = [this.endObj[this.headerObj.tAvgAmt] && this.endObj[this.headerObj.tAvgAmt].toFixed(2) || 0,this.endObj.cnyAmt && this.endObj.cnyAmt.toFixed(2) || 0,this.endObj[this.headerObj2.amtRadio] && (Number(this.endObj[this.headerObj2.amtRadio])*100).toFixed(2)+'%' || 0+'%',this.endObj[this.headerObj2.profitRadio] && Number(this.endObj[this.headerObj2.profitRadio]*100).toFixed(2)+'%' || 0+'%',this.endObj[this.headerObj2.amtFinish] || 0,''];
           //  arrContent.forEach((v,i)=>{
 
           //   // if(Number(v).toString()=='Number'){

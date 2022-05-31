@@ -290,7 +290,9 @@ export default {
       this.$store.commit('setDirection',index);
     
       let urlName = this.$route.name;
-      if (index == "1" && urlName.includes('Department')==false) {  /*不是产司页*/
+      console.log('exprotAreaAll',index == "2" && urlName == "exprotAreaAll",this.$route.query.key);
+      
+      if (index == "1" && urlName.includes('Department')==false) {  /*销向页点销向 */
         this.$router.push("/center/index");
         
       }
@@ -310,10 +312,16 @@ export default {
         this.$router.push("/center/exportDepartment");
         
       } else if (index == "2" && urlName == "exprotAreaAll") {
-        this.$router.push({ name: 'exprotAreaAllDepartment', query: { key: this.$route.key } });
+    
+        this.$router.push({ name: 'exprotAreaAllDepartment', query: { key: this.$route.query.key } });
         
-      } else if (index == "1" && urlName.cludes('Department')) {
-        this.$router.push({name:urlName.replace('Department','')});
+      } else if (index == "1" && urlName.includes('Department')) { /*产司切换回销向*/
+
+        if(urlName == 'exprotAreaAllDepartment'){
+          this.$router.push({ name: 'exprotAreaAll', query: { key: this.$route.query.key } });
+        }else{
+          this.$router.push({name:urlName.replace('Department','')});
+        }
       }
       // else {
 

@@ -1,7 +1,7 @@
 <template>
   <div class="flex-card" >
-    <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
-    <div class="noData" v-if="cardList.length<1">暂无数据</div>
+    <a-spin class="flex-loading" size="large" v-if="showLoading" />
+    <div class="noData" v-else-if="cardList.length<1">暂无数据</div>
     <!-- <span >有数据</span> -->
 
     <div class="card-box" v-for="(v,i) in cardList" :key="i" @click="gotoCatSeries(v[cardObj.title])" v-else>
@@ -136,7 +136,7 @@
         // 'onlineSummary':'catSeries'
 
       },
-      showLoading:false,
+      showLoading:true,
       cardList:[]
       }
     },
@@ -335,11 +335,11 @@
   .flex-card {
     display: flex;
     margin-top: 10px;
-    align-items: center;
+    /* align-items: center; */
     justify-content: inherit;
     flex-wrap: wrap;
     min-width: 56%;
-    min-height: 100px;
+    min-height: 270px;
     position: relative;
   }
 
@@ -574,10 +574,10 @@
   }
   .flex-loading{
       position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    width:40px;
+    height:40px;
+    top: calc(50% - 20px);
+    left:calc(50% - 20px);
     }
     .card-box{
       width:33%;
