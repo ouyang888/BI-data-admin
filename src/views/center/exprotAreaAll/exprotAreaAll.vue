@@ -457,7 +457,7 @@ export default {
             arrs[Arrtitle.indexOf(v.cooprLevel2)].push(v);
           }
         })
-       console.log('arrs',arrs,Arrtitle);
+   
 
 
         arrs.forEach((v,j)=>{

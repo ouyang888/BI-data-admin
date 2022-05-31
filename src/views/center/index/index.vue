@@ -1016,7 +1016,7 @@ export default {
               outtersab.rows.forEach(v=>{
                 v.positionRatio = (v.positionRatio*100).toFixed(2);
               })
-              console.log('outtersab',outtersab)
+         
 
 
               let outterSabLeft = outtersab.rows.filter((v) => {
@@ -1288,7 +1288,6 @@ export default {
             }
           }
         }
-        console.log('this.sabData',this.sabData)
       } catch (error) {
         console.log(error);
       }

@@ -222,8 +222,6 @@
         }
       },
       getSummaries(){
-           
-          console.log('this.endObj',this.endObj);
           let arr = ['合计',''];
 
           if(this.marketCenter==false && this.arr.includes(this.router)==false){
@@ -247,7 +245,6 @@
     watch:{
     mesInfo:{
       handler:function(newValue,oldValue){
-        console.log('更新newValue',newValue)
         // newValue.forEach((v,i)=>{
         //   // v.amtRadio = Number((v.amtRadio*100).toFixed(2));
         //   // v.profitRadio = Number((v.profitRadio*100).toFixed(2));

@@ -304,13 +304,11 @@ export default {
           }
           k++;
         }
-        console.log("arrs2222", arr);
         // this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
         arrs.forEach((v,i) => {
           this.dhcarr[i] = v[0].cooprLevel2;
         });
-        console.log("this.dhcarr", this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {

@@ -765,16 +765,14 @@ export default {
 
       });
       this.cardData = arr;
-      this.cardData.forEach(v=>{
-        console.log(v.businessEntityName,v.obmOem);
-      })
+     
  
 
       this.cardSab = res2.rows.filter(v=>{
               v.positionRatio = v.sabAmtRadio;  /*右边sab*/
               return v.position.length<2
       })
-      console.log('this.cardSab',this.cardData,this.cardSab)
+
     
 
 
