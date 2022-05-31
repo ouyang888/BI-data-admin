@@ -11,7 +11,7 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-       <div style="color:white;" v-if="cardData.length===0">暂无数据</div>
+       <!-- <div style="color:white;" v-if="cardData.length===0">暂无数据</div> -->
      <Card :list="cardData" :cardObj="cardObj"  @gotoCatSeries="gotoCatSeries"/>
     </div>
 <!-- @gotoCatSeries="gotoCatSeries" -->
