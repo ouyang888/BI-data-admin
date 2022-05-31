@@ -19,13 +19,13 @@ const httpConfig = {
  */
 const handleCode = (code, msg) => {
     console.log("errorcode", code)
-    // if (errorTokenCode.indexOf(code) > -1) {
-    if (code == 1) {
-        code && message.error(msg || "登录失效");
-        // location.href = api.adminUrl + 'login';
-        localStorage.removeItem("token")
-        location.href = 'http://10.18.4.139:8088/#/login';
-
+    if (errorTokenCode.indexOf(code) > -1) {
+        if (code == 1) {
+            code && message.error(msg || "登录失效");
+            // location.href = api.adminUrl + 'login';
+            localStorage.removeItem("token")
+            location.href = "https://signin.midea.com/oauth2.0/authorize?response_type=code&client_id=0k9m1deaadmin8&redirect_uri=http://p.midea.com"
+        }
     }
 };
 

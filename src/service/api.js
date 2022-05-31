@@ -74,9 +74,16 @@ export default class ApiService {
   }
 
 
-  //登录接口
-  static textInfo() {
-    return request.get(api.adminUrl + `query?start_date=2022-03-01`, "", { headers: { "Accept": "application/json" } });
+   //登出接口
+   static loginout(data) {
+    return request.post(api.adminUrl + `logout`, "", { headers: { "content-Type": "multipart/form-data" } });
   }
+
+
+
+  //登录接口
+  // static textInfo() {
+  //   return request.get(api.adminUrl + `query?start_date=2022-03-01`, "", { headers: { "Accept": "application/json" } });
+  // }
   
 }
