@@ -172,12 +172,10 @@
     watch:{
       cardObj:{
         handler:function(newValue,oldValue){
-          console.log('newValue',newValue);
         }
       },
       list:{
         handler:function(newValue,oldValue){
-          console.log('newValue11',newValue);
           let title = '';
       
           if(newValue.length<1) {
@@ -226,7 +224,6 @@
             })
 
            }
-           console.log('this.cardSabObj',this.cardSabObj);
         }
 
       }
@@ -240,9 +237,11 @@
     },
     methods: {
       gotoCatSeries(val) {
-
+        if(this.pathObj[this.name]){ /*存在路由,保存*/
         this.$store.commit('setCurrTitle',val);
         this.$router.push({name:this.pathObj[this.name],query:{key:val}});
+
+        }
 
 
         // this.$emit('gotoCatSeries',val)

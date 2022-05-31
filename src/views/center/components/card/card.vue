@@ -184,7 +184,6 @@
     },
     methods: {
       gotoCatSeries(val) {
-        console.log('123',this.pathObj,this.name)
 
         if(this.pathObj[this.name]){ /*存在路由,保存*/
         this.$store.commit('setCurrTitle',val);

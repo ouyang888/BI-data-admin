@@ -2053,8 +2053,8 @@ export default {
     },
 
     async infoList(){
-      let res = await API.textInfo()
-      console.log("88888",res)
+      // let res = await API.textInfo()
+      // console.log("88888",res)
     },
     
     
@@ -2452,7 +2452,7 @@ export default {
   },
   mounted() {
     this.init(this.ontime);
-    this.infoList();
+    // this.infoList();
   },
 };
 </script>

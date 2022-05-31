@@ -286,15 +286,12 @@ export default {
       localStorage.setItem("menu", JSON.stringify(res))
     },
 
-    changedirection(index) {
+    changedirection(index) {   /*1:销向  2:产司*/
       this.$store.commit('setDirection',index);
     
       let urlName = this.$route.name;
-      if (index == "1" && urlName != "offlineSummaryDepartment") {
+      if (index == "1" && urlName.includes('Department')==false) {  /*不是产司页*/
         this.$router.push("/center/index");
-        
-      } else if (index == "1" && urlName == "offlineSummaryDepartment") {
-        this.$router.push("/center/offlineSummary");
         
       }
       if (index == "2" && urlName == "psi" || urlName == "index") {
@@ -315,9 +312,8 @@ export default {
       } else if (index == "2" && urlName == "exprotAreaAll") {
         this.$router.push({ name: 'exprotAreaAllDepartment', query: { key: this.$route.key } });
         
-      } else if (index == "2" && urlName == "index") {
-        this.$router.push("/center/department");
-        
+      } else if (index == "1" && urlName.cludes('Department')) {
+        this.$router.push({name:urlName.replace('Department','')});
       }
       // else {
 
