@@ -13,7 +13,8 @@
 
       <!-- 右侧卡片 -->
       <!-- @gotoCatSeries="gotoCatSeries" -->
-      <Card :list="cardData"  />
+      <Card :list="cardData" @gotoCatSeries="gotoCatSeries"/>
+
     </div>
     <!-- 中间echart -->
     <div class="middle-box">
@@ -25,6 +26,14 @@
         <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
         <div>
           <div class="middle-font left-file">内销线下日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="(item, index) in echartsLabel" :key="index">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{ item.text }}</div>
+              </div>
+            </template>
+          </div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
@@ -72,7 +81,7 @@ import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
 import SadPanel from "@/views/center/panel/SadPanel.vue";
-import Card from "./component/card.vue";
+import Card from '@/views/center/components/card/card.vue'; 
 import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
 import selectTime from '@/components/selectTime.vue';
 
@@ -157,6 +166,16 @@ export default {
         level: "coopr_level3_manager",
         tAvgAmt: "tAvgAmt" /*责任制*/,
       },
+      cardObj:{
+        'title':'cooprLevel2', /*标题*/
+       'cnyAmt':'cnyAmt',/*金额*/
+       'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
+       'saleAmtRadio':'saleAmtRadio'  /*金额完成率*/
+      },
+      echartsLabel: [
+        { class: "plan", text: "实际达成" },
+        { class: "average", text: "日均线" },
+      ],
     };
   },
   computed: {
@@ -748,27 +767,27 @@ export default {
       try {
         const res = await API.getTotal(obj);
 
-        res.rows.length > 0 &&
-          res.rows.forEach((v) => {
-            if (!!v.cnyAmt) {
-              v.cnyAmt = v.cnyAmt.toFixed(2);
-            }
-            if (!!v.saleTaskAmt) {
-              v.saleTaskAmt = v.saleTaskAmt.toFixed(2);
-            }
-            v.dateRadio = v.dateRadio*100;
+        // res.rows.length > 0 &&
+        //   res.rows.forEach((v) => {
+        //     if (!!v.cnyAmt) {
+        //       v.cnyAmt = v.cnyAmt.toFixed(2);
+        //     }
+        //     if (!!v.saleTaskAmt) {
+        //       v.saleTaskAmt = v.saleTaskAmt.toFixed(2);
+        //     }
+        //     v.dateRadio = v.dateRadio*100;
 
-            if (!!v.saleAmtRadio) {
-              v.saleAmtRadio = (
-                v.saleAmtRadio * 100
-              ).toFixed(2);
-            }
-            if (!!v.saleQtyRadio) {
-              v.saleQtyRadio = (
-                v.saleQtyRadio * 100
-              ).toFixed(2);
-            }
-          });
+        //     if (!!v.saleAmtRadio) {
+        //       v.saleAmtRadio = (
+        //         v.saleAmtRadio * 100
+        //       ).toFixed(2);
+        //     }
+        //     if (!!v.saleQtyRadio) {
+        //       v.saleQtyRadio = (
+        //         v.saleQtyRadio * 100
+        //       ).toFixed(2);
+        //     }
+        //   });
 
         if (res.rows.length > 0) {
           this.cardData = res.rows.filter((v) => {

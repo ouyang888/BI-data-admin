@@ -26,7 +26,7 @@
       </div>
       <div class="flex-char">
         <div>
-          <div class="middle-font left-file">产司日达成趋势图</div>
+          <div class="middle-font left-file"> {{ this.$route.query.key}}日达成趋势图</div>
           
           <div id="main" class="echartsBox"></div>
         </div>
@@ -562,6 +562,7 @@ export default {
         }
             // 处理空数据
           let noDatalen = 6 -  arr.length;
+          debugger;
           for (let j = arr.length; j < noDatalen; j++) {
             this.myEcharts2([], [], '', j);
             this.dhcarr[j] = '暂无数据';

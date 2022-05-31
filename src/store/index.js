@@ -25,8 +25,8 @@ export default new Vuex.Store({
         year:'2022',
         month:new Date().getMonth()+1>=10?new Date().getMonth()+1>=10:'0'+(new Date().getMonth()+1),
         model:'本部,OEM,待定',
-        currPath:'销向汇总',
-        currTitle:'',
+        currPath:'总裁PSI页',
+        currTitle:'',   
         unit:'亿',/*页面单位*/
         tableUnit:' (万)',
         endDay:'',/*最后一天*/

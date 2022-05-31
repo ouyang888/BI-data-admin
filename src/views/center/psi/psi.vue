@@ -287,7 +287,7 @@
           <div class="flex-char">
             
             <div>
-              <div class="middle-font">事业部年度销售规划及达成趋势图</div>
+              <div class="middle-font">事业部月度销售达成趋势图</div>
                <div class="legend"> 
                 <template v-if="echartsLabel">
                   <div class="item" v-for="(item,index) in echartsLabel" :key="index">
@@ -738,7 +738,7 @@
           </div>
           <div class="flex-char">
             <div>
-              <div class="middle-font"> 事业部月度生产规划及达成趋势图</div>
+              <div class="middle-font"> 事业部月度销售达成趋势图</div>
                 <div class="legend"> 
                 <template v-if="echartsLabel">
                   <div class="item" v-for="(item,index) in echartsLabel" :key="index">
@@ -1065,13 +1065,10 @@
         </div>
         <!-- 内容中 -->
         <div class="middle-box">
-          <div class="flex-fang">
-            <div class="fang-color"></div>
-            <div class="fang-color"></div>
-          </div>
+
           <div class="flex-char">
             <div>
-              <div class="middle-font">事业部月库存生产规划及达成趋势图</div>
+              <div class="middle-font">事业部月度库存达成趋势图</div>
                   <div class="legend"> 
                 <template v-if="echartsLabel">
                   <div class="item" v-for="(item,index) in echartsLabel" :key="index">
@@ -1131,6 +1128,7 @@ export default {
         
           { class: "average", text: "日均线" },
         ],
+        cardSabObj: {},
         info:[{}],
         info2:[{}],  
         info3:[],
@@ -1405,7 +1403,8 @@ export default {
                         outerCnyAmt: 126.7279,
                         outerCnyAmtRatio: 10000,
                         outerSaleTaskAmt:1000,
-                        saleTaskAmtAll: 10000
+                        saleTaskAmtAll: 10000,
+                        day:12
                 },
                  mesInfo2: [
                     {
@@ -1818,6 +1817,15 @@ export default {
         },
       ],
       endnesInfo:{},
+      sabList:[{
+                  position:'S',positionRatio:0
+                },
+                  {
+                  position:'A',positionRatio:0
+                },
+                  {
+                  position:'B',positionRatio:0
+                }]  
     };
   },
     computed:{
@@ -1893,11 +1901,27 @@ export default {
         this.processInfo = res.rows.filter((v) => {
           return v.directName == "内销";
         });
+
+        this.homeSabInfo = this.sabList.slice(0);
+        this.homeSabInfo1 = this.sabList.slice(0);
         //this.homeSabInfo = homeSab.rows;
-         this.homeSabInfo = homeSab.rows.filter((v) => {
+         let homeSabList = homeSab.rows.filter((v) => {
           return v.directName == "内销";
+        });
+        homeSabList.forEach(v=>{
+          if(v.position == 'S'){
+
+          this.homeSabInfo[0] = v;
+          }
+          if(v.position == 'A'){
+          this.homeSabInfo[1] = v;
+          }
+          if(v.position == 'B'){
+          this.homeSabInfo[2] = v;
+          }
+
         })
-        console.log("SAB",this.homeSabInfo);
+        //console.log("SAB",this.homeSabInfo);
           const homeGrossProfitRadio = await API.getTotal(
          Object.assign(timeInfo,homeGross)
         );
@@ -1905,8 +1929,7 @@ export default {
         this.homeGrossProfitRadio = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName ==this.sale;
         });
-
-        console.log("homeGrossProfitRadio.rows",homeGrossProfitRadio.rows);
+        //console.log("homeGrossProfitRadio.rows",homeGrossProfitRadio.rows);
         this.info=  this.homeGrossProfitRadio.filter((v) => {
           return v.cooprLevel1 ==="线上"
         })[0];
@@ -1921,9 +1944,23 @@ export default {
         this.processInfo1 = res.rows.filter((v) => {
           return v.directName == "外销";
         });
-        this.homeSabInfo1 = homeSab.rows.filter((v) => {
+        let homeSabList2 = homeSab.rows.filter((v) => {
           return v.directName == "外销";
         });
+
+        homeSabList2.forEach(v=>{
+          if(v.position == 'S'){
+
+          this.homeSabInfo1[0] = v;
+          }
+          if(v.position == 'A'){
+          this.homeSabInfo1[1] = v;
+          }
+          if(v.position == 'B'){
+          this.homeSabInfo1[2] = v;
+          }
+
+        })
 
         this.homeGrossProfitRadio1 = homeGrossProfitRadio.rows.filter((v) => {
           return v.directName == this.sales;

@@ -40,7 +40,8 @@
         align="center"
         :label="'责任制'+$store.state.tableUnit"
         height="30px"
-      >
+        >
+        <!-- v-if="tAvgAmtArr.includes(router)" -->
       
         <template v-slot="scope">
           {{ !scope.row[headerObj.tAvgAmt] || Math.abs(scope.row[headerObj.tAvgAmt].toFixed(2)) ==0?0:scope.row[headerObj.tAvgAmt].toFixed(2) }}
@@ -194,7 +195,8 @@ export default{
 
     level:['exprotAreaAll','exprotAreaAllDepartment'], /* 过滤责任人路由 */
     tableData:[],/*talbe*/
-    endObj:{} /*最后一条数据*/
+    endObj:{}, /*最后一条数据*/
+    // tAvgAmtArr:['domestic'], /*需要显示责任制的 路由名*/
   }
 
   },
@@ -284,7 +286,7 @@ export default{
           //  console.log('this.endObj',this.endObj);
            let arr = ['合计',''];
  
-           let arrContent = [this.endObj[this.headerObj.tAvgAmt] && this.endObj[this.headerObj.tAvgAmt].toFixed(2) || 0,this.endObj.cnyAmt && this.endObj.cnyAmt.toFixed(2) || 0,this.endObj[this.headerObj2.amtRadio] && (Number(this.endObj[this.headerObj2.amtRadio])*100).toFixed(2)+'%' || 0+'%',this.endObj[this.headerObj2.profitRadio] && Number(this.endObj[this.headerObj2.profitRadio]*100).toFixed(2)+'%' || 0+'%',this.endObj[this.headerObj2.amtFinish] || 0];
+           let arrContent = [this.endObj[this.headerObj.tAvgAmt] && this.endObj[this.headerObj.tAvgAmt].toFixed(2) || 0,this.endObj.cnyAmt && this.endObj.cnyAmt.toFixed(2) || 0,this.endObj[this.headerObj2.amtRadio] && (Number(this.endObj[this.headerObj2.amtRadio])*100).toFixed(2)+'%' || 0+'%',this.endObj[this.headerObj2.profitRadio] && Number(this.endObj[this.headerObj2.profitRadio]*100).toFixed(2)+'%' || 0+'%',''];
           //  arrContent.forEach((v,i)=>{
 
           //   // if(Number(v).toString()=='Number'){

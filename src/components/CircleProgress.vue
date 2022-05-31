@@ -53,7 +53,12 @@
       isBackground: {
         type: Boolean,
         default: true
-      }
+      },
+      isShow: { /*用来控制圆环上的文字是否显示*/
+        type: Boolean,
+        default: true
+      },
+
     },
     data() {
       return {
@@ -75,7 +80,8 @@
           deg: this.$props.deg,
           barSize: this.$props.barSize,
           circleSize: this.$props.circleSize,
-          isBackground: this.$props.isBackground
+          isBackground: this.$props.isBackground,
+          isShow:this.$props.isShow
         })
       }
 
@@ -93,7 +99,8 @@
             deg: this.$props.deg,
             barSize: this.$props.barSize,
             circleSize: this.$props.circleSize,
-            isBackground: this.$props.isBackground
+            isBackground: this.$props.isBackground,
+            isShow:this.$props.isShow
           })
         }
       },

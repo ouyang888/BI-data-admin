@@ -6,7 +6,8 @@ class circleProgress {
             progress  真实的进度比例 0 - 1  之间 100% 就是1；
             number 当前进度表示的数额
         */  
-        const { el, progress, number, color, deg,barSize,circleSize,isBackground} = params;
+        const { el, progress, number, color, deg,barSize,circleSize,isBackground,isShow} = params;
+
         // console.log("params",params)
         //获取canvas 元素 及其 2d context
         const cav = el
@@ -37,7 +38,7 @@ class circleProgress {
         
         this.aniDeg = this.beginDeg;
         this.number = number;
-        this.move(color);
+        this.move(color,isShow);
     }
 
 
@@ -56,8 +57,11 @@ class circleProgress {
     }
 
     // 绘制文字
-    drawFont(font) {
+    drawFont(font,ifShow) {
       font = `${font}%`
+      if(!ifShow){
+        font = ''
+      }
         const { ctx, w, h } = this;
         // 获取文字的宽度 用已计算文字的x坐标 居中显示
         ctx.font = 'bold 9px arial';
@@ -135,7 +139,7 @@ class circleProgress {
     }
 
     // 动画绘制
-    move(color) {
+    move(color,isShow = true) {
         const { ctx, x, y, r, angle, w, h, progressDeg, number,barSize,isBackground } = this;
 
         let font = 0;
@@ -159,7 +163,7 @@ class circleProgress {
             this.aniDeg = this.aniDeg + (progressDeg - this.aniDeg) / 20;
             font = font + (number - font) / 20;
             if (isBackground) {
-              this.drawFont(Math.floor(font))
+              this.drawFont(Math.floor(font),isShow)
             }
             if (last) { return; }
             if ((progressDeg - this.aniDeg > 1)) {

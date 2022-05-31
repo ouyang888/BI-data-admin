@@ -12,7 +12,7 @@
       </div>
       <!-- 右侧卡片 -->
        <div style="color:white;" v-if="cardData.length===0">暂无数据</div>
-     <Card :list="cardData"  @click="cardClick()"/>
+     <Card :list="cardData" :cardObj="cardObj"  @gotoCatSeries="gotoCatSeries"/>
     </div>
 <!-- @gotoCatSeries="gotoCatSeries" -->
 
@@ -24,6 +24,14 @@
       <div class="flex-char">
         <div>
           <div class="middle-font left-file">内销线上日达成趋势图</div>
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="(item, index) in echartsLabel" :key="index">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{ item.text }}</div>
+              </div>
+            </template>
+          </div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
@@ -63,7 +71,7 @@
   </div>
 </template>
 <script>
-import Card from "./component/card.vue";
+import Card from '@/views/center/components/card/card.vue'; 
 import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
@@ -141,90 +149,7 @@ export default {
         tAvgAmt: 'saleTaskAmt',/*责任制*/
       },
       cardData: [],
-      dateTime: "2022-03",
-      dataTimeMany: "2022-01-01,2022-10-01,2022-01-01,2022-10-01",
       showLoading: false,
-      columns: [
-        {
-          title: "线上",
-          dataIndex: "name",
-          key: "name",
-          align: "center",
-          scopedSlots: { customRender: "name" },
-        },
-        {
-          title: "责任人",
-          dataIndex: "age",
-          key: "age",
-          align: "center",
-        },
-        {
-          title: "责任制",
-          dataIndex: "address",
-          key: "address 1",
-          align: "center",
-        },
-        {
-          title: "累计达成",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "任务完成率",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "毛利率",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "周转天数",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "说到做到",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-        {
-          title: "排名",
-          dataIndex: "address",
-          key: "address 2",
-          align: "center",
-        },
-      ],
-      data: [
-        {
-          key: "1",
-          name: "John Brown",
-          age: 32,
-          address: "New York No. ",
-          tags: ["nice", "developer"],
-        },
-        {
-          key: "2",
-          name: "Jim Green",
-          age: 42,
-          address: "London No. ",
-          tags: ["loser"],
-        },
-        {
-          key: "3",
-          name: "Joe Black",
-          age: 32,
-          address: "Sidney No. ",
-          tags: ["cool", "teacher"],
-        },
-      ],
-
       progressData: {
         bar1: 0,
         bar2: 0,
@@ -273,6 +198,16 @@ export default {
       tableOutter: [],
       rowSpanNumber1: 6,
       rowSpanNumber2: 6,
+      echartsLabel: [
+        { class: "plan", text: "实际达成" },
+        { class: "average", text: "日均线" },
+      ],
+      cardObj:{
+        'title':'cooprLevel2', /*标题*/
+       'cnyAmt':'cnyAmt',/*金额*/
+       'saleTaskAmt': 'saleTaskAmt', /*责任制金额*/
+       'saleAmtRadio':'completeRadio'  /*金额完成率*/
+      },
     };
   },
   methods: {
@@ -292,7 +227,6 @@ export default {
         let sellOutDataList = res.rows.filter(v=>{
           return v.cooprLevel2 == '总'
         });
-        console.log('sellOutDataList',sellOutDataList);
         this.AvgTaskAmtDate=[];
         this.AvgTaskAmtList=[];
         let newArr = sellOutDataList.filter((item) => {
@@ -325,7 +259,6 @@ export default {
           if (item.saleAvgAmt !== null && item.totalCnyAmt !== null) {
             this.AvgTaskAmtDate.push(yue + "-" + ri);
             this.AvgTaskAmtList.push(item.totalCnyAmt);
-                console.log("折线图222",item.saleAvgAmt);
             this.AvgTaskAmtLine = item.saleAvgAmt;
             this.myEcharts();
           }
@@ -371,7 +304,7 @@ export default {
           this.dhcarr[i]=v[0].cooprLevel2;
           //this.dhcarr.push(v[0].cooprLevel2);
         });
-        console.log("this.dhcarrthis.dhcarrthis.dhcarr",this.dhcarr);
+
         //this.dhcarr = [0,1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {
@@ -537,41 +470,40 @@ export default {
         // const res = await API.getTotal(Object.assign(params, obj));
          const res = await API.getData("onlineTopCooprLevel2", params);
 
-        res.rows.length > 0 &&
-          res.rows.forEach((v) => {
-            if (!!v.cnyAmt) {
-              v.cnyAmt = v.cnyAmt.toFixed(2);
-            }
-            if (!!v.saleTaskAmt) {
-              v.saleTaskAmt = v.saleTaskAmt .toFixed(2);
-            }
-            if (!!v.completeRadio) {
-              v.completeRadio = (
-                v.completeRadio * 100
-              ).toFixed(2);
-            }
-            if (!!v.saleQtyRadio) {
-              v.saleQtyRadio = (
-                v.saleQtyRadio * 100 
-              ).toFixed(2);
-            }
-             if (!!v.dateRadio) {
-              v.dateRadio = (
-                v.dateRadio * 100 
-              ).toFixed(2);
-            }
-              if (!!v.completeRadio) {
-              v.dateRadio = (
-                v.completeRadio * 100 
-              ).toFixed(2);
-            }
-          });
+        // res.rows.length > 0 &&
+        //   res.rows.forEach((v) => {
+        //     if (!!v.cnyAmt) {
+        //       v.cnyAmt = v.cnyAmt.toFixed(2);
+        //     }
+        //     if (!!v.saleTaskAmt) {
+        //       v.saleTaskAmt = v.saleTaskAmt .toFixed(2);
+        //     }
+        //     if (!!v.completeRadio) {
+        //       v.completeRadio = (
+        //         v.completeRadio * 100
+        //       ).toFixed(2);
+        //     }
+        //     if (!!v.saleQtyRadio) {
+        //       v.saleQtyRadio = (
+        //         v.saleQtyRadio * 100 
+        //       ).toFixed(2);
+        //     }
+        //      if (!!v.dateRadio) {
+        //       v.dateRadio = (
+        //         v.dateRadio * 100 
+        //       ).toFixed(2);
+        //     }
+        //       if (!!v.completeRadio) {
+        //       v.dateRadio = (
+        //         v.completeRadio * 100 
+        //       ).toFixed(2);
+        //     }
+        //   });
 
         if (res.rows.length > 0) {
           this.cardData = res.rows.filter((v) => {
             return !!v.cooprLevel2;
           });
-          console.log("this.cardData", this.cardData);
           this.cardData.splice(6);
         } else {
           this.cardData = [{}];
@@ -610,7 +542,6 @@ export default {
         if(res.rows.length<1){  
         return;
         }
-        console.log("panelDataList",panelDataList);
         this.progressData.ballNum = (
           panelDataList[0].onLineGrossProfitRadio * 100
         ).toFixed(2);
@@ -636,7 +567,6 @@ export default {
  */
         for (var i = 0; i < panelDataList.length; i++) {
           if (panelDataList[i].businessModel == "直营") {
-            console.log("panelDataList[i]",panelDataList[i]);
             this.progressData.bar2 = (
               panelDataList[i].grossProfitRadio * 100
             ).toFixed(2);
@@ -647,7 +577,6 @@ export default {
              this.speedData.ballLeftNum = panelDataList[i].cnyAmt.toFixed(2)
             this.speedData.bottomClose = (panelDataList[i].businessModelCompleteRadio*100).toFixed(2)
             this.speedData.bottomTime = (panelDataList[i].dateRadio*100).toFixed(2)
-            console.log("panelDataList[i].dateRadio",panelDataList[i].dateRadio);
 
           }
          if (panelDataList[i].businessModel == "代运营") {
@@ -685,7 +614,7 @@ export default {
         if(RightSAB.length<1 ){
         return;
         }
-          console.log("RightSABRightSABRightSAB",RightSAB);
+  
         for (var i = 0; i < RightSAB.length; i++) {
           if (RightSAB[i].cooprLevel1 == "线上") {
             // this.sabData.bar1 = (RightSAB[i].positionRatio*100).toFixed(1)
@@ -1106,7 +1035,7 @@ export default {
       }
     },
   },
-  mounted() {
+  mounted(){
     this.init(this.ontime);
   }
 };
@@ -1246,13 +1175,13 @@ export default {
   padding-top: 3px;
 }
 
-.flex-card {
+/* .flex-card {
   display: flex;
   margin-top: 10px;
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-}
+} */
 
 .flex-top-card {
   display: flex;
@@ -1266,101 +1195,6 @@ export default {
   margin-right: 8px;
 }
 
-.card-border-box {
-  margin: 10px 10px 30px 10px;
-  position: relative;
-  /* border: 1px solid red; */
-  /* border: 1px solid hsla(210, 86%, 39%, 0.66); */
-  min-width: 89%;
-  /* height: 70%;
-}
-.line {
-  height: 10px;
-  /* border-left: 2px solid rgb(102, 255, 255);
-  border-right: 2px solid rgb(102, 255, 255); */
-}
-
-.line1 {
-  /* border-top: 2px solid rgb(102, 255, 255); */
-  width: 10px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.line2 {
-  /* border-top: 2px solid rgb(102, 255, 255); */
-  width: 10px;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.line3 {
-  /* border-top: 2px solid rgb(102, 255, 255); */
-  width: 10px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-.line4 {
-  /* border-top: 2px solid rgb(102, 255, 255); */
-  width: 10px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-
-.left-right-box {
-  display: flex;
-  justify-content: space-between;
-}
-
-.finish-font {
-  color: #fff;
-  opacity: 0.6;
-  font-size: 12px;
-  margin-right: 4px;
-}
-
-.finish-font span {
-  color: #66ffff;
-  margin-left: 2px;
-}
-
-.mt-border {
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  width: 1px;
-}
-
-.card-big-num {
-  color: #66ffff;
-  font-size: 18px;
-}
-
-.progress {
-  width: 60px;
-  height: 10px;
-}
-
-.progress:last-child {
-  margin-bottom: 12px;
-}
-
-.progress-middle {
-  width: 34px;
-  height: 10px;
-}
-
-.progress-middle:last-child {
-  margin-bottom: 12px;
-}
-
-::v-deep .ant-progress-bg {
-  height: 4px !important;
-  border-radius: 200px !important;
-}
 
 .card-middle-progress {
   display: flex;

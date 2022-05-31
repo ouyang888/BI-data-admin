@@ -34,7 +34,8 @@ html,
 body,
 #app {
 
-  // height: auto !important;
+   height: auto !important;
+   background:rgb(2, 0, 77);
 
 }
 
