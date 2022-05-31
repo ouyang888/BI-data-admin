@@ -193,7 +193,7 @@ export default{
   data(){
     return{
 
-    level:['exprotAreaAll','exprotAreaAllDepartment'], /* 过滤责任人路由 */
+    level:['exprotAreaAll','exprotAreaAllDepartment'], /* 过滤责任人路由  当前路由不显示责任人 */
     tableData:[],/*talbe*/
     endObj:{}, /*最后一条数据*/
     tAvgAmtArr:['domestic'], /*需要显示责任制的 路由名*/
@@ -284,7 +284,11 @@ export default{
     getSummaries(){
            
           //  console.log('this.endObj',this.endObj);
-           let arr = ['合计',''];
+           let arr = ['合计'];
+
+           if(!this.level.includes(this.router)){ /*level路由外的加责任人 */
+            arr.push('');
+           }
  
            let arrContent = [this.endObj.cnyAmt && this.endObj.cnyAmt.toFixed(2) || 0,this.endObj[this.headerObj2.amtRadio] && (Number(this.endObj[this.headerObj2.amtRadio])*100).toFixed(2)+'%' || 0+'%',this.endObj[this.headerObj2.profitRadio] && Number(this.endObj[this.headerObj2.profitRadio]*100).toFixed(2)+'%' || 0+'%',this.endObj[this.headerObj2.amtFinish] || 0,''];
           
