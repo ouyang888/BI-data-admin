@@ -218,7 +218,7 @@ export default {
   },
   methods: {
     init(ontime) {
-      let title = this.$store.state.currTitle; /*当前标题*/
+      let title = this.$route.query.key; /*当前标题*/
     let params = {  /*年月*/
       month_date:ontime,
       coopr_level1:title
@@ -765,16 +765,14 @@ export default {
 
       });
       this.cardData = arr;
-      this.cardData.forEach(v=>{
-        console.log(v.businessEntityName,v.obmOem);
-      })
+     
  
 
       this.cardSab = res2.rows.filter(v=>{
               v.positionRatio = v.sabAmtRadio;  /*右边sab*/
               return v.position.length<2
       })
-      console.log('this.cardSab',this.cardData,this.cardSab)
+
     
 
 
@@ -816,7 +814,7 @@ export default {
         let listParams = { /*年月日*/
        start_date:start,
       end_date:end,
-      coopr_level1:this.$store.state.currTitle
+      coopr_level1:this.$route.query.key
       }
         this.getList(listParams);
         this.getList1(listParams);

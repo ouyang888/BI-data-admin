@@ -407,8 +407,8 @@
         <div class="fang-color"></div>
       </div>
       <div class="flex-char">
-        <a-spin class="flex-loading" size="large" v-if="showLoading" />
-        <div>
+        <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
+        <div style="position:relative">
           <div class="middle-font">内销日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
@@ -418,10 +418,10 @@
               </div>
             </template>
           </div>
-          <div id="main" class="echartsBox" v-show="!showLoading"></div>
-          <div class="echartsBox" v-show="showLoading"></div>
+          <div id="main" class="echartsBox"></div>
+          <div class="leftData" v-if="allList.length<1">暂无数据</div>
         </div>
-        <div>
+        <div style="position:relative">
           <div class="middle-font">线上日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
@@ -431,10 +431,10 @@
               </div>
             </template>
           </div>
-          <div id="main2" class="echartsBox" v-show="!showLoading"></div>
-          <div class="echartsBox" v-show="showLoading"></div>
+          <div id="main2" class="echartsBox"></div>
+          <div class="leftData" v-if="innerDirectList.length<1">暂无数据</div>
         </div>
-        <div>
+        <div style="position:relative">
           <div class="middle-font">线下日达成趋势图</div>
           <div class="legend">
             <template v-if="echartsLabel">
@@ -444,8 +444,8 @@
               </div>
             </template>
           </div>
-          <div id="main3" class="echartsBox" v-show="!showLoading"></div>
-          <div class="echartsBox" v-show="showLoading"></div>
+          <div id="main3" class="echartsBox"></div>
+          <div class="leftData" v-if="outerDirectList.length<1">暂无数据</div>
         </div>
       </div>
       <div class="flex-fang">

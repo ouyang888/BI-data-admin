@@ -363,7 +363,6 @@ export default {
             }
           }
         }
-        console.log('this.sabData',this.sabData)
       } catch (error) {
         console.log(error);
       }
@@ -458,7 +457,7 @@ export default {
             arrs[Arrtitle.indexOf(v.cooprLevel2)].push(v);
           }
         })
-       console.log('arrs',arrs,Arrtitle);
+   
 
 
         arrs.forEach((v,j)=>{
@@ -474,7 +473,6 @@ export default {
             AmericaLine = item.tAvgAmt;
 
           });
-          console.log("Arrnum",j);
 
           this.myEcharts2(AmericaList, AmericaDate, AmericaLine, j);
 

@@ -199,14 +199,8 @@
 
         },
         watch: {
-            cardObj: {
-                handler: function(newValue, oldValue) {
-                    console.log('newValue', newValue);
-                }
-            },
             list: {
                 handler: function(newValue, oldValue) {
-                    console.log('newValue11', newValue);
                     let title = '';
 
                     if (newValue.length < 1) {
@@ -247,7 +241,6 @@
                         })
 
                     }
-                    console.log('this.cardSabObj', this.cardSabObj);
                 }
 
             }
@@ -256,7 +249,7 @@
 
         created() {
 
-            // console.log('this.name',this.name)
+     
 
         },
         methods: {

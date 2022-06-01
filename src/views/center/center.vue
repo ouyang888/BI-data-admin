@@ -286,15 +286,14 @@ export default {
       localStorage.setItem("menu", JSON.stringify(res))
     },
 
-    changedirection(index) {
+    changedirection(index) {   /*1:销向  2:产司*/
       this.$store.commit('setDirection',index);
     
       let urlName = this.$route.name;
-      if (index == "1" && urlName != "offlineSummaryDepartment") {
+      console.log('exprotAreaAll',index == "2" && urlName == "exprotAreaAll",this.$route.query.key);
+      
+      if (index == "1" && urlName.includes('Department')==false) {  /*销向页点销向 */
         this.$router.push("/center/index");
-        
-      } else if (index == "1" && urlName == "offlineSummaryDepartment") {
-        this.$router.push("/center/offlineSummary");
         
       }
       if (index == "2" && urlName == "psi" || urlName == "index") {
@@ -313,11 +312,16 @@ export default {
         this.$router.push("/center/exportDepartment");
         
       } else if (index == "2" && urlName == "exprotAreaAll") {
-        this.$router.push({ name: 'exprotAreaAllDepartment', query: { key: this.$route.key } });
+    
+        this.$router.push({ name: 'exprotAreaAllDepartment', query: { key: this.$route.query.key } });
         
-      } else if (index == "2" && urlName == "index") {
-        this.$router.push("/center/department");
-        
+      } else if (index == "1" && urlName.includes('Department')) { /*产司切换回销向*/
+
+        if(urlName == 'exprotAreaAllDepartment'){
+          this.$router.push({ name: 'exprotAreaAll', query: { key: this.$route.query.key } });
+        }else{
+          this.$router.push({name:urlName.replace('Department','')});
+        }
       }
       // else {
 
@@ -381,12 +385,16 @@ export default {
   },
   created() {
     let month = this.date.getMonth() + 1;
+    let day = this.date.getDate();
+    if(day == 1){
+      month--;
+    }
     let currMonth = month >= 10 ? month : '0' + month;
     this.month = currMonth;
 
     this.$store.commit('setEndDay', new Date(this.year, currMonth, '0').getDate());
 
-    for (var i = month - 4; i <= month; i++) {
+    for (var i = 1; i <= month; i++) {
       let onMonth = i >= 10 ? i : '0' + i;
       // debugger
       this.timeList.push(`${this.year}${onMonth}`)

@@ -1,7 +1,7 @@
 <template>
   <div class="flex-card" >
-    <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" /> -->
-    <div class="noData" v-if="cardList.length<1">暂无数据</div>
+    <a-spin class="flex-loading" size="large" v-if="showLoading" />
+    <div class="noData" v-else-if="cardList.length<1">暂无数据</div>
     <!-- <span >有数据</span> -->
 
     <div class="card-box" v-for="(v,i) in cardList" :key="i" @click="gotoCatSeries(v[cardObj.title])" v-else>
@@ -136,7 +136,7 @@
         // 'onlineSummary':'catSeries'
 
       },
-      showLoading:false,
+      showLoading:true,
       cardList:[]
       }
     },
@@ -158,11 +158,12 @@
         handler:function(newValue,oldValue){
           this.showLoading = true;
           let arr = JSON.parse(JSON.stringify(newValue));
-          arr && arr.forEach(v => {
-            v[this.cardObj.cnyAmt] =  (v[this.cardObj.cnyAmt]).toFixed(2);
+
+          arr && arr.length>0 && arr.forEach(v => {
+            v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt]?(v[this.cardObj.cnyAmt]).toFixed(2):0.00;
           
-            v[this.cardObj.saleTaskAmt] =  (v[this.cardObj.saleTaskAmt]).toFixed(2);
-            v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(2));
+            v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt]?(v[this.cardObj.saleTaskAmt]).toFixed(2):0.00;
+            v[this.cardObj.saleAmtRadio] = v[this.cardObj.saleAmtRadio]?Number((v[this.cardObj.saleAmtRadio]*100).toFixed(2)):0.00;
             // if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
             v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/
             
@@ -184,7 +185,6 @@
     },
     methods: {
       gotoCatSeries(val) {
-        console.log('123',this.pathObj,this.name)
 
         if(this.pathObj[this.name]){ /*存在路由,保存*/
         this.$store.commit('setCurrTitle',val);
@@ -336,11 +336,11 @@
   .flex-card {
     display: flex;
     margin-top: 10px;
-    align-items: center;
+    /* align-items: center; */
     justify-content: inherit;
     flex-wrap: wrap;
     min-width: 56%;
-    min-height: 100px;
+    min-height: 270px;
     position: relative;
   }
 
@@ -575,10 +575,10 @@
   }
   .flex-loading{
       position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    width:40px;
+    height:40px;
+    top: calc(50% - 20px);
+    left:calc(50% - 20px);
     }
     .card-box{
       width:33%;

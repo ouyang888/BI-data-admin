@@ -1,8 +1,7 @@
 <template>
   <div class="flex-card" >
-    <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" />
-    <div class="noData" v-if="!showLoading && cardList.length<1">暂无数据</div> -->
-    <div class="noData" v-if="cardList.length<1">暂无数据</div>
+    <a-spin class="flex-loading" size="large" v-if="showLoading" />
+    <div class="noData" v-else-if="cardList.length<1">暂无数据</div>
     <div class="card-box" v-for="(v,i) in cardList" :key="i" v-else>
       <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
@@ -79,6 +78,8 @@
               <span class="percent-title">{{title1}}</span>
               <span class="percent-text">{{!!item[cardObj.businessModelCompleteRadio]?(item[cardObj.businessModelCompleteRadio]*100).toFixed(0):(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
             </div>
+          </template>
+          <template v-for="(item,k) in list"> 
             <div :key="k+223" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
               <span class="percent-title">{{title2}}</span>
               <span class="percent-text">{{!!item[cardObj.businessModelCompleteRadio]?(item[cardObj.businessModelCompleteRadio]*100).toFixed(0):(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
@@ -172,12 +173,11 @@
     watch:{
       cardObj:{
         handler:function(newValue,oldValue){
-          console.log('newValue',newValue);
         }
       },
       list:{
         handler:function(newValue,oldValue){
-          console.log('newValue11',newValue);
+          this.showLoading = true;
           let title = '';
       
           if(newValue.length<1) {
@@ -226,7 +226,6 @@
             })
 
            }
-           console.log('this.cardSabObj',this.cardSabObj);
         }
 
       }
@@ -240,9 +239,11 @@
     },
     methods: {
       gotoCatSeries(val) {
-
+        if(this.pathObj[this.name]){ /*存在路由,保存*/
         this.$store.commit('setCurrTitle',val);
         this.$router.push({name:this.pathObj[this.name],query:{key:val}});
+
+        }
 
 
         // this.$emit('gotoCatSeries',val)
@@ -395,7 +396,7 @@
     flex-wrap: wrap;
     position: relative;
     min-width: 56%;
-    min-height: 100px;
+    min-height: 270px;
   }
 
   .flex-top-card {
@@ -643,8 +644,8 @@
       text-align: right;
       font-weight: 400;
       display: inline-block;
-      width:28px;
-  
+      width:36px;
+      margin-right:5px;
     }
   
     .percent-text {
@@ -708,9 +709,9 @@
     }
     .flex-loading{
       position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    width:40px;
+    height:40px;
+    top: calc(50% - 20px);
+    left:calc(50% - 20px);
     }
 </style>

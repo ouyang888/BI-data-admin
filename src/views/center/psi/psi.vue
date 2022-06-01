@@ -30,7 +30,11 @@
   
                         <span
                         >{{
+<<<<<<< HEAD
                           !!departmentInfo.length===0?Number(departmentInfo.cnyAmtRadio*100).toFixed(2):0.00
+=======
+                          !!departmentInfo.cnyAmtRadio?Number(departmentInfo.cnyAmtRadio*100).toFixed(2):0.00
+>>>>>>> 4893c5759839fadd696ebd325cebbb31fdaa60db
                         }}%</span
                       >
                     </div>
@@ -120,7 +124,7 @@
                     毛利率
                     <span class="light-blue"
                   
-                      >{{!!homeGrossProfitRadio[0]?
+                      >{{!!homeGrossProfitRadio[0] && !!homeGrossProfitRadio[0].grossProfitRadio?
                         Number(
                           homeGrossProfitRadio[0].grossProfitRadio * 100
                         ).toFixed(2):0
@@ -2066,8 +2070,8 @@ export default {
     },
 
     async infoList(){
-      let res = await API.textInfo()
-      console.log("88888",res)
+      // let res = await API.textInfo()
+      // console.log("88888",res)
     },
     
     

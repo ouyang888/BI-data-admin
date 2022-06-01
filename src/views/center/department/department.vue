@@ -91,7 +91,8 @@
 import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
 import selectTime from '@/components/selectTime.vue';
 //  import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
-import cardPro from "./component/cardPro.vue";
+// import cardPro from "./component/cardPro.vue";
+import cardPro from "@/views/center/components/card/cardPro.vue"; 
 
 import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
@@ -380,7 +381,7 @@ export default {
         });
         this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
         let innerTotal = tableInner.rows.filter((v) => {
-          return v.cooprLevel2Manager == "底部合计" || v.cooprLevel2Manager =='合计';
+          return v.cooprLevel1 =='合计';
         });
         this.tableInner = innerTop.concat(innerBottom, innerTotal);
         this.tableInner.forEach(v=>{
