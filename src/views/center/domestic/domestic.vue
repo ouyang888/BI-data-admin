@@ -49,7 +49,7 @@
                         <a-progress :percent="innerLeftInfo.dateRadio" :show-info="false" strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress :percent="innerLeftInfo.onLineRadio" :show-info="false"
+                        <a-progress :percent="Number(innerLeftInfo.onLineRadio)" :show-info="false"
                           strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
@@ -147,7 +147,7 @@
                           strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress :percent="innerRightInfo.onLineRadio || 20" :show-info="false"
+                        <a-progress :percent="Number(innerRightInfo.onLineRadio) || 20" :show-info="false"
                           strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
@@ -241,7 +241,7 @@
                         <a-progress :percent="outterLeftInfo.dateRadio" :show-info="false" strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress :percent="outterLeftInfo.onLineRadio" :show-info="false"
+                        <a-progress :percent="Number(outterLeftInfo.onLineRadio)" :show-info="false"
                           strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
@@ -340,7 +340,7 @@
                           strokeColor="#FF8B2F" />
                       </div>
                       <div class="progress">
-                        <a-progress :percent="outterRightInfo.onLineRadio || 20" :show-info="false"
+                        <a-progress :percent="Number(outterRightInfo.onLineRadio) || 20" :show-info="false"
                           strokeColor="rgb(102, 255, 255)" />
                       </div>
                     </div>
