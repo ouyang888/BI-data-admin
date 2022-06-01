@@ -247,7 +247,7 @@
         }
 
 
-        // this.$emit('gotoCatSeries',val)
+        this.$emit('gotoCatSeries',val)
 
 
       }
