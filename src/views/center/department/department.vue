@@ -24,7 +24,7 @@
 
       <div class="flex-char">      
         <div>
-          <div class="middle-font left-file">事业部日达成趋势图</div>
+          <div class="middle-font left-file">事业部日达成趋势图l</div>
           <div class="legend">
             <template v-if="echartsLabel">
               <div class="item" v-for="(item, index) in echartsLabel" :key="index">
@@ -1232,7 +1232,7 @@ export default {
   font-size: 15px;
   color: #fff;
   margin-right: 40px;
-  width: 30px;
+  width: 45%;
   white-space: nowrap;
 }
 .flex-right-bottom {

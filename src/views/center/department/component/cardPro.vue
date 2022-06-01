@@ -80,7 +80,7 @@
               <span class="percent-title">{{title1}}</span>
               <span class="percent-text">{{!!item.businessModelCompleteRadio*100?(item.businessModelCompleteRadio*100).toFixed(2):0.00 }}%</span>
             </div>
-            <div :key="k+223" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
+            <div :key="k+223" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
               <span class="percent-title">{{title2}}</span>
               <span class="percent-text">{{!!item.businessModelCompleteRadio*100?(item.businessModelCompleteRadio*100).toFixed(2):0.00 }}%</span>
             </div>
@@ -575,6 +575,7 @@
         font-size: 15px;
         color: #fff;
         margin-right: 40px;
+        width:45%
     }
     
     .flex-right-bottom {

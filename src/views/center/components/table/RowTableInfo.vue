@@ -224,7 +224,7 @@
             mesInfo: {
                 handler: function(newValue, oldValue) {
                    this.tableData = this.mesInfo.slice(0,newValue.length - 1);
-                  this.endObj = this.mesInfo.slice(this.mesInfo.length -1 ,this.mesInfo.length)[0];
+                  this.endObj = this.mesInfo.slice(this.mesInfo.length -1 ,this.mesInfo.length)[0]||{};
 
                 }
             }

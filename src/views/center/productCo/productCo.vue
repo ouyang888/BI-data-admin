@@ -2064,6 +2064,7 @@ myEcharts() {
 .right-font-title {
   font-size: 15px;
   color: #fff;
+  width:100px;
 }
 .flex-right-bottom {
   display: flex;

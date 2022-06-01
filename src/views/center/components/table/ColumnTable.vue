@@ -152,13 +152,11 @@
         watch:{
     mesInfo:{
       handler:function(newValue,oldValue){
-          console.log('newValue',newValue,newValue[newValue.length-1].businessEntityName);
-           console.log('oldValue',oldValue);
-         if(newValue[newValue.length-1].businessEntityName == '合计'){
+         if(!!newValue&&!!newValue[newValue.length-1]&&newValue[newValue.length-1].businessEntityName == '合计'){
             this.tableData = newValue.slice(0,newValue.length - 1);
             this.endObj = newValue.slice(newValue.length -1 ,newValue.length)[0];
          }else{  
-        this.endObj = this.mesInfo.slice(this.mesInfo.length -1 ,this.mesInfo.length)[0];
+        this.endObj = this.mesInfo.slice(this.mesInfo.length -1 ,this.mesInfo.length)[0]||{};
     }
 
       }
