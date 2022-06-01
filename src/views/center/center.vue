@@ -385,12 +385,16 @@ export default {
   },
   created() {
     let month = this.date.getMonth() + 1;
+    let day = this.date.getDate();
+    if(day == 1){
+      month--;
+    }
     let currMonth = month >= 10 ? month : '0' + month;
     this.month = currMonth;
 
     this.$store.commit('setEndDay', new Date(this.year, currMonth, '0').getDate());
 
-    for (var i = month - 4; i <= month; i++) {
+    for (var i = 1; i <= month; i++) {
       let onMonth = i >= 10 ? i : '0' + i;
       // debugger
       this.timeList.push(`${this.year}${onMonth}`)

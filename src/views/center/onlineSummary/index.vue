@@ -33,6 +33,7 @@
             </template>
           </div>
           <div id="main" class="echartsBox"></div>
+          <div class="leftData" v-if="AvgTaskAmtList.length<1">暂无数据</div>
         </div>
         <div>
           <div class="middle-font">线上通路日达成趋势图</div>
@@ -506,7 +507,7 @@ export default {
           });
           this.cardData.splice(6);
         } else {
-          this.cardData = [{}];
+          this.cardData = [];
         }
         // console.log("2233377",this.cardData)
       } catch (err) {

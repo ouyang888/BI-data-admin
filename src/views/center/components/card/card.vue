@@ -158,11 +158,12 @@
         handler:function(newValue,oldValue){
           this.showLoading = true;
           let arr = JSON.parse(JSON.stringify(newValue));
-          arr && arr.forEach(v => {
-            v[this.cardObj.cnyAmt] =  (v[this.cardObj.cnyAmt]).toFixed(2);
+
+          arr && arr.length>0 && arr.forEach(v => {
+            v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt]?(v[this.cardObj.cnyAmt]).toFixed(2):0.00;
           
-            v[this.cardObj.saleTaskAmt] =  (v[this.cardObj.saleTaskAmt]).toFixed(2);
-            v[this.cardObj.saleAmtRadio] = Number((v[this.cardObj.saleAmtRadio]*100).toFixed(2));
+            v[this.cardObj.saleTaskAmt] =  v[this.cardObj.saleTaskAmt]?(v[this.cardObj.saleTaskAmt]).toFixed(2):0.00;
+            v[this.cardObj.saleAmtRadio] = v[this.cardObj.saleAmtRadio]?Number((v[this.cardObj.saleAmtRadio]*100).toFixed(2)):0.00;
             // if(v[this.cardObj.saleAmtRadio]>100){  v[this.cardObj.saleAmtRadio] = 100 };
             v.dateRadio = Number((v.dateRadio*100).toFixed(0)); /*时间进度*/
             

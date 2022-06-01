@@ -213,7 +213,7 @@ export default{
         //   }
         // })
         this.tableData = newValue.slice(0,newValue.length - 1);
-        this.endObj = newValue.slice(newValue.length -1 ,newValue.length)[0];
+        this.endObj = newValue.slice(newValue.length -1 ,newValue.length)[0] || {};
 
       }
     }

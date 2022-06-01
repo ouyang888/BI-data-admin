@@ -30,7 +30,7 @@
   
                         <span
                         >{{
-                          !!departmentInfo?Number(departmentInfo.cnyAmtRadio*100).toFixed(2):0.00
+                          !!departmentInfo.cnyAmtRadio?Number(departmentInfo.cnyAmtRadio*100).toFixed(2):0.00
                         }}%</span
                       >
                     </div>
@@ -119,7 +119,7 @@
                     毛利率
                     <span class="light-blue"
                   
-                      >{{!!homeGrossProfitRadio[0]?
+                      >{{!!homeGrossProfitRadio[0] && !!homeGrossProfitRadio[0].grossProfitRadio?
                         Number(
                           homeGrossProfitRadio[0].grossProfitRadio * 100
                         ).toFixed(2):0
@@ -129,7 +129,7 @@
                    <div   class="rightInfo">
                     线上
                     <span class="light-blue"> 
-                         {{!!info?
+                         {{!!info && !!info.profitRadio?
                           Number(info.profitRadio*100).toFixed(2):0 
                          }}%</span>
 
@@ -137,7 +137,7 @@
                   <div  class="rightInfo">
                     线下
                     <span class="light-blue"
-                      >{{ !!info2?Number(info2.profitRadio*100).toFixed(2):0}}%
+                      >{{ !!info2 && info2.profitRadio?Number(info2.profitRadio*100).toFixed(2):0}}%
                       </span> 
                   </div>
 

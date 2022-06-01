@@ -91,7 +91,8 @@
 import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
 import selectTime from '@/components/selectTime.vue';
 //  import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
-import cardPro from "./component/cardPro.vue";
+// import cardPro from "./component/cardPro.vue";
+import cardPro from "@/views/center/components/card/cardPro.vue"; 
 
 import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
