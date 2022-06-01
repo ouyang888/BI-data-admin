@@ -1,4 +1,5 @@
-<template>
+<!-- sab组件 -->
+<template> 
   <div class="flex-card" >
     <a-spin class="flex-loading" size="large" v-if="showLoading" />
     <div class="noData" v-else-if="cardList.length<1">暂无数据</div>
