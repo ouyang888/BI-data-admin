@@ -30,11 +30,7 @@
   
                         <span
                         >{{
-<<<<<<< HEAD
                           !!departmentInfo.length===0?Number(departmentInfo.cnyAmtRadio*100).toFixed(2):0.00
-=======
-                          !!departmentInfo.cnyAmtRadio?Number(departmentInfo.cnyAmtRadio*100).toFixed(2):0.00
->>>>>>> 4893c5759839fadd696ebd325cebbb31fdaa60db
                         }}%</span
                       >
                     </div>
