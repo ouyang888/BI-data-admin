@@ -11,11 +11,7 @@
         </div>
       </div>
         <!-- 右侧卡片 -->
-     
-       
-    
     <!-- <div class="noData" v-if="cardData.length===0">暂无数据</div> -->
-    
       <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
     </div>
     <!-- 中间echart -->
@@ -82,7 +78,8 @@
 </template>
 <script>
 import selectTime from '@/components/selectTime.vue';
-import cardPro from "./component/cardPro.vue"; 
+// import cardPro from "./component/cardPro.vue"; 
+import cardPro from "@/views/center/components/card/cardPro.vue"; 
 import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
@@ -2075,7 +2072,7 @@ myEcharts() {
 .right-font-title {
   font-size: 15px;
   color: #fff;
-  width:100px;
+  width:80px;
 }
 .flex-right-bottom {
   display: flex;

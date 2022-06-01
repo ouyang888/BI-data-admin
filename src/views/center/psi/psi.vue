@@ -20,7 +20,7 @@
                     <div class="finish-font">
                       责任制
                       <span>{{
-                        !!departmentInfo.length===0?Number(departmentInfo.saleTaskAmt).toFixed(2):0.00
+                        !!departmentInfo&& !!departmentInfo.length===0?Number(departmentInfo.saleTaskAmt).toFixed(2):0.00
                       }}</span
                       >{{modelLabel}}
                     </div>
@@ -30,7 +30,7 @@
   
                         <span
                         >{{
-                          !!departmentInfo.length===0?Number(departmentInfo.cnyAmtRadio*100).toFixed(2):0.00
+                          !!departmentInfo&&!!departmentInfo.length===0?Number(departmentInfo.cnyAmtRadio*100).toFixed(2):0.00
                         }}%</span
                       >
                     </div>
@@ -39,21 +39,21 @@
                 <div class="flex-top-card">
               
                   <div class="card-big-num">
-                    {{ !!departmentInfo.length===0?Number(departmentInfo.cnyAmt).toFixed(2):0 }}{{modelLabel}}
+                    {{!!departmentInfo&& !!departmentInfo.length===0?Number(departmentInfo.cnyAmt).toFixed(2):0 }}{{modelLabel}}
                   </div>
                   <div style=" display: flex; align-items: center; ">
                     <div class="finish-font">进度</div>
                     <div>
                       <div class="progress">
                         <a-progress
-                          :percent="departmentInfo.dateRadio * 100"
+                          :percent="departmentInfo&&departmentInfo.dateRadio * 100"
                           :show-info="false"
                           strokeColor="#FF8B2F"
                         />
                       </div>
                       <div class="progress">
                         <a-progress
-                          :percent="departmentInfo.businessCnyAmtRadio * 100"
+                          :percent="departmentInfo&&departmentInfo.businessCnyAmtRadio * 100"
                           :show-info="false"
                           strokeColor="rgb(102, 255, 255)"
                         />
@@ -134,7 +134,7 @@
                     <span class="light-blue"> 
                   
                         
-                          {{!!info.length===0?Number(info.profitRadio*100).toFixed(2):0 
+                          {{!!info&&!!info.length===0?Number(info.profitRadio*100).toFixed(2):0 
                          }}%</span>
 
                   </div>
@@ -142,7 +142,7 @@
                     线下
                    
                     <span class="light-blue"
-                      >{{ !!info2.length===0?Number(info2.profitRadio*100).toFixed(2):0}}%
+                      >{{!!info2&& !!info2.length===0?Number(info2.profitRadio*100).toFixed(2):0}}%
                       </span> 
                   </div>
 
@@ -158,7 +158,7 @@
                     <div class="finish-font">
                       责任制
                       <span>{{
-                        !!departmentInfo1===undefined||undefined?Number(departmentInfo1.saleTaskAmt).toFixed(2):0
+                        !!departmentInfo1===undefined?Number(departmentInfo1.saleTaskAmt).toFixed(2):0
                       }}</span
                       >{{modelLabel}}
                     </div>
@@ -226,14 +226,14 @@
                       <div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="item.dateRadio* 100"
+                            :percent="!!item&&item.dateRadio* 100"
                             :show-info="false"
                             strokeColor="#FF8B2F"
                           />
                         </div>
                         <div class="progress-middle">
                           <a-progress
-                            :percent="item.businessCnyAmtRadio * 100"
+                            :percent="!!item&&item.businessCnyAmtRadio * 100"
                             :show-info="false"
                             strokeColor="rgb(102, 255, 255)"
                           />
@@ -265,19 +265,19 @@
                   <div class="rightInfo1">
                      毛利率
                     <span class="light-blue" 
-                      >{{!!homeGrossProfitRadio1.length===0?Number(homeGrossProfitRadio1[0].grossProfitRadio * 100).toFixed(2):0
+                      >{{!!homeGrossProfitRadio1&&!!homeGrossProfitRadio1.length===0?Number(homeGrossProfitRadio1[0].grossProfitRadio * 100).toFixed(2):0
                       }}%</span>
                   </div>
                    <div class="rightInfo1">
                    OEM
                   
-                    <span class="light-blue"> {{!!info3.length===0?Number(info3.profitRadio*100).toFixed(2):0 }}%</span>
+                    <span class="light-blue"> {{!!info3&&!!info3.length===0?Number(info3.profitRadio*100).toFixed(2):0 }}%</span>
 
                   </div>
               
                   <div class="rightInfo1">
                     OBM <span class="light-blue"
-                      >{{!!info4.length===0?Number(info4.profitRadio*100).toFixed(2):0}}%
+                      >{{!!info4&&!!info4.length===0?Number(info4.profitRadio*100).toFixed(2):0}}%
                       </span> 
                   </div>
 
