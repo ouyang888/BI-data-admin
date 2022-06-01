@@ -1232,8 +1232,7 @@ export default {
 .right-font-title {
   font-size: 15px;
   color: #fff;
-  margin-right: 40px;
-  width: 45%;
+width:80px;
   white-space: nowrap;
 }
 .flex-right-bottom {

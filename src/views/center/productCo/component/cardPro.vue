@@ -579,6 +579,10 @@
         font-size: 15px;
         color: #fff;
         margin-right: 40px;
+        font-size: 15px;
+        color: #fff;
+        width: 80px;
+        white-space: nowrap;
     }
     
     .flex-right-bottom {
