@@ -3,8 +3,8 @@
   <div class="flex-card" >
     <a-spin class="flex-loading" size="large" v-if="showLoading" />
     <div class="noData" v-else-if="cardList.length<1">暂无数据</div>
-    <div class="card-box" v-for="(v,i) in cardList" :key="i" v-else>
-      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
+    <div class="card-box" v-for="(v,i) in cardList" @click="gotoCatSeries(v[cardObj.title])" :key="i" v-else>
+      <div class="card-font">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
         <div class="line"></div>
         <div class="line1"></div>
