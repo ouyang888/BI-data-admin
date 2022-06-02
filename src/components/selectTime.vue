@@ -1,5 +1,5 @@
 <template>
-  <el-select :popper-append-to-body="false" v-model="currentTime"  @change="changeDate">
+  <el-select :popper-append-to-body="false" v-model="currentTime"  @change="changeDate" :disabled="onMonth!=month">
     <el-option v-for="(item, index) in timeOptions" :key="index" :label="item.label" :value="item.value">
     </el-option>
   </el-select>
@@ -17,6 +17,7 @@ export default {
         { value: 30, label: "近30天" },
         { value: 0, label: "本月" }
       ],
+      onMonth:""
     }
   },
   methods: {
@@ -45,9 +46,42 @@ export default {
     },
 
   },
+  computed:{
+    month(){
+      return this.$store.state.month;
+    }
+  },
+  watch:{
+   month:function(val){
+      console.log(val);
+      if(val!=this.onMonth){
+        this.currentTime = 0;
+      }
+   }
+
+  },
+  created(){
+    let month = new Date().getMonth();
+    this.onMonth = month+1>=10?month:'0'+(month+1);
+  }
 
 }
 </script>
 
 <style scoped>
+::v-deep .el-input.is-disabled .el-input__inner{
+  background-color: transparent;
+  border-color: #00f9ff;
+  color: #19ECFF;
+}
+
+::v-deep .el-input.is-disabled .el-input__inner:hover{
+  border-color: #00f9ff;
+}
+::v-deep .el-input .el-input__inner:hover{
+  border-color: #00f9ff;
+}
+::v-deep .el-select .el-input__inner:focus{
+  border-color: #00f9ff;
+}
 </style>
