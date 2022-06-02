@@ -53,7 +53,6 @@ export default {
   },
   watch:{
    month:function(val){
-      console.log(val);
       if(val!=this.onMonth){
         this.currentTime = 0;
       }

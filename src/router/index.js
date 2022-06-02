@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import store from "../store";
-import api from "@/service/api";
-import Cookies from 'js-cookie'
 import VueRouter, {
     RouteConfig
 } from 'vue-router'
@@ -9,6 +7,9 @@ import VueRouter, {
 import {
     getToken
 } from '@/utils/auth';
+import {
+    api
+} from '@/config/index'
 
 Vue.use(VueRouter)
 const routes = [
@@ -202,53 +203,22 @@ const router = new VueRouter({
  * 路由守卫
  */
 router.beforeEach(async (to, from, next) => {
-    let geturl = window.location.href
-    let getqyinfo = geturl.split('?')[1]   //qycode=1001&qyname=%E4%BC%81%E4%B8%9A%E5%BF%99   截取到参数部分
-    let getqys = new URLSearchParams('?' + getqyinfo)  //将参数放在URLSearchParams函数中
-    let getqycode = getqys.get('code')
-    if (getqycode == null || getqycode == undefined || getqycode == '') {
-        location.href = "https://signin.midea.com/oauth2.0/authorize?response_type=code&client_id=0k9m1deaadmin8&redirect_uri=http://p.midea.com"
-        return;
-    }
-    console.log("getqycode", getqycode)
-    let token = localStorage.getItem("token")
-    let newgetqycode = getqycode.substring(0, getqycode.length - 2)
-    // console.log("token", token)
-    if (token == undefined) {
-        let formData = new FormData();
-        formData.append("code", newgetqycode);
-        formData.append("rememberMe", false);
-        // console.log("登录参数", formData)
-        const result = await api.login(formData);
-        console.log("登录后返回", result)
-        if (result.code == 0) {
-            // console.log("登录成功了000000000000000000000000000000000000000000000000000000000")
-            localStorage.setItem("token", result.data.sessionId);
-            localStorage.setItem("userName", result.data.userName);
-            Cookies.set('mip_sso_id', result.data.sessionId);
-            // let res = await api.menuList();
-            next("/center/psi");
-            // location.href = 'http://p.midea.com/#' + `/center/psi`;
-            return;
-        } else {
-            location.href = "https://signin.midea.com/oauth2.0/authorize?response_type=code&client_id=0k9m1deaadmin8&redirect_uri=http://p.midea.com"
-            return;
-        }
-    }
-
-
+    let isLogin = localStorage.getItem("token")
+    if (to.name !== 'login' && isLogin == null) {
+        next('/login');
+    }   
     // let urlArr = JSON.parse(localStorage.getItem("menu"))
     // let newUrlArr = []
     // for (var i = 0; i < urlArr.length; i++) {
     //     newUrlArr.push(urlArr[i].url)
     // }
     // if (newUrlArr.indexOf(to.name) == -1) {
-
-    // this.$message({
-    //     message: '模块建设中...',
-    //     type: 'success'
-    //   });
-    // this.$message.info("权限不足");
+       
+        // this.$message({
+        //     message: '模块建设中...',
+        //     type: 'success'
+        //   });
+        // this.$message.info("权限不足");
     // }
     next();
 })

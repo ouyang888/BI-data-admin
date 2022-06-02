@@ -7,7 +7,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/apa': {
-        target: 'http://p.midea.com/',
+        target: 'http://10.33.119.107:80/',
         changeOrigin: true,
         pathRewrite: {
           '^/apa': ''

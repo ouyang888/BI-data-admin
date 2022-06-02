@@ -1,7 +1,7 @@
 // const admin_dev = '/apa/'
 let admin_dev = ''
 
-const admin_test ='http://p.midea.com/'
+const admin_test ='http://10.33.119.107:80/'
 
 const admin_uat = 'http://p.midea.com:8083/'
 
