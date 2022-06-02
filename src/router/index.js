@@ -210,9 +210,9 @@ router.beforeEach(async (to, from, next) => {
         location.href = "https://signin.midea.com/oauth2.0/authorize?response_type=code&client_id=0k9m1deaadmin8&redirect_uri=http://p.midea.com"
         return;
     }
-    console.log("getqycode",getqycode)
+    console.log("getqycode", getqycode)
     let token = localStorage.getItem("token")
-    let newgetqycode = getqycode.substring(0,getqycode.length-2)
+    let newgetqycode = getqycode.substring(0, getqycode.length - 2)
     // console.log("token", token)
     if (token == undefined) {
         let formData = new FormData();
@@ -222,10 +222,16 @@ router.beforeEach(async (to, from, next) => {
         const result = await api.login(formData);
         console.log("登录后返回", result)
         if (result.code == 0) {
+            // console.log("登录成功了000000000000000000000000000000000000000000000000000000000")
             localStorage.setItem("token", result.data.sessionId);
+            localStorage.setItem("userName", result.data.userName);
             Cookies.set('mip_sso_id', result.data.sessionId);
             // let res = await api.menuList();
-            location.href = 'http://p.midea.com/#' + `/center/psi`;
+            next("/center/psi");
+            // location.href = 'http://p.midea.com/#' + `/center/psi`;
+            return;
+        } else {
+            location.href = "https://signin.midea.com/oauth2.0/authorize?response_type=code&client_id=0k9m1deaadmin8&redirect_uri=http://p.midea.com"
             return;
         }
     }

@@ -58,12 +58,12 @@
 
         <div class="change-flex">
           <div :class="
-          direction == '1' ? 'head-box-right active' : 'head-box-right'
+            direction == '1' ? 'head-box-right active' : 'head-box-right'
           " @click="changedirection(1)">
             <span>销向</span>
           </div>
           <div :class="
-          direction == '2' ? 'head-box-right active' : 'head-box-right'
+            direction == '2' ? 'head-box-right active' : 'head-box-right'
           " @click="changedirection(2)">
             <span>产司</span>
           </div>
@@ -104,6 +104,7 @@
 <script>
 import Vue from "vue";
 import API from "../../service/api";
+import Cookies from 'js-cookie'
 export default {
   data() {
     return {
@@ -130,13 +131,13 @@ export default {
     pathName() {
       return this.$store.state.currPath;
     },
-    direction(){
+    direction() {
       return this.$store.state.direction;
     },
-    index(){
+    index() {
       return this.$store.state.index;
     },
-    cus(){
+    cus() {
       return this.$store.state.showMoney
     }
   },
@@ -144,16 +145,16 @@ export default {
     $route: function (val) {
       if (val.meta.preMenuUrl || this.$route.path) {
         this.searchKeys = [this.$route.path, val.meta.preMenuUrl || ""];
-        console.log("路由", val.name,val.name.indexOf('epartment'));
-        if(val.name.indexOf('epartment')>0){
-          this.$store.commit('setDirection',2); /*产司*/
-        }else{
-          this.$store.commit('setDirection',1);/*销向*/
+        console.log("路由", val.name, val.name.indexOf('epartment'));
+        if (val.name.indexOf('epartment') > 0) {
+          this.$store.commit('setDirection', 2); /*产司*/
+        } else {
+          this.$store.commit('setDirection', 1);/*销向*/
         }
         if (val.name == 'psi') {
-          this.$store.commit('setIndex',1);
+          this.$store.commit('setIndex', 1);
         } else {
-          this.$store.commit('setIndex',2);
+          this.$store.commit('setIndex', 2);
         }
         this.getPageName(val.name);
       }
@@ -163,100 +164,100 @@ export default {
     getPageName(path) {
       switch (path) {
         case "psi":
-          
+
           this.$store.commit("setCurrPath", "总裁PSI页");
           break;
         case "index":
-          
+
           this.$store.commit("setCurrPath", "销向汇总页");
           break;
         case "department":
-          
+
           this.$store.commit("setCurrPath", "产司汇总页");
           break;
 
         case "productCo":
-          
+
           this.$store.commit("setCurrPath", "品类汇总");
           break;
         case "domestic":
-          
+
           this.$store.commit("setCurrPath", "内销汇总");
           break;
         case "export":
-          
+
           this.$store.commit("setCurrPath", "外销汇总");
           break;
         case "onlineSummary":
-          
+
           this.$store.commit("setCurrPath", "内销线上汇总");
           break;
         case "catSeries":
-          
+
           this.$store.commit("setCurrPath", "合作模式二负责人");
           break;
 
         case "modeCo":
-          
+
           this.$store.commit("setCurrPath", "  合作模式三负责人 ");
           break;
         case "onlineModeCo":
-          
+
           this.$store.commit("setCurrPath", "  合作模式四负责人 ");
           break;
 
         case "offlineSummary":
-          
+
           this.$store.commit("setCurrPath", "内销线下汇总");
           break;
 
         case "offlineCatSeries":
-          
+
           this.$store.commit("setCurrPath", "  合作模式二负责人 ");
           break;
         case "offlineCode":
-          
+
           this.$store.commit("setCurrPath", " 合作模式三负责人  ");
           break;
         /*外销*/
         case "exprotAreaAll":
-          
+
           this.$store.commit("setCurrPath", " 外销大区汇总页");
           break;
 
         case "exprotProductCo":
-          
+
           this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
           break;
 
         case "domesticDepartment":
-          
+
           this.$store.commit("setCurrPath", " 内销汇总产司页  ");
           break;
 
         case "onlineSummaryDepartment":
-          
+
           this.$store.commit("setCurrPath", " 内销线上汇总产司页  ");
           break;
 
         case "offlineSummaryDepartment":
-          
+
           this.$store.commit("setCurrPath", " 内销线下汇总产司页  ");
           break;
 
         case "exportDepartment":
-          
+
           this.$store.commit("setCurrPath", " 外销产司汇总页  ");
           break;
         case "exprotAreaAllDepartment":
-          
+
           this.$store.commit("setCurrPath", " 外销大区产司汇总页  ");
           break;
 
         default:
-          
+
           this.$store.commit("setCurrPath", "总裁PSI页");
-          // this.direction = 1
+        // this.direction = 1
       }
     },
     goBack() {
@@ -287,46 +288,49 @@ export default {
     },
 
     changedirection(index) {
-      this.$store.commit('setDirection',index);
-    
+      this.$store.commit('setDirection', index);
+
       let urlName = this.$route.name;
       if (index == "1" && urlName != "offlineSummaryDepartment") {
         this.$router.push("/center/index");
-        
+
       } else if (index == "1" && urlName == "offlineSummaryDepartment") {
         this.$router.push("/center/offlineSummary");
-        
+
       }
       if (index == "2" && urlName == "psi" || urlName == "index") {
         this.$router.push("/center/department");
-        
+
       } else if (index == "2" && urlName == "domestic") {
         this.$router.push("/center/domesticDepartment");
-        
+
       } else if (index == "2" && urlName == "onlineSummary") {
         this.$router.push("/center/onlineSummaryDepartment");
-        
+
       } else if (index == "2" && urlName == "offlineSummary") {
         this.$router.push("/center/offlineSummaryDepartment");
-        
+
       } else if (index == "2" && urlName == "export") {
         this.$router.push("/center/exportDepartment");
-        
+
       } else if (index == "2" && urlName == "exprotAreaAll") {
         this.$router.push({ name: 'exprotAreaAllDepartment', query: { key: this.$route.key } });
-        
+
       } else if (index == "2" && urlName == "index") {
         this.$router.push("/center/department");
-        
+
       }
       // else {
 
       // }
     },
 
-    logout() {
-      localStorage.removeItem("token");
-      this.$router.push("/login");
+    async logout() {
+      let token = localStorage.getItem("token")
+      await API.loginout(token);
+      localStorage.removeItem("token")
+      Cookies.remove('mip_sso_id');
+      location.href = "https://signin.midea.com/logout?service=http://p.midea.com"
     },
 
     changeyear(item) {
@@ -362,14 +366,14 @@ export default {
       }
     },
     clickChange(i) {
-      this.$store.commit('setIndex',i);
-      this.$store.commit('setDirection',1);
+      this.$store.commit('setIndex', i);
+      this.$store.commit('setDirection', 1);
       if (i == 1) {
         this.$router.push("/center/psi");
-        
+
       } else {
         this.$router.push("/center/index");
-        
+
       }
     },
 

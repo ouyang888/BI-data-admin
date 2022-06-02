@@ -16,13 +16,13 @@ export default class ApiService {
   static getData(code, params) {
     // return request.get(api.adminUrl + `query?code=${code}&parameter=${date}`);
     let obj = {
-      sqlType:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
-      prod_area_name:store.state.model, /*本部*/
-      code:code
+      sqlType: store.state.showMoney == true ? 'AMT' : 'QTY', /*金额:数量*/
+      prod_area_name: store.state.model, /*本部*/
+      code: code
     };
-    Object.assign(obj,params);
-    return request.get( api.adminUrl +`query?`,
-    obj
+    Object.assign(obj, params);
+    return request.get(api.adminUrl + `query?`,
+      obj
     );
   }
   //七图
@@ -31,35 +31,35 @@ export default class ApiService {
   }
 
 
-//  新的总接口
+  //  新的总接口
   static getTotal(params) {
-    
+
     let obj = {
-      sqlType:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
-      prod_area_name:store.state.model /*本部*/
+      sqlType: store.state.showMoney == true ? 'AMT' : 'QTY', /*金额:数量*/
+      prod_area_name: store.state.model /*本部*/
     };
 
-    Object.assign(obj,params);
-  
+    Object.assign(obj, params);
 
-    return request.get( api.adminUrl +`query?`,
-    obj
+
+    return request.get(api.adminUrl + `query?`,
+      obj
     );
   }
   // 趋势图接口
   static getChartTotal(params) {
     let obj = {
-      sqlType:store.state.showMoney==true?'AMT':'QTY', /*金额:数量*/
-      prod_area_name:store.state.model /*本部*/
+      sqlType: store.state.showMoney == true ? 'AMT' : 'QTY', /*金额:数量*/
+      prod_area_name: store.state.model /*本部*/
     };
-    Object.assign(obj,params);
+    Object.assign(obj, params);
     return request.get(api.adminUrl + `chartQuery?`,
-    obj);
+      obj);
   }
 
   //权限
-  static menuList(){
-    return request.post(api.adminUrl +  `system/menu/list`)
+  static menuList() {
+    return request.post(api.adminUrl + `system/menu/list`)
   }
 
   // axios.get('/user', {
@@ -74,10 +74,16 @@ export default class ApiService {
   }
 
 
-   //登出接口
-   static loginout(data) {
-    return request.post(api.adminUrl + `logout`, "", { headers: { "content-Type": "multipart/form-data" } });
+  //登出接口
+  static loginout(data) {
+    return request.post(api.adminUrl + `monitor/online/batchForceLogout?ids=` + data);
   }
+
+   //登出接口
+   static loginoutTwo(data) {
+    return request.post(api.adminUrl + `logout` );
+  }
+
 
 
 
@@ -85,5 +91,5 @@ export default class ApiService {
   // static textInfo() {
   //   return request.get(api.adminUrl + `query?start_date=2022-03-01`, "", { headers: { "Accept": "application/json" } });
   // }
-  
+
 }
