@@ -24,7 +24,7 @@
 
       <div class="flex-char">      
         <div>
-          <div class="middle-font left-file">事业部日达成趋势图</div>
+          <div class="middle-font left-file">事业部日达成趋势图l</div>
           <div class="legend">
             <template v-if="echartsLabel">
               <div class="item" v-for="(item, index) in echartsLabel" :key="index">
@@ -91,7 +91,8 @@
 import TableCardBox from "@/views/center/components/table/TableCardBox.vue";
 import selectTime from '@/components/selectTime.vue';
 //  import innerTableCardBox from "@/views/center/components/table/innerTableCardBox.vue";
-import cardPro from "./component/cardPro.vue";
+// import cardPro from "./component/cardPro.vue";
+import cardPro from "@/views/center/components/card/cardPro.vue"; 
 
 import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
@@ -380,7 +381,7 @@ export default {
         });
         this.rowSpanNumber1 = [innerTop.length,innerBottom.length];
         let innerTotal = tableInner.rows.filter((v) => {
-          return v.cooprLevel2Manager == "底部合计" || v.cooprLevel2Manager =='合计';
+          return v.cooprLevel1 =='合计';
         });
         this.tableInner = innerTop.concat(innerBottom, innerTotal);
         this.tableInner.forEach(v=>{
@@ -1231,8 +1232,7 @@ export default {
 .right-font-title {
   font-size: 15px;
   color: #fff;
-  margin-right: 40px;
-  width: 30px;
+width:80px;
   white-space: nowrap;
 }
 .flex-right-bottom {

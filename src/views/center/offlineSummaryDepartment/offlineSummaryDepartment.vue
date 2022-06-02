@@ -107,7 +107,7 @@ export default {
       progressData: {
         bar1: 0,
         bar2: 0,
-        ballTitle: "内销",
+        ballTitle: "线下",
         bigBallTitle: "毛利率",
         textLeft: "直营",
         textRight: "代运营",
@@ -120,7 +120,7 @@ export default {
       speedData: {
         bar: 0,
         speedBar: 0,
-        ballTitle: "内销达成",
+        ballTitle: "线下达成",
         ballNum: 0,
         ballLeftTitle: "直营",
         ballRightTitle: "代运营",
@@ -137,7 +137,7 @@ export default {
       sabData: {
         bar1: 0,
         bar2: 0,
-        ballTitle: "内销",
+        ballTitle: "线下",
         top: "直营",
         bottom: "代运营",
         sabArr: { S: 0, A: 0, B: 0 },

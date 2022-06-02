@@ -35,6 +35,7 @@
             </template>
           </div>
           <div id="main" class="echartsBox"></div>
+          <div class="leftData" v-if="AvgTaskAmtList.length<1">暂无数据</div>
         </div>
         <div>
           <div class="middle-font">线下通路日达成趋势图</div>
@@ -304,13 +305,11 @@ export default {
           }
           k++;
         }
-        console.log("arrs2222", arr);
         // this.dhcarr = [];
         let arrs = JSON.parse(JSON.stringify(arr));
         arrs.forEach((v,i) => {
           this.dhcarr[i] = v[0].cooprLevel2;
         });
-        console.log("this.dhcarr", this.dhcarr);
         // this.dhcarr = [1,2,3,4,5];
 
         for (let j = 0; j < arr.length; j++) {
@@ -795,7 +794,7 @@ export default {
           });
           this.cardData.splice(6);
         } else {
-          this.cardData = [{}];
+          this.cardData = [];
         }
       } catch (err) {
         console.log(err);

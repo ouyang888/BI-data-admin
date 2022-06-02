@@ -361,7 +361,7 @@ display:none;
   cursor: pointer;
 }
 .leftData{
-height: 280px;
+height: 250px;
 width: 607px;
 position: absolute;
 top:48px;
@@ -405,7 +405,9 @@ align-items: center;
   position: absolute;
   left:10px;
   top:0;
-  content:"单位：(万)";
+  // content:"(单位:万)";
+  content:"\0028\5355\4f4d\003a\4e07\0029"!important; /*(单位:万)*/
+  // content:"\0028\5355\4f4d\003a\4ebf\0029"!important; /*(单位:亿)*/
   color:#fff;
   font-size:12px;
 }

@@ -11,7 +11,6 @@
         </div>
       </div>
       <!-- 右侧卡片 -->
-       <div style="color:white;" v-if="cardData.length===0">暂无数据</div>
      <Card :list="cardData" :cardObj="cardObj"  @gotoCatSeries="gotoCatSeries"/>
     </div>
 <!-- @gotoCatSeries="gotoCatSeries" -->
@@ -33,6 +32,7 @@
             </template>
           </div>
           <div id="main" class="echartsBox"></div>
+          <div class="leftData" v-if="AvgTaskAmtList.length<1">暂无数据</div>
         </div>
         <div>
           <div class="middle-font">线上通路日达成趋势图</div>
@@ -155,9 +155,9 @@ export default {
         bar2: 0,
         ballTitle: "线上",
         bigBallTitle: "毛利率",
-        textLeft: "自营",
+        textLeft: "直营",
         textRight: "代运营",
-        titleTop: "自营",
+        titleTop: "直营",
         titleBottom: "代运营",
         topGPM: 0,
         bottomGPM: 0,
@@ -168,12 +168,12 @@ export default {
         speedBar: 0,
         ballTitle: "线上达成",
         ballNum: 0,
-        ballLeftTitle: "自营",
+        ballLeftTitle: "直营",
         ballRightTitle: "代运营",
         ballLeftNum: 0,
         ballRightNum: 0,
         bottomNum: 0,
-        bottomTitle1: "自营",
+        bottomTitle1: "直营",
         bottomClose: 0,
         bottomTime: 0,
         bottomTitle2: "代运营",
@@ -184,7 +184,7 @@ export default {
         bar1: 70,
         bar2: 50,
         ballTitle: "线上",
-        top: "自营",
+        top: "直营",
         bottom: "代运营",
          sabArr: { S: 0, A: 0, B: 0 },
         topArr: { S: 0, A: 0, B: 0  },
@@ -506,7 +506,7 @@ export default {
           });
           this.cardData.splice(6);
         } else {
-          this.cardData = [{}];
+          this.cardData = [];
         }
         // console.log("2233377",this.cardData)
       } catch (err) {

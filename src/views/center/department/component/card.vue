@@ -124,14 +124,6 @@
         } }
       },
     },
-    watch:{
-      cardObj:{
-        handler:function(newValue,oldValue){
-          // console.log('newValue',newValue);
-        }
-      }
-
-    },
     methods: {
       gotoCatSeries(val) {
         this.$emit('gotoCatSeries',val)

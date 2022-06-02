@@ -11,11 +11,7 @@
         </div>
       </div>
         <!-- 右侧卡片 -->
-     
-       
-    
     <!-- <div class="noData" v-if="cardData.length===0">暂无数据</div> -->
-    
       <cardPro  :list="cardData" :cardObj="cardObj" :cardSab="cardSab" :title1="cardSabTitle1" :title2="cardSabTitle2"/>
     </div>
     <!-- 中间echart -->
@@ -27,7 +23,14 @@
       <div class="flex-char">
         <div>
           <div class="middle-font left-file"> {{ this.$route.query.key}}日达成趋势图</div>
-          
+          <div class="legend">
+            <template v-if="echartsLabel">
+              <div class="item" v-for="(item, index) in echartsLabel" :key="index">
+                <div class="lump" :class="item.class"></div>
+                <div class="text">{{ item.text }}</div>
+              </div>
+            </template>
+          </div>
           <div id="main" class="echartsBox"></div>
         </div>
         <div>
@@ -75,7 +78,8 @@
 </template>
 <script>
 import selectTime from '@/components/selectTime.vue';
-import cardPro from "./component/cardPro.vue"; 
+// import cardPro from "./component/cardPro.vue"; 
+import cardPro from "@/views/center/components/card/cardPro.vue"; 
 import API from "../../../service/api";
 import ProgressPanel from "@/views/center/panel/ProgressPanel.vue";
 import SpeedPanel from "@/views/center/panel/SpeedPanel.vue";
@@ -258,6 +262,10 @@ export default {
       // 底部表格
       rowSpanNumber1:6,
       rowSpanNumber2:6,
+      echartsLabel: [
+        { class: "plan", text: "实际达成" },
+        { class: "average", text: "日均线" },
+      ],
     };
   },
     computed: {
@@ -2064,6 +2072,7 @@ myEcharts() {
 .right-font-title {
   font-size: 15px;
   color: #fff;
+  width:80px;
 }
 .flex-right-bottom {
   display: flex;

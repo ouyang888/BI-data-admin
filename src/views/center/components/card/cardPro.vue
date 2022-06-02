@@ -1,10 +1,10 @@
-<template>
+<!-- sab组件 -->
+<template> 
   <div class="flex-card" >
-    <!-- <a-spin class="flex-loading" size="large" v-if="showLoading" />
-    <div class="noData" v-if="!showLoading && cardList.length<1">暂无数据</div> -->
-    <div class="noData" v-if="cardList.length<1">暂无数据</div>
-    <div class="card-box" v-for="(v,i) in cardList" :key="i" v-else>
-      <div class="card-font" @click="gotoCatSeries(v[cardObj.title])">{{v[cardObj.title]}} </div>
+    <a-spin class="flex-loading" size="large" v-if="showLoading" />
+    <div class="noData" v-else-if="cardList.length<1">暂无数据</div>
+    <div class="card-box" v-for="(v,i) in cardList" @click="gotoCatSeries(v[cardObj.title])" :key="i" v-else>
+      <div class="card-font">{{v[cardObj.title]}} </div>
       <div class="card-border-box">
         <div class="line"></div>
         <div class="line1"></div>
@@ -77,11 +77,14 @@
             <template v-for="(item,k) in list"> 
             <div :key="k+22" v-if="item[cardObj.cooprLevel1] == title1 && v[cardObj.title] == item[cardObj.title]">
               <span class="percent-title">{{title1}}</span>
-              <span class="percent-text">{{!!item[cardObj.businessModelCompleteRadio]?(item[cardObj.businessModelCompleteRadio]*100).toFixed(0):(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+              <span class="percent-text">{{!!item[cardObj.businessModelCompleteRadio]?(item[cardObj.businessModelCompleteRadio]*100).toFixed(0):0.00 }}%</span>
             </div>
+          </template>
+   
+          <template v-for="(item,k) in list"> 
             <div :key="k+223" v-if="item[cardObj.cooprLevel1] == title2 && v[cardObj.title] == item[cardObj.title]">
               <span class="percent-title">{{title2}}</span>
-              <span class="percent-text">{{!!item[cardObj.businessModelCompleteRadio]?(item[cardObj.businessModelCompleteRadio]*100).toFixed(0):(item.businessModelCompleteRadio*100).toFixed(0) }}%</span>
+              <span class="percent-text">{{!!item[cardObj.businessModelCompleteRadio]?(item[cardObj.businessModelCompleteRadio]*100).toFixed(0):0.00}}%</span>
             </div>
           </template>
           </div>
@@ -172,12 +175,11 @@
     watch:{
       cardObj:{
         handler:function(newValue,oldValue){
-          console.log('newValue',newValue);
         }
       },
       list:{
         handler:function(newValue,oldValue){
-          console.log('newValue11',newValue);
+          this.showLoading = true;
           let title = '';
       
           if(newValue.length<1) {
@@ -196,9 +198,9 @@
             if(v[this.cardObj.businessModelCompleteRadio || 'businessModelCompleteRadio']>6){  v[this.cardObj.businessModelCompleteRadio || 'businessModelCompleteRadio'] = 6 }; /*线上/线下 中间sab名称后面的完成率*/
             if(v[this.cardObj.title] !=title && !!v[this.cardObj.title]){
               // v[this.cardObj.cnyAmt] =  v[this.cardObj.cnyAmt].toFixed(1);
-              v[this.cardObj.cnyAmt] =  !!v[this.cardObj.cnyAmt]?v[this.cardObj.cnyAmt].toFixed(2):0;
-            v[this.cardObj.saleTaskAmt] =  !!v[this.cardObj.saleTaskAmt]?v[this.cardObj.saleTaskAmt].toFixed(2):0;
-            v[this.cardObj.saleAmtRadio] = !!v[this.cardObj.saleAmtRadio]?Number((v[this.cardObj.saleAmtRadio]*100).toFixed(2)):0;
+              v[this.cardObj.cnyAmt] =  !!v[this.cardObj.cnyAmt]?v[this.cardObj.cnyAmt].toFixed(2):0.00;
+            v[this.cardObj.saleTaskAmt] =  !!v[this.cardObj.saleTaskAmt]?Number(v[this.cardObj.saleTaskAmt]).toFixed(2):0.00;
+            v[this.cardObj.saleAmtRadio] = !!v[this.cardObj.saleAmtRadio]?Number((v[this.cardObj.saleAmtRadio]*100).toFixed(2)):0.00;
             // v.grossProfitRadio = Number((v.grossProfitRadio*100).toFixed(0));
             // debugger;
             if(v[this.cardObj.saleAmtRadio]>1000){  v[this.cardObj.saleAmtRadio] = 1000 }; /*完成率*/
@@ -226,7 +228,6 @@
             })
 
            }
-           console.log('this.cardSabObj',this.cardSabObj);
         }
 
       }
@@ -240,12 +241,14 @@
     },
     methods: {
       gotoCatSeries(val) {
-
+        if(this.pathObj[this.name]){ /*存在路由,保存*/
         this.$store.commit('setCurrTitle',val);
         this.$router.push({name:this.pathObj[this.name],query:{key:val}});
 
+        }
 
-        // this.$emit('gotoCatSeries',val)
+
+        this.$emit('gotoCatSeries',val)
 
 
       }
@@ -395,7 +398,7 @@
     flex-wrap: wrap;
     position: relative;
     min-width: 56%;
-    min-height: 100px;
+    min-height: 270px;
   }
 
   .flex-top-card {
@@ -643,8 +646,8 @@
       text-align: right;
       font-weight: 400;
       display: inline-block;
-      width:28px;
-  
+      width:36px;
+      margin-right:5px;
     }
   
     .percent-text {
@@ -708,9 +711,9 @@
     }
     .flex-loading{
       position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    width:40px;
+    height:40px;
+    top: calc(50% - 20px);
+    left:calc(50% - 20px);
     }
 </style>
